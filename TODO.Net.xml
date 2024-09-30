@@ -1,0 +1,593 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>TODO.Net</name>
+    </assembly>
+    <members>
+        <member name="T:TODO.Net.Clients.SpotApi.TODORestClientSpotApi">
+            <inheritdoc cref="T:TODO.Net.Interfaces.Clients.SpotApi.ITODORestClientSpotApi" />
+        </member>
+        <member name="P:TODO.Net.Clients.SpotApi.TODORestClientSpotApi.Account">
+            <inheritdoc />
+        </member>
+        <member name="P:TODO.Net.Clients.SpotApi.TODORestClientSpotApi.ExchangeData">
+            <inheritdoc />
+        </member>
+        <member name="P:TODO.Net.Clients.SpotApi.TODORestClientSpotApi.Trading">
+            <inheritdoc />
+        </member>
+        <member name="P:TODO.Net.Clients.SpotApi.TODORestClientSpotApi.ExchangeName">
+            <inheritdoc />
+        </member>
+        <member name="E:TODO.Net.Clients.SpotApi.TODORestClientSpotApi.OnOrderPlaced">
+            <summary>
+            Event triggered when an order is placed via this client. Only available for Spot orders
+            </summary>
+        </member>
+        <member name="E:TODO.Net.Clients.SpotApi.TODORestClientSpotApi.OnOrderCanceled">
+            <summary>
+            Event triggered when an order is canceled via this client. Note that this does not trigger when using CancelAllOrdersAsync. Only available for Spot orders
+            </summary>
+        </member>
+        <member name="M:TODO.Net.Clients.SpotApi.TODORestClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.Clients.SpotApi.TODORestClientSpotApi.GetServerTimestampAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.Clients.SpotApi.TODORestClientSpotApi.GetTimeSyncInfo">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.Clients.SpotApi.TODORestClientSpotApi.GetTimeOffset">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.Clients.SpotApi.TODORestClientSpotApi.FormatSymbol(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="P:TODO.Net.Clients.SpotApi.TODORestClientSpotApi.CommonSpotClient">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.Clients.SpotApi.TODORestClientSpotApi.GetSymbolName(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:TODO.Net.Clients.SpotApi.TODORestClientSpotApiAccount">
+            <inheritdoc />
+        </member>
+        <member name="T:TODO.Net.Clients.SpotApi.TODORestClientSpotApiExchangeData">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.Clients.SpotApi.TODORestClientSpotApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:TODO.Net.Clients.SpotApi.TODORestClientSpotApiTrading">
+            <inheritdoc />
+        </member>
+        <member name="T:TODO.Net.Clients.SpotApi.TODOSocketClientSpotApi">
+            <summary>
+            Client providing access to the TODO spot websocket Api
+            </summary>
+        </member>
+        <member name="M:TODO.Net.Clients.SpotApi.TODOSocketClientSpotApi.#ctor(Microsoft.Extensions.Logging.ILogger,TODO.Net.Objects.Options.TODOSocketOptions)">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:TODO.Net.Clients.SpotApi.TODOSocketClientSpotApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.Clients.SpotApi.TODOSocketClientSpotApi.SubscribeToXXXUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{TODO.Net.Objects.Models.TODOModel}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.Clients.SpotApi.TODOSocketClientSpotApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.Clients.SpotApi.TODOSocketClientSpotApi.GetAuthenticationRequest(CryptoExchange.Net.Sockets.SocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.Clients.SpotApi.TODOSocketClientSpotApi.FormatSymbol(System.String,System.String)">
+            <inheritdoc />
+        </member>
+        <member name="T:TODO.Net.Clients.TODORestClient">
+            <inheritdoc cref="T:TODO.Net.Interfaces.Clients.ITODORestClient" />
+        </member>
+        <member name="P:TODO.Net.Clients.TODORestClient.SpotApi">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.Clients.TODORestClient.#ctor(System.Action{TODO.Net.Objects.Options.TODORestOptions})">
+            <summary>
+            Create a new instance of the TODORestClient using provided options
+            </summary>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:TODO.Net.Clients.TODORestClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILoggerFactory,System.Action{TODO.Net.Objects.Options.TODORestOptions})">
+            <summary>
+            Create a new instance of the TODORestClient using provided options
+            </summary>
+            <param name="optionsDelegate">Option configuration delegate</param>
+            <param name="loggerFactory">The logger factory</param>
+            <param name="httpClient">Http client for this client</param>
+        </member>
+        <member name="M:TODO.Net.Clients.TODORestClient.SetDefaultOptions(System.Action{TODO.Net.Objects.Options.TODORestOptions})">
+            <summary>
+            Set the default options to be used when creating new clients
+            </summary>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:TODO.Net.Clients.TODORestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="T:TODO.Net.Clients.TODOSocketClient">
+            <inheritdoc cref="T:TODO.Net.Interfaces.Clients.ITODOSocketClient" />
+        </member>
+        <member name="P:TODO.Net.Clients.TODOSocketClient.SpotApi">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.Clients.TODOSocketClient.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance of TODOSocketClient
+            </summary>
+            <param name="loggerFactory">The logger factory</param>
+        </member>
+        <member name="M:TODO.Net.Clients.TODOSocketClient.#ctor(System.Action{TODO.Net.Objects.Options.TODOSocketOptions})">
+            <summary>
+            Create a new instance of TODOSocketClient
+            </summary>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:TODO.Net.Clients.TODOSocketClient.#ctor(System.Action{TODO.Net.Objects.Options.TODOSocketOptions},Microsoft.Extensions.Logging.ILoggerFactory)">
+            <summary>
+            Create a new instance of TODOSocketClient
+            </summary>
+            <param name="loggerFactory">The logger factory</param>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:TODO.Net.Clients.TODOSocketClient.SetDefaultOptions(System.Action{TODO.Net.Objects.Options.TODOSocketOptions})">
+            <summary>
+            Set the default options to be used when creating new clients
+            </summary>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:TODO.Net.Clients.TODOSocketClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="T:TODO.Net.Enums.TODOEnum">
+            <summary>
+            XXX
+            </summary>
+        </member>
+        <member name="F:TODO.Net.Enums.TODOEnum.XXX">
+            <summary>
+            XXX
+            </summary>
+        </member>
+        <member name="T:TODO.Net.ExtensionMethods.CryptoClientExtensions">
+            <summary>
+            Extensions for the ICryptoRestClient and ICryptoSocketClient interfaces
+            </summary>
+        </member>
+        <member name="M:TODO.Net.ExtensionMethods.CryptoClientExtensions.TODO(CryptoExchange.Net.Interfaces.ICryptoRestClient)">
+            <summary>
+            Get the TODO REST Api client
+            </summary>
+            <param name="baseClient"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TODO.Net.ExtensionMethods.CryptoClientExtensions.TODO(CryptoExchange.Net.Interfaces.ICryptoSocketClient)">
+            <summary>
+            Get the TODO Websocket Api client
+            </summary>
+            <param name="baseClient"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TODO.Net.ExtensionMethods.TODOExtensionMethods">
+            <summary>
+            Extension methods specific to using the TODO API
+            </summary>
+        </member>
+        <member name="T:TODO.Net.Interfaces.Clients.ITODORestClient">
+            <summary>
+            Client for accessing the TODO Rest API. 
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Interfaces.Clients.ITODORestClient.SpotApi">
+            <summary>
+            Spot API endpoints
+            </summary>
+        </member>
+        <member name="M:TODO.Net.Interfaces.Clients.ITODORestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <summary>
+            Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
+            </summary>
+            <param name="credentials">The credentials to set</param>
+        </member>
+        <member name="T:TODO.Net.Interfaces.Clients.ITODOSocketClient">
+            <summary>
+            Client for accessing the TODO websocket API
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Interfaces.Clients.ITODOSocketClient.SpotApi">
+            <summary>
+            Spot streams
+            </summary>
+        </member>
+        <member name="M:TODO.Net.Interfaces.Clients.ITODOSocketClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <summary>
+            Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
+            </summary>
+            <param name="credentials">The credentials to set</param>
+        </member>
+        <member name="T:TODO.Net.Interfaces.Clients.SpotApi.ITODORestClientSpotApi">
+            <summary>
+            TODO Spot API endpoints
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Interfaces.Clients.SpotApi.ITODORestClientSpotApi.Account">
+            <summary>
+            Endpoints related to account settings, info or actions
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Interfaces.Clients.SpotApi.ITODORestClientSpotApi.ExchangeData">
+            <summary>
+            Endpoints related to retrieving market and system data
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Interfaces.Clients.SpotApi.ITODORestClientSpotApi.Trading">
+            <summary>
+            Endpoints related to orders and trades
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Interfaces.Clients.SpotApi.ITODORestClientSpotApi.CommonSpotClient">
+            <summary>
+            Get the ISpotClient for this client. This is a common interface which allows for some basic operations without knowing any details of the exchange.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="T:TODO.Net.Interfaces.Clients.SpotApi.ITODORestClientSpotApiAccount">
+            <summary>
+            TODO Spot account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
+            </summary>
+        </member>
+        <member name="T:TODO.Net.Interfaces.Clients.SpotApi.ITODORestClientSpotApiExchangeData">
+            <summary>
+            TODO Spot exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
+            </summary>
+        </member>
+        <member name="M:TODO.Net.Interfaces.Clients.SpotApi.ITODORestClientSpotApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <summary>
+            
+            <para><a href="XXX" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:TODO.Net.Interfaces.Clients.SpotApi.ITODORestClientSpotApiTrading">
+            <summary>
+            TODO Spot trading endpoints, placing and managing orders.
+            </summary>
+        </member>
+        <member name="T:TODO.Net.Interfaces.Clients.SpotApi.ITODOSocketClientSpotApi">
+            <summary>
+            TODO spot streams
+            </summary>
+        </member>
+        <member name="M:TODO.Net.Interfaces.Clients.SpotApi.ITODOSocketClientSpotApi.SubscribeToXXXUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{TODO.Net.Objects.Models.TODOModel}},System.Threading.CancellationToken)">
+            <summary>
+            
+            <para><a href="XXX" /></para>
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="T:TODO.Net.Interfaces.ITODOOrderBookFactory">
+            <summary>
+            TODO local order book factory
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Interfaces.ITODOOrderBookFactory.Spot">
+            <summary>
+            Spot order book factory methods
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Interfaces.ITODOOrderBookFactory.Futures">
+            <summary>
+            Futures order book factory methods
+            </summary>
+        </member>
+        <member name="M:TODO.Net.Interfaces.ITODOOrderBookFactory.CreateFutures(System.String,System.Action{TODO.Net.Objects.Options.TODOOrderBookOptions})">
+            <summary>
+            Create a new futures local order book instance
+            </summary>
+            <param name="symbol"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="M:TODO.Net.Interfaces.ITODOOrderBookFactory.CreateSpot(System.String,System.Action{TODO.Net.Objects.Options.TODOOrderBookOptions})">
+            <summary>
+            Create a new spot local order book instance
+            </summary>
+            <param name="symbol"></param>
+            <param name="options"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TODO.Net.Objects.Options.TODOOrderBookOptions">
+            <summary>
+            Options for the TODO SymbolOrderBook
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Objects.Options.TODOOrderBookOptions.Default">
+            <summary>
+            Default options for new clients
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Objects.Options.TODOOrderBookOptions.Limit">
+            <summary>
+            The top amount of results to keep in sync. If for example limit=10 is used, the order book will contain the 10 best bids and 10 best asks. Leaving this null will sync the full order book
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Objects.Options.TODOOrderBookOptions.InitialDataTimeout">
+            <summary>
+            After how much time we should consider the connection dropped if no data is received for this time after the initial subscriptions
+            </summary>
+        </member>
+        <member name="T:TODO.Net.Objects.Options.TODORestOptions">
+            <summary>
+            Options for the TODORestClient
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Objects.Options.TODORestOptions.Default">
+            <summary>
+            Default options for new clients
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Objects.Options.TODORestOptions.SpotOptions">
+            <summary>
+            Spot API options
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Objects.Options.TODORestOptions.FuturesOptions">
+            <summary>
+            Futures API options
+            </summary>
+        </member>
+        <member name="T:TODO.Net.Objects.Options.TODOSocketOptions">
+            <summary>
+            Options for the TODOSocketClient
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Objects.Options.TODOSocketOptions.Default">
+            <summary>
+            Default options for new clients
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Objects.Options.TODOSocketOptions.SpotOptions">
+            <summary>
+            Options for the Spot API
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Objects.Options.TODOSocketOptions.FuturesOptions">
+            <summary>
+            Options for the Futures API
+            </summary>
+        </member>
+        <member name="T:TODO.Net.Objects.Sockets.Subscriptions.TODOSubscription`1">
+            <inheritdoc />
+        </member>
+        <member name="P:TODO.Net.Objects.Sockets.Subscriptions.TODOSubscription`1.ListenerIdentifiers">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.Objects.Sockets.Subscriptions.TODOSubscription`1.GetMessageType(CryptoExchange.Net.Interfaces.IMessageAccessor)">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.Objects.Sockets.Subscriptions.TODOSubscription`1.#ctor(Microsoft.Extensions.Logging.ILogger,System.String[],System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{`0}},System.Boolean)">
+            <summary>
+            ctor
+            </summary>
+            <param name="logger"></param>
+            <param name="topics"></param>
+            <param name="handler"></param>
+            <param name="auth"></param>
+        </member>
+        <member name="M:TODO.Net.Objects.Sockets.Subscriptions.TODOSubscription`1.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.Objects.Sockets.Subscriptions.TODOSubscription`1.GetUnsubQuery">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.Objects.Sockets.Subscriptions.TODOSubscription`1.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{System.Object})">
+            <inheritdoc />
+        </member>
+        <member name="T:TODO.Net.Objects.TODOApiAddresses">
+            <summary>
+            Api addresses
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Objects.TODOApiAddresses.RestClientAddress">
+            <summary>
+            The address used by the TODORestClient for the API
+            </summary>
+        </member>
+        <member name="P:TODO.Net.Objects.TODOApiAddresses.SocketClientAddress">
+            <summary>
+            The address used by the TODOSocketClient for the websocket API
+            </summary>
+        </member>
+        <member name="F:TODO.Net.Objects.TODOApiAddresses.Default">
+            <summary>
+            The default addresses to connect to the TODO.com API
+            </summary>
+        </member>
+        <member name="T:TODO.Net.SymbolOrderBooks.TODOFuturesSymbolOrderBook">
+            <summary>
+            Implementation for a synchronized order book. After calling Start the order book will sync itself and keep up to date with new data. It will automatically try to reconnect and resync in case of a lost/interrupted connection.
+            Make sure to check the State property to see if the order book is synced.
+            </summary>
+        </member>
+        <member name="M:TODO.Net.SymbolOrderBooks.TODOFuturesSymbolOrderBook.#ctor(System.String,System.Action{TODO.Net.Objects.Options.TODOOrderBookOptions})">
+            <summary>
+            Create a new order book instance
+            </summary>
+            <param name="symbol">The symbol the order book is for</param>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:TODO.Net.SymbolOrderBooks.TODOFuturesSymbolOrderBook.#ctor(System.String,System.Action{TODO.Net.Objects.Options.TODOOrderBookOptions},Microsoft.Extensions.Logging.ILoggerFactory,TODO.Net.Interfaces.Clients.ITODORestClient,TODO.Net.Interfaces.Clients.ITODOSocketClient)">
+            <summary>
+            Create a new order book instance
+            </summary>
+            <param name="symbol">The symbol the order book is for</param>
+            <param name="optionsDelegate">Option configuration delegate</param>
+            <param name="logger">Logger</param>
+            <param name="restClient">Rest client instance</param>
+            <param name="socketClient">Socket client instance</param>
+        </member>
+        <member name="M:TODO.Net.SymbolOrderBooks.TODOFuturesSymbolOrderBook.DoStartAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.SymbolOrderBooks.TODOFuturesSymbolOrderBook.DoReset">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.SymbolOrderBooks.TODOFuturesSymbolOrderBook.DoResyncAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.SymbolOrderBooks.TODOFuturesSymbolOrderBook.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:TODO.Net.SymbolOrderBooks.TODOOrderBookFactory">
+            <summary>
+            TODO order book factory
+            </summary>
+        </member>
+        <member name="M:TODO.Net.SymbolOrderBooks.TODOOrderBookFactory.#ctor(System.IServiceProvider)">
+            <summary>
+            ctor
+            </summary>
+            <param name="serviceProvider">Service provider for resolving logging and clients</param>
+        </member>
+        <member name="P:TODO.Net.SymbolOrderBooks.TODOOrderBookFactory.Spot">
+            <inheritdoc />
+        </member>
+        <member name="P:TODO.Net.SymbolOrderBooks.TODOOrderBookFactory.Futures">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.SymbolOrderBooks.TODOOrderBookFactory.CreateSpot(System.String,System.Action{TODO.Net.Objects.Options.TODOOrderBookOptions})">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.SymbolOrderBooks.TODOOrderBookFactory.CreateFutures(System.String,System.Action{TODO.Net.Objects.Options.TODOOrderBookOptions})">
+            <inheritdoc />
+        </member>
+        <member name="T:TODO.Net.SymbolOrderBooks.TODOSpotSymbolOrderBook">
+            <summary>
+            Implementation for a synchronized order book. After calling Start the order book will sync itself and keep up to date with new data. It will automatically try to reconnect and resync in case of a lost/interrupted connection.
+            Make sure to check the State property to see if the order book is synced.
+            </summary>
+        </member>
+        <member name="M:TODO.Net.SymbolOrderBooks.TODOSpotSymbolOrderBook.#ctor(System.String,System.Action{TODO.Net.Objects.Options.TODOOrderBookOptions})">
+            <summary>
+            Create a new order book instance
+            </summary>
+            <param name="symbol">The symbol the order book is for</param>
+            <param name="optionsDelegate">Option configuration delegate</param>
+        </member>
+        <member name="M:TODO.Net.SymbolOrderBooks.TODOSpotSymbolOrderBook.#ctor(System.String,System.Action{TODO.Net.Objects.Options.TODOOrderBookOptions},Microsoft.Extensions.Logging.ILoggerFactory,TODO.Net.Interfaces.Clients.ITODORestClient,TODO.Net.Interfaces.Clients.ITODOSocketClient)">
+            <summary>
+            Create a new order book instance
+            </summary>
+            <param name="symbol">The symbol the order book is for</param>
+            <param name="optionsDelegate">Option configuration delegate</param>
+            <param name="logger">Logger</param>
+            <param name="restClient">Rest client instance</param>
+            <param name="socketClient">Socket client instance</param>
+        </member>
+        <member name="M:TODO.Net.SymbolOrderBooks.TODOSpotSymbolOrderBook.DoStartAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.SymbolOrderBooks.TODOSpotSymbolOrderBook.DoReset">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.SymbolOrderBooks.TODOSpotSymbolOrderBook.DoResyncAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:TODO.Net.SymbolOrderBooks.TODOSpotSymbolOrderBook.Dispose(System.Boolean)">
+            <inheritdoc />
+        </member>
+        <member name="T:TODO.Net.TODOEnvironment">
+            <summary>
+            TODO environments
+            </summary>
+        </member>
+        <member name="P:TODO.Net.TODOEnvironment.RestClientAddress">
+            <summary>
+            Rest API address
+            </summary>
+        </member>
+        <member name="P:TODO.Net.TODOEnvironment.SocketClientAddress">
+            <summary>
+            Socket API address
+            </summary>
+        </member>
+        <member name="P:TODO.Net.TODOEnvironment.Live">
+            <summary>
+            Live environment
+            </summary>
+        </member>
+        <member name="M:TODO.Net.TODOEnvironment.CreateCustom(System.String,System.String,System.String)">
+            <summary>
+            Create a custom environment
+            </summary>
+            <param name="name"></param>
+            <param name="spotRestAddress"></param>
+            <param name="spotSocketStreamsAddress"></param>
+            <returns></returns>
+        </member>
+        <member name="T:TODO.Net.TODOExchange">
+            <summary>
+            TODO exchange information and configuration
+            </summary>
+        </member>
+        <member name="P:TODO.Net.TODOExchange.ExchangeName">
+            <summary>
+            Exchange name
+            </summary>
+        </member>
+        <member name="P:TODO.Net.TODOExchange.Url">
+            <summary>
+            Url to the main website
+            </summary>
+        </member>
+        <member name="P:TODO.Net.TODOExchange.ApiDocsUrl">
+            <summary>
+            Urls to the API documentation
+            </summary>
+        </member>
+        <member name="P:TODO.Net.TODOExchange.RateLimiter">
+            <summary>
+            Rate limiter configuration for the TODO API
+            </summary>
+        </member>
+        <member name="T:TODO.Net.TODORateLimiters">
+            <summary>
+            Rate limiter configuration for the TODO API
+            </summary>
+        </member>
+        <member name="E:TODO.Net.TODORateLimiters.RateLimitTriggered">
+            <summary>
+            Event for when a rate limit is triggered
+            </summary>
+        </member>
+        <member name="T:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions">
+            <summary>
+            Extensions for DI
+            </summary>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddTODO(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{TODO.Net.Objects.Options.TODORestOptions},System.Action{TODO.Net.Objects.Options.TODOSocketOptions},System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+            <summary>
+            Add the ITODORestClient and ITODOSocketClient to the sevice collection so they can be injected
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="defaultRestOptionsDelegate">Set default options for the rest client</param>
+            <param name="defaultSocketOptionsDelegate">Set default options for the socket client</param>
+            <param name="socketClientLifeTime">The lifetime of the ITODOSocketClient for the service collection. Defaults to Singleton.</param>
+            <returns></returns>
+        </member>
+    </members>
+</doc>

@@ -4,10 +4,8 @@ using Microsoft.Extensions.Logging;
 using System;
 using Coinbase.Net.Interfaces.Clients;
 using Coinbase.Net.Objects.Options;
-using Coinbase.Net.Interfaces.Clients.FuturesApi;
 using Coinbase.Net.Interfaces.Clients.SpotApi;
 using Coinbase.Net.Clients.SpotApi;
-using Coinbase.Net.Clients.FuturesApi;
 
 namespace Coinbase.Net.Clients
 {
@@ -19,13 +17,8 @@ namespace Coinbase.Net.Clients
 
         #region Api clients
 
-        
          /// <inheritdoc />
-        public ICoinbaseSocketClientFuturesApi FuturesApi { get; }
-
-         /// <inheritdoc />
-        public ICoinbaseSocketClientSpotApi SpotApi { get; }
-
+        public ICoinbaseSocketClientAdvancedTradeApi AdvancedTradeApi { get; }
 
         #endregion
 
@@ -56,9 +49,8 @@ namespace Coinbase.Net.Clients
             var options = CoinbaseSocketOptions.Default.Copy();
             optionsDelegate?.Invoke(options);
             Initialize(options);
-                        
-            FuturesApi = AddApiClient(new CoinbaseSocketClientFuturesApi(_logger, options));
-            SpotApi = AddApiClient(new CoinbaseSocketClientSpotApi(_logger, options));
+
+            AdvancedTradeApi = AddApiClient(new CoinbaseSocketClientAdvancedTradeApi(_logger, options));
         }
         #endregion
 
@@ -76,11 +68,7 @@ namespace Coinbase.Net.Clients
         /// <inheritdoc />
         public void SetApiCredentials(ApiCredentials credentials)
         {
-            
-            FuturesApi.SetApiCredentials(credentials);
-
-            SpotApi.SetApiCredentials(credentials);
-
+            AdvancedTradeApi.SetApiCredentials(credentials);
         }
     }
 }

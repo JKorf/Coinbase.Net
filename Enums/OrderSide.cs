@@ -13,12 +13,12 @@ namespace Coinbase.Net.Enums
         /// <summary>
         /// Buy
         /// </summary>
-        [Map("buy")]
+        [Map("BUY", "buy")]
         Buy,
         /// <summary>
         /// Sell
         /// </summary>
-        [Map("sell")]
+        [Map("SELL", "sell")]
         Sell
     }
 }

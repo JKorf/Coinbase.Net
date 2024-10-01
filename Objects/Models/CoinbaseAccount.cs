@@ -106,6 +106,9 @@ namespace Coinbase.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("value")]
         public decimal Value { get; set; }
+        [JsonPropertyName("amount")]
+        [JsonInclude]
+        internal decimal Amount { set => Value = value; }
         /// <summary>
         /// Asset name
         /// </summary>

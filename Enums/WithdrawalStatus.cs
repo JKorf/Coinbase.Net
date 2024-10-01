@@ -6,24 +6,24 @@ using System.Text;
 namespace Coinbase.Net.Enums
 {
     /// <summary>
-    /// Margin type
+    /// Status
     /// </summary>
-    public enum MarginType
+    public enum WithdrawalStatus
     {
         /// <summary>
-        /// Unspecified
+        /// Created
         /// </summary>
-        [Map("MARGIN_TYPE_UNSPECIFIED", "UNKNOWN_MARGIN_TYPE")]
-        Unspecified,
+        [Map("created")]
+        Created,
         /// <summary>
-        /// Cross margin
+        /// Completed
         /// </summary>
-        [Map("MARGIN_TYPE_CROSS")]
-        Cross,
+        [Map("completed")]
+        Completed,
         /// <summary>
-        /// Isolated margin
+        /// Canceled
         /// </summary>
-        [Map("MARGIN_TYPE_ISOLATED")]
-        Isolated
+        [Map("canceled")]
+        Canceled
     }
 }

@@ -23,33 +23,16 @@ namespace Coinbase.Net.SymbolOrderBooks
         public CoinbaseOrderBookFactory(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
-            
-            
-            Futures = new OrderBookFactory<CoinbaseOrderBookOptions>((symbol, options) => CreateFutures(symbol, options), (baseAsset, quoteAsset, options) => CreateFutures(baseAsset + quoteAsset, options));
 
-            Spot = new OrderBookFactory<CoinbaseOrderBookOptions>((symbol, options) => CreateSpot(symbol, options), (baseAsset, quoteAsset, options) => CreateSpot(baseAsset + quoteAsset, options));
-
+            AdvancedTrade = new OrderBookFactory<CoinbaseOrderBookOptions>((symbol, options) => Create(symbol, options), (baseAsset, quoteAsset, options) => Create(baseAsset + "-" + quoteAsset, options));
         }
 
-        
          /// <inheritdoc />
-        public IOrderBookFactory<CoinbaseOrderBookOptions> Futures { get; }
+        public IOrderBookFactory<CoinbaseOrderBookOptions> AdvancedTrade { get; }
 
          /// <inheritdoc />
-        public IOrderBookFactory<CoinbaseOrderBookOptions> Spot { get; }
-
-
-        
-         /// <inheritdoc />
-        public ISymbolOrderBook CreateFutures(string symbol, Action<CoinbaseOrderBookOptions>? options = null)
-            => new CoinbaseFuturesSymbolOrderBook(symbol, options, 
-                                                          _serviceProvider.GetRequiredService<ILoggerFactory>(),
-                                                          _serviceProvider.GetRequiredService<ICoinbaseRestClient>(),
-                                                          _serviceProvider.GetRequiredService<ICoinbaseSocketClient>());
-
-         /// <inheritdoc />
-        public ISymbolOrderBook CreateSpot(string symbol, Action<CoinbaseOrderBookOptions>? options = null)
-            => new CoinbaseSpotSymbolOrderBook(symbol, options, 
+        public ISymbolOrderBook Create(string symbol, Action<CoinbaseOrderBookOptions>? options = null)
+            => new CoinbaseSymbolOrderBook(symbol, options, 
                                                           _serviceProvider.GetRequiredService<ILoggerFactory>(),
                                                           _serviceProvider.GetRequiredService<ICoinbaseRestClient>(),
                                                           _serviceProvider.GetRequiredService<ICoinbaseSocketClient>());

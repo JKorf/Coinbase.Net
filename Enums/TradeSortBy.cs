@@ -6,24 +6,24 @@ using System.Text;
 namespace Coinbase.Net.Enums
 {
     /// <summary>
-    /// Margin type
+    /// Trade sort order
     /// </summary>
-    public enum MarginType
+    public enum TradeSortBy
     {
         /// <summary>
-        /// Unspecified
+        /// Unknown
         /// </summary>
-        [Map("MARGIN_TYPE_UNSPECIFIED", "UNKNOWN_MARGIN_TYPE")]
-        Unspecified,
+        [Map("UNKNOWN_SORT_BY")]
+        Unknown,
         /// <summary>
-        /// Cross margin
+        /// Trade price
         /// </summary>
-        [Map("MARGIN_TYPE_CROSS")]
-        Cross,
+        [Map("PRICE")]
+        Price,
         /// <summary>
-        /// Isolated margin
+        /// Trade time
         /// </summary>
-        [Map("MARGIN_TYPE_ISOLATED")]
-        Isolated
+        [Map("TRADE_TIME")]
+        TradeTime
     }
 }

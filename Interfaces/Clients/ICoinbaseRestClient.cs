@@ -1,4 +1,3 @@
-using Coinbase.Net.Interfaces.Clients.FuturesApi;
 using Coinbase.Net.Interfaces.Clients.SpotApi;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
@@ -10,17 +9,10 @@ namespace Coinbase.Net.Interfaces.Clients
     /// </summary>
     public interface ICoinbaseRestClient : IRestClient
     {
-        
         /// <summary>
-        /// Futures API endpoints
+        /// Advanced trade API endpoints
         /// </summary>
-        public ICoinbaseRestClientFuturesApi FuturesApi { get; }
-
-        /// <summary>
-        /// Spot API endpoints
-        /// </summary>
-        public ICoinbaseRestClientSpotApi SpotApi { get; }
-
+        public ICoinbaseRestClientAdvancedTradeApi AdvancedTradeApi { get; }
 
         /// <summary>
         /// Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.

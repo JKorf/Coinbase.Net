@@ -213,11 +213,11 @@ namespace Coinbase.Net.Clients.SpotApi
         #region Close Position
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseOrderResult>> ClosePositionAsync(string symbol, string clientOrderId, decimal quantity, CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbaseOrderResult>> ClosePositionAsync(string symbol, decimal quantity, string? clientOrderId = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("product_id", symbol);
-            parameters.Add("client_order_id", clientOrderId);
+            parameters.Add("client_order_id", clientOrderId ?? ExchangeHelpers.RandomString(24));
             parameters.AddString("size", quantity);
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v3/brokerage/orders/close_position", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseOrderResult>(request, parameters, ct).ConfigureAwait(false);

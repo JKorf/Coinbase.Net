@@ -70,6 +70,16 @@ namespace Coinbase.Net.Interfaces.Clients.SpotApi
         Task<WebCallResult<CoinbasePortfolioMove>> TransferPortfolioFundsAsync(string fromPortfolioId, string toPortfolioId, decimal quantity, string asset, CancellationToken ct = default);
 
         /// <summary>
+        /// Edit portfolio
+        /// </summary>
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_editportfolio" /></para>
+        /// <param name="portfolioId">Id of portfolio</param>
+        /// <param name="newName">New name</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<CoinbasePortfolio>> EditPortfolioAsync(string portfolioId, string newName, CancellationToken ct = default);
+
+        /// <summary>
         /// Delete a portfolio
         /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_deleteportfolio" /></para>
         /// </summary>
@@ -149,8 +159,12 @@ namespace Coinbase.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-withdrawals" /></para>
         /// </summary>
         /// <param name="accountId">Account id</param>
+        /// <param name="order">Result order</param>
+        /// <param name="fromId">Return results before after id</param>
+        /// <param name="toId">Return results before this id</param>
+        /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbasePaginatedResult<CoinbaseWithdrawal>>> GetWithdrawalsAsync(string accountId, CancellationToken ct = default);
+        Task<WebCallResult<CoinbasePaginatedResult<CoinbaseWithdrawal>>> GetWithdrawalsAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get info on a specific fiat withdrawal
@@ -188,8 +202,12 @@ namespace Coinbase.Net.Interfaces.Clients.SpotApi
         /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-deposits" /></para>
         /// </summary>
         /// <param name="accountId">Account id</param>
+        /// <param name="order">Result order</param>
+        /// <param name="fromId">Return results before after id</param>
+        /// <param name="toId">Return results before this id</param>
+        /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbasePaginatedResult<CoinbaseDeposit>>> GetDepositsAsync(string accountId, CancellationToken ct = default);
+        Task<WebCallResult<CoinbasePaginatedResult<CoinbaseDeposit>>> GetDepositsAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get info on a specific fiat deposit
@@ -199,14 +217,18 @@ namespace Coinbase.Net.Interfaces.Clients.SpotApi
         /// <param name="depositId">Deposit id</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<CoinbaseDeposit>> GetDepositAsync(string accountId, string depositId, CancellationToken ct = default);
-        
+
         /// <summary>
         /// Get list of transaction for the account
         /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-transactions" /></para>
         /// </summary>
         /// <param name="accountId">Account id</param>
+        /// <param name="order">Result order</param>
+        /// <param name="fromId">Return results before after id</param>
+        /// <param name="toId">Return results before this id</param>
+        /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbasePaginatedResult<CoinbaseTransaction>>> GetTransactionsAsync(string accountId, CancellationToken ct = default);
+        Task<WebCallResult<CoinbasePaginatedResult<CoinbaseTransaction>>> GetTransactionsAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get info on a specific transaction
@@ -216,7 +238,7 @@ namespace Coinbase.Net.Interfaces.Clients.SpotApi
         /// <param name="transactionId">Transaction id</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<CoinbaseTransaction>> GetTransactionsAsync(string accountId, string transactionId, CancellationToken ct = default);
+        Task<WebCallResult<CoinbaseTransaction>> GetTransactionAsync(string accountId, string transactionId, CancellationToken ct = default);
 
         /// <summary>
         /// Transfer an asset between 2 accounts of the same user. Either wallet to wallet or wallet to vault.
@@ -229,6 +251,19 @@ namespace Coinbase.Net.Interfaces.Clients.SpotApi
         /// <param name="description">Description</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<CoinbaseTransaction>> TransferAsync(string accountId, string toAccountId, decimal quantity, string asset, string? description = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get transactions for a specific address
+        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /></para>
+        /// </summary>
+        /// <param name="accountId">Account id</param>
+        /// <param name="addressId">Address id</param>
+        /// <param name="order">Result order</param>
+        /// <param name="fromId">Return results before after id</param>
+        /// <param name="toId">Return results before this id</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<CoinbasePaginatedResult<CoinbaseTransaction>>> GetAddressTransactionsAsync(string accountId, string addressId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Withdraw a crypto asset to an external blockchain address or user by email
@@ -246,6 +281,36 @@ namespace Coinbase.Net.Interfaces.Clients.SpotApi
         /// <param name="destinationTag">Destination tag</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<CoinbaseTransaction>> WithdrawCryptoAsync(string accountId, string to, decimal quantity, string asset, string? description = null, bool? skipNotifications = null, string? idempotencyToken = null, bool? toFinancialInstitution = null, string? financialInstituionWebsite = null, string? destinationTag = null, CancellationToken ct = default);
+        
+        /// <summary>
+        /// Create a new deposit address for an account
+        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /></para>
+        /// </summary>
+        /// <param name="accountId">Account id</param>
+        /// <param name="name">Address label</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<CoinbaseDepositAddress>> CreateDepositAddressAsync(string accountId, string name, CancellationToken ct = default);
+
+        /// <summary>
+        /// List deposit addresses for an account
+        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /></para>
+        /// </summary>
+        /// <param name="accountId">Account id</param>
+        /// <param name="order">Result order</param>
+        /// <param name="fromId">Return results before after id</param>
+        /// <param name="toId">Return results before this id</param>
+        /// <param name="limit">Max number of results</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<CoinbasePaginatedResult<CoinbaseDepositAddress>>> GetDepositAddressesAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default);
+        
+        /// <summary>
+        /// Get info on a specific deposit address
+        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /></para>
+        /// </summary>
+        /// <param name="accountId">Account id</param>
+        /// <param name="addressId">Id of the address</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<CoinbaseDepositAddress>> GetDepositAddressAsync(string accountId, string addressId, CancellationToken ct = default);
 
     }
 }

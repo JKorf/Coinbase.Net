@@ -1,5 +1,4 @@
 using CryptoExchange.Net.Objects;
-using Coinbase.Net.Clients.SpotApi;
 using Coinbase.Net.Interfaces.Clients.SpotApi;
 using System.Collections.Generic;
 using System.Net.Http;
@@ -119,7 +118,7 @@ namespace Coinbase.Net.Clients.SpotApi
         {
             var parameters = new ParameterCollection();
             parameters.Add("name", newName);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, $"api/v3/brokerage/portfolios/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Put, $"api/v3/brokerage/portfolios/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePortfolioWrapper>(request, parameters, ct).ConfigureAwait(false);
             return result.As<CoinbasePortfolio>(result.Data?.Portfolio);
         }
@@ -246,9 +245,13 @@ namespace Coinbase.Net.Clients.SpotApi
         #region Get Withdrawals
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePaginatedResult<CoinbaseWithdrawal>>> GetWithdrawalsAsync(string accountId, CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbasePaginatedResult<CoinbaseWithdrawal>>> GetWithdrawalsAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
+            parameters.AddOptionalEnum("order", order);
+            parameters.AddOptional("starting_after", fromId);
+            parameters.AddOptional("ending_before", toId);
+            parameters.AddOptional("limit", limit);
             var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/accounts/{accountId}/withdrawals", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePaginatedResult<CoinbaseWithdrawal>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -304,9 +307,13 @@ namespace Coinbase.Net.Clients.SpotApi
         #region Get Deposits
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePaginatedResult<CoinbaseDeposit>>> GetDepositsAsync(string accountId, CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbasePaginatedResult<CoinbaseDeposit>>> GetDepositsAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
+            parameters.AddOptionalEnum("order", order);
+            parameters.AddOptional("starting_after", fromId);
+            parameters.AddOptional("ending_before", toId);
+            parameters.AddOptional("limit", limit);
             var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/accounts/{accountId}/deposits", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePaginatedResult<CoinbaseDeposit>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -330,9 +337,13 @@ namespace Coinbase.Net.Clients.SpotApi
         #region Get Transactions
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePaginatedResult<CoinbaseTransaction>>> GetTransactionsAsync(string accountId, CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbasePaginatedResult<CoinbaseTransaction>>> GetTransactionsAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
+            parameters.AddOptionalEnum("order", order);
+            parameters.AddOptional("starting_after", fromId);
+            parameters.AddOptional("ending_before", toId);
+            parameters.AddOptional("limit", limit);
             var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/accounts/{accountId}/transactions", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePaginatedResult<CoinbaseTransaction>>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -343,7 +354,7 @@ namespace Coinbase.Net.Clients.SpotApi
         #region Get Transaction
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseTransaction>> GetTransactionsAsync(string accountId, string transactionId, CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbaseTransaction>> GetTransactionAsync(string accountId, string transactionId, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/accounts/{accountId}/transactions/{transactionId}", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
@@ -372,6 +383,23 @@ namespace Coinbase.Net.Clients.SpotApi
 
         #endregion
 
+        #region Get Address Transactions
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinbasePaginatedResult<CoinbaseTransaction>>> GetAddressTransactionsAsync(string accountId, string addressId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptionalEnum("order", order);
+            parameters.AddOptional("starting_after", fromId);
+            parameters.AddOptional("ending_before", toId);
+            parameters.AddOptional("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/accounts/{accountId}/addresses/{addressId}/transactions", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
+            var result = await _baseClient.SendAsync<CoinbasePaginatedResult<CoinbaseTransaction>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
         #region Withdraw Crypto
 
         /// <inheritdoc />
@@ -391,6 +419,50 @@ namespace Coinbase.Net.Clients.SpotApi
             var request = _definitions.GetOrCreate(HttpMethod.Post, $"/v2/accounts/{accountId}/transactions", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseTransactionWrapper>(request, parameters, ct).ConfigureAwait(false);
             return result.As<CoinbaseTransaction>(result.Data?.Data);
+        }
+
+        #endregion
+
+        #region Create Deposit Address
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinbaseDepositAddress>> CreateDepositAddressAsync(string accountId, string name, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("name", name);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, $"/v2/accounts/{accountId}/addresses", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
+            var result = await _baseClient.SendAsync<CoinbaseDepositAddressWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<CoinbaseDepositAddress>(result.Data?.Data);
+        }
+
+        #endregion
+
+        #region Get Deposit Addresses
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinbasePaginatedResult<CoinbaseDepositAddress>>> GetDepositAddressesAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptionalEnum("order", order);
+            parameters.AddOptional("starting_after", fromId);
+            parameters.AddOptional("ending_before", toId);
+            parameters.AddOptional("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/accounts/{accountId}/addresses", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
+            var result = await _baseClient.SendAsync<CoinbasePaginatedResult<CoinbaseDepositAddress>>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Deposit Address
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinbaseDepositAddress>> GetDepositAddressAsync(string accountId, string addressId, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/accounts/{accountId}/addresses/{addressId}", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
+            var result = await _baseClient.SendAsync<CoinbaseDepositAddressWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<CoinbaseDepositAddress>(result.Data?.Data);
         }
 
         #endregion

@@ -158,6 +158,11 @@ namespace Coinbase.Net.Objects.Models
         [JsonPropertyName("alias")]
         public string Alias { get; set; } = string.Empty;
         /// <summary>
+        /// Alias to
+        /// </summary>
+        [JsonPropertyName("alias_to")]
+        public IEnumerable<string> AliasTo { get; set; } = Array.Empty<string>();
+        /// <summary>
         /// Base display symbol
         /// </summary>
         [JsonPropertyName("base_display_symbol")]

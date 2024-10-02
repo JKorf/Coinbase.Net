@@ -24,7 +24,7 @@ namespace Coinbase.Net.Objects
         public static CoinbaseApiAddresses Default = new CoinbaseApiAddresses
         {
             RestClientAddress = "https://api.coinbase.com",
-            SocketClientPublicAddress = "wss://ws-feed.exchange.coinbase.com",
+            SocketClientPublicAddress = "wss://advanced-trade-ws.coinbase.com",
             SocketClientPrivateAddress = "wss://advanced-trade-ws-user.coinbase.com"
         };
     }

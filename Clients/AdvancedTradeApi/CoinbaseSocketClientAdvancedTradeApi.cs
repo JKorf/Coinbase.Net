@@ -14,6 +14,10 @@ using Coinbase.Net.Interfaces.Clients.SpotApi;
 using Coinbase.Net.Objects.Models;
 using Coinbase.Net.Objects.Options;
 using Coinbase.Net.Objects.Sockets.Subscriptions;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Linq;
+using Coinbase.Net.Objects.Internal;
+using System.Collections.Generic;
 
 namespace Coinbase.Net.Clients.SpotApi
 {
@@ -23,7 +27,7 @@ namespace Coinbase.Net.Clients.SpotApi
     internal partial class CoinbaseSocketClientAdvancedTradeApi : SocketApiClient, ICoinbaseSocketClientAdvancedTradeApi
     {
         #region fields
-        private static readonly MessagePath _idPath = MessagePath.Get().Property("id");
+        private static readonly MessagePath _channelPath = MessagePath.Get().Property("channel");
         #endregion
 
         #region constructor/destructor
@@ -35,23 +39,36 @@ namespace Coinbase.Net.Clients.SpotApi
             base(logger, options.Environment.SocketClientPublicAddress!, options, options.SpotOptions)
         {
         }
-        #endregion 
+        #endregion
+
+        /// <inheritdoc />
+        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor();
+        /// <inheritdoc />
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new CoinbaseAuthenticationProvider(credentials);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToXXXUpdatesAsync(Action<DataEvent<CoinbaseModel>> onMessage, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToHeartbeatUpdatesAsync(Action<DataEvent<CoinbaseHeartbeat>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new CoinbaseSubscription<CoinbaseModel>(_logger, new [] { "XXX" }, onMessage, false);
+            var subscription = new CoinbaseSubscription<CoinbaseHeartbeat>(_logger, "heartbeats", new [] { "XXX" }, x => onMessage(x.As(x.Data.First())), false);
+            return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
+        }
+
+        /// <inheritdoc />
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<CoinbaseTrade>>> onMessage, CancellationToken ct = default)
+        {
+            var subscription = new CoinbaseSubscription<CoinbaseTradeEvent>(_logger, "market_trades", new[] { symbol }, x => onMessage(x.As(x.Data.First().Trades)), false);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public override string? GetListenerIdentifier(IMessageAccessor message)
         {
-            return message.GetValue<string>(_idPath);
+#warning symbol
+            return message.GetValue<string>(_channelPath);
         }
 
         /// <inheritdoc />

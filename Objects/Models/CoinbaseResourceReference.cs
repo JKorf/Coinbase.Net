@@ -15,7 +15,7 @@ namespace Coinbase.Net.Objects.Models
         /// Id
         /// </summary>
         [JsonPropertyName("id")]
-        public string Id { get; set; } = string.Empty;
+        public string? Id { get; set; } = string.Empty;
         /// <summary>
         /// Resource
         /// </summary>
@@ -25,6 +25,24 @@ namespace Coinbase.Net.Objects.Models
         /// Resource path
         /// </summary>
         [JsonPropertyName("resource_path")]
-        public string ResourcePath { get; set; } = string.Empty;
+        public string? ResourcePath { get; set; }
+    }
+
+    /// <summary>
+    /// Reference
+    /// </summary>
+    public record CoinbaseToReference : CoinbaseResourceReference
+    {
+        /// <summary>
+        /// Address
+        /// </summary>
+        [JsonPropertyName("address")]
+        public string? Address { get; set; }
+
+        /// <summary>
+        /// Email
+        /// </summary>
+        [JsonPropertyName("email")]
+        public string? Email { get; set; }
     }
 }

@@ -51,7 +51,7 @@ namespace Coinbase.Net.Objects.Models
         /// Fees
         /// </summary>
         [JsonPropertyName("fees")]
-        public CoinbaseConvertFees Fees { get; set; } = null!;
+        public IEnumerable<CoinbaseConvertFees> Fees { get; set; } = null!;
         /// <summary>
         /// Total fee
         /// </summary>
@@ -155,7 +155,7 @@ namespace Coinbase.Net.Objects.Models
         /// Quantity
         /// </summary>
         [JsonPropertyName("amount")]
-        public CoinbaseConvertFees Quantity { get; set; } = null!;
+        public CoinbaseQuantityReference Quantity { get; set; } = null!;
         /// <summary>
         /// Disclosure
         /// </summary>

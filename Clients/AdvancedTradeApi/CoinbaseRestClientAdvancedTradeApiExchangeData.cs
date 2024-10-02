@@ -30,7 +30,7 @@ namespace Coinbase.Net.Clients.SpotApi
         {
             var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/brokerage/time", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
             var result = await _baseClient.SendAsync<CoinbaseTime>(request, null, ct).ConfigureAwait(false);
-            return result.As(result.Data.Time);
+            return result.As(result.Data?.Time ?? default);
         }
 
         #endregion
@@ -48,7 +48,7 @@ namespace Coinbase.Net.Clients.SpotApi
             parameters.AddOptional("get_all_products", allProducts);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/brokerage/market/products", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
             var result = await _baseClient.SendAsync<CoinbaseSymbolWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As(result.Data.Symbols);
+            return result.As<IEnumerable<CoinbaseSymbol>>(result.Data?.Symbols);
         }
 
         #endregion
@@ -77,7 +77,7 @@ namespace Coinbase.Net.Clients.SpotApi
             parameters.AddOptionalString("aggregation_price_increment", priceIntervals);
             var request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/market/product_book", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
             var result = await _baseClient.SendAsync<CoinbaseOrderBookWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As(result.Data.Book);
+            return result.As<CoinbaseOrderBook>(result.Data?.Book);
         }
 
         #endregion
@@ -94,7 +94,7 @@ namespace Coinbase.Net.Clients.SpotApi
             parameters.AddOptional("limit", limit);
             var request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/market/products/{symbol}/candles", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
             var result = await _baseClient.SendAsync<CoinbaseKlineWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As(result.Data.Klines);
+            return result.As<IEnumerable<CoinbaseKline>>(result.Data?.Klines);
         }
 
         #endregion
@@ -137,6 +137,20 @@ namespace Coinbase.Net.Clients.SpotApi
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v2/currencies/crypto", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
             var result = await _baseClient.SendAsync<CoinbaseCryptoAssetWrapper>(request, parameters, ct).ConfigureAwait(false);
             return result.As<IEnumerable<CoinbaseCryptoAsset>>(result.Data?.Data);
+        }
+
+        #endregion
+
+        #region Get Exchange Rates
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinbaseExchangeRates>> GetExchangeRatesAsync(string? asset = null, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("currency", asset);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/v2/exchange-rates", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
+            var result = await _baseClient.SendAsync<CoinbaseExchangeRatesWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<CoinbaseExchangeRates>(result.Data?.Data);
         }
 
         #endregion

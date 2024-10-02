@@ -141,7 +141,7 @@ namespace Coinbase.Net.Interfaces.Clients.SpotApi
         /// <param name="clientOrderId">Client order id for the close order</param>
         /// <param name="quantity">Quantity to close</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbaseOrderResult>> ClosePositionAsync(string symbol, string clientOrderId, decimal quantity, CancellationToken ct = default);
+        Task<WebCallResult<CoinbaseOrderResult>> ClosePositionAsync(string symbol, decimal quantity, string? clientOrderId = null, CancellationToken ct = default);
 
     }
 }

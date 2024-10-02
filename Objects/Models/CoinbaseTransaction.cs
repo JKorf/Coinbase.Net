@@ -66,10 +66,47 @@ namespace Coinbase.Net.Objects.Models
         [JsonPropertyName("resource_path")]
         public string ResourcePath { get; set; } = string.Empty;
         /// <summary>
+        /// Network info
+        /// </summary>
+        [JsonPropertyName("network")]
+        public CoinbaseTransactionNetwork? Network { get; set; }
+        /// <summary>
+        /// Transfer target
+        /// </summary>
+        [JsonPropertyName("to")]
+        public CoinbaseToReference? To { get; set; }
+        /// <summary>
+        /// Transfer source
+        /// </summary>
+        [JsonPropertyName("from")]
+        public CoinbaseToReference? From { get; set; }
+        /// <summary>
         /// Details
         /// </summary>
         [JsonPropertyName("details")]
         public CoinbaseTransactionDetails Details { get; set; } = null!;
+    }
+
+    /// <summary>
+    /// Network info
+    /// </summary>
+    public record CoinbaseTransactionNetwork
+    {
+        /// <summary>
+        /// Status
+        /// </summary>
+        [JsonPropertyName("status")]
+        public string Status { get; set; } = string.Empty;
+        /// <summary>
+        /// Transaction hash
+        /// </summary>
+        [JsonPropertyName("hash")]
+        public string? Hash { get; set; } = string.Empty;
+        /// <summary>
+        /// Name of the network
+        /// </summary>
+        [JsonPropertyName("name")]
+        public string NetworkName { get; set; } = string.Empty;
     }
 
     /// <summary>

@@ -89,5 +89,13 @@ namespace Coinbase.Net.Interfaces.Clients.SpotApi
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<IEnumerable<CoinbaseCryptoAsset>>> GetCryptoAssetsAsync(CancellationToken ct = default);
 
+        /// <summary>
+        /// Get exchange rates
+        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-exchange-rates" /></para>
+        /// </summary>
+        /// <param name="asset">The asset to get exchange rates for, defaults to USD</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<CoinbaseExchangeRates>> GetExchangeRatesAsync(string? asset = null, CancellationToken ct = default);
+
     }
 }

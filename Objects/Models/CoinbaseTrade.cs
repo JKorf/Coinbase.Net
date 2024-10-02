@@ -42,7 +42,12 @@ namespace Coinbase.Net.Objects.Models
         /// Trade id
         /// </summary>
         [JsonPropertyName("trade_id")]
-        public long TradeId { get; set; }
+        public string TradeId { get; set; } = string.Empty;
+        /// <summary>
+        /// Symbol
+        /// </summary>
+        [JsonPropertyName("product_id")]
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Trade price
         /// </summary>

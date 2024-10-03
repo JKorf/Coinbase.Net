@@ -5,7 +5,7 @@ using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Internal
 {
-    internal class CoinbaseSocketMessage
+    internal record CoinbaseSocketMessage
     {
         [JsonPropertyName("channel")]
         public string Channel { get; set; }
@@ -15,7 +15,7 @@ namespace Coinbase.Net.Objects.Internal
         public long SequenceNumber { get; set; }
     }
 
-    internal class CoinbaseSocketMessage<T> : CoinbaseSocketMessage
+    internal record CoinbaseSocketMessage<T> : CoinbaseSocketMessage
     {
         [JsonPropertyName("events")]
         public IEnumerable<T> Events { get; set; }

@@ -42,31 +42,41 @@ namespace Coinbase.Net
             if (!auth)
                 return;
 
+            var timestamp = GetTimestamp(apiClient);
+
+            headers.Add("Authorization", $"Bearer {GenerateToken(timestamp, $"{method} {uri.Host}{uri.AbsolutePath}")}");
+
+        }
+
+        public string GenerateToken(DateTime timestamp, string? uriLine)
+        {
+#if NETSTANDARD2_1_OR_GREATER
+
             var lines = _credentials.Secret.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
             var strippedKey = string.Join("", lines.Skip(1).Take(lines.Length - 2));
 
-#if NETSTANDARD2_1_OR_GREATER
             using var key = ECDsa.Create();
             key.ImportECPrivateKey(Convert.FromBase64String(strippedKey), out _);
 
-            var timestamp = GetTimestamp(apiClient);
             var payload = new Dictionary<string, object>
              {
-                 { "sub", ApiKey },
                  { "iss", "coinbase-cloud" },
                  { "nbf", (long)DateTimeConverter.ConvertToSeconds(timestamp) },
                  { "exp", (long)DateTimeConverter.ConvertToSeconds(timestamp.AddMinutes(1)) },
-                 { "uri", $"{method} {uri.Host}{uri.AbsolutePath}" }
+                 { "sub", ApiKey },
              };
+            if (uriLine != null)
+                payload.Add("uri", uriLine);
 
+            var nonce = new byte[16];
+            RandomNumberGenerator.Fill(nonce);
             var extraHeaders = new Dictionary<string, object>
              {
                  { "kid", ApiKey },
-                 { "nonce", ExchangeHelpers.RandomString(10) },
-                 { "typ", "JWT"}
+                 { "nonce", BytesToHexString(nonce) },
              };
 
-            headers.Add("Authorization", $"Bearer {JWT.Encode(payload, key, JwsAlgorithm.ES256, extraHeaders)}");
+            return JWT.Encode(payload, key, JwsAlgorithm.ES256, extraHeaders);
 #else
             throw new PlatformNotSupportedException();
 #endif

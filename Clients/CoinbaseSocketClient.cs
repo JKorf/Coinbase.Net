@@ -4,8 +4,8 @@ using Microsoft.Extensions.Logging;
 using System;
 using Coinbase.Net.Interfaces.Clients;
 using Coinbase.Net.Objects.Options;
-using Coinbase.Net.Interfaces.Clients.SpotApi;
 using Coinbase.Net.Clients.SpotApi;
+using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 
 namespace Coinbase.Net.Clients
 {

@@ -50,7 +50,17 @@ namespace Coinbase.Net.Objects.Models
         public decimal Volume { get; set; }
     }
 
-
+    /// <summary>
+    /// Stream kline
+    /// </summary>
+    public record CoinbaseStreamKline: CoinbaseKline
+    {
+        /// <summary>
+        /// Symbol
+        /// </summary>
+        [JsonPropertyName("product_id")]
+        public string Symbol { get; set; } = string.Empty;
+    }
 
 
 }

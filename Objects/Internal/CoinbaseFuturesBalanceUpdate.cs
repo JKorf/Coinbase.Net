@@ -6,9 +6,9 @@ using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Internal
 {
-    internal record CoinbaseTradeEvent : CoinbaseSocketEvent
+    internal record CoinbaseFuturesBalanceUpdate : CoinbaseSocketEvent
     {
-        [JsonPropertyName("trades")]
-        public IEnumerable<CoinbaseTrade> Trades { get; set; }
+        [JsonPropertyName("fcm_balance_summary")]
+        public CoinbaseFuturesBalance BalanceSummary { get; set; } = null!;
     }
 }

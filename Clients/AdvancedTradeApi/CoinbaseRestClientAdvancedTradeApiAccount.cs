@@ -1,5 +1,4 @@
 using CryptoExchange.Net.Objects;
-using Coinbase.Net.Interfaces.Clients.SpotApi;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Threading.Tasks;
@@ -7,8 +6,10 @@ using System.Threading;
 using Coinbase.Net.Objects.Models;
 using Coinbase.Net.Enums;
 using System.Globalization;
+using Coinbase.Net.Clients.SpotApi;
+using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 
-namespace Coinbase.Net.Clients.SpotApi
+namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     /// <inheritdoc />
     internal class CoinbaseRestClientAdvancedTradeApiAccount : ICoinbaseRestClientAdvancedTradeApiAccount
@@ -55,7 +56,7 @@ namespace Coinbase.Net.Clients.SpotApi
         public async Task<WebCallResult<IEnumerable<CoinbasePortfolio>>> GetPortfoliosAsync(PortfolioType? type = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            parameters.AddOptional("portfolio_type", type);
+            parameters.AddOptionalEnum("portfolio_type", type);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/brokerage/portfolios", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePortfoliosWrapper>(request, parameters, ct).ConfigureAwait(false);
             return result.As<IEnumerable<CoinbasePortfolio>>(result.Data?.Portfolios);
@@ -139,6 +140,109 @@ namespace Coinbase.Net.Clients.SpotApi
 
         #endregion
 
+        #region Delete Portfolio
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> AllocatePortfolioAsync(string portfolioId, string symbol, decimal quantity, string asset, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("portfolio_uuid", portfolioId);
+            parameters.Add("symbol", portfolioId);
+            parameters.AddString("amount", quantity);
+            parameters.Add("currency", portfolioId);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, $"api/v3/brokerage/intx/allocate", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var result = await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Perpetual Portfolio Summary
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinbasePerpetualPorfolios>> GetPerpetualPortfolioSummaryAsync(string portfolioId, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/intx/portfolio/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var result = await _baseClient.SendAsync<CoinbasePerpetualPorfolios>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Perpetual Positions
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinbasePerpetualPositions>> GetPerpetualPositionsAsync(string portfolioId, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/intx/positions/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var result = await _baseClient.SendAsync<CoinbasePerpetualPositions>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Perpetual Position
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinbasePerpetualPosition>> GetPerpetualPositionAsync(string portfolioId, string symbol, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/intx/positions/{portfolioId}/{symbol}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var result = await _baseClient.SendAsync<CoinbasePerpetualPositionWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<CoinbasePerpetualPosition>(result.Data?.Position);
+        }
+
+        #endregion
+
+        #region Get Perpetual Balances
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinbasePerpetualBalances>> GetPerpetualBalancesAsync(string portfolioId, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/intx/balances/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var result = await _baseClient.SendAsync<CoinbasePerpetualBalancesWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<CoinbasePerpetualBalances>(result.Data?.PortfolioBalances);
+        }
+
+        #endregion
+
+        #region Get Perpetual Balances
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinbaseMultiAssetMode>> SetPerpetualMultiAssetCollateralModeAsync(string portfolioId, bool enabled, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.Add("portfolio_uuid", portfolioId);
+            parameters.Add("multi_asset_collateral_enabled", enabled);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, $"/api/v3/brokerage/intx/multi_asset_collateral", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var result = await _baseClient.SendAsync<CoinbaseMultiAssetMode>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Futures Balance Summary
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinbaseFuturesBalanceSummary>> GetFuturesBalanceSummaryAsync(CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/brokerage/cfm/balance_summary", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var result = await _baseClient.SendAsync<CoinbaseFuturesBalanceSummaryWrapper>(request, parameters, ct).ConfigureAwait(false);
+            if (!result)
+                return result.As<CoinbaseFuturesBalanceSummary>(default);
+
+            if (result.Data.BalanceSummary == null)
+                return result.AsError<CoinbaseFuturesBalanceSummary>(new ServerError("Not found"));
+
+            return result.As(result.Data.BalanceSummary);
+        }
+
+        #endregion
+
         #region Get Fee Info
 
         /// <inheritdoc />
@@ -151,6 +255,73 @@ namespace Coinbase.Net.Clients.SpotApi
             var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/brokerage/transaction_summary", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseFeeInfo>(request, parameters, ct).ConfigureAwait(false);
             return result;
+        }
+
+        #endregion
+
+        #region Set Futures Intraday Margin Setting
+
+        /// <inheritdoc />
+        public async Task<WebCallResult> SetFuturesIntradayMarginSettingAsync(IntradayMargin setting, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddEnum("setting", setting);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/brokerage/cfm/intraday/margin_setting", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var result = await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Futures Intraday Margin Setting
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IntradayMarginSetting>> GetFuturesIntradayMarginSettingAsync(CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/brokerage/cfm/intraday/margin_setting", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var result = await _baseClient.SendAsync<IntradayMarginSetting>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Futures Current Margin Window
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinbaseFuturesMarginWindow>> GetFuturesCurrentMarginWindowAsync(MarginProfileType marginProfileType, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddEnum("margin_profile_type", marginProfileType);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/brokerage/cfm/intraday/current_margin_window", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var result = await _baseClient.SendAsync<CoinbaseFuturesMarginWindow>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Futures Positions
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<CoinbaseFuturesPosition>>> GetFuturesPositionsAsync(CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/brokerage/cfm/positions", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var result = await _baseClient.SendAsync<CoinbaseFuturesPositionsWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<IEnumerable<CoinbaseFuturesPosition>>(result.Data?.Positions);
+        }
+
+        #endregion
+
+        #region Get Futures Position
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinbaseFuturesPosition>> GetFuturesPositionAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, $"api/v3/brokerage/cfm/positions/{symbol}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var result = await _baseClient.SendAsync<CoinbaseFuturesPositionWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<CoinbaseFuturesPosition>(result.Data?.Position);
         }
 
         #endregion

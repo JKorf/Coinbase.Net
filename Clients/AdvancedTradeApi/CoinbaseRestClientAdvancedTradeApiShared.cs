@@ -2,7 +2,7 @@ using CryptoExchange.Net.SharedApis;
 using System;
 using System.Collections.Generic;
 using System.Text;
-using Coinbase.Net.Interfaces.Clients.SpotApi;
+using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 
 namespace Coinbase.Net.Clients.SpotApi
 {

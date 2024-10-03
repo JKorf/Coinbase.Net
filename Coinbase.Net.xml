@@ -73,7 +73,43 @@
         <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.DeletePortfolioAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.AllocatePortfolioAsync(System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualPortfolioSummaryAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualPositionsAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualPositionAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualBalancesAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.SetPerpetualMultiAssetCollateralModeAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetFuturesBalanceSummaryAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetFeeInfoAsync(System.Nullable{Coinbase.Net.Enums.SymbolType},System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.SetFuturesIntradayMarginSettingAsync(Coinbase.Net.Enums.IntradayMargin,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetFuturesIntradayMarginSettingAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetFuturesCurrentMarginWindowAsync(Coinbase.Net.Enums.MarginProfileType,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetFuturesPositionsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetFuturesPositionAsync(System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetApiKeyInfoAsync(System.Threading.CancellationToken)">
@@ -216,6 +252,48 @@
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseTrade}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseTrade}}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamKline}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamKline}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseTicker}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseTicker}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToBatchedTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseBatchTicker}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToBatchedTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseBatchTicker}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToSymbolUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamSymbol}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToSymbolUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamSymbol}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToSymbolUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamSymbol}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToUserUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseUserUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToFuturesBalanceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseFuturesBalance}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
@@ -453,6 +531,26 @@
             All statuses
             </summary>
         </member>
+        <member name="T:Coinbase.Net.Enums.IntradayMargin">
+            <summary>
+            Intraday margin setting
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.IntradayMargin.Unspecified">
+            <summary>
+            Unspecified
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.IntradayMargin.Standard">
+            <summary>
+            Standard
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.IntradayMargin.Intraday">
+            <summary>
+            Intraday
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Enums.KlineInterval">
             <summary>
             Kline interval
@@ -503,6 +601,111 @@
             1d
             </summary>
         </member>
+        <member name="T:Coinbase.Net.Enums.LiquidationStatus">
+            <summary>
+            Liquidation status
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.LiquidationStatus.Unspecified">
+            <summary>
+            Unspecified
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.LiquidationStatus.Canceling">
+            <summary>
+            Canceling
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.LiquidationStatus.AutoLiquidating">
+            <summary>
+            Auto liquidating
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.LiquidationStatus.LspAssignment">
+            <summary>
+            LSP assignment
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.LiquidationStatus.CustomerAssignment">
+            <summary>
+            Customer assignment
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.LiquidationStatus.Manual">
+            <summary>
+            Manual liquidation
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.LiquidationStatus.NotLiquidating">
+            <summary>
+            Not liquidating
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Enums.MarginFlags">
+            <summary>
+            Margin flags
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.MarginFlags.Unspecified">
+            <summary>
+            Unspecified
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.MarginFlags.InLiquidation">
+            <summary>
+            In liquidation
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Enums.MarginLevel">
+            <summary>
+            Margin level
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.MarginLevel.Unspecified">
+            <summary>
+            Unspecified
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.MarginLevel.Base">
+            <summary>
+            Base level
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.MarginLevel.Warning">
+            <summary>
+            Warning
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.MarginLevel.Danger">
+            <summary>
+            Danger
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.MarginLevel.Liquidation">
+            <summary>
+            Liquidation
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Enums.MarginProfileType">
+            <summary>
+            Profile type
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.MarginProfileType.Unspecified">
+            <summary>
+            Unspecified
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.MarginProfileType.Regular">
+            <summary>
+            Regular
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.MarginProfileType.IntradayMargin1">
+            <summary>
+            Intraday margin 1
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Enums.MarginType">
             <summary>
             Margin type
@@ -521,6 +724,36 @@
         <member name="F:Coinbase.Net.Enums.MarginType.Isolated">
             <summary>
             Isolated margin
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Enums.MarginWindowType">
+            <summary>
+            Window type
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.MarginWindowType.Unspecified">
+            <summary>
+            Unspecified
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.MarginWindowType.Overnight">
+            <summary>
+            Overnight
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.MarginWindowType.Weekend">
+            <summary>
+            Weekend
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.MarginWindowType.Intraday">
+            <summary>
+            Intraday
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.MarginWindowType.Transition">
+            <summary>
+            Transition
             </summary>
         </member>
         <member name="T:Coinbase.Net.Enums.NewOrderType">
@@ -1209,6 +1442,110 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.AllocatePortfolioAsync(System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Allocate portfolio funds to a sub-portfolio on Intx Portfolio
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_allocateportfolio" /></para>
+            </summary>
+            <param name="portfolioId">Portfolio id</param>
+            <param name="symbol">Symbol</param>
+            <param name="quantity">Quantity to be allocated for the specified isolated position.</param>
+            <param name="asset">The asset to be allocated for the specific isolated position</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualPortfolioSummaryAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get a summary of your Perpetuals portfolio
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxportfoliosummary" /></para>
+            </summary>
+            <param name="portfolioId">Portfolio uuid</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualPositionsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of open positions in your Perpetuals portfolio
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxportfoliosummary" /></para>
+            </summary>
+            <param name="portfolioId">Portfolio uuid</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualPositionAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get a specific Perpetual position
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxposition" /></para>
+            </summary>
+            <param name="portfolioId">Portfolio uuid</param>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualBalancesAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get balances of a Perpetual futures portfolio
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxbalances" /></para>
+            </summary>
+            <param name="portfolioId">Portfolio uuid</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.SetPerpetualMultiAssetCollateralModeAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Set multi asset collateral mode
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_intxmultiassetcollateral" /></para>
+            </summary>
+            <param name="portfolioId">Portfolio uuid</param>
+            <param name="enabled">Enabled</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetFuturesBalanceSummaryAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get delivery futures balance summary
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmbalancesummary" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.SetFuturesIntradayMarginSettingAsync(Coinbase.Net.Enums.IntradayMargin,System.Threading.CancellationToken)">
+            <summary>
+            Set intraday margin setting
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_setintradaymarginsetting" /></para>
+            </summary>
+            <param name="setting">Setting value</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetFuturesIntradayMarginSettingAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get intraday margin setting
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintradaymarginsetting" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetFuturesCurrentMarginWindowAsync(Coinbase.Net.Enums.MarginProfileType,System.Threading.CancellationToken)">
+            <summary>
+            Get futures current margin window
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getcurrentmarginwindow" /></para>
+            </summary>
+            <param name="marginProfileType">Margin profile type</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetFuturesPositionsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get expiring futures positions
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmpositions" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetFuturesPositionAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get expiring futures position for a symbol
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmposition" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+        </member>
         <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetFeeInfoAsync(System.Nullable{Coinbase.Net.Enums.SymbolType},System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.String,System.Threading.CancellationToken)">
             <summary>
             Get fee tier info
@@ -1637,8 +1974,155 @@
         </member>
         <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToHeartbeatUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseHeartbeat}},System.Threading.CancellationToken)">
             <summary>
-            
-            <para><a href="XXX" /></para>
+            Subscribe to the heartbeats channel. The heartbeats channel can be used to keep the connection alive when data from other subscriptions isn't continuous
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#heartbeats-channel" /></para>
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseTrade}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to public trades updates
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#market-trades-channel" /></para>
+            </summary>
+            <param name="symbol">Symbol to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseTrade}}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to public trades updates
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#market-trades-channel" /></para>
+            </summary>
+            <param name="symbols">Symbols to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamKline}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to kline updates. Klines are always at a 5 minute interval.
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#candles-channel" /></para>
+            </summary>
+            <param name="symbol">Symbol to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamKline}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to kline updates. Klines are always at a 5 minute interval.
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#candles-channel" /></para>
+            </summary>
+            <param name="symbols">Symbols to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseTicker}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to ticker updates, updates are pushed immediately on any chance
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-channel" /></para>
+            </summary>
+            <param name="symbol">Symbol to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseTicker}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to ticker updates, updates are pushed immediately on any chance
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-channel" /></para>
+            </summary>
+            <param name="symbol">Symbol to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToBatchedTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseBatchTicker}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to batched ticker updates, updates are pushed every 5 seconds
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-batch-channel" /></para>
+            </summary>
+            <param name="symbol">Symbol to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToBatchedTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseBatchTicker}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to batched ticker updates, updates are pushed every 5 seconds
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-batch-channel" /></para>
+            </summary>
+            <param name="symbols">Symbols to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToSymbolUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamSymbol}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to symbol rules updates
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#status-channel" /></para>
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToSymbolUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamSymbol}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to symbol rules updates
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#status-channel" /></para>
+            </summary>
+            <param name="symbol">Symbol to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToSymbolUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamSymbol}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to symbol rules updates
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#status-channel" /></para>
+            </summary>
+            <param name="symbols">Symbols to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to order book updates. First update is a snapshot of the full book, subsequent updates are change messages
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#level2-channel" /></para>
+            </summary>
+            <param name="symbol">Symbol to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to order book updates. First update is a snapshot of the full book, subsequent updates are change messages
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#level2-channel" /></para>
+            </summary>
+            <param name="symbols">Symbols to subscribe</param>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToUserUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseUserUpdate}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to user order and position updates. After subscribing snapshots will be pushed containing all open orders for the user
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#user-channel" /></para>
+            </summary>
+            <param name="onMessage">The event handler for the received data</param>
+            <param name="ct">Cancellation token for closing this subscription</param>
+            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToFuturesBalanceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseFuturesBalance}},System.Threading.CancellationToken)">
+            <summary>
+            Subscribe to futures balance updates
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#futures-balance-summary-channel" /></para>
             </summary>
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
@@ -1651,7 +2135,7 @@
         </member>
         <member name="P:Coinbase.Net.Interfaces.Clients.ICoinbaseRestClient.AdvancedTradeApi">
             <summary>
-            Advanced trade API endpoints
+            Advanced Trade API endpoints, also contains some Wallet API endpoints
             </summary>
         </member>
         <member name="M:Coinbase.Net.Interfaces.Clients.ICoinbaseRestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
@@ -1714,6 +2198,26 @@
         <member name="F:Coinbase.Net.Objects.CoinbaseApiAddresses.Default">
             <summary>
             The default addresses to connect to the Coinbase API
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Internal.CoinbaseOrderBookEvent.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Internal.CoinbaseOrderBookEvent.Book">
+            <summary>
+            Book data
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Internal.CoinbaseSocketEvent">
+            <summary>
+            Socket update
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Internal.CoinbaseSocketEvent.EventType">
+            <summary>
+            Event type
             </summary>
         </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseAccountPage">
@@ -2451,6 +2955,41 @@
             Exchange rates
             </summary>
         </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseExpiringPosition">
+            <summary>
+            Expiring position info
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExpiringPosition.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExpiringPosition.PositionSide">
+            <summary>
+            Side of the position
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExpiringPosition.NumberOfContracts">
+            <summary>
+            Number of contracts
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExpiringPosition.RealizedPnl">
+            <summary>
+            Realized profit and loss
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExpiringPosition.UnrealizedPnl">
+            <summary>
+            Unrealized profit and loss
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExpiringPosition.EntryPrice">
+            <summary>
+            Entry price
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseFeeInfo">
             <summary>
             Fee info
@@ -2591,6 +3130,296 @@
             Min quantity
             </summary>
         </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseFuturesBalance">
+            <summary>
+            Futures balance info
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalance.CashAvailable">
+            <summary>
+            The amount of your cash balance that is available to trade CFM futures
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalance.TotalUsdBalance">
+            <summary>
+            Aggregate USD maintained across your CFTC-regulated futures account and your Coinbase Inc. spot account
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalance.CbiUsdBalance">
+            <summary>
+            USD maintained in your Coinbase Inc. spot account
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalance.CfmUsdBalance">
+            <summary>
+            USD maintained in your CFTC-regulated futures account. Funds held in your futures account are not available to trade spot
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalance.TotalOpenOrdersHoldQuantity">
+            <summary>
+            Your total balance on hold for spot and futures open orders
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalance.UnrealizedPnl">
+            <summary>
+            Unrealized profit and loss
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalance.DailyRealizedPnl">
+            <summary>
+            Daily realized profit and loss
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalance.InitialMargin">
+            <summary>
+            Initial margin
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalance.AvailableMargin">
+            <summary>
+            Available margin
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalance.LiquidationThreshold">
+            <summary>
+            When your available funds for collateral drop to the liquidation threshold, some or all of your futures positions will be liquidated
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalance.LiquidationBufferQuantity">
+            <summary>
+            Funds available in excess of the liquidation threshold, calculated as available margin minus liquidation threshold. If your liquidation buffer amount reaches 0, your futures positions and/or open orders will be liquidated as necessary
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalance.LiquidationBufferPercentage">
+            <summary>
+            Funds available in excess of the liquidation threshold expressed as a percentage. If your liquidation buffer percentage reaches 0%, your futures positions and/or open orders will be liquidated as necessary
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalance.IntradayMarginWindowMeasure">
+            <summary>
+            Intraday margin window measure
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalance.OvernightMarginWindowMeasure">
+            <summary>
+            Overnight margin window measure
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceWindow">
+            <summary>
+            Window info
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceWindow.MarginWindowType">
+            <summary>
+            Margin window type
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceWindow.MarginLevel">
+            <summary>
+            Margin level
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceWindow.InitialMargin">
+            <summary>
+            Initial margin
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceWindow.MaintenanceMargin">
+            <summary>
+            Maintenance margin
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceWindow.LiquidationBufferPercentage">
+            <summary>
+            Liquidation buffer percentage
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceWindow.LiquidationBuffer">
+            <summary>
+            Liquidation buffer
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceWindow.TotalHold">
+            <summary>
+            Total hold
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceWindow.FuturesBuyingPower">
+            <summary>
+            Futures buying power
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceSummaryWrapper.BalanceSummary">
+            <summary>
+            Balance summary
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceSummary">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceSummary.FuturesBuyingPower">
+            <summary>
+            Futures buying power
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceSummary.TotalUsdBalance">
+            <summary>
+            Total usd balance
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceSummary.CbiUsdBalance">
+            <summary>
+            Cbi usd balance
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceSummary.CfmUsdBalance">
+            <summary>
+            Cfm usd balance
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceSummary.TotalOpenOrdersHoldQuantity">
+            <summary>
+            Total open orders hold quantity
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceSummary.UnrealizedPnl">
+            <summary>
+            Unrealized pnl
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceSummary.DailyRealizedPnl">
+            <summary>
+            Daily realized pnl
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceSummary.InitialMargin">
+            <summary>
+            Initial margin
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceSummary.AvailableMargin">
+            <summary>
+            Available margin
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceSummary.LiquidationThreshold">
+            <summary>
+            Liquidation threshold
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceSummary.LiquidationBufferQuantity">
+            <summary>
+            Liquidation buffer quantity
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceSummary.LiquidationBufferPercentage">
+            <summary>
+            Liquidation buffer percentage
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceSummary.IntradayMarginWindowMeasure">
+            <summary>
+            Intraday margin window measure
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesBalanceSummary.OvernightMarginWindowMeasure">
+            <summary>
+            Overnight margin window measure
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseFuturesMarginWindow">
+            <summary>
+            Current margin window info
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesMarginWindow.MarginWindow">
+            <summary>
+            Margin window
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesMarginWindow.IsIntradayMarginKillswitchEnabled">
+            <summary>
+            Is intraday margin killswitch enabled
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesMarginWindow.IsIntradayMarginEnrollmentKillswitchEnabled">
+            <summary>
+            Is intraday margin enrollment killswitch enabled
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseFuturesMarginWindowInfo">
+            <summary>
+            Window info
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesMarginWindowInfo.MarginWindowType">
+            <summary>
+            Margin window type
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesMarginWindowInfo.EndTime">
+            <summary>
+            End time
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesPositionsWrapper.Positions">
+            <summary>
+            Positions
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesPositionWrapper.Position">
+            <summary>
+            Position
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseFuturesPosition">
+            <summary>
+            Position info
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesPosition.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesPosition.ExpirationTime">
+            <summary>
+            Expiration time
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesPosition.PositionSide">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesPosition.NumberOfContracts">
+            <summary>
+            Number of contracts
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesPosition.CurrentPrice">
+            <summary>
+            Current price
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesPosition.AverageEntryPrice">
+            <summary>
+            Average entry price
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesPosition.UnrealizedPnl">
+            <summary>
+            Unrealized profit and loss
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFuturesPosition.DailyRealizedPnl">
+            <summary>
+            Daily realized profit and loss
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseHeartbeat">
             <summary>
             Heartbeat
@@ -2639,6 +3468,26 @@
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseKline.Volume">
             <summary>
             Volume
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseStreamKline">
+            <summary>
+            Stream kline
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseStreamKline.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseMultiAssetMode">
+            <summary>
+            Multi asset mode status
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseMultiAssetMode.MultiAssetCollateralEnabled">
+            <summary>
+            Is multi asset collateral enabled
             </summary>
         </member>
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderWrapper.Order">
@@ -2882,6 +3731,31 @@
             </summary>
         </member>
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderBookEntry.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdateEntry">
+            <summary>
+            Order book update
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdateEntry.Side">
+            <summary>
+            Side
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdateEntry.EventTime">
+            <summary>
+            Timestamp
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdateEntry.Price">
+            <summary>
+            Price
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdateEntry.Quantity">
             <summary>
             Quantity
             </summary>
@@ -3151,6 +4025,276 @@
             Updated at
             </summary>
         </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalancesWrapper.PortfolioBalances">
+            <summary>
+            Portfolio balances
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbasePerpetualBalances">
+            <summary>
+            Portfolio balances
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalances.PortfolioId">
+            <summary>
+            Portfolio uuid
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalances.Balances">
+            <summary>
+            Balances
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalances.IsMarginLimitReached">
+            <summary>
+            Is margin limit reached
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbasePerpetualBalance">
+            <summary>
+            Balance info
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalance.Asset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalance.Quantity">
+            <summary>
+            Quantity
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalance.Hold">
+            <summary>
+            Hold
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalance.TransferHold">
+            <summary>
+            Transfer hold
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalance.CollateralValue">
+            <summary>
+            Collateral value
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalance.CollateralWeight">
+            <summary>
+            Collateral weight
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalance.MaxWithdrawQuantity">
+            <summary>
+            Max withdraw quantity
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalance.Loan">
+            <summary>
+            Loan
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalance.LoanCollateralRequirementUsd">
+            <summary>
+            Loan collateral requirement usd
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalance.PledgedQuantity">
+            <summary>
+            Pledged quantity
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbasePerpetualBalancesAsset">
+            <summary>
+            Asset
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalancesAsset.AssetId">
+            <summary>
+            Asset id
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalancesAsset.AssetUuid">
+            <summary>
+            Asset uuid
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalancesAsset.AssetName">
+            <summary>
+            Asset name
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalancesAsset.Status">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalancesAsset.CollateralWeight">
+            <summary>
+            Collateral weight
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalancesAsset.AccountCollateralLimit">
+            <summary>
+            Account collateral limit
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalancesAsset.EcosystemCollateralLimitBreached">
+            <summary>
+            Ecosystem collateral limit breached
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalancesAsset.AssetIconUrl">
+            <summary>
+            Asset icon url
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualBalancesAsset.SupportedNetworksEnabled">
+            <summary>
+            Supported networks enabled
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolios">
+            <summary>
+            Portfolios info
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolios.Portfolios">
+            <summary>
+            Portfolios
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolios.Summary">
+            <summary>
+            Summary
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio">
+            <summary>
+            Portfolio info
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.PortfolioId">
+            <summary>
+            Portfolio uuid
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.Collateral">
+            <summary>
+            Collateral
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.PositionNotional">
+            <summary>
+            Position notional
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.OpenPositionNotional">
+            <summary>
+            Open position notional
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.PendingFees">
+            <summary>
+            Pending fees
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.Borrow">
+            <summary>
+            Borrow
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.AccruedInterest">
+            <summary>
+            Accrued interest
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.RollingDebt">
+            <summary>
+            Rolling debt
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.PortfolioInitialMargin">
+            <summary>
+            Portfolio initial margin
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.PortfolioImNotional">
+            <summary>
+            Portfolio im notional
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.PortfolioMaintenanceMargin">
+            <summary>
+            Portfolio maintenance margin
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.PortfolioMmNotional">
+            <summary>
+            Portfolio mm notional
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.LiquidationPercentage">
+            <summary>
+            Liquidation percentage
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.LiquidationBuffer">
+            <summary>
+            Liquidation buffer
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.MarginType">
+            <summary>
+            Margin type
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.MarginFlags">
+            <summary>
+            Margin flags
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.LiquidationStatus">
+            <summary>
+            Liquidation status
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.UnrealizedPnl">
+            <summary>
+            Unrealized profit and loss
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolio.TotalBalance">
+            <summary>
+            Total balance
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolioSummary">
+            <summary>
+            Perpetual futures portfolio summary
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolioSummary.UnrealizedPnl">
+            <summary>
+            Unrealized profit and loss
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolioSummary.BuyingPower">
+            <summary>
+            Buying power
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolioSummary.TotalBalance">
+            <summary>
+            Total balance
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPorfolioSummary.MaxWithdrawalQuantity">
+            <summary>
+            Max withdrawal quantity
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbasePerpetualPositions">
             <summary>
             Position summary
@@ -3171,12 +4315,12 @@
             Position info
             </summary>
         </member>
-        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPosition.Symbol">
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPosition.SymbolId">
             <summary>
             Symbol
             </summary>
         </member>
-        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPosition.SymbolId">
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPosition.SymbolUuid">
             <summary>
             Symbol id
             </summary>
@@ -3186,9 +4330,9 @@
             Portfolio id
             </summary>
         </member>
-        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPosition.Symbol2">
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPosition.Symbol">
             <summary>
-            Symbol2
+            Symbol
             </summary>
         </member>
         <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPosition.VolumeWeightedAveragePrice">
@@ -3267,6 +4411,106 @@
             </summary>
         </member>
         <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPosition.AggregatedPnl">
+            <summary>
+            Aggregated profit and loss
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionSummary">
+            <summary>
+            Positions summary
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionSummary.AggregatedPnl">
+            <summary>
+            Aggregated profit and loss
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate">
+            <summary>
+            Position info
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.PortfolioUuid">
+            <summary>
+            Portfolio uuid
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.VolumeWeightedAveragePrice">
+            <summary>
+            Volume weighted average price
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.EntryVolumeWeightedAveragePrice">
+            <summary>
+            Entry volume weighted average price
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.PositionSide">
+            <summary>
+            Position side
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.MarginType">
+            <summary>
+            Margin type
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.NetQuantity">
+            <summary>
+            Net quantity
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.BuyOrderQuantity">
+            <summary>
+            Buy order quantity
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.SellOrderQuantity">
+            <summary>
+            Sell order quantity
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.Leverage">
+            <summary>
+            Leverage
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.MarkPrice">
+            <summary>
+            Mark price
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.LiquidationPrice">
+            <summary>
+            Liquidation price
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.ImNotional">
+            <summary>
+            	 The amount this position contributes to the initial margin
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.MmNotional">
+            <summary>
+            The amount this position contributes to the maintenance margin
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.PositionNotional">
+            <summary>
+            The notional value of the position
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.UnrealizedPnl">
+            <summary>
+            Unrealized profit and loss
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePerpetualPositionUpdate.AggregatedPnl">
             <summary>
             Aggregated profit and loss
             </summary>
@@ -3661,6 +4905,61 @@
             Email
             </summary>
         </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseStreamSymbol">
+            <summary>
+            Symbol info
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseStreamSymbol.SymbolType">
+            <summary>
+            Symbol type
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseStreamSymbol.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseStreamSymbol.BaseAsset">
+            <summary>
+            Base asset
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseStreamSymbol.QuoteAsset">
+            <summary>
+            Quote asset
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseStreamSymbol.QuantityStep">
+            <summary>
+            Base increment
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseStreamSymbol.QuoteQuantityStep">
+            <summary>
+            Quote quantity increment
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseStreamSymbol.DisplayName">
+            <summary>
+            Display name
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseStreamSymbol.SymbolStatus">
+            <summary>
+            Status
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseStreamSymbol.StatusMessage">
+            <summary>
+            Status message
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseStreamSymbol.MinNotionalValue">
+            <summary>
+            Min notional value
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseSymbol">
             <summary>
             Symbol info
@@ -3996,29 +5295,59 @@
             Underlying type
             </summary>
         </member>
-        <member name="T:Coinbase.Net.Objects.Models.CoinbaseTicker">
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseBatchTicker">
             <summary>
-            Ticker info
+            Batch ticker
             </summary>
         </member>
-        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTicker.LastTradeId">
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBatchTicker.Type">
             <summary>
-            Last trade id
+            Type
             </summary>
         </member>
-        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTicker.Price">
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBatchTicker.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBatchTicker.LastPrice">
             <summary>
             Last trade price
             </summary>
         </member>
-        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTicker.Quantity">
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBatchTicker.Volume24H">
             <summary>
-            Last trade quantity
+            Volume in last 24 hours
             </summary>
         </member>
-        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTicker.UpdateTime">
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBatchTicker.LowPrice24H">
             <summary>
-            Update time
+            Lowest price in last 24 hours
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBatchTicker.HighPrice24H">
+            <summary>
+            Highest price in last 24 hours
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBatchTicker.LowPrice52W">
+            <summary>
+            Lowest price in last 52 weeks
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBatchTicker.HighPrice52W">
+            <summary>
+            Highest price in last 52 weeks
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBatchTicker.PricePercentChange24H">
+            <summary>
+            Price change percentage in last 24 hours
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseTicker">
+            <summary>
+            Ticker info
             </summary>
         </member>
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseTicker.BestBidPrice">
@@ -4026,24 +5355,19 @@
             Best bid price
             </summary>
         </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTicker.BestBidQuantity">
+            <summary>
+            Best bid quantity
+            </summary>
+        </member>
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseTicker.BestAskPrice">
             <summary>
             Best ask price
             </summary>
         </member>
-        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTicker.Volume">
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTicker.BestAskQuantity">
             <summary>
-            Trade volume
-            </summary>
-        </member>
-        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTicker.RfqVolume">
-            <summary>
-            Rfq volume
-            </summary>
-        </member>
-        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTicker.ConversionsVolume">
-            <summary>
-            Conversions volume
+            Best ask quantity
             </summary>
         </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseTime">
@@ -4316,6 +5640,36 @@
             Retail portfolio id
             </summary>
         </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseUserUpdate">
+            <summary>
+            User data update
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseUserUpdate.Orders">
+            <summary>
+            Order data
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseUserUpdate.PositionInfo">
+            <summary>
+            Position data
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbasePositionsUpdates">
+            <summary>
+            Positions data
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePositionsUpdates.PerpetualPositions">
+            <summary>
+            Perpetual futures positions
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbasePositionsUpdates.ExpiringPositions">
+            <summary>
+            Expiring futures positions
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseWithdrawal">
             <summary>
             Withdrawal info
@@ -4384,6 +5738,16 @@
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseWithdrawal.PayoutAt">
             <summary>
             Payout at
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.IntradayMarginSetting">
+            <summary>
+            Intraday margin setting
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.IntradayMarginSetting.Setting">
+            <summary>
+            Intraday trading setting value
             </summary>
         </member>
         <member name="T:Coinbase.Net.Objects.Options.CoinbaseOrderBookOptions">
@@ -4455,12 +5819,12 @@
         <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.GetMessageType(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.#ctor(Microsoft.Extensions.Logging.ILogger,System.String,System.String[],System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{`0}}},System.Boolean)">
+        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.#ctor(CryptoExchange.Net.Clients.SocketApiClient,Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.String[],System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{`0}}},System.Boolean)">
             <summary>
             ctor
             </summary>
             <param name="logger"></param>
-            <param name="topics"></param>
+            <param name="symbols"></param>
             <param name="handler"></param>
             <param name="auth"></param>
         </member>
@@ -4503,14 +5867,13 @@
             <param name="symbol">The symbol the order book is for</param>
             <param name="optionsDelegate">Option configuration delegate</param>
         </member>
-        <member name="M:Coinbase.Net.SymbolOrderBooks.CoinbaseSymbolOrderBook.#ctor(System.String,System.Action{Coinbase.Net.Objects.Options.CoinbaseOrderBookOptions},Microsoft.Extensions.Logging.ILoggerFactory,Coinbase.Net.Interfaces.Clients.ICoinbaseRestClient,Coinbase.Net.Interfaces.Clients.ICoinbaseSocketClient)">
+        <member name="M:Coinbase.Net.SymbolOrderBooks.CoinbaseSymbolOrderBook.#ctor(System.String,System.Action{Coinbase.Net.Objects.Options.CoinbaseOrderBookOptions},Microsoft.Extensions.Logging.ILoggerFactory,Coinbase.Net.Interfaces.Clients.ICoinbaseSocketClient)">
             <summary>
             Create a new order book instance
             </summary>
             <param name="symbol">The symbol the order book is for</param>
             <param name="optionsDelegate">Option configuration delegate</param>
             <param name="logger">Logger</param>
-            <param name="restClient">Rest client instance</param>
             <param name="socketClient">Socket client instance</param>
         </member>
         <member name="M:Coinbase.Net.SymbolOrderBooks.CoinbaseSymbolOrderBook.DoStartAsync(System.Threading.CancellationToken)">

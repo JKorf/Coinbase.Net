@@ -13,7 +13,7 @@ namespace Coinbase.Net.Objects.Sockets
 
         public CoinbaseQuery(CoinbaseSocketRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
-            ListenerIdentifiers = new HashSet<string> { };
+            ListenerIdentifiers = new HashSet<string> { "subscriptions" };
         }
 
         public override CallResult<T> HandleMessage(SocketConnection connection, DataEvent<T> message)

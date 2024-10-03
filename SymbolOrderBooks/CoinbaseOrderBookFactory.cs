@@ -34,7 +34,6 @@ namespace Coinbase.Net.SymbolOrderBooks
         public ISymbolOrderBook Create(string symbol, Action<CoinbaseOrderBookOptions>? options = null)
             => new CoinbaseSymbolOrderBook(symbol, options, 
                                                           _serviceProvider.GetRequiredService<ILoggerFactory>(),
-                                                          _serviceProvider.GetRequiredService<ICoinbaseRestClient>(),
                                                           _serviceProvider.GetRequiredService<ICoinbaseSocketClient>());
 
 

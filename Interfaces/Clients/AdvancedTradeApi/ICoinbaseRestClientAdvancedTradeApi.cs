@@ -2,7 +2,7 @@ using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Interfaces.CommonClients;
 using System;
 
-namespace Coinbase.Net.Interfaces.Clients.SpotApi
+namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 {
     /// <summary>
     /// Coinbase API endpoints

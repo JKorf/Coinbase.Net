@@ -1,4 +1,4 @@
-using Coinbase.Net.Interfaces.Clients.SpotApi;
+using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
 

@@ -6,24 +6,24 @@ using System.Text;
 namespace Coinbase.Net.Enums
 {
     /// <summary>
-    /// Position side
+    /// Intraday margin setting
     /// </summary>
-    public enum PositionSide
+    public enum IntradayMargin
     {
         /// <summary>
         /// Unspecified
         /// </summary>
-        [Map("FUTURES_POSITION_SIDE_UNSPECIFIED", "POSITION_SIDE_UNKNOWN", "UNKNOWN")]
+        [Map("INTRADAY_MARGIN_SETTING_UNSPECIFIED")]
         Unspecified,
         /// <summary>
-        /// Long position
+        /// Standard
         /// </summary>
-        [Map("FUTURES_POSITION_SIDE_LONG", "POSITION_SIDE_LONG", "LONG")]
-        Long,
+        [Map("INTRADAY_MARGIN_SETTING_STANDARD")]
+        Standard,
         /// <summary>
-        /// Short position
+        /// Intraday
         /// </summary>
-        [Map("FUTURES_POSITION_SIDE_SHORT", "POSITION_SIDE_SHORT", "SHORT")]
-        Short
+        [Map("INTRADAY_MARGIN_SETTING_INTRADAY")]
+        Intraday
     }
 }

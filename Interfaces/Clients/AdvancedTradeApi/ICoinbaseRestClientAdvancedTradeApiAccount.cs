@@ -4,8 +4,9 @@ using System.Threading;
 using CryptoExchange.Net.Objects;
 using Coinbase.Net.Objects.Models;
 using Coinbase.Net.Enums;
+using System.Net.Http;
 
-namespace Coinbase.Net.Interfaces.Clients.SpotApi
+namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 {
     /// <summary>
     /// Coinbase account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
@@ -87,6 +88,110 @@ namespace Coinbase.Net.Interfaces.Clients.SpotApi
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
         Task<WebCallResult> DeletePortfolioAsync(string portfolioId, CancellationToken ct = default);
+
+        /// <summary>
+        /// Allocate portfolio funds to a sub-portfolio on Intx Portfolio
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_allocateportfolio" /></para>
+        /// </summary>
+        /// <param name="portfolioId">Portfolio id</param>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="quantity">Quantity to be allocated for the specified isolated position.</param>
+        /// <param name="asset">The asset to be allocated for the specific isolated position</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult> AllocatePortfolioAsync(string portfolioId, string symbol, decimal quantity, string asset, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get a summary of your Perpetuals portfolio
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxportfoliosummary" /></para>
+        /// </summary>
+        /// <param name="portfolioId">Portfolio uuid</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<CoinbasePerpetualPorfolios>> GetPerpetualPortfolioSummaryAsync(string portfolioId, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get a list of open positions in your Perpetuals portfolio
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxportfoliosummary" /></para>
+        /// </summary>
+        /// <param name="portfolioId">Portfolio uuid</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<CoinbasePerpetualPositions>> GetPerpetualPositionsAsync(string portfolioId, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get a specific Perpetual position
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxposition" /></para>
+        /// </summary>
+        /// <param name="portfolioId">Portfolio uuid</param>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<CoinbasePerpetualPosition>> GetPerpetualPositionAsync(string portfolioId, string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get balances of a Perpetual futures portfolio
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxbalances" /></para>
+        /// </summary>
+        /// <param name="portfolioId">Portfolio uuid</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<CoinbasePerpetualBalances>> GetPerpetualBalancesAsync(string portfolioId, CancellationToken ct = default);
+
+        /// <summary>
+        /// Set multi asset collateral mode
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_intxmultiassetcollateral" /></para>
+        /// </summary>
+        /// <param name="portfolioId">Portfolio uuid</param>
+        /// <param name="enabled">Enabled</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<CoinbaseMultiAssetMode>> SetPerpetualMultiAssetCollateralModeAsync(string portfolioId, bool enabled, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get delivery futures balance summary
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmbalancesummary" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<CoinbaseFuturesBalanceSummary>> GetFuturesBalanceSummaryAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Set intraday margin setting
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_setintradaymarginsetting" /></para>
+        /// </summary>
+        /// <param name="setting">Setting value</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult> SetFuturesIntradayMarginSettingAsync(IntradayMargin setting, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get intraday margin setting
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintradaymarginsetting" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<IntradayMarginSetting>> GetFuturesIntradayMarginSettingAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get futures current margin window
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getcurrentmarginwindow" /></para>
+        /// </summary>
+        /// <param name="marginProfileType">Margin profile type</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<CoinbaseFuturesMarginWindow>> GetFuturesCurrentMarginWindowAsync(MarginProfileType marginProfileType, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get expiring futures positions
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmpositions" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<IEnumerable<CoinbaseFuturesPosition>>> GetFuturesPositionsAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get expiring futures position for a symbol
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmposition" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<CoinbaseFuturesPosition>> GetFuturesPositionAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get fee tier info
@@ -281,7 +386,7 @@ namespace Coinbase.Net.Interfaces.Clients.SpotApi
         /// <param name="destinationTag">Destination tag</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<CoinbaseTransaction>> WithdrawCryptoAsync(string accountId, string to, decimal quantity, string asset, string? description = null, bool? skipNotifications = null, string? idempotencyToken = null, bool? toFinancialInstitution = null, string? financialInstituionWebsite = null, string? destinationTag = null, CancellationToken ct = default);
-        
+
         /// <summary>
         /// Create a new deposit address for an account
         /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /></para>
@@ -302,7 +407,7 @@ namespace Coinbase.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<CoinbasePaginatedResult<CoinbaseDepositAddress>>> GetDepositAddressesAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default);
-        
+
         /// <summary>
         /// Get info on a specific deposit address
         /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /></para>

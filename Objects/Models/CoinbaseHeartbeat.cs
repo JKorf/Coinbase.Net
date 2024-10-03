@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Coinbase.Net.Objects.Internal;
+using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Text.Json.Serialization;
@@ -8,7 +9,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Heartbeat
     /// </summary>
-    public record CoinbaseHeartbeat
+    public record CoinbaseHeartbeat : CoinbaseSocketEvent
     {
         /// <summary>
         /// Counter

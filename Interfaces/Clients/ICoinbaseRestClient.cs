@@ -1,4 +1,4 @@
-using Coinbase.Net.Interfaces.Clients.SpotApi;
+using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
 
@@ -10,7 +10,7 @@ namespace Coinbase.Net.Interfaces.Clients
     public interface ICoinbaseRestClient : IRestClient
     {
         /// <summary>
-        /// Advanced trade API endpoints
+        /// Advanced Trade API endpoints, also contains some Wallet API endpoints
         /// </summary>
         public ICoinbaseRestClientAdvancedTradeApi AdvancedTradeApi { get; }
 

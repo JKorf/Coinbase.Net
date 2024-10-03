@@ -6,19 +6,19 @@ using System.Text;
 namespace Coinbase.Net.Enums
 {
     /// <summary>
-    /// Order side
+    /// Margin flags
     /// </summary>
-    public enum OrderSide
+    public enum MarginFlags
     {
         /// <summary>
-        /// Buy
+        /// Unspecified
         /// </summary>
-        [Map("BUY", "buy", "bid")]
-        Buy,
+        [Map("PORTFOLIO_MARGIN_FLAGS_UNSPECIFIED")]
+        Unspecified,
         /// <summary>
-        /// Sell
+        /// In liquidation
         /// </summary>
-        [Map("SELL", "sell", "ask", "offer")]
-        Sell
+        [Map("PORTFOLIO_MARGIN_FLAGS_IN_LIQUIDATION")]
+        InLiquidation
     }
 }

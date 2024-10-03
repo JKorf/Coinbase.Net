@@ -6,11 +6,12 @@ using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
-using Coinbase.Net.Interfaces.Clients.SpotApi;
 using Coinbase.Net.Objects.Models;
 using Coinbase.Net.Enums;
+using Coinbase.Net.Clients.SpotApi;
+using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 
-namespace Coinbase.Net.Clients.SpotApi
+namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     /// <inheritdoc />
     internal class CoinbaseRestClientAdvancedTradeApiExchangeData : ICoinbaseRestClientAdvancedTradeApiExchangeData

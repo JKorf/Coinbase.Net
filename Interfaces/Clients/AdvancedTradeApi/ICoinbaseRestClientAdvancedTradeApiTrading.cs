@@ -8,7 +8,7 @@ using Coinbase.Net.Objects.Models;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Coinbase.Net.Interfaces.Clients.SpotApi
+namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 {
     /// <summary>
     /// Coinbase trading endpoints, placing and managing orders.
@@ -62,7 +62,7 @@ namespace Coinbase.Net.Interfaces.Clients.SpotApi
         /// <param name="quantity">New order quantity</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<CoinbaseEditOrderResult>> EditOrderAsync(string orderId, decimal price, decimal quantity, CancellationToken ct = default);
-        
+
         /// <summary>
         /// Get order details 
         /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_gethistoricalorder" /></para>

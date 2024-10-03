@@ -6,56 +6,81 @@ using System.Text.Json.Serialization;
 namespace Coinbase.Net.Objects.Models
 {
     /// <summary>
-    /// Ticker info
+    /// Batch ticker
     /// </summary>
-    public record CoinbaseTicker
+    public record CoinbaseBatchTicker
     {
         /// <summary>
-        /// Last trade id
+        /// Type
         /// </summary>
-        [JsonPropertyName("trade_id")]
-        public long? LastTradeId { get; set; }
+        [JsonPropertyName("type")]
+        public string Type { get; set; } = string.Empty;
+        /// <summary>
+        /// Symbol
+        /// </summary>
+        [JsonPropertyName("product_id")]
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Last trade price
         /// </summary>
         [JsonPropertyName("price")]
-        public decimal Price { get; set; }
+        public decimal LastPrice { get; set; }
         /// <summary>
-        /// Last trade quantity
+        /// Volume in last 24 hours
         /// </summary>
-        [JsonPropertyName("size")]
-        public decimal Quantity { get; set; }
+        [JsonPropertyName("volume_24_h")]
+        public decimal Volume24H { get; set; }
         /// <summary>
-        /// Update time
+        /// Lowest price in last 24 hours
         /// </summary>
-        [JsonPropertyName("time")]
-        public DateTime UpdateTime { get; set; }
+        [JsonPropertyName("low_24_h")]
+        public decimal LowPrice24H { get; set; }
+        /// <summary>
+        /// Highest price in last 24 hours
+        /// </summary>
+        [JsonPropertyName("high_24_h")]
+        public decimal HighPrice24H { get; set; }
+        /// <summary>
+        /// Lowest price in last 52 weeks
+        /// </summary>
+        [JsonPropertyName("low_52_w")]
+        public decimal LowPrice52W { get; set; }
+        /// <summary>
+        /// Highest price in last 52 weeks
+        /// </summary>
+        [JsonPropertyName("high_52_w")]
+        public decimal HighPrice52W { get; set; }
+        /// <summary>
+        /// Price change percentage in last 24 hours
+        /// </summary>
+        [JsonPropertyName("price_percent_chg_24_h")]
+        public decimal PricePercentChange24H { get; set; }
+    }
+
+    /// <summary>
+    /// Ticker info
+    /// </summary>
+    public record CoinbaseTicker : CoinbaseBatchTicker
+    {
         /// <summary>
         /// Best bid price
         /// </summary>
-        [JsonPropertyName("bid")]
+        [JsonPropertyName("best_bid")]
         public decimal BestBidPrice { get; set; }
+        /// <summary>
+        /// Best bid quantity
+        /// </summary>
+        [JsonPropertyName("best_bid_quantity")]
+        public decimal BestBidQuantity { get; set; }
         /// <summary>
         /// Best ask price
         /// </summary>
-        [JsonPropertyName("ask")]
+        [JsonPropertyName("best_ask")]
         public decimal BestAskPrice { get; set; }
         /// <summary>
-        /// Trade volume
+        /// Best ask quantity
         /// </summary>
-        [JsonPropertyName("volume")]
-        public decimal Volume { get; set; }
-        /// <summary>
-        /// Rfq volume
-        /// </summary>
-        [JsonPropertyName("rfq_volume")]
-        public decimal RfqVolume { get; set; }
-        /// <summary>
-        /// Conversions volume
-        /// </summary>
-        [JsonPropertyName("conversions_volume")]
-        public decimal ConversionsVolume { get; set; }
+        [JsonPropertyName("best_ask_quantity")]
+        public decimal BestAskQuantity { get; set; }
     }
-
-
 }

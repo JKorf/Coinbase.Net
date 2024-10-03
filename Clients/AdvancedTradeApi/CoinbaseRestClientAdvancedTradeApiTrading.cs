@@ -1,6 +1,5 @@
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
-using Coinbase.Net.Interfaces.Clients.SpotApi;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Threading;
@@ -11,8 +10,10 @@ using CryptoExchange.Net;
 using Coinbase.Net.Objects.Models;
 using System.Collections.Generic;
 using System.Linq;
+using Coinbase.Net.Clients.SpotApi;
+using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 
-namespace Coinbase.Net.Clients.SpotApi
+namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     /// <inheritdoc />
     internal class CoinbaseRestClientAdvancedTradeApiTrading : ICoinbaseRestClientAdvancedTradeApiTrading
@@ -145,11 +146,11 @@ namespace Coinbase.Net.Clients.SpotApi
             IEnumerable<SymbolType>? symbolType = null,
             IEnumerable<OrderStatus>? orderStatus = null,
             IEnumerable<TimeInForce>? timeInForces = null,
-            IEnumerable<OrderType>? orderTypes = null, 
+            IEnumerable<OrderType>? orderTypes = null,
             OrderSide? orderSide = null,
             DateTime? startTime = null,
             DateTime? endTime = null,
-            string? orderSource = null, 
+            string? orderSource = null,
             ContractExpiryType? expiryType = null,
             IEnumerable<string>? assets = null,
             int? limit = null,

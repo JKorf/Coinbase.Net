@@ -6,6 +6,12 @@ using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    internal record CoinbasePerpetualPositionWrapper
+    {
+        [JsonPropertyName("position")]
+        public CoinbasePerpetualPosition Position { get; set; } = null!;
+    }
+
     /// <summary>
     /// Position summary
     /// </summary>
@@ -20,7 +26,7 @@ namespace Coinbase.Net.Objects.Models
         /// Summary
         /// </summary>
         [JsonPropertyName("summary")]
-        public CoinbasePerpetualPosition Summary { get; set; } = null!;
+        public CoinbasePerpetualPositionSummary Summary { get; set; } = null!;
     }
 
     /// <summary>
@@ -32,22 +38,22 @@ namespace Coinbase.Net.Objects.Models
         /// Symbol
         /// </summary>
         [JsonPropertyName("product_id")]
-        public string Symbol { get; set; } = string.Empty;
+        public string SymbolId { get; set; } = string.Empty;
         /// <summary>
         /// Symbol id
         /// </summary>
         [JsonPropertyName("product_uuid")]
-        public string SymbolId { get; set; } = string.Empty;
+        public string SymbolUuid { get; set; } = string.Empty;
         /// <summary>
         /// Portfolio id
         /// </summary>
         [JsonPropertyName("portfolio_uuid")]
         public string PorfolioId { get; set; } = string.Empty;
         /// <summary>
-        /// Symbol2
+        /// Symbol
         /// </summary>
         [JsonPropertyName("symbol")]
-        public string Symbol2 { get; set; } = string.Empty;
+        public string Symbol { get; set; } = string.Empty;
         /// <summary>
         /// Volume weighted average price
         /// </summary>
@@ -123,6 +129,18 @@ namespace Coinbase.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("position_notional")]
         public CoinbaseQuantityReference PositionNotional { get; set; } = null!;
+        /// <summary>
+        /// Aggregated profit and loss
+        /// </summary>
+        [JsonPropertyName("aggregated_pnl")]
+        public CoinbaseQuantityReference AggregatedPnl { get; set; } = null!;
+    }
+
+    /// <summary>
+    /// Positions summary
+    /// </summary>
+    public record CoinbasePerpetualPositionSummary
+    {
         /// <summary>
         /// Aggregated profit and loss
         /// </summary>

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace Coinbase.Net.Interfaces.Clients.SpotApi
+namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 {
     public interface ICoinbaseRestClientAdvancedTradeApiShared :
         ISharedClient

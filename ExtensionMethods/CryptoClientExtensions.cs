@@ -2,7 +2,7 @@ using CryptoExchange.Net.Interfaces;
 using Coinbase.Net.Clients;
 using Coinbase.Net.Interfaces.Clients;
 
-namespace CryptoExchange.Net.ExtensionMethods
+namespace CryptoExchange.Net.Interfaces
 {
     /// <summary>
     /// Extensions for the ICryptoRestClient and ICryptoSocketClient interfaces

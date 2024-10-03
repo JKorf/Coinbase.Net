@@ -6,7 +6,7 @@ using Coinbase.Net.Enums;
 using Coinbase.Net.Objects.Models;
 using CryptoExchange.Net.Objects;
 
-namespace Coinbase.Net.Interfaces.Clients.SpotApi
+namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 {
     /// <summary>
     /// Coinbase exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
@@ -74,7 +74,7 @@ namespace Coinbase.Net.Interfaces.Clients.SpotApi
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<CoinbaseTrades>> GetTradeHistoryAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
-        
+
         /// <summary>
         /// Get fiat assets
         /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-currencies" /></para>

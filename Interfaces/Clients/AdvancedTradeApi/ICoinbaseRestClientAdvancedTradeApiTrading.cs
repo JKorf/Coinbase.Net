@@ -94,7 +94,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         Task<WebCallResult<IEnumerable<CoinbaseOrder>>> GetOrdersAsync(
             IEnumerable<string>? orderIds = null,
             IEnumerable<string>? symbols = null,
-            IEnumerable<SymbolType>? symbolType = null,
+            SymbolType? symbolType = null,
             IEnumerable<OrderStatus>? orderStatus = null,
             IEnumerable<TimeInForce>? timeInForces = null,
             IEnumerable<OrderType>? orderTypes = null,
@@ -141,7 +141,41 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="clientOrderId">Client order id for the close order</param>
         /// <param name="quantity">Quantity to close</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbaseOrderResult>> ClosePositionAsync(string symbol, decimal quantity, string? clientOrderId = null, CancellationToken ct = default);
+        Task<WebCallResult<CoinbaseOrderResult>> ClosePositionAsync(string symbol, decimal? quantity = null, string? clientOrderId = null, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get expiring futures positions
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmpositions" /></para>
+        /// </summary>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<IEnumerable<CoinbaseFuturesPosition>>> GetFuturesPositionsAsync(CancellationToken ct = default);
+
+        /// <summary>
+        /// Get expiring futures position for a symbol
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmposition" /></para>
+        /// </summary>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<CoinbaseFuturesPosition>> GetFuturesPositionAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get a list of open positions in your Perpetuals portfolio
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxportfoliosummary" /></para>
+        /// </summary>
+        /// <param name="portfolioId">Portfolio uuid</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<CoinbasePerpetualPositions>> GetPerpetualPositionsAsync(string portfolioId, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get a specific Perpetual position
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxposition" /></para>
+        /// </summary>
+        /// <param name="portfolioId">Portfolio uuid</param>
+        /// <param name="symbol">Symbol</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<CoinbasePerpetualPosition>> GetPerpetualPositionAsync(string portfolioId, string symbol, CancellationToken ct = default);
 
     }
 }

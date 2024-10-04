@@ -9,6 +9,6 @@ namespace Coinbase.Net.Objects.Internal
     internal record CoinbaseBatchTickerEvent : CoinbaseSocketEvent
     {
         [JsonPropertyName("tickers")]
-        public IEnumerable<CoinbaseBatchTicker> Tickers { get; set; }
+        public IEnumerable<CoinbaseBatchTicker> Tickers { get; set; } = Array.Empty<CoinbaseBatchTicker>();
     }
 }

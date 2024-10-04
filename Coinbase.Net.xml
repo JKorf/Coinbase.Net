@@ -5,7 +5,7 @@
     </assembly>
     <members>
         <member name="T:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApi">
-            <inheritdoc cref="T:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApi" />
+            <inheritdoc cref="T:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApi" />
         </member>
         <member name="P:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApi.Account">
             <inheritdoc />
@@ -46,189 +46,6 @@
         <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApi.GetSymbolName(System.String,System.String)">
             <inheritdoc />
         </member>
-        <member name="T:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetAccountsAsync(System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetAccountAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPortfoliosAsync(System.Nullable{Coinbase.Net.Enums.PortfolioType},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPortfolioAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.CreatePortfolioAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.TransferPortfolioFundsAsync(System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.EditPortfolioAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.DeletePortfolioAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.AllocatePortfolioAsync(System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualPortfolioSummaryAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualPositionsAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualPositionAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualBalancesAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.SetPerpetualMultiAssetCollateralModeAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetFuturesBalanceSummaryAsync(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetFeeInfoAsync(System.Nullable{Coinbase.Net.Enums.SymbolType},System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.SetFuturesIntradayMarginSettingAsync(Coinbase.Net.Enums.IntradayMargin,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetFuturesIntradayMarginSettingAsync(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetFuturesCurrentMarginWindowAsync(Coinbase.Net.Enums.MarginProfileType,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetFuturesPositionsAsync(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetFuturesPositionAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetApiKeyInfoAsync(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPaymentMethodsAsync(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPaymentMethodAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.CreateConvertQuoteAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetConvertTradeAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.CommitConvertTradeAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetWithdrawalsAsync(System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetWithdrawalAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.DepositAsync(System.String,System.String,System.String,System.Decimal,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetDepositsAsync(System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetDepositAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetTransactionsAsync(System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetTransactionAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.TransferAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetAddressTransactionsAsync(System.String,System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.WithdrawCryptoAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Boolean},System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.CreateDepositAddressAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetDepositAddressesAsync(System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiAccount.GetDepositAddressAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="T:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiExchangeData">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetSymbolsAsync(System.Nullable{Coinbase.Net.Enums.SymbolType},System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.Nullable{Coinbase.Net.Enums.ExpiryStatus},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetSymbolAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetOrderBookAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetKlinesAsync(System.String,Coinbase.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetTradeHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetFiatAssetsAsync(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetCryptoAssetsAsync(System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetExchangeRatesAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="T:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiTrading">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiTrading.PlaceOrderAsync(System.String,Coinbase.Net.Enums.OrderSide,Coinbase.Net.Enums.NewOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Coinbase.Net.Enums.MarginType},System.String,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.Decimal},System.Nullable{Coinbase.Net.Enums.StopDirection},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiTrading.CancelOrderAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiTrading.CancelOrdersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiTrading.EditOrderAsync(System.String,System.Decimal,System.Decimal,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiTrading.GetOrderAsync(System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiTrading.GetOrdersAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Coinbase.Net.Enums.SymbolType},System.Collections.Generic.IEnumerable{Coinbase.Net.Enums.OrderStatus},System.Collections.Generic.IEnumerable{Coinbase.Net.Enums.TimeInForce},System.Collections.Generic.IEnumerable{Coinbase.Net.Enums.OrderType},System.Nullable{Coinbase.Net.Enums.OrderSide},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String,System.Nullable{Coinbase.Net.Enums.OrderSortBy},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiTrading.GetUserTradesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{Coinbase.Net.Enums.TradeSortBy},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseRestClientAdvancedTradeApiTrading.ClosePositionAsync(System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="T:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi">
             <summary>
             Client providing access to the Coinbase websocket Api
@@ -257,10 +74,10 @@
         <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseTrade}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamKline}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseStreamKline}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamKline}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseStreamKline}}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseTicker}},System.Threading.CancellationToken)">
@@ -273,9 +90,6 @@
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToBatchedTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseBatchTicker}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToSymbolUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamSymbol}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToSymbolUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamSymbol}},System.Threading.CancellationToken)">
@@ -306,6 +120,189 @@
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.SpotApi.CoinbaseSocketClientAdvancedTradeApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
+            <inheritdoc />
+        </member>
+        <member name="T:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetAccountsAsync(System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetAccountAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPortfoliosAsync(System.Nullable{Coinbase.Net.Enums.PortfolioType},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPortfolioAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.CreatePortfolioAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.TransferPortfolioFundsAsync(System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.EditPortfolioAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.DeletePortfolioAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.AllocatePortfolioAsync(System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualPortfolioSummaryAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualBalancesAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.SetPerpetualMultiAssetCollateralModeAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetFuturesBalanceSummaryAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetFeeInfoAsync(System.Nullable{Coinbase.Net.Enums.SymbolType},System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.SetFuturesIntradayMarginSettingAsync(Coinbase.Net.Enums.IntradayMargin,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetFuturesIntradayMarginSettingAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetFuturesCurrentMarginWindowAsync(Coinbase.Net.Enums.MarginProfileType,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetApiKeyInfoAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPaymentMethodsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetPaymentMethodAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.CreateConvertQuoteAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetConvertTradeAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.CommitConvertTradeAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetWithdrawalsAsync(System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetWithdrawalAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.DepositAsync(System.String,System.String,System.String,System.Decimal,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetDepositsAsync(System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetDepositAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetTransactionsAsync(System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetTransactionAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.TransferAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetAddressTransactionsAsync(System.String,System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.WithdrawCryptoAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Boolean},System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.CreateDepositAddressAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetDepositAddressesAsync(System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetDepositAddressAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetSymbolsAsync(System.Nullable{Coinbase.Net.Enums.SymbolType},System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.Nullable{Coinbase.Net.Enums.ExpiryStatus},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetSymbolAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetOrderBookAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetKlinesAsync(System.String,Coinbase.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetTradeHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetFiatAssetsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetCryptoAssetsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetExchangeRatesAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="T:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading.PlaceOrderAsync(System.String,Coinbase.Net.Enums.OrderSide,Coinbase.Net.Enums.NewOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Coinbase.Net.Enums.MarginType},System.String,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.Decimal},System.Nullable{Coinbase.Net.Enums.StopDirection},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading.CancelOrderAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading.CancelOrdersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading.EditOrderAsync(System.String,System.Decimal,System.Decimal,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading.GetOrderAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading.GetOrdersAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{Coinbase.Net.Enums.SymbolType},System.Collections.Generic.IEnumerable{Coinbase.Net.Enums.OrderStatus},System.Collections.Generic.IEnumerable{Coinbase.Net.Enums.TimeInForce},System.Collections.Generic.IEnumerable{Coinbase.Net.Enums.OrderType},System.Nullable{Coinbase.Net.Enums.OrderSide},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String,System.Nullable{Coinbase.Net.Enums.OrderSortBy},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading.GetUserTradesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{Coinbase.Net.Enums.TradeSortBy},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading.ClosePositionAsync(System.String,System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading.GetFuturesPositionsAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading.GetFuturesPositionAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading.GetPerpetualPositionsAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading.GetPerpetualPositionAsync(System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Coinbase.Net.Clients.CoinbaseRestClient">
@@ -821,6 +818,11 @@
             Sell
             </summary>
         </member>
+        <member name="F:Coinbase.Net.Enums.OrderSide.Unknown">
+            <summary>
+            Unkown, only for data mapping
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Enums.OrderSortBy">
             <summary>
             Sort order
@@ -1096,6 +1098,26 @@
             Fill or kill
             </summary>
         </member>
+        <member name="T:Coinbase.Net.Enums.TradeRole">
+            <summary>
+            Trade role
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.TradeRole.Unknown">
+            <summary>
+            Unknown role
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.TradeRole.Taker">
+            <summary>
+            Taker
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.TradeRole.Maker">
+            <summary>
+            Maker
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Enums.TradeSortBy">
             <summary>
             Trade sort order
@@ -1336,37 +1358,37 @@
             Extension methods specific to using the Coinbase API
             </summary>
         </member>
-        <member name="T:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApi">
+        <member name="T:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApi">
             <summary>
             Coinbase API endpoints
             </summary>
         </member>
-        <member name="P:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApi.Account">
+        <member name="P:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApi.Account">
             <summary>
             Endpoints related to account settings, info or actions
             </summary>
         </member>
-        <member name="P:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApi.ExchangeData">
+        <member name="P:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApi.ExchangeData">
             <summary>
             Endpoints related to retrieving market and system data
             </summary>
         </member>
-        <member name="P:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApi.Trading">
+        <member name="P:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApi.Trading">
             <summary>
             Endpoints related to orders and trades
             </summary>
         </member>
-        <member name="P:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApi.SharedClient">
+        <member name="P:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApi.SharedClient">
             <summary>
             Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
-        <member name="T:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount">
+        <member name="T:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount">
             <summary>
             Coinbase account endpoints. Account endpoints include balance info, withdraw/deposit info and requesting and account settings
             </summary>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetAccountsAsync(System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetAccountsAsync(System.Nullable{System.Int32},System.String,System.Threading.CancellationToken)">
             <summary>
             Get accounts
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getaccounts" /></para>
@@ -1375,7 +1397,7 @@
             <param name="pageCursor">Cursor from last request to retrieve the next page</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetAccountAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetAccountAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get a specific account
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getaccount" /></para>
@@ -1384,7 +1406,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPortfoliosAsync(System.Nullable{Coinbase.Net.Enums.PortfolioType},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPortfoliosAsync(System.Nullable{Coinbase.Net.Enums.PortfolioType},System.Threading.CancellationToken)">
             <summary>
             Get a list of portfolios
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getportfolios" /></para>
@@ -1393,7 +1415,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPortfolioAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPortfolioAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get a breakdown of a portfolio
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getportfoliobreakdown" /></para>
@@ -1402,7 +1424,7 @@
             <param name="asset">Filter by asset</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.CreatePortfolioAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.CreatePortfolioAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Create a new portfolio
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_createportfolio" /></para>
@@ -1411,7 +1433,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.TransferPortfolioFundsAsync(System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.TransferPortfolioFundsAsync(System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
             <summary>
             Move funds between portfolios
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_moveportfoliofunds" /></para>
@@ -1423,7 +1445,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.EditPortfolioAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.EditPortfolioAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Edit portfolio
             </summary>
@@ -1433,7 +1455,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.DeletePortfolioAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.DeletePortfolioAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Delete a portfolio
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_deleteportfolio" /></para>
@@ -1442,7 +1464,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.AllocatePortfolioAsync(System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.AllocatePortfolioAsync(System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
             <summary>
             Allocate portfolio funds to a sub-portfolio on Intx Portfolio
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_allocateportfolio" /></para>
@@ -1454,7 +1476,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualPortfolioSummaryAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualPortfolioSummaryAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get a summary of your Perpetuals portfolio
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxportfoliosummary" /></para>
@@ -1463,26 +1485,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualPositionsAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get a list of open positions in your Perpetuals portfolio
-            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxportfoliosummary" /></para>
-            </summary>
-            <param name="portfolioId">Portfolio uuid</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualPositionAsync(System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get a specific Perpetual position
-            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxposition" /></para>
-            </summary>
-            <param name="portfolioId">Portfolio uuid</param>
-            <param name="symbol">Symbol</param>
-            <param name="ct">Cancellation token</param>
-            <returns></returns>
-        </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualBalancesAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPerpetualBalancesAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get balances of a Perpetual futures portfolio
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxbalances" /></para>
@@ -1491,7 +1494,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.SetPerpetualMultiAssetCollateralModeAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.SetPerpetualMultiAssetCollateralModeAsync(System.String,System.Boolean,System.Threading.CancellationToken)">
             <summary>
             Set multi asset collateral mode
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_intxmultiassetcollateral" /></para>
@@ -1501,14 +1504,14 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetFuturesBalanceSummaryAsync(System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetFuturesBalanceSummaryAsync(System.Threading.CancellationToken)">
             <summary>
             Get delivery futures balance summary
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmbalancesummary" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.SetFuturesIntradayMarginSettingAsync(Coinbase.Net.Enums.IntradayMargin,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.SetFuturesIntradayMarginSettingAsync(Coinbase.Net.Enums.IntradayMargin,System.Threading.CancellationToken)">
             <summary>
             Set intraday margin setting
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_setintradaymarginsetting" /></para>
@@ -1516,14 +1519,14 @@
             <param name="setting">Setting value</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetFuturesIntradayMarginSettingAsync(System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetFuturesIntradayMarginSettingAsync(System.Threading.CancellationToken)">
             <summary>
             Get intraday margin setting
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintradaymarginsetting" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetFuturesCurrentMarginWindowAsync(Coinbase.Net.Enums.MarginProfileType,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetFuturesCurrentMarginWindowAsync(Coinbase.Net.Enums.MarginProfileType,System.Threading.CancellationToken)">
             <summary>
             Get futures current margin window
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getcurrentmarginwindow" /></para>
@@ -1531,22 +1534,7 @@
             <param name="marginProfileType">Margin profile type</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetFuturesPositionsAsync(System.Threading.CancellationToken)">
-            <summary>
-            Get expiring futures positions
-            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmpositions" /></para>
-            </summary>
-            <param name="ct">Cancellation token</param>
-        </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetFuturesPositionAsync(System.String,System.Threading.CancellationToken)">
-            <summary>
-            Get expiring futures position for a symbol
-            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmposition" /></para>
-            </summary>
-            <param name="symbol">Symbol</param>
-            <param name="ct">Cancellation token</param>
-        </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetFeeInfoAsync(System.Nullable{Coinbase.Net.Enums.SymbolType},System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetFeeInfoAsync(System.Nullable{Coinbase.Net.Enums.SymbolType},System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.String,System.Threading.CancellationToken)">
             <summary>
             Get fee tier info
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_gettransactionsummary" /></para>
@@ -1556,21 +1544,21 @@
             <param name="venue">Venue</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetApiKeyInfoAsync(System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetApiKeyInfoAsync(System.Threading.CancellationToken)">
             <summary>
             Get API key info/permissions for the current API key
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getapikeypermissions" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPaymentMethodsAsync(System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPaymentMethodsAsync(System.Threading.CancellationToken)">
             <summary>
             Get payment methods
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpaymentmethods" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPaymentMethodAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetPaymentMethodAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get payment method by id
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpaymentmethods" /></para>
@@ -1578,7 +1566,7 @@
             <param name="paymentMethodId">Payment method id</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.CreateConvertQuoteAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.CreateConvertQuoteAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get a convert quote
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_createconvertquote" /></para>
@@ -1590,7 +1578,7 @@
             <param name="promoCode">The promo code</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetConvertTradeAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetConvertTradeAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get convert trade info
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getconverttrade" /></para>
@@ -1601,7 +1589,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.CommitConvertTradeAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.CommitConvertTradeAsync(System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Commit a convert trade
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_commitconverttrade" /></para>
@@ -1612,7 +1600,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetWithdrawalsAsync(System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetWithdrawalsAsync(System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get fiat withdrawls
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-withdrawals" /></para>
@@ -1624,7 +1612,7 @@
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetWithdrawalAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetWithdrawalAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get info on a specific fiat withdrawal
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-withdrawals" /></para>
@@ -1633,7 +1621,7 @@
             <param name="withdrawalId">Withdrawal id</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.WithdrawAsync(System.String,System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
             <summary>
             Withdraw fiat funds
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-withdrawals" /></para>
@@ -1644,7 +1632,7 @@
             <param name="paymentMethod">Payment method id</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.DepositAsync(System.String,System.String,System.String,System.Decimal,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.DepositAsync(System.String,System.String,System.String,System.Decimal,System.Threading.CancellationToken)">
             <summary>
             Deposit fiat funds
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-deposits" /></para>
@@ -1655,7 +1643,7 @@
             <param name="quantity">Quantity to deposit</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetDepositsAsync(System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetDepositsAsync(System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get fiat deposits
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-deposits" /></para>
@@ -1667,7 +1655,7 @@
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetDepositAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetDepositAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get info on a specific fiat deposit
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-deposits" /></para>
@@ -1676,7 +1664,7 @@
             <param name="depositId">Deposit id</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetTransactionsAsync(System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetTransactionsAsync(System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get list of transaction for the account
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-transactions" /></para>
@@ -1688,7 +1676,7 @@
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetTransactionAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetTransactionAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get info on a specific transaction
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-transactions" /></para>
@@ -1698,7 +1686,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.TransferAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.TransferAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Transfer an asset between 2 accounts of the same user. Either wallet to wallet or wallet to vault.
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-transactions#transfer-money-between-accounts" /></para>
@@ -1710,7 +1698,7 @@
             <param name="description">Description</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetAddressTransactionsAsync(System.String,System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetAddressTransactionsAsync(System.String,System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get transactions for a specific address
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /></para>
@@ -1723,7 +1711,7 @@
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.WithdrawCryptoAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Boolean},System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.WithdrawCryptoAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Boolean},System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Withdraw a crypto asset to an external blockchain address or user by email
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-transactions#transfer-money-between-accounts" /></para>
@@ -1740,7 +1728,7 @@
             <param name="destinationTag">Destination tag</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.CreateDepositAddressAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.CreateDepositAddressAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Create a new deposit address for an account
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /></para>
@@ -1749,7 +1737,7 @@
             <param name="name">Address label</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetDepositAddressesAsync(System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetDepositAddressesAsync(System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             List deposit addresses for an account
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /></para>
@@ -1761,7 +1749,7 @@
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetDepositAddressAsync(System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetDepositAddressAsync(System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Get info on a specific deposit address
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /></para>
@@ -1770,19 +1758,19 @@
             <param name="addressId">Id of the address</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="T:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiExchangeData">
+        <member name="T:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiExchangeData">
             <summary>
             Coinbase exchange data endpoints. Exchange data includes market data (tickers, order books, etc) and system status.
             </summary>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
             <summary>
             Get the current server time
             </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetSymbolsAsync(System.Nullable{Coinbase.Net.Enums.SymbolType},System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.Nullable{Coinbase.Net.Enums.ExpiryStatus},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetSymbolsAsync(System.Nullable{Coinbase.Net.Enums.SymbolType},System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.Nullable{Coinbase.Net.Enums.ExpiryStatus},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get list of supported symbols
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicproducts" /></para>
@@ -1796,7 +1784,7 @@
             <param name="offset">Result offset</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetSymbolAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetSymbolAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get info on a specific symbol
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicproduct" /></para>
@@ -1804,7 +1792,7 @@
             <param name="symbol">Symbol name</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetOrderBookAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetOrderBookAsync(System.String,System.Nullable{System.Int32},System.Nullable{System.Decimal},System.Threading.CancellationToken)">
             <summary>
             Get the order book
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicproductbook" /></para>
@@ -1814,7 +1802,7 @@
             <param name="priceIntervals">Grouping of prices</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetKlinesAsync(System.String,Coinbase.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetKlinesAsync(System.String,Coinbase.Net.Enums.KlineInterval,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get kline/candlestick data
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpubliccandles" /></para>
@@ -1826,7 +1814,7 @@
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetTradeHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetTradeHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get historical public trades for a symbol
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicmarkettrades" /></para>
@@ -1837,21 +1825,21 @@
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetFiatAssetsAsync(System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetFiatAssetsAsync(System.Threading.CancellationToken)">
             <summary>
             Get fiat assets
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-currencies" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetCryptoAssetsAsync(System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetCryptoAssetsAsync(System.Threading.CancellationToken)">
             <summary>
             Get crypto assets
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-currencies" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetExchangeRatesAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetExchangeRatesAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get exchange rates
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-exchange-rates" /></para>
@@ -1859,12 +1847,17 @@
             <param name="asset">The asset to get exchange rates for, defaults to USD</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="T:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiTrading">
+        <member name="T:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiShared">
+            <summary>
+            Shared interface for the Advanced Trade rest API
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading">
             <summary>
             Coinbase trading endpoints, placing and managing orders.
             </summary>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiTrading.PlaceOrderAsync(System.String,Coinbase.Net.Enums.OrderSide,Coinbase.Net.Enums.NewOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Coinbase.Net.Enums.MarginType},System.String,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.Decimal},System.Nullable{Coinbase.Net.Enums.StopDirection},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading.PlaceOrderAsync(System.String,Coinbase.Net.Enums.OrderSide,Coinbase.Net.Enums.NewOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Coinbase.Net.Enums.MarginType},System.String,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.Decimal},System.Nullable{Coinbase.Net.Enums.StopDirection},System.Threading.CancellationToken)">
             <summary>
             Place a new order
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_postorder" /></para>
@@ -1885,7 +1878,7 @@
             <param name="stopDirection">Direction of the stop trigger</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiTrading.CancelOrderAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading.CancelOrderAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Cancel an order
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_cancelorders" /></para>
@@ -1894,7 +1887,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiTrading.CancelOrdersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading.CancelOrdersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
             <summary>
             Cancel orders
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_cancelorders" /></para>
@@ -1902,7 +1895,7 @@
             <param name="orderIds">Ids of orders to cancel</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiTrading.EditOrderAsync(System.String,System.Decimal,System.Decimal,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading.EditOrderAsync(System.String,System.Decimal,System.Decimal,System.Threading.CancellationToken)">
             <summary>
             Edit an order
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_editorder" /></para>
@@ -1912,7 +1905,7 @@
             <param name="quantity">New order quantity</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiTrading.GetOrderAsync(System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading.GetOrderAsync(System.String,System.Threading.CancellationToken)">
             <summary>
             Get order details 
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_gethistoricalorder" /></para>
@@ -1920,7 +1913,7 @@
             <param name="orderId">Order id</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiTrading.GetOrdersAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{Coinbase.Net.Enums.SymbolType},System.Collections.Generic.IEnumerable{Coinbase.Net.Enums.OrderStatus},System.Collections.Generic.IEnumerable{Coinbase.Net.Enums.TimeInForce},System.Collections.Generic.IEnumerable{Coinbase.Net.Enums.OrderType},System.Nullable{Coinbase.Net.Enums.OrderSide},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String,System.Nullable{Coinbase.Net.Enums.OrderSortBy},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading.GetOrdersAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{Coinbase.Net.Enums.SymbolType},System.Collections.Generic.IEnumerable{Coinbase.Net.Enums.OrderStatus},System.Collections.Generic.IEnumerable{Coinbase.Net.Enums.TimeInForce},System.Collections.Generic.IEnumerable{Coinbase.Net.Enums.OrderType},System.Nullable{Coinbase.Net.Enums.OrderSide},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.String,System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.String,System.Nullable{Coinbase.Net.Enums.OrderSortBy},System.Threading.CancellationToken)">
             <summary>
             Get orders. Note that open orders do not adhere to the time filter
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_gethistoricalorders" /></para>
@@ -1942,7 +1935,7 @@
             <param name="sortBy">Sort order</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiTrading.GetUserTradesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{Coinbase.Net.Enums.TradeSortBy},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading.GetUserTradesAsync(System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.String,System.Nullable{Coinbase.Net.Enums.TradeSortBy},System.Threading.CancellationToken)">
             <summary>
             Get user trade history
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfills" /></para>
@@ -1957,7 +1950,7 @@
             <param name="sortBy">Sort type</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseRestClientAdvancedTradeApiTrading.ClosePositionAsync(System.String,System.Decimal,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading.ClosePositionAsync(System.String,System.Nullable{System.Decimal},System.String,System.Threading.CancellationToken)">
             <summary>
             Close a position
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_closeposition" /></para>
@@ -1967,12 +1960,51 @@
             <param name="quantity">Quantity to close</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="T:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading.GetFuturesPositionsAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get expiring futures positions
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmpositions" /></para>
+            </summary>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading.GetFuturesPositionAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get expiring futures position for a symbol
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmposition" /></para>
+            </summary>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading.GetPerpetualPositionsAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get a list of open positions in your Perpetuals portfolio
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxportfoliosummary" /></para>
+            </summary>
+            <param name="portfolioId">Portfolio uuid</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading.GetPerpetualPositionAsync(System.String,System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get a specific Perpetual position
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxposition" /></para>
+            </summary>
+            <param name="portfolioId">Portfolio uuid</param>
+            <param name="symbol">Symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="T:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi">
             <summary>
             Coinbase streams
             </summary>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToHeartbeatUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseHeartbeat}},System.Threading.CancellationToken)">
+        <member name="P:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SharedClient">
+            <summary>
+            Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+            </summary>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToHeartbeatUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseHeartbeat}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to the heartbeats channel. The heartbeats channel can be used to keep the connection alive when data from other subscriptions isn't continuous
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#heartbeats-channel" /></para>
@@ -1981,7 +2013,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseTrade}}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseTrade}}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to public trades updates
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#market-trades-channel" /></para>
@@ -1991,7 +2023,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseTrade}}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseTrade}}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to public trades updates
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#market-trades-channel" /></para>
@@ -2001,7 +2033,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamKline}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseStreamKline}}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to kline updates. Klines are always at a 5 minute interval.
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#candles-channel" /></para>
@@ -2011,7 +2043,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamKline}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseStreamKline}}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to kline updates. Klines are always at a 5 minute interval.
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#candles-channel" /></para>
@@ -2021,7 +2053,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseTicker}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseTicker}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to ticker updates, updates are pushed immediately on any chance
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-channel" /></para>
@@ -2031,7 +2063,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseTicker}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseTicker}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to ticker updates, updates are pushed immediately on any chance
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-channel" /></para>
@@ -2041,7 +2073,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToBatchedTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseBatchTicker}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToBatchedTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseBatchTicker}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to batched ticker updates, updates are pushed every 5 seconds
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-batch-channel" /></para>
@@ -2051,7 +2083,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToBatchedTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseBatchTicker}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToBatchedTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseBatchTicker}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to batched ticker updates, updates are pushed every 5 seconds
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-batch-channel" /></para>
@@ -2061,16 +2093,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToSymbolUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamSymbol}},System.Threading.CancellationToken)">
-            <summary>
-            Subscribe to symbol rules updates
-            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#status-channel" /></para>
-            </summary>
-            <param name="onMessage">The event handler for the received data</param>
-            <param name="ct">Cancellation token for closing this subscription</param>
-            <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToSymbolUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamSymbol}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToSymbolUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamSymbol}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to symbol rules updates
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#status-channel" /></para>
@@ -2080,7 +2103,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToSymbolUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamSymbol}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToSymbolUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamSymbol}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to symbol rules updates
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#status-channel" /></para>
@@ -2090,7 +2113,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to order book updates. First update is a snapshot of the full book, subsequent updates are change messages
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#level2-channel" /></para>
@@ -2100,7 +2123,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to order book updates. First update is a snapshot of the full book, subsequent updates are change messages
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#level2-channel" /></para>
@@ -2110,7 +2133,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToUserUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseUserUpdate}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToUserUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseUserUpdate}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to user order and position updates. After subscribing snapshots will be pushed containing all open orders for the user
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#user-channel" /></para>
@@ -2119,7 +2142,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.SpotApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToFuturesBalanceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseFuturesBalance}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToFuturesBalanceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseFuturesBalance}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to futures balance updates
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#futures-balance-summary-channel" /></para>
@@ -2127,6 +2150,11 @@
             <param name="onMessage">The event handler for the received data</param>
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
+        </member>
+        <member name="T:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApiShared">
+            <summary>
+            Shared interface for the Advanced Trade socket API
+            </summary>
         </member>
         <member name="T:Coinbase.Net.Interfaces.Clients.ICoinbaseRestClient">
             <summary>
@@ -3735,6 +3763,21 @@
             Quantity
             </summary>
         </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdate">
+            <summary>
+            Order book update
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdate.Bids">
+            <summary>
+            List of bids
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdate.Asks">
+            <summary>
+            List of asks
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseOrderBookUpdateEntry">
             <summary>
             Order book update
@@ -3883,6 +3926,156 @@
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderError.OrderFailureReason">
             <summary>
             New order failure reason
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate">
+            <summary>
+            Order update
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.AveragePrice">
+            <summary>
+            Average price
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.CancelReason">
+            <summary>
+            Cancel reason
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.ClientOrderId">
+            <summary>
+            Client order id
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.CompletionPercentage">
+            <summary>
+            Completion percentage
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.ContractExpiryType">
+            <summary>
+            Contract expiry type
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.QuantityFilled">
+            <summary>
+            Cumulative quantity filled
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.ValueFilled">
+            <summary>
+            Filled value
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.QuantityRemaining">
+            <summary>
+            Remaining quantity
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.Price">
+            <summary>
+            Limit price
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.NumberOfTrades">
+            <summary>
+            Number of trades for the order
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.OrderSide">
+            <summary>
+            Order side
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.OrderType">
+            <summary>
+            Order type
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.OutstandingHoldQuantity">
+            <summary>
+            Outstanding hold quantity
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.PostOnly">
+            <summary>
+            Post only
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.SymbolType">
+            <summary>
+            Product type
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.RejectReason">
+            <summary>
+            Reject reason
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.RetailPortfolioId">
+            <summary>
+            Retail portfolio id
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.RiskManagedBy">
+            <summary>
+            Risk managed by
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.Status">
+            <summary>
+            Order status
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.StopPrice">
+            <summary>
+            Stop price
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.TimeInForce">
+            <summary>
+            Time in force
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.TotalFees">
+            <summary>
+            Fees paid for the order
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.TotalValueAfterFees">
+            <summary>
+            Total value after fees
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.TriggerStatus">
+            <summary>
+            Trigger status
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.CreateTime">
+            <summary>
+            Order placement time
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.FinishTime">
+            <summary>
+            Order finished time
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderUpdate.StartTime">
+            <summary>
+            Order start time
             </summary>
         </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbasePage">
@@ -5262,7 +5455,7 @@
         </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseSymbolPerpDetails">
             <summary>
-            
+            Perpetual info
             </summary>
         </member>
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseSymbolPerpDetails.OpenInterest">
@@ -5823,10 +6016,6 @@
             <summary>
             ctor
             </summary>
-            <param name="logger"></param>
-            <param name="symbols"></param>
-            <param name="handler"></param>
-            <param name="auth"></param>
         </member>
         <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
@@ -5888,19 +6077,19 @@
         <member name="M:Coinbase.Net.SymbolOrderBooks.CoinbaseSymbolOrderBook.Dispose(System.Boolean)">
             <inheritdoc />
         </member>
-        <member name="T:CryptoExchange.Net.ExtensionMethods.CryptoClientExtensions">
+        <member name="T:CryptoExchange.Net.Interfaces.CryptoClientExtensions">
             <summary>
             Extensions for the ICryptoRestClient and ICryptoSocketClient interfaces
             </summary>
         </member>
-        <member name="M:CryptoExchange.Net.ExtensionMethods.CryptoClientExtensions.Coinbase(CryptoExchange.Net.Interfaces.ICryptoRestClient)">
+        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Coinbase(CryptoExchange.Net.Interfaces.ICryptoRestClient)">
             <summary>
             Get the Coinbase REST Api client
             </summary>
             <param name="baseClient"></param>
             <returns></returns>
         </member>
-        <member name="M:CryptoExchange.Net.ExtensionMethods.CryptoClientExtensions.Coinbase(CryptoExchange.Net.Interfaces.ICryptoSocketClient)">
+        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Coinbase(CryptoExchange.Net.Interfaces.ICryptoSocketClient)">
             <summary>
             Get the Coinbase Websocket Api client
             </summary>

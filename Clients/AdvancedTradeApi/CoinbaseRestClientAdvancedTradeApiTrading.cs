@@ -143,7 +143,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         public async Task<WebCallResult<IEnumerable<CoinbaseOrder>>> GetOrdersAsync(
             IEnumerable<string>? orderIds = null,
             IEnumerable<string>? symbols = null,
-            IEnumerable<SymbolType>? symbolType = null,
+            SymbolType? symbolType = null,
             IEnumerable<OrderStatus>? orderStatus = null,
             IEnumerable<TimeInForce>? timeInForces = null,
             IEnumerable<OrderType>? orderTypes = null,
@@ -161,7 +161,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             var parameters = new ParameterCollection();
             parameters.AddOptional("order_ids", orderIds?.ToArray());
             parameters.AddOptional("product_ids", symbols?.ToArray());
-            parameters.AddOptional("product_type", symbolType?.Select(EnumConverter.GetString).ToArray());
+            parameters.AddOptionalEnum("product_type", symbolType);
             parameters.AddOptional("order_status", orderStatus?.Select(EnumConverter.GetString).ToArray());
             parameters.AddOptional("time_in_forces", timeInForces?.Select(EnumConverter.GetString).ToArray());
             parameters.AddOptional("order_types", orderTypes?.Select(EnumConverter.GetString).ToArray());
@@ -214,12 +214,12 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Close Position
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseOrderResult>> ClosePositionAsync(string symbol, decimal quantity, string? clientOrderId = null, CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbaseOrderResult>> ClosePositionAsync(string symbol, decimal? quantity = null, string? clientOrderId = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("product_id", symbol);
             parameters.Add("client_order_id", clientOrderId ?? ExchangeHelpers.RandomString(24));
-            parameters.AddString("size", quantity);
+            parameters.AddOptionalString("size", quantity);
             var request = _definitions.GetOrCreate(HttpMethod.Post, "/api/v3/brokerage/orders/close_position", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseOrderResult>(request, parameters, ct).ConfigureAwait(false);
             return result;
@@ -227,5 +227,56 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         #endregion
 
+        #region Get Futures Positions
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<CoinbaseFuturesPosition>>> GetFuturesPositionsAsync(CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/brokerage/cfm/positions", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var result = await _baseClient.SendAsync<CoinbaseFuturesPositionsWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<IEnumerable<CoinbaseFuturesPosition>>(result.Data?.Positions);
+        }
+
+        #endregion
+
+        #region Get Futures Position
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinbaseFuturesPosition>> GetFuturesPositionAsync(string symbol, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, $"api/v3/brokerage/cfm/positions/{symbol}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var result = await _baseClient.SendAsync<CoinbaseFuturesPositionWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<CoinbaseFuturesPosition>(result.Data?.Position);
+        }
+
+        #endregion
+
+        #region Get Perpetual Positions
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinbasePerpetualPositions>> GetPerpetualPositionsAsync(string portfolioId, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/intx/positions/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var result = await _baseClient.SendAsync<CoinbasePerpetualPositions>(request, parameters, ct).ConfigureAwait(false);
+            return result;
+        }
+
+        #endregion
+
+        #region Get Perpetual Position
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<CoinbasePerpetualPosition>> GetPerpetualPositionAsync(string portfolioId, string symbol, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/intx/positions/{portfolioId}/{symbol}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var result = await _baseClient.SendAsync<CoinbasePerpetualPositionWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<CoinbasePerpetualPosition>(result.Data?.Position);
+        }
+
+        #endregion
     }
 }

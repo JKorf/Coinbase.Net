@@ -15,6 +15,9 @@ using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Converters.MessageParsing;
 using System.Reflection;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
+using Coinbase.Net.Clients.AdvancedTradeApi;
+using System.Linq;
+using Newtonsoft.Json.Linq;
 
 namespace Coinbase.Net.Clients.SpotApi
 {
@@ -37,7 +40,7 @@ namespace Coinbase.Net.Clients.SpotApi
         #endregion
 
         #region constructor/destructor
-        internal CoinbaseRestClientAdvancedTradeApi(ILogger logger, HttpClient? httpClient, CoinbaseRestOptions options)
+        internal CoinbaseRestClientAdvancedTradeApi(CoinbaseRestClient baseClient, ILogger logger, HttpClient? httpClient, CoinbaseRestOptions options)
             : base(logger, httpClient, options.Environment.RestClientAddress, options, options.SpotOptions)
         {
             Account = new CoinbaseRestClientAdvancedTradeApiAccount(this);
@@ -49,7 +52,7 @@ namespace Coinbase.Net.Clients.SpotApi
             var version = Assembly.GetAssembly(typeof(RestApiClient)).GetName().Version;
             StandardRequestHeaders = new Dictionary<string, string>
             {
-                { "User-Agent", "CryptoExchange.Net/" + version.ToString() }
+                { "User-Agent", "CryptoExchange.Net/" + baseClient.CryptoExchangeLibVersion }
             };
         }
         #endregion
@@ -87,6 +90,20 @@ namespace Coinbase.Net.Clients.SpotApi
             return result;
         }
 
+        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
+        {
+            var reset = responseHeaders.SingleOrDefault(x => x.Key == "x-ratelimit-reset");
+            if (reset.Key == null)
+                return base.ParseRateLimitResponse(httpStatusCode, responseHeaders, accessor);
+
+            if (!int.TryParse(reset.Value.Single(), out var seconds))
+                return base.ParseRateLimitResponse(httpStatusCode, responseHeaders, accessor);
+
+            var error = new ServerRateLimitError(accessor.GetOriginalString());
+            error.RetryAfter = DateTime.UtcNow.AddSeconds(seconds);
+            return error;
+        }
+
         protected override Error ParseErrorResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
         {
             if (!accessor.IsJson)
@@ -120,7 +137,19 @@ namespace Coinbase.Net.Clients.SpotApi
             => _timeSyncState.TimeOffset;
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverDate = null) => throw new NotImplementedException();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverDate = null)
+        {
+            if (tradingMode == TradingMode.Spot)
+                return $"{baseAsset.ToUpperInvariant()}-{quoteAsset.ToUpperInvariant()}";
+
+            if (tradingMode.IsPerpetual())
+                return $"{baseAsset.ToUpperInvariant()}-PERP-INTX";
+
+            if (deliverDate == null)
+                throw new ArgumentException("DeliverDate required for delivery futures symbol");
+
+            return $"{baseAsset.ToUpperInvariant()}-{deliverDate.Value:dd}{deliverDate.Value.ToString("MMM").ToUpper()}{deliverDate.Value:yy}-CDE";
+        }
 
         /// <inheritdoc />
         public ICoinbaseRestClientAdvancedTradeApiShared SharedClient => this;

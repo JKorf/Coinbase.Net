@@ -28,7 +28,8 @@ namespace Coinbase.Net
         /// Urls to the API documentation
         /// </summary>
         public static string[] ApiDocsUrl { get; } = new[] {
-            "https://docs.cdp.coinbase.com/advanced-trade/reference"
+            "https://docs.cdp.coinbase.com/advanced-trade/reference",
+            "https://docs.cdp.coinbase.com/coinbase-app/docs/welcome"
             };
 
         /// <summary>
@@ -57,9 +58,9 @@ namespace Coinbase.Net
         private void Initialize()
         {
             CoinbaseRestPublic = new RateLimitGate("Coinbase Public")
-                .AddGuard(new RateLimitGuard(RateLimitGuard.PerEndpoint, Array.Empty<IGuardFilter>(), 10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+                .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, Array.Empty<IGuardFilter>(), 10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             CoinbaseRestPrivate = new RateLimitGate("Coinbase Private")
-                .AddGuard(new RateLimitGuard(RateLimitGuard.PerApiKeyPerEndpoint, Array.Empty<IGuardFilter>(), 15, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+                .AddGuard(new RateLimitGuard(RateLimitGuard.PerApiKey, Array.Empty<IGuardFilter>(), 30, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             CoinbaseSocket = new RateLimitGate("Coinbase Socket")
                 .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new LimitItemTypeFilter(RateLimitItemType.Request), 100, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding))
                 .AddGuard(new RateLimitGuard(RateLimitGuard.PerEndpoint, new LimitItemTypeFilter(RateLimitItemType.Request), 8, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));

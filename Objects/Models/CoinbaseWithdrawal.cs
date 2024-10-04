@@ -52,12 +52,12 @@ namespace Coinbase.Net.Objects.Models
         /// Created at
         /// </summary>
         [JsonPropertyName("created_at")]
-        public string CreateTime { get; set; } = string.Empty;
+        public DateTime CreateTime { get; set; }
         /// <summary>
         /// Updated at
         /// </summary>
         [JsonPropertyName("updated_at")]
-        public string UpdateTime { get; set; } = string.Empty;
+        public DateTime? UpdateTime { get; set; }
         /// <summary>
         /// Resource
         /// </summary>

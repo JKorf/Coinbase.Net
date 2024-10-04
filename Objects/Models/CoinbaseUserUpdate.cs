@@ -15,7 +15,7 @@ namespace Coinbase.Net.Objects.Models
         /// Order data
         /// </summary>
         [JsonPropertyName("orders")]
-        public IEnumerable<CoinbaseOrder> Orders { get; set; } = Array.Empty<CoinbaseOrder>();
+        public IEnumerable<CoinbaseOrderUpdate> Orders { get; set; } = Array.Empty<CoinbaseOrderUpdate>();
         /// <summary>
         /// Position data
         /// </summary>

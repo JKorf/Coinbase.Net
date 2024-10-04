@@ -77,12 +77,12 @@ namespace Coinbase.Net.Objects.Models
         /// Time at which this fill was posted.
         /// </summary>
         [JsonPropertyName("sequence_timestamp")]
-        public DateTime? Timestamp { get; set; }
+        public DateTime Timestamp { get; set; }
         /// <summary>
         /// Trade role
         /// </summary>
         [JsonPropertyName("liquidity_indicator")]
-        public string TradeRole { get; set; } = string.Empty;
+        public TradeRole TradeRole { get; set; }
         /// <summary>
         /// Whether the order was placed with quote asset
         /// </summary>

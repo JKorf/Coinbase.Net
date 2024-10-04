@@ -6,24 +6,24 @@ using System.Text;
 namespace Coinbase.Net.Enums
 {
     /// <summary>
-    /// Order side
+    /// Trade role
     /// </summary>
-    public enum OrderSide
+    public enum TradeRole
     {
         /// <summary>
-        /// Buy
+        /// Unknown role
         /// </summary>
-        [Map("BUY", "buy", "bid")]
-        Buy,
+        [Map("UNKNOWN_LIQUIDITY_INDICATOR")]
+        Unknown,
         /// <summary>
-        /// Sell
+        /// Taker
         /// </summary>
-        [Map("SELL", "sell", "ask", "offer")]
-        Sell,
+        [Map("TAKER")]
+        Taker,
         /// <summary>
-        /// Unkown, only for data mapping
+        /// Maker
         /// </summary>
-        [Map("UNKNOWN_ORDER_SIDE")]
-        Unknown
+        [Map("MAKER")]
+        Maker
     }
 }

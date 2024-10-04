@@ -26,7 +26,7 @@ namespace Coinbase.Net.Objects.Models
         /// Last price
         /// </summary>
         [JsonPropertyName("price")]
-        public decimal LastPrice { get; set; }
+        public decimal? LastPrice { get; set; }
         /// <summary>
         /// Price percentage change in last 24 hours
         /// </summary>
@@ -36,7 +36,7 @@ namespace Coinbase.Net.Objects.Models
         /// Volume in base asset in last 24 hours
         /// </summary>
         [JsonPropertyName("volume_24h")]
-        public decimal Volume24h { get; set; }
+        public decimal? Volume24h { get; set; }
         /// <summary>
         /// Volume percentage change in last 24 hours
         /// </summary>
@@ -101,7 +101,7 @@ namespace Coinbase.Net.Objects.Models
         /// Status of the symbol
         /// </summary>
         [JsonPropertyName("status")]
-        public SymbolStatus SymbolStatus { get; set; }
+        public SymbolStatus? SymbolStatus { get; set; }
         /// <summary>
         /// Is symbol in cancel only mode
         /// </summary>
@@ -196,12 +196,12 @@ namespace Coinbase.Net.Objects.Models
         /// Approximate quote 24h volume
         /// </summary>
         [JsonPropertyName("approximate_quote_24h_volume")]
-        public decimal ApproximateQuote24hVolume { get; set; }
+        public decimal? ApproximateQuote24hVolume { get; set; }
         /// <summary>
         /// Future product details
         /// </summary>
         [JsonPropertyName("future_product_details")]
-        public CoinbaseSymbolFuturesDetails FutureProductDetails { get; set; } = null!;
+        public CoinbaseSymbolFuturesDetails? FutureProductDetails { get; set; } = null!;
     }
 
     /// <summary>
@@ -275,7 +275,7 @@ namespace Coinbase.Net.Objects.Models
         /// Contract expiry timezone
         /// </summary>
         [JsonPropertyName("contract_expiry_timezone")]
-        public DateTime? ContractExpiryTimezone { get; set; }
+        public string ContractExpiryTimezone { get; set; } = string.Empty;
         /// <summary>
         /// Group short description
         /// </summary>
@@ -295,7 +295,7 @@ namespace Coinbase.Net.Objects.Models
         /// Perpetual details
         /// </summary>
         [JsonPropertyName("perpetual_details")]
-        public CoinbaseSymbolPerpDetails PerpetualDetails { get; set; } = null!;
+        public CoinbaseSymbolPerpDetails? PerpetualDetails { get; set; } = null!;
         /// <summary>
         /// Contract display name
         /// </summary>
@@ -305,7 +305,7 @@ namespace Coinbase.Net.Objects.Models
         /// Time to expiry ms
         /// </summary>
         [JsonPropertyName("time_to_expiry_ms")]
-        public DateTime TimeToExpiryMs { get; set; }
+        public long? TimeToExpiryMs { get; set; }
         /// <summary>
         /// Non crypto
         /// </summary>
@@ -319,7 +319,7 @@ namespace Coinbase.Net.Objects.Models
     }
 
     /// <summary>
-    /// 
+    /// Perpetual info
     /// </summary>
     public record CoinbaseSymbolPerpDetails
     {

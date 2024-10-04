@@ -5,8 +5,16 @@ using System.Text;
 
 namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 {
+    /// <summary>
+    /// Shared interface for the Advanced Trade socket API
+    /// </summary>
     public interface ICoinbaseSocketClientAdvancedTradeApiShared :
-        ISharedClient
+        IKlineSocketClient,
+        ITickerSocketClient,
+        ITradeSocketClient,
+        ISpotOrderSocketClient,
+        IFuturesOrderSocketClient,
+        IPositionSocketClient
     {
     }
 }

@@ -32,18 +32,14 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         /// <summary>
         /// ctor
         /// </summary>
-        /// <param name="logger"></param>
-        /// <param name="symbols"></param>
-        /// <param name="handler"></param>
-        /// <param name="auth"></param>
         public CoinbaseSubscription(SocketApiClient client, ILogger logger, string channel, string channelIdentifier, string[]? symbols, Action<DataEvent<IEnumerable<T>>> handler, bool auth) : base(logger, auth)
         {
             _handler = handler;
             _channel = channel;
             _client = client;
-            _symbols = symbols;
-            ListenerIdentifiers = symbols?.Any() == true ? 
-                new HashSet<string>(symbols.Select(x => channelIdentifier + "-" + x)) :
+            _symbols = symbols?.Select(x => x.Replace("-USDC", "-USD")).ToArray();
+            ListenerIdentifiers = _symbols?.Any() == true ? 
+                new HashSet<string>(_symbols.Select(x => channelIdentifier + "-" + x)) :
                 new HashSet<string>() { channelIdentifier };
         }
 

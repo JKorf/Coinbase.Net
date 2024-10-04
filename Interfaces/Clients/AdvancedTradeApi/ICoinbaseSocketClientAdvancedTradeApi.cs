@@ -15,6 +15,11 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
     public interface ICoinbaseSocketClientAdvancedTradeApi : ISocketApiClient, IDisposable
     {
         /// <summary>
+        /// Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+        /// </summary>
+        ICoinbaseSocketClientAdvancedTradeApiShared SharedClient { get; }
+
+        /// <summary>
         /// Subscribe to the heartbeats channel. The heartbeats channel can be used to keep the connection alive when data from other subscriptions isn't continuous
         /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#heartbeats-channel" /></para>
         /// </summary>
@@ -51,7 +56,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, Action<DataEvent<CoinbaseStreamKline>> onMessage, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<CoinbaseStreamKline>>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to kline updates. Klines are always at a 5 minute interval.
@@ -61,7 +66,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseStreamKline>> onMessage, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<CoinbaseStreamKline>>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to ticker updates, updates are pushed immediately on any chance
@@ -105,14 +110,6 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Subscribe to symbol rules updates
         /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#status-channel" /></para>
         /// </summary>
-        /// <param name="onMessage">The event handler for the received data</param>
-        /// <param name="ct">Cancellation token for closing this subscription</param>
-        /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(Action<DataEvent<CoinbaseStreamSymbol>> onMessage, CancellationToken ct = default);
-        /// <summary>
-        /// Subscribe to symbol rules updates
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#status-channel" /></para>
-        /// </summary>
         /// <param name="symbol">Symbol to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -126,7 +123,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(IEnumerable<string>? symbols, Action<DataEvent<CoinbaseStreamSymbol>> onMessage, CancellationToken ct = default);
+        Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseStreamSymbol>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to order book updates. First update is a snapshot of the full book, subsequent updates are change messages

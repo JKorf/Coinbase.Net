@@ -170,32 +170,6 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         #endregion
 
-        #region Get Perpetual Positions
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePerpetualPositions>> GetPerpetualPositionsAsync(string portfolioId, CancellationToken ct = default)
-        {
-            var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/intx/positions/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
-            var result = await _baseClient.SendAsync<CoinbasePerpetualPositions>(request, parameters, ct).ConfigureAwait(false);
-            return result;
-        }
-
-        #endregion
-
-        #region Get Perpetual Position
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePerpetualPosition>> GetPerpetualPositionAsync(string portfolioId, string symbol, CancellationToken ct = default)
-        {
-            var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/intx/positions/{portfolioId}/{symbol}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
-            var result = await _baseClient.SendAsync<CoinbasePerpetualPositionWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbasePerpetualPosition>(result.Data?.Position);
-        }
-
-        #endregion
-
         #region Get Perpetual Balances
 
         /// <inheritdoc />
@@ -209,7 +183,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         #endregion
 
-        #region Get Perpetual Balances
+        #region Set Perpetual Multi Asset Collateral Mode
 
         /// <inheritdoc />
         public async Task<WebCallResult<CoinbaseMultiAssetMode>> SetPerpetualMultiAssetCollateralModeAsync(string portfolioId, bool enabled, CancellationToken ct = default)
@@ -296,32 +270,6 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/brokerage/cfm/intraday/current_margin_window", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseFuturesMarginWindow>(request, parameters, ct).ConfigureAwait(false);
             return result;
-        }
-
-        #endregion
-
-        #region Get Futures Positions
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CoinbaseFuturesPosition>>> GetFuturesPositionsAsync(CancellationToken ct = default)
-        {
-            var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/brokerage/cfm/positions", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
-            var result = await _baseClient.SendAsync<CoinbaseFuturesPositionsWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<CoinbaseFuturesPosition>>(result.Data?.Positions);
-        }
-
-        #endregion
-
-        #region Get Futures Position
-
-        /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseFuturesPosition>> GetFuturesPositionAsync(string symbol, CancellationToken ct = default)
-        {
-            var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"api/v3/brokerage/cfm/positions/{symbol}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
-            var result = await _baseClient.SendAsync<CoinbaseFuturesPositionWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbaseFuturesPosition>(result.Data?.Position);
         }
 
         #endregion
@@ -577,7 +525,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         public async Task<WebCallResult<CoinbaseTransaction>> WithdrawCryptoAsync(string accountId, string to, decimal quantity, string asset, string? description = null, bool? skipNotifications = null, string? idempotencyToken = null, bool? toFinancialInstitution = null, string? financialInstituionWebsite = null, string? destinationTag = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            parameters.Add("accountId", accountId);
+            parameters.Add("type", "send");
             parameters.Add("to", to);
             parameters.AddString("amount", quantity);
             parameters.Add("currency", asset);

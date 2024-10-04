@@ -9,6 +9,6 @@ namespace Coinbase.Net.Objects.Internal
     internal record CoinbaseKlineEvent : CoinbaseSocketEvent
     {
         [JsonPropertyName("candles")]
-        public IEnumerable<CoinbaseStreamKline> Klines { get; set; }
+        public IEnumerable<CoinbaseStreamKline> Klines { get; set; } = Array.Empty<CoinbaseStreamKline>();
     }
 }

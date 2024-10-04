@@ -111,25 +111,6 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         Task<WebCallResult<CoinbasePerpetualPorfolios>> GetPerpetualPortfolioSummaryAsync(string portfolioId, CancellationToken ct = default);
 
         /// <summary>
-        /// Get a list of open positions in your Perpetuals portfolio
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxportfoliosummary" /></para>
-        /// </summary>
-        /// <param name="portfolioId">Portfolio uuid</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult<CoinbasePerpetualPositions>> GetPerpetualPositionsAsync(string portfolioId, CancellationToken ct = default);
-
-        /// <summary>
-        /// Get a specific Perpetual position
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxposition" /></para>
-        /// </summary>
-        /// <param name="portfolioId">Portfolio uuid</param>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="ct">Cancellation token</param>
-        /// <returns></returns>
-        Task<WebCallResult<CoinbasePerpetualPosition>> GetPerpetualPositionAsync(string portfolioId, string symbol, CancellationToken ct = default);
-
-        /// <summary>
         /// Get balances of a Perpetual futures portfolio
         /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxbalances" /></para>
         /// </summary>
@@ -177,21 +158,6 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="marginProfileType">Margin profile type</param>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<CoinbaseFuturesMarginWindow>> GetFuturesCurrentMarginWindowAsync(MarginProfileType marginProfileType, CancellationToken ct = default);
-
-        /// <summary>
-        /// Get expiring futures positions
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmpositions" /></para>
-        /// </summary>
-        /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<CoinbaseFuturesPosition>>> GetFuturesPositionsAsync(CancellationToken ct = default);
-
-        /// <summary>
-        /// Get expiring futures position for a symbol
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmposition" /></para>
-        /// </summary>
-        /// <param name="symbol">Symbol</param>
-        /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbaseFuturesPosition>> GetFuturesPositionAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get fee tier info

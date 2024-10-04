@@ -9,6 +9,6 @@ namespace Coinbase.Net.Objects.Internal
     internal record CoinbaseSymbolEvent : CoinbaseSocketEvent
     {
         [JsonPropertyName("products")]
-        public IEnumerable<CoinbaseStreamSymbol> Symbols { get; set; }
+        public IEnumerable<CoinbaseStreamSymbol> Symbols { get; set; } = Array.Empty<CoinbaseStreamSymbol>();
     }
 }

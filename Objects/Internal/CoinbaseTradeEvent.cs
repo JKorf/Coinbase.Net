@@ -9,6 +9,6 @@ namespace Coinbase.Net.Objects.Internal
     internal record CoinbaseTradeEvent : CoinbaseSocketEvent
     {
         [JsonPropertyName("trades")]
-        public IEnumerable<CoinbaseTrade> Trades { get; set; }
+        public IEnumerable<CoinbaseTrade> Trades { get; set; } = Array.Empty<CoinbaseTrade>();
     }
 }

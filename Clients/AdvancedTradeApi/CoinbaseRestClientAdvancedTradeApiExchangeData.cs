@@ -106,8 +106,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         public async Task<WebCallResult<CoinbaseTrades>> GetTradeHistoryAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            parameters.AddOptionalMillisecondsString("start", startTime);
-            parameters.AddOptionalMillisecondsString("end", endTime);
+            parameters.AddOptionalSecondsString("start", startTime);
+            parameters.AddOptionalSecondsString("end", endTime);
             parameters.AddOptional("limit", limit);
             var request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/market/products/{symbol}/ticker", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
             var result = await _baseClient.SendAsync<CoinbaseTrades>(request, parameters, ct).ConfigureAwait(false);

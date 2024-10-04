@@ -13,7 +13,7 @@ namespace Coinbase.Net.Enums
         /// <summary>
         /// Online
         /// </summary>
-        [Map("online")]
+        [Map("online", "STANDARD")]
         Online,
         /// <summary>
         /// Offline

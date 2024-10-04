@@ -18,6 +18,7 @@ using System.Linq;
 using Coinbase.Net.Objects.Internal;
 using System.Collections.Generic;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
+using CryptoExchange.Net;
 
 namespace Coinbase.Net.Clients.SpotApi
 {
@@ -76,14 +77,14 @@ namespace Coinbase.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, Action<DataEvent<CoinbaseStreamKline>> onMessage, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<CoinbaseStreamKline>>> onMessage, CancellationToken ct = default)
             => await SubscribeToKlineUpdatesAsync([symbol], onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseStreamKline>> onMessage, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<CoinbaseStreamKline>>> onMessage, CancellationToken ct = default)
         {
             var subscription = new CoinbaseSubscription<CoinbaseKlineEvent>(this, _logger, "candles", "candles", symbols.ToArray(), x => onMessage(
-                x.As(x.Data.First().Klines.First())
+                x.As(x.Data.First().Klines)
                 .WithSymbol(x.Data.First().Klines.First().Symbol)), AuthenticationProvider != null);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
@@ -115,17 +116,13 @@ namespace Coinbase.Net.Clients.SpotApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(Action<DataEvent<CoinbaseStreamSymbol>> onMessage, CancellationToken ct = default)
-            => await SubscribeToSymbolUpdatesAsync((IEnumerable<string>?)null, onMessage, ct).ConfigureAwait(false);
-
-        /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(string symbol, Action<DataEvent<CoinbaseStreamSymbol>> onMessage, CancellationToken ct = default)
             => await SubscribeToSymbolUpdatesAsync([symbol], onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(IEnumerable<string>? symbols, Action<DataEvent<CoinbaseStreamSymbol>> onMessage, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseStreamSymbol>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new CoinbaseSubscription<CoinbaseSymbolEvent>(this, _logger, "status", "status", symbols?.ToArray(), x => onMessage(
+            var subscription = new CoinbaseSubscription<CoinbaseSymbolEvent>(this, _logger, "status", "status", symbols.ToArray(), x => onMessage(
                 x.As(x.Data.First().Symbols.First())
                 .WithSymbol(x.Data.First().Symbols.First().Symbol)), AuthenticationProvider != null);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
@@ -191,6 +188,18 @@ namespace Coinbase.Net.Clients.SpotApi
         public ICoinbaseSocketClientAdvancedTradeApiShared SharedClient => this;
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradeMode, DateTime? deliverDate) => throw new NotImplementedException();
+        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverDate = null)
+        {
+            if (tradingMode == TradingMode.Spot)
+                return $"{baseAsset.ToUpperInvariant()}-{quoteAsset.ToUpperInvariant()}";
+
+            if (tradingMode.IsPerpetual())
+                return $"{baseAsset.ToUpperInvariant()}-PERP-INTX";
+
+            if (deliverDate == null)
+                throw new ArgumentException("DeliverDate required for delivery futures symbol");
+
+            return $"{baseAsset.ToUpperInvariant()}-{deliverDate.Value:dd}{deliverDate.Value.ToString("MMM").ToUpper()}{deliverDate.Value:yy}-CDE";
+        }
     }
 }

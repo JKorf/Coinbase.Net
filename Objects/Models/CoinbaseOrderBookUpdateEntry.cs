@@ -7,10 +7,19 @@ using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    /// <summary>
+    /// Order book update
+    /// </summary>
     public record CoinbaseOrderBookUpdate
     {
-        public IEnumerable<CoinbaseOrderBookUpdateEntry> Bids { get; set; }
-        public IEnumerable<CoinbaseOrderBookUpdateEntry> Asks { get; set; }
+        /// <summary>
+        /// List of bids
+        /// </summary>
+        public IEnumerable<CoinbaseOrderBookUpdateEntry> Bids { get; set; } = Array.Empty<CoinbaseOrderBookUpdateEntry>();
+        /// <summary>
+        /// List of asks
+        /// </summary>
+        public IEnumerable<CoinbaseOrderBookUpdateEntry> Asks { get; set; } = Array.Empty<CoinbaseOrderBookUpdateEntry>();
     }
 
     /// <summary>

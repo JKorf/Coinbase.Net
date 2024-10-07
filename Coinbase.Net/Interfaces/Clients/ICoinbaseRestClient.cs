@@ -10,7 +10,7 @@ namespace Coinbase.Net.Interfaces.Clients
     public interface ICoinbaseRestClient : IRestClient
     {
         /// <summary>
-        /// Advanced Trade API endpoints, also contains some Wallet API endpoints
+        /// Advanced Trade API endpoints, also contains some App API endpoints
         /// </summary>
         public ICoinbaseRestClientAdvancedTradeApi AdvancedTradeApi { get; }
 

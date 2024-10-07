@@ -93,14 +93,38 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 
 ## Supported functionality
 
-### Spot
+### Advanced Trade REST
 |API|Supported|Location|
 |--|--:|--|
-|TODO|✓|`restClient.SpotApi.Account`|
-### Futures
+|Account|✓|`restClient.AdvancedTradeApi.Account`|
+|Products|✓|`restClient.AdvancedTradeApi.ExchangeData`|
+|Orders|✓|`restClient.AdvancedTradeApi.Trading`|
+|Portfolios|✓|`restClient.AdvancedTradeApi.Account`|
+|Futures|✓|`restClient.AdvancedTradeApi.Account`/`restClient.AdvancedTradeApi.Trading`|
+|Perpetuals|✓|`restClient.AdvancedTradeApi.Account`/`restClient.AdvancedTradeApi.Trading`|
+|Fees|✓|`restClient.AdvancedTradeApi.Account`|
+|Convert|✓|`restClient.AdvancedTradeApi.Account`|
+|Public|✓|`restClient.AdvancedTradeApi.ExchangeData`|
+|Payment Methods|✓|`restClient.AdvancedTradeApi.Account`|
+|Data API|✓|`restClient.AdvancedTradeApi.Account`|
+
+### Advanced Trade Websocket
 |API|Supported|Location|
 |--|--:|--|
-|TODO|✓|`restClient.FuturesApi.ExchangeData`|
+|All channels|✓|`socketClient.AdvancedTradeApi`|
+
+### App
+|API|Supported|Location|
+|--|--:|--|
+|Accounts|X|*Functionality supported in Advanced Trade API*|
+|Addresses|✓|`restClient.AdvancedTradeApi.Account`|
+|Transactions|✓|`restClient.AdvancedTradeApi.Account`|
+|Deposits|✓|`restClient.AdvancedTradeApi.Account`|
+|Withdrawals|✓|`restClient.AdvancedTradeApi.Account`|
+|Currencies|✓|`restClient.AdvancedTradeApi.ExchangeData`|
+|Exchange Rates|✓|`restClient.AdvancedTradeApi.ExchangeData`|
+|Prices|✓|`restClient.AdvancedTradeApi.ExchangeData`|
+|Time|✓|`restClient.AdvancedTradeApi.ExchangeData`|
 
 ## Support the project
 Any support is greatly appreciated.

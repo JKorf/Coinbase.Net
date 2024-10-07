@@ -8,7 +8,6 @@ using Microsoft.Extensions.Logging;
 using Coinbase.Net.Clients;
 using Coinbase.Net.Interfaces.Clients;
 using Coinbase.Net.Objects.Options;
-using System.Collections.Generic;
 using Coinbase.Net.Objects.Models;
 
 namespace Coinbase.Net.SymbolOrderBooks
@@ -76,11 +75,6 @@ namespace Coinbase.Net.SymbolOrderBooks
 
             var setResult = await WaitForSetOrderBookAsync(_initialDataTimeout, ct).ConfigureAwait(false);
             return setResult ? result : new CallResult<UpdateSubscription>(setResult.Error!);
-        }
-
-        /// <inheritdoc />
-        protected override void DoReset()
-        {
         }
 
         private void ProcessUpdate(DataEvent<CoinbaseOrderBookUpdate> data)

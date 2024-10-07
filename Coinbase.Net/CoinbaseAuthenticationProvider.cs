@@ -1,13 +1,8 @@
 using System;
 using System.Collections.Generic;
-using System.Globalization;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Sockets;
 using System.Security.Cryptography;
-using System.Xml.Linq;
-using Coinbase.Net.Objects;
-using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.SystemTextJson;
@@ -78,7 +73,7 @@ namespace Coinbase.Net
 
             return JWT.Encode(payload, key, JwsAlgorithm.ES256, extraHeaders);
 #else
-            throw new PlatformNotSupportedException();
+            throw new PlatformNotSupportedException("Authentication is not available for .NetStandard2.0 due to platform limitations");
 #endif
         }
     }

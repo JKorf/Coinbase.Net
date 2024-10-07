@@ -1,8 +1,5 @@
 ﻿using Coinbase.Net.Enums;
-using CryptoExchange.Net.Attributes;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models

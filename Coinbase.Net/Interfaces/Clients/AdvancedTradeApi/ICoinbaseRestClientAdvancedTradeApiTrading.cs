@@ -1,11 +1,9 @@
-using System.Drawing;
 using System.Threading.Tasks;
 using System.Threading;
 using System;
 using CryptoExchange.Net.Objects;
 using Coinbase.Net.Enums;
 using Coinbase.Net.Objects.Models;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi

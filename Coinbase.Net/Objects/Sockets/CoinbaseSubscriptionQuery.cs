@@ -2,7 +2,6 @@ using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using System.Collections.Generic;
-using Coinbase.Net.Objects.Models;
 using Coinbase.Net.Objects.Internal;
 using System.Linq;
 

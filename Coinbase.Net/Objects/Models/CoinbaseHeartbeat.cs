@@ -1,7 +1,4 @@
 ﻿using Coinbase.Net.Objects.Internal;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models

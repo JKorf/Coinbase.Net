@@ -97,5 +97,29 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<CoinbaseExchangeRates>> GetExchangeRatesAsync(string? asset = null, CancellationToken ct = default);
 
+        /// <summary>
+        /// Get the current buy prices for all assets denoted in the asset parameter. Includes a 1% Coinbase fee.
+        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-prices" /></para>
+        /// </summary>
+        /// <param name="asset">Asset name</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<IEnumerable<CoinbasePrice>>> GetBuyPriceAsync(string asset, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the current sell prices for all assets denoted in the asset parameter. Includes a 1% Coinbase fee.
+        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-prices" /></para>
+        /// </summary>
+        /// <param name="asset">Asset name</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<IEnumerable<CoinbasePrice>>> GetSellPriceAsync(string asset, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the spot market prices for all assets denoted in the asset parameter
+        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-prices" /></para>
+        /// </summary>
+        /// <param name="asset">Asset name</param>
+        /// <param name="date">Specify for retrieving a historical price</param>
+        /// <param name="ct">Cancellation token</param>
+        Task<WebCallResult<IEnumerable<CoinbasePrice>>> GetSpotPriceAsync(string asset, DateTime? date = null, CancellationToken ct = default);
     }
 }

@@ -10,7 +10,6 @@ using CryptoExchange.Net;
 using Coinbase.Net.Objects.Models;
 using System.Collections.Generic;
 using System.Linq;
-using Coinbase.Net.Clients.SpotApi;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
@@ -166,8 +165,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             parameters.AddOptional("time_in_forces", timeInForces?.Select(EnumConverter.GetString).ToArray());
             parameters.AddOptional("order_types", orderTypes?.Select(EnumConverter.GetString).ToArray());
             parameters.AddOptionalEnum("order_side", orderSide);
-            parameters.AddOptional("start_date", startTime);
-            parameters.AddOptional("end_date", endTime);
+            parameters.AddOptional("start_date", startTime?.ToRfc3339String());
+            parameters.AddOptional("end_date", endTime?.ToRfc3339String());
             parameters.AddOptional("order_placement_source", orderSource);
             parameters.AddOptionalEnum("contract_expiry_type", expiryType);
             parameters.AddOptional("asset_filters", assets?.ToArray());
@@ -199,8 +198,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             parameters.AddOptional("order_ids", orderIds?.ToArray());
             parameters.AddOptional("trade_ids", tradeIds?.ToArray());
             parameters.AddOptional("product_ids", symbols?.ToArray());
-            parameters.AddOptional("start_sequence_timestamp", startTime);
-            parameters.AddOptional("end_sequence_timestamp", endTime);
+            parameters.AddOptional("start_sequence_timestamp", startTime?.ToRfc3339String());
+            parameters.AddOptional("end_sequence_timestamp", endTime?.ToRfc3339String());
             parameters.AddOptional("limit", limit);
             parameters.AddOptional("cursor", cursor);
             parameters.AddOptionalEnum("sort_by", sortBy);

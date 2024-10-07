@@ -6,7 +6,6 @@ using System.Threading;
 using Coinbase.Net.Objects.Models;
 using Coinbase.Net.Enums;
 using System.Globalization;
-using Coinbase.Net.Clients.SpotApi;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi

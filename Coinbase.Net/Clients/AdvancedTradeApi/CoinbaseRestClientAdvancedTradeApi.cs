@@ -15,17 +15,15 @@ using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Converters.MessageParsing;
 using System.Reflection;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
-using Coinbase.Net.Clients.AdvancedTradeApi;
 using System.Linq;
-using Newtonsoft.Json.Linq;
 
-namespace Coinbase.Net.Clients.SpotApi
+namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     /// <inheritdoc cref="ICoinbaseRestClientAdvancedTradeApi" />
     internal partial class CoinbaseRestClientAdvancedTradeApi : RestApiClient, ICoinbaseRestClientAdvancedTradeApi
     {
         #region fields 
-        internal static TimeSyncState _timeSyncState = new TimeSyncState("Spot Api");
+        internal static TimeSyncState _timeSyncState = new TimeSyncState("Advanced Trade Api");
         #endregion
 
         #region Api clients
@@ -41,7 +39,7 @@ namespace Coinbase.Net.Clients.SpotApi
 
         #region constructor/destructor
         internal CoinbaseRestClientAdvancedTradeApi(CoinbaseRestClient baseClient, ILogger logger, HttpClient? httpClient, CoinbaseRestOptions options)
-            : base(logger, httpClient, options.Environment.RestClientAddress, options, options.SpotOptions)
+            : base(logger, httpClient, options.Environment.RestClientAddress, options, options.AdvancedTradeOptions)
         {
             Account = new CoinbaseRestClientAdvancedTradeApiAccount(this);
             ExchangeData = new CoinbaseRestClientAdvancedTradeApiExchangeData(logger, this);
@@ -71,11 +69,7 @@ namespace Coinbase.Net.Clients.SpotApi
 
         internal async Task<WebCallResult> SendToAddressAsync(string baseAddress, RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)
         {
-            var result = await base.SendAsync(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
-
-            // Optional response checking
-
-            return result;
+            return await base.SendAsync(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
         }
 
         internal Task<WebCallResult<T>> SendAsync<T>(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
@@ -83,16 +77,12 @@ namespace Coinbase.Net.Clients.SpotApi
 
         internal async Task<WebCallResult<T>> SendToAddressAsync<T>(string baseAddress, RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
         {
-            var result = await base.SendAsync<T>(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
-
-            // Optional response checking
-
-            return result;
+            return await base.SendAsync<T>(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
         }
 
         protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
         {
-            var reset = responseHeaders.SingleOrDefault(x => x.Key == "x-ratelimit-reset");
+            var reset = responseHeaders.SingleOrDefault(x => x.Key.Equals("x-ratelimit-reset", StringComparison.InvariantCultureIgnoreCase));
             if (reset.Key == null)
                 return base.ParseRateLimitResponse(httpStatusCode, responseHeaders, accessor);
 
@@ -153,9 +143,6 @@ namespace Coinbase.Net.Clients.SpotApi
 
         /// <inheritdoc />
         public ICoinbaseRestClientAdvancedTradeApiShared SharedClient => this;
-
-        /// <inheritdoc />
-        public string GetSymbolName(string baseAsset, string quoteAsset) => FormatSymbol(baseAsset, quoteAsset, TradingMode.Spot);
 
     }
 }

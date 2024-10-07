@@ -4,7 +4,6 @@ using System.Threading;
 using CryptoExchange.Net.Objects;
 using Coinbase.Net.Objects.Models;
 using Coinbase.Net.Enums;
-using System.Net.Http;
 
 namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 {

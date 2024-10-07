@@ -5,7 +5,6 @@ using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
-using Coinbase.Net.Objects.Models;
 using Coinbase.Net.Objects.Internal;
 using CryptoExchange.Net.Clients;
 using System.Linq;

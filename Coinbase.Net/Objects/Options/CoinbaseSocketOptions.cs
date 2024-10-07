@@ -16,26 +16,15 @@ namespace Coinbase.Net.Objects.Options
             SocketSubscriptionsCombineTarget = 10
         };
 
-        
          /// <summary>
-        /// Futures API options
+        /// Advanced Trade API options
         /// </summary>
-        public SocketApiOptions FuturesOptions { get; private set; } = new SocketApiOptions();
-
-         /// <summary>
-        /// Spot API options
-        /// </summary>
-        public SocketApiOptions SpotOptions { get; private set; } = new SocketApiOptions();
-
+        public SocketApiOptions AdvancedTradeOptions { get; private set; } = new SocketApiOptions();
 
         internal CoinbaseSocketOptions Copy()
         {
             var options = Copy<CoinbaseSocketOptions>();
-            
-            options.FuturesOptions = FuturesOptions.Copy<SocketApiOptions>();
-
-            options.SpotOptions = SpotOptions.Copy<SocketApiOptions>();
-
+            options.AdvancedTradeOptions = AdvancedTradeOptions.Copy<SocketApiOptions>();
             return options;
         }
     }

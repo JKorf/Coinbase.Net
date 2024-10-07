@@ -1,7 +1,6 @@
 using CryptoExchange.Net.SharedApis;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using System.Threading.Tasks;
 using System.Threading;
@@ -10,13 +9,14 @@ using CryptoExchange.Net.Objects;
 using System.Linq;
 using Coinbase.Net.Enums;
 
-namespace Coinbase.Net.Clients.SpotApi
+namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     internal partial class CoinbaseSocketClientAdvancedTradeApi : ICoinbaseSocketClientAdvancedTradeApiShared
     {
         public string Exchange => "Coinbase";
 
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.Spot, TradingMode.PerpetualLinear, TradingMode.DeliveryLinear };
+        public TradingMode[] SupportedFuturesModes => new[] { TradingMode.PerpetualLinear, TradingMode.DeliveryLinear };
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(Exchange, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
@@ -135,12 +135,12 @@ namespace Coinbase.Net.Clients.SpotApi
         }
         #endregion
 
-        #region Spot Order client
+        #region Futures Order client
 
         EndpointOptions<SubscribeFuturesOrderRequest> IFuturesOrderSocketClient.SubscribeFuturesOrderOptions { get; } = new EndpointOptions<SubscribeFuturesOrderRequest>(true);
         async Task<ExchangeResult<UpdateSubscription>> IFuturesOrderSocketClient.SubscribeToFuturesOrderUpdatesAsync(SubscribeFuturesOrderRequest request, Action<ExchangeEvent<IEnumerable<SharedFuturesOrder>>> handler, CancellationToken ct)
         {
-            var validationError = ((IFuturesOrderSocketClient)this).SubscribeFuturesOrderOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
+            var validationError = ((IFuturesOrderSocketClient)this).SubscribeFuturesOrderOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedFuturesModes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
@@ -182,7 +182,7 @@ namespace Coinbase.Net.Clients.SpotApi
         EndpointOptions<SubscribePositionRequest> IPositionSocketClient.SubscribePositionOptions { get; } = new EndpointOptions<SubscribePositionRequest>(true);
         async Task<ExchangeResult<UpdateSubscription>> IPositionSocketClient.SubscribeToPositionUpdatesAsync(SubscribePositionRequest request, Action<ExchangeEvent<IEnumerable<SharedPosition>>> handler, CancellationToken ct)
         {
-            var validationError = ((IPositionSocketClient)this).SubscribePositionOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
+            var validationError = ((IPositionSocketClient)this).SubscribePositionOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedFuturesModes);
             if (validationError != null)
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 

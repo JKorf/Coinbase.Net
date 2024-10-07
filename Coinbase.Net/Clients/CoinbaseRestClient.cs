@@ -5,8 +5,8 @@ using CryptoExchange.Net.Authentication;
 using Coinbase.Net.Interfaces.Clients;
 using Coinbase.Net.Objects.Options;
 using CryptoExchange.Net.Clients;
-using Coinbase.Net.Clients.SpotApi;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
+using Coinbase.Net.Clients.AdvancedTradeApi;
 
 namespace Coinbase.Net.Clients
 {

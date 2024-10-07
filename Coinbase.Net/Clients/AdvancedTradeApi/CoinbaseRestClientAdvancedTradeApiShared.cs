@@ -1,7 +1,6 @@
 using CryptoExchange.Net.SharedApis;
 using System;
 using System.Collections.Generic;
-using System.Text;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using System.Threading.Tasks;
 using System.Threading;
@@ -10,7 +9,7 @@ using CryptoExchange.Net.Objects;
 using CryptoExchange.Net;
 using Coinbase.Net.Enums;
 
-namespace Coinbase.Net.Clients.SpotApi
+namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     internal partial class CoinbaseRestClientAdvancedTradeApi : ICoinbaseRestClientAdvancedTradeApiShared
     {
@@ -117,8 +116,7 @@ namespace Coinbase.Net.Clients.SpotApi
                 if (!result)
                     return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, null, default);
 
-#warning check
-                return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, TradingMode.Spot, result.Data.Balances.Select(x => new SharedBalance(x.Asset.AssetId, x.Quantity, x.Quantity)).ToArray());
+                return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, request.TradingMode.Value, result.Data.Balances.Select(x => new SharedBalance(x.Asset.AssetId, x.MaxWithdrawQuantity, x.Quantity)).ToArray());
             }
             else
             {
@@ -127,7 +125,7 @@ namespace Coinbase.Net.Clients.SpotApi
                 if (!result)
                     return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, null, default);
 
-                return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, TradingMode.Spot, new[] { new SharedBalance(result.Data.CfmUsdBalance.Asset, result.Data.CfmUsdBalance.Value, result.Data.TotalUsdBalance.Value) });
+                return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, request.TradingMode.Value, new[] { new SharedBalance(result.Data.CfmUsdBalance.Asset, result.Data.CfmUsdBalance.Value, result.Data.TotalUsdBalance.Value) });
             }
         }
 
@@ -507,7 +505,7 @@ namespace Coinbase.Net.Clients.SpotApi
             }).ToArray());
         }
 
-        PaginatedEndpointOptions<GetClosedOrdersRequest> ISpotOrderRestClient.GetClosedSpotOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(SharedPaginationSupport.Ascending, true);
+        PaginatedEndpointOptions<GetClosedOrdersRequest> ISpotOrderRestClient.GetClosedSpotOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(SharedPaginationSupport.Descending, true);
         async Task<ExchangeWebResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetClosedSpotOrdersAsync(GetClosedOrdersRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
             var validationError = ((ISpotOrderRestClient)this).GetClosedSpotOrdersOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
@@ -519,15 +517,13 @@ namespace Coinbase.Net.Clients.SpotApi
             if (pageToken is DateTimeToken dateTimeToken)
                 fromTime = dateTimeToken.LastTime;
 
-#warning check pagination
-
             var symbol = request.Symbol?.GetSymbol(FormatSymbol);
             var orders = await Trading.GetOrdersAsync(
                 symbols: request.Symbol == null ? Array.Empty<string>() : [request.Symbol.GetSymbol(FormatSymbol)],
                 orderStatus: [OrderStatus.Canceled, OrderStatus.Filled],
                 symbolType: SymbolType.Spot,
-                startTime: fromTime ?? request.StartTime,
-                endTime: request.EndTime,
+                startTime: request.StartTime,
+                endTime: fromTime ?? request.EndTime,
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!orders)
@@ -594,7 +590,6 @@ namespace Coinbase.Net.Clients.SpotApi
             DateTime? fromTimestamp = null;
             if (pageToken is DateTimeToken dateTimeToken)
                 fromTimestamp = dateTimeToken.LastTime;
-#warning check pagination
 
             // Get data
             var orders = await Trading.GetUserTradesAsync(
@@ -861,10 +856,12 @@ namespace Coinbase.Net.Clients.SpotApi
                 return new ExchangeWebResult<IEnumerable<SharedFuturesOrder>>(Exchange, validationError);
 
             var symbol = request.Symbol?.GetSymbol(FormatSymbol);
+            var expiryType = ((request.Symbol?.TradingMode ?? request.TradingMode) ?? TradingMode.PerpetualLinear) == TradingMode.PerpetualLinear ? ContractExpiryType.Perpetual : ContractExpiryType.Expiring;
             var orders = await Trading.GetOrdersAsync(
                 symbols: request.Symbol == null ? Array.Empty<string>() : [request.Symbol.GetSymbol(FormatSymbol)],
                 orderStatus: [OrderStatus.Open],
                 symbolType: SymbolType.Futures,
+                expiryType: expiryType,
                 ct: ct).ConfigureAwait(false);
             if (!orders)
                 return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, null, default);
@@ -902,14 +899,15 @@ namespace Coinbase.Net.Clients.SpotApi
             if (pageToken is DateTimeToken dateTimeToken)
                 fromTimestamp = dateTimeToken.LastTime;
 
-#warning pagination
             // Get data
+            var expiryType = request.Symbol.TradingMode == TradingMode.PerpetualLinear ? ContractExpiryType.Perpetual : ContractExpiryType.Expiring;
             var orders = await Trading.GetOrdersAsync(
                 symbols: request.Symbol == null ? Array.Empty<string>() : [request.Symbol.GetSymbol(FormatSymbol)],
                 orderStatus: [OrderStatus.Canceled, OrderStatus.Filled],
-                symbolType: SymbolType.Spot,
-                startTime: fromTimestamp ?? request.StartTime,
-                endTime: request.EndTime,
+                symbolType: SymbolType.Futures,
+                expiryType: expiryType,
+                startTime: request.StartTime,
+                endTime: fromTimestamp ?? request.EndTime,
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!orders)
@@ -918,7 +916,7 @@ namespace Coinbase.Net.Clients.SpotApi
             // Get next token
             DateTimeToken? nextToken = null;
             if (orders.Data.Count() == (request.Limit ?? 1000))
-                nextToken = new DateTimeToken(orders.Data.Max(o => o.CreateTime));
+                nextToken = new DateTimeToken(orders.Data.Min(o => o.CreateTime).AddMilliseconds(-1));
 
             return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, TradingMode.Spot, orders.Data.Select(x => new SharedFuturesOrder(
                 x.Symbol,
@@ -978,8 +976,6 @@ namespace Coinbase.Net.Clients.SpotApi
             if (pageToken is DateTimeToken dateTimeToken)
                 fromTimestamp = dateTimeToken.LastTime;
 
-#warning check paginatino
-
             // Get data
             var orders = await Trading.GetUserTradesAsync(
                 symbols: [request.Symbol.GetSymbol(FormatSymbol)],
@@ -1007,7 +1003,7 @@ namespace Coinbase.Net.Clients.SpotApi
             {
                 Fee = x.Fee,
                 Role = x.TradeRole == TradeRole.Maker ? SharedRole.Maker : SharedRole.Taker
-            }).ToArray());
+            }).ToArray(), nextToken);
         }
 
         EndpointOptions<CancelOrderRequest> IFuturesOrderRestClient.CancelFuturesOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);

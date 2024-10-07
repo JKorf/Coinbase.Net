@@ -1,14 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Net.Http;
-using System.Security.Cryptography;
 using System.Threading;
 using System.Threading.Tasks;
 using CryptoExchange.Net.Objects;
 using Microsoft.Extensions.Logging;
 using Coinbase.Net.Objects.Models;
 using Coinbase.Net.Enums;
-using Coinbase.Net.Clients.SpotApi;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
@@ -156,5 +154,44 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         #endregion
 
+        #region Get Buy Price
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<CoinbasePrice>>> GetBuyPriceAsync(string asset, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/prices/{asset}/buy", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
+            var result = await _baseClient.SendAsync<CoinbasePriceWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<IEnumerable<CoinbasePrice>>(result.Data?.Prices);
+        }
+
+        #endregion
+
+        #region Get Buy Price
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<CoinbasePrice>>> GetSellPriceAsync(string asset, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/prices/{asset}/sell", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
+            var result = await _baseClient.SendAsync<CoinbasePriceWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<IEnumerable<CoinbasePrice>>(result.Data?.Prices);
+        }
+
+        #endregion
+
+        #region Get Spot Price
+
+        /// <inheritdoc />
+        public async Task<WebCallResult<IEnumerable<CoinbasePrice>>> GetSpotPriceAsync(string asset, DateTime? date, CancellationToken ct = default)
+        {
+            var parameters = new ParameterCollection();
+            parameters.AddOptional("date", date?.ToString("yyyy-MM-dd"));
+            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/prices/{asset}/sell", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
+            var result = await _baseClient.SendAsync<CoinbasePriceWrapper>(request, parameters, ct).ConfigureAwait(false);
+            return result.As<IEnumerable<CoinbasePrice>>(result.Data?.Prices);
+        }
+
+        #endregion
     }
 }

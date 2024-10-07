@@ -20,7 +20,7 @@ using System.Collections.Generic;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using CryptoExchange.Net;
 
-namespace Coinbase.Net.Clients.SpotApi
+namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     /// <summary>
     /// Client providing access to the Coinbase websocket Api
@@ -42,7 +42,7 @@ namespace Coinbase.Net.Clients.SpotApi
         /// ctor
         /// </summary>
         internal CoinbaseSocketClientAdvancedTradeApi(ILogger logger, CoinbaseSocketOptions options) :
-            base(logger, options.Environment.SocketClientPublicAddress!, options, options.SpotOptions)
+            base(logger, options.Environment.SocketClientPublicAddress!, options, options.AdvancedTradeOptions)
         {
         }
         #endregion

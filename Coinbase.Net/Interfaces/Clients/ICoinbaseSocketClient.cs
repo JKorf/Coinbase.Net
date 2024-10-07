@@ -10,7 +10,7 @@ namespace Coinbase.Net.Interfaces.Clients
     public interface ICoinbaseSocketClient : ISocketClient
     {
         /// <summary>
-        /// Advanced trade API endpoints
+        /// Advanced trade API streams
         /// </summary>
         public ICoinbaseSocketClientAdvancedTradeApi AdvancedTradeApi { get; }
 

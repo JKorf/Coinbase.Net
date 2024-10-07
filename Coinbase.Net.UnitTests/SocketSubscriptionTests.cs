@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using Coinbase.Net.Clients;
 using Coinbase.Net.Objects.Models;
 using CryptoExchange.Net.Authentication;
-using System.Collections;
 using System.Collections.Generic;
 
 namespace Coinbase.Net.UnitTests
@@ -13,7 +12,7 @@ namespace Coinbase.Net.UnitTests
     public class SocketSubscriptionTests
     {
         [Test]
-        public async Task ValidateSpotExchangeDataSubscriptions()
+        public async Task ValidateAdvancedTradeExchangeDataSubscriptions()
         {
             var client = new CoinbaseSocketClient(opts =>
             {

@@ -1,12 +1,10 @@
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Testing;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Coinbase.Net.Clients;
 using Coinbase.Net.Enums;
-using Coinbase.Net.Objects;
 using CryptoExchange.Net.Authentication;
 using System.Linq;
 
@@ -16,14 +14,14 @@ namespace Coinbase.Net.UnitTests
     public class RestRequestTests
     {
         [Test]
-        public async Task ValidateSpotAccountCalls()
+        public async Task ValidateAdvancedTradeAccountCalls()
         {
             var client = new CoinbaseRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new ApiCredentials("123", "-----BEGIN EC PRIVATE KEY-----\r\nMHcCAQEEIGaopmcUKDBihelMJbKUyRmaR6F3Eo90EZaqZJ3/mBr0oAoGCCqGSM49\r\nAwEHoUQDQgAEnYaxPG+o57xM5o/M5QNn0ocwlw12ZNVWFEo9tKDQ7Jz5Gz/0eMcP\r\nmEhm5msFFpWgrY0/T92MfwByuaLws/rM3w==\r\n-----END EC PRIVATE KEY-----");
             });
-            var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/Spot/Account", "https://api.coinbase.com", IsAuthenticated, stjCompare: true);
+            var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/AdvancedTrade/Account", "https://api.coinbase.com", IsAuthenticated, stjCompare: true);
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetAccountsAsync(), "GetAccounts");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetFeeInfoAsync(), "GetFeeInfo");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetApiKeyInfoAsync(), "GetApiKeyInfo");
@@ -60,13 +58,13 @@ namespace Coinbase.Net.UnitTests
         }
 
         [Test]
-        public async Task ValidateSpotExchangeDataCalls()
+        public async Task ValidateAdvancedTradeExchangeDataCalls()
         {
             var client = new CoinbaseRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
             });
-            var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/Spot/ExchangeData", "https://api.coinbase.com", IsAuthenticated, stjCompare: true);
+            var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/AdvancedTrade/ExchangeData", "https://api.coinbase.com", IsAuthenticated, stjCompare: true);
             await tester.ValidateAsync(client => client.AdvancedTradeApi.ExchangeData.GetSymbolsAsync(), "GetSymbols", "products");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.ExchangeData.GetKlinesAsync("ETH-USDT", KlineInterval.OneDay), "GetKlines", "candles");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.ExchangeData.GetTradeHistoryAsync("ETH-USDT"), "GetTradeHistory", ignoreProperties: new List<string> { "bid", "ask" });
@@ -76,14 +74,14 @@ namespace Coinbase.Net.UnitTests
         }
 
         [Test]
-        public async Task ValidateSpotTradingCalls()
+        public async Task ValidateAdvancedTradeTradingCalls()
         {
             var client = new CoinbaseRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new ApiCredentials("123", "-----BEGIN EC PRIVATE KEY-----\r\nMHcCAQEEIGaopmcUKDBihelMJbKUyRmaR6F3Eo90EZaqZJ3/mBr0oAoGCCqGSM49\r\nAwEHoUQDQgAEnYaxPG+o57xM5o/M5QNn0ocwlw12ZNVWFEo9tKDQ7Jz5Gz/0eMcP\r\nmEhm5msFFpWgrY0/T92MfwByuaLws/rM3w==\r\n-----END EC PRIVATE KEY-----");
             });
-            var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/Spot/Trading", "https://api.coinbase.com", IsAuthenticated, stjCompare: true);
+            var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/AdvancedTrade/Trading", "https://api.coinbase.com", IsAuthenticated, stjCompare: true);
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Trading.PlaceOrderAsync("ETHUSDT", OrderSide.Sell, NewOrderType.Limit), "PlaceOrder", ignoreProperties: new List<string> { "order_configuration" });
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Trading.CancelOrdersAsync(new[] { "123" }), "CancelOrders", nestedJsonProperty: "results");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Trading.EditOrderAsync("123", 1, 1), "EditOrder", ignoreProperties: new List<string> { "errors" });

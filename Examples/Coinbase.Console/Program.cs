@@ -3,8 +3,8 @@ using Coinbase.Net.Clients;
 
 // REST
 var restClient = new CoinbaseRestClient();
-var ticker = await restClient.AdvancedTradeApi.ExchangeData.GetSpotTickersAsync("ETH-USDT");
-Console.WriteLine($"Rest client ticker price for ETH-USDT: {ticker.Data.List.First().LastPrice}");
+var ticker = await restClient.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USDT");
+Console.WriteLine($"Rest client ticker price for ETH-USDT: {ticker.Data.LastPrice}");
 
 Console.WriteLine();
 Console.WriteLine("Press enter to start websocket subscription");

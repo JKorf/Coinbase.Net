@@ -1,3 +1,4 @@
+using Coinbase.Net.Interfaces.Clients;
 using Microsoft.AspNetCore.Mvc;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -28,15 +29,15 @@ app.UseHttpsRedirection();
 // Map the endpoint and inject the rest client
 app.MapGet("/{Symbol}", async ([FromServices] ICoinbaseRestClient client, string symbol) =>
 {
-    var result = await client.SpotApi.ExchangeData.GetTickersAsync(symbol);
-    return result.Data.List.First().LastPrice;
+    var result = await client.AdvancedTradeApi.ExchangeData.GetSymbolAsync(symbol);
+    return result.Data.LastPrice;
 })
 .WithOpenApi();
 
 
 app.MapGet("/Balances", async ([FromServices] ICoinbaseRestClient client) =>
 {
-    var result = await client.SpotApi.Account.GetBalancesAsync();
+    var result = await client.AdvancedTradeApi.Account.GetAccountsAsync();
     return (object)(result.Success ? result.Data : result.Error!);
 })
 .WithOpenApi();

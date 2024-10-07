@@ -30,12 +30,12 @@ The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for op
 ## Install the library
 
 ### NuGet 
-[![NuGet version](https://img.shields.io/nuget/v/Coinbase.net.svg?style=for-the-badge)](https://www.nuget.org/packages/Coinbase.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Coinbase.Net.svg?style=for-the-badge)](https://www.nuget.org/packages/Coinbase.Net)
+[![NuGet version](https://img.shields.io/nuget/v/Jkorf.Coinbase.net.svg?style=for-the-badge)](https://www.nuget.org/packages/Jkorf.Coinbase.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Jkorf.Coinbase.Net.svg?style=for-the-badge)](https://www.nuget.org/packages/Jkorf.Coinbase.Net)
 
 	dotnet add package Coinbase.Net
 	
 ### GitHub packages
-Coinbase.Net is available on [GitHub packages](https://github.com/JKorf/Coinbase.Net/pkgs/nuget/Coinbase.Net). You'll need to add `https://nuget.pkg.github.com/JKorf/index.json` as a NuGet package source.
+Coinbase.Net is available on [GitHub packages](https://github.com/JKorf/Coinbase.Net/pkgs/nuget/Jkorf.Coinbase.Net). You'll need to add `https://nuget.pkg.github.com/JKorf/index.json` as a NuGet package source.
 
 ### Download release
 [![GitHub Release](https://img.shields.io/github/v/release/JKorf/Coinbase.Net?style=for-the-badge&label=GitHub)](https://github.com/JKorf/Coinbase.Net/releases)
@@ -88,7 +88,7 @@ CryptoExchange.Net also allows for [easy access to different exchange API's](htt
 When using multiple of these API's the [CryptoClients.Net](https://github.com/JKorf/CryptoClients.Net) package can be used which combines this and the other packages and allows easy access to all exchange API's.
 
 ## Discord
-[![Nuget version](https://img.shields.io/discord/847020490588422145?style=for-the-badge)](https://discord.gg/MSpeEtSY8t)  
+[![Discord](https://img.shields.io/discord/847020490588422145?style=for-the-badge)](https://discord.gg/MSpeEtSY8t)  
 A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discussion and/or questions around the CryptoExchange.Net and implementation libraries, feel free to join.
 
 ## Supported functionality

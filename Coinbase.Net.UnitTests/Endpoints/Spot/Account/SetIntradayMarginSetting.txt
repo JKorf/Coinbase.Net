@@ -1,0 +1,4 @@
+POST
+/api/v3/brokerage/cfm/intraday/margin_setting
+true
+{}

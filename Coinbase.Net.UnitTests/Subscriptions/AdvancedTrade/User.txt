@@ -1,0 +1,80 @@
+> { "type": "subscribe", "channel": "user", "jwt": "|1|" }
+< {"channel":"subscriptions","client_id":"","timestamp":"2024-10-04T07:31:01.754118917Z","sequence_num":1,"events":[{"subscriptions":{"user":["3e625b74-1c4e-5967-ad38-4d26f30d4439"]}}]}
+= 
+{
+  "channel": "user",
+  "client_id": "",
+  "timestamp": "2023-02-09T20:33:57.609931463Z",
+  "sequence_num": 0,
+  "events": [
+    {
+      "type": "snapshot",
+      "orders": [
+        {
+          "avg_price": "50000",
+          "cancel_reason": "",
+          "client_order_id": "XXX",
+          "completion_percentage": "100.00",
+          "contract_expiry_type": "UNKNOWN_CONTRACT_EXPIRY_TYPE",
+          "cumulative_quantity": "0.01",
+          "filled_value": "500",
+          "leaves_quantity": "0",
+          "limit_price": "50000",
+          "number_of_fills": "1",
+          "order_id": "YYY",
+          "order_side": "BUY",
+          "order_type": "Limit",
+          "outstanding_hold_amount": "0",
+          "post_only": "false",
+          "product_id": "BTC-USD",
+          "product_type": "SPOT",
+          "reject_reason": "",
+          "retail_portfolio_id": "ZZZ",
+          "risk_managed_by": "UNKNOWN_RISK_MANAGEMENT_TYPE",
+          "status": "FILLED",
+          "stop_price": "",
+          "time_in_force": "GOOD_UNTIL_CANCELLED",
+          "total_fees": "2",
+          "total_value_after_fees": "502",
+          "trigger_status": "INVALID_ORDER_TYPE",
+          "creation_time": "2024-06-21T18:29:13.909347Z",
+          "end_time": "0001-01-01T00:00:00Z",
+          "start_time": "0001-01-01T00:00:00Z"
+        }
+      ],
+      "positions": {
+        "perpetual_futures_positions": [
+          {
+            "product_id": "BTC-PERP-INTX",
+            "portfolio_uuid": "018c4b12-9f87-7c36-897d-28fb6a1ea88d",
+            "vwap": "63049.9",
+            "entry_vwap": "0",
+            "position_side": "Long",
+            "margin_type": "Cross",
+            "net_size": "0.0041",
+            "buy_order_size": "0",
+            "sell_order_size": "0",
+            "leverage": "1",
+            "mark_price": "63049.9",
+            "liquidation_price": "0",
+            "im_notional": "258.5046",
+            "mm_notional": "17.061304",
+            "position_notional": "258.5046",
+            "unrealized_pnl": "0",
+            "aggregated_pnl": "258.50459"
+          }
+        ],
+        "expiring_futures_positions": [
+          {
+            "product_id": "BIT-28JUN24-CDE",
+            "side": "Long",
+            "number_of_contracts": "1",
+            "realized_pnl": "0",
+            "unrealized_pnl": "-21.199999999999932",
+            "entry_price": "64150"
+          }
+        ]
+      }
+    }
+  ]
+}

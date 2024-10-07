@@ -1,0 +1,35 @@
+GET
+/v2/accounts/123/addresses
+true
+{
+  "pagination": {
+    "ending_before": null,
+    "starting_after": null,
+    "limit": 25,
+    "order": "desc",
+    "previous_uri": null,
+    "next_uri": null
+  },
+  "data": [
+    {
+      "id": "dd3183eb-af1d-5f5d-a90d-cbff946435ff",
+      "address": "mswUGcPHp1YnkLCgF1TtoryqSc5E9Q8xFa",
+      "name": null,
+      "created_at": "2015-01-31T20:49:02Z",
+      "updated_at": "2015-03-31T17:25:29-07:00",
+      "network": "bitcoin",
+      "resource": "address",
+      "resource_path": "/v2/accounts/2bbf394c-193b-5b2a-9155-3b4732659ede/addresses/dd3183eb-af1d-5f5d-a90d-cbff946435ff"
+    },
+    {
+      "id": "ac5c5f15-0b1d-54f5-8912-fecbf66c2a64",
+      "address": "mgSvu1z1amUFAPkB4cUg8ujaDxKAfZBt5Q",
+      "name": null,
+      "created_at": "2015-03-31T17:23:52-07:00",
+      "updated_at": "2015-01-31T20:49:02Z",
+      "network": "bitcoin",
+      "resource": "address",
+      "resource_path": "/v2/accounts/2bbf394c-193b-5b2a-9155-3b4732659ede/addresses/ac5c5f15-0b1d-54f5-8912-fecbf66c2a64"
+    }
+  ]
+}

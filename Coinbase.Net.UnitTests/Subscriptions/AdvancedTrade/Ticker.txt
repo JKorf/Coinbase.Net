@@ -1,0 +1,31 @@
+> { "type": "subscribe", "product_ids": ["ETH-USDT"], "channel": "ticker", "jwt": "|1|" }
+< {"channel":"subscriptions","client_id":"","timestamp":"2024-10-04T07:13:08.600625889Z","sequence_num":1,"events":[{"subscriptions":{"ticker":["ETH-USDT"]}}]}
+= 
+{
+  "channel": "ticker",
+  "client_id": "",
+  "timestamp": "2023-02-09T20:30:37.167359596Z",
+  "sequence_num": 0,
+  "events": [
+    {
+      "type": "snapshot",
+      "tickers": [
+        {
+          "type": "ticker",
+          "product_id": "ETH-USDT",
+          "price": "21932.98",
+          "volume_24_h": "16038.28770938",
+          "low_24_h": "21835.29",
+          "high_24_h": "23011.18",
+          "low_52_w": "15460",
+          "high_52_w": "48240",
+          "price_percent_chg_24_h": "-4.15775596190603",
+          "best_bid": "21931.98",
+          "best_bid_quantity": "8000.21",
+          "best_ask": "21933.98",
+          "best_ask_quantity": "8038.07770938"
+        }
+      ]
+    }
+  ]
+}

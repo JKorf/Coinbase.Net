@@ -1,0 +1,10 @@
+POST
+/api/v3/brokerage/orders/batch_cancel
+true
+{
+  "results": [{
+    "success": true,
+    "failure_reason": "UNKNOWN_CANCEL_FAILURE_REASON",
+    "order_id": "0000-00000"
+  }]
+}

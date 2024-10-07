@@ -1,0 +1,26 @@
+GET
+/api/v3/brokerage/transaction_summary
+true
+{
+  "total_volume": 1000,
+  "total_fees": 25,
+  "fee_tier": {
+    "pricing_tier": "<$10k",
+    "usd_from": "0",
+    "usd_to": "1000",
+    "taker_fee_rate": "0.0010",
+    "maker_fee_rate": "0.0020",
+    "aop_from": "0",
+    "aop_to": "10000"
+  },
+  "margin_rate": 0.5,
+  "goods_and_services_tax": {
+    "rate": "123",
+    "type": "INCLUSIVE"
+  },
+  "advanced_trade_only_volume": 1000,
+  "advanced_trade_only_fees": 25,
+  "coinbase_pro_volume": 1000,
+  "coinbase_pro_fees": 25,
+  "total_balance": "1000"
+}

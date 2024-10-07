@@ -1,0 +1,68 @@
+POST
+/api/v3/brokerage/orders
+true
+{
+  "success": true,
+  "success_response": {
+    "order_id": "11111-00000-000000",
+    "product_id": "BTC-USD",
+    "side": "BUY",
+    "client_order_id": "0000-00000-000000"
+  },
+  "error_response": {
+    "error": "UNKNOWN_FAILURE_REASON",
+    "message": "The order configuration was invalid",
+    "error_details": "Market orders cannot be placed with empty order sizes",
+    "preview_failure_reason": "UNKNOWN_PREVIEW_FAILURE_REASON",
+    "new_order_failure_reason": "UNKNOWN_FAILURE_REASON"
+  },
+  "order_configuration": {
+    "market_market_ioc": {
+      "quote_size": "10.00",
+      "base_size": "0.001"
+    },
+    "sor_limit_ioc": {
+      "base_size": "0.001",
+      "limit_price": "10000.00"
+    },
+    "limit_limit_gtc": {
+      "base_size": "0.001",
+      "limit_price": "10000.00",
+      "post_only": false
+    },
+    "limit_limit_gtd": {
+      "base_size": "0.001",
+      "limit_price": "10000.00",
+      "end_time": "2021-05-31T09:59:59Z",
+      "post_only": false
+    },
+    "limit_limit_fok": {
+      "base_size": "0.001",
+      "limit_price": "10000.00"
+    },
+    "stop_limit_stop_limit_gtc": {
+      "base_size": "0.001",
+      "limit_price": "10000.00",
+      "stop_price": "20000.00",
+      "stop_direction": "20000.00"
+    },
+    "stop_limit_stop_limit_gtd": {
+      "base_size": 0.001,
+      "limit_price": "10000.00",
+      "stop_price": "20000.00",
+      "end_time": "2021-05-31T09:59:59Z",
+      "stop_direction": "20000.00"
+    },
+    "trigger_bracket_gtc": {
+      "base_size": 0.001,
+      "limit_price": "10000.00",
+      "stop_trigger_price": "20000.00"
+    },
+    "trigger_bracket_gtd": {
+      "base_size": 0.001,
+      "limit_price": "10000.00",
+      "stop_trigger_price": "20000.00",
+      "end_time": "2021-05-31T09:59:59Z"
+    }
+  }
+}

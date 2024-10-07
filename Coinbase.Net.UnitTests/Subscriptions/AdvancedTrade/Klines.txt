@@ -1,0 +1,25 @@
+> { "type": "subscribe", "product_ids": ["ETH-USDT"], "channel": "candles", "jwt": "|1|" }
+< {"channel":"subscriptions","client_id":"","timestamp":"2024-10-04T07:13:08.600625889Z","sequence_num":1,"events":[{"subscriptions":{"candles":["ETH-USDT"]}}]}
+= 
+{
+  "channel": "candles",
+  "client_id": "",
+  "timestamp": "2023-06-09T20:19:35.39625135Z",
+  "sequence_num": 0,
+  "events": [
+    {
+      "type": "snapshot",
+      "candles": [
+        {
+          "start": "1688998200",
+          "high": "1867.72",
+          "low": "1865.63",
+          "open": "1867.38",
+          "close": "1866.81",
+          "volume": "0.20269406",
+          "product_id": "ETH-USDT"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+> { "type": "subscribe", "channel": "heartbeats", "jwt": "|1|" }
+< {"channel":"subscriptions","client_id":"","timestamp":"2024-10-04T07:04:40.812675707Z","sequence_num":0,"events":[{"subscriptions":{"heartbeats":["heartbeats"]}}]}
+= 
+{"channel":"heartbeats","client_id":"","timestamp":"2024-10-04T07:04:40.825062088Z","sequence_num":1,"events":[{"current_time":"2024-10-04 07:04:40.820713045 +0000 UTC m=+66987.628148662","heartbeat_counter":66987}]}

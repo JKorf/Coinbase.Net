@@ -1,0 +1,70 @@
+GET
+/api/v3/brokerage/cfm/balance_summary
+true
+{
+  "balance_summary": {
+    "futures_buying_power": {
+      "value": "123",
+      "currency": "string"
+    },
+    "total_usd_balance": {
+      "value": "123",
+      "currency": "string"
+    },
+    "cbi_usd_balance": {
+      "value": "123",
+      "currency": "string"
+    },
+    "cfm_usd_balance": {
+      "value": "123",
+      "currency": "string"
+    },
+    "total_open_orders_hold_amount": {
+      "value": "123",
+      "currency": "string"
+    },
+    "unrealized_pnl": {
+      "value": "123",
+      "currency": "string"
+    },
+    "daily_realized_pnl": {
+      "value": "123",
+      "currency": "string"
+    },
+    "initial_margin": {
+      "value": "123",
+      "currency": "string"
+    },
+    "available_margin": {
+      "value": "123",
+      "currency": "string"
+    },
+    "liquidation_threshold": {
+      "value": "123",
+      "currency": "string"
+    },
+    "liquidation_buffer_amount": {
+      "value": "123",
+      "currency": "string"
+    },
+    "liquidation_buffer_percentage": "123",
+    "intraday_margin_window_measure": {
+      "margin_window_type": "FCM_MARGIN_WINDOW_TYPE_UNSPECIFIED",
+      "margin_level": "MARGIN_LEVEL_TYPE_UNSPECIFIED",
+      "initial_margin": "123",
+      "maintenance_margin": "123",
+      "liquidation_buffer": "123",
+      "total_hold": "123",
+      "futures_buying_power": "123"
+    },
+    "overnight_margin_window_measure": {
+      "margin_window_type": "FCM_MARGIN_WINDOW_TYPE_UNSPECIFIED",
+      "margin_level": "MARGIN_LEVEL_TYPE_UNSPECIFIED",
+      "initial_margin": "123",
+      "maintenance_margin": "123",
+      "liquidation_buffer": "123",
+      "total_hold": "123",
+      "futures_buying_power": "123"
+    }
+  }
+}

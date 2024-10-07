@@ -1,0 +1,33 @@
+GET
+/api/v3/brokerage/intx/balances/123
+true
+{
+  "portfolio_balances": {
+    "portfolio_uuid": "string",
+    "balances": [
+      {
+        "asset": {
+          "asset_id": "string",
+          "asset_uuid": "string",
+          "asset_name": "string",
+          "status": "string",
+          "collateral_weight": "123",
+          "account_collateral_limit": "123",
+          "ecosystem_collateral_limit_breached": true,
+          "asset_icon_url": "string",
+          "supported_networks_enabled": true
+        },
+        "quantity": "123",
+        "hold": "123",
+        "transfer_hold": "123",
+        "collateral_value": "123",
+        "collateral_weight": "123",
+        "max_withdraw_amount": "123",
+        "loan": "123",
+        "loan_collateral_requirement_usd": "123",
+        "pledged_quantity": "123"
+      }
+    ],
+    "is_margin_limit_reached": true
+  }
+}

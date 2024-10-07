@@ -1,0 +1,98 @@
+GET
+/api/v3/brokerage/orders/historical/batch
+true
+{
+  "orders": [{
+    "order_id": "0000-000000-000000",
+    "product_id": "BTC-USD",
+    "user_id": "2222-000000-000000",
+    "order_configuration": {
+      "market_market_ioc": {
+        "quote_size": "10.00",
+        "base_size": "0.001"
+      },
+      "sor_limit_ioc": {
+        "base_size": "0.001",
+        "limit_price": "10000.00"
+      },
+      "limit_limit_gtc": {
+        "base_size": "0.001",
+        "limit_price": "10000.00",
+        "post_only": false
+      },
+      "limit_limit_gtd": {
+        "base_size": "0.001",
+        "limit_price": "10000.00",
+        "end_time": "2021-05-31T09:59:59Z",
+        "post_only": false
+      },
+      "limit_limit_fok": {
+        "base_size": "0.001",
+        "limit_price": "10000.00"
+      },
+      "stop_limit_stop_limit_gtc": {
+        "base_size": "0.001",
+        "limit_price": "10000.00",
+        "stop_price": "20000.00",
+        "stop_direction": "20000.00"
+      },
+      "stop_limit_stop_limit_gtd": {
+        "base_size": 0.001,
+        "limit_price": "10000.00",
+        "stop_price": "20000.00",
+        "end_time": "2021-05-31T09:59:59Z",
+        "stop_direction": "20000.00"
+      },
+      "trigger_bracket_gtc": {
+        "base_size": 0.001,
+        "limit_price": "10000.00",
+        "stop_trigger_price": "20000.00"
+      },
+      "trigger_bracket_gtd": {
+        "base_size": 0.001,
+        "limit_price": "10000.00",
+        "stop_trigger_price": "20000.00",
+        "end_time": "2021-05-31T09:59:59Z"
+      }
+    },
+    "side": "",
+    "client_order_id": "11111-000000-000000",
+    "status": "PENDING",
+    "time_in_force": "UNKNOWN_TIME_IN_FORCE",
+    "created_time": "2021-05-31T09:59:59Z",
+    "completion_percentage": "50",
+    "filled_size": "0.001",
+    "average_filled_price": "50",
+    "number_of_fills": "2",
+    "filled_value": "10000",
+    "pending_cancel": true,
+    "size_in_quote": false,
+    "total_fees": "5.00",
+    "size_inclusive_of_fees": false,
+    "total_value_after_fees": "123",
+    "trigger_status": "UNKNOWN_TRIGGER_STATUS",
+    "order_type": "UNKNOWN_ORDER_TYPE",
+    "reject_reason": "REJECT_REASON_UNSPECIFIED",
+    "settled": false,
+    "product_type": "UNKNOWN_PRODUCT_TYPE",
+    "reject_message": "string",
+    "cancel_message": "string",
+    "order_placement_source": "UNKNOWN_PLACEMENT_SOURCE",
+    "outstanding_hold_amount": "123",
+    "is_liquidation": false,
+    "last_fill_time": "2021-05-31T09:59:59Z",
+    "edit_history": [
+      {
+        "price": "19000.00",
+        "size": "0.001",
+        "replace_accept_timestamp": "2021-05-31T09:59:59Z"
+      }
+    ],
+    "leverage": "1",
+    "margin_type": "",
+    "retail_portfolio_id": "b87a2d3f-8a1e-49b3-a4ea-402d8c389aca"
+  }],
+  "sequence": "string",
+  "has_next": true,
+  "cursor": "789100"
+}

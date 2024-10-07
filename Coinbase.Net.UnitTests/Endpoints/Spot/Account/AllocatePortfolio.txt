@@ -1,0 +1,4 @@
+POST
+/api/v3/brokerage/intx/allocate
+true
+{}

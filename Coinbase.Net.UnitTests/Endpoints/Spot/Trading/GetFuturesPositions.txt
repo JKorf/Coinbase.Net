@@ -1,0 +1,15 @@
+GET
+/api/v3/brokerage/cfm/positions
+true
+{
+  "positions": [{
+    "product_id": "string",
+    "expiration_time": "2021-05-31T09:59:59Z",
+    "side": "LONG",
+    "number_of_contracts": "123",
+    "current_price": "123",
+    "avg_entry_price": "123",
+    "unrealized_pnl": "123",
+    "daily_realized_pnl": "123"
+  }]
+}

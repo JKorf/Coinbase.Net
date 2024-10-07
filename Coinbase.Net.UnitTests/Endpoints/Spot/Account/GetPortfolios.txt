@@ -1,0 +1,11 @@
+GET
+/api/v3/brokerage/portfolios
+true
+{
+  "portfolios": [{
+    "name": "string",
+    "uuid": "string",
+    "type": "UNDEFINED",
+    "deleted": true
+  }]
+}

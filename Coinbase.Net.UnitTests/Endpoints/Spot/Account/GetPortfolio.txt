@@ -1,0 +1,160 @@
+GET
+/api/v3/brokerage/portfolios/123
+true
+{
+  "breakdown": {
+    "portfolio": {
+      "name": "string",
+      "uuid": "string",
+      "type": "UNDEFINED",
+      "deleted": true
+    },
+    "portfolio_balances": {
+      "total_balance": {
+        "value": "123",
+        "currency": "string"
+      },
+      "total_futures_balance": {
+        "value": "123",
+        "currency": "string"
+      },
+      "total_cash_equivalent_balance": {
+        "value": "123",
+        "currency": "string"
+      },
+      "total_crypto_balance": {
+        "value": "123",
+        "currency": "string"
+      },
+      "futures_unrealized_pnl": {
+        "value": "123",
+        "currency": "string"
+      },
+      "perp_unrealized_pnl": {
+        "value": "123",
+        "currency": "string"
+      }
+    },
+    "spot_positions": [
+      {
+        "asset": "string",
+        "account_uuid": "string",
+        "total_balance_fiat": "123",
+        "total_balance_crypto": "123",
+        "available_to_trade_fiat": "123",
+        "allocation": "123",
+        "one_day_change": "123",
+        "cost_basis": {
+          "value": "123",
+          "currency": "string"
+        },
+        "asset_img_url": "string",
+        "is_cash": true
+      }
+    ],
+    "perp_positions": [
+      {
+        "product_id": "string",
+        "product_uuid": "string",
+        "symbol": "string",
+        "asset_image_url": "string",
+        "vwap": {
+          "userNativeCurrency": {
+            "value": "123",
+            "currency": "string"
+          },
+          "rawCurrency": {
+            "value": "123",
+            "currency": "string"
+          }
+        },
+        "position_side": "FUTURES_POSITION_SIDE_UNSPECIFIED",
+        "net_size": "123",
+        "buy_order_size": "123",
+        "sell_order_size": "123",
+        "im_contribution": "123",
+        "unrealized_pnl": {
+          "userNativeCurrency": {
+            "value": "123",
+            "currency": "string"
+          },
+          "rawCurrency": {
+            "value": "123",
+            "currency": "string"
+          }
+        },
+        "mark_price": {
+          "userNativeCurrency": {
+            "value": "123",
+            "currency": "string"
+          },
+          "rawCurrency": {
+            "value": "123",
+            "currency": "string"
+          }
+        },
+        "liquidation_price": {
+          "userNativeCurrency": {
+            "value": "123",
+            "currency": "string"
+          },
+          "rawCurrency": {
+            "value": "123",
+            "currency": "string"
+          }
+        },
+        "leverage": "12",
+        "im_notional": {
+          "userNativeCurrency": {
+            "value": "123",
+            "currency": "string"
+          },
+          "rawCurrency": {
+            "value": "123",
+            "currency": "string"
+          }
+        },
+        "mm_notional": {
+          "userNativeCurrency": {
+            "value": "123",
+            "currency": "string"
+          },
+          "rawCurrency": {
+            "value": "123",
+            "currency": "string"
+          }
+        },
+        "position_notional": {
+          "userNativeCurrency": {
+            "value": "123",
+            "currency": "string"
+          },
+          "rawCurrency": {
+            "value": "123",
+            "currency": "string"
+          }
+        },
+        "margin_type": "MARGIN_TYPE_UNSPECIFIED",
+        "liquidation_buffer": "123",
+        "liquidation_percentage": "123"
+      }
+    ],
+    "futures_positions": [
+      {
+        "product_id": "string",
+        "contract_size": "1",
+        "side": "FUTURES_POSITION_SIDE_UNSPECIFIED",
+        "amount": "123",
+        "avg_entry_price": "123",
+        "current_price": "123",
+        "unrealized_pnl": "123",
+        "expiry": "string",
+        "underlying_asset": "string",
+        "asset_img_url": "string",
+        "product_name": "string",
+        "venue": "string",
+        "notional_value": "123"
+      }
+    ]
+  }
+}

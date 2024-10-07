@@ -1,0 +1,11 @@
+PUT
+/api/v3/brokerage/portfolios/123
+true
+{
+  "portfolio": {
+    "name": "string",
+    "uuid": "string",
+    "type": "UNDEFINED",
+    "deleted": "true"
+  }
+}

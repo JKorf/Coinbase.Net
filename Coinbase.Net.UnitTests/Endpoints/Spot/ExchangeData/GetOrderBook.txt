@@ -1,0 +1,4 @@
+GET
+/api/v3/brokerage/market/product_book
+false
+{"pricebook":{"product_id":"ETH-USDT","bids":[{"price":"2452.77","size":"0.32700476"}],"asks":[{"price":"2453.62","size":"0.38"}],"time":"2024-10-02T11:22:32.748151Z"}}

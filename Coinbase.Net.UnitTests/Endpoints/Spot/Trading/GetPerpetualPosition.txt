@@ -1,0 +1,54 @@
+GET
+/api/v3/brokerage/intx/positions/123/BTC-PERP-INTX
+true
+{
+  "position": {
+    "product_id": "string",
+    "product_uuid": "string",
+    "portfolio_uuid": "string",
+    "symbol": "string",
+    "vwap": {
+      "value": "123",
+      "currency": "string"
+    },
+    "entry_vwap": {
+      "value": "123",
+      "currency": "string"
+    },
+    "position_side": "POSITION_SIDE_UNKNOWN",
+    "margin_type": "MARGIN_TYPE_UNSPECIFIED",
+    "net_size": "123",
+    "buy_order_size": "123",
+    "sell_order_size": "123",
+    "im_contribution": "123",
+    "unrealized_pnl": {
+      "value": "123",
+      "currency": "string"
+    },
+    "mark_price": {
+      "value": "123",
+      "currency": "string"
+    },
+    "liquidation_price": {
+      "value": "123",
+      "currency": "string"
+    },
+    "leverage": "123",
+    "im_notional": {
+      "value": "123",
+      "currency": "string"
+    },
+    "mm_notional": {
+      "value": "123",
+      "currency": "string"
+    },
+    "position_notional": {
+      "value": "123",
+      "currency": "string"
+    },
+    "aggregated_pnl": {
+      "value": "123",
+      "currency": "string"
+    }
+  }
+}

@@ -1,0 +1,4 @@
+> { "type": "subscribe", "product_ids": ["ETH-USDT"], "channel": "market_trades", "jwt": "|1|" }
+< {"channel":"subscriptions","client_id":"","timestamp":"2024-10-04T07:13:08.600625889Z","sequence_num":1,"events":[{"subscriptions":{"market_trades":["ETH-USDT"]}}]}
+= 
+{"channel":"market_trades","client_id":"","timestamp":"2024-10-04T07:13:31.158696693Z","sequence_num":2,"events":[{"type":"update","trades":[{"product_id":"ETH-USDT","trade_id":"22381691","price":"2375.56","size":"0.5","time":"2024-10-04T07:13:31.088388Z","side":"BUY"},{"product_id":"ETH-USDT","trade_id":"22381690","price":"2375.56","size":"0.5","time":"2024-10-04T07:13:31.084859Z","side":"BUY"}]}]}

@@ -1,0 +1,10 @@
+GET
+/api/v3/brokerage/key_permissions
+true
+{
+  "can_view": true,
+  "can_trade": true,
+  "can_transfer": true,
+  "portfolio_uuid": "string",
+  "portfolio_type": "DEFAULT"
+}

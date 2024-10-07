@@ -1,0 +1,6 @@
+GET
+/api/v3/brokerage/cfm/intraday/margin_setting
+true
+{
+  "setting": "INTRADAY_MARGIN_SETTING_STANDARD"
+}

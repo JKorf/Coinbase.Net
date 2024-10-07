@@ -1,0 +1,17 @@
+POST
+/api/v3/brokerage/orders/edit
+true
+{
+  "success": true,
+  "success_response": {
+    "order_id": "11111-00000-000000"
+  },
+  "error_response": {
+    "error_details": "Market orders cannot be placed with empty order sizes",
+    "edit_order_failure_reason": "UNKNOWN_EDIT_ORDER_FAILURE_REASON"
+  },
+  "errors": {
+    "edit_failure_reason": "UNKNOWN_EDIT_ORDER_FAILURE_REASON",
+    "preview_failure_reason": "UNKNOWN_PREVIEW_FAILURE_REASON"
+  }
+}

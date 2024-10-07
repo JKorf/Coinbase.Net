@@ -1,0 +1,183 @@
+POST
+/api/v3/brokerage/convert/quote
+true
+{
+  "trade": {
+    "id": "string",
+    "status": "TRADE_STATUS_UNSPECIFIED",
+    "user_entered_amount": {
+      "value": "123",
+      "currency": "string"
+    },
+    "amount": {
+      "value": "123",
+      "currency": "string"
+    },
+    "subtotal": {
+      "value": "123",
+      "currency": "string"
+    },
+    "total": {
+      "value": "123",
+      "currency": "string"
+    },
+    "fees": [
+      {
+        "title": "string",
+        "description": "string",
+        "amount": {
+          "value": "123",
+          "currency": "string"
+        },
+        "label": "string",
+        "disclosure": {
+          "title": "string",
+          "description": "string",
+          "link": {
+            "text": "string",
+            "url": "string"
+          }
+        }
+      }
+    ],
+    "total_fee": {
+      "title": "string",
+      "description": "string",
+      "amount": {
+        "value": "123",
+        "currency": "string"
+      },
+      "label": "string",
+      "disclosure": {
+        "title": "string",
+        "description": "string",
+        "link": {
+          "text": "string",
+          "url": "string"
+        }
+      }
+    },    
+    "unit_price": {
+      "target_to_fiat": {
+        "amount": {
+          "value": "123",
+          "currency": "string"
+        },
+        "scale": "1"
+      },
+      "target_to_source": {
+        "amount": {
+          "value": "123",
+          "currency": "string"
+        },
+        "scale": "1"
+      },
+      "source_to_fiat": {
+        "amount": {
+          "value": "123",
+          "currency": "string"
+        },
+        "scale": "1"
+      }
+    },
+    "user_warnings": [
+      {
+        "id": "string",
+        "link": {
+          "text": "string",
+          "url": "string"
+        },
+        "context": {
+          "details": [
+            "string"
+          ],
+          "title": "string",
+          "link_text": "string"
+        },
+        "code": "string",
+        "message": "string"
+      }
+    ],
+    "user_reference": "string",
+    "source_currency": "string",
+    "target_currency": "string",
+    "cancellation_reason": {
+      "message": "string",
+      "code": "string",
+      "error_code": "ERROR_CODES_UNSPECIFIED",
+      "error_cta": "ERROR_CTA_UNSPECIFIED"
+    },
+    "source_id": "string",
+    "target_id": "string",
+    "subscription_info": {
+      "free_trading_reset_date": "string",
+      "used_zero_fee_trading": {
+        "value": "123",
+        "currency": "string"
+      },
+      "remaining_free_trading_volume": {
+        "value": "13",
+        "currency": "string"
+      },
+      "max_free_trading_volume": {
+        "value": "123",
+        "currency": "string"
+      },
+      "has_benefit_cap": true,
+      "applied_subscription_benefit": false,
+      "fee_without_subscription_benefit": {
+        "value": "123",
+        "currency": "string"
+      },
+      "payment_method_fee_without_subscription_benefit": {
+        "value": "123",
+        "currency": "string"
+      }
+    },
+    "exchange_rate": {
+      "value": "123",
+      "currency": "string"
+    },
+    "tax_details": [
+      {
+        "name": "string",
+        "amount": {
+          "value": "123",
+          "currency": "string"
+        }
+      }
+    ],
+    "trade_incentive_info": {
+      "applied_incentive": false,
+      "user_incentive_id": "string",
+      "code_val": "string",
+      "ends_at": "string",
+      "fee_without_incentive": {
+        "value": "123",
+        "currency": "string"
+      },
+      "redeemed": true
+    },
+    "total_fee_without_tax": {
+      "title": "string",
+      "description": "string",
+      "amount": {
+        "value": "123",
+        "currency": "string"
+      },
+      "label": "string",
+      "disclosure": {
+        "title": "string",
+        "description": "string",
+        "link": {
+          "text": "string",
+          "url": "string"
+        }
+      }
+    },
+    "fiat_denoted_total": {
+      "value": "123",
+      "currency": "string"
+    }
+  }
+}

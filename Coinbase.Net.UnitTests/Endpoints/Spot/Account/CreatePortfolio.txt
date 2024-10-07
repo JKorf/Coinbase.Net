@@ -1,0 +1,11 @@
+POST
+/api/v3/brokerage/portfolios
+true
+{
+  "portfolio": {
+    "name": "string",
+    "uuid": "string",
+    "type": "UNDEFINED",
+    "deleted": true
+  }
+}

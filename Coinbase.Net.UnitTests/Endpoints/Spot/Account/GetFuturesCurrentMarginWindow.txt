@@ -1,0 +1,11 @@
+GET
+/api/v3/brokerage/cfm/intraday/current_margin_window
+true
+{
+  "margin_window": {
+    "margin_window_type": "MARGIN_WINDOW_TYPE_UNSPECIFIED",
+    "end_time": "2021-05-31T09:59:59Z"
+  },
+  "is_intraday_margin_killswitch_enabled": false,
+  "is_intraday_margin_enrollment_killswitch_enabled": false
+}

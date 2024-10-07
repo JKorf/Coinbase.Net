@@ -1,0 +1,15 @@
+GET
+/api/v3/brokerage/market/products/ETH-USDT/ticker
+false
+{
+  "trades": [{
+    "trade_id": "22350501",
+    "product_id": "BTC-USD",
+    "price": "140.91",
+    "size": "4",
+    "time": "2021-05-31T09:59:59Z",
+    "side": "BUY"
+  }],
+  "best_bid": "291.13",
+  "best_ask": "292.40"
+}

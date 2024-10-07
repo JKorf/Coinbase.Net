@@ -1,0 +1,23 @@
+GET
+/api/v3/brokerage/orders/historical/fills
+true
+{
+  "fills": [{
+    "entry_id": "22222-2222222-22222222",
+    "trade_id": "1111-11111-111111",
+    "order_id": "0000-000000-000000",
+    "trade_time": "2021-05-31T09:59:59Z",
+    "trade_type": "FILL",
+    "price": "10000.00",
+    "size": "0.001",
+    "commission": "1.25",
+    "product_id": "BTC-USD",
+    "sequence_timestamp": "2021-05-31T09:58:59Z",
+    "liquidity_indicator": "UNKNOWN_LIQUIDITY_INDICATOR",
+    "size_in_quote": false,
+    "user_id": "3333-333333-3333333",
+    "side": "BUY",
+    "retail_portfolio_id": "4444-444444-4444444"
+  }],
+  "cursor": "789100"
+}

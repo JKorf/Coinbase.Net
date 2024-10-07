@@ -1,0 +1,76 @@
+GET
+/api/v3/brokerage/market/products
+false
+{
+  "products": [{
+    "product_id": "BTC-USD",
+    "price": "140.21",
+    "price_percentage_change_24h": "9.43",
+    "volume_24h": "1908432",
+    "volume_percentage_change_24h": "9.43",
+    "base_increment": "0.00000001",
+    "quote_increment": "0.00000001",
+    "quote_min_size": "0.00000001",
+    "quote_max_size": "1000",
+    "base_min_size": "0.00000001",
+    "base_max_size": "1000",
+    "base_name": "Bitcoin",
+    "quote_name": "US Dollar",
+    "watched": true,
+    "is_disabled": false,
+    "new": true,
+    "status": "online",
+    "cancel_only": true,
+    "limit_only": true,
+    "post_only": true,
+    "trading_disabled": false,
+    "auction_mode": true,
+    "product_type": "UNKNOWN_PRODUCT_TYPE",
+    "quote_currency_id": "USD",
+    "base_currency_id": "BTC",
+    "fcm_trading_session_details": {
+      "is_session_open": true,
+      "open_time": "string",
+      "close_time": "string",
+      "session_state": "FCM_TRADING_SESSION_STATE_UNDEFINED",
+      "after_hours_order_entry_disabled": true
+    },
+    "mid_market_price": "140.22",
+    "alias": "BTC-USD",
+    "alias_to": [
+      "string"
+    ],
+    "base_display_symbol": "BTC",
+    "quote_display_symbol": "USD",
+    "view_only": true,
+    "price_increment": "0.00000001",
+    "display_name": "BTC PERP",
+    "product_venue": "neptune",
+    "approximate_quote_24h_volume": "1908432",
+    "future_product_details": {
+      "venue": "string",
+      "contract_code": "string",
+      "contract_expiry": "1727686200",
+      "contract_size": "0.1",
+      "contract_root_unit": "1",
+      "group_description": "string",
+      "contract_expiry_timezone": "string",
+      "group_short_description": "string",
+      "risk_managed_by": "UNKNOWN_RISK_MANAGEMENT_TYPE",
+      "contract_expiry_type": "UNKNOWN_CONTRACT_EXPIRY_TYPE",
+      "perpetual_details": {
+        "open_interest": "1",
+        "funding_rate": "1",
+        "funding_time": "1727686200",
+        "max_leverage": "1",
+        "base_asset_uuid": "string",
+        "underlying_type": "string"
+      },
+      "contract_display_name": "string",
+      "time_to_expiry_ms": "1727686200",
+      "non_crypto": true,
+      "contract_expiry_name": "string"
+    }
+  }],
+  "num_products": 100
+}

@@ -1,0 +1,7 @@
+POST
+/api/v3/brokerage/portfolios/move_funds
+true
+{
+  "source_portfolio_uuid": "8bfc20d7-f7c6-4422-bf07-8243ca4169fe",
+  "target_portfolio_uuid": "8bfc20d7-f7c6-4422-bf07-8243ca4169fe"
+}

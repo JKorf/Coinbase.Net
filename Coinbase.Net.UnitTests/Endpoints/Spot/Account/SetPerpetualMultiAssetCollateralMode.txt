@@ -1,0 +1,6 @@
+POST
+/api/v3/brokerage/intx/multi_asset_collateral
+true
+{
+  "multi_asset_collateral_enabled": true
+}

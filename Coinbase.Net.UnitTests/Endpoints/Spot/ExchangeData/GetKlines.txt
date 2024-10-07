@@ -1,0 +1,13 @@
+GET
+/api/v3/brokerage/market/products/ETH-USDT/candles
+false
+{
+  "candles": [{
+    "start": "1639508050",
+    "low": "140.21",
+    "high": "140.21",
+    "open": "140.21",
+    "close": "140.21",
+    "volume": "56437345"
+  }]
+}

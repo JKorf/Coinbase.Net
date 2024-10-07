@@ -1,0 +1,46 @@
+> { "type": "subscribe", "channel": "futures_balance_summary", "jwt": "|1|" }
+< {"channel":"subscriptions","client_id":"","timestamp":"2024-10-04T07:13:08.600625889Z","sequence_num":1,"events":[{"subscriptions":{"futures_balance_summary":["123"]}}]}
+= 
+{
+  "channel": "futures_balance_summary",
+  "client_id": "",
+  "timestamp": "2023-02-09T20:33:57.609931463Z",
+  "sequence_num": 0,
+  "events": [
+    {
+      "type": "snapshot",
+      "fcm_balance_summary":{
+        "futures_buying_power": "100.00",
+        "total_usd_balance": "200.00",
+        "cbi_usd_balance": "300.00",
+        "cfm_usd_balance": "400.00",
+        "total_open_orders_hold_amount": "500.00",
+        "unrealized_pnl": "600.00",
+        "daily_realized_pnl": "0",
+        "initial_margin": "700.00",
+        "available_margin": "800.00",
+        "liquidation_threshold": "900.00",
+        "liquidation_buffer_amount": "1000.00",
+        "liquidation_buffer_percentage": "1000",
+        "intraday_margin_window_measure":{
+          "margin_window_type":"FCM_MARGIN_WINDOW_TYPE_INTRADAY",
+          "margin_level":"MARGIN_LEVEL_TYPE_BASE",
+          "initial_margin":"100.00",
+          "maintenance_margin":"200.00",
+          "liquidation_buffer_percentage":"1000",
+          "total_hold":"100.00",
+          "futures_buying_power":"400.00"
+        },
+        "overnight_margin_window_measure":{
+          "margin_window_type":"FCM_MARGIN_WINDOW_TYPE_OVERNIGHT",
+          "margin_level":"MARGIN_LEVEL_TYPE_BASE",
+          "initial_margin":"300.00",
+          "maintenance_margin":"200.00",
+          "liquidation_buffer_percentage":"1000",
+          "total_hold":"-30.00",
+          "futures_buying_power":"2000.00"
+        }
+      }
+    }
+  ]
+}

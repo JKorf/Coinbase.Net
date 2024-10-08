@@ -61,7 +61,7 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.AddTransient<ICryptoRestClient, CryptoRestClient>();
             services.AddSingleton<ICryptoSocketClient, CryptoSocketClient>();
-            services.AddSingleton<ICoinbaseOrderBookFactory, CoinbaseOrderBookFactory>();
+            services.AddTransient<ICoinbaseOrderBookFactory, CoinbaseOrderBookFactory>();
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<ICoinbaseRestClient>().AdvancedTradeApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<ICoinbaseSocketClient>().AdvancedTradeApi.SharedClient);

@@ -93,6 +93,8 @@ A Discord server is available [here](https://discord.gg/MSpeEtSY8t). For discuss
 
 ## Supported functionality
 
+*Due to framework restrictions for signing requests only .netstandard 2.1 can currently use private endpoints*
+
 ### Advanced Trade REST
 |API|Supported|Location|
 |--|--:|--|

@@ -42,7 +42,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalEnum("product_type", type);
-            parameters.AddOptional("product_ids", symbols.ToArray());
+            parameters.AddOptional("product_ids", symbols?.ToArray());
             parameters.AddOptionalEnum("contract_expiry_type", expiryType);
             parameters.AddOptionalEnum("expiring_contract_status", expireStatus);
             parameters.AddOptional("get_all_products", allProducts);

@@ -178,6 +178,12 @@
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetTradeHistoryAsync(System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetBookTickerAsync(System.String,System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetBookTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetFiatAssetsAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
@@ -1831,6 +1837,24 @@
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
         </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetBookTickerAsync(System.String,System.Threading.CancellationToken)">
+            <summary>
+            Get the best ask/bid price and quantity for a symbol
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getbestbidask" /></para>
+            </summary>
+            <param name="symbol">The symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetBookTickersAsync(System.Collections.Generic.IEnumerable{System.String},System.Threading.CancellationToken)">
+            <summary>
+            Get the best ask/bid price and quantity for all or selected symbols
+            <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getbestbidask" /></para>
+            </summary>
+            <param name="symbols">Filter by symbol</param>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
         <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetFiatAssetsAsync(System.Threading.CancellationToken)">
             <summary>
             Get fiat assets
@@ -2402,6 +2426,46 @@
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseApiKey.PortfolioType">
             <summary>
             Portfolio type
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseBookTicker">
+            <summary>
+            Book ticker
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBookTicker.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBookTicker.Asks">
+            <summary>
+            Asks
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBookTicker.Bids">
+            <summary>
+            Bids
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBookTicker.BestAskPrice">
+            <summary>
+            Best ask price
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBookTicker.BestAskQuantity">
+            <summary>
+            Best ask quantity
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBookTicker.BestBidPrice">
+            <summary>
+            Best bid price
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBookTicker.BestBidQuantity">
+            <summary>
+            Best bid quantity
             </summary>
         </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseCancelResult">

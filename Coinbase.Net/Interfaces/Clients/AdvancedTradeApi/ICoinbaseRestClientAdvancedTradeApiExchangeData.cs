@@ -76,6 +76,24 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         Task<WebCallResult<CoinbaseTrades>> GetTradeHistoryAsync(string symbol, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
+        /// Get the best ask/bid price and quantity for a symbol
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getbestbidask" /></para>
+        /// </summary>
+        /// <param name="symbol">The symbol</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<CoinbaseBookTicker>> GetBookTickerAsync(string symbol, CancellationToken ct = default);
+
+        /// <summary>
+        /// Get the best ask/bid price and quantity for all or selected symbols
+        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getbestbidask" /></para>
+        /// </summary>
+        /// <param name="symbols">Filter by symbol</param>
+        /// <param name="ct">Cancellation token</param>
+        /// <returns></returns>
+        Task<WebCallResult<IEnumerable<CoinbaseBookTicker>>> GetBookTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
+
+        /// <summary>
         /// Get fiat assets
         /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-currencies" /></para>
         /// </summary>

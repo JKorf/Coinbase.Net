@@ -142,6 +142,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 1.1.1 - 21 Oct 2024
+    * Fixed websocket market data subscriptions for "USDT-USDC" and "EURC-USDC" symbols
+
 * Version 1.1.0 - 15 Oct 2024
     * Updated ExchangeData endpoints to use the Products endpoint instead of Public endpoint if API credentials are provided
     * Added restClient.AdvancedTradeApi.ExchangeData.GetBookTickersAsync and GetBookTickerAsync endpoints

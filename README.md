@@ -142,6 +142,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 1.1.2 - 22 Oct 2024
+    * Fixed deserialization issue on websocket ticker updates
+
 * Version 1.1.1 - 21 Oct 2024
     * Fixed websocket market data subscriptions for "USDT-USDC" and "EURC-USDC" symbols
 

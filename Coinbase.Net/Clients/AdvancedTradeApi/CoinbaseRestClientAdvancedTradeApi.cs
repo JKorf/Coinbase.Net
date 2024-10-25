@@ -127,19 +127,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             => _timeSyncState.TimeOffset;
 
         /// <inheritdoc />
-        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverDate = null)
-        {
-            if (tradingMode == TradingMode.Spot)
-                return $"{baseAsset.ToUpperInvariant()}-{quoteAsset.ToUpperInvariant()}";
-
-            if (tradingMode.IsPerpetual())
-                return $"{baseAsset.ToUpperInvariant()}-PERP-INTX";
-
-            if (deliverDate == null)
-                throw new ArgumentException("DeliverDate required for delivery futures symbol");
-
-            return $"{baseAsset.ToUpperInvariant()}-{deliverDate.Value:dd}{deliverDate.Value.ToString("MMM").ToUpper()}{deliverDate.Value:yy}-CDE";
-        }
+        public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
+                => CoinbaseExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
         /// <inheritdoc />
         public ICoinbaseRestClientAdvancedTradeApiShared SharedClient => this;

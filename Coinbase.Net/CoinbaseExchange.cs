@@ -4,6 +4,8 @@ using CryptoExchange.Net.RateLimiting.Guards;
 using CryptoExchange.Net.RateLimiting.Interfaces;
 using CryptoExchange.Net.RateLimiting;
 using System;
+using CryptoExchange.Net.SharedApis;
+using CryptoExchange.Net;
 
 namespace Coinbase.Net
 {
@@ -29,6 +31,28 @@ namespace Coinbase.Net
             "https://docs.cdp.coinbase.com/advanced-trade/reference",
             "https://docs.cdp.coinbase.com/coinbase-app/docs/welcome"
             };
+
+        /// <summary>
+        /// Format a base and quote asset to a Coinbase recognized symbol 
+        /// </summary>
+        /// <param name="baseAsset">Base asset</param>
+        /// <param name="quoteAsset">Quote asset</param>
+        /// <param name="tradingMode">Trading mode</param>
+        /// <param name="deliverTime">Delivery time for delivery futures</param>
+        /// <returns></returns>
+        public static string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
+        {
+            if (tradingMode == TradingMode.Spot)
+                return $"{baseAsset.ToUpperInvariant()}-{quoteAsset.ToUpperInvariant()}";
+
+            if (tradingMode.IsPerpetual())
+                return $"{baseAsset.ToUpperInvariant()}-PERP-INTX";
+
+            if (deliverTime == null)
+                throw new ArgumentException("DeliverDate required for delivery futures symbol");
+
+            return $"{baseAsset.ToUpperInvariant()}-{deliverTime.Value:dd}{deliverTime.Value.ToString("MMM").ToUpper()}{deliverTime.Value:yy}-CDE";
+        }
 
         /// <summary>
         /// Rate limiter configuration for the Coinbase API

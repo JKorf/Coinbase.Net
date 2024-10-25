@@ -105,8 +105,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         {
             var parameters = new ParameterCollection();
             parameters.AddEnum("granularity", klineInterval);
-            parameters.AddOptionalMillisecondsString("start", startTime);
-            parameters.AddOptionalMillisecondsString("end", endTime);
+            parameters.AddOptionalSecondsString("start", startTime);
+            parameters.AddOptionalSecondsString("end", endTime);
             parameters.AddOptional("limit", limit);
 
             RequestDefinition request;

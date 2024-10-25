@@ -78,7 +78,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     return;
 
                 foreach (var item in update.Data)
-                    handler(update.AsExchangeEvent<IEnumerable<SharedTrade>>(Exchange, new[] { new SharedTrade(item.Quantity, item.Price, item.Timestamp) }));
+                {
+                    handler(update.AsExchangeEvent<IEnumerable<SharedTrade>>(Exchange, new[] { new SharedTrade(item.Quantity, item.Price, item.Timestamp){
+                        Side = item.OrderSide == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
+                    } }));
+                }
 
             }, ct).ConfigureAwait(false);
 

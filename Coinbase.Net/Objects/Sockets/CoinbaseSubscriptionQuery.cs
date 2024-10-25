@@ -21,15 +21,20 @@ namespace Coinbase.Net.Objects.Sockets
             _symbols = request.Symbols;
         }
 
-        public override CallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> HandleMessage(SocketConnection connection, DataEvent<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> message)
+        public override bool ValidateMessage(DataEvent<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> message)
         {
             var evnt = message.Data.Events.First();
             if (!evnt.Subscriptions.TryGetValue(_channel, out var subbed))
-                return message.ToCallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>(new ServerError("Server has not aknowledged subscription"));
+                return false;
 
             if (_symbols != null && _symbols.Any(x => !subbed.Contains(x)))
-                return message.ToCallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>(new ServerError("Server has not aknowledged all symbols"));
+                return false;
 
+            return true;
+        }
+
+        public override CallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> HandleMessage(SocketConnection connection, DataEvent<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> message)
+        {
             return message.ToCallResult();
         }
     }

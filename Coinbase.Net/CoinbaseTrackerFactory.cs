@@ -48,6 +48,7 @@ namespace Coinbase.Net
 
             return new TradeTracker(
                 _serviceProvider.GetRequiredService<ILoggerFactory>().CreateLogger(restClient.Exchange),
+                null,
                 restClient,
                 socketClient,
                 symbol,

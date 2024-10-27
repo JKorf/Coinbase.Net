@@ -84,8 +84,8 @@ namespace Coinbase.Net
             CoinbaseRestPrivate = new RateLimitGate("Coinbase Private")
                 .AddGuard(new RateLimitGuard(RateLimitGuard.PerApiKey, Array.Empty<IGuardFilter>(), 30, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             CoinbaseSocket = new RateLimitGate("Coinbase Socket")
-                .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new LimitItemTypeFilter(RateLimitItemType.Request), 100, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding))
-                .AddGuard(new RateLimitGuard(RateLimitGuard.PerEndpoint, new LimitItemTypeFilter(RateLimitItemType.Request), 8, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
+                .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new LimitItemTypeFilter(RateLimitItemType.Connection), 100, TimeSpan.FromSeconds(750), RateLimitWindowType.Sliding))
+                .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new LimitItemTypeFilter(RateLimitItemType.Request), 8, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             CoinbaseRestPublic.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
             CoinbaseRestPrivate.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
             CoinbaseSocket.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);

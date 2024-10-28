@@ -463,6 +463,11 @@
         <member name="T:Coinbase.Net.CoinbaseTrackerFactory">
             <inheritdoc />
         </member>
+        <member name="M:Coinbase.Net.CoinbaseTrackerFactory.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
         <member name="M:Coinbase.Net.CoinbaseTrackerFactory.#ctor(System.IServiceProvider)">
             <summary>
             ctor

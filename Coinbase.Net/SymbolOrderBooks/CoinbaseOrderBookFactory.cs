@@ -6,6 +6,7 @@ using System;
 using Coinbase.Net.Interfaces;
 using Coinbase.Net.Interfaces.Clients;
 using Coinbase.Net.Objects.Options;
+using CryptoExchange.Net.SharedApis;
 
 namespace Coinbase.Net.SymbolOrderBooks
 {
@@ -24,13 +25,22 @@ namespace Coinbase.Net.SymbolOrderBooks
         {
             _serviceProvider = serviceProvider;
 
-            AdvancedTrade = new OrderBookFactory<CoinbaseOrderBookOptions>((symbol, options) => Create(symbol, options), (baseAsset, quoteAsset, options) => Create(baseAsset + "-" + quoteAsset, options));
+            AdvancedTrade = new OrderBookFactory<CoinbaseOrderBookOptions>(
+                Create,
+                (sharedSymbol, options) => Create(CoinbaseExchange.FormatSymbol(sharedSymbol.BaseAsset, sharedSymbol.QuoteAsset, sharedSymbol.TradingMode, sharedSymbol.DeliverTime), options));
         }
 
          /// <inheritdoc />
         public IOrderBookFactory<CoinbaseOrderBookOptions> AdvancedTrade { get; }
 
-         /// <inheritdoc />
+        /// <inheritdoc />
+        public ISymbolOrderBook Create(SharedSymbol symbol, Action<CoinbaseOrderBookOptions>? options = null)
+        {
+            var symbolName = CoinbaseExchange.FormatSymbol(symbol.BaseAsset, symbol.QuoteAsset, symbol.TradingMode, symbol.DeliverTime);
+            return Create(symbolName, options);
+        }
+
+        /// <inheritdoc />
         public ISymbolOrderBook Create(string symbol, Action<CoinbaseOrderBookOptions>? options = null)
             => new CoinbaseSymbolOrderBook(symbol, options, 
                                                           _serviceProvider.GetRequiredService<ILoggerFactory>(),

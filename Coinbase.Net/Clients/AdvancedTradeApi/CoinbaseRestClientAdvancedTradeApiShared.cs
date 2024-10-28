@@ -231,7 +231,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, null, default);
 
             // Return
-            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, request.Symbol.TradingMode, result.Data.Trades.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)).ToArray());
+            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, request.Symbol.TradingMode, result.Data.Trades.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)
+            {
+                Side = x.OrderSide == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
+            }).ToArray());
         }
         #endregion
 
@@ -264,7 +267,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 nextToken = new DateTimeToken(result.Data.Trades.Min(x => x.Timestamp.AddMilliseconds(-1)));
 
             // Return
-            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, TradingMode.Spot, result.Data.Trades.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)).ToArray(), nextToken);
+            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, TradingMode.Spot, result.Data.Trades.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)
+            {
+                Side = x.OrderSide == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
+            }).ToArray(), nextToken);
         }
         #endregion
 
@@ -683,7 +689,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return resultTicker.AsExchangeResult<SharedFuturesTicker>(Exchange, null, default);
 
             return resultTicker.AsExchangeResult(Exchange, request.Symbol.TradingMode, 
-                new SharedFuturesTicker(resultTicker.Data.Symbol, resultTicker.Data.LastPrice ?? 0, 0, 0, resultTicker.Data.Volume24h ?? 0, resultTicker.Data.PricePercentageChange24h)
+                new SharedFuturesTicker(resultTicker.Data.Symbol, resultTicker.Data.LastPrice, null, null, resultTicker.Data.Volume24h ?? 0, resultTicker.Data.PricePercentageChange24h)
             {
                 FundingRate = resultTicker.Data.FutureProductDetails!.PerpetualDetails!.FundingRate,
                 NextFundingTime = resultTicker.Data.FutureProductDetails.PerpetualDetails.FundingTime
@@ -705,7 +711,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             var data = resultTicker.Data;
             return resultTicker.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, request.TradingMode.HasValue ? [request.TradingMode.Value]: SupportedTradingModes,
                 data.Select(x => 
-                    new SharedFuturesTicker(x.Symbol, x.LastPrice ?? 0, 0, 0, x.Volume24h ?? 0, x.PricePercentageChange24h)
+                    new SharedFuturesTicker(x.Symbol, x.LastPrice, null, null, x.Volume24h ?? 0, x.PricePercentageChange24h)
                     {
                         FundingRate = x.FutureProductDetails!.PerpetualDetails?.FundingRate,
                         NextFundingTime = x.FutureProductDetails.PerpetualDetails?.FundingTime
@@ -1078,6 +1084,66 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return result.AsExchangeResult<SharedId>(Exchange, null, default);
 
             return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedId(result.Data.SuccessResponse.OrderId));
+        }
+
+        #endregion
+
+        #region Klines Client
+
+        GetKlinesOptions IKlineRestClient.GetKlinesOptions { get; } = new GetKlinesOptions(SharedPaginationSupport.Descending, false)
+        {
+            MaxRequestDataPoints = 350
+        };
+
+        async Task<ExchangeWebResult<IEnumerable<SharedKline>>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, CancellationToken ct)
+        {
+            var interval = (Enums.KlineInterval)request.Interval;
+            if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
+                return new ExchangeWebResult<IEnumerable<SharedKline>>(Exchange, new ArgumentError("Interval not supported"));
+
+            var validationError = ((IKlineRestClient)this).GetKlinesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            if (validationError != null)
+                return new ExchangeWebResult<IEnumerable<SharedKline>>(Exchange, validationError);
+
+            // Determine pagination
+            // Data is normally returned oldest first, so to do newest first pagination we have to do some calc
+            DateTime endTime = request.EndTime ?? DateTime.UtcNow;
+            DateTime? startTime = request.StartTime;
+            if (pageToken is DateTimeToken dateTimeToken)
+                endTime = dateTimeToken.LastTime;
+
+            var limit = request.Limit ?? 350;
+            if (startTime == null || startTime < endTime)
+            {
+                var offset = (int)interval * limit;
+                startTime = endTime.AddSeconds(-offset);
+            }
+
+            if (startTime < request.StartTime)
+                startTime = request.StartTime;
+
+            // Get data
+            var result = await ExchangeData.GetKlinesAsync(
+                request.Symbol.GetSymbol(FormatSymbol),
+                interval,
+                startTime,
+                endTime,
+                limit,
+                ct: ct
+                ).ConfigureAwait(false);
+            if (!result)
+                return new ExchangeWebResult<IEnumerable<SharedKline>>(Exchange, TradingMode.Spot, result.As<IEnumerable<SharedKline>>(default));
+
+            // Get next token
+            DateTimeToken? nextToken = null;
+            if (result.Data.Count() == limit)
+            {
+                var minOpenTime = result.Data.Min(x => x.OpenTime);
+                if (request.StartTime == null || minOpenTime > request.StartTime.Value)
+                    nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
+            }
+
+            return result.AsExchangeResult<IEnumerable<SharedKline>>(Exchange, request.Symbol.TradingMode, result.Data.Reverse().Select(x => new SharedKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
         }
 
         #endregion

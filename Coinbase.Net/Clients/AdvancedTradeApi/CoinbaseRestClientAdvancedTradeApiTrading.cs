@@ -78,7 +78,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (!result)
                 return result.As<CoinbaseCancelResult>(default);
 
-            var cancelResult = result.Data.Single();
+            var cancelResult = result.Data.SingleOrDefault();
+            if (cancelResult == null)
+                return result.AsError<CoinbaseCancelResult>(new ServerError("Order not found"));
+
             if (!cancelResult.Success)
                 return result.AsError<CoinbaseCancelResult>(new ServerError(cancelResult.ErrorMessage!));
 
@@ -96,7 +99,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             parameters.Add("order_ids", orderIds.ToArray());
             var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/brokerage/orders/batch_cancel", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseCancelResultWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As(result.Data.Results);
+            return result.As<IEnumerable<CoinbaseCancelResult>>(result.Data?.Results);
         }
 
         #endregion

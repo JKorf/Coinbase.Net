@@ -9,6 +9,7 @@ using Coinbase.Net.Interfaces.Clients;
 using Coinbase.Net.Objects.Options;
 using Coinbase.Net.SymbolOrderBooks;
 using CryptoExchange.Net;
+using Coinbase.Net;
 
 namespace Microsoft.Extensions.DependencyInjection
 {
@@ -62,6 +63,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddTransient<ICryptoRestClient, CryptoRestClient>();
             services.AddSingleton<ICryptoSocketClient, CryptoSocketClient>();
             services.AddTransient<ICoinbaseOrderBookFactory, CoinbaseOrderBookFactory>();
+            services.AddTransient<ICoinbaseTrackerFactory, CoinbaseTrackerFactory>();
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<ICoinbaseRestClient>().AdvancedTradeApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<ICoinbaseSocketClient>().AdvancedTradeApi.SharedClient);

@@ -143,6 +143,19 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 1.2.0 - 28 Oct 2024
+    * Updated CryptoExchange.Net to version 8.1.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.1.0
+    * Moved FormatSymbol to CoinbaseExchange class
+    * Added support Side setting on SharedTrade model
+    * Added CoinbaseTrackerFactory for creating trackers
+    * Added overload to Create method on CoinbaseOrderBookFactory support SharedSymbol parameter
+    * Added GetKlinesAsync to Shared rest client
+    * Fixed exception on restClient.AdvancedTradingAi.Trading.CancelOrderAynsc when order not found
+    * Fixed exception on restClient.AdvancedTradingAi.Trading.CancelOrdersAynsc when request fails
+    * Fixed restClient.AdvancedTradingAi.ExchangeData.GetKlinesAsync time filter
+    * Fixed issue with concurrent websocket subscription acknowledgements
+    * Removed incorrect rate limit of 100 message per second per ip for websockets
+
 * Version 1.1.2 - 22 Oct 2024
     * Fixed deserialization issue on websocket ticker updates
 

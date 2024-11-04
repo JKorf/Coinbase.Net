@@ -311,18 +311,6 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         Task<WebCallResult<CoinbaseTransaction>> GetTransactionAsync(string accountId, string transactionId, CancellationToken ct = default);
 
         /// <summary>
-        /// Transfer an asset between 2 accounts of the same user. Either wallet to wallet or wallet to vault.
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-transactions#transfer-money-between-accounts" /></para>
-        /// </summary>
-        /// <param name="accountId">From account id</param>
-        /// <param name="toAccountId">To account id</param>
-        /// <param name="quantity">Quantity to transfer</param>
-        /// <param name="asset">The asset, for example `ETH`</param>
-        /// <param name="description">Description</param>
-        /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbaseTransaction>> TransferAsync(string accountId, string toAccountId, decimal quantity, string asset, string? description = null, CancellationToken ct = default);
-
-        /// <summary>
         /// Get transactions for a specific address
         /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /></para>
         /// </summary>
@@ -344,13 +332,11 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="quantity">Quantity to send</param>
         /// <param name="asset">The asset, for example `ETH`</param>
         /// <param name="description">Description</param>
-        /// <param name="skipNotifications">Don't send notification emails for small amounts (e.g., tips)</param>
+        /// <param name="network">Network to use for the withdrawal</param>
         /// <param name="idempotencyToken">If a previous transaction with the same idempotencyToken parameter exists for this sender, that previous transaction is returned and a new one is not created. Max length is 100 characters.</param>
-        /// <param name="toFinancialInstitution">If true, send to another financial institution or exchange. Required if this send is to an address and is valued at over USD$3000.</param>
-        /// <param name="financialInstituionWebsite">The website of the financial institution or exchange. Required if toFinancialInstitution is true.</param>
         /// <param name="destinationTag">Destination tag</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbaseTransaction>> WithdrawCryptoAsync(string accountId, string to, decimal quantity, string asset, string? description = null, bool? skipNotifications = null, string? idempotencyToken = null, bool? toFinancialInstitution = null, string? financialInstituionWebsite = null, string? destinationTag = null, CancellationToken ct = default);
+        Task<WebCallResult<CoinbaseTransaction>> WithdrawCryptoAsync(string accountId, string to, decimal quantity, string asset, string? network = null, string? description = null, string? idempotencyToken = null, string? destinationTag = null, CancellationToken ct = default);
 
         /// <summary>
         /// Create a new deposit address for an account

@@ -139,13 +139,10 @@
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetTransactionAsync(System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.TransferAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.GetAddressTransactionsAsync(System.String,System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.WithdrawCryptoAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Boolean},System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.WithdrawCryptoAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiAccount.CreateDepositAddressAsync(System.String,System.String,System.Threading.CancellationToken)">
@@ -1728,18 +1725,6 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.TransferAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Threading.CancellationToken)">
-            <summary>
-            Transfer an asset between 2 accounts of the same user. Either wallet to wallet or wallet to vault.
-            <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-transactions#transfer-money-between-accounts" /></para>
-            </summary>
-            <param name="accountId">From account id</param>
-            <param name="toAccountId">To account id</param>
-            <param name="quantity">Quantity to transfer</param>
-            <param name="asset">The asset, for example `ETH`</param>
-            <param name="description">Description</param>
-            <param name="ct">Cancellation token</param>
-        </member>
         <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.GetAddressTransactionsAsync(System.String,System.String,System.Nullable{Coinbase.Net.Enums.SortOrder},System.String,System.String,System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get transactions for a specific address
@@ -1753,7 +1738,7 @@
             <param name="limit">Max number of results</param>
             <param name="ct">Cancellation token</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.WithdrawCryptoAsync(System.String,System.String,System.Decimal,System.String,System.String,System.Nullable{System.Boolean},System.String,System.Nullable{System.Boolean},System.String,System.String,System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount.WithdrawCryptoAsync(System.String,System.String,System.Decimal,System.String,System.String,System.String,System.String,System.String,System.Threading.CancellationToken)">
             <summary>
             Withdraw a crypto asset to an external blockchain address or user by email
             <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-transactions#transfer-money-between-accounts" /></para>
@@ -1763,10 +1748,8 @@
             <param name="quantity">Quantity to send</param>
             <param name="asset">The asset, for example `ETH`</param>
             <param name="description">Description</param>
-            <param name="skipNotifications">Don't send notification emails for small amounts (e.g., tips)</param>
+            <param name="network">Network to use for the withdrawal</param>
             <param name="idempotencyToken">If a previous transaction with the same idempotencyToken parameter exists for this sender, that previous transaction is returned and a new one is not created. Max length is 100 characters.</param>
-            <param name="toFinancialInstitution">If true, send to another financial institution or exchange. Required if this send is to an address and is valued at over USD$3000.</param>
-            <param name="financialInstituionWebsite">The website of the financial institution or exchange. Required if toFinancialInstitution is true.</param>
             <param name="destinationTag">Destination tag</param>
             <param name="ct">Cancellation token</param>
         </member>

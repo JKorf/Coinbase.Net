@@ -26,7 +26,6 @@ namespace Coinbase.Net.UnitTests
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetFeeInfoAsync(), "GetFeeInfo");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetApiKeyInfoAsync(), "GetApiKeyInfo");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetPaymentMethodsAsync(), "GetPaymentMethods", nestedJsonProperty: "payment_methods");
-            await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.TransferAsync("123", "123", 0.1m, "123"), "Transfer", "data");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.WithdrawCryptoAsync("123", "123", 0.1m, "123"), "WithdrawCrypto", "data");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.CreateDepositAddressAsync("123", "123"), "CreateDepositAddress", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetDepositAddressAsync("123", "123"), "GetDepositAddress", "data", ignoreProperties: new List<string> { "callback_url" });

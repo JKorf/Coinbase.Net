@@ -305,7 +305,7 @@
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.GetAuthenticationRequest(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
         <member name="P:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.SharedClient">

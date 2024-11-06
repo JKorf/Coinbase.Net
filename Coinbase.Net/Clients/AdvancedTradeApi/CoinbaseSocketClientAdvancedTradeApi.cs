@@ -182,7 +182,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         /// <inheritdoc />
-        protected override Query? GetAuthenticationRequest(SocketConnection connection) => null;
+        protected override Task<Query?> GetAuthenticationRequestAsync(SocketConnection connection) => Task.FromResult<Query?>(null);
 
         /// <inheritdoc />
         public ICoinbaseSocketClientAdvancedTradeApiShared SharedClient => this;

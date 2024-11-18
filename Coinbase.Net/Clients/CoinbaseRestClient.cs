@@ -7,6 +7,7 @@ using Coinbase.Net.Objects.Options;
 using CryptoExchange.Net.Clients;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using Coinbase.Net.Clients.AdvancedTradeApi;
+using Microsoft.Extensions.Options;
 
 namespace Coinbase.Net.Clients
 {
@@ -27,24 +28,22 @@ namespace Coinbase.Net.Clients
         /// Create a new instance of the CoinbaseRestClient using provided options
         /// </summary>
         /// <param name="optionsDelegate">Option configuration delegate</param>
-        public CoinbaseRestClient(Action<CoinbaseRestOptions>? optionsDelegate = null) : this(null, null, optionsDelegate)
+        public CoinbaseRestClient(Action<CoinbaseRestOptions>? optionsDelegate = null)
+            : this(null, null, Options.Create(ApplyOptionsDelegate(optionsDelegate)))
         {
         }
 
         /// <summary>
         /// Create a new instance of the CoinbaseRestClient using provided options
         /// </summary>
-        /// <param name="optionsDelegate">Option configuration delegate</param>
+        /// <param name="options">Option configuration</param>
         /// <param name="loggerFactory">The logger factory</param>
         /// <param name="httpClient">Http client for this client</param>
-        public CoinbaseRestClient(HttpClient? httpClient, ILoggerFactory? loggerFactory, Action<CoinbaseRestOptions>? optionsDelegate = null) : base(loggerFactory, "Coinbase")
+        public CoinbaseRestClient(HttpClient? httpClient, ILoggerFactory? loggerFactory, IOptions<CoinbaseRestOptions> options) : base(loggerFactory, "Coinbase")
         {
-            var options = CoinbaseRestOptions.Default.Copy();
-            if (optionsDelegate != null)
-                optionsDelegate(options);
-            Initialize(options);
+            Initialize(options.Value);
 
-            AdvancedTradeApi = AddApiClient(new CoinbaseRestClientAdvancedTradeApi(this, _logger, httpClient, options));
+            AdvancedTradeApi = AddApiClient(new CoinbaseRestClientAdvancedTradeApi(this, _logger, httpClient, options.Value));
         }
 
         #endregion
@@ -55,9 +54,7 @@ namespace Coinbase.Net.Clients
         /// <param name="optionsDelegate">Option configuration delegate</param>
         public static void SetDefaultOptions(Action<CoinbaseRestOptions> optionsDelegate)
         {
-            var options = CoinbaseRestOptions.Default.Copy();
-            optionsDelegate(options);
-            CoinbaseRestOptions.Default = options;
+            CoinbaseRestOptions.Default = ApplyOptionsDelegate(optionsDelegate);
         }
 
         /// <inheritdoc />

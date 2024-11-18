@@ -326,11 +326,11 @@
             </summary>
             <param name="optionsDelegate">Option configuration delegate</param>
         </member>
-        <member name="M:Coinbase.Net.Clients.CoinbaseRestClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILoggerFactory,System.Action{Coinbase.Net.Objects.Options.CoinbaseRestOptions})">
+        <member name="M:Coinbase.Net.Clients.CoinbaseRestClient.#ctor(System.Net.Http.HttpClient,Microsoft.Extensions.Logging.ILoggerFactory,Microsoft.Extensions.Options.IOptions{Coinbase.Net.Objects.Options.CoinbaseRestOptions})">
             <summary>
             Create a new instance of the CoinbaseRestClient using provided options
             </summary>
-            <param name="optionsDelegate">Option configuration delegate</param>
+            <param name="options">Option configuration</param>
             <param name="loggerFactory">The logger factory</param>
             <param name="httpClient">Http client for this client</param>
         </member>
@@ -349,24 +349,18 @@
         <member name="P:Coinbase.Net.Clients.CoinbaseSocketClient.AdvancedTradeApi">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.CoinbaseSocketClient.#ctor(Microsoft.Extensions.Logging.ILoggerFactory)">
-            <summary>
-            Create a new instance of CoinbaseSocketClient
-            </summary>
-            <param name="loggerFactory">The logger factory</param>
-        </member>
         <member name="M:Coinbase.Net.Clients.CoinbaseSocketClient.#ctor(System.Action{Coinbase.Net.Objects.Options.CoinbaseSocketOptions})">
             <summary>
             Create a new instance of CoinbaseSocketClient
             </summary>
             <param name="optionsDelegate">Option configuration delegate</param>
         </member>
-        <member name="M:Coinbase.Net.Clients.CoinbaseSocketClient.#ctor(System.Action{Coinbase.Net.Objects.Options.CoinbaseSocketOptions},Microsoft.Extensions.Logging.ILoggerFactory)">
+        <member name="M:Coinbase.Net.Clients.CoinbaseSocketClient.#ctor(Microsoft.Extensions.Options.IOptions{Coinbase.Net.Objects.Options.CoinbaseSocketOptions},Microsoft.Extensions.Logging.ILoggerFactory)">
             <summary>
             Create a new instance of CoinbaseSocketClient
             </summary>
             <param name="loggerFactory">The logger factory</param>
-            <param name="optionsDelegate">Option configuration delegate</param>
+            <param name="options">Option configuration</param>
         </member>
         <member name="M:Coinbase.Net.Clients.CoinbaseSocketClient.SetDefaultOptions(System.Action{Coinbase.Net.Objects.Options.CoinbaseSocketOptions})">
             <summary>
@@ -395,6 +389,16 @@
         <member name="P:Coinbase.Net.CoinbaseEnvironment.SocketClientPrivateAddress">
             <summary>
             Socket API address
+            </summary>
+        </member>
+        <member name="M:Coinbase.Net.CoinbaseEnvironment.#ctor">
+            <summary>
+            ctor for DI, use <see cref="M:Coinbase.Net.CoinbaseEnvironment.CreateCustom(System.String,System.String,System.String,System.String)"/> for creating a custom environment
+            </summary>
+        </member>
+        <member name="M:Coinbase.Net.CoinbaseEnvironment.GetEnvironmentByName(System.String)">
+            <summary>
+            Get the Coinbase environment by name
             </summary>
         </member>
         <member name="P:Coinbase.Net.CoinbaseEnvironment.Live">
@@ -6103,6 +6107,36 @@
             Intraday trading setting value
             </summary>
         </member>
+        <member name="T:Coinbase.Net.Objects.Options.CoinbaseOptions">
+            <summary>
+            Coinbase options
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Options.CoinbaseOptions.Rest">
+            <summary>
+            Rest client options
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Options.CoinbaseOptions.Socket">
+            <summary>
+            Socket client options
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Options.CoinbaseOptions.Environment">
+            <summary>
+            Trade environment. Contains info about URL's to use to connect to the API. Use `CoinbaseEnvironment` to swap environment, for example `Environment = CoinbaseEnvironment.Live`
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Options.CoinbaseOptions.ApiCredentials">
+            <summary>
+            The api credentials used for signing requests.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Options.CoinbaseOptions.SocketClientLifeTime">
+            <summary>
+            The DI service lifetime for the ICoinbaseSocketClient
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Objects.Options.CoinbaseOrderBookOptions">
             <summary>
             Options for the Coinbase SymbolOrderBook
@@ -6128,6 +6162,11 @@
             Default options for new clients
             </summary>
         </member>
+        <member name="M:Coinbase.Net.Objects.Options.CoinbaseRestOptions.#ctor">
+            <summary>
+            ctor
+            </summary>
+        </member>
         <member name="P:Coinbase.Net.Objects.Options.CoinbaseRestOptions.AdvancedTradeOptions">
             <summary>
             Advanced Trade API options
@@ -6141,6 +6180,11 @@
         <member name="P:Coinbase.Net.Objects.Options.CoinbaseSocketOptions.Default">
             <summary>
             Default options for new clients
+            </summary>
+        </member>
+        <member name="M:Coinbase.Net.Objects.Options.CoinbaseSocketOptions.#ctor">
+            <summary>
+            ctor
             </summary>
         </member>
         <member name="P:Coinbase.Net.Objects.Options.CoinbaseSocketOptions.AdvancedTradeOptions">
@@ -6246,15 +6290,26 @@
             Extensions for DI
             </summary>
         </member>
-        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddCoinbase(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Coinbase.Net.Objects.Options.CoinbaseRestOptions},System.Action{Coinbase.Net.Objects.Options.CoinbaseSocketOptions},System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddCoinbase(Microsoft.Extensions.DependencyInjection.IServiceCollection,Microsoft.Extensions.Configuration.IConfiguration)">
             <summary>
-            Add the ICoinbaseRestClient and ICoinbaseSocketClient to the sevice collection so they can be injected
+            Add services such as the ICoinbaseRestClient and ICoinbaseSocketClient. Configures the services based on the provided configuration.
             </summary>
             <param name="services">The service collection</param>
-            <param name="defaultRestOptionsDelegate">Set default options for the rest client</param>
-            <param name="defaultSocketOptionsDelegate">Set default options for the socket client</param>
-            <param name="socketClientLifeTime">The lifetime of the ICoinbaseSocketClient for the service collection. Defaults to Singleton.</param>
+            <param name="configuration">The configuration(section) containing the options</param>
             <returns></returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddCoinbase(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Coinbase.Net.Objects.Options.CoinbaseOptions})">
+            <summary>
+            Add services such as the ICoinbaseRestClient and ICoinbaseSocketClient. Services will be configured based on the provided options.
+            </summary>
+            <param name="services">The service collection</param>
+            <param name="optionsDelegate">Set options for the Coinbase services</param>
+            <returns></returns>
+        </member>
+        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddCoinbase(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Coinbase.Net.Objects.Options.CoinbaseRestOptions},System.Action{Coinbase.Net.Objects.Options.CoinbaseSocketOptions},System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
+            <summary>
+            DEPRECATED; use <see cref="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddCoinbase(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Coinbase.Net.Objects.Options.CoinbaseOptions})" /> instead
+            </summary>
         </member>
     </members>
 </doc>

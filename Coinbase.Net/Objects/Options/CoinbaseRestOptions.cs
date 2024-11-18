@@ -10,23 +10,30 @@ namespace Coinbase.Net.Objects.Options
         /// <summary>
         /// Default options for new clients
         /// </summary>
-        public static CoinbaseRestOptions Default { get; set; } = new CoinbaseRestOptions()
+        internal static CoinbaseRestOptions Default { get; set; } = new CoinbaseRestOptions()
         {
             Environment = CoinbaseEnvironment.Live,
             AutoTimestamp = true
         };
 
-         /// <summary>
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public CoinbaseRestOptions()
+        {
+            Default?.Set(this);
+        }
+
+        /// <summary>
         /// Advanced Trade API options
         /// </summary>
         public RestApiOptions AdvancedTradeOptions { get; private set; } = new RestApiOptions();
 
-
-        internal CoinbaseRestOptions Copy()
+        internal CoinbaseRestOptions Set(CoinbaseRestOptions targetOptions)
         {
-            var options = Copy<CoinbaseRestOptions>();
-            options.AdvancedTradeOptions = AdvancedTradeOptions.Copy<RestApiOptions>();
-            return options;
+            targetOptions = base.Set<CoinbaseRestOptions>(targetOptions);
+            targetOptions.AdvancedTradeOptions = AdvancedTradeOptions.Set(targetOptions.AdvancedTradeOptions);
+            return targetOptions;
         }
     }
 }

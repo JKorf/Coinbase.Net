@@ -1,6 +1,7 @@
 ﻿using Coinbase.Net.Clients;
 using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using NUnit.Framework;
 using System;
 using System.Diagnostics;
@@ -25,12 +26,12 @@ namespace Coinbase.Net.UnitTests
             var sec = Environment.GetEnvironmentVariable("APISECRET");
 
             Authenticated = key != null && sec != null;
-            return new CoinbaseRestClient(null, loggerFactory, opts =>
+            return new CoinbaseRestClient(null, loggerFactory, Options.Create(new Objects.Options.CoinbaseRestOptions
             {
-                opts.AutoTimestamp = false;
-                opts.OutputOriginalData = true;
-                opts.ApiCredentials = Authenticated ? new CryptoExchange.Net.Authentication.ApiCredentials(key, sec) : null;
-            });
+                AutoTimestamp = false,
+                OutputOriginalData = true,
+                ApiCredentials = Authenticated ? new CryptoExchange.Net.Authentication.ApiCredentials(key, sec) : null
+            }));
         }
 
         [Test]

@@ -10,22 +10,31 @@ namespace Coinbase.Net.Objects.Options
         /// <summary>
         /// Default options for new clients
         /// </summary>
-        public static CoinbaseSocketOptions Default { get; set; } = new CoinbaseSocketOptions()
+        internal static CoinbaseSocketOptions Default { get; set; } = new CoinbaseSocketOptions()
         {
             Environment = CoinbaseEnvironment.Live,
             SocketSubscriptionsCombineTarget = 10
         };
 
-         /// <summary>
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public CoinbaseSocketOptions()
+        {
+            Default?.Set(this);
+        }
+
+        /// <summary>
         /// Advanced Trade API options
         /// </summary>
         public SocketApiOptions AdvancedTradeOptions { get; private set; } = new SocketApiOptions();
 
-        internal CoinbaseSocketOptions Copy()
+
+        internal CoinbaseSocketOptions Set(CoinbaseSocketOptions targetOptions)
         {
-            var options = Copy<CoinbaseSocketOptions>();
-            options.AdvancedTradeOptions = AdvancedTradeOptions.Copy<SocketApiOptions>();
-            return options;
+            targetOptions = base.Set<CoinbaseSocketOptions>(targetOptions);
+            targetOptions.AdvancedTradeOptions = AdvancedTradeOptions.Set(targetOptions.AdvancedTradeOptions);
+            return targetOptions;
         }
     }
 }

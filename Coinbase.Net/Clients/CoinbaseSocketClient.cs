@@ -6,6 +6,7 @@ using Coinbase.Net.Interfaces.Clients;
 using Coinbase.Net.Objects.Options;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using Coinbase.Net.Clients.AdvancedTradeApi;
+using Microsoft.Extensions.Options;
 
 namespace Coinbase.Net.Clients
 {
@@ -23,19 +24,13 @@ namespace Coinbase.Net.Clients
         #endregion
 
         #region constructor/destructor
-        /// <summary>
-        /// Create a new instance of CoinbaseSocketClient
-        /// </summary>
-        /// <param name="loggerFactory">The logger factory</param>
-        public CoinbaseSocketClient(ILoggerFactory? loggerFactory = null) : this((x) => { }, loggerFactory)
-        {
-        }
 
         /// <summary>
         /// Create a new instance of CoinbaseSocketClient
         /// </summary>
         /// <param name="optionsDelegate">Option configuration delegate</param>
-        public CoinbaseSocketClient(Action<CoinbaseSocketOptions> optionsDelegate) : this(optionsDelegate, null)
+        public CoinbaseSocketClient(Action<CoinbaseSocketOptions>? optionsDelegate = null)
+            : this(Options.Create(ApplyOptionsDelegate(optionsDelegate)), null)
         {
         }
 
@@ -43,14 +38,12 @@ namespace Coinbase.Net.Clients
         /// Create a new instance of CoinbaseSocketClient
         /// </summary>
         /// <param name="loggerFactory">The logger factory</param>
-        /// <param name="optionsDelegate">Option configuration delegate</param>
-        public CoinbaseSocketClient(Action<CoinbaseSocketOptions>? optionsDelegate, ILoggerFactory? loggerFactory = null) : base(loggerFactory, "Coinbase")
+        /// <param name="options">Option configuration</param>
+        public CoinbaseSocketClient(IOptions<CoinbaseSocketOptions> options, ILoggerFactory? loggerFactory = null) : base(loggerFactory, "Coinbase")
         {
-            var options = CoinbaseSocketOptions.Default.Copy();
-            optionsDelegate?.Invoke(options);
-            Initialize(options);
+            Initialize(options.Value);
 
-            AdvancedTradeApi = AddApiClient(new CoinbaseSocketClientAdvancedTradeApi(_logger, options));
+            AdvancedTradeApi = AddApiClient(new CoinbaseSocketClientAdvancedTradeApi(_logger, options.Value));
         }
         #endregion
 
@@ -60,9 +53,7 @@ namespace Coinbase.Net.Clients
         /// <param name="optionsDelegate">Option configuration delegate</param>
         public static void SetDefaultOptions(Action<CoinbaseSocketOptions> optionsDelegate)
         {
-            var options = CoinbaseSocketOptions.Default.Copy();
-            optionsDelegate(options);
-            CoinbaseSocketOptions.Default = options;
+            CoinbaseSocketOptions.Default = ApplyOptionsDelegate(optionsDelegate);
         }
 
         /// <inheritdoc />

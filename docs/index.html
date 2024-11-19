@@ -189,9 +189,15 @@
           
 		  <p>Coinbase.Net can be configured using Dotnet dependency injection, after which the clients can be injected into your services. It also correctly configures logging and HttpClient usage.</p>
 		  
-		  <pre><code>builder.Services.AddCoinbase(options => {
-  // Options can be configured here, for example:
-  options.ApiCredentials = new ApiCredentials("KEYNAME", "PRIVATEKEY");
+		  <pre><code>// Configure options from config file
+// see https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples/example-config.json for an example
+builder.Services.AddCoinbase(builder.Configuration.GetSection("Coinbase"));
+		  
+// OR
+		  
+ builder.Services.AddCoinbase(options => {
+  // Configure options in code
+  options.ApiCredentials = new ApiCredentials("APIKEY", "APISECRET");
 });</code></pre>
 		  
 		  <p>The <code>ICoinbaseRestClient</code> and <code>ICoinbaseSocketClient</code> can then be injected.</p>

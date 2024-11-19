@@ -426,6 +426,16 @@
             Exchange name
             </summary>
         </member>
+        <member name="P:Coinbase.Net.CoinbaseExchange.DisplayName">
+            <summary>
+            Exchange name
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.CoinbaseExchange.ImageUrl">
+            <summary>
+            Url to exchange image
+            </summary>
+        </member>
         <member name="P:Coinbase.Net.CoinbaseExchange.Url">
             <summary>
             Url to the main website

@@ -21,7 +21,7 @@ namespace Coinbase.Net.Objects.Models
         /// Last trade price
         /// </summary>
         [JsonPropertyName("price")]
-        public decimal LastPrice { get; set; }
+        public decimal? LastPrice { get; set; }
         /// <summary>
         /// Volume in last 24 hours
         /// </summary>

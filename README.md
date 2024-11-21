@@ -144,6 +144,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 1.5.1 - 21 Nov 2024
+    * Fixed deserialization error in SubscribeToBatchedTickerUpdatesAsync subscription when there is no trade price
+
 * Version 1.5.0 - 19 Nov 2024
     * Updated CryptoExchange.Net to version 8.3.0, see https://github.com/JKorf/CryptoExchange.Net/releases/tag/8.3.0
     * Added support for loading client settings from IConfiguration

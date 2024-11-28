@@ -56,7 +56,7 @@ namespace Coinbase.Net.Objects.Models
         /// Total balance
         /// </summary>
         [JsonPropertyName("total_balance")]
-        public decimal TotalBalance { get; set; }
+        public decimal? TotalBalance { get; set; }
         /// <summary>
         /// Promo fee active
         /// </summary>

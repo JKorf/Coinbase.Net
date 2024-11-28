@@ -21,7 +21,8 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         IFuturesTickerRestClient,
         IOpenInterestRestClient,
         IFuturesOrderRestClient,
-        IKlineRestClient
+        IKlineRestClient,
+        IFeeRestClient
     {
     }
 }

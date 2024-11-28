@@ -6122,31 +6122,6 @@
             Coinbase options
             </summary>
         </member>
-        <member name="P:Coinbase.Net.Objects.Options.CoinbaseOptions.Rest">
-            <summary>
-            Rest client options
-            </summary>
-        </member>
-        <member name="P:Coinbase.Net.Objects.Options.CoinbaseOptions.Socket">
-            <summary>
-            Socket client options
-            </summary>
-        </member>
-        <member name="P:Coinbase.Net.Objects.Options.CoinbaseOptions.Environment">
-            <summary>
-            Trade environment. Contains info about URL's to use to connect to the API. Use `CoinbaseEnvironment` to swap environment, for example `Environment = CoinbaseEnvironment.Live`
-            </summary>
-        </member>
-        <member name="P:Coinbase.Net.Objects.Options.CoinbaseOptions.ApiCredentials">
-            <summary>
-            The api credentials used for signing requests.
-            </summary>
-        </member>
-        <member name="P:Coinbase.Net.Objects.Options.CoinbaseOptions.SocketClientLifeTime">
-            <summary>
-            The DI service lifetime for the ICoinbaseSocketClient
-            </summary>
-        </member>
         <member name="T:Coinbase.Net.Objects.Options.CoinbaseOrderBookOptions">
             <summary>
             Options for the Coinbase SymbolOrderBook

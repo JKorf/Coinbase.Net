@@ -25,9 +25,7 @@ namespace Coinbase.Net.SymbolOrderBooks
         {
             _serviceProvider = serviceProvider;
 
-            AdvancedTrade = new OrderBookFactory<CoinbaseOrderBookOptions>(
-                Create,
-                (sharedSymbol, options) => Create(CoinbaseExchange.FormatSymbol(sharedSymbol.BaseAsset, sharedSymbol.QuoteAsset, sharedSymbol.TradingMode, sharedSymbol.DeliverTime), options));
+            AdvancedTrade = new OrderBookFactory<CoinbaseOrderBookOptions>(Create, Create);
         }
 
          /// <inheritdoc />
@@ -36,7 +34,7 @@ namespace Coinbase.Net.SymbolOrderBooks
         /// <inheritdoc />
         public ISymbolOrderBook Create(SharedSymbol symbol, Action<CoinbaseOrderBookOptions>? options = null)
         {
-            var symbolName = CoinbaseExchange.FormatSymbol(symbol.BaseAsset, symbol.QuoteAsset, symbol.TradingMode, symbol.DeliverTime);
+            var symbolName = symbol.GetSymbol(CoinbaseExchange.FormatSymbol);
             return Create(symbolName, options);
         }
 

@@ -93,6 +93,11 @@ namespace Coinbase.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("retail_portfolio_id")]
         public string PortfolioId { get; set; } = string.Empty;
+        /// <summary>
+        /// Account platform
+        /// </summary>
+        [JsonPropertyName("platform")]
+        public AccountPlatform Platform { get; set; }
     }
 
     /// <summary>

@@ -491,6 +491,31 @@
         <member name="M:Coinbase.Net.CoinbaseTrackerFactory.CreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
             <inheritdoc />
         </member>
+        <member name="T:Coinbase.Net.Enums.AccountPlatform">
+            <summary>
+            Platform
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.AccountPlatform.Unspecified">
+            <summary>
+            Unspecified
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.AccountPlatform.Spot">
+            <summary>
+            Spot
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.AccountPlatform.UsDerivatives">
+            <summary>
+            US derivatives consumer
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.AccountPlatform.InternationalExchange">
+            <summary>
+            International exchange
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Enums.AccountType">
             <summary>
             Account type
@@ -2440,6 +2465,11 @@
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseAccount.PortfolioId">
             <summary>
             Portfolio id
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseAccount.Platform">
+            <summary>
+            Account platform
             </summary>
         </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseQuantityReference">

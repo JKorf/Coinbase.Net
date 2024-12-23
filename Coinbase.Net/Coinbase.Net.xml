@@ -334,6 +334,9 @@
             <param name="loggerFactory">The logger factory</param>
             <param name="httpClient">Http client for this client</param>
         </member>
+        <member name="M:Coinbase.Net.Clients.CoinbaseRestClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
+            <inheritdoc />
+        </member>
         <member name="M:Coinbase.Net.Clients.CoinbaseRestClient.SetDefaultOptions(System.Action{Coinbase.Net.Objects.Options.CoinbaseRestOptions})">
             <summary>
             Set the default options to be used when creating new clients
@@ -361,6 +364,9 @@
             </summary>
             <param name="loggerFactory">The logger factory</param>
             <param name="options">Option configuration</param>
+        </member>
+        <member name="M:Coinbase.Net.Clients.CoinbaseSocketClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
+            <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.CoinbaseSocketClient.SetDefaultOptions(System.Action{Coinbase.Net.Objects.Options.CoinbaseSocketOptions})">
             <summary>
@@ -2113,7 +2119,7 @@
         </member>
         <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToHeartbeatUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseHeartbeat}},System.Threading.CancellationToken)">
             <summary>
-            Subscribe to the heartbeats channel. The heartbeats channel can be used to keep the connection alive when data from other subscriptions isn't continuous
+            Subscribe to the heartbeats channel. The heartbeats channel can be used to keep the connection alive when data from other subscriptions isn't continuous. When using this subscription it is recommended to also set the client option <code>options.SocketNoData = TimeSpan.FromSeconds(5)</code> to quickly detect when the connection is interupted.
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#heartbeats-channel" /></para>
             </summary>
             <param name="onMessage">The event handler for the received data</param>
@@ -2273,6 +2279,12 @@
             Advanced Trade API endpoints, also contains some App API endpoints
             </summary>
         </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.ICoinbaseRestClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
+            <summary>
+            Update specific options
+            </summary>
+            <param name="options">Options to update. Only specific options are changable after the client has been created</param>
+        </member>
         <member name="M:Coinbase.Net.Interfaces.Clients.ICoinbaseRestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
             <summary>
             Set the API credentials for this client. All Api clients in this client will use the new credentials, regardless of earlier set options.
@@ -2288,6 +2300,12 @@
             <summary>
             Advanced trade API streams
             </summary>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.ICoinbaseSocketClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
+            <summary>
+            Update specific options
+            </summary>
+            <param name="options">Options to update. Only specific options are changable after the client has been created</param>
         </member>
         <member name="M:Coinbase.Net.Interfaces.Clients.ICoinbaseSocketClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
             <summary>

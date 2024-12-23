@@ -7,6 +7,7 @@ using Coinbase.Net.Objects.Options;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using Coinbase.Net.Clients.AdvancedTradeApi;
 using Microsoft.Extensions.Options;
+using CryptoExchange.Net.Objects.Options;
 
 namespace Coinbase.Net.Clients
 {
@@ -46,6 +47,12 @@ namespace Coinbase.Net.Clients
             AdvancedTradeApi = AddApiClient(new CoinbaseSocketClientAdvancedTradeApi(_logger, options.Value));
         }
         #endregion
+
+        /// <inheritdoc />
+        public void SetOptions(UpdateOptions options)
+        {
+            AdvancedTradeApi.SetOptions(options);
+        }
 
         /// <summary>
         /// Set the default options to be used when creating new clients

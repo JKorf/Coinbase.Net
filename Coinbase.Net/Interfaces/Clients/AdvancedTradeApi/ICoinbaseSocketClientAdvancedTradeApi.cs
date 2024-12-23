@@ -20,7 +20,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         ICoinbaseSocketClientAdvancedTradeApiShared SharedClient { get; }
 
         /// <summary>
-        /// Subscribe to the heartbeats channel. The heartbeats channel can be used to keep the connection alive when data from other subscriptions isn't continuous
+        /// Subscribe to the heartbeats channel. The heartbeats channel can be used to keep the connection alive when data from other subscriptions isn't continuous. When using this subscription it is recommended to also set the client option <code>options.SocketNoData = TimeSpan.FromSeconds(5)</code> to quickly detect when the connection is interupted.
         /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#heartbeats-channel" /></para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>

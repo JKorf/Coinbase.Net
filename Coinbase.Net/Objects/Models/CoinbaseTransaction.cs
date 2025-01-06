@@ -98,15 +98,27 @@ namespace Coinbase.Net.Objects.Models
         [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
-        /// Transaction hash
+        /// Transaction hash, only provided when this is a SEND transaction
         /// </summary>
         [JsonPropertyName("hash")]
-        public string? Hash { get; set; } = string.Empty;
+        public string? Hash { get; set; }
         /// <summary>
-        /// Name of the network
+        /// Name of the network, only provided when this is a SEND transaction
         /// </summary>
         [JsonPropertyName("name")]
-        public string NetworkName { get; set; } = string.Empty;
+        public string? NetworkName { get; set; }
+
+        /// <summary>
+        /// Transaction fee, only provided when this is a SEND transaction
+        /// </summary>
+        [JsonPropertyName("transaction_fee")]
+        public CoinbaseQuantityReference? TransactionFee { get; set; }
+
+        /// <summary>
+        /// Transaction quantity, only provided when this is a SEND transaction
+        /// </summary>
+        [JsonPropertyName("transaction_amount")]
+        public CoinbaseQuantityReference? TransactionQuantity { get; set; }
     }
 
     /// <summary>

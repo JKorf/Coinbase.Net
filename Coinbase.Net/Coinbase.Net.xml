@@ -5937,12 +5937,22 @@
         </member>
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseTransactionNetwork.Hash">
             <summary>
-            Transaction hash
+            Transaction hash, only provided when this is a SEND transaction
             </summary>
         </member>
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseTransactionNetwork.NetworkName">
             <summary>
-            Name of the network
+            Name of the network, only provided when this is a SEND transaction
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTransactionNetwork.TransactionFee">
+            <summary>
+            Transaction fee, only provided when this is a SEND transaction
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTransactionNetwork.TransactionQuantity">
+            <summary>
+            Transaction quantity, only provided when this is a SEND transaction
             </summary>
         </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseTransactionDetails">

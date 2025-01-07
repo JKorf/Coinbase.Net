@@ -452,6 +452,11 @@
             Urls to the API documentation
             </summary>
         </member>
+        <member name="P:Coinbase.Net.CoinbaseExchange.Type">
+            <summary>
+            Type of exchange
+            </summary>
+        </member>
         <member name="M:Coinbase.Net.CoinbaseExchange.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <summary>
             Format a base and quote asset to a Coinbase recognized symbol 

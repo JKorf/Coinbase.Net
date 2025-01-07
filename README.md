@@ -149,6 +149,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 1.7.2 - 07 Jan 2025
+    * Updated CryptoExchange.Net version
+    * Added Type property to CoinbaseExchange class
+
 * Version 1.7.1 - 06 Jan 2025
     * Updated transaction model to include fee and quantity info
 

@@ -672,7 +672,7 @@
             1h
             </summary>
         </member>
-        <member name="F:Coinbase.Net.Enums.KlineInterval.TwoHour">
+        <member name="F:Coinbase.Net.Enums.KlineInterval.TwoHours">
             <summary>
             2h
             </summary>

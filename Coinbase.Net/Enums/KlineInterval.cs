@@ -41,7 +41,7 @@ namespace Coinbase.Net.Enums
         /// 2h
         /// </summary>
         [Map("TWO_HOUR")]
-        TwoHour = 60 * 60,
+        TwoHours = 60 * 60 * 2,
         /// <summary>
         /// 6h
         /// </summary>

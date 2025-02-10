@@ -70,7 +70,8 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         public override CallResult DoHandleMessage(SocketConnection connection, DataEvent<object> message)
         {
             var data = (CoinbaseSocketMessage<T>)message.Data;
-            _handler.Invoke(message.As(data.Events, data.Channel, null, data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update));
+            _handler.Invoke(message.As(data.Events, data.Channel, null, data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                .WithDataTimestamp(data.Timestamp));
             return new CallResult(null);
         }
 

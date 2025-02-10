@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace Coinbase.Net.UnitTests
 {
     [NonParallelizable]
-    internal class CoinbaseRestIntegrationTests : RestIntergrationTest<CoinbaseRestClient>
+    internal class CoinbaseRestIntegrationTests : RestIntegrationTest<CoinbaseRestClient>
     {
         public override bool Run { get; set; } = false;
 

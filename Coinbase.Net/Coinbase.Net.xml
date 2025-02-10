@@ -160,7 +160,7 @@
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetSymbolsAsync(System.Nullable{Coinbase.Net.Enums.SymbolType},System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.Nullable{Coinbase.Net.Enums.ExpiryStatus},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetSymbolsAsync(System.Nullable{Coinbase.Net.Enums.SymbolType},System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.Nullable{Coinbase.Net.Enums.ExpiryStatus},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiExchangeData.GetSymbolAsync(System.String,System.Threading.CancellationToken)">
@@ -1845,7 +1845,7 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetSymbolsAsync(System.Nullable{Coinbase.Net.Enums.SymbolType},System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.Nullable{Coinbase.Net.Enums.ExpiryStatus},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{System.String},System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiExchangeData.GetSymbolsAsync(System.Nullable{Coinbase.Net.Enums.SymbolType},System.Nullable{Coinbase.Net.Enums.ContractExpiryType},System.Nullable{Coinbase.Net.Enums.ExpiryStatus},System.Nullable{System.Boolean},System.Collections.Generic.IEnumerable{System.String},System.Boolean,System.Nullable{System.Int32},System.Nullable{System.Int32},System.Threading.CancellationToken)">
             <summary>
             Get list of supported symbols
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicproducts" /></para>
@@ -1855,6 +1855,7 @@
             <param name="expireStatus">Status of futures expiry status</param>
             <param name="allProducts">Return all symbols</param>
             <param name="symbols">Filter by symbol names</param>
+            <param name="getTradabilityStatus">Whether or not to populate <see cref="P:Coinbase.Net.Objects.Models.CoinbaseSymbol.ViewOnly"/> with the tradability status of the product. This is only enabled for SPOT products. Can only be used when the client is authenticated.</param>
             <param name="limit">Max number of resulst</param>
             <param name="offset">Result offset</param>
             <param name="ct">Cancellation token</param>

@@ -29,10 +29,11 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="expireStatus">Status of futures expiry status</param>
         /// <param name="allProducts">Return all symbols</param>
         /// <param name="symbols">Filter by symbol names</param>
+        /// <param name="getTradabilityStatus">Whether or not to populate <see cref="CoinbaseSymbol.ViewOnly"/> with the tradability status of the product. This is only enabled for SPOT products. Can only be used when the client is authenticated.</param>
         /// <param name="limit">Max number of resulst</param>
         /// <param name="offset">Result offset</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<CoinbaseSymbol>>> GetSymbolsAsync(SymbolType? type = null, ContractExpiryType? expiryType = null, ExpiryStatus? expireStatus = null, bool? allProducts = null, IEnumerable<string>? symbols = null, int? limit = null, int? offset = null, CancellationToken ct = default);
+        Task<WebCallResult<IEnumerable<CoinbaseSymbol>>> GetSymbolsAsync(SymbolType? type = null, ContractExpiryType? expiryType = null, ExpiryStatus? expireStatus = null, bool? allProducts = null, IEnumerable<string>? symbols = null, bool getTradabilityStatus = false, int? limit = null, int? offset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get info on a specific symbol

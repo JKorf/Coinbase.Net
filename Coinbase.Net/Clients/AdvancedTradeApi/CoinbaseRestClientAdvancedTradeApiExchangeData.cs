@@ -38,7 +38,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Symbols
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CoinbaseSymbol>>> GetSymbolsAsync(SymbolType? type = null, ContractExpiryType? expiryType = null, ExpiryStatus? expireStatus = null, bool? allProducts = null, IEnumerable<string>? symbols = null, int? limit = null, int? offset = null, CancellationToken ct = default)
+        public async Task<WebCallResult<IEnumerable<CoinbaseSymbol>>> GetSymbolsAsync(SymbolType? type = null, ContractExpiryType? expiryType = null, ExpiryStatus? expireStatus = null, bool? allProducts = null, IEnumerable<string>? symbols = null, bool getTradabilityStatus = false, int? limit = null, int? offset = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalEnum("product_type", type);
@@ -50,8 +50,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (!_baseClient.Authenticated)
                 request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/brokerage/market/products", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
             else
+            {
+                parameters.Add("get_tradability_status", getTradabilityStatus);
                 request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/brokerage/products", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
-            
+            }
             var result = await _baseClient.SendAsync<CoinbaseSymbolWrapper>(request, parameters, ct).ConfigureAwait(false);
             return result.As<IEnumerable<CoinbaseSymbol>>(result.Data?.Symbols);
         }
@@ -91,7 +93,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/market/product_book", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
             else
                 request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/product_book", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
-            
+
             var result = await _baseClient.SendAsync<CoinbaseOrderBookWrapper>(request, parameters, ct).ConfigureAwait(false);
             return result.As<CoinbaseOrderBook>(result.Data?.Book);
         }
@@ -159,7 +161,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             if (!result.Data.Data.Any())
                 return result.AsError<CoinbaseBookTicker>(new ServerError("Not found"));
-            
+
             return result.As(result.Data.Data.Single());
         }
 

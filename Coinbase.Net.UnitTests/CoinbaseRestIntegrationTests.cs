@@ -60,7 +60,7 @@ namespace Coinbase.Net.UnitTests
         public async Task TestSpotExchangeData()
         {
             await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetServerTimeAsync(default), false);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetSymbolsAsync(default, default, default, default, default, default, default, default), false);
+            await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetSymbolsAsync(default, default, default, default, default, default, default, default, default), false);
             await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USD", default), false);
             await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetOrderBookAsync("ETH-USD", 1, default, default), false);
             await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetKlinesAsync("ETH-USD", Enums.KlineInterval.OneDay, default, default, 5, default), false);

@@ -1137,6 +1137,11 @@
             Delisted
             </summary>
         </member>
+        <member name="F:Coinbase.Net.Enums.SymbolStatus.PreLaunch">
+            <summary>
+            Pre-launch
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Enums.SymbolType">
             <summary>
             Symbol type

@@ -26,6 +26,11 @@ namespace Coinbase.Net.Enums
         /// Delisted
         /// </summary>
         [Map("delisted")]
-        Delisted
+        Delisted,
+        /// <summary>
+        /// Pre-launch
+        /// </summary>
+        [Map("PRE_LAUNCH")]
+        PreLaunch
     }
 }

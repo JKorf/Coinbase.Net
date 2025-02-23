@@ -173,7 +173,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         public async Task<WebCallResult<IEnumerable<CoinbaseBookTicker>>> GetBookTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
-            parameters.AddOptional("product_ids", symbols.ToArray());
+            if (symbols != null)
+                parameters.AddOptional("product_ids", symbols.ToArray());    
             var request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/best_bid_ask", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
 
             var result = await _baseClient.SendAsync<CoinbaseBookTickerWrapper>(request, parameters, ct).ConfigureAwait(false);

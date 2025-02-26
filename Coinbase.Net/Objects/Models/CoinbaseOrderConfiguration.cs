@@ -36,6 +36,14 @@ namespace Coinbase.Net.Objects.Models
         /// </summary>
         public DateTime? CancelTime { get; set; }
         /// <summary>
+        /// Start time for a Twap order
+        /// </summary>
+        public DateTime? TwapStartTime { get; set; }
+        /// <summary>
+        /// End time for a Twap order
+        /// </summary>
+        public DateTime? TwapEndTime { get; set; }
+        /// <summary>
         /// Stop order trigger direction
         /// </summary>
         public StopDirection? StopDirection { get; set; }

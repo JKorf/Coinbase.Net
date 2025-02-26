@@ -9,7 +9,7 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseOrderResult
     {
         /// <summary>
-        /// Whether the call was succesfull
+        /// Whether the call was successful
         /// </summary>
         [JsonPropertyName("success")]
         public bool Success { get; set; }

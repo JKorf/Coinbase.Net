@@ -202,7 +202,7 @@
         <member name="T:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading.PlaceOrderAsync(System.String,Coinbase.Net.Enums.OrderSide,Coinbase.Net.Enums.NewOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Coinbase.Net.Enums.MarginType},System.String,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.Decimal},System.Nullable{Coinbase.Net.Enums.StopDirection},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading.PlaceOrderAsync(System.String,Coinbase.Net.Enums.OrderSide,Coinbase.Net.Enums.NewOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Coinbase.Net.Enums.MarginType},System.String,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.Decimal},System.Nullable{Coinbase.Net.Enums.StopDirection},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApiTrading.CancelOrderAsync(System.String,System.Threading.CancellationToken)">
@@ -890,6 +890,11 @@
         <member name="F:Coinbase.Net.Enums.NewOrderType.BracketGoodTillDate">
             <summary>
             Limit order with stop limit order parameters embedded in the order, active until a certain date
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.NewOrderType.Twap">
+            <summary>
+            Time weighted average price order
             </summary>
         </member>
         <member name="T:Coinbase.Net.Enums.OrderSide">
@@ -1981,7 +1986,7 @@
             Coinbase trading endpoints, placing and managing orders.
             </summary>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading.PlaceOrderAsync(System.String,Coinbase.Net.Enums.OrderSide,Coinbase.Net.Enums.NewOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Coinbase.Net.Enums.MarginType},System.String,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.Decimal},System.Nullable{Coinbase.Net.Enums.StopDirection},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading.PlaceOrderAsync(System.String,Coinbase.Net.Enums.OrderSide,Coinbase.Net.Enums.NewOrderType,System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.Nullable{System.Decimal},System.String,System.Nullable{System.Decimal},System.Nullable{Coinbase.Net.Enums.MarginType},System.String,System.Nullable{System.Boolean},System.Nullable{System.DateTime},System.Nullable{System.Decimal},System.Nullable{Coinbase.Net.Enums.StopDirection},System.Nullable{System.DateTime},System.Nullable{System.DateTime},System.Threading.CancellationToken)">
             <summary>
             Place a new order
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_postorder" /></para>
@@ -2000,6 +2005,8 @@
             <param name="cancelTime">Time to cancel the order</param>
             <param name="stopPrice">Stop order trigger price</param>
             <param name="stopDirection">Direction of the stop trigger</param>
+            <param name="twapStartTime">Start time of the Twap order</param>
+            <param name="twapEndTime">End time of the Twap order</param>
             <param name="ct">Cancellation token</param>
         </member>
         <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading.CancelOrderAsync(System.String,System.Threading.CancellationToken)">
@@ -4051,6 +4058,16 @@
             Time the order is canceled
             </summary>
         </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderConfiguration.TwapStartTime">
+            <summary>
+            Start time for a Twap order
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderConfiguration.TwapEndTime">
+            <summary>
+            End time for a Twap order
+            </summary>
+        </member>
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderConfiguration.StopDirection">
             <summary>
             Stop order trigger direction
@@ -4068,7 +4085,7 @@
         </member>
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderResult.Success">
             <summary>
-            Whether the call was succesfull
+            Whether the call was successful
             </summary>
         </member>
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseOrderResult.SuccessResponse">

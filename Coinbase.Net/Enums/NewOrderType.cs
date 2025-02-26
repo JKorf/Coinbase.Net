@@ -51,6 +51,11 @@ namespace Coinbase.Net.Enums
         /// Limit order with stop limit order parameters embedded in the order, active until a certain date
         /// </summary>
         [Map("trigger_bracket_gtd")]
-        BracketGoodTillDate
+        BracketGoodTillDate,
+        /// <summary>
+        /// Time weighted average price order
+        /// </summary>
+        [Map("twap_limit_gtd")]
+        Twap
     }
 }

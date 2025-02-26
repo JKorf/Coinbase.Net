@@ -109,6 +109,29 @@ namespace Coinbase.Net.Converters
                 if (triggerGtdElement.TryGetProperty("end_time", out var endTime))
                     result.CancelTime = endTime.GetDateTime();
             }
+            else if (jsonDoc.RootElement.TryGetProperty("twap_limit_gtd", out var twapElement))
+            {
+                result.OrderType = NewOrderType.Twap;
+                if (twapElement.TryGetProperty("base_size", out var baseSize))
+                {
+                    if (decimal.TryParse(baseSize.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture, out var bq))
+                        result.Quantity = bq;
+                }
+                if (twapElement.TryGetProperty("quote_size", out var quoteSize))
+                {
+                    if (decimal.TryParse(quoteSize.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture, out var qq))
+                        result.QuoteQuantity = qq;
+                }
+                if (twapElement.TryGetProperty("limit_price", out var limitPrice))
+                {
+                    if (decimal.TryParse(limitPrice.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture, out var price))
+                        result.Price = price;
+                }
+                if (twapElement.TryGetProperty("start_time", out var startTime))
+                    result.TwapStartTime= startTime.GetDateTime();
+                if (twapElement.TryGetProperty("end_time", out var endTime))
+                    result.TwapEndTime = endTime.GetDateTime();
+            }
 
             return result;
         }

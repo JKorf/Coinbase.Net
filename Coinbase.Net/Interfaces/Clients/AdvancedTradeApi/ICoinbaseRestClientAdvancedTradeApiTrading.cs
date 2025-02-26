@@ -31,8 +31,27 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="cancelTime">Time to cancel the order</param>
         /// <param name="stopPrice">Stop order trigger price</param>
         /// <param name="stopDirection">Direction of the stop trigger</param>
+        /// <param name="twapStartTime">Start time of the Twap order</param>
+        /// <param name="twapEndTime">End time of the Twap order</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbaseOrderResult>> PlaceOrderAsync(string symbol, OrderSide side, NewOrderType orderType, decimal? quantity = null, decimal? quoteQuantity = null, decimal? price = null, string? clientOrderId = null, decimal? leverage = null, MarginType? marginType = null, string? previewId = null, bool? postOnly = null, DateTime? cancelTime = null, decimal? stopPrice = null, StopDirection? stopDirection = null, CancellationToken ct = default);
+        Task<WebCallResult<CoinbaseOrderResult>> PlaceOrderAsync(
+            string symbol, 
+            OrderSide side, 
+            NewOrderType orderType, 
+            decimal? quantity = null,
+            decimal? quoteQuantity = null,
+            decimal? price = null,
+            string? clientOrderId = null,
+            decimal? leverage = null,
+            MarginType? marginType = null,
+            string? previewId = null,
+            bool? postOnly = null, 
+            DateTime? cancelTime = null,
+            decimal? stopPrice = null, 
+            StopDirection? stopDirection = null,
+            DateTime? twapStartTime = null,
+            DateTime? twapEndTime = null,
+            CancellationToken ct = default);
 
         /// <summary>
         /// Cancel an order

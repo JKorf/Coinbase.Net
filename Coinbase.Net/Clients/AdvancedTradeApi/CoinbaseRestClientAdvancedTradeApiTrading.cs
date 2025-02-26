@@ -30,7 +30,24 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Place Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseOrderResult>> PlaceOrderAsync(string symbol, OrderSide side, NewOrderType orderType, decimal? quantity = null, decimal? quoteQuantity = null, decimal? price = null, string? clientOrderId = null, decimal? leverage = null, MarginType? marginType = null, string? previewId = null, bool? postOnly = null, DateTime? cancelTime = null, decimal? stopPrice = null, StopDirection? stopDirection = null, CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbaseOrderResult>> PlaceOrderAsync(
+            string symbol,
+            OrderSide side,
+            NewOrderType orderType,
+            decimal? quantity = null,
+            decimal? quoteQuantity = null,
+            decimal? price = null,
+            string? clientOrderId = null,
+            decimal? leverage = null,
+            MarginType? marginType = null,
+            string? previewId = null,
+            bool? postOnly = null,
+            DateTime? cancelTime = null,
+            decimal? stopPrice = null,
+            StopDirection? stopDirection = null,
+            DateTime? twapStartTime = null,
+            DateTime? twapEndTime = null,
+            CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("product_id", symbol);
@@ -45,7 +62,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             marketConfig.AddOptionalString("quote_size", quoteQuantity);
             marketConfig.AddOptionalString("limit_price", price);
             marketConfig.AddOptional("post_only", postOnly);
-            marketConfig.AddOptional("end_time", cancelTime);
+            marketConfig.AddOptional("start_time", twapStartTime?.ToString("yyy-MM-ddThh:mm:ssZ"));
+            marketConfig.AddOptional("end_time", twapEndTime?.ToString("yyy-MM-ddThh:mm:ssZ") ?? cancelTime?.ToString("yyy-MM-ddThh:mm:ssZ"));
             marketConfig.AddOptionalEnum("stop_direction", stopDirection);
             if (orderType == NewOrderType.Bracket || orderType == NewOrderType.BracketGoodTillDate)
                 marketConfig.AddOptionalString("stop_trigger_price", stopPrice);

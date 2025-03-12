@@ -14,7 +14,7 @@ namespace Coinbase.Net
 {
     internal class CoinbaseAuthenticationProvider : AuthenticationProvider
     {
-        private static IMessageSerializer _serializer = new SystemTextJsonMessageSerializer();
+        private static IMessageSerializer _serializer = new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange.SerializerContext));
 
         public CoinbaseAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {

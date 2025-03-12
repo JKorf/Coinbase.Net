@@ -6,6 +6,8 @@ using CryptoExchange.Net.RateLimiting;
 using System;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net;
+using System.Text.Json.Serialization;
+using Coinbase.Net.Converters;
 
 namespace Coinbase.Net
 {
@@ -46,6 +48,8 @@ namespace Coinbase.Net
         /// Type of exchange
         /// </summary>
         public static ExchangeType Type { get; } = ExchangeType.CEX;
+
+        internal static JsonSerializerContext SerializerContext = new CoinbaseSourceGenerationContext();
 
         /// <summary>
         /// Format a base and quote asset to a Coinbase recognized symbol 

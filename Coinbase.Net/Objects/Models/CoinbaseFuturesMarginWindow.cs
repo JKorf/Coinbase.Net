@@ -1,4 +1,5 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using System;
 using System.Text.Json.Serialization;
 
@@ -7,6 +8,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Current margin window info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseFuturesMarginWindow
     {
         /// <summary>
@@ -29,6 +31,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Window info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseFuturesMarginWindowInfo
     {
         /// <summary>

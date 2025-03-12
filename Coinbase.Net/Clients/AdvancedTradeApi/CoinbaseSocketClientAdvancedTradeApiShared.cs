@@ -8,11 +8,15 @@ using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Objects;
 using System.Linq;
 using Coinbase.Net.Enums;
+using CryptoExchange.Net;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     internal partial class CoinbaseSocketClientAdvancedTradeApi : ICoinbaseSocketClientAdvancedTradeApiShared
     {
+        private const string _topicSpotId = "CoinbaseSpot";
+        private const string _topicFuturesId = "CoinbaseFutures";
+
         public string Exchange => "Coinbase";
 
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.Spot, TradingMode.PerpetualLinear, TradingMode.DeliveryLinear };
@@ -56,7 +60,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return new ExchangeResult<UpdateSubscription>(Exchange, validationError);
 
             var symbol = request.Symbol.GetSymbol(FormatSymbol);
-            var result = await SubscribeToTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(update.Data.Symbol, update.Data.LastPrice, update.Data.HighPrice24H, update.Data.LowPrice24H, update.Data.Volume24H ?? 0, update.Data.PricePercentChange24H))), ct).ConfigureAwait(false);
+            var result = await SubscribeToTickerUpdatesAsync(symbol, update => handler(update.AsExchangeEvent(Exchange, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicSpotId, update.Data.Symbol), update.Data.Symbol, update.Data.LastPrice, update.Data.HighPrice24H, update.Data.LowPrice24H, update.Data.Volume24H ?? 0, update.Data.PricePercentChange24H))), ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
         }
@@ -65,7 +69,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Trade client
 
         EndpointOptions<SubscribeTradeRequest> ITradeSocketClient.SubscribeTradeOptions { get; } = new EndpointOptions<SubscribeTradeRequest>(false);
-        async Task<ExchangeResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(SubscribeTradeRequest request, Action<ExchangeEvent<IEnumerable<SharedTrade>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ITradeSocketClient.SubscribeToTradeUpdatesAsync(SubscribeTradeRequest request, Action<ExchangeEvent<SharedTrade[]>> handler, CancellationToken ct)
         {
             var validationError = ((ITradeSocketClient)this).SubscribeTradeOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
             if (validationError != null)
@@ -79,7 +83,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
                 foreach (var item in update.Data)
                 {
-                    handler(update.AsExchangeEvent<IEnumerable<SharedTrade>>(Exchange, new[] { new SharedTrade(item.Quantity, item.Price, item.Timestamp){
+                    handler(update.AsExchangeEvent<SharedTrade[]>(Exchange, new[] { new SharedTrade(item.Quantity, item.Price, item.Timestamp){
                         Side = item.OrderSide == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
                     } }));
                 }
@@ -94,7 +98,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Spot Order client
 
         EndpointOptions<SubscribeSpotOrderRequest> ISpotOrderSocketClient.SubscribeSpotOrderOptions { get; } = new EndpointOptions<SubscribeSpotOrderRequest>(true);
-        async Task<ExchangeResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(SubscribeSpotOrderRequest request, Action<ExchangeEvent<IEnumerable<SharedSpotOrder>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(SubscribeSpotOrderRequest request, Action<ExchangeEvent<SharedSpotOrder[]>> handler, CancellationToken ct)
         {
             var validationError = ((ISpotOrderSocketClient)this).SubscribeSpotOrderOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedTradingModes);
             if (validationError != null)
@@ -105,6 +109,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 {
                     var orders = update.Data.Orders.Where(x => x.SymbolType == SymbolType.Spot).Select(x =>
                         new SharedSpotOrder(
+                            ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol),
                             x.Symbol,
                             x.OrderId.ToString(),
                             x.OrderType == Enums.OrderType.Limit ? SharedOrderType.Limit : x.OrderType == Enums.OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
@@ -124,7 +129,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     if (!orders.Any())
                         return;
 
-                    handler(update.AsExchangeEvent<IEnumerable<SharedSpotOrder>>(Exchange, orders));
+                    handler(update.AsExchangeEvent<SharedSpotOrder[]>(Exchange, orders));
                 },
                 ct: ct).ConfigureAwait(false);
 
@@ -142,7 +147,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Futures Order client
 
         EndpointOptions<SubscribeFuturesOrderRequest> IFuturesOrderSocketClient.SubscribeFuturesOrderOptions { get; } = new EndpointOptions<SubscribeFuturesOrderRequest>(true);
-        async Task<ExchangeResult<UpdateSubscription>> IFuturesOrderSocketClient.SubscribeToFuturesOrderUpdatesAsync(SubscribeFuturesOrderRequest request, Action<ExchangeEvent<IEnumerable<SharedFuturesOrder>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IFuturesOrderSocketClient.SubscribeToFuturesOrderUpdatesAsync(SubscribeFuturesOrderRequest request, Action<ExchangeEvent<SharedFuturesOrder[]>> handler, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderSocketClient)this).SubscribeFuturesOrderOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedFuturesModes);
             if (validationError != null)
@@ -153,6 +158,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 {
                     var orders = update.Data.Orders.Where(x => x.SymbolType == SymbolType.Futures).Select(x =>
                         new SharedFuturesOrder(
+                            ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol),
                             x.Symbol,
                             x.OrderId.ToString(),
                             x.OrderType == Enums.OrderType.Limit ? SharedOrderType.Limit : x.OrderType == Enums.OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
@@ -172,7 +178,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     if (!orders.Any())
                         return;
 
-                    handler(update.AsExchangeEvent<IEnumerable<SharedFuturesOrder>>(Exchange, orders));
+                    handler(update.AsExchangeEvent<SharedFuturesOrder[]>(Exchange, orders));
                 },
                 ct: ct).ConfigureAwait(false);
 
@@ -184,7 +190,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Position client
 
         EndpointOptions<SubscribePositionRequest> IPositionSocketClient.SubscribePositionOptions { get; } = new EndpointOptions<SubscribePositionRequest>(true);
-        async Task<ExchangeResult<UpdateSubscription>> IPositionSocketClient.SubscribeToPositionUpdatesAsync(SubscribePositionRequest request, Action<ExchangeEvent<IEnumerable<SharedPosition>>> handler, CancellationToken ct)
+        async Task<ExchangeResult<UpdateSubscription>> IPositionSocketClient.SubscribeToPositionUpdatesAsync(SubscribePositionRequest request, Action<ExchangeEvent<SharedPosition[]>> handler, CancellationToken ct)
         {
             var validationError = ((IPositionSocketClient)this).SubscribePositionOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedFuturesModes);
             if (validationError != null)
@@ -195,6 +201,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 {
                     var positions = update.Data.PositionInfo.PerpetualPositions.Select(x =>
                         new SharedPosition(
+                            ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol),
                             x.Symbol,
                             x.NetQuantity,
                             null)
@@ -207,14 +214,14 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         }).ToList();
 
                     positions.AddRange(update.Data.PositionInfo.ExpiringPositions.Select(x =>
-                        new SharedPosition(x.Symbol, x.NumberOfContracts, null)
+                        new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), x.Symbol, x.NumberOfContracts, null)
                         {
                             AverageOpenPrice = x.EntryPrice,
                             PositionSide = x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,
                             UnrealizedPnl = x.UnrealizedPnl
                         }));
 
-                    handler(update.AsExchangeEvent<IEnumerable<SharedPosition>>(Exchange, positions));
+                    handler(update.AsExchangeEvent<SharedPosition[]>(Exchange, positions.ToArray()));
                 },
                 ct: ct).ConfigureAwait(false);
 

@@ -64,11 +64,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<CoinbaseTrade>>> onMessage, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<CoinbaseTrade[]>> onMessage, CancellationToken ct = default)
             => await SubscribeToTradeUpdatesAsync([symbol], onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<CoinbaseTrade>>> onMessage, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseTrade[]>> onMessage, CancellationToken ct = default)
         {
             var subscription = new CoinbaseSubscription<CoinbaseTradeEvent>(this, _logger, "market_trades", "market_trades", symbols.ToArray(), x => onMessage(
                 x.As(x.Data.First().Trades)
@@ -77,11 +77,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, Action<DataEvent<IEnumerable<CoinbaseStreamKline>>> onMessage, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, Action<DataEvent<CoinbaseStreamKline[]>> onMessage, CancellationToken ct = default)
             => await SubscribeToKlineUpdatesAsync([symbol], onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<IEnumerable<CoinbaseStreamKline>>> onMessage, CancellationToken ct = default)
+        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseStreamKline[]>> onMessage, CancellationToken ct = default)
         {
             var subscription = new CoinbaseSubscription<CoinbaseKlineEvent>(this, _logger, "candles", "candles", symbols.ToArray(), x => onMessage(
                 x.As(x.Data.First().Klines)

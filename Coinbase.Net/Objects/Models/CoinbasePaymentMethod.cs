@@ -1,18 +1,21 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbasePaymentMethodsWrapper
     {
         /// <summary>
         /// Payment methods
         /// </summary>
         [JsonPropertyName("payment_methods")]
-        public IEnumerable<CoinbasePaymentMethod> PaymentMethods { get; set; } = null!;
+        public CoinbasePaymentMethod[] PaymentMethods { get; set; } = null!;
     }
 
+    [SerializationModel]
     internal record CoinbasePaymentMethodWrapper
     {
         /// <summary>
@@ -25,6 +28,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// 
     /// </summary>
+    [SerializationModel]
     public record CoinbasePaymentMethod
     {
         /// <summary>

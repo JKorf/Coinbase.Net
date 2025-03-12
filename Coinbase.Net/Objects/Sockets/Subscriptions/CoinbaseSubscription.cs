@@ -17,7 +17,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         /// <inheritdoc />
         public override HashSet<string> ListenerIdentifiers { get; set; }
 
-        private readonly Action<DataEvent<IEnumerable<T>>> _handler;
+        private readonly Action<DataEvent<T[]>> _handler;
         private readonly string _channel;
         private readonly string[]? _symbols;
         private readonly SocketApiClient _client;
@@ -37,7 +37,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         /// <summary>
         /// ctor
         /// </summary>
-        public CoinbaseSubscription(SocketApiClient client, ILogger logger, string channel, string channelIdentifier, string[]? symbols, Action<DataEvent<IEnumerable<T>>> handler, bool auth) : base(logger, auth)
+        public CoinbaseSubscription(SocketApiClient client, ILogger logger, string channel, string channelIdentifier, string[]? symbols, Action<DataEvent<T[]>> handler, bool auth) : base(logger, auth)
         {
             _handler = handler;
             _channel = channel;

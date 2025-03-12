@@ -1,4 +1,5 @@
-﻿using Coinbase.Net.Converters;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Converters;
 using Coinbase.Net.Enums;
 using System;
 using System.Text.Json.Serialization;
@@ -9,6 +10,7 @@ namespace Coinbase.Net.Objects.Models
     /// Order configuration
     /// </summary>
     [JsonConverter(typeof(OrderConfigurationConverter))]
+    [SerializationModel]
     public record CoinbaseOrderConfiguration
     {
         /// <summary>

@@ -1,19 +1,22 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbaseFuturesPositionsWrapper
     {
         /// <summary>
         /// Positions
         /// </summary>
         [JsonPropertyName("positions")]
-        public IEnumerable<CoinbaseFuturesPosition> Positions { get; set; } = null!;
+        public CoinbaseFuturesPosition[] Positions { get; set; } = null!;
     }
 
+    [SerializationModel]
     internal record CoinbaseFuturesPositionWrapper
     {
         /// <summary>
@@ -26,6 +29,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Position info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseFuturesPosition
     {
         /// <summary>

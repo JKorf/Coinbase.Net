@@ -30,10 +30,10 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="allProducts">Return all symbols</param>
         /// <param name="symbols">Filter by symbol names</param>
         /// <param name="getTradabilityStatus">Whether or not to populate <see cref="CoinbaseSymbol.ViewOnly"/> with the tradability status of the product. This is only enabled for SPOT products. Can only be used when the client is authenticated.</param>
-        /// <param name="limit">Max number of resulst</param>
+        /// <param name="limit">Max number of results</param>
         /// <param name="offset">Result offset</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<CoinbaseSymbol>>> GetSymbolsAsync(SymbolType? type = null, ContractExpiryType? expiryType = null, ExpiryStatus? expireStatus = null, bool? allProducts = null, IEnumerable<string>? symbols = null, bool getTradabilityStatus = false, int? limit = null, int? offset = null, CancellationToken ct = default);
+        Task<WebCallResult<CoinbaseSymbol[]>> GetSymbolsAsync(SymbolType? type = null, ContractExpiryType? expiryType = null, ExpiryStatus? expireStatus = null, bool? allProducts = null, IEnumerable<string>? symbols = null, bool getTradabilityStatus = false, int? limit = null, int? offset = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get info on a specific symbol
@@ -63,7 +63,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="endTime">Filter by end time</param>
         /// <param name="limit">Max number of results</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<CoinbaseKline>>> GetKlinesAsync(string symbol, KlineInterval klineInterval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
+        Task<WebCallResult<CoinbaseKline[]>> GetKlinesAsync(string symbol, KlineInterval klineInterval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get historical public trades for a symbol
@@ -92,21 +92,21 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="symbols">Filter by symbol</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<CoinbaseBookTicker>>> GetBookTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
+        Task<WebCallResult<CoinbaseBookTicker[]>> GetBookTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get fiat assets
         /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-currencies" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<CoinbaseFiatAsset>>> GetFiatAssetsAsync(CancellationToken ct = default);
+        Task<WebCallResult<CoinbaseFiatAsset[]>> GetFiatAssetsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get crypto assets
         /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-currencies" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<CoinbaseCryptoAsset>>> GetCryptoAssetsAsync(CancellationToken ct = default);
+        Task<WebCallResult<CoinbaseCryptoAsset[]>> GetCryptoAssetsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get exchange rates
@@ -122,7 +122,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// </summary>
         /// <param name="asset">Asset name</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<CoinbasePrice>>> GetBuyPriceAsync(string asset, CancellationToken ct = default);
+        Task<WebCallResult<CoinbasePrice[]>> GetBuyPriceAsync(string asset, CancellationToken ct = default);
 
         /// <summary>
         /// Get the current sell prices for all assets denoted in the asset parameter. Includes a 1% Coinbase fee.
@@ -130,7 +130,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// </summary>
         /// <param name="asset">Asset name</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<CoinbasePrice>>> GetSellPriceAsync(string asset, CancellationToken ct = default);
+        Task<WebCallResult<CoinbasePrice[]>> GetSellPriceAsync(string asset, CancellationToken ct = default);
 
         /// <summary>
         /// Get the spot market prices for all assets denoted in the asset parameter
@@ -139,6 +139,6 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="asset">Asset name</param>
         /// <param name="date">Specify for retrieving a historical price</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<CoinbasePrice>>> GetSpotPriceAsync(string asset, DateTime? date = null, CancellationToken ct = default);
+        Task<WebCallResult<CoinbasePrice[]>> GetSpotPriceAsync(string asset, DateTime? date = null, CancellationToken ct = default);
     }
 }

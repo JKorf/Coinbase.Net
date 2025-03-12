@@ -1,4 +1,5 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
@@ -8,13 +9,14 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Portfolios info
     /// </summary>
+    [SerializationModel]
     public record CoinbasePerpetualPorfolios
     {
         /// <summary>
         /// Portfolios
         /// </summary>
         [JsonPropertyName("portfolios")]
-        public IEnumerable<CoinbasePerpetualPorfolio> Portfolios { get; set; } = Array.Empty<CoinbasePerpetualPorfolio>();
+        public CoinbasePerpetualPorfolio[] Portfolios { get; set; } = Array.Empty<CoinbasePerpetualPorfolio>();
         /// <summary>
         /// Summary
         /// </summary>
@@ -25,6 +27,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Portfolio info
     /// </summary>
+    [SerializationModel]
     public record CoinbasePerpetualPorfolio
     {
         /// <summary>
@@ -127,6 +130,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Perpetual futures portfolio summary
     /// </summary>
+    [SerializationModel]
     public record CoinbasePerpetualPorfolioSummary
     {
         /// <summary>

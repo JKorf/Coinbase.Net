@@ -1,19 +1,22 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbaseSymbolWrapper
     {
         [JsonPropertyName("products")]
-        public IEnumerable<CoinbaseSymbol> Symbols { get; set; } = Array.Empty<CoinbaseSymbol>();
+        public CoinbaseSymbol[] Symbols { get; set; } = Array.Empty<CoinbaseSymbol>();
     }
 
     /// <summary>
     /// Symbol info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseSymbol
     {
         /// <summary>
@@ -160,7 +163,7 @@ namespace Coinbase.Net.Objects.Models
         /// Alias to
         /// </summary>
         [JsonPropertyName("alias_to")]
-        public IEnumerable<string> AliasTo { get; set; } = Array.Empty<string>();
+        public string[] AliasTo { get; set; } = Array.Empty<string>();
         /// <summary>
         /// Base display symbol
         /// </summary>
@@ -206,6 +209,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// FCM info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseSymbolFcmInfo
     {
         /// <summary>
@@ -238,6 +242,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Futures details
     /// </summary>
+    [SerializationModel]
     public record CoinbaseSymbolFuturesDetails
     {
         /// <summary>
@@ -320,6 +325,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Perpetual info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseSymbolPerpDetails
     {
         /// <summary>

@@ -49,7 +49,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// </summary>
         /// <param name="orderIds">Ids of orders to cancel</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<CoinbaseCancelResult>>> CancelOrdersAsync(IEnumerable<string> orderIds, CancellationToken ct = default);
+        Task<WebCallResult<CoinbaseCancelResult[]>> CancelOrdersAsync(IEnumerable<string> orderIds, CancellationToken ct = default);
 
         /// <summary>
         /// Edit an order
@@ -89,7 +89,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="cursor">Page cursor</param>
         /// <param name="sortBy">Sort order</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<CoinbaseOrder>>> GetOrdersAsync(
+        Task<WebCallResult<CoinbaseOrder[]>> GetOrdersAsync(
             IEnumerable<string>? orderIds = null,
             IEnumerable<string>? symbols = null,
             SymbolType? symbolType = null,
@@ -146,7 +146,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmpositions" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<CoinbaseFuturesPosition>>> GetFuturesPositionsAsync(CancellationToken ct = default);
+        Task<WebCallResult<CoinbaseFuturesPosition[]>> GetFuturesPositionsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get expiring futures position for a symbol

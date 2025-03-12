@@ -260,16 +260,16 @@
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToHeartbeatUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseHeartbeat}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseTrade}}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseTrade[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseTrade}}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseTrade[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseStreamKline}}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamKline[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseStreamKline}}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamKline[]}},System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseTicker}},System.Threading.CancellationToken)">
@@ -501,6 +501,1630 @@
         </member>
         <member name="M:Coinbase.Net.CoinbaseTrackerFactory.CreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
             <inheritdoc />
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.Boolean">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.NullableBoolean">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.Decimal">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.NullableDecimal">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.AccountPlatform">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.AccountType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.AssetType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.ContractExpiryType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.NullableContractExpiryType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.IntradayMargin">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.LiquidationStatus">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.MarginFlags">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.MarginLevel">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.MarginType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.NullableMarginType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.MarginWindowType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.OrderSide">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.NullableOrderSide">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.OrderStatus">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.OrderType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.PortfolioType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.PositionSide">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.NullablePositionSide">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.RiskManageType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.NullableRiskManageType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.SymbolStatus">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.NullableSymbolStatus">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.SymbolType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.TimeInForce">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.TradeRole">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.TransactionStatus">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.TransactionType">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.TriggerStatus">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.NullableTriggerStatus">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.WithdrawalStatus">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseBatchTickerEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseBatchTickerEventArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesBalanceUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesBalanceUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseKlineEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseKlineEventArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderBookEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderBookEventArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSocketEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSocketEventArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSocketMessage">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSocketMessageArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSocketMessageCoinbaseBatchTickerEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSocketMessageCoinbaseFuturesBalanceUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSocketMessageCoinbaseKlineEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSocketMessageCoinbaseOrderBookEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSocketMessageCoinbaseSubscriptionsUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSocketMessageCoinbaseSymbolEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSocketMessageCoinbaseTickerEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSocketMessageCoinbaseTradeEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSocketMessageCoinbaseHeartbeat">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSocketMessageCoinbaseUserUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSocketRequest">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSocketRequestArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSubscriptionsUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSubscriptionsUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSymbolEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSymbolEventArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTickerEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTickerEventArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTradeEvent">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTradeEventArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseAccount">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseAccountArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseAccountPage">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseAccountPageArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseAccountWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseAccountWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseApiKey">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseApiKeyArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseBatchTicker">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseBatchTickerArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseBookTicker">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseBookTickerArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseBookTickerWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseBookTickerWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseCancellationReason">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseCancellationReasonArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseCancelResult">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseCancelResultArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseCancelResultWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseCancelResultWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseContext">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseContextArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseConvertFeeDisclosure">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseConvertFeeDisclosureArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseConvertFees">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseConvertFeesArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseConvertQuote">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseConvertQuoteArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseConvertQuoteWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseConvertQuoteWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseCryptoAsset">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseCryptoAssetArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseCryptoAssetWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseCryptoAssetWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseCurrencyQuantityReference">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseCurrencyQuantityReferenceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseDeposit">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseDepositArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseDepositAddress">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseDepositAddressArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseDepositAddressWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseDepositAddressWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseDepositWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseDepositWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseEditOrderResult">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseEditOrderResultArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseExchangeRates">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseExchangeRatesArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseExchangeRatesWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseExchangeRatesWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseExpiringPosition">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseExpiringPositionArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFeeInfo">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFeeInfoArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFeeTier">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFeeTierArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFiatAsset">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFiatAssetArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFiatAssetWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFiatAssetWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesBalance">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesBalanceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesBalanceSummary">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesBalanceSummaryArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesBalanceSummaryWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesBalanceSummaryWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesBalanceWindow">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesBalanceWindowArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesMarginWindow">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesMarginWindowArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesMarginWindowInfo">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesMarginWindowInfoArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesPosition">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesPositionArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesPositionsWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesPositionsWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesPositionWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseFuturesPositionWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseHeartbeat">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseHeartbeatArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseKline">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseKlineArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseKlineWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseKlineWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseLink">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseLinkArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseMultiAssetMode">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseMultiAssetModeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrder">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderBook">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderBookArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderBookEntry">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderBookEntryArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderBookUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderBookUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderBookUpdateEntry">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderBookUpdateEntryArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderBookWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderBookWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderConfiguration">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderConfigurationArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderEditHistory">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderEditHistoryArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderError">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderErrorArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderResult">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderResultArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderSuccess">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderSuccessArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrdersWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrdersWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseOrderWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePage">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePageArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePageInfo">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePageInfoArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePaginatedResultCoinbaseDeposit">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePaginatedResultCoinbaseDepositAddress">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePaginatedResultCoinbaseTransaction">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePaginatedResultCoinbaseWithdrawal">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePaymentMethod">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePaymentMethodArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePaymentMethodsWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePaymentMethodsWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePaymentMethodWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePaymentMethodWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualBalance">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualBalanceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualBalances">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualBalancesArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualBalancesAsset">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualBalancesAssetArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualBalancesWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualBalancesWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualPorfolio">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualPorfolioArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualPorfolios">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualPorfoliosArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualPorfolioSummary">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualPorfolioSummaryArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualPosition">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualPositionArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualPositions">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualPositionsArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualPositionSummary">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualPositionSummaryArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualPositionUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualPositionUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualPositionWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePerpetualPositionWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePorfolioBreakdown">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePorfolioBreakdownArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePorfolioBreakdownBalances">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePorfolioBreakdownBalancesArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePorfolioBreakdownFuturesPosition">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePorfolioBreakdownFuturesPositionArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePorfolioBreakdownPosition">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePorfolioBreakdownPositionArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePorfolioBreakdownWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePorfolioBreakdownWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePorfolioSpotBalance">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePorfolioSpotBalanceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePortfolio">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePortfolioArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePortfolioMove">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePortfolioMoveArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePortfoliosWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePortfoliosWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePortfolioWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePortfolioWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePositionsUpdates">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePositionsUpdatesArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePrice">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePriceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePriceWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbasePriceWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseQuantityReference">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseQuantityReferenceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseQuantityScale">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseQuantityScaleArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseResourceReference">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseResourceReferenceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseStreamKline">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseStreamKlineArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseStreamSymbol">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseStreamSymbolArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSubscriptionInfo">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSubscriptionInfoArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSymbol">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSymbolArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSymbolFcmInfo">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSymbolFcmInfoArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSymbolFuturesDetails">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSymbolFuturesDetailsArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSymbolPerpDetails">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSymbolPerpDetailsArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSymbolWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseSymbolWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTax">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTaxArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTaxDetails">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTaxDetailsArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTicker">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTickerArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTime">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTimeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseToReference">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseToReferenceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTrade">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTradeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTradeIncentiveInfo">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTradeIncentiveInfoArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTrades">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTradesArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTransaction">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTransactionArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTransactionDetails">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTransactionDetailsArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTransactionNetwork">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTransactionNetworkArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTransactionWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTransactionWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseUnitPrice">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseUnitPriceArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseUserTrade">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseUserTradeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseUserTrades">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseUserTradesArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseUserUpdate">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseUserUpdateArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseUserWarning">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseUserWarningArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseWithdrawal">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseWithdrawalArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseWithdrawalWrapper">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseWithdrawalWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.IntradayMarginSetting">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.IntradayMarginSettingArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.DictionaryStringDecimal">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.DictionaryStringStringArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.IDictionaryStringObject">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.DateTime">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.NullableDateTime">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.Int32">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.NullableInt32">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.Int64">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.NullableInt64">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.Object">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.String">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.StringArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.Default">
+            <summary>
+            The default <see cref="T:System.Text.Json.Serialization.JsonSerializerContext"/> associated with a default <see cref="T:System.Text.Json.JsonSerializerOptions"/> instance.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.GeneratedSerializerOptions">
+            <summary>
+            The source-generated options associated with this context.
+            </summary>
+        </member>
+        <member name="M:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.#ctor">
+            <inheritdoc/>
+        </member>
+        <member name="M:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.#ctor(System.Text.Json.JsonSerializerOptions)">
+            <inheritdoc/>
+        </member>
+        <member name="M:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.GetTypeInfo(System.Type)">
+            <inheritdoc/>
         </member>
         <member name="T:Coinbase.Net.Enums.AccountPlatform">
             <summary>
@@ -1861,7 +3485,7 @@
             <param name="allProducts">Return all symbols</param>
             <param name="symbols">Filter by symbol names</param>
             <param name="getTradabilityStatus">Whether or not to populate <see cref="P:Coinbase.Net.Objects.Models.CoinbaseSymbol.ViewOnly"/> with the tradability status of the product. This is only enabled for SPOT products. Can only be used when the client is authenticated.</param>
-            <param name="limit">Max number of resulst</param>
+            <param name="limit">Max number of results</param>
             <param name="offset">Result offset</param>
             <param name="ct">Cancellation token</param>
         </member>
@@ -2137,7 +3761,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseTrade}}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseTrade[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to public trades updates
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#market-trades-channel" /></para>
@@ -2147,7 +3771,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseTrade}}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToTradeUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseTrade[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to public trades updates
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#market-trades-channel" /></para>
@@ -2157,7 +3781,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseStreamKline}}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamKline[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to kline updates. Klines are always at a 5 minute interval.
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#candles-channel" /></para>
@@ -2167,7 +3791,7 @@
             <param name="ct">Cancellation token for closing this subscription</param>
             <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{Coinbase.Net.Objects.Models.CoinbaseStreamKline}}},System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToKlineUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseStreamKline[]}},System.Threading.CancellationToken)">
             <summary>
             Subscribe to kline updates. Klines are always at a 5 minute interval.
             <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#candles-channel" /></para>
@@ -2294,7 +3918,7 @@
             <summary>
             Update specific options
             </summary>
-            <param name="options">Options to update. Only specific options are changable after the client has been created</param>
+            <param name="options">Options to update. Only specific options are changeable after the client has been created</param>
         </member>
         <member name="M:Coinbase.Net.Interfaces.Clients.ICoinbaseRestClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
             <summary>
@@ -6255,7 +7879,7 @@
         <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.GetMessageType(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.#ctor(CryptoExchange.Net.Clients.SocketApiClient,Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.String[],System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{System.Collections.Generic.IEnumerable{`0}}},System.Boolean)">
+        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.#ctor(CryptoExchange.Net.Clients.SocketApiClient,Microsoft.Extensions.Logging.ILogger,System.String,System.String,System.String[],System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{`0[]}},System.Boolean)">
             <summary>
             ctor
             </summary>

@@ -45,7 +45,7 @@ namespace Coinbase.Net
 
         public string GenerateToken(DateTime timestamp, string? uriLine)
         {
-#if NETSTANDARD2_1_OR_GREATER
+#if NETSTANDARD2_1_OR_GREATER || NET8_0_OR_GREATER
 
             var lines = _credentials.Secret.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
             var strippedKey = string.Join("", lines.Skip(1).Take(lines.Length - 2));

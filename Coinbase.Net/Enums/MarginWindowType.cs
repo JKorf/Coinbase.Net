@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Coinbase.Net.Enums
 {
     /// <summary>
     /// Window type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<MarginWindowType>))]
     public enum MarginWindowType
     {
         /// <summary>

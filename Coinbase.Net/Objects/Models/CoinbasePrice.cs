@@ -1,18 +1,21 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbasePriceWrapper
     {
         [JsonPropertyName("data")]
-        public IEnumerable<CoinbasePrice> Prices { get; set; } = Array.Empty<CoinbasePrice>();
+        public CoinbasePrice[] Prices { get; set; } = Array.Empty<CoinbasePrice>();
     }
 
     /// <summary>
     /// Price info
     /// </summary>
+    [SerializationModel]
     public record CoinbasePrice
     {
         /// <summary>

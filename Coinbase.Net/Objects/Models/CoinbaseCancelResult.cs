@@ -1,18 +1,21 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbaseCancelResultWrapper
     {
         [JsonPropertyName("results")]
-        public IEnumerable<CoinbaseCancelResult> Results { get; set; } = Array.Empty<CoinbaseCancelResult>();
+        public CoinbaseCancelResult[] Results { get; set; } = Array.Empty<CoinbaseCancelResult>();
     }
 
     /// <summary>
     /// Cancel result
     /// </summary>
+    [SerializationModel]
     public record CoinbaseCancelResult
     {
         /// <summary>

@@ -47,7 +47,6 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             ArraySerialization = ArrayParametersSerialization.MultipleValues;
 
-            var version = Assembly.GetAssembly(typeof(RestApiClient)).GetName().Version;
             StandardRequestHeaders = new Dictionary<string, string>
             {
                 { "User-Agent", "CryptoExchange.Net/" + baseClient.CryptoExchangeLibVersion }

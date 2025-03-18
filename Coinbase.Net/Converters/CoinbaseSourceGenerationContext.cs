@@ -6,6 +6,8 @@ using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Converters
 {
+    [JsonSerializable(typeof(Dictionary<string, object>))]
+
     // End manual defined attributes
 
     [JsonSerializable(typeof(CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>))]

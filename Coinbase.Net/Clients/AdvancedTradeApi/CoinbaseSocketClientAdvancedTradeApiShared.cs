@@ -120,8 +120,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                             ClientOrderId = x.ClientOrderId,
                             OrderPrice = x.Price == 0 ? null : x.Price,
                             AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
-                            QuantityFilled = x.QuantityFilled,
-                            QuoteQuantityFilled = x.ValueFilled,
+                            OrderQuantity = new SharedOrderQuantity(x.QuantityFilled + x.QuantityRemaining),
+                            QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.ValueFilled),
                             Fee = x.TotalFees,
                             TimeInForce = x.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : SharedTimeInForce.GoodTillCanceled
                         }).ToArray();
@@ -169,8 +169,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                             ClientOrderId = x.ClientOrderId,
                             OrderPrice = x.Price == 0 ? null : x.Price,
                             AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
-                            QuantityFilled = x.QuantityFilled,
-                            QuoteQuantityFilled = x.ValueFilled,
+                            OrderQuantity = new SharedOrderQuantity(contractQuantity: x.QuantityFilled + x.QuantityRemaining),
+                            QuantityFilled = new SharedOrderQuantity(quoteAssetQuantity: x.ValueFilled, contractQuantity: x.QuantityFilled),
                             Fee = x.TotalFees,
                             TimeInForce = x.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : SharedTimeInForce.GoodTillCanceled
                         }).ToArray();

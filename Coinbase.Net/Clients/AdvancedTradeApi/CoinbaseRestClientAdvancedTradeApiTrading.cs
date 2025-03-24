@@ -30,7 +30,24 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Place Order
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseOrderResult>> PlaceOrderAsync(string symbol, OrderSide side, NewOrderType orderType, decimal? quantity = null, decimal? quoteQuantity = null, decimal? price = null, string? clientOrderId = null, decimal? leverage = null, MarginType? marginType = null, string? previewId = null, bool? postOnly = null, DateTime? cancelTime = null, decimal? stopPrice = null, StopDirection? stopDirection = null, CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbaseOrderResult>> PlaceOrderAsync(
+            string symbol,
+            OrderSide side, 
+            NewOrderType orderType,
+            decimal? quantity = null,
+            decimal? quoteQuantity = null, 
+            decimal? price = null,
+            string? clientOrderId = null,
+            decimal? leverage = null,
+            MarginType? marginType = null,
+            string? previewId = null,
+            bool? postOnly = null,
+            DateTime? cancelTime = null,
+            decimal? stopPrice = null,
+            StopDirection? stopDirection = null,
+            decimal? attachedOrderTriggerPrice = null,
+            decimal? attachedOrderLimitPrice = null,
+            CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.Add("product_id", symbol);
@@ -55,6 +72,17 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             var wrapper = new ParameterCollection();
             wrapper.Add(EnumConverter.GetString(orderType), marketConfig);
             parameters.Add("order_configuration", wrapper);
+
+            if (attachedOrderTriggerPrice != null)
+            {
+                var attachedConfig = new ParameterCollection();
+                attachedConfig.AddOptionalString("stopTriggerPrice", attachedOrderTriggerPrice);
+                attachedConfig.AddOptionalString("limitPrice", attachedOrderLimitPrice);
+                parameters.Add("attached_order_configuration", new Dictionary<string, object>
+                {
+                    { "triggerBracketGtc", attachedConfig }
+                });
+            }
 
             var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/brokerage/orders", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseOrderResult>(request, parameters, ct).ConfigureAwait(false);

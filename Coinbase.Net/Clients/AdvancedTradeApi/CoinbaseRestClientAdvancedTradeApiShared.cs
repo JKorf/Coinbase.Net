@@ -8,6 +8,7 @@ using System.Linq;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net;
 using Coinbase.Net.Enums;
+using System.Drawing;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
@@ -1211,24 +1212,24 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #endregion
 
         #region Spot Trigger Order Client
-        //EndpointOptions<GetFeeRequest> IFeeRestClient.GetFeeOptions { get; } = new EndpointOptions<GetFeeRequest>(true);
-        //{
-        //};
+        PlaceSpotTriggerOrderOptions ISpotTriggerOrderRestClient.PlaceSpotTriggerOrderOptions { get; } = new PlaceSpotTriggerOrderOptions(true);
+
         async Task<ExchangeWebResult<SharedId>> ISpotTriggerOrderRestClient.PlaceSpotTriggerOrderAsync(PlaceSpotTriggerOrderRequest request, CancellationToken ct)
         {
-            //var validationError = ((ISpotTriggerOrderRestClient)this).GetFeeOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
-            //if (validationError != null)
-            //    return new ExchangeWebResult<SharedFee>(Exchange, validationError);
+            var validationError = ((ISpotTriggerOrderRestClient)this).PlaceSpotTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes, ((ISpotOrderRestClient)this).SpotSupportedOrderQuantity);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
             var result = await Trading.PlaceOrderAsync(                
                 request.Symbol.GetSymbol(FormatSymbol),
-                request.OrderDirection == SharedTriggerOrderDirection.Enter ? OrderSide.Buy : OrderSide.Sell,
+                request.OrderSide == SharedOrderSide.Buy ? OrderSide.Buy : OrderSide.Sell,
                 NewOrderType.StopLimit,
                 quantity: request.Quantity?.QuantityInBaseAsset,
                 quoteQuantity: request.Quantity?.QuantityInQuoteAsset,
                 // Simulate market order by adding/removing 10% to the trigger price as order price
-                price: request.OrderPrice ?? (request.TriggerPrice + (request.TriggerPrice * 0.1m * (request.OrderDirection == SharedTriggerOrderDirection.Enter ? 1 : -1))),
+                price: request.OrderPrice ?? (request.TriggerPrice + (request.TriggerPrice * 0.1m * (request.OrderSide == SharedOrderSide.Buy ? 1 : -1))),
                 stopPrice: request.TriggerPrice,
+                clientOrderId: request.ClientOrderId,
                 stopDirection: request.PriceDirection == SharedTriggerPriceDirection.PriceAbove ? StopDirection.Up : StopDirection.Down,
                 ct: ct).ConfigureAwait(false);
             if (!result)
@@ -1258,17 +1259,34 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 order.Data.OrderId.ToString(),
                 SharedOrderType.Limit,
                 order.Data.OrderSide == OrderSide.Buy ? SharedTriggerOrderDirection.Enter : SharedTriggerOrderDirection.Exit,
-                ParseOrderStatus(order.Data.OrderStatus),
+                ParseTriggerOrderStatus(order.Data.OrderStatus),
                 order.Data.OrderConfiguration.StopPrice ?? 0,
                 order.Data.CreateTime)
             {
+                PlacedOrderId = order.Data.OrderId,
                 AveragePrice = order.Data.AverageFillPrice == 0 ? null : order.Data.AverageFillPrice,
                 OrderPrice = order.Data.OrderConfiguration.Price,
                 OrderQuantity = new SharedOrderQuantity(order.Data.OrderConfiguration.Quantity, order.Data.OrderConfiguration.QuoteQuantity),
                 QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
-                UpdateTime = order.Data.LastFillTime
+                UpdateTime = order.Data.LastFillTime,
+                ClientOrderId = order.Data.ClientOrderId
             });
+        }
+
+        private SharedTriggerOrderStatus ParseTriggerOrderStatus(OrderStatus orderStatus)
+        {
+            if (orderStatus == OrderStatus.Filled)
+                return SharedTriggerOrderStatus.Filled;
+
+            if (orderStatus == OrderStatus.Canceled
+                || orderStatus == OrderStatus.Expired
+                || orderStatus == OrderStatus.Failed)
+            {
+                return SharedTriggerOrderStatus.CanceledOrRejected;
+            }
+
+            return SharedTriggerOrderStatus.Active;
         }
 
         EndpointOptions<CancelOrderRequest> ISpotTriggerOrderRestClient.CancelSpotTriggerOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
@@ -1290,24 +1308,27 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #endregion
 
         #region Futures Trigger Order Client
-        //EndpointOptions<GetFeeRequest> IFeeRestClient.GetFeeOptions { get; } = new EndpointOptions<GetFeeRequest>(true);
-        //{
-        //};
+        PlaceFuturesTriggerOrderOptions IFuturesTriggerOrderRestClient.PlaceFuturesTriggerOrderOptions { get; } = new PlaceFuturesTriggerOrderOptions(true)
+        {
+        };
+
         async Task<ExchangeWebResult<SharedId>> IFuturesTriggerOrderRestClient.PlaceFuturesTriggerOrderAsync(PlaceFuturesTriggerOrderRequest request, CancellationToken ct)
         {
-            //var validationError = ((IFuturesTriggerOrderRestClient)this).GetFeeOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
-            //if (validationError != null)
-            //    return new ExchangeWebResult<SharedFee>(Exchange, validationError);
+            var side = GetTriggerOrderSide(request);
+            var validationError = ((IFuturesTriggerOrderRestClient)this).PlaceFuturesTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes, side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, ((IFuturesOrderRestClient)this).FuturesSupportedOrderQuantity);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
             var result = await Trading.PlaceOrderAsync(
                 request.Symbol.GetSymbol(FormatSymbol),
-                GetTriggerOrderSide(request),
+                side,
                 NewOrderType.StopLimit,
                 quantity: request.Quantity.QuantityInContracts,
                 // Simulate market order by adding/removing 10% to the trigger price as order price
                 price: request.OrderPrice ?? (request.TriggerPrice + (request.TriggerPrice * 0.1m * (request.OrderDirection == SharedTriggerOrderDirection.Enter ? 1 : -1))),
                 stopPrice: request.TriggerPrice,
                 stopDirection: request.PriceDirection == SharedTriggerPriceDirection.PriceAbove ? StopDirection.Up : StopDirection.Down,
+                clientOrderId: request.ClientOrderId,
                 ct: ct).ConfigureAwait(false);
             if (!result)
                 return result.AsExchangeResult<SharedId>(Exchange, null, default);
@@ -1350,17 +1371,19 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 order.Data.OrderId.ToString(),
                 SharedOrderType.Limit,
                 order.Data.OrderSide == OrderSide.Buy ? SharedTriggerOrderDirection.Enter : SharedTriggerOrderDirection.Exit,
-                ParseOrderStatus(order.Data.OrderStatus),
+                ParseTriggerOrderStatus(order.Data.OrderStatus),
                 order.Data.OrderConfiguration.StopPrice ?? 0,
                 null,
                 order.Data.CreateTime)
             {
+                PlacedOrderId = order.Data.OrderId,
                 AveragePrice = order.Data.AverageFillPrice == 0 ? null : order.Data.AverageFillPrice,
                 OrderPrice = order.Data.OrderConfiguration.Price,
                 OrderQuantity = new SharedOrderQuantity(order.Data.OrderConfiguration.Quantity, order.Data.OrderConfiguration.QuoteQuantity),
                 QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
-                UpdateTime = order.Data.LastFillTime
+                UpdateTime = order.Data.LastFillTime,
+                ClientOrderId = order.Data.ClientOrderId
             });
         }
 

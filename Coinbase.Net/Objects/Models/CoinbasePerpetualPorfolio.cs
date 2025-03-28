@@ -71,7 +71,7 @@ namespace Coinbase.Net.Objects.Models
         /// Portfolio initial margin
         /// </summary>
         [JsonPropertyName("portfolio_initial_margin")]
-        public decimal PortfolioInitialMargin { get; set; }
+        public CoinbaseQuantityReference PortfolioInitialMargin { get; set; } = null!;
         /// <summary>
         /// Portfolio im notional
         /// </summary>

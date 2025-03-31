@@ -152,6 +152,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 1.9.1 - 28 Mar 2025
+    * Fixed deserialization issue for restClient.AdvancedTradeApi.Account.GetPerpetualPortfolioSummaryAsync
+
 * Version 1.9.0 - 24 Mar 2025
     * Added attachedOrderTriggerPrice and attachedOrderLimitPrice parameters for restClient.AdvancedTradeApi.Trading.PlaceOrderAsync
 

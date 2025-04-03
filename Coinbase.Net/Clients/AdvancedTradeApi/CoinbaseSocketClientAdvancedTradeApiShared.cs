@@ -112,7 +112,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                             ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol),
                             x.Symbol,
                             x.OrderId.ToString(),
-                            x.OrderType == Enums.OrderType.Limit ? SharedOrderType.Limit : x.OrderType == Enums.OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
+                            ParseOrderType(x.OrderType),
                             x.OrderSide == Enums.OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
                             ParseOrderStatus(x.Status),
                             x.CreateTime)
@@ -123,7 +123,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                             OrderQuantity = new SharedOrderQuantity(x.QuantityFilled + x.QuantityRemaining),
                             QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.ValueFilled),
                             Fee = x.TotalFees,
-                            TimeInForce = x.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : SharedTimeInForce.GoodTillCanceled
+                            TriggerPrice = x.StopPrice,
+                            TimeInForce = x.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : SharedTimeInForce.GoodTillCanceled,
+                            IsTriggerOrder = x.OrderType == OrderType.Stop || x.OrderType == OrderType.StopLimit
                         }).ToArray();
 
                     if (!orders.Any())
@@ -134,6 +136,17 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
+        }
+
+        private SharedOrderType ParseOrderType(OrderType orderType)
+        {
+            if (orderType == OrderType.Market || orderType == OrderType.Stop)
+                return SharedOrderType.Market;
+
+            if (orderType == OrderType.Limit || orderType == OrderType.StopLimit)
+                return SharedOrderType.Limit;
+
+            return SharedOrderType.Other;
         }
 
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
@@ -172,7 +185,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                             OrderQuantity = new SharedOrderQuantity(contractQuantity: x.QuantityFilled + x.QuantityRemaining),
                             QuantityFilled = new SharedOrderQuantity(quoteAssetQuantity: x.ValueFilled, contractQuantity: x.QuantityFilled),
                             Fee = x.TotalFees,
-                            TimeInForce = x.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : SharedTimeInForce.GoodTillCanceled
+                            TimeInForce = x.TimeInForce == Enums.TimeInForce.ImmediateOrCancel ? SharedTimeInForce.ImmediateOrCancel : x.TimeInForce == Enums.TimeInForce.FillOrKill ? SharedTimeInForce.FillOrKill : SharedTimeInForce.GoodTillCanceled,
+                            IsTriggerOrder = x.OrderType == OrderType.Stop || x.OrderType == OrderType.StopLimit
                         }).ToArray();
 
                     if (!orders.Any())

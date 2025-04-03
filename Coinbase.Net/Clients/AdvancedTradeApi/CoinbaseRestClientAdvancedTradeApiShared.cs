@@ -432,6 +432,30 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         #endregion
 
+        #region Book Ticker client
+
+        EndpointOptions<GetBookTickerRequest> IBookTickerRestClient.GetBookTickerOptions { get; } = new EndpointOptions<GetBookTickerRequest>(false);
+        async Task<ExchangeWebResult<SharedBookTicker>> IBookTickerRestClient.GetBookTickerAsync(GetBookTickerRequest request, CancellationToken ct)
+        {
+            var validationError = ((IBookTickerRestClient)this).GetBookTickerOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedBookTicker>(Exchange, validationError);
+
+            var resultTicker = await ExchangeData.GetBookTickerAsync(request.Symbol.GetSymbol(FormatSymbol), ct: ct).ConfigureAwait(false);
+            if (!resultTicker)
+                return resultTicker.AsExchangeResult<SharedBookTicker>(Exchange, null, default);
+
+            return resultTicker.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedBookTicker(
+                ExchangeSymbolCache.ParseSymbol(request.Symbol.TradingMode == TradingMode.Spot ? _topicSpotId : _topicFuturesId, resultTicker.Data.Symbol),
+                resultTicker.Data.Symbol,
+                resultTicker.Data.BestAskPrice,
+                resultTicker.Data.BestAskQuantity,
+                resultTicker.Data.BestBidPrice,
+                resultTicker.Data.BestBidQuantity));
+        }
+
+        #endregion
+
         #region Spot Order Client
 
         SharedFeeDeductionType ISpotOrderRestClient.SpotFeeDeductionType => SharedFeeDeductionType.DeductFromOutput;
@@ -503,7 +527,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 OrderQuantity = new SharedOrderQuantity(order.Data.OrderConfiguration.Quantity, order.Data.OrderConfiguration.QuoteQuantity),
                 QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
-                UpdateTime = order.Data.LastFillTime
+                UpdateTime = order.Data.LastFillTime,
+                IsTriggerOrder = order.Data.OrderType == OrderType.Stop || order.Data.OrderType == OrderType.StopLimit
             });
         }
 
@@ -538,7 +563,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 OrderQuantity = new SharedOrderQuantity(x.OrderConfiguration.Quantity, x.OrderConfiguration.QuoteQuantity),
                 QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
-                UpdateTime = x.LastFillTime
+                UpdateTime = x.LastFillTime,
+                IsTriggerOrder = x.OrderType == OrderType.Stop || x.OrderType == OrderType.StopLimit
             }).ToArray());
         }
 
@@ -586,7 +612,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 OrderQuantity = new SharedOrderQuantity(x.OrderConfiguration.Quantity, x.OrderConfiguration.QuoteQuantity),
                 QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
-                UpdateTime = x.LastFillTime
+                UpdateTime = x.LastFillTime,
+                IsTriggerOrder = x.OrderType == OrderType.Stop || x.OrderType == OrderType.StopLimit
             }).ToArray(), nextToken);
         }
 
@@ -888,7 +915,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 QuantityFilled = new SharedOrderQuantity(quoteAssetQuantity: order.Data.QuoteQuantityFilled, contractQuantity: order.Data.QuantityFilled),
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
                 UpdateTime = order.Data.LastFillTime,
-                Leverage = order.Data.Leverage
+                Leverage = order.Data.Leverage,
+                TriggerPrice = order.Data.OrderConfiguration.StopPrice,
+                IsTriggerOrder = order.Data.OrderType == OrderType.Stop || order.Data.OrderType == OrderType.StopLimit
             });
         }
 
@@ -926,7 +955,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 QuantityFilled = new SharedOrderQuantity(quoteAssetQuantity: x.QuoteQuantityFilled, contractQuantity: x.QuantityFilled),
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 UpdateTime = x.LastFillTime,
-                Leverage = x.Leverage
+                Leverage = x.Leverage,
+                TriggerPrice = x.OrderConfiguration.StopPrice,
+                IsTriggerOrder = x.OrderType == OrderType.Stop || x.OrderType == OrderType.StopLimit
             }).ToArray());
         }
 
@@ -977,7 +1008,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 QuantityFilled = new SharedOrderQuantity(quoteAssetQuantity: x.QuoteQuantityFilled, contractQuantity: x.QuantityFilled),
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 UpdateTime = x.LastFillTime,
-                Leverage = x.Leverage
+                Leverage = x.Leverage,
+                TriggerPrice = x.OrderConfiguration.StopPrice,
+                IsTriggerOrder = x.OrderType == OrderType.Stop || x.OrderType == OrderType.StopLimit
             }).ToArray(), nextToken);
         }
 
@@ -1074,7 +1107,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             var tradingMode = request.Symbol?.TradingMode ?? request.TradingMode;
             if (tradingMode == null || request.TradingMode == TradingMode.PerpetualLinear)
             {
-                var portfolioId = ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "PorfolioId");
+                var portfolioId = ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "PortfolioId");
                 if (portfolioId == default)
                     return new ExchangeWebResult<SharedPosition[]>(Exchange, new ArgumentError("PortfolioId is required as Exchange parameter for retrieving Perpetual futures balances"));
 
@@ -1379,8 +1412,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 PlacedOrderId = order.Data.OrderId,
                 AveragePrice = order.Data.AverageFillPrice == 0 ? null : order.Data.AverageFillPrice,
                 OrderPrice = order.Data.OrderConfiguration.Price,
-                OrderQuantity = new SharedOrderQuantity(order.Data.OrderConfiguration.Quantity, order.Data.OrderConfiguration.QuoteQuantity),
-                QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled),
+                OrderQuantity = new SharedOrderQuantity(contractQuantity: order.Data.OrderConfiguration.Quantity, quoteAssetQuantity: order.Data.OrderConfiguration.QuoteQuantity),
+                QuantityFilled = new SharedOrderQuantity(contractQuantity: order.Data.QuantityFilled, quoteAssetQuantity: order.Data.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
                 UpdateTime = order.Data.LastFillTime,
                 ClientOrderId = order.Data.ClientOrderId

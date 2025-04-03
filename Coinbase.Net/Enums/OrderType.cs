@@ -33,7 +33,7 @@ namespace Coinbase.Net.Enums
         /// <summary>
         /// Stop limit order
         /// </summary>
-        [Map("STOP_LIMIT")]
+        [Map("STOP_LIMIT", "Stop Limit")]
         StopLimit,
         /// <summary>
         /// Bracket order

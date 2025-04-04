@@ -7991,10 +7991,5 @@
             <param name="optionsDelegate">Set options for the Coinbase services</param>
             <returns></returns>
         </member>
-        <member name="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddCoinbase(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Coinbase.Net.Objects.Options.CoinbaseRestOptions},System.Action{Coinbase.Net.Objects.Options.CoinbaseSocketOptions},System.Nullable{Microsoft.Extensions.DependencyInjection.ServiceLifetime})">
-            <summary>
-            DEPRECATED; use <see cref="M:Microsoft.Extensions.DependencyInjection.ServiceCollectionExtensions.AddCoinbase(Microsoft.Extensions.DependencyInjection.IServiceCollection,System.Action{Coinbase.Net.Objects.Options.CoinbaseOptions})" /> instead
-            </summary>
-        </member>
     </members>
 </doc>

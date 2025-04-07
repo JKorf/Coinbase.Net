@@ -90,7 +90,14 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return result;
 
             if (!result.Data.Success && result.Data.ErrorResponse != null)
-                return result.AsError<CoinbaseOrderResult>(new ServerError($"{result.Data.ErrorResponse.ErrorCode}: {result.Data.ErrorResponse.Message}"));
+            {
+                var errorMessage = result.Data.ErrorResponse.Message;
+                if (!string.IsNullOrEmpty(result.Data.ErrorResponse.PreviewFailureReason))
+                    errorMessage = result.Data.ErrorResponse.PreviewFailureReason;
+                else if (!string.IsNullOrEmpty(result.Data.ErrorResponse.OrderFailureReason))
+                    errorMessage = result.Data.ErrorResponse.PreviewFailureReason;
+                return result.AsError<CoinbaseOrderResult>(new ServerError($"{result.Data.ErrorResponse.ErrorCode}: {errorMessage}"));
+            }
 
             return result;
         }

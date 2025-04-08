@@ -3090,20 +3090,23 @@
             <summary>
             Endpoints related to account settings, info or actions
             </summary>
+            <see cref="T:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount"/>
         </member>
         <member name="P:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApi.ExchangeData">
             <summary>
             Endpoints related to retrieving market and system data
             </summary>
+            <see cref="T:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiExchangeData"/>
         </member>
         <member name="P:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApi.Trading">
             <summary>
             Endpoints related to orders and trades
             </summary>
+            <see cref="T:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiTrading"/>
         </member>
         <member name="P:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApi.SharedClient">
             <summary>
-            Get the shared rest requests client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+            Get the shared rest requests client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="T:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApiAccount">
@@ -3756,7 +3759,7 @@
         </member>
         <member name="P:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SharedClient">
             <summary>
-            Get the shared socket subscription client. This interface is shared with other exhanges to allow for a common implementation for different exchanges.
+            Get the shared socket subscription client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
             </summary>
         </member>
         <member name="M:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi.SubscribeToHeartbeatUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseHeartbeat}},System.Threading.CancellationToken)">
@@ -3920,6 +3923,7 @@
             <summary>
             Advanced Trade API endpoints, also contains some App API endpoints
             </summary>
+            <see cref="T:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApi"/>
         </member>
         <member name="M:Coinbase.Net.Interfaces.Clients.ICoinbaseRestClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
             <summary>
@@ -3942,12 +3946,13 @@
             <summary>
             Advanced trade API streams
             </summary>
+            <see cref="T:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseSocketClientAdvancedTradeApi"/>
         </member>
         <member name="M:Coinbase.Net.Interfaces.Clients.ICoinbaseSocketClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
             <summary>
             Update specific options
             </summary>
-            <param name="options">Options to update. Only specific options are changable after the client has been created</param>
+            <param name="options">Options to update. Only specific options are changeable after the client has been created</param>
         </member>
         <member name="M:Coinbase.Net.Interfaces.Clients.ICoinbaseSocketClient.SetApiCredentials(CryptoExchange.Net.Authentication.ApiCredentials)">
             <summary>

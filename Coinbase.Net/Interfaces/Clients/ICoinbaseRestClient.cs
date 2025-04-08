@@ -13,6 +13,7 @@ namespace Coinbase.Net.Interfaces.Clients
         /// <summary>
         /// Advanced Trade API endpoints, also contains some App API endpoints
         /// </summary>
+        /// <see cref="ICoinbaseRestClientAdvancedTradeApi"/>
         public ICoinbaseRestClientAdvancedTradeApi AdvancedTradeApi { get; }
 
         /// <summary>

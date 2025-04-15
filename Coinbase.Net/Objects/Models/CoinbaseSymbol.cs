@@ -332,7 +332,7 @@ namespace Coinbase.Net.Objects.Models
         /// Open interest
         /// </summary>
         [JsonPropertyName("open_interest")]
-        public decimal OpenInterest { get; set; }
+        public decimal? OpenInterest { get; set; }
         /// <summary>
         /// Funding rate
         /// </summary>

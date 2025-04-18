@@ -1,19 +1,22 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbaseCryptoAssetWrapper
     {
         [JsonPropertyName("data")]
-        public IEnumerable<CoinbaseCryptoAsset> Data { get; set; } = Array.Empty<CoinbaseCryptoAsset>();
+        public CoinbaseCryptoAsset[] Data { get; set; } = Array.Empty<CoinbaseCryptoAsset>();
     }
 
     /// <summary>
     /// Crypto asset
     /// </summary>
+    [SerializationModel]
     public record CoinbaseCryptoAsset
     {
         /// <summary>

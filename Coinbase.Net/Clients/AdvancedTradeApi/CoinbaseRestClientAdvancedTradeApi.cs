@@ -47,7 +47,6 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             ArraySerialization = ArrayParametersSerialization.MultipleValues;
 
-            var version = Assembly.GetAssembly(typeof(RestApiClient)).GetName().Version;
             StandardRequestHeaders = new Dictionary<string, string>
             {
                 { "User-Agent", "CryptoExchange.Net/" + baseClient.CryptoExchangeLibVersion }
@@ -56,9 +55,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #endregion
 
         /// <inheritdoc />
-        protected override IStreamMessageAccessor CreateAccessor() => new SystemTextJsonStreamMessageAccessor();
+        protected override IStreamMessageAccessor CreateAccessor() => new SystemTextJsonStreamMessageAccessor(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
         /// <inheritdoc />
-        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer();
+        protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
@@ -80,7 +79,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             return await base.SendAsync<T>(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
         }
 
-        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
+        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor)
         {
             var reset = responseHeaders.SingleOrDefault(x => x.Key.Equals("x-ratelimit-reset", StringComparison.InvariantCultureIgnoreCase));
             if (reset.Key == null)
@@ -94,7 +93,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             return error;
         }
 
-        protected override Error ParseErrorResponse(int httpStatusCode, IEnumerable<KeyValuePair<string, IEnumerable<string>>> responseHeaders, IMessageAccessor accessor)
+        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor)
         {
             if (!accessor.IsJson)
                 return new ServerError(accessor.GetOriginalString());

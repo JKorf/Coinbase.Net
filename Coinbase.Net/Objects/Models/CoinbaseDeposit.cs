@@ -1,10 +1,12 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using System;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
 
+    [SerializationModel]
     internal record CoinbaseDepositWrapper
     {
         [JsonPropertyName("data")]
@@ -14,6 +16,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Deposit info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseDeposit
     {
         /// <summary>

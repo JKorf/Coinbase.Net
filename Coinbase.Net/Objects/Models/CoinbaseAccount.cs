@@ -1,10 +1,12 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbaseAccountWrapper
     {
         [JsonPropertyName("account")]
@@ -14,18 +16,20 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Accounts page
     /// </summary>
+    [SerializationModel]
     public record CoinbaseAccountPage : CoinbasePage
     {
         /// <summary>
         /// Accounts
         /// </summary>
         [JsonPropertyName("accounts")]
-        public IEnumerable<CoinbaseAccount> Accounts { get; set; } = Array.Empty<CoinbaseAccount>();
+        public CoinbaseAccount[] Accounts { get; set; } = Array.Empty<CoinbaseAccount>();
     }
 
     /// <summary>
     /// Account/balance info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseAccount
     {
         /// <summary>
@@ -103,6 +107,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Quantity
     /// </summary>
+    [SerializationModel]
     public record CoinbaseQuantityReference
     {
         /// <summary>

@@ -1,9 +1,11 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using System;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbaseWithdrawalWrapper
     {
         [JsonPropertyName("data")]
@@ -13,6 +15,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Withdrawal info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseWithdrawal
     {
         /// <summary>

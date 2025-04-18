@@ -21,7 +21,7 @@ namespace Coinbase.Net.UnitTests
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new ApiCredentials("123", "-----BEGIN EC PRIVATE KEY-----\r\nMHcCAQEEIGaopmcUKDBihelMJbKUyRmaR6F3Eo90EZaqZJ3/mBr0oAoGCCqGSM49\r\nAwEHoUQDQgAEnYaxPG+o57xM5o/M5QNn0ocwlw12ZNVWFEo9tKDQ7Jz5Gz/0eMcP\r\nmEhm5msFFpWgrY0/T92MfwByuaLws/rM3w==\r\n-----END EC PRIVATE KEY-----");
             });
-            var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/AdvancedTrade/Account", "https://api.coinbase.com", IsAuthenticated, stjCompare: true);
+            var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/AdvancedTrade/Account", "https://api.coinbase.com", IsAuthenticated);
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetAccountsAsync(), "GetAccounts");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetFeeInfoAsync(), "GetFeeInfo");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetApiKeyInfoAsync(), "GetApiKeyInfo");
@@ -63,7 +63,7 @@ namespace Coinbase.Net.UnitTests
             {
                 opts.AutoTimestamp = false;
             });
-            var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/AdvancedTrade/ExchangeData", "https://api.coinbase.com", IsAuthenticated, stjCompare: true);
+            var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/AdvancedTrade/ExchangeData", "https://api.coinbase.com", IsAuthenticated);
             await tester.ValidateAsync(client => client.AdvancedTradeApi.ExchangeData.GetSymbolsAsync(), "GetSymbols", "products");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.ExchangeData.GetKlinesAsync("ETH-USDT", KlineInterval.OneDay), "GetKlines", "candles");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.ExchangeData.GetTradeHistoryAsync("ETH-USDT"), "GetTradeHistory", ignoreProperties: new List<string> { "bid", "ask" });
@@ -80,7 +80,7 @@ namespace Coinbase.Net.UnitTests
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new ApiCredentials("123", "-----BEGIN EC PRIVATE KEY-----\r\nMHcCAQEEIGaopmcUKDBihelMJbKUyRmaR6F3Eo90EZaqZJ3/mBr0oAoGCCqGSM49\r\nAwEHoUQDQgAEnYaxPG+o57xM5o/M5QNn0ocwlw12ZNVWFEo9tKDQ7Jz5Gz/0eMcP\r\nmEhm5msFFpWgrY0/T92MfwByuaLws/rM3w==\r\n-----END EC PRIVATE KEY-----");
             });
-            var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/AdvancedTrade/Trading", "https://api.coinbase.com", IsAuthenticated, stjCompare: true);
+            var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/AdvancedTrade/Trading", "https://api.coinbase.com", IsAuthenticated);
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Trading.PlaceOrderAsync("ETHUSDT", OrderSide.Sell, NewOrderType.Limit), "PlaceOrder", ignoreProperties: new List<string> { "order_configuration" });
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Trading.CancelOrdersAsync(new[] { "123" }), "CancelOrders", nestedJsonProperty: "results");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Trading.EditOrderAsync("123", 1, 1), "EditOrder", ignoreProperties: new List<string> { "errors" });

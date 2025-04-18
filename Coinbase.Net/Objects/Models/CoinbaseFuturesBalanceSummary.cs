@@ -1,7 +1,9 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbaseFuturesBalanceSummaryWrapper
     {
         /// <summary>
@@ -14,6 +16,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// 
     /// </summary>
+    [SerializationModel]
     public record CoinbaseFuturesBalanceSummary
     {
         /// <summary>

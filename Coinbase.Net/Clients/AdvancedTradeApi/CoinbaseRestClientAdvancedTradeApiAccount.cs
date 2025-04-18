@@ -52,13 +52,13 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Portfolios
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CoinbasePortfolio>>> GetPortfoliosAsync(PortfolioType? type = null, CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbasePortfolio[]>> GetPortfoliosAsync(PortfolioType? type = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalEnum("portfolio_type", type);
             var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/brokerage/portfolios", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePortfoliosWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<CoinbasePortfolio>>(result.Data?.Portfolios);
+            return result.As<CoinbasePortfolio[]>(result.Data?.Portfolios);
         }
 
         #endregion
@@ -99,10 +99,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             var parameters = new ParameterCollection();
             parameters.Add("source_portfolio_uuid", fromPortfolioId);
             parameters.Add("target_portfolio_uuid", toPortfolioId);
-            parameters.Add("funds", new
+            parameters.Add("funds", new Dictionary<string, object>
             {
-                value = quantity.ToString(CultureInfo.InvariantCulture),
-                currency = asset
+                { "value", quantity.ToString(CultureInfo.InvariantCulture) },
+                { "currency", asset }
             });
             var request = _definitions.GetOrCreate(HttpMethod.Post, $"api/v3/brokerage/portfolios/move_funds", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePortfolioMove>(request, parameters, ct).ConfigureAwait(false);
@@ -289,12 +289,12 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Payment Methods
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CoinbasePaymentMethod>>> GetPaymentMethodsAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbasePaymentMethod[]>> GetPaymentMethodsAsync(CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/brokerage/payment_methods", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePaymentMethodsWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<CoinbasePaymentMethod>>(result.Data?.PaymentMethods);
+            return result.As<CoinbasePaymentMethod[]>(result.Data?.PaymentMethods);
         }
 
         #endregion

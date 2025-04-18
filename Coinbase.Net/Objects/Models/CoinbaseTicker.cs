@@ -1,10 +1,12 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
     /// <summary>
     /// Batch ticker
     /// </summary>
+    [SerializationModel]
     public record CoinbaseBatchTicker
     {
         /// <summary>
@@ -57,6 +59,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Ticker info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseTicker : CoinbaseBatchTicker
     {
         /// <summary>

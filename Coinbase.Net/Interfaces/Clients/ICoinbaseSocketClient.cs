@@ -13,12 +13,13 @@ namespace Coinbase.Net.Interfaces.Clients
         /// <summary>
         /// Advanced trade API streams
         /// </summary>
+        /// <see cref="ICoinbaseSocketClientAdvancedTradeApi"/>
         public ICoinbaseSocketClientAdvancedTradeApi AdvancedTradeApi { get; }
 
         /// <summary>
         /// Update specific options
         /// </summary>
-        /// <param name="options">Options to update. Only specific options are changable after the client has been created</param>
+        /// <param name="options">Options to update. Only specific options are changeable after the client has been created</param>
         void SetOptions(UpdateOptions options);
 
         /// <summary>

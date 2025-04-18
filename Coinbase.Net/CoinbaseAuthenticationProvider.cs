@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
 using System.Security.Cryptography;
+using System.Text.Json;
+using System.Text.Json.Serialization.Metadata;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.SystemTextJson;
@@ -14,7 +16,8 @@ namespace Coinbase.Net
 {
     internal class CoinbaseAuthenticationProvider : AuthenticationProvider
     {
-        private static IMessageSerializer _serializer = new SystemTextJsonMessageSerializer();
+        private static IMessageSerializer _serializer = new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
+        private static JwtSettings _mapperSettings = new JwtSettings() { JsonMapper = new JwtJsonMapper() };
 
         public CoinbaseAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {
@@ -45,7 +48,7 @@ namespace Coinbase.Net
 
         public string GenerateToken(DateTime timestamp, string? uriLine)
         {
-#if NETSTANDARD2_1_OR_GREATER
+#if NETSTANDARD2_1_OR_GREATER || NET8_0_OR_GREATER
 
             var lines = _credentials.Secret.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
             var strippedKey = string.Join("", lines.Skip(1).Take(lines.Length - 2));
@@ -71,10 +74,23 @@ namespace Coinbase.Net
                  { "nonce", BytesToHexString(nonce) },
              };
 
-            return JWT.Encode(payload, key, JwsAlgorithm.ES256, extraHeaders);
+            var payloadStr = _serializer.Serialize(payload);
+            return JWT.Encode(payloadStr, key, JwsAlgorithm.ES256, extraHeaders, _mapperSettings);
 #else
             throw new PlatformNotSupportedException("Authentication is not available for .NetStandard2.0 due to platform limitations");
 #endif
         }
+
+        // Override the default to make sure the correct json serializer options are used
+        class JwtJsonMapper : IJsonMapper
+        {
+            public T Parse<T>(string json)
+            {
+                return JsonSerializer.Deserialize(json, (JsonTypeInfo<T>)CoinbaseExchange._serializerContext.GetTypeInfo(typeof(T))!)!;
+            }
+
+            public string Serialize(object obj) => _serializer.Serialize(obj);
+        }
     }
+
 }

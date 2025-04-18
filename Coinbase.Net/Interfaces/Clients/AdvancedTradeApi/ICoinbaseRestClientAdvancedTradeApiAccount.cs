@@ -37,7 +37,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="type">Filter by portfolio type</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<IEnumerable<CoinbasePortfolio>>> GetPortfoliosAsync(PortfolioType? type = null, CancellationToken ct = default);
+        Task<WebCallResult<CoinbasePortfolio[]>> GetPortfoliosAsync(PortfolioType? type = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get a breakdown of a portfolio
@@ -180,7 +180,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpaymentmethods" /></para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<IEnumerable<CoinbasePaymentMethod>>> GetPaymentMethodsAsync(CancellationToken ct = default);
+        Task<WebCallResult<CoinbasePaymentMethod[]>> GetPaymentMethodsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get payment method by id

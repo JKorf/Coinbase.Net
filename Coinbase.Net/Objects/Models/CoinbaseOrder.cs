@@ -1,10 +1,12 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbaseOrderWrapper
     {
         /// <summary>
@@ -14,18 +16,20 @@ namespace Coinbase.Net.Objects.Models
         public CoinbaseOrder Order { get; set; } = null!;
     }
 
+    [SerializationModel]
     internal record CoinbaseOrdersWrapper
     {
         /// <summary>
         /// Orders
         /// </summary>
         [JsonPropertyName("orders")]
-        public IEnumerable<CoinbaseOrder> Orders { get; set; } = null!;
+        public CoinbaseOrder[] Orders { get; set; } = null!;
     }
 
     /// <summary>
     /// 
     /// </summary>
+    [SerializationModel]
     public record CoinbaseOrder
     {
         /// <summary>
@@ -182,7 +186,7 @@ namespace Coinbase.Net.Objects.Models
         /// Edit history
         /// </summary>
         [JsonPropertyName("edit_history")]
-        public IEnumerable<CoinbaseOrderEditHistory>? EditHistory { get; set; }
+        public CoinbaseOrderEditHistory[]? EditHistory { get; set; }
         /// <summary>
         /// Leverage
         /// </summary>
@@ -203,6 +207,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Edit history
     /// </summary>
+    [SerializationModel]
     public record CoinbaseOrderEditHistory
     {
         /// <summary>

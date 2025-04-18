@@ -1,9 +1,11 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using System;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbaseTransactionWrapper
     {
         [JsonPropertyName("data")]
@@ -13,6 +15,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Transaction info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseTransaction
     {
         /// <summary>
@@ -90,6 +93,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Network info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseTransactionNetwork
     {
         /// <summary>
@@ -124,6 +128,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Transaction details
     /// </summary>
+    [SerializationModel]
     public record CoinbaseTransactionDetails
     {
         /// <summary>

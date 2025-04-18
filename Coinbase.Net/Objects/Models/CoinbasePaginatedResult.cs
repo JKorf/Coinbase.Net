@@ -1,4 +1,5 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
@@ -7,6 +8,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Paginated response
     /// </summary>
+    [SerializationModel]
     public record CoinbasePaginatedResult<T>
     {
         /// <summary>
@@ -18,12 +20,13 @@ namespace Coinbase.Net.Objects.Models
         /// Data
         /// </summary>
         [JsonPropertyName("data")]
-        public IEnumerable<T> Data { get; set; } = Array.Empty<T>();
+        public T[] Data { get; set; } = Array.Empty<T>();
     }
 
     /// <summary>
     /// Pagination info
     /// </summary>
+    [SerializationModel]
     public record CoinbasePageInfo
     {
         /// <summary>

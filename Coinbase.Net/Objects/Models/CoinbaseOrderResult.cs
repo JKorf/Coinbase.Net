@@ -1,4 +1,5 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
@@ -6,6 +7,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Order info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseOrderResult
     {
         /// <summary>
@@ -35,6 +37,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Success response
     /// </summary>
+    [SerializationModel]
     public record CoinbaseOrderSuccess
     {
         /// <summary>
@@ -62,6 +65,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Error response
     /// </summary>
+    [SerializationModel]
     public record CoinbaseOrderError
     {
         /// <summary>

@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Coinbase.Net.Enums
 {
     /// <summary>
     /// Order type
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<OrderType>))]
     public enum OrderType
     {
         /// <summary>
@@ -30,7 +33,7 @@ namespace Coinbase.Net.Enums
         /// <summary>
         /// Stop limit order
         /// </summary>
-        [Map("STOP_LIMIT")]
+        [Map("STOP_LIMIT", "Stop Limit")]
         StopLimit,
         /// <summary>
         /// Bracket order

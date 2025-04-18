@@ -1,4 +1,5 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
@@ -6,6 +7,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Position info
     /// </summary>
+    [SerializationModel]
     public record CoinbasePerpetualPositionUpdate
     {
         /// <summary>

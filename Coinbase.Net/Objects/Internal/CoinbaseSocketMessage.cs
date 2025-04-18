@@ -1,9 +1,11 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Internal
 {
+    [SerializationModel]
     internal record CoinbaseSocketMessage
     {
         [JsonPropertyName("channel")]
@@ -14,9 +16,10 @@ namespace Coinbase.Net.Objects.Internal
         public long SequenceNumber { get; set; }
     }
 
+    [SerializationModel]
     internal record CoinbaseSocketMessage<T> : CoinbaseSocketMessage
     {
         [JsonPropertyName("events")]
-        public IEnumerable<T> Events { get; set; } = Array.Empty<T>();
+        public T[] Events { get; set; } = Array.Empty<T>();
     }
 }

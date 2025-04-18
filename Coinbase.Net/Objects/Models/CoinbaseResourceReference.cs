@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
@@ -6,6 +7,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Resource reference
     /// </summary>
+    [SerializationModel]
     public record CoinbaseResourceReference
     {
         /// <summary>
@@ -28,6 +30,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Reference
     /// </summary>
+    [SerializationModel]
     public record CoinbaseToReference : CoinbaseResourceReference
     {
         /// <summary>

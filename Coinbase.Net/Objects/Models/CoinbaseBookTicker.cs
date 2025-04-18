@@ -1,19 +1,22 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbaseBookTickerWrapper
     {
         [JsonPropertyName("pricebooks")]
-        public IEnumerable<CoinbaseBookTicker> Data { get; set; } = null!;
+        public CoinbaseBookTicker[] Data { get; set; } = null!;
     }
 
     /// <summary>
     /// Book ticker
     /// </summary>
+    [SerializationModel]
     public record CoinbaseBookTicker
     {
         /// <summary>

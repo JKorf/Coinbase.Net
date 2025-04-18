@@ -16,7 +16,7 @@ namespace Coinbase.Net
 {
     internal class CoinbaseAuthenticationProvider : AuthenticationProvider
     {
-        private static IMessageSerializer _serializer = new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange.SerializerContext));
+        private static IMessageSerializer _serializer = new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
         private static JwtSettings _mapperSettings = new JwtSettings() { JsonMapper = new JwtJsonMapper() };
 
         public CoinbaseAuthenticationProvider(ApiCredentials credentials) : base(credentials)
@@ -86,7 +86,7 @@ namespace Coinbase.Net
         {
             public T Parse<T>(string json)
             {
-                return JsonSerializer.Deserialize(json, (JsonTypeInfo<T>)CoinbaseExchange.SerializerContext.GetTypeInfo(typeof(T))!)!;
+                return JsonSerializer.Deserialize(json, (JsonTypeInfo<T>)CoinbaseExchange._serializerContext.GetTypeInfo(typeof(T))!)!;
             }
 
             public string Serialize(object obj) => _serializer.Serialize(obj);

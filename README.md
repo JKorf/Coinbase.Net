@@ -13,9 +13,10 @@ Coinbase.Net is a client library for accessing the [Coinbase Advanced Trade REST
 * Extensive logging
 * Support for different environments
 * Easy integration with other exchange client based on the CryptoExchange.Net base library
+* Native AOT support
 
 ## Supported Frameworks
-The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for optimal compatibility
+The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for optimal compatibility, as well as dotnet 8.0 and 9.0 to use the latest framework features.
 
 |.NET implementation|Version Support|
 |--|--|

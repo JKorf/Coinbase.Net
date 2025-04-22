@@ -224,7 +224,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (!result)
                 return result.AsExchangeResult<SharedOrderBook>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedOrderBook(result.Data.Asks, result.Data.Bids));
+            return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedOrderBook(result.Data.Asks, result.Data.Bids));
         }
 
         #endregion
@@ -283,7 +283,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 nextToken = new DateTimeToken(result.Data.Trades.Min(x => x.Timestamp.AddMilliseconds(-1)));
 
             // Return
-            return result.AsExchangeResult<SharedTrade[]>(Exchange, TradingMode.Spot, result.Data.Trades.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)
+            return result.AsExchangeResult<SharedTrade[]>(Exchange, request.Symbol.TradingMode, result.Data.Trades.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)
             {
                 Side = x.OrderSide == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
             }).ToArray(), nextToken);
@@ -899,7 +899,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (!order)
                 return order.AsExchangeResult<SharedFuturesOrder>(Exchange, null, default);
 
-            return order.AsExchangeResult(Exchange, TradingMode.Spot, new SharedFuturesOrder(
+            return order.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedFuturesOrder(
                 ExchangeSymbolCache.ParseSymbol(_topicFuturesId, order.Data.Symbol),
                 order.Data.Symbol,
                 order.Data.OrderId.ToString(),
@@ -939,7 +939,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (!orders)
                 return orders.AsExchangeResult<SharedFuturesOrder[]>(Exchange, null, default);
 
-            return orders.AsExchangeResult<SharedFuturesOrder[]>(Exchange, TradingMode.Spot, orders.Data.Select(x => new SharedFuturesOrder(
+            return orders.AsExchangeResult<SharedFuturesOrder[]>(Exchange, SupportedFuturesModes, orders.Data.Select(x => new SharedFuturesOrder(
                 ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), 
                 x.Symbol,
                 x.OrderId.ToString(),
@@ -992,7 +992,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (orders.Data.Count() == (request.Limit ?? 1000))
                 nextToken = new DateTimeToken(orders.Data.Min(o => o.CreateTime).AddMilliseconds(-1));
 
-            return orders.AsExchangeResult<SharedFuturesOrder[]>(Exchange, TradingMode.Spot, orders.Data.Select(x => new SharedFuturesOrder(
+            return orders.AsExchangeResult<SharedFuturesOrder[]>(Exchange, request.Symbol.TradingMode, orders.Data.Select(x => new SharedFuturesOrder(
                 ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), 
                 x.Symbol,
                 x.OrderId.ToString(),
@@ -1025,7 +1025,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (!orders)
                 return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, null, default);
 
-            return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, TradingMode.Spot, orders.Data.Trades.Select(x => new SharedUserTrade(
+            return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, request.Symbol.TradingMode, orders.Data.Trades.Select(x => new SharedUserTrade(
                 ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), 
                 x.Symbol,
                 x.OrderId,
@@ -1068,7 +1068,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (orders.Data.Trades.Count() == (request.Limit ?? 100))
                 nextToken = new DateTimeToken(orders.Data.Trades.Min(o => o.Timestamp).AddMilliseconds(-1));
 
-            return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, TradingMode.Spot, orders.Data.Trades.Select(x => new SharedUserTrade(
+            return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, request.Symbol.TradingMode, orders.Data.Trades.Select(x => new SharedUserTrade(
                 ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), 
                 x.Symbol,
                 x.OrderId,
@@ -1208,7 +1208,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
-                return new ExchangeWebResult<SharedKline[]>(Exchange, TradingMode.Spot, result.As<SharedKline[]>(default));
+                return new ExchangeWebResult<SharedKline[]>(Exchange, request.Symbol.TradingMode, result.As<SharedKline[]>(default));
 
             // Get next token
             DateTimeToken? nextToken = null;
@@ -1240,7 +1240,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return result.AsExchangeResult<SharedFee>(Exchange, null, default);
 
             // Return
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedFee(result.Data.FeeTier.MakerFeeRate * 100, result.Data.FeeTier.TakerFeeRate * 100));
+            return result.AsExchangeResult(Exchange, symbolType == SymbolType.Spot ? [TradingMode.Spot] : SupportedFuturesModes, new SharedFee(result.Data.FeeTier.MakerFeeRate * 100, result.Data.FeeTier.TakerFeeRate * 100));
         }
         #endregion
 

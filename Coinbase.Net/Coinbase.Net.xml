@@ -407,6 +407,12 @@
             Get the Coinbase environment by name
             </summary>
         </member>
+        <member name="P:Coinbase.Net.CoinbaseEnvironment.All">
+            <summary>
+            Available environment names
+            </summary>
+            <returns></returns>
+        </member>
         <member name="P:Coinbase.Net.CoinbaseEnvironment.Live">
             <summary>
             Live environment

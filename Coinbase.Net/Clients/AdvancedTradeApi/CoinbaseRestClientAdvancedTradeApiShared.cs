@@ -386,16 +386,24 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (!result)
                 return result.AsExchangeResult<SharedSpotSymbol[]>(Exchange, null, default);
 
-            var response = result.AsExchangeResult<SharedSpotSymbol[]>(Exchange, TradingMode.Spot, result.Data.Where(x => !x.AliasTo.Any()).Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Symbol, s.SymbolStatus == SymbolStatus.Online && !s.IsDisabled && !s.TradingDisabled)
+            // Coinbase return duplicate spot symbols for some pairs
+            // For example both BTC-USD and BTC-USDC is returned, referring to the same symbol
+            // Also, when for example subscribing to BTC-USDC in update the name is BTC-USD instead
+            // The library uses the BTC-USDC notation
+            var symbolData = result.Data.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Symbol, s.SymbolStatus == SymbolStatus.Online && !s.IsDisabled && !s.TradingDisabled)
             {
                 MinTradeQuantity = s.MinOrderQuantity,
                 MaxTradeQuantity = s.MaxOrderQuantity,
                 QuantityStep = s.QuantityStep,
                 PriceStep = s.PriceStep
-            }).ToArray());
+            }).ToArray();
 
-            ExchangeSymbolCache.UpdateSymbolInfo(_topicSpotId, response.Data);
-            return response;
+            var originalSymbols = symbolData.Where(x => x.QuoteAsset != "USD").ToArray();
+            foreach (var item in symbolData.Where(x => x.QuoteAsset == "USD"))            
+                item.QuoteAsset = "USDC";            
+
+            ExchangeSymbolCache.UpdateSymbolInfo(_topicSpotId, symbolData);
+            return result.AsExchangeResult<SharedSpotSymbol[]>(Exchange, TradingMode.Spot, originalSymbols);
         }
 
         #endregion

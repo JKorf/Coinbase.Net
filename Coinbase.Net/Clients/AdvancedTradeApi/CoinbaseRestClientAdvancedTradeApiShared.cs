@@ -408,7 +408,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         #endregion
 
-        #region Ticker client
+        #region Spot Ticker client
 
         EndpointOptions<GetTickerRequest> ISpotTickerRestClient.GetSpotTickerOptions { get; } = new EndpointOptions<GetTickerRequest>(false);
         async Task<ExchangeWebResult<SharedSpotTicker>> ISpotTickerRestClient.GetSpotTickerAsync(GetTickerRequest request, CancellationToken ct)
@@ -438,7 +438,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (!result)
                 return result.AsExchangeResult<SharedSpotTicker[]>(Exchange, null, default);
 
-            return result.AsExchangeResult<SharedSpotTicker[]>(Exchange, TradingMode.Spot, result.Data.Select(x => new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol), x.Symbol, x.LastPrice, null, null, x.Volume24h ?? 0, x.PricePercentageChange24h)
+            var originalSymbols = result.Data.Where(x => x.QuoteAsset != "USD").ToArray();
+            return result.AsExchangeResult<SharedSpotTicker[]>(Exchange, TradingMode.Spot, originalSymbols.Select(x => new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol), x.Symbol, x.LastPrice, null, null, x.Volume24h ?? 0, x.PricePercentageChange24h)
             {
                 QuoteVolume = x.ApproximateQuote24hVolume
             }).ToArray());
@@ -748,7 +749,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         #endregion
 
-        #region Ticker client
+        #region Futures Ticker client
 
         EndpointOptions<GetTickerRequest> IFuturesTickerRestClient.GetFuturesTickerOptions { get; } = new EndpointOptions<GetTickerRequest>(false);
         async Task<ExchangeWebResult<SharedFuturesTicker>> IFuturesTickerRestClient.GetFuturesTickerAsync(GetTickerRequest request, CancellationToken ct)

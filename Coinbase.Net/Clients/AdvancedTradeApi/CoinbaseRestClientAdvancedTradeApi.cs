@@ -93,10 +93,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             return error;
         }
 
-        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor)
+        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
         {
             if (!accessor.IsJson)
-                return new ServerError(accessor.GetOriginalString());
+                return new ServerError(null, "Unknown request error", exception: exception);
 
             var error = accessor.GetValue<string>(MessagePath.Get().Property("error"));
             if (error == null)
@@ -104,13 +104,13 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 var errorId = accessor.GetValue<string?>(MessagePath.Get().Property("errors").Index(0).Property("id"));
                 var errorMsg = accessor.GetValue<string?>(MessagePath.Get().Property("errors").Index(0).Property("message"));
                 if (errorId != null)
-                    return new ServerError($"{errorId}: {errorMsg}");
+                    return new ServerError(null, $"{errorId}: {errorMsg}", exception);
 
-                return new ServerError(accessor.GetOriginalString());
+                return new ServerError(null, "Unknown request error", exception: exception);
             }
 
             var msg = accessor.GetValue<string>(MessagePath.Get().Property("message"));
-            return new ServerError($"{error}: {msg}");
+            return new ServerError(null, $"{error}: {msg}", exception);
         }
 
         /// <inheritdoc />

@@ -9,6 +9,7 @@ using CryptoExchange.Net.Objects;
 using System.Linq;
 using Coinbase.Net.Enums;
 using CryptoExchange.Net;
+using Coinbase.Net.Objects.Models;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
@@ -120,7 +121,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                             ClientOrderId = x.ClientOrderId,
                             OrderPrice = x.Price == 0 ? null : x.Price,
                             AveragePrice = x.AveragePrice == 0 ? null : x.AveragePrice,
-                            OrderQuantity = new SharedOrderQuantity(x.QuantityFilled + x.QuantityRemaining),
+                            OrderQuantity = ParseOrderQuantity(x),
                             QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.ValueFilled),
                             Fee = x.TotalFees,
                             TriggerPrice = x.StopPrice,
@@ -136,6 +137,19 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 ct: ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
+        }
+
+        private SharedOrderQuantity ParseOrderQuantity(CoinbaseOrderUpdate order)
+        {
+            if (order.OrderType != OrderType.Market || order.OrderSide != OrderSide.Buy)
+                return new SharedOrderQuantity(order.QuantityFilled + order.QuantityRemaining); // Always base asset quantity
+
+            // Can be either base or quote asset quantity, but not very clear how to know
+            // If the total value of the order is the same as the quantity we assume order quantity is in quote
+            if (order.TotalValueAfterFees == (order.QuantityFilled + order.QuantityRemaining))
+                return new SharedOrderQuantity(null, order.QuantityFilled + order.QuantityRemaining);
+
+            return new SharedOrderQuantity(order.QuantityFilled + order.QuantityRemaining);
         }
 
         private SharedOrderType ParseOrderType(OrderType orderType)

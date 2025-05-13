@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Coinbase.Net.Enums
 {
     /// <summary>
     /// Intraday margin setting
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<IntradayMargin>))]
     public enum IntradayMargin
     {
         /// <summary>

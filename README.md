@@ -13,9 +13,10 @@ Coinbase.Net is a client library for accessing the [Coinbase Advanced Trade REST
 * Extensive logging
 * Support for different environments
 * Easy integration with other exchange client based on the CryptoExchange.Net base library
+* Native AOT support
 
 ## Supported Frameworks
-The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for optimal compatibility
+The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for optimal compatibility, as well as dotnet 8.0 and 9.0 to use the latest framework features.
 
 |.NET implementation|Version Support|
 |--|--|
@@ -152,6 +153,37 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 2.0.0-beta3 - 01 May 2025
+    * Updated CryptoExchange.Net version to 9.0.0-beta5
+    * Added property to retrieve all available API environments
+    * Fixed duplicate symbols being returned from Shared GetSpotSymbolsAsync
+
+* Version 2.0.0-beta2 - 23 Apr 2025
+    * Updated CryptoExchange.Net to version 9.0.0-beta2
+    * Added Shared spot ticker QuoteVolume mapping
+    * Fixed incorrect DataTradeMode on responses
+
+* Version 2.0.0-beta1 - 22 Apr 2025
+    * Updated CryptoExchange.Net to version 9.0.0-beta1, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added support for Native AOT compilation
+    * Added RateLimitUpdated event
+    * Added SharedSymbol response property to all Shared interfaces response models returning a symbol name
+    * Added GenerateClientOrderId method to AdvandedTradeApi Shared clients
+    * Added IBookTickerRestClient implementation to AdvandedTradeApi Shared client
+    * Added ISpotTriggerOrderRestClient implementation to AdvandedTradeApi Shared client
+    * Added IFuturesTriggerOrderRestClient implementation to AdvandedTradeApi Shared client
+    * Added IsTriggerOrder to SharedSpotOrder model
+    * Added TriggerPrice, IsTriggerPrice to SharedFuturesOrder model
+    * Added MaxLongLeverage, MaxShortLeverage to SharedFuturesSymbol model
+    * Added OptionalExchangeParameters and Supported properties to EndpointOptions
+    * Added error details parsing in restClient.AdvancedTradeApi.Trading.PlaceOrderAsync
+    * Refactored Shared clients quantity parameters and responses to use SharedQuantity
+    * Updated all IEnumerable response and model types to array response types
+    * Removed Newtonsoft.Json dependency
+    * Removed legacy AddCoinbase(restOptions, socketOptions) DI overload
+    * Fixed some typos
+    * Fixed deserialization error in restClient.AdvandedTradeApi.ExchangeData.GetFuturesSymbolsAsync endpoint
+
 * Version 1.9.1 - 28 Mar 2025
     * Fixed deserialization issue for restClient.AdvancedTradeApi.Account.GetPerpetualPortfolioSummaryAsync
 

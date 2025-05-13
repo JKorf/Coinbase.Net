@@ -1,10 +1,13 @@
-﻿using CryptoExchange.Net.Attributes;
+using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Attributes;
 
 namespace Coinbase.Net.Enums
 {
     /// <summary>
     /// Direction of a stop order trigger
     /// </summary>
+    [JsonConverter(typeof(EnumConverter<StopDirection>))]
     public enum StopDirection
     {
         /// <summary>

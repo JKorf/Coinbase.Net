@@ -6,6 +6,9 @@ using CryptoExchange.Net.RateLimiting;
 using System;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net;
+using System.Text.Json.Serialization;
+using Coinbase.Net.Converters;
+using CryptoExchange.Net.Converters;
 
 namespace Coinbase.Net
 {
@@ -47,6 +50,8 @@ namespace Coinbase.Net
         /// </summary>
         public static ExchangeType Type { get; } = ExchangeType.CEX;
 
+        internal static JsonSerializerContext _serializerContext = JsonSerializerContextCache.GetOrCreate<CoinbaseSourceGenerationContext>();
+
         /// <summary>
         /// Format a base and quote asset to a Coinbase recognized symbol 
         /// </summary>
@@ -85,6 +90,11 @@ namespace Coinbase.Net
         /// </summary>
         public event Action<RateLimitEvent> RateLimitTriggered;
 
+        /// <summary>
+        /// Event when the rate limit is updated. Note that it's only updated when a request is send, so there are no specific updates when the current usage is decaying.
+        /// </summary>
+        public event Action<RateLimitUpdateEvent> RateLimitUpdated;
+
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         internal CoinbaseRateLimiters()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
@@ -102,8 +112,11 @@ namespace Coinbase.Net
                 .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new LimitItemTypeFilter(RateLimitItemType.Connection), 750, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding))
                 .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, new LimitItemTypeFilter(RateLimitItemType.Request), 8, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));
             CoinbaseRestPublic.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            CoinbaseRestPublic.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);
             CoinbaseRestPrivate.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            CoinbaseRestPrivate.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);
             CoinbaseSocket.RateLimitTriggered += (x) => RateLimitTriggered?.Invoke(x);
+            CoinbaseSocket.RateLimitUpdated += (x) => RateLimitUpdated?.Invoke(x);
         }
 
 

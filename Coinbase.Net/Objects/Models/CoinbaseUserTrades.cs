@@ -1,4 +1,5 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
@@ -8,13 +9,14 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// User trades
     /// </summary>
+    [SerializationModel]
     public record CoinbaseUserTrades
     {
         /// <summary>
         /// Trade list
         /// </summary>
         [JsonPropertyName("fills")]
-        public IEnumerable<CoinbaseUserTrade> Trades { get; set; } = null!;
+        public CoinbaseUserTrade[] Trades { get; set; } = null!;
         /// <summary>
         /// Next page cursor
         /// </summary>
@@ -25,6 +27,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// User trade info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseUserTrade
     {
         /// <summary>

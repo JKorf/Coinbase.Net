@@ -8,11 +8,15 @@ using System.Linq;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net;
 using Coinbase.Net.Enums;
+using System.Drawing;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     internal partial class CoinbaseRestClientAdvancedTradeApi : ICoinbaseRestClientAdvancedTradeApiShared
     {
+        private const string _topicSpotId = "CoinbaseSpot";
+        private const string _topicFuturesId = "CoinbaseFutures";
+
         public string Exchange => "Coinbase";
 
         public TradingMode[] SupportedTradingModes => new[] { TradingMode.Spot, TradingMode.PerpetualLinear, TradingMode.DeliveryLinear };
@@ -24,20 +28,20 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Asset client
         EndpointOptions<GetAssetsRequest> IAssetsRestClient.GetAssetsOptions { get; } = new EndpointOptions<GetAssetsRequest>(false);
 
-        async Task<ExchangeWebResult<IEnumerable<SharedAsset>>> IAssetsRestClient.GetAssetsAsync(GetAssetsRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedAsset[]>> IAssetsRestClient.GetAssetsAsync(GetAssetsRequest request, CancellationToken ct)
         {
             var validationError = ((IAssetsRestClient)this).GetAssetsOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedTradingModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedAsset>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedAsset[]>(Exchange, validationError);
 
             var fiatAssets = ExchangeData.GetFiatAssetsAsync(ct: ct);
             var cryptoAssets = ExchangeData.GetCryptoAssetsAsync(ct: ct);
             await Task.WhenAll(fiatAssets, cryptoAssets).ConfigureAwait(false);
 
             if (!fiatAssets.Result)
-                return fiatAssets.Result.AsExchangeResult<IEnumerable<SharedAsset>>(Exchange, null, default);
+                return fiatAssets.Result.AsExchangeResult<SharedAsset[]>(Exchange, null, default);
             if (!cryptoAssets.Result)
-                return cryptoAssets.Result.AsExchangeResult<IEnumerable<SharedAsset>>(Exchange, null, default);
+                return cryptoAssets.Result.AsExchangeResult<SharedAsset[]>(Exchange, null, default);
 
             var result = new List<SharedAsset>();
             result.AddRange(fiatAssets.Result.Data.Select(x => new SharedAsset(x.Asset)
@@ -50,7 +54,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 FullName = x.Name
             }));
 
-            return cryptoAssets.Result.AsExchangeResult<IEnumerable<SharedAsset>>(Exchange, TradingMode.Spot, result);
+            return cryptoAssets.Result.AsExchangeResult<SharedAsset[]>(Exchange, TradingMode.Spot, result.ToArray());
         }
 
         EndpointOptions<GetAssetRequest> IAssetsRestClient.GetAssetOptions { get; } = new EndpointOptions<GetAssetRequest>(false);
@@ -92,40 +96,42 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Balance Client
         EndpointOptions<GetBalancesRequest> IBalanceRestClient.GetBalancesOptions { get; } = new EndpointOptions<GetBalancesRequest>(true);
 
-        async Task<ExchangeWebResult<IEnumerable<SharedBalance>>> IBalanceRestClient.GetBalancesAsync(GetBalancesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedBalance[]>> IBalanceRestClient.GetBalancesAsync(GetBalancesRequest request, CancellationToken ct)
         {
             var validationError = ((IBalanceRestClient)this).GetBalancesOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedBalance>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedBalance[]>(Exchange, validationError);
 
             if (request.TradingMode == TradingMode.Spot || request.TradingMode == null)
             {
                 var result = await Account.GetAccountsAsync(ct: ct).ConfigureAwait(false);
                 if (!result)
-                    return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, null, default);
+                    return result.AsExchangeResult<SharedBalance[]>(Exchange, null, default);
 
-                return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, TradingMode.Spot, result.Data.Accounts.Select(x => new SharedBalance(x.Asset, x.AvailableBalance.Value, x.AvailableBalance.Value + x.HoldBalance.Value)).ToArray());
+                return result.AsExchangeResult<SharedBalance[]>(Exchange, TradingMode.Spot, 
+                    result.Data.Accounts.Where(x => x.Type == AccountType.Crypto || x.Type == AccountType.Fiat).Select(x => 
+                    new SharedBalance(x.Asset, x.AvailableBalance.Value, x.AvailableBalance.Value + x.HoldBalance.Value)).ToArray());
             }
             else if (request.TradingMode.Value.IsPerpetual())
             {
                 var portfolioId = ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "PorfolioId");
                 if (portfolioId == default)
-                    return new ExchangeWebResult<IEnumerable<SharedBalance>>(Exchange, new ArgumentError("PortfolioId is required as Exchange parameter for retrieving Perpetual futures balances"));
+                    return new ExchangeWebResult<SharedBalance[]>(Exchange, new ArgumentError("PortfolioId is required as Exchange parameter for retrieving Perpetual futures balances"));
 
                 var result = await Account.GetPerpetualBalancesAsync(portfolioId, ct: ct).ConfigureAwait(false);
                 if (!result)
-                    return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, null, default);
+                    return result.AsExchangeResult<SharedBalance[]>(Exchange, null, default);
 
-                return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, request.TradingMode.Value, result.Data.Balances.Select(x => new SharedBalance(x.Asset.AssetId, x.MaxWithdrawQuantity, x.Quantity)).ToArray());
+                return result.AsExchangeResult<SharedBalance[]>(Exchange, request.TradingMode.Value, result.Data.Balances.Select(x => new SharedBalance(x.Asset.AssetId, x.MaxWithdrawQuantity, x.Quantity)).ToArray());
             }
             else
             {
                 // Delivery futures
                 var result = await Account.GetFuturesBalanceSummaryAsync(ct: ct).ConfigureAwait(false);
                 if (!result)
-                    return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, null, default);
+                    return result.AsExchangeResult<SharedBalance[]>(Exchange, null, default);
 
-                return result.AsExchangeResult<IEnumerable<SharedBalance>>(Exchange, request.TradingMode.Value, new[] { new SharedBalance(result.Data.CfmUsdBalance.Asset, result.Data.CfmUsdBalance.Value, result.Data.TotalUsdBalance.Value) });
+                return result.AsExchangeResult<SharedBalance[]>(Exchange, request.TradingMode.Value, new[] { new SharedBalance(result.Data.CfmUsdBalance.Asset, result.Data.CfmUsdBalance.Value, result.Data.TotalUsdBalance.Value) });
             }
         }
 
@@ -133,37 +139,49 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         #region Deposit client
 
-        EndpointOptions<GetDepositAddressesRequest> IDepositRestClient.GetDepositAddressesOptions { get; } = new EndpointOptions<GetDepositAddressesRequest>(true);
-        async Task<ExchangeWebResult<IEnumerable<SharedDepositAddress>>> IDepositRestClient.GetDepositAddressesAsync(GetDepositAddressesRequest request, CancellationToken ct)
+        EndpointOptions<GetDepositAddressesRequest> IDepositRestClient.GetDepositAddressesOptions { get; } = new EndpointOptions<GetDepositAddressesRequest>(true)
+        {
+            OptionalExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("AccountId", typeof(string), "Id of the account to get info for", "123123")
+            }
+        };
+        async Task<ExchangeWebResult<SharedDepositAddress[]>> IDepositRestClient.GetDepositAddressesAsync(GetDepositAddressesRequest request, CancellationToken ct)
         {
             var validationError = ((IDepositRestClient)this).GetDepositAddressesOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedTradingModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedDepositAddress>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedDepositAddress[]>(Exchange, validationError);
 
             var accountId = await GetAccountIdAsync(request.ExchangeParameters, request.Asset, ct).ConfigureAwait(false);
             if (accountId == null)
-                return new ExchangeWebResult<IEnumerable<SharedDepositAddress>>(Exchange, new ArgumentError("AccountId not provided and could not be determined. Please provide the AccountId parameter in the ExchangeParameters"));
+                return new ExchangeWebResult<SharedDepositAddress[]>(Exchange, new ArgumentError("AccountId not provided and could not be determined. Please provide the AccountId parameter in the ExchangeParameters"));
 
             var depositAddresses = await Account.GetDepositAddressesAsync(accountId, ct: ct).ConfigureAwait(false);
             if (!depositAddresses)
-                return depositAddresses.AsExchangeResult<IEnumerable<SharedDepositAddress>>(Exchange, null, default);
+                return depositAddresses.AsExchangeResult<SharedDepositAddress[]>(Exchange, null, default);
 
-            return depositAddresses.AsExchangeResult<IEnumerable<SharedDepositAddress>>(Exchange, TradingMode.Spot, depositAddresses.Data.Data.Select(x => new SharedDepositAddress(x.Network, x.Address)
+            return depositAddresses.AsExchangeResult<SharedDepositAddress[]>(Exchange, TradingMode.Spot, depositAddresses.Data.Data.Select(x => new SharedDepositAddress(x.Network, x.Address)
             {
                 Network = x.Network
             }).ToArray());
         }
 
-        GetDepositsOptions IDepositRestClient.GetDepositsOptions { get; } = new GetDepositsOptions(SharedPaginationSupport.Descending, false, 100);
-        async Task<ExchangeWebResult<IEnumerable<SharedDeposit>>> IDepositRestClient.GetDepositsAsync(GetDepositsRequest request, INextPageToken? pageToken, CancellationToken ct)
+        GetDepositsOptions IDepositRestClient.GetDepositsOptions { get; } = new GetDepositsOptions(SharedPaginationSupport.Descending, false, 100)
+        {
+            OptionalExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("AccountId", typeof(string), "Id of the account to get info for", "123123")
+            }
+        };
+        async Task<ExchangeWebResult<SharedDeposit[]>> IDepositRestClient.GetDepositsAsync(GetDepositsRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
             var validationError = ((IDepositRestClient)this).GetDepositsOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedTradingModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedDeposit>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedDeposit[]>(Exchange, validationError);
 
             var accountId = await GetAccountIdAsync(request.ExchangeParameters, request.Asset, ct).ConfigureAwait(false);
             if (accountId == null)
-                return new ExchangeWebResult<IEnumerable<SharedDeposit>>(Exchange, new ArgumentError("AccountId not provided and could not be determined. Please provide the AccountId parameter in the ExchangeParameters"));
+                return new ExchangeWebResult<SharedDeposit[]>(Exchange, new ArgumentError("AccountId not provided and could not be determined. Please provide the AccountId parameter in the ExchangeParameters"));
 
             // Determine page token
             string? toId = null;
@@ -178,14 +196,14 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 limit: request.Limit ?? 100,
                 ct: ct).ConfigureAwait(false);
             if (!deposits)
-                return deposits.AsExchangeResult<IEnumerable<SharedDeposit>>(Exchange, null, default);
+                return deposits.AsExchangeResult<SharedDeposit[]>(Exchange, null, default);
 
             // Determine next token
             FromIdToken? nextToken = null;
             if (deposits.Data.Pagination.NextUri != null)
                 nextToken = new FromIdToken(deposits.Data.Data.OrderBy(x => x.CreateTime).First().Id);
 
-            return deposits.AsExchangeResult<IEnumerable<SharedDeposit>>(Exchange, TradingMode.Spot, deposits.Data.Data.Select(x => new SharedDeposit(x.Quantity.Asset, x.Quantity.Value, x.Status == Enums.WithdrawalStatus.Completed, x.CreateTime)
+            return deposits.AsExchangeResult<SharedDeposit[]>(Exchange, TradingMode.Spot, deposits.Data.Data.Select(x => new SharedDeposit(x.Quantity.Asset, x.Quantity.Value, x.Status == Enums.WithdrawalStatus.Completed, x.CreateTime)
             {
                 Id = x.Id
             }).ToArray(), nextToken);
@@ -208,7 +226,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (!result)
                 return result.AsExchangeResult<SharedOrderBook>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedOrderBook(result.Data.Asks, result.Data.Bids));
+            return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedOrderBook(result.Data.Asks, result.Data.Bids));
         }
 
         #endregion
@@ -216,11 +234,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Recent Trades client
         GetRecentTradesOptions IRecentTradeRestClient.GetRecentTradesOptions { get; } = new GetRecentTradesOptions(1000, false);
 
-        async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> IRecentTradeRestClient.GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedTrade[]>> IRecentTradeRestClient.GetRecentTradesAsync(GetRecentTradesRequest request, CancellationToken ct)
         {
             var validationError = ((IRecentTradeRestClient)this).GetRecentTradesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedTrade>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedTrade[]>(Exchange, validationError);
 
             // Get data
             var result = await ExchangeData.GetTradeHistoryAsync(
@@ -228,10 +246,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, null, default);
+                return result.AsExchangeResult<SharedTrade[]>(Exchange, null, default);
 
             // Return
-            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, request.Symbol.TradingMode, result.Data.Trades.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)
+            return result.AsExchangeResult<SharedTrade[]>(Exchange, request.Symbol.TradingMode, result.Data.Trades.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)
             {
                 Side = x.OrderSide == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
             }).ToArray());
@@ -241,11 +259,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Trade History client
         GetTradeHistoryOptions ITradeHistoryRestClient.GetTradeHistoryOptions { get; } = new GetTradeHistoryOptions(SharedPaginationSupport.Descending, true, 1000, false);
 
-        async Task<ExchangeWebResult<IEnumerable<SharedTrade>>> ITradeHistoryRestClient.GetTradeHistoryAsync(GetTradeHistoryRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedTrade[]>> ITradeHistoryRestClient.GetTradeHistoryAsync(GetTradeHistoryRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
             var validationError = ((ITradeHistoryRestClient)this).GetTradeHistoryOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedTrade>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedTrade[]>(Exchange, validationError);
 
             DateTime? fromTime = null;
             if (pageToken is DateTimeToken token)
@@ -260,14 +278,14 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 limit: limit,
                 ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, null, default);
+                return result.AsExchangeResult<SharedTrade[]>(Exchange, null, default);
 
             DateTimeToken? nextToken = null;
             if (result.Data.Trades.Any() && result.Data.Trades.Count() == limit)
                 nextToken = new DateTimeToken(result.Data.Trades.Min(x => x.Timestamp.AddMilliseconds(-1)));
 
             // Return
-            return result.AsExchangeResult<IEnumerable<SharedTrade>>(Exchange, TradingMode.Spot, result.Data.Trades.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)
+            return result.AsExchangeResult<SharedTrade[]>(Exchange, request.Symbol.TradingMode, result.Data.Trades.Select(x => new SharedTrade(x.Quantity, x.Price, x.Timestamp)
             {
                 Side = x.OrderSide == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
             }).ToArray(), nextToken);
@@ -276,16 +294,22 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         #region Withdrawal client
 
-        GetWithdrawalsOptions IWithdrawalRestClient.GetWithdrawalsOptions { get; } = new GetWithdrawalsOptions(SharedPaginationSupport.Descending, false, 100);
-        async Task<ExchangeWebResult<IEnumerable<SharedWithdrawal>>> IWithdrawalRestClient.GetWithdrawalsAsync(GetWithdrawalsRequest request, INextPageToken? pageToken, CancellationToken ct)
+        GetWithdrawalsOptions IWithdrawalRestClient.GetWithdrawalsOptions { get; } = new GetWithdrawalsOptions(SharedPaginationSupport.Descending, false, 100)
+        {
+            OptionalExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("AccountId", typeof(string), "Id of the account to get info for", "123123")
+            }
+        };
+        async Task<ExchangeWebResult<SharedWithdrawal[]>> IWithdrawalRestClient.GetWithdrawalsAsync(GetWithdrawalsRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
             var validationError = ((IWithdrawalRestClient)this).GetWithdrawalsOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedTradingModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedWithdrawal>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedWithdrawal[]>(Exchange, validationError);
 
             var accountId = await GetAccountIdAsync(request.ExchangeParameters, request.Asset, ct).ConfigureAwait(false);
             if (accountId == null)
-                return new ExchangeWebResult<IEnumerable<SharedWithdrawal>>(Exchange, new ArgumentError("AccountId not provided and could not be determined. Please provide the AccountId parameter in the ExchangeParameters"));
+                return new ExchangeWebResult<SharedWithdrawal[]>(Exchange, new ArgumentError("AccountId not provided and could not be determined. Please provide the AccountId parameter in the ExchangeParameters"));
 
             // Determine page token
             string? toId = null;
@@ -300,14 +324,14 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 limit: request.Limit ?? 100,
                 ct: ct).ConfigureAwait(false);
             if (!deposits)
-                return deposits.AsExchangeResult<IEnumerable<SharedWithdrawal>>(Exchange, null, default);
+                return deposits.AsExchangeResult<SharedWithdrawal[]>(Exchange, null, default);
 
             // Determine next token
             FromIdToken? nextToken = null;
             if (deposits.Data.Pagination.NextUri != null)
                 nextToken = new FromIdToken(deposits.Data.Data.OrderBy(x => x.CreateTime).First().Id);
 
-            return deposits.AsExchangeResult<IEnumerable<SharedWithdrawal>>(Exchange, TradingMode.Spot, deposits.Data.Data.Select(x => new SharedWithdrawal(x.Quantity.Asset, string.Empty, x.Quantity.Value, x.Status == Enums.WithdrawalStatus.Completed, x.CreateTime)
+            return deposits.AsExchangeResult<SharedWithdrawal[]>(Exchange, TradingMode.Spot, deposits.Data.Data.Select(x => new SharedWithdrawal(x.Quantity.Asset, string.Empty, x.Quantity.Value, x.Status == Enums.WithdrawalStatus.Completed, x.CreateTime)
             {
                 Id = x.Id,
                 Fee = x.Fee.Value
@@ -318,7 +342,13 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         #region Withdraw client
 
-        WithdrawOptions IWithdrawRestClient.WithdrawOptions { get; } = new WithdrawOptions();
+        WithdrawOptions IWithdrawRestClient.WithdrawOptions { get; } = new WithdrawOptions()
+        {
+            OptionalExchangeParameters = new List<ParameterDescription>
+            {
+                new ParameterDescription("AccountId", typeof(string), "Id of the account to withdraw from", "123123")
+            }
+        };
         async Task<ExchangeWebResult<SharedId>> IWithdrawRestClient.WithdrawAsync(WithdrawRequest request, CancellationToken ct)
         {
             var validationError = ((IWithdrawRestClient)this).WithdrawOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedTradingModes);
@@ -348,28 +378,39 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Spot Symbol client
         EndpointOptions<GetSymbolsRequest> ISpotSymbolRestClient.GetSpotSymbolsOptions { get; } = new EndpointOptions<GetSymbolsRequest>(false);
 
-        async Task<ExchangeWebResult<IEnumerable<SharedSpotSymbol>>> ISpotSymbolRestClient.GetSpotSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedSpotSymbol[]>> ISpotSymbolRestClient.GetSpotSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
         {
             var validationError = ((ISpotSymbolRestClient)this).GetSpotSymbolsOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedTradingModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedSpotSymbol>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedSpotSymbol[]>(Exchange, validationError);
 
             var result = await ExchangeData.GetSymbolsAsync(Enums.SymbolType.Spot, ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedSpotSymbol>>(Exchange, null, default);
+                return result.AsExchangeResult<SharedSpotSymbol[]>(Exchange, null, default);
 
-            return result.AsExchangeResult<IEnumerable<SharedSpotSymbol>>(Exchange, TradingMode.Spot, result.Data.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Symbol, s.SymbolStatus == SymbolStatus.Online && !s.IsDisabled && !s.TradingDisabled)
+            // Coinbase return duplicate spot symbols for some pairs
+            // For example both BTC-USD and BTC-USDC is returned, referring to the same symbol
+            // Also, when for example subscribing to BTC-USDC in update the name is BTC-USD instead
+            // The library uses the BTC-USDC notation
+            var symbolData = result.Data.Select(s => new SharedSpotSymbol(s.BaseAsset, s.QuoteAsset, s.Symbol, s.SymbolStatus == SymbolStatus.Online && !s.IsDisabled && !s.TradingDisabled)
             {
                 MinTradeQuantity = s.MinOrderQuantity,
                 MaxTradeQuantity = s.MaxOrderQuantity,
                 QuantityStep = s.QuantityStep,
                 PriceStep = s.PriceStep
-            }).ToArray());
+            }).ToArray();
+
+            var originalSymbols = symbolData.Where(x => x.QuoteAsset != "USD").ToArray();
+            foreach (var item in symbolData.Where(x => x.QuoteAsset == "USD"))            
+                item.QuoteAsset = "USDC";            
+
+            ExchangeSymbolCache.UpdateSymbolInfo(_topicSpotId, symbolData);
+            return result.AsExchangeResult<SharedSpotSymbol[]>(Exchange, TradingMode.Spot, originalSymbols);
         }
 
         #endregion
 
-        #region Ticker client
+        #region Spot Ticker client
 
         EndpointOptions<GetTickerRequest> ISpotTickerRestClient.GetSpotTickerOptions { get; } = new EndpointOptions<GetTickerRequest>(false);
         async Task<ExchangeWebResult<SharedSpotTicker>> ISpotTickerRestClient.GetSpotTickerAsync(GetTickerRequest request, CancellationToken ct)
@@ -382,21 +423,52 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (!result)
                 return result.AsExchangeResult<SharedSpotTicker>(Exchange, null, default);
 
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotTicker(result.Data.Symbol, result.Data.LastPrice, null, null, result.Data.Volume24h ?? 0, result.Data.PricePercentageChange24h));
+            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicSpotId, result.Data.Symbol), result.Data.Symbol, result.Data.LastPrice, null, null, result.Data.Volume24h ?? 0, result.Data.PricePercentageChange24h)
+            {
+                QuoteVolume = result.Data.ApproximateQuote24hVolume
+            });
         }
 
         EndpointOptions<GetTickersRequest> ISpotTickerRestClient.GetSpotTickersOptions { get; } = new EndpointOptions<GetTickersRequest>(false);
-        async Task<ExchangeWebResult<IEnumerable<SharedSpotTicker>>> ISpotTickerRestClient.GetSpotTickersAsync(GetTickersRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedSpotTicker[]>> ISpotTickerRestClient.GetSpotTickersAsync(GetTickersRequest request, CancellationToken ct)
         {
             var validationError = ((ISpotTickerRestClient)this).GetSpotTickersOptions.ValidateRequest(Exchange, request, TradingMode.Spot, SupportedTradingModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedSpotTicker>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedSpotTicker[]>(Exchange, validationError);
 
             var result = await ExchangeData.GetSymbolsAsync(ct: ct).ConfigureAwait(false);
             if (!result)
-                return result.AsExchangeResult<IEnumerable<SharedSpotTicker>>(Exchange, null, default);
+                return result.AsExchangeResult<SharedSpotTicker[]>(Exchange, null, default);
 
-            return result.AsExchangeResult<IEnumerable<SharedSpotTicker>>(Exchange, TradingMode.Spot, result.Data.Select(x => new SharedSpotTicker(x.Symbol, x.LastPrice, null, null, x.Volume24h ?? 0, x.PricePercentageChange24h)).ToArray());
+            var originalSymbols = result.Data.Where(x => x.QuoteAsset != "USD").ToArray();
+            return result.AsExchangeResult<SharedSpotTicker[]>(Exchange, TradingMode.Spot, originalSymbols.Select(x => new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol), x.Symbol, x.LastPrice, null, null, x.Volume24h ?? 0, x.PricePercentageChange24h)
+            {
+                QuoteVolume = x.ApproximateQuote24hVolume
+            }).ToArray());
+        }
+
+        #endregion
+
+        #region Book Ticker client
+
+        EndpointOptions<GetBookTickerRequest> IBookTickerRestClient.GetBookTickerOptions { get; } = new EndpointOptions<GetBookTickerRequest>(false);
+        async Task<ExchangeWebResult<SharedBookTicker>> IBookTickerRestClient.GetBookTickerAsync(GetBookTickerRequest request, CancellationToken ct)
+        {
+            var validationError = ((IBookTickerRestClient)this).GetBookTickerOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedBookTicker>(Exchange, validationError);
+
+            var resultTicker = await ExchangeData.GetBookTickerAsync(request.Symbol.GetSymbol(FormatSymbol), ct: ct).ConfigureAwait(false);
+            if (!resultTicker)
+                return resultTicker.AsExchangeResult<SharedBookTicker>(Exchange, null, default);
+
+            return resultTicker.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedBookTicker(
+                ExchangeSymbolCache.ParseSymbol(request.Symbol.TradingMode == TradingMode.Spot ? _topicSpotId : _topicFuturesId, resultTicker.Data.Symbol),
+                resultTicker.Data.Symbol,
+                resultTicker.Data.BestAskPrice,
+                resultTicker.Data.BestAskQuantity,
+                resultTicker.Data.BestBidPrice,
+                resultTicker.Data.BestBidQuantity));
         }
 
         #endregion
@@ -405,13 +477,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         SharedFeeDeductionType ISpotOrderRestClient.SpotFeeDeductionType => SharedFeeDeductionType.DeductFromOutput;
         SharedFeeAssetType ISpotOrderRestClient.SpotFeeAssetType => SharedFeeAssetType.QuoteAsset;
-        IEnumerable<SharedOrderType> ISpotOrderRestClient.SpotSupportedOrderTypes { get; } = new[] { SharedOrderType.Limit, SharedOrderType.Market, SharedOrderType.LimitMaker };
-        IEnumerable<SharedTimeInForce> ISpotOrderRestClient.SpotSupportedTimeInForce { get; } = new[] { SharedTimeInForce.GoodTillCanceled, SharedTimeInForce.ImmediateOrCancel, SharedTimeInForce.FillOrKill };
+        SharedOrderType[] ISpotOrderRestClient.SpotSupportedOrderTypes { get; } = new[] { SharedOrderType.Limit, SharedOrderType.Market, SharedOrderType.LimitMaker };
+        SharedTimeInForce[] ISpotOrderRestClient.SpotSupportedTimeInForce { get; } = new[] { SharedTimeInForce.GoodTillCanceled, SharedTimeInForce.ImmediateOrCancel, SharedTimeInForce.FillOrKill };
         SharedQuantitySupport ISpotOrderRestClient.SpotSupportedOrderQuantity { get; } = new SharedQuantitySupport(
                 SharedQuantityType.BaseAsset,
                 SharedQuantityType.BaseAsset,
                 SharedQuantityType.BaseAndQuoteAsset,
                 SharedQuantityType.BaseAsset);
+
+        string ISpotOrderRestClient.GenerateClientOrderId() => ExchangeHelpers.RandomString(32);
 
         PlaceSpotOrderOptions ISpotOrderRestClient.PlaceSpotOrderOptions { get; } = new PlaceSpotOrderOptions();
         async Task<ExchangeWebResult<SharedId>> ISpotOrderRestClient.PlaceSpotOrderAsync(PlaceSpotOrderRequest request, CancellationToken ct)
@@ -431,8 +505,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 request.Symbol.GetSymbol(FormatSymbol),
                 request.Side == SharedOrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
                 GetOrderType(request.OrderType, request.TimeInForce),
-                quantity: request.Quantity,
-                quoteQuantity: request.QuoteQuantity,
+                quantity: request.Quantity?.QuantityInBaseAsset,
+                quoteQuantity: request.Quantity?.QuantityInQuoteAsset,
                 price: request.Price,
                 clientOrderId: request.ClientOrderId,
                 postOnly: request.OrderType == SharedOrderType.LimitMaker ? true: null,
@@ -456,6 +530,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return order.AsExchangeResult<SharedSpotOrder>(Exchange, null, default);
 
             return order.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicSpotId, order.Data.Symbol),
                 order.Data.Symbol,
                 order.Data.OrderId.ToString(),
                 order.Data.OrderType == OrderType.Limit ? SharedOrderType.Limit : order.Data.OrderType == OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
@@ -466,21 +541,20 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 ClientOrderId = order.Data.ClientOrderId,
                 AveragePrice = order.Data.AverageFillPrice == 0 ? null : order.Data.AverageFillPrice,
                 OrderPrice = order.Data.OrderConfiguration.Price,
-                Quantity = order.Data.OrderConfiguration.Quantity,
-                QuantityFilled = order.Data.QuantityFilled,
-                QuoteQuantity = order.Data.OrderConfiguration.QuoteQuantity,
-                QuoteQuantityFilled = order.Data.QuoteQuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(order.Data.OrderConfiguration.Quantity, order.Data.OrderConfiguration.QuoteQuantity),
+                QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
-                UpdateTime = order.Data.LastFillTime
+                UpdateTime = order.Data.LastFillTime,
+                IsTriggerOrder = order.Data.OrderType == OrderType.Stop || order.Data.OrderType == OrderType.StopLimit
             });
         }
 
         EndpointOptions<GetOpenOrdersRequest> ISpotOrderRestClient.GetOpenSpotOrdersOptions { get; } = new EndpointOptions<GetOpenOrdersRequest>(true);
-        async Task<ExchangeWebResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetOpenSpotOrdersAsync(GetOpenOrdersRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedSpotOrder[]>> ISpotOrderRestClient.GetOpenSpotOrdersAsync(GetOpenOrdersRequest request, CancellationToken ct)
         {
             var validationError = ((ISpotOrderRestClient)this).GetOpenSpotOrdersOptions.ValidateRequest(Exchange, request, request.Symbol?.TradingMode ?? request.TradingMode, SupportedTradingModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedSpotOrder>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedSpotOrder[]>(Exchange, validationError);
 
             var symbol = request.Symbol?.GetSymbol(FormatSymbol);
             var orders = await Trading.GetOrdersAsync(
@@ -489,9 +563,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 symbolType: SymbolType.Spot,
                 ct: ct).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, null, default);
+                return orders.AsExchangeResult<SharedSpotOrder[]>(Exchange, null, default);
 
-            return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, TradingMode.Spot, orders.Data.Select(x => new SharedSpotOrder(
+            return orders.AsExchangeResult<SharedSpotOrder[]>(Exchange, TradingMode.Spot, orders.Data.Select(x => new SharedSpotOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol),
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.OrderType == OrderType.Limit ? SharedOrderType.Limit : x.OrderType == OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
@@ -502,21 +577,20 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 ClientOrderId = x.ClientOrderId,
                 AveragePrice = x.AverageFillPrice == 0 ? null : x.AverageFillPrice,
                 OrderPrice = x.OrderConfiguration.Price,
-                Quantity = x.OrderConfiguration.Quantity,
-                QuantityFilled = x.QuantityFilled,
-                QuoteQuantity = x.OrderConfiguration.QuoteQuantity,
-                QuoteQuantityFilled = x.QuoteQuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(x.OrderConfiguration.Quantity, x.OrderConfiguration.QuoteQuantity),
+                QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
-                UpdateTime = x.LastFillTime
+                UpdateTime = x.LastFillTime,
+                IsTriggerOrder = x.OrderType == OrderType.Stop || x.OrderType == OrderType.StopLimit
             }).ToArray());
         }
 
         PaginatedEndpointOptions<GetClosedOrdersRequest> ISpotOrderRestClient.GetClosedSpotOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(SharedPaginationSupport.Descending, true, 1000, true);
-        async Task<ExchangeWebResult<IEnumerable<SharedSpotOrder>>> ISpotOrderRestClient.GetClosedSpotOrdersAsync(GetClosedOrdersRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedSpotOrder[]>> ISpotOrderRestClient.GetClosedSpotOrdersAsync(GetClosedOrdersRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
             var validationError = ((ISpotOrderRestClient)this).GetClosedSpotOrdersOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedSpotOrder>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedSpotOrder[]>(Exchange, validationError);
 
             // Determine page token
             DateTime? fromTime = null;
@@ -533,14 +607,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, null, default);
+                return orders.AsExchangeResult<SharedSpotOrder[]>(Exchange, null, default);
 
             // Get next token
             DateTimeToken? nextToken = null;
             if (orders.Data.Any())
                 nextToken = new DateTimeToken(orders.Data.Min(o => o.CreateTime).AddMilliseconds(-1));
 
-            return orders.AsExchangeResult<IEnumerable<SharedSpotOrder>>(Exchange, TradingMode.Spot, orders.Data.Select(x => new SharedSpotOrder(
+            return orders.AsExchangeResult<SharedSpotOrder[]>(Exchange, TradingMode.Spot, orders.Data.Select(x => new SharedSpotOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol),
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.OrderType == OrderType.Limit ? SharedOrderType.Limit : x.OrderType == OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
@@ -551,27 +626,27 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 ClientOrderId = x.ClientOrderId,
                 AveragePrice = x.AverageFillPrice == 0 ? null : x.AverageFillPrice,
                 OrderPrice = x.OrderConfiguration.Price,
-                Quantity = x.OrderConfiguration.Quantity,
-                QuantityFilled = x.QuantityFilled,
-                QuoteQuantity = x.OrderConfiguration.QuoteQuantity,
-                QuoteQuantityFilled = x.QuoteQuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(x.OrderConfiguration.Quantity, x.OrderConfiguration.QuoteQuantity),
+                QuantityFilled = new SharedOrderQuantity(x.QuantityFilled, x.QuoteQuantityFilled),
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
-                UpdateTime = x.LastFillTime
+                UpdateTime = x.LastFillTime,
+                IsTriggerOrder = x.OrderType == OrderType.Stop || x.OrderType == OrderType.StopLimit
             }).ToArray(), nextToken);
         }
 
         EndpointOptions<GetOrderTradesRequest> ISpotOrderRestClient.GetSpotOrderTradesOptions { get; } = new EndpointOptions<GetOrderTradesRequest>(true);
-        async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetSpotOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedUserTrade[]>> ISpotOrderRestClient.GetSpotOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
         {
             var validationError = ((ISpotOrderRestClient)this).GetSpotOrderTradesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedUserTrade>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedUserTrade[]>(Exchange, validationError);
 
             var orders = await Trading.GetUserTradesAsync(orderIds: [request.OrderId], ct: ct).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, null, default);
+                return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, null, default);
 
-            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, TradingMode.Spot, orders.Data.Trades.Select(x => new SharedUserTrade(
+            return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, TradingMode.Spot, orders.Data.Trades.Select(x => new SharedUserTrade(
+                ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol),
                 x.Symbol,
                 x.OrderId,
                 x.TradeId,
@@ -586,11 +661,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         PaginatedEndpointOptions<GetUserTradesRequest> ISpotOrderRestClient.GetSpotUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(SharedPaginationSupport.Descending, true, 100, true);
-        async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> ISpotOrderRestClient.GetSpotUserTradesAsync(GetUserTradesRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedUserTrade[]>> ISpotOrderRestClient.GetSpotUserTradesAsync(GetUserTradesRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
             var validationError = ((ISpotOrderRestClient)this).GetSpotUserTradesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedUserTrade>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedUserTrade[]>(Exchange, validationError);
 
             // Determine page token
             DateTime? fromTimestamp = null;
@@ -606,14 +681,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 ct: ct
                 ).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, null, default);
+                return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, null, default);
 
             // Get next token
             DateTimeToken? nextToken = null;
             if (orders.Data.Trades.Count() == (request.Limit ?? 100))
                 nextToken = new DateTimeToken(orders.Data.Trades.Min(o => o.Timestamp).AddMilliseconds(-1));
 
-            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, TradingMode.Spot, orders.Data.Trades.Select(x => new SharedUserTrade(
+            return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, TradingMode.Spot, orders.Data.Trades.Select(x => new SharedUserTrade(
+                ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol),
                 x.Symbol,
                 x.OrderId,
                 x.TradeId,
@@ -675,7 +751,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         #endregion
 
-        #region Ticker client
+        #region Futures Ticker client
 
         EndpointOptions<GetTickerRequest> IFuturesTickerRestClient.GetFuturesTickerOptions { get; } = new EndpointOptions<GetTickerRequest>(false);
         async Task<ExchangeWebResult<SharedFuturesTicker>> IFuturesTickerRestClient.GetFuturesTickerAsync(GetTickerRequest request, CancellationToken ct)
@@ -689,7 +765,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return resultTicker.AsExchangeResult<SharedFuturesTicker>(Exchange, null, default);
 
             return resultTicker.AsExchangeResult(Exchange, request.Symbol.TradingMode, 
-                new SharedFuturesTicker(resultTicker.Data.Symbol, resultTicker.Data.LastPrice, null, null, resultTicker.Data.Volume24h ?? 0, resultTicker.Data.PricePercentageChange24h)
+                new SharedFuturesTicker(ExchangeSymbolCache.ParseSymbol(_topicFuturesId, resultTicker.Data.Symbol), resultTicker.Data.Symbol, resultTicker.Data.LastPrice, null, null, resultTicker.Data.Volume24h ?? 0, resultTicker.Data.PricePercentageChange24h)
             {
                 FundingRate = resultTicker.Data.FutureProductDetails!.PerpetualDetails!.FundingRate,
                 NextFundingTime = resultTicker.Data.FutureProductDetails.PerpetualDetails.FundingTime
@@ -697,21 +773,21 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         EndpointOptions<GetTickersRequest> IFuturesTickerRestClient.GetFuturesTickersOptions { get; } = new EndpointOptions<GetTickersRequest>(false);
-        async Task<ExchangeWebResult<IEnumerable<SharedFuturesTicker>>> IFuturesTickerRestClient.GetFuturesTickersAsync(GetTickersRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedFuturesTicker[]>> IFuturesTickerRestClient.GetFuturesTickersAsync(GetTickersRequest request, CancellationToken ct)
         {
             var validationError = ((IFuturesTickerRestClient)this).GetFuturesTickersOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedFuturesModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedFuturesTicker>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedFuturesTicker[]>(Exchange, validationError);
 
             var expiringTime = request.TradingMode == null || request.TradingMode == TradingMode.PerpetualLinear ? ContractExpiryType.Perpetual : ContractExpiryType.Expiring;
             var resultTicker = await ExchangeData.GetSymbolsAsync(SymbolType.Futures, expiryType: expiringTime, ct: ct).ConfigureAwait(false);
             if (!resultTicker)
-                return resultTicker.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, null, default);
+                return resultTicker.AsExchangeResult<SharedFuturesTicker[]>(Exchange, null, default);
 
             var data = resultTicker.Data;
-            return resultTicker.AsExchangeResult<IEnumerable<SharedFuturesTicker>>(Exchange, request.TradingMode.HasValue ? [request.TradingMode.Value]: SupportedTradingModes,
+            return resultTicker.AsExchangeResult<SharedFuturesTicker[]>(Exchange, request.TradingMode.HasValue ? [request.TradingMode.Value]: SupportedTradingModes,
                 data.Select(x => 
-                    new SharedFuturesTicker(x.Symbol, x.LastPrice, null, null, x.Volume24h ?? 0, x.PricePercentageChange24h)
+                    new SharedFuturesTicker(ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), x.Symbol, x.LastPrice, null, null, x.Volume24h ?? 0, x.PricePercentageChange24h)
                     {
                         FundingRate = x.FutureProductDetails!.PerpetualDetails?.FundingRate,
                         NextFundingTime = x.FutureProductDetails.PerpetualDetails?.FundingTime
@@ -723,23 +799,23 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Futures Symbol client
 
         EndpointOptions<GetSymbolsRequest> IFuturesSymbolRestClient.GetFuturesSymbolsOptions { get; } = new EndpointOptions<GetSymbolsRequest>(false);
-        async Task<ExchangeWebResult<IEnumerable<SharedFuturesSymbol>>> IFuturesSymbolRestClient.GetFuturesSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedFuturesSymbol[]>> IFuturesSymbolRestClient.GetFuturesSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
         {
             var validationError = ((IFuturesSymbolRestClient)this).GetFuturesSymbolsOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedFuturesModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedFuturesSymbol>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedFuturesSymbol[]>(Exchange, validationError);
 
             var expiringTime = request.TradingMode == null || request.TradingMode == TradingMode.PerpetualLinear ? ContractExpiryType.Perpetual : ContractExpiryType.Expiring;
             var resultTicker = await ExchangeData.GetSymbolsAsync(SymbolType.Futures, expiryType: expiringTime, ct: ct).ConfigureAwait(false);
             if (!resultTicker)
-                return resultTicker.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, null, default);
+                return resultTicker.AsExchangeResult<SharedFuturesSymbol[]>(Exchange, null, default);
 
             var data = resultTicker.Data;
 
-            return resultTicker.AsExchangeResult<IEnumerable<SharedFuturesSymbol>>(Exchange, request.TradingMode.HasValue ? [request.TradingMode.Value] : SupportedTradingModes,
+            var response = resultTicker.AsExchangeResult<SharedFuturesSymbol[]>(Exchange, request.TradingMode.HasValue ? [request.TradingMode.Value] : SupportedTradingModes,
                 data.Select(x =>
                     new SharedFuturesSymbol(
-                        x.FutureProductDetails!.ContractExpiry == null ? SharedSymbolType.PerpetualLinear: SharedSymbolType.DeliveryLinear,
+                        x.FutureProductDetails!.ContractExpiry == null ? TradingMode.PerpetualLinear: TradingMode.DeliveryLinear,
                         x.FutureProductDetails.ContractCode,
                         x.QuoteAsset,
                         x.Symbol,
@@ -750,8 +826,13 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         QuantityStep = x.QuantityStep,
                         PriceStep = x.PriceStep,
                         ContractSize = x.FutureProductDetails.ContractSize,
-                        DeliveryTime = x.FutureProductDetails.ContractExpiry
+                        DeliveryTime = x.FutureProductDetails.ContractExpiry,
+                        MaxLongLeverage = x.FutureProductDetails.PerpetualDetails?.MaxLeverage,
+                        MaxShortLeverage = x.FutureProductDetails.PerpetualDetails?.MaxLeverage
                     }).ToArray());
+
+            ExchangeSymbolCache.UpdateSymbolInfo(_topicFuturesId, response.Data);
+            return response;
         }
 
         #endregion
@@ -779,15 +860,17 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         SharedFeeDeductionType IFuturesOrderRestClient.FuturesFeeDeductionType => SharedFeeDeductionType.AddToCost;
         SharedFeeAssetType IFuturesOrderRestClient.FuturesFeeAssetType => SharedFeeAssetType.QuoteAsset;
 
-        IEnumerable<SharedOrderType> IFuturesOrderRestClient.FuturesSupportedOrderTypes { get; } = new[] { SharedOrderType.Limit, SharedOrderType.Market };
-        IEnumerable<SharedTimeInForce> IFuturesOrderRestClient.FuturesSupportedTimeInForce { get; } = new[] { SharedTimeInForce.GoodTillCanceled, SharedTimeInForce.ImmediateOrCancel, SharedTimeInForce.FillOrKill };
+        SharedOrderType[] IFuturesOrderRestClient.FuturesSupportedOrderTypes { get; } = new[] { SharedOrderType.Limit, SharedOrderType.Market };
+        SharedTimeInForce[] IFuturesOrderRestClient.FuturesSupportedTimeInForce { get; } = new[] { SharedTimeInForce.GoodTillCanceled, SharedTimeInForce.ImmediateOrCancel, SharedTimeInForce.FillOrKill };
         SharedQuantitySupport IFuturesOrderRestClient.FuturesSupportedOrderQuantity { get; } = new SharedQuantitySupport(
                 SharedQuantityType.Contracts,
                 SharedQuantityType.Contracts,
                 SharedQuantityType.Contracts,
                 SharedQuantityType.Contracts);
 
-        PlaceFuturesOrderOptions IFuturesOrderRestClient.PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderOptions();
+        string IFuturesOrderRestClient.GenerateClientOrderId() => ExchangeHelpers.RandomString(32);
+
+        PlaceFuturesOrderOptions IFuturesOrderRestClient.PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderOptions(false);
         async Task<ExchangeWebResult<SharedId>> IFuturesOrderRestClient.PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderRestClient)this).PlaceFuturesOrderOptions.ValidateRequest(
@@ -808,7 +891,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 request.Symbol.GetSymbol(FormatSymbol),
                 request.Side == SharedOrderSide.Buy ? Enums.OrderSide.Buy : Enums.OrderSide.Sell,
                 GetOrderType(request.OrderType, request.TimeInForce),
-                quantity: request.Quantity,
+                quantity: request.Quantity?.QuantityInContracts,
                 price: request.Price,
                 leverage: request.Leverage,
                 marginType: request.MarginMode == null ? null : request.MarginMode == SharedMarginMode.Cross ? MarginType.Cross : MarginType.Isolated,
@@ -833,7 +916,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (!order)
                 return order.AsExchangeResult<SharedFuturesOrder>(Exchange, null, default);
 
-            return order.AsExchangeResult(Exchange, TradingMode.Spot, new SharedFuturesOrder(
+            return order.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedFuturesOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicFuturesId, order.Data.Symbol),
                 order.Data.Symbol,
                 order.Data.OrderId.ToString(),
                 order.Data.OrderType == OrderType.Limit ? SharedOrderType.Limit : order.Data.OrderType == OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
@@ -844,22 +928,22 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 ClientOrderId = order.Data.ClientOrderId,
                 AveragePrice = order.Data.AverageFillPrice == 0 ? null : order.Data.AverageFillPrice,
                 OrderPrice = order.Data.OrderConfiguration.Price,
-                Quantity = order.Data.OrderConfiguration.Quantity,
-                QuantityFilled = order.Data.QuantityFilled,
-                QuoteQuantity = order.Data.OrderConfiguration.QuoteQuantity,
-                QuoteQuantityFilled = order.Data.QuoteQuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(contractQuantity: order.Data.OrderConfiguration.Quantity),
+                QuantityFilled = new SharedOrderQuantity(quoteAssetQuantity: order.Data.QuoteQuantityFilled, contractQuantity: order.Data.QuantityFilled),
                 TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
                 UpdateTime = order.Data.LastFillTime,
-                Leverage = order.Data.Leverage
+                Leverage = order.Data.Leverage,
+                TriggerPrice = order.Data.OrderConfiguration.StopPrice,
+                IsTriggerOrder = order.Data.OrderType == OrderType.Stop || order.Data.OrderType == OrderType.StopLimit
             });
         }
 
         EndpointOptions<GetOpenOrdersRequest> IFuturesOrderRestClient.GetOpenFuturesOrdersOptions { get; } = new EndpointOptions<GetOpenOrdersRequest>(true);
-        async Task<ExchangeWebResult<IEnumerable<SharedFuturesOrder>>> IFuturesOrderRestClient.GetOpenFuturesOrdersAsync(GetOpenOrdersRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedFuturesOrder[]>> IFuturesOrderRestClient.GetOpenFuturesOrdersAsync(GetOpenOrdersRequest request, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderRestClient)this).GetOpenFuturesOrdersOptions.ValidateRequest(Exchange, request, request.Symbol?.TradingMode ?? request.TradingMode, SupportedFuturesModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedFuturesOrder>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedFuturesOrder[]>(Exchange, validationError);
 
             var symbol = request.Symbol?.GetSymbol(FormatSymbol);
             var expiryType = ((request.Symbol?.TradingMode ?? request.TradingMode) ?? TradingMode.PerpetualLinear) == TradingMode.PerpetualLinear ? ContractExpiryType.Perpetual : ContractExpiryType.Expiring;
@@ -870,9 +954,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 expiryType: expiryType,
                 ct: ct).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, null, default);
+                return orders.AsExchangeResult<SharedFuturesOrder[]>(Exchange, null, default);
 
-            return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, TradingMode.Spot, orders.Data.Select(x => new SharedFuturesOrder(
+            return orders.AsExchangeResult<SharedFuturesOrder[]>(Exchange, SupportedFuturesModes, orders.Data.Select(x => new SharedFuturesOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), 
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.OrderType == OrderType.Limit ? SharedOrderType.Limit : x.OrderType == OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
@@ -883,22 +968,22 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 ClientOrderId = x.ClientOrderId,
                 AveragePrice = x.AverageFillPrice == 0 ? null : x.AverageFillPrice,
                 OrderPrice = x.OrderConfiguration.Price,
-                Quantity = x.OrderConfiguration.Quantity,
-                QuantityFilled = x.QuantityFilled,
-                QuoteQuantity = x.OrderConfiguration.QuoteQuantity,
-                QuoteQuantityFilled = x.QuoteQuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(contractQuantity: x.OrderConfiguration.Quantity),
+                QuantityFilled = new SharedOrderQuantity(quoteAssetQuantity: x.QuoteQuantityFilled, contractQuantity: x.QuantityFilled),
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 UpdateTime = x.LastFillTime,
-                Leverage = x.Leverage
+                Leverage = x.Leverage,
+                TriggerPrice = x.OrderConfiguration.StopPrice,
+                IsTriggerOrder = x.OrderType == OrderType.Stop || x.OrderType == OrderType.StopLimit
             }).ToArray());
         }
 
         PaginatedEndpointOptions<GetClosedOrdersRequest> IFuturesOrderRestClient.GetClosedFuturesOrdersOptions { get; } = new PaginatedEndpointOptions<GetClosedOrdersRequest>(SharedPaginationSupport.Descending, true, 100, true);
-        async Task<ExchangeWebResult<IEnumerable<SharedFuturesOrder>>> IFuturesOrderRestClient.GetClosedFuturesOrdersAsync(GetClosedOrdersRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedFuturesOrder[]>> IFuturesOrderRestClient.GetClosedFuturesOrdersAsync(GetClosedOrdersRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderRestClient)this).GetClosedFuturesOrdersOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedFuturesModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedFuturesOrder>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedFuturesOrder[]>(Exchange, validationError);
 
             // Determine page token
             DateTime? fromTimestamp = null;
@@ -908,7 +993,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             // Get data
             var expiryType = request.Symbol.TradingMode == TradingMode.PerpetualLinear ? ContractExpiryType.Perpetual : ContractExpiryType.Expiring;
             var orders = await Trading.GetOrdersAsync(
-                symbols: request.Symbol == null ? Array.Empty<string>() : [request.Symbol.GetSymbol(FormatSymbol)],
+                symbols: [request.Symbol.GetSymbol(FormatSymbol)],
                 orderStatus: [OrderStatus.Canceled, OrderStatus.Filled],
                 symbolType: SymbolType.Futures,
                 expiryType: expiryType,
@@ -917,14 +1002,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 limit: request.Limit,
                 ct: ct).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, null, default);
+                return orders.AsExchangeResult<SharedFuturesOrder[]>(Exchange, null, default);
 
             // Get next token
             DateTimeToken? nextToken = null;
             if (orders.Data.Count() == (request.Limit ?? 1000))
                 nextToken = new DateTimeToken(orders.Data.Min(o => o.CreateTime).AddMilliseconds(-1));
 
-            return orders.AsExchangeResult<IEnumerable<SharedFuturesOrder>>(Exchange, TradingMode.Spot, orders.Data.Select(x => new SharedFuturesOrder(
+            return orders.AsExchangeResult<SharedFuturesOrder[]>(Exchange, request.Symbol.TradingMode, orders.Data.Select(x => new SharedFuturesOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), 
                 x.Symbol,
                 x.OrderId.ToString(),
                 x.OrderType == OrderType.Limit ? SharedOrderType.Limit : x.OrderType == OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
@@ -935,28 +1021,29 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 ClientOrderId = x.ClientOrderId,
                 AveragePrice = x.AverageFillPrice == 0 ? null : x.AverageFillPrice,
                 OrderPrice = x.OrderConfiguration.Price,
-                Quantity = x.OrderConfiguration.Quantity,
-                QuantityFilled = x.QuantityFilled,
-                QuoteQuantity = x.OrderConfiguration.QuoteQuantity,
-                QuoteQuantityFilled = x.QuoteQuantityFilled,
+                OrderQuantity = new SharedOrderQuantity(contractQuantity: x.OrderConfiguration.Quantity),
+                QuantityFilled = new SharedOrderQuantity(quoteAssetQuantity: x.QuoteQuantityFilled, contractQuantity: x.QuantityFilled),
                 TimeInForce = ParseTimeInForce(x.TimeInForce),
                 UpdateTime = x.LastFillTime,
-                Leverage = x.Leverage
+                Leverage = x.Leverage,
+                TriggerPrice = x.OrderConfiguration.StopPrice,
+                IsTriggerOrder = x.OrderType == OrderType.Stop || x.OrderType == OrderType.StopLimit
             }).ToArray(), nextToken);
         }
 
         EndpointOptions<GetOrderTradesRequest> IFuturesOrderRestClient.GetFuturesOrderTradesOptions { get; } = new EndpointOptions<GetOrderTradesRequest>(true);
-        async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> IFuturesOrderRestClient.GetFuturesOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedUserTrade[]>> IFuturesOrderRestClient.GetFuturesOrderTradesAsync(GetOrderTradesRequest request, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderRestClient)this).GetFuturesOrderTradesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedFuturesModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedUserTrade>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedUserTrade[]>(Exchange, validationError);
 
             var orders = await Trading.GetUserTradesAsync(orderIds: [request.OrderId], ct: ct).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, null, default);
+                return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, null, default);
 
-            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, TradingMode.Spot, orders.Data.Trades.Select(x => new SharedUserTrade(
+            return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, request.Symbol.TradingMode, orders.Data.Trades.Select(x => new SharedUserTrade(
+                ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), 
                 x.Symbol,
                 x.OrderId,
                 x.TradeId,
@@ -971,11 +1058,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         PaginatedEndpointOptions<GetUserTradesRequest> IFuturesOrderRestClient.GetFuturesUserTradesOptions { get; } = new PaginatedEndpointOptions<GetUserTradesRequest>(SharedPaginationSupport.Descending, true, 100, true);
-        async Task<ExchangeWebResult<IEnumerable<SharedUserTrade>>> IFuturesOrderRestClient.GetFuturesUserTradesAsync(GetUserTradesRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedUserTrade[]>> IFuturesOrderRestClient.GetFuturesUserTradesAsync(GetUserTradesRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderRestClient)this).GetFuturesUserTradesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedFuturesModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedUserTrade>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedUserTrade[]>(Exchange, validationError);
 
             // Determine page token
             DateTime? fromTimestamp = null;
@@ -991,14 +1078,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 ct: ct
                 ).ConfigureAwait(false);
             if (!orders)
-                return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, null, default);
+                return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, null, default);
 
             // Get next token
             DateTimeToken? nextToken = null;
             if (orders.Data.Trades.Count() == (request.Limit ?? 100))
                 nextToken = new DateTimeToken(orders.Data.Trades.Min(o => o.Timestamp).AddMilliseconds(-1));
 
-            return orders.AsExchangeResult<IEnumerable<SharedUserTrade>>(Exchange, TradingMode.Spot, orders.Data.Trades.Select(x => new SharedUserTrade(
+            return orders.AsExchangeResult<SharedUserTrade[]>(Exchange, request.Symbol.TradingMode, orders.Data.Trades.Select(x => new SharedUserTrade(
+                ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), 
                 x.Symbol,
                 x.OrderId,
                 x.TradeId,
@@ -1027,24 +1115,24 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         EndpointOptions<GetPositionsRequest> IFuturesOrderRestClient.GetPositionsOptions { get; } = new EndpointOptions<GetPositionsRequest>(true);
-        async Task<ExchangeWebResult<IEnumerable<SharedPosition>>> IFuturesOrderRestClient.GetPositionsAsync(GetPositionsRequest request, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedPosition[]>> IFuturesOrderRestClient.GetPositionsAsync(GetPositionsRequest request, CancellationToken ct)
         {
             var validationError = ((IFuturesOrderRestClient)this).GetPositionsOptions.ValidateRequest(Exchange, request, request.Symbol?.TradingMode ?? request.TradingMode, SupportedFuturesModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedPosition>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedPosition[]>(Exchange, validationError);
 
             var tradingMode = request.Symbol?.TradingMode ?? request.TradingMode;
             if (tradingMode == null || request.TradingMode == TradingMode.PerpetualLinear)
             {
-                var portfolioId = ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "PorfolioId");
+                var portfolioId = ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "PortfolioId");
                 if (portfolioId == default)
-                    return new ExchangeWebResult<IEnumerable<SharedPosition>>(Exchange, new ArgumentError("PortfolioId is required as Exchange parameter for retrieving Perpetual futures balances"));
+                    return new ExchangeWebResult<SharedPosition[]>(Exchange, new ArgumentError("PortfolioId is required as Exchange parameter for retrieving Perpetual futures balances"));
 
                 var result = await Trading.GetPerpetualPositionsAsync(portfolioId, ct: ct).ConfigureAwait(false);
                 if (!result)
-                    return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, null, default);
+                    return result.AsExchangeResult<SharedPosition[]>(Exchange, null, default);
 
-                return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, TradingMode.PerpetualLinear, result.Data.Positions.Select(x => new SharedPosition(x.Symbol, Math.Abs(x.NetQuantity), null)
+                return result.AsExchangeResult<SharedPosition[]>(Exchange, TradingMode.PerpetualLinear, result.Data.Positions.Select(x => new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), x.Symbol, Math.Abs(x.NetQuantity), null)
                 {
                     UnrealizedPnl = x.UnrealizedPnl.Value,
                     LiquidationPrice = x.LiquidationPrice.Value == 0 ? null : x.LiquidationPrice.Value,
@@ -1057,9 +1145,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             {
                 var result = await Trading.GetFuturesPositionsAsync(ct: ct).ConfigureAwait(false);
                 if (!result)
-                    return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, null, default);
+                    return result.AsExchangeResult<SharedPosition[]>(Exchange, null, default);
 
-                return result.AsExchangeResult<IEnumerable<SharedPosition>>(Exchange, TradingMode.DeliveryLinear, result.Data.Select(x => new SharedPosition(x.Symbol, Math.Abs(x.NumberOfContracts), null)
+                return result.AsExchangeResult<SharedPosition[]>(Exchange, TradingMode.DeliveryLinear, result.Data.Select(x => new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), x.Symbol, Math.Abs(x.NumberOfContracts), null)
                 {
                     UnrealizedPnl = x.UnrealizedPnl,
                     AverageOpenPrice = x.AverageEntryPrice,
@@ -1100,15 +1188,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             SharedKlineInterval.SixHours,
             SharedKlineInterval.OneDay);
 
-        async Task<ExchangeWebResult<IEnumerable<SharedKline>>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, CancellationToken ct)
+        async Task<ExchangeWebResult<SharedKline[]>> IKlineRestClient.GetKlinesAsync(GetKlinesRequest request, INextPageToken? pageToken, CancellationToken ct)
         {
             var interval = (Enums.KlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
-                return new ExchangeWebResult<IEnumerable<SharedKline>>(Exchange, new ArgumentError("Interval not supported"));
+                return new ExchangeWebResult<SharedKline[]>(Exchange, new ArgumentError("Interval not supported"));
 
             var validationError = ((IKlineRestClient)this).GetKlinesOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
             if (validationError != null)
-                return new ExchangeWebResult<IEnumerable<SharedKline>>(Exchange, validationError);
+                return new ExchangeWebResult<SharedKline[]>(Exchange, validationError);
 
             // Determine pagination
             // Data is normally returned oldest first, so to do newest first pagination we have to do some calc
@@ -1137,7 +1225,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 ct: ct
                 ).ConfigureAwait(false);
             if (!result)
-                return new ExchangeWebResult<IEnumerable<SharedKline>>(Exchange, TradingMode.Spot, result.As<IEnumerable<SharedKline>>(default));
+                return new ExchangeWebResult<SharedKline[]>(Exchange, request.Symbol.TradingMode, result.As<SharedKline[]>(default));
 
             // Get next token
             DateTimeToken? nextToken = null;
@@ -1148,7 +1236,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult<IEnumerable<SharedKline>>(Exchange, request.Symbol.TradingMode, result.Data.Reverse().Select(x => new SharedKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
+            return result.AsExchangeResult<SharedKline[]>(Exchange, request.Symbol.TradingMode, result.Data.Reverse().Select(x => new SharedKline(x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
         }
 
         #endregion
@@ -1169,8 +1257,202 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return result.AsExchangeResult<SharedFee>(Exchange, null, default);
 
             // Return
-            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedFee(result.Data.FeeTier.MakerFeeRate * 100, result.Data.FeeTier.TakerFeeRate * 100));
+            return result.AsExchangeResult(Exchange, symbolType == SymbolType.Spot ? [TradingMode.Spot] : SupportedFuturesModes, new SharedFee(result.Data.FeeTier.MakerFeeRate * 100, result.Data.FeeTier.TakerFeeRate * 100));
         }
+        #endregion
+
+        #region Spot Trigger Order Client
+        PlaceSpotTriggerOrderOptions ISpotTriggerOrderRestClient.PlaceSpotTriggerOrderOptions { get; } = new PlaceSpotTriggerOrderOptions(true);
+
+        async Task<ExchangeWebResult<SharedId>> ISpotTriggerOrderRestClient.PlaceSpotTriggerOrderAsync(PlaceSpotTriggerOrderRequest request, CancellationToken ct)
+        {
+            var validationError = ((ISpotTriggerOrderRestClient)this).PlaceSpotTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes, ((ISpotOrderRestClient)this).SpotSupportedOrderQuantity);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
+
+            var result = await Trading.PlaceOrderAsync(                
+                request.Symbol.GetSymbol(FormatSymbol),
+                request.OrderSide == SharedOrderSide.Buy ? OrderSide.Buy : OrderSide.Sell,
+                NewOrderType.StopLimit,
+                quantity: request.Quantity?.QuantityInBaseAsset,
+                quoteQuantity: request.Quantity?.QuantityInQuoteAsset,
+                // Simulate market order by adding/removing 10% to the trigger price as order price
+                price: request.OrderPrice ?? (request.TriggerPrice + (request.TriggerPrice * 0.1m * (request.OrderSide == SharedOrderSide.Buy ? 1 : -1))),
+                stopPrice: request.TriggerPrice,
+                clientOrderId: request.ClientOrderId,
+                stopDirection: request.PriceDirection == SharedTriggerPriceDirection.PriceAbove ? StopDirection.Up : StopDirection.Down,
+                ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<SharedId>(Exchange, null, default);
+
+            // Return
+            return result.AsExchangeResult(Exchange, TradingMode.Spot, new SharedId(result.Data.SuccessResponse.OrderId));
+        }
+
+        EndpointOptions<GetOrderRequest> ISpotTriggerOrderRestClient.GetSpotTriggerOrderOptions { get; } = new EndpointOptions<GetOrderRequest>(true)
+        {
+            RequestNotes = "Only pending trigger orders can be requested, executed trigger orders are not available in the API"
+        };
+        async Task<ExchangeWebResult<SharedSpotTriggerOrder>> ISpotTriggerOrderRestClient.GetSpotTriggerOrderAsync(GetOrderRequest request, CancellationToken ct)
+        {
+            var validationError = ((ISpotTriggerOrderRestClient)this).GetSpotTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedSpotTriggerOrder>(Exchange, validationError);
+
+            var order = await Trading.GetOrderAsync(request.OrderId, ct: ct).ConfigureAwait(false);
+            if (!order)
+                return order.AsExchangeResult<SharedSpotTriggerOrder>(Exchange, null, default);
+
+            return order.AsExchangeResult(Exchange, TradingMode.Spot, new SharedSpotTriggerOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicSpotId, order.Data.Symbol),
+                order.Data.Symbol,
+                order.Data.OrderId.ToString(),
+                SharedOrderType.Limit,
+                order.Data.OrderSide == OrderSide.Buy ? SharedTriggerOrderDirection.Enter : SharedTriggerOrderDirection.Exit,
+                ParseTriggerOrderStatus(order.Data.OrderStatus),
+                order.Data.OrderConfiguration.StopPrice ?? 0,
+                order.Data.CreateTime)
+            {
+                PlacedOrderId = order.Data.OrderId,
+                AveragePrice = order.Data.AverageFillPrice == 0 ? null : order.Data.AverageFillPrice,
+                OrderPrice = order.Data.OrderConfiguration.Price,
+                OrderQuantity = new SharedOrderQuantity(order.Data.OrderConfiguration.Quantity, order.Data.OrderConfiguration.QuoteQuantity),
+                QuantityFilled = new SharedOrderQuantity(order.Data.QuantityFilled, order.Data.QuoteQuantityFilled),
+                TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
+                UpdateTime = order.Data.LastFillTime,
+                ClientOrderId = order.Data.ClientOrderId
+            });
+        }
+
+        private SharedTriggerOrderStatus ParseTriggerOrderStatus(OrderStatus orderStatus)
+        {
+            if (orderStatus == OrderStatus.Filled)
+                return SharedTriggerOrderStatus.Filled;
+
+            if (orderStatus == OrderStatus.Canceled
+                || orderStatus == OrderStatus.Expired
+                || orderStatus == OrderStatus.Failed)
+            {
+                return SharedTriggerOrderStatus.CanceledOrRejected;
+            }
+
+            return SharedTriggerOrderStatus.Active;
+        }
+
+        EndpointOptions<CancelOrderRequest> ISpotTriggerOrderRestClient.CancelSpotTriggerOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
+        async Task<ExchangeWebResult<SharedId>> ISpotTriggerOrderRestClient.CancelSpotTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
+        {
+            var validationError = ((ISpotTriggerOrderRestClient)this).CancelSpotTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
+
+            var order = await Trading.CancelOrderAsync(
+                request.OrderId,
+                ct: ct).ConfigureAwait(false);
+            if (!order)
+                return order.AsExchangeResult<SharedId>(Exchange, null, default);
+
+            return order.AsExchangeResult(Exchange, TradingMode.Spot, new SharedId(request.OrderId));
+        }
+
+        #endregion
+
+        #region Futures Trigger Order Client
+        PlaceFuturesTriggerOrderOptions IFuturesTriggerOrderRestClient.PlaceFuturesTriggerOrderOptions { get; } = new PlaceFuturesTriggerOrderOptions(true)
+        {
+        };
+
+        async Task<ExchangeWebResult<SharedId>> IFuturesTriggerOrderRestClient.PlaceFuturesTriggerOrderAsync(PlaceFuturesTriggerOrderRequest request, CancellationToken ct)
+        {
+            var side = GetTriggerOrderSide(request);
+            var validationError = ((IFuturesTriggerOrderRestClient)this).PlaceFuturesTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes, side == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell, ((IFuturesOrderRestClient)this).FuturesSupportedOrderQuantity);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
+
+            var result = await Trading.PlaceOrderAsync(
+                request.Symbol.GetSymbol(FormatSymbol),
+                side,
+                NewOrderType.StopLimit,
+                quantity: request.Quantity.QuantityInContracts,
+                // Simulate market order by adding/removing 10% to the trigger price as order price
+                price: request.OrderPrice ?? (request.TriggerPrice + (request.TriggerPrice * 0.1m * (request.OrderDirection == SharedTriggerOrderDirection.Enter ? 1 : -1))),
+                stopPrice: request.TriggerPrice,
+                stopDirection: request.PriceDirection == SharedTriggerPriceDirection.PriceAbove ? StopDirection.Up : StopDirection.Down,
+                clientOrderId: request.ClientOrderId,
+                ct: ct).ConfigureAwait(false);
+            if (!result)
+                return result.AsExchangeResult<SharedId>(Exchange, null, default);
+
+            // Return
+            return result.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedId(result.Data.SuccessResponse.OrderId));
+        }
+
+        private OrderSide GetTriggerOrderSide(PlaceFuturesTriggerOrderRequest request)
+        {
+            if (request.PositionSide == SharedPositionSide.Long)
+            {
+                if (request.OrderDirection == SharedTriggerOrderDirection.Enter)
+                    return OrderSide.Buy;
+                return OrderSide.Sell;
+            }
+
+            if (request.OrderDirection == SharedTriggerOrderDirection.Enter)
+                return OrderSide.Sell;
+            return OrderSide.Buy;
+        }
+
+        EndpointOptions<GetOrderRequest> IFuturesTriggerOrderRestClient.GetFuturesTriggerOrderOptions { get; } = new EndpointOptions<GetOrderRequest>(true)
+        {
+            RequestNotes = "Only pending trigger orders can be requested, executed trigger orders are not available in the API"
+        };
+        async Task<ExchangeWebResult<SharedFuturesTriggerOrder>> IFuturesTriggerOrderRestClient.GetFuturesTriggerOrderAsync(GetOrderRequest request, CancellationToken ct)
+        {
+            var validationError = ((IFuturesTriggerOrderRestClient)this).GetFuturesTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedFuturesTriggerOrder>(Exchange, validationError);
+
+            var order = await Trading.GetOrderAsync(request.OrderId, ct: ct).ConfigureAwait(false);
+            if (!order)
+                return order.AsExchangeResult<SharedFuturesTriggerOrder>(Exchange, null, default);
+
+            return order.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedFuturesTriggerOrder(
+                ExchangeSymbolCache.ParseSymbol(_topicFuturesId, order.Data.Symbol),
+                order.Data.Symbol,
+                order.Data.OrderId.ToString(),
+                SharedOrderType.Limit,
+                order.Data.OrderSide == OrderSide.Buy ? SharedTriggerOrderDirection.Enter : SharedTriggerOrderDirection.Exit,
+                ParseTriggerOrderStatus(order.Data.OrderStatus),
+                order.Data.OrderConfiguration.StopPrice ?? 0,
+                null,
+                order.Data.CreateTime)
+            {
+                PlacedOrderId = order.Data.OrderId,
+                AveragePrice = order.Data.AverageFillPrice == 0 ? null : order.Data.AverageFillPrice,
+                OrderPrice = order.Data.OrderConfiguration.Price,
+                OrderQuantity = new SharedOrderQuantity(contractQuantity: order.Data.OrderConfiguration.Quantity, quoteAssetQuantity: order.Data.OrderConfiguration.QuoteQuantity),
+                QuantityFilled = new SharedOrderQuantity(contractQuantity: order.Data.QuantityFilled, quoteAssetQuantity: order.Data.QuoteQuantityFilled),
+                TimeInForce = ParseTimeInForce(order.Data.TimeInForce),
+                UpdateTime = order.Data.LastFillTime,
+                ClientOrderId = order.Data.ClientOrderId
+            });
+        }
+
+        EndpointOptions<CancelOrderRequest> IFuturesTriggerOrderRestClient.CancelFuturesTriggerOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);
+        async Task<ExchangeWebResult<SharedId>> IFuturesTriggerOrderRestClient.CancelFuturesTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
+        {
+            var validationError = ((IFuturesTriggerOrderRestClient)this).CancelFuturesTriggerOrderOptions.ValidateRequest(Exchange, request, request.Symbol.TradingMode, SupportedTradingModes);
+            if (validationError != null)
+                return new ExchangeWebResult<SharedId>(Exchange, validationError);
+
+            var order = await Trading.CancelOrderAsync(
+                request.OrderId,
+                ct: ct).ConfigureAwait(false);
+            if (!order)
+                return order.AsExchangeResult<SharedId>(Exchange, null, default);
+
+            return order.AsExchangeResult(Exchange, request.Symbol.TradingMode, new SharedId(request.OrderId));
+        }
+
         #endregion
 
         private async Task<string?> GetAccountIdAsync(ExchangeParameters? parameters, string? asset, CancellationToken ct)

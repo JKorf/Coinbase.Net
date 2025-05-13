@@ -1,21 +1,24 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbaseFiatAssetWrapper
     {
         /// <summary>
         /// Data
         /// </summary>
         [JsonPropertyName("data")]
-        public IEnumerable<CoinbaseFiatAsset> Data { get; set; } = Array.Empty<CoinbaseFiatAsset>();
+        public CoinbaseFiatAsset[] Data { get; set; } = Array.Empty<CoinbaseFiatAsset>();
     }
 
     /// <summary>
     /// Fiat asset info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseFiatAsset
     {
         /// <summary>

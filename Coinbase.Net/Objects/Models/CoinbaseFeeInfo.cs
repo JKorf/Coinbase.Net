@@ -1,10 +1,12 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
     /// <summary>
     /// Fee info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseFeeInfo
     {
         /// <summary>
@@ -67,6 +69,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Tier info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseFeeTier
     {
         /// <summary>
@@ -109,6 +112,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Tax rate
     /// </summary>
+    [SerializationModel]
     public record CoinbaseTax
     {
         /// <summary>

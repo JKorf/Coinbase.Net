@@ -1,8 +1,10 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbaseDepositAddressWrapper
     {
         /// <summary>
@@ -15,6 +17,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Deposit address info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseDepositAddress
     {
         /// <summary>

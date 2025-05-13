@@ -1,7 +1,9 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Internal
 {
+    [SerializationModel]
     internal record CoinbaseSocketRequest
     {
         [JsonPropertyName("type")]

@@ -1,10 +1,12 @@
-﻿using System.Text.Json.Serialization;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Internal
 {
     /// <summary>
     /// Socket update
     /// </summary>
+    [SerializationModel]
     public record CoinbaseSocketEvent
     {
         /// <summary>

@@ -1,4 +1,5 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using CryptoExchange.Net.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -9,21 +10,23 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Order book update
     /// </summary>
+    [SerializationModel]
     public record CoinbaseOrderBookUpdate
     {
         /// <summary>
         /// List of bids
         /// </summary>
-        public IEnumerable<CoinbaseOrderBookUpdateEntry> Bids { get; set; } = Array.Empty<CoinbaseOrderBookUpdateEntry>();
+        public CoinbaseOrderBookUpdateEntry[] Bids { get; set; } = Array.Empty<CoinbaseOrderBookUpdateEntry>();
         /// <summary>
         /// List of asks
         /// </summary>
-        public IEnumerable<CoinbaseOrderBookUpdateEntry> Asks { get; set; } = Array.Empty<CoinbaseOrderBookUpdateEntry>();
+        public CoinbaseOrderBookUpdateEntry[] Asks { get; set; } = Array.Empty<CoinbaseOrderBookUpdateEntry>();
     }
 
     /// <summary>
     /// Order book update
     /// </summary>
+    [SerializationModel]
     public record CoinbaseOrderBookUpdateEntry : ISymbolOrderBookEntry
     {
         /// <summary>

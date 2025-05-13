@@ -1,15 +1,18 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbasePortfoliosWrapper
     {
         [JsonPropertyName("portfolios")]
-        public IEnumerable<CoinbasePortfolio> Portfolios { get; set; } = new List<CoinbasePortfolio>();
+        public CoinbasePortfolio[] Portfolios { get; set; } = [];
     }
 
+    [SerializationModel]
     internal record CoinbasePortfolioWrapper
     {
         [JsonPropertyName("portfolio")]
@@ -19,6 +22,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Portfolio info
     /// </summary>
+    [SerializationModel]
     public record CoinbasePortfolio
     {
         /// <summary>

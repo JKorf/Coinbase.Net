@@ -38,7 +38,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Symbols
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CoinbaseSymbol>>> GetSymbolsAsync(SymbolType? type = null, ContractExpiryType? expiryType = null, ExpiryStatus? expireStatus = null, bool? allProducts = null, IEnumerable<string>? symbols = null, bool getTradabilityStatus = false, int? limit = null, int? offset = null, CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbaseSymbol[]>> GetSymbolsAsync(SymbolType? type = null, ContractExpiryType? expiryType = null, ExpiryStatus? expireStatus = null, bool? allProducts = null, IEnumerable<string>? symbols = null, bool getTradabilityStatus = false, int? limit = null, int? offset = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptionalEnum("product_type", type);
@@ -55,7 +55,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/brokerage/products", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             }
             var result = await _baseClient.SendAsync<CoinbaseSymbolWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<CoinbaseSymbol>>(result.Data?.Symbols);
+            return result.As<CoinbaseSymbol[]>(result.Data?.Symbols);
         }
 
         #endregion
@@ -103,7 +103,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Klines
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CoinbaseKline>>> GetKlinesAsync(string symbol, KlineInterval klineInterval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbaseKline[]>> GetKlinesAsync(string symbol, KlineInterval klineInterval, DateTime? startTime = null, DateTime? endTime = null, int? limit = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddEnum("granularity", klineInterval);
@@ -118,7 +118,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/products/{symbol}/candles", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
 
             var result = await _baseClient.SendAsync<CoinbaseKlineWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<CoinbaseKline>>(result.Data?.Klines);
+            return result.As<CoinbaseKline[]>(result.Data?.Klines);
         }
 
         #endregion
@@ -170,14 +170,14 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Book Tickers
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CoinbaseBookTicker>>> GetBookTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbaseBookTicker[]>> GetBookTickersAsync(IEnumerable<string>? symbols = null, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptional("product_ids", symbols?.ToArray());
             var request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/best_bid_ask", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
 
             var result = await _baseClient.SendAsync<CoinbaseBookTickerWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<CoinbaseBookTicker>>(result.Data?.Data);
+            return result.As<CoinbaseBookTicker[]>(result.Data?.Data);
         }
 
         #endregion
@@ -185,12 +185,12 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Fiat Assets
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CoinbaseFiatAsset>>> GetFiatAssetsAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbaseFiatAsset[]>> GetFiatAssetsAsync(CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v2/currencies", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
             var result = await _baseClient.SendAsync<CoinbaseFiatAssetWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<CoinbaseFiatAsset>>(result.Data?.Data);
+            return result.As<CoinbaseFiatAsset[]>(result.Data?.Data);
         }
 
         #endregion
@@ -198,12 +198,12 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Crypto Assets
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CoinbaseCryptoAsset>>> GetCryptoAssetsAsync(CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbaseCryptoAsset[]>> GetCryptoAssetsAsync(CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             var request = _definitions.GetOrCreate(HttpMethod.Get, "v2/currencies/crypto", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
             var result = await _baseClient.SendAsync<CoinbaseCryptoAssetWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<CoinbaseCryptoAsset>>(result.Data?.Data);
+            return result.As<CoinbaseCryptoAsset[]>(result.Data?.Data);
         }
 
         #endregion
@@ -225,12 +225,12 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Buy Price
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CoinbasePrice>>> GetBuyPriceAsync(string asset, CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbasePrice[]>> GetBuyPriceAsync(string asset, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/prices/{asset}/buy", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
             var result = await _baseClient.SendAsync<CoinbasePriceWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<CoinbasePrice>>(result.Data?.Prices);
+            return result.As<CoinbasePrice[]>(result.Data?.Prices);
         }
 
         #endregion
@@ -238,12 +238,12 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Buy Price
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CoinbasePrice>>> GetSellPriceAsync(string asset, CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbasePrice[]>> GetSellPriceAsync(string asset, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/prices/{asset}/sell", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
             var result = await _baseClient.SendAsync<CoinbasePriceWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<CoinbasePrice>>(result.Data?.Prices);
+            return result.As<CoinbasePrice[]>(result.Data?.Prices);
         }
 
         #endregion
@@ -251,13 +251,13 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Spot Price
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IEnumerable<CoinbasePrice>>> GetSpotPriceAsync(string asset, DateTime? date, CancellationToken ct = default)
+        public async Task<WebCallResult<CoinbasePrice[]>> GetSpotPriceAsync(string asset, DateTime? date, CancellationToken ct = default)
         {
             var parameters = new ParameterCollection();
             parameters.AddOptional("date", date?.ToString("yyyy-MM-dd"));
             var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/prices/{asset}/sell", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
             var result = await _baseClient.SendAsync<CoinbasePriceWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<IEnumerable<CoinbasePrice>>(result.Data?.Prices);
+            return result.As<CoinbasePrice[]>(result.Data?.Prices);
         }
 
         #endregion

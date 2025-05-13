@@ -1,9 +1,11 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbaseConvertQuoteWrapper
     {
         [JsonPropertyName("trade")]
@@ -13,6 +15,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Convert quote
     /// </summary>
+    [SerializationModel]
     public record CoinbaseConvertQuote
     {
         /// <summary>
@@ -49,7 +52,7 @@ namespace Coinbase.Net.Objects.Models
         /// Fees
         /// </summary>
         [JsonPropertyName("fees")]
-        public IEnumerable<CoinbaseConvertFees> Fees { get; set; } = null!;
+        public CoinbaseConvertFees[] Fees { get; set; } = null!;
         /// <summary>
         /// Total fee
         /// </summary>
@@ -64,7 +67,7 @@ namespace Coinbase.Net.Objects.Models
         /// Unit warnings
         /// </summary>
         [JsonPropertyName("user_warnings")]
-        public IEnumerable<CoinbaseUserWarning> UserWarnings { get; set; } = null!;
+        public CoinbaseUserWarning[] UserWarnings { get; set; } = null!;
 
         /// <summary>
         /// User reference
@@ -110,7 +113,7 @@ namespace Coinbase.Net.Objects.Models
         /// Tax details
         /// </summary>
         [JsonPropertyName("tax_details")]
-        public IEnumerable<CoinbaseTaxDetails> TaxDetails { get; set; } = Array.Empty<CoinbaseTaxDetails>();
+        public CoinbaseTaxDetails[] TaxDetails { get; set; } = Array.Empty<CoinbaseTaxDetails>();
 
         /// <summary>
         /// Trade incentive info
@@ -132,6 +135,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Convert fee info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseConvertFees
     {
         /// <summary>
@@ -164,6 +168,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Convert fee disclosure
     /// </summary>
+    [SerializationModel]
     public record CoinbaseConvertFeeDisclosure
     {
         /// <summary>
@@ -186,6 +191,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Convert fee disclosure
     /// </summary>
+    [SerializationModel]
     public record CoinbaseLink
     {
         /// <summary>
@@ -203,6 +209,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Convert unit price
     /// </summary>
+    [SerializationModel]
     public record CoinbaseUnitPrice
     {
         /// <summary>
@@ -225,6 +232,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Convert fee disclosure
     /// </summary>
+    [SerializationModel]
     public record CoinbaseQuantityScale
     {
         /// <summary>
@@ -242,6 +250,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// User warning
     /// </summary>
+    [SerializationModel]
     public record CoinbaseUserWarning
     {
         /// <summary>
@@ -274,13 +283,14 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// User warning
     /// </summary>
+    [SerializationModel]
     public record CoinbaseContext
     {
         /// <summary>
         /// Details
         /// </summary>
         [JsonPropertyName("details")]
-        public IEnumerable<string> Details { get; set; } = Array.Empty<string>();
+        public string[] Details { get; set; } = Array.Empty<string>();
 
         /// <summary>
         /// Title
@@ -297,6 +307,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Cancellation reason
     /// </summary>
+    [SerializationModel]
     public record CoinbaseCancellationReason
     {
         /// <summary>
@@ -324,6 +335,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Tax details
     /// </summary>
+    [SerializationModel]
     public record CoinbaseTaxDetails
     {
         /// <summary>
@@ -341,6 +353,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Subscription info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseSubscriptionInfo
     {
         /// <summary>
@@ -388,6 +401,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Trade incentive info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseTradeIncentiveInfo
     {
         /// <summary>

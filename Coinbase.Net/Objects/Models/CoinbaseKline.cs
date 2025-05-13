@@ -1,18 +1,21 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbaseKlineWrapper
     {
         [JsonPropertyName("candles")]
-        public IEnumerable<CoinbaseKline> Klines { get; set; } = Array.Empty<CoinbaseKline>();
+        public CoinbaseKline[] Klines { get; set; } = Array.Empty<CoinbaseKline>();
     }
 
     /// <summary>
     /// Kline data
     /// </summary>
+    [SerializationModel]
     public record CoinbaseKline
     {
         /// <summary>
@@ -50,6 +53,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Stream kline
     /// </summary>
+    [SerializationModel]
     public record CoinbaseStreamKline: CoinbaseKline
     {
         /// <summary>

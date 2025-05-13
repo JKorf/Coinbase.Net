@@ -1,4 +1,5 @@
 ﻿using Coinbase.Net.Clients;
+using Coinbase.Net.SymbolOrderBooks;
 using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -80,5 +81,10 @@ namespace Coinbase.Net.UnitTests
             await RunAndCheckResult(client => client.AdvancedTradeApi.Trading.GetUserTradesAsync(default, default, default, default, default, default, default, default, default), true);
         }
 
+        [Test]
+        public async Task TestOrderBooks()
+        {
+            await TestOrderBook(new CoinbaseSymbolOrderBook("ETH-USD"));
+        }
     }
 }

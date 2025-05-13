@@ -1,10 +1,12 @@
-﻿using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Enums;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbasePorfolioBreakdownWrapper
     {
         /// <summary>
@@ -17,6 +19,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// 
     /// </summary>
+    [SerializationModel]
     public record CoinbasePorfolioBreakdown
     {
         /// <summary>
@@ -33,22 +36,23 @@ namespace Coinbase.Net.Objects.Models
         /// Spot balances
         /// </summary>
         [JsonPropertyName("spot_positions")]
-        public IEnumerable<CoinbasePorfolioSpotBalance> SpotBalances { get; set; } = Array.Empty<CoinbasePorfolioSpotBalance>();
+        public CoinbasePorfolioSpotBalance[] SpotBalances { get; set; } = Array.Empty<CoinbasePorfolioSpotBalance>();
         /// <summary>
         /// Perpetual futures positions
         /// </summary>
         [JsonPropertyName("perp_positions")]
-        public IEnumerable<CoinbasePorfolioBreakdownPosition> PerpetualPositions { get; set; } = Array.Empty<CoinbasePorfolioBreakdownPosition>();
+        public CoinbasePorfolioBreakdownPosition[] PerpetualPositions { get; set; } = Array.Empty<CoinbasePorfolioBreakdownPosition>();
         /// <summary>
         /// Delivery futures positions
         /// </summary>
         [JsonPropertyName("futures_positions")]
-        public IEnumerable<CoinbasePorfolioBreakdownFuturesPosition> FuturesPositions { get; set; } = Array.Empty<CoinbasePorfolioBreakdownFuturesPosition>();
+        public CoinbasePorfolioBreakdownFuturesPosition[] FuturesPositions { get; set; } = Array.Empty<CoinbasePorfolioBreakdownFuturesPosition>();
     }
 
     /// <summary>
     /// Total balances
     /// </summary>
+    [SerializationModel]
     public record CoinbasePorfolioBreakdownBalances
     {
         /// <summary>
@@ -86,6 +90,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Spot balances
     /// </summary>
+    [SerializationModel]
     public record CoinbasePorfolioSpotBalance
     {
         /// <summary>
@@ -143,6 +148,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Position info
     /// </summary>
+    [SerializationModel]
     public record CoinbasePorfolioBreakdownPosition
     {
         /// <summary>
@@ -250,6 +256,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Futures position info
     /// </summary>
+    [SerializationModel]
     public record CoinbasePorfolioBreakdownFuturesPosition
     {
         /// <summary>
@@ -322,6 +329,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// 
     /// </summary>
+    [SerializationModel]
     public record CoinbaseCurrencyQuantityReference
     {
         /// <summary>

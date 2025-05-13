@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbaseExchangeRatesWrapper
     {
         /// <summary>
@@ -15,6 +17,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Exchange rates
     /// </summary>
+    [SerializationModel]
     public record CoinbaseExchangeRates
     {
         /// <summary>

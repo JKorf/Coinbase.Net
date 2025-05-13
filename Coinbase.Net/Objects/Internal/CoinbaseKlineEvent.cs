@@ -1,13 +1,15 @@
-﻿using Coinbase.Net.Objects.Models;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using Coinbase.Net.Objects.Models;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Internal
 {
+    [SerializationModel]
     internal record CoinbaseKlineEvent : CoinbaseSocketEvent
     {
         [JsonPropertyName("candles")]
-        public IEnumerable<CoinbaseStreamKline> Klines { get; set; } = Array.Empty<CoinbaseStreamKline>();
+        public CoinbaseStreamKline[] Klines { get; set; } = Array.Empty<CoinbaseStreamKline>();
     }
 }

@@ -1,10 +1,12 @@
-﻿using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbaseOrderBookWrapper
     {
         [JsonPropertyName("pricebook")]
@@ -14,6 +16,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Order book info
     /// </summary>
+    [SerializationModel]
     public record CoinbaseOrderBook
     {
         /// <summary>
@@ -25,12 +28,12 @@ namespace Coinbase.Net.Objects.Models
         /// Asks list
         /// </summary>
         [JsonPropertyName("asks")]
-        public IEnumerable<CoinbaseOrderBookEntry> Asks { get; set; } = Array.Empty<CoinbaseOrderBookEntry>();
+        public CoinbaseOrderBookEntry[] Asks { get; set; } = Array.Empty<CoinbaseOrderBookEntry>();
         /// <summary>
         /// Bids list
         /// </summary>
         [JsonPropertyName("bids")]
-        public IEnumerable<CoinbaseOrderBookEntry> Bids { get; set; } = Array.Empty<CoinbaseOrderBookEntry>();
+        public CoinbaseOrderBookEntry[] Bids { get; set; } = Array.Empty<CoinbaseOrderBookEntry>();
 
         /// <summary>
         /// Time
@@ -42,6 +45,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Order book entry
     /// </summary>
+    [SerializationModel]
     public record CoinbaseOrderBookEntry : ISymbolOrderBookEntry
     {
         /// <summary>

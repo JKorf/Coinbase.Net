@@ -19,25 +19,25 @@ namespace Coinbase.Net.Converters
             {
                 result.OrderType = NewOrderType.Market;
                 if (marketElement.TryGetProperty("quote_size", out var quoteSize))
-                    result.QuoteQuantity = decimal.Parse(quoteSize.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.QuoteQuantity = decimal.Parse(quoteSize.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (marketElement.TryGetProperty("base_size", out var baseSize))
-                    result.Quantity = decimal.Parse(baseSize.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Quantity = decimal.Parse(baseSize.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
             }
             else if (jsonDoc.RootElement.TryGetProperty("sor_limit_ioc", out var limitIocElement))
             {
                 result.OrderType = NewOrderType.LimitImmediateOrCancel;
                 if (limitIocElement.TryGetProperty("base_size", out var baseSize))
-                    result.Quantity = decimal.Parse(baseSize.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Quantity = decimal.Parse(baseSize.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (limitIocElement.TryGetProperty("limit_price", out var limitPrice))
-                    result.Price = decimal.Parse(limitPrice.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Price = decimal.Parse(limitPrice.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
             }
             else if (jsonDoc.RootElement.TryGetProperty("limit_limit_gtc", out var limitGtcElement))
             {
                 result.OrderType = NewOrderType.Limit;
                 if (limitGtcElement.TryGetProperty("base_size", out var baseSize))
-                    result.Quantity = decimal.Parse(baseSize.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Quantity = decimal.Parse(baseSize.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (limitGtcElement.TryGetProperty("limit_price", out var limitPrice))
-                    result.Price = decimal.Parse(limitPrice.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Price = decimal.Parse(limitPrice.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (limitGtcElement.TryGetProperty("post_only", out var postOnly))
                     result.PostOnly = postOnly.GetBoolean();
             }
@@ -45,9 +45,9 @@ namespace Coinbase.Net.Converters
             {
                 result.OrderType = NewOrderType.LimitGoodTillDate;
                 if (limitGtdElement.TryGetProperty("base_size", out var baseSize))
-                    result.Quantity = decimal.Parse(baseSize.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Quantity = decimal.Parse(baseSize.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (limitGtdElement.TryGetProperty("limit_price", out var limitPrice))
-                    result.Price = decimal.Parse(limitPrice.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Price = decimal.Parse(limitPrice.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (limitGtdElement.TryGetProperty("post_only", out var postOnly))
                     result.PostOnly = postOnly.GetBoolean();
                 if (limitGtdElement.TryGetProperty("end_time", out var endTime))
@@ -57,19 +57,19 @@ namespace Coinbase.Net.Converters
             {
                 result.OrderType = NewOrderType.LimitFillOrKill;
                 if (limitFokElement.TryGetProperty("base_size", out var baseSize))
-                    result.Quantity = decimal.Parse(baseSize.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Quantity = decimal.Parse(baseSize.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (limitFokElement.TryGetProperty("limit_price", out var limitPrice))
-                    result.Price = decimal.Parse(limitPrice.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Price = decimal.Parse(limitPrice.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
             }
             else if (jsonDoc.RootElement.TryGetProperty("stop_limit_stop_limit_gtc", out var stopLimitGtcElement))
             {
                 result.OrderType = NewOrderType.StopLimit;
                 if (stopLimitGtcElement.TryGetProperty("base_size", out var baseSize))
-                    result.Quantity = decimal.Parse(baseSize.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Quantity = decimal.Parse(baseSize.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (stopLimitGtcElement.TryGetProperty("limit_price", out var limitPrice))
-                    result.Price = decimal.Parse(limitPrice.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Price = decimal.Parse(limitPrice.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (stopLimitGtcElement.TryGetProperty("stop_price", out var stopPrice))
-                    result.StopPrice = decimal.Parse(stopPrice.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.StopPrice = decimal.Parse(stopPrice.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (stopLimitGtcElement.TryGetProperty("stop_direction", out var stopDirection))
                     result.StopDirection = EnumConverter.ParseString<StopDirection>(stopDirection.GetString()!);
             }
@@ -77,11 +77,11 @@ namespace Coinbase.Net.Converters
             {
                 result.OrderType = NewOrderType.StopLimitGoodTillDate;
                 if (stopLimitGtdElement.TryGetProperty("base_size", out var baseSize))
-                    result.Quantity = decimal.Parse(baseSize.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Quantity = decimal.Parse(baseSize.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (stopLimitGtdElement.TryGetProperty("limit_price", out var limitPrice))
-                    result.Price = decimal.Parse(limitPrice.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Price = decimal.Parse(limitPrice.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (stopLimitGtdElement.TryGetProperty("stop_price", out var stopPrice))
-                    result.StopPrice = decimal.Parse(stopPrice.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.StopPrice = decimal.Parse(stopPrice.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (stopLimitGtdElement.TryGetProperty("end_time", out var endTime))
                     result.CancelTime = endTime.GetDateTime();
                 if (stopLimitGtdElement.TryGetProperty("stop_direction", out var stopDirection))
@@ -91,21 +91,21 @@ namespace Coinbase.Net.Converters
             {
                 result.OrderType = NewOrderType.Bracket;
                 if (triggerGtcElement.TryGetProperty("base_size", out var baseSize))
-                    result.Quantity = decimal.Parse(baseSize.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Quantity = decimal.Parse(baseSize.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (triggerGtcElement.TryGetProperty("limit_price", out var limitPrice))
-                    result.Price = decimal.Parse(limitPrice.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Price = decimal.Parse(limitPrice.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (triggerGtcElement.TryGetProperty("stop_trigger_price", out var stopTriggerPrice))
-                    result.StopPrice = decimal.Parse(stopTriggerPrice.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.StopPrice = decimal.Parse(stopTriggerPrice.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
             }
             else if (jsonDoc.RootElement.TryGetProperty("trigger_bracket_gtd", out var triggerGtdElement))
             {
                 result.OrderType = NewOrderType.BracketGoodTillDate;
                 if (triggerGtdElement.TryGetProperty("base_size", out var baseSize))
-                    result.Quantity = decimal.Parse(baseSize.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Quantity = decimal.Parse(baseSize.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (triggerGtdElement.TryGetProperty("limit_price", out var limitPrice))
-                    result.Price = decimal.Parse(limitPrice.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Price = decimal.Parse(limitPrice.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (triggerGtdElement.TryGetProperty("stop_trigger_price", out var stopTriggerPrice))
-                    result.StopPrice = decimal.Parse(stopTriggerPrice.GetString(), NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.StopPrice = decimal.Parse(stopTriggerPrice.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (triggerGtdElement.TryGetProperty("end_time", out var endTime))
                     result.CancelTime = endTime.GetDateTime();
             }

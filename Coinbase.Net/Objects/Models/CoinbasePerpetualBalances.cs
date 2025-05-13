@@ -1,9 +1,11 @@
-﻿using System;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
+    [SerializationModel]
     internal record CoinbasePerpetualBalancesWrapper
     {
         /// <summary>
@@ -16,6 +18,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Portfolio balances
     /// </summary>
+    [SerializationModel]
     public record CoinbasePerpetualBalances
     {
         /// <summary>
@@ -27,7 +30,7 @@ namespace Coinbase.Net.Objects.Models
         /// Balances
         /// </summary>
         [JsonPropertyName("balances")]
-        public IEnumerable<CoinbasePerpetualBalance> Balances { get; set; } = Array.Empty<CoinbasePerpetualBalance>();
+        public CoinbasePerpetualBalance[] Balances { get; set; } = Array.Empty<CoinbasePerpetualBalance>();
         /// <summary>
         /// Is margin limit reached
         /// </summary>
@@ -38,6 +41,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Balance info
     /// </summary>
+    [SerializationModel]
     public record CoinbasePerpetualBalance
     {
         /// <summary>
@@ -95,6 +99,7 @@ namespace Coinbase.Net.Objects.Models
     /// <summary>
     /// Asset
     /// </summary>
+    [SerializationModel]
     public record CoinbasePerpetualBalancesAsset
     {
         /// <summary>

@@ -153,6 +153,32 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 2.0.0 - 13 May 2025
+    * Updated CryptoExchange.Net to version 9.0.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
+    * Added support for Native AOT compilation
+    * Added RateLimitUpdated event
+    * Added SharedSymbol response property to all Shared interfaces response models returning a symbol name
+    * Added GenerateClientOrderId method to AdvandedTradeApi Shared clients
+    * Added IBookTickerRestClient implementation to AdvandedTradeApi Shared client
+    * Added ISpotTriggerOrderRestClient implementation to AdvandedTradeApi Shared client
+    * Added IFuturesTriggerOrderRestClient implementation to AdvandedTradeApi Shared client
+    * Added IsTriggerOrder to SharedSpotOrder model
+    * Added TriggerPrice, IsTriggerPrice to SharedFuturesOrder model
+    * Added MaxLongLeverage, MaxShortLeverage to SharedFuturesSymbol model
+    * Added QuoteVolume property mapping to SharedSpotTicker model
+    * Added OptionalExchangeParameters and Supported properties to EndpointOptions
+    * Added error details parsing in restClient.AdvancedTradeApi.Trading.PlaceOrderAsync
+    * Added All property to retrieve all available environment on CoinbaseEnvironment
+    * Refactored Shared clients quantity parameters and responses to use SharedQuantity
+    * Updated all IEnumerable response and model types to array response types
+    * Removed Newtonsoft.Json dependency
+    * Removed legacy AddCoinbase(restOptions, socketOptions) DI overload
+    * Fixed duplicate symbols getting returned from the Shared GetSpotSymbolsAsync and GetSpotTickersAsync implementations
+    * Fixed Shared GetBalancesAsync returning the same asset multiple times
+    * Fixed incorrect DataTradeMode on certain Shared interface responses
+    * Fixed some typos
+    * Fixed deserialization error in restClient.AdvandedTradeApi.ExchangeData.GetFuturesSymbolsAsync endpoint
+
 * Version 2.0.0-beta3 - 01 May 2025
     * Updated CryptoExchange.Net version to 9.0.0-beta5
     * Added property to retrieve all available API environments

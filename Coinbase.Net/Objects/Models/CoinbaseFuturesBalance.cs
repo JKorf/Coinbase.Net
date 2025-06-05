@@ -107,7 +107,7 @@ namespace Coinbase.Net.Objects.Models
         /// Maintenance margin
         /// </summary>
         [JsonPropertyName("maintenance_margin")]
-        public decimal MaintenanceMargin { get; set; }
+        public decimal? MaintenanceMargin { get; set; }
         /// <summary>
         /// Liquidation buffer percentage
         /// </summary>
@@ -122,12 +122,12 @@ namespace Coinbase.Net.Objects.Models
         /// Total hold
         /// </summary>
         [JsonPropertyName("total_hold")]
-        public decimal TotalHold { get; set; }
+        public decimal? TotalHold { get; set; }
         /// <summary>
         /// Futures buying power
         /// </summary>
         [JsonPropertyName("futures_buying_power")]
-        public decimal FuturesBuyingPower { get; set; }
+        public decimal? FuturesBuyingPower { get; set; }
     }
 
 }

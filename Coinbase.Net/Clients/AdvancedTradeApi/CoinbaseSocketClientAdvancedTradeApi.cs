@@ -19,6 +19,7 @@ using Coinbase.Net.Objects.Internal;
 using System.Collections.Generic;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using CryptoExchange.Net;
+using System.Net.WebSockets;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
@@ -48,7 +49,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #endregion
 
         /// <inheritdoc />
-        protected override IByteMessageAccessor CreateAccessor() => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
+        protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
 

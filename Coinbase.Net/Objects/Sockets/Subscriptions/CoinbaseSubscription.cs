@@ -14,9 +14,6 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
     /// <inheritdoc />
     internal class CoinbaseSubscription<T> : Subscription<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>, CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> where T: CoinbaseSocketEvent
     {
-        /// <inheritdoc />
-        public override HashSet<string> ListenerIdentifiers { get; set; }
-
         private readonly Action<DataEvent<T[]>> _handler;
         private readonly string _channel;
         private readonly string[]? _symbols;
@@ -28,12 +25,6 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
             "EURC-USDC"
         };
 
-        /// <inheritdoc />
-        public override Type? GetMessageType(IMessageAccessor message)
-        {
-            return typeof(CoinbaseSocketMessage<T>);
-        }
-
         /// <summary>
         /// ctor
         /// </summary>
@@ -43,9 +34,11 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
             _channel = channel;
             _client = client;
             _symbols = symbols?.Select(x => !_usdcNotReplacing.Contains(x) ? x.Replace("-USDC", "-USD") : x).ToArray();
-            ListenerIdentifiers = _symbols?.Any() == true ? 
-                new HashSet<string>(_symbols.Select(x => channelIdentifier + "-" + x)) :
-                new HashSet<string>() { channelIdentifier };
+
+            if (_symbols?.Length > 0)
+                MessageMatcher = MessageMatcher.Create(_symbols.Select(x => new MessageHandlerLink<CoinbaseSocketMessage<T>>(channelIdentifier + "-" + x, DoHandleMessage)).ToArray());
+            else
+                MessageMatcher = MessageMatcher.Create<CoinbaseSocketMessage<T>>(channelIdentifier, DoHandleMessage);
         }
 
         /// <inheritdoc />
@@ -67,11 +60,10 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         }, Authenticated);
 
         /// <inheritdoc />
-        public override CallResult DoHandleMessage(SocketConnection connection, DataEvent<object> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<CoinbaseSocketMessage<T>> message)
         {
-            var data = (CoinbaseSocketMessage<T>)message.Data;
-            _handler.Invoke(message.As(data.Events, data.Channel, null, data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
-                .WithDataTimestamp(data.Timestamp));
+            _handler.Invoke(message.As(message.Data.Events, message.Data.Channel, null, message.Data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                .WithDataTimestamp(message.Data.Timestamp));
             return CallResult.SuccessResult;
         }
 

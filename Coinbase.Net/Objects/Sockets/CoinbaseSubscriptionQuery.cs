@@ -9,21 +9,21 @@ namespace Coinbase.Net.Objects.Sockets
 {
     internal class CoinbaseSubscriptionQuery : Query<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>
     {
-        public override HashSet<string> ListenerIdentifiers { get; set; }
-
         private readonly string _channel;
         private readonly string[]? _symbols;
 
         public CoinbaseSubscriptionQuery(CoinbaseSocketRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
-            ListenerIdentifiers = new HashSet<string> { "subscriptions" };
             _channel = request.Channel;
             _symbols = request.Symbols;
+
+            MessageMatcher = MessageMatcher.Create<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>("subscriptions", HandleMessage);
         }
 
-        public override bool ValidateMessage(DataEvent<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> message)
+        public override bool PreCheckMessage(DataEvent<object> message)
         {
-            var evnt = message.Data.Events.First();
+            var messageData = (CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>)message.Data;
+            var evnt = messageData.Events.First();
             if (!evnt.Subscriptions.TryGetValue(_channel, out var subbed))
                 return false;
 
@@ -33,7 +33,7 @@ namespace Coinbase.Net.Objects.Sockets
             return true;
         }
 
-        public override CallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> HandleMessage(SocketConnection connection, DataEvent<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> message)
+        public CallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> HandleMessage(SocketConnection connection, DataEvent<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> message)
         {
             return message.ToCallResult();
         }

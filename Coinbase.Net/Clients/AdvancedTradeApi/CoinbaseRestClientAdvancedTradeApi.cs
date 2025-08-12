@@ -16,6 +16,7 @@ using CryptoExchange.Net.Converters.MessageParsing;
 using System.Reflection;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using System.Linq;
+using CryptoExchange.Net.Objects.Errors;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
@@ -24,10 +25,22 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
     {
         #region fields 
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Advanced Trade Api");
+
+        protected override ErrorCollection ErrorMapping { get; } = new ErrorCollection(
+            [
+                new ErrorInfo(ErrorType.Unauthorized, false, "Insufficient permissions", "PERMISSION_DENIED"),
+
+                new ErrorInfo(ErrorType.InvalidParameter, false, "Invalid parameter", "INVALID_ARGUMENT"),
+
+                new ErrorInfo(ErrorType.BalanceInsufficient, false, "Insufficient balance", "INSUFFICIENT_FUND"),
+
+                new ErrorInfo(ErrorType.OrderConfigurationRejected, false, "Order configuration rejected", "UNSUPPORTED_ORDER_CONFIGURATION"),
+            ]
+        );
         #endregion
 
         #region Api clients
-        /// <inheritdoc />
+            /// <inheritdoc />
         public ICoinbaseRestClientAdvancedTradeApiAccount Account { get; }
         /// <inheritdoc />
         public ICoinbaseRestClientAdvancedTradeApiExchangeData ExchangeData { get; }
@@ -96,7 +109,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
         {
             if (!accessor.IsValid)
-                return new ServerError(null, "Unknown request error", exception: exception);
+                return new ServerError(ErrorInfo.Unknown, exception: exception);
 
             var error = accessor.GetValue<string>(MessagePath.Get().Property("error"));
             if (error == null)
@@ -104,13 +117,13 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 var errorId = accessor.GetValue<string?>(MessagePath.Get().Property("errors").Index(0).Property("id"));
                 var errorMsg = accessor.GetValue<string?>(MessagePath.Get().Property("errors").Index(0).Property("message"));
                 if (errorId != null)
-                    return new ServerError(null, $"{errorId}: {errorMsg}", exception);
+                    return new ServerError(errorId, GetErrorInfo(errorId, errorMsg), exception);
 
-                return new ServerError(null, "Unknown request error", exception: exception);
+                return new ServerError(ErrorInfo.Unknown, exception: exception);
             }
 
             var msg = accessor.GetValue<string>(MessagePath.Get().Property("message"));
-            return new ServerError(null, $"{error}: {msg}", exception);
+            return new ServerError(error, GetErrorInfo(error, msg), exception);
         }
 
         /// <inheritdoc />

@@ -173,7 +173,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 channel += "-" + message.GetValue<string>(_klinesSymbolPath);
             if (channel.Equals("ticker", StringComparison.Ordinal)
                 || channel.Equals("ticker_batch", StringComparison.Ordinal))
+            {
                 channel += "-" + message.GetValue<string>(_tickersSymbolPath);
+            }
             if (channel.Equals("status", StringComparison.Ordinal))
                 channel += "-" + message.GetValue<string>(_symbolsSymbolPath);
             if (channel.Equals("l2_data", StringComparison.Ordinal))

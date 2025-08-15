@@ -26,17 +26,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region fields 
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Advanced Trade Api");
 
-        protected override ErrorCollection ErrorMapping { get; } = new ErrorCollection(
-            [
-                new ErrorInfo(ErrorType.Unauthorized, false, "Insufficient permissions", "PERMISSION_DENIED"),
-
-                new ErrorInfo(ErrorType.InvalidParameter, false, "Invalid parameter", "INVALID_ARGUMENT"),
-
-                new ErrorInfo(ErrorType.BalanceInsufficient, false, "Insufficient balance", "INSUFFICIENT_FUND"),
-
-                new ErrorInfo(ErrorType.OrderConfigurationRejected, false, "Order configuration rejected", "UNSUPPORTED_ORDER_CONFIGURATION"),
-            ]
-        );
+        protected override ErrorCollection ErrorMapping => CoinbaseErrors.Errors;
         #endregion
 
         #region Api clients

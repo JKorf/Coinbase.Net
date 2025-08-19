@@ -9,6 +9,7 @@ using CryptoExchange.Net.Objects;
 using CryptoExchange.Net;
 using Coinbase.Net.Enums;
 using System.Drawing;
+using CryptoExchange.Net.Objects.Errors;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
@@ -83,7 +84,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             var fiatAsset = cryptoAssets.Data.SingleOrDefault(x => x.Asset.Equals(request.Asset, StringComparison.InvariantCultureIgnoreCase));
             if (fiatAsset == null)
-                return cryptoAssets.AsExchangeError<SharedAsset>(Exchange, new ServerError("Asset not found"));
+                return cryptoAssets.AsExchangeError<SharedAsset>(Exchange, new ServerError(new ErrorInfo(ErrorType.UnknownAsset, "Asset not found")));
 
             return fiatAssets.AsExchangeResult(Exchange, TradingMode.Spot, new SharedAsset(fiatAsset.Asset)
             {
@@ -116,7 +117,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             {
                 var portfolioId = ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "PortfolioId");
                 if (portfolioId == default)
-                    return new ExchangeWebResult<SharedBalance[]>(Exchange, new ArgumentError("PortfolioId is required as Exchange parameter for retrieving Perpetual futures balances"));
+                    return new ExchangeWebResult<SharedBalance[]>(Exchange, ArgumentError.Missing("PortfolioId", "PortfolioId is required as Exchange parameter for retrieving Perpetual futures balances"));
 
                 var result = await Account.GetPerpetualBalancesAsync(portfolioId, ct: ct).ConfigureAwait(false);
                 if (!result)
@@ -154,7 +155,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             var accountId = await GetAccountIdAsync(request.ExchangeParameters, request.Asset, ct).ConfigureAwait(false);
             if (accountId == null)
-                return new ExchangeWebResult<SharedDepositAddress[]>(Exchange, new ArgumentError("AccountId not provided and could not be determined. Please provide the AccountId parameter in the ExchangeParameters"));
+                return new ExchangeWebResult<SharedDepositAddress[]>(Exchange, ArgumentError.Missing("AccountId", "AccountId not provided and could not be determined. Please provide the AccountId parameter in the ExchangeParameters"));
 
             var depositAddresses = await Account.GetDepositAddressesAsync(accountId, ct: ct).ConfigureAwait(false);
             if (!depositAddresses)
@@ -181,7 +182,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             var accountId = await GetAccountIdAsync(request.ExchangeParameters, request.Asset, ct).ConfigureAwait(false);
             if (accountId == null)
-                return new ExchangeWebResult<SharedDeposit[]>(Exchange, new ArgumentError("AccountId not provided and could not be determined. Please provide the AccountId parameter in the ExchangeParameters"));
+                return new ExchangeWebResult<SharedDeposit[]>(Exchange, ArgumentError.Missing("AccountId", "AccountId not provided and could not be determined. Please provide the AccountId parameter in the ExchangeParameters"));
 
             // Determine page token
             string? toId = null;
@@ -309,7 +310,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             var accountId = await GetAccountIdAsync(request.ExchangeParameters, request.Asset, ct).ConfigureAwait(false);
             if (accountId == null)
-                return new ExchangeWebResult<SharedWithdrawal[]>(Exchange, new ArgumentError("AccountId not provided and could not be determined. Please provide the AccountId parameter in the ExchangeParameters"));
+                return new ExchangeWebResult<SharedWithdrawal[]>(Exchange, ArgumentError.Missing("AccountId", "AccountId not provided and could not be determined. Please provide the AccountId parameter in the ExchangeParameters"));
 
             // Determine page token
             string? toId = null;
@@ -357,7 +358,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             var accountId = await GetAccountIdAsync(request.ExchangeParameters, request.Asset, ct).ConfigureAwait(false);
             if (accountId == null)
-                return new ExchangeWebResult<SharedId>(Exchange, new ArgumentError("AccountId not provided and could not be determined. Please provide the AccountId parameter in the ExchangeParameters"));
+                return new ExchangeWebResult<SharedId>(Exchange, ArgumentError.Missing("AccountId", "AccountId not provided and could not be determined. Please provide the AccountId parameter in the ExchangeParameters"));
 
             // Get data
             var withdrawal = await Account.WithdrawCryptoAsync(
@@ -885,7 +886,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return new ExchangeWebResult<SharedId>(Exchange, validationError);
 
             if (request.ReduceOnly == true)
-                return new ExchangeWebResult<SharedId>(Exchange, new ArgumentError($"ReduceOnly flag is not available on {Exchange}, use ClosePositionAsync with quantity to reduce a position"));
+                return new ExchangeWebResult<SharedId>(Exchange, ArgumentError.Invalid(nameof(PlaceFuturesOrderRequest.ReduceOnly), $"ReduceOnly flag is not available on {Exchange}, use ClosePositionAsync with quantity to reduce a position"));
 
             var result = await Trading.PlaceOrderAsync(
                 request.Symbol!.GetSymbol(FormatSymbol),
@@ -1126,7 +1127,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             {
                 var portfolioId = ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "PortfolioId");
                 if (portfolioId == default)
-                    return new ExchangeWebResult<SharedPosition[]>(Exchange, new ArgumentError("PortfolioId is required as Exchange parameter for retrieving Perpetual futures balances"));
+                    return new ExchangeWebResult<SharedPosition[]>(Exchange, ArgumentError.Missing("PortfolioId", "PortfolioId is required as Exchange parameter for retrieving Perpetual futures balances"));
 
                 var result = await Trading.GetPerpetualPositionsAsync(portfolioId, ct: ct).ConfigureAwait(false);
                 if (!result)
@@ -1192,7 +1193,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         {
             var interval = (Enums.KlineInterval)request.Interval;
             if (!Enum.IsDefined(typeof(Enums.KlineInterval), interval))
-                return new ExchangeWebResult<SharedKline[]>(Exchange, new ArgumentError("Interval not supported"));
+                return new ExchangeWebResult<SharedKline[]>(Exchange, ArgumentError.Invalid(nameof(GetKlinesRequest.Interval), "Interval not supported"));
 
             var validationError = ((IKlineRestClient)this).GetKlinesOptions.ValidateRequest(Exchange, request, request.Symbol!.TradingMode, SupportedTradingModes);
             if (validationError != null)

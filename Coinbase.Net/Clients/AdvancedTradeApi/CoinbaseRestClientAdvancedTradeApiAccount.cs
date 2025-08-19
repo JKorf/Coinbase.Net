@@ -7,6 +7,7 @@ using Coinbase.Net.Objects.Models;
 using Coinbase.Net.Enums;
 using System.Globalization;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
+using CryptoExchange.Net.Objects.Errors;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
@@ -209,7 +210,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return result.As<CoinbaseFuturesBalanceSummary>(default);
 
             if (result.Data.BalanceSummary == null)
-                return result.AsError<CoinbaseFuturesBalanceSummary>(new ServerError("Not found"));
+                return result.AsError<CoinbaseFuturesBalanceSummary>(new ServerError(new ErrorInfo(ErrorType.Unknown, "Not found")));
 
             return result.As(result.Data.BalanceSummary);
         }

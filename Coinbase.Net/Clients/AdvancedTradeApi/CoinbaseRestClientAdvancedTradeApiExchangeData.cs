@@ -9,6 +9,7 @@ using Coinbase.Net.Objects.Models;
 using Coinbase.Net.Enums;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using System.Linq;
+using CryptoExchange.Net.Objects.Errors;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
@@ -48,7 +49,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             parameters.AddOptional("get_all_products", allProducts);
             RequestDefinition request;
             if (!_baseClient.Authenticated)
+            {
                 request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/brokerage/market/products", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
+            }
             else
             {
                 parameters.Add("get_tradability_status", getTradabilityStatus);
@@ -160,7 +163,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return result.As<CoinbaseBookTicker>(default);
 
             if (!result.Data.Data.Any())
-                return result.AsError<CoinbaseBookTicker>(new ServerError("Not found"));
+                return result.AsError<CoinbaseBookTicker>(new ServerError(new ErrorInfo(ErrorType.Unknown, "Not found")));
 
             return result.As(result.Data.Data.Single());
         }

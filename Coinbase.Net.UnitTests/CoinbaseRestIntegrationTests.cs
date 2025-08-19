@@ -1,5 +1,6 @@
 ﻿using Coinbase.Net.Clients;
 using Coinbase.Net.SymbolOrderBooks;
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -44,7 +45,8 @@ namespace Coinbase.Net.UnitTests
             var result = await CreateClient().AdvancedTradeApi.ExchangeData.GetSymbolAsync("TSTTST", default);
 
             Assert.That(result.Success, Is.False);
-            Assert.That(result.Error.Code, Is.EqualTo(400));
+            Assert.That(result.Error.ErrorCode, Is.EqualTo("INVALID_ARGUMENT"));
+            Assert.That(result.Error.ErrorType, Is.EqualTo(ErrorType.InvalidParameter));
         }
 
         [Test]

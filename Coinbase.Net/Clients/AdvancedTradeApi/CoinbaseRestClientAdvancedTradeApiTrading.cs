@@ -11,6 +11,7 @@ using Coinbase.Net.Objects.Models;
 using System.Collections.Generic;
 using System.Linq;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
+using CryptoExchange.Net.Objects.Errors;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
@@ -96,7 +97,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     errorMessage = result.Data.ErrorResponse.PreviewFailureReason;
                 else if (!string.IsNullOrEmpty(result.Data.ErrorResponse.OrderFailureReason))
                     errorMessage = result.Data.ErrorResponse.PreviewFailureReason;
-                return result.AsError<CoinbaseOrderResult>(new ServerError($"{result.Data.ErrorResponse.ErrorCode}: {errorMessage}"));
+                return result.AsError<CoinbaseOrderResult>(new ServerError(result.Data.ErrorResponse.ErrorCode, _baseClient.GetErrorInfo(result.Data.ErrorResponse.ErrorCode, errorMessage)));
             }
 
             return result;
@@ -115,10 +116,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             var cancelResult = result.Data.SingleOrDefault();
             if (cancelResult == null)
-                return result.AsError<CoinbaseCancelResult>(new ServerError("Order not found"));
+                return result.AsError<CoinbaseCancelResult>(new ServerError(new ErrorInfo(ErrorType.UnknownOrder, "Order not found")));
 
             if (!cancelResult.Success)
-                return result.AsError<CoinbaseCancelResult>(new ServerError(cancelResult.ErrorMessage!));
+                return result.AsError<CoinbaseCancelResult>(new ServerError(new ErrorInfo(ErrorType.Unknown, cancelResult.ErrorMessage!)));
 
             return result.As(cancelResult);
         }
@@ -154,7 +155,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return result;
 
             if (!result.Data.Success && result.Data.ErrorResponse != null)
-                return result.AsError<CoinbaseEditOrderResult>(new ServerError($"{result.Data.ErrorResponse.ErrorCode}: {result.Data.ErrorResponse.Message}"));
+                return result.AsError<CoinbaseEditOrderResult>(new ServerError(result.Data.ErrorResponse.ErrorCode, _baseClient.GetErrorInfo(result.Data.ErrorResponse.ErrorCode, result.Data.ErrorResponse.Message)));
 
             return result;
         }

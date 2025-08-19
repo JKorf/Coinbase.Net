@@ -1,3 +1,9 @@
+using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Objects;
+using Jose;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,45 +11,27 @@ using System.Net.Http;
 using System.Security.Cryptography;
 using System.Text.Json;
 using System.Text.Json.Serialization.Metadata;
-using CryptoExchange.Net.Authentication;
-using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Converters.SystemTextJson;
-using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.Objects;
-using Jose;
 
 namespace Coinbase.Net
 {
     internal class CoinbaseAuthenticationProvider : AuthenticationProvider
     {
         private static IStringMessageSerializer _serializer = new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
-        private static JwtSettings _mapperSettings = new JwtSettings() { JsonMapper = new JwtJsonMapper() };
+        private static readonly JwtSettings _mapperSettings = new() { JsonMapper = new JwtJsonMapper() };
 
         public CoinbaseAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {
         }
 
-        public override void AuthenticateRequest(
-            RestApiClient apiClient,
-            Uri uri,
-            HttpMethod method,
-            ref IDictionary<string, object>? uriParameters,
-            ref IDictionary<string, object>? bodyParameters,
-            ref Dictionary<string, string>? headers,
-            bool auth,
-            ArrayParametersSerialization arraySerialization,
-            HttpMethodParameterPosition parameterPosition,
-            RequestBodyFormat requestBodyFormat)
+        public override void ProcessRequest(RestApiClient apiClient, RestRequestConfiguration request)
         {
-            headers = new Dictionary<string, string>() { };
-
-            if (!auth)
+            if (!request.Authenticated)
                 return;
 
             var timestamp = GetTimestamp(apiClient);
 
-            headers.Add("Authorization", $"Bearer {GenerateToken(timestamp, $"{method} {uri.Host}{uri.AbsolutePath}")}");
-
+            var host = request.BaseAddress.Substring(request.BaseAddress.IndexOf("//") + 2);
+            request.Headers.Add("Authorization", $"Bearer {GenerateToken(timestamp, $"{request.Method} {host}{request.Path}")}");
         }
 
         public string GenerateToken(DateTime timestamp, string? uriLine)

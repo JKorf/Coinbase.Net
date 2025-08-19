@@ -9,7 +9,7 @@ namespace Coinbase.Net
 {
     internal static class CoinbaseErrors
     {
-        public static ErrorCollection Errors { get; } = new ErrorCollection(
+        public static ErrorMapping Errors { get; } = new ErrorMapping(
             [
                 new ErrorInfo(ErrorType.Unauthorized, false, "Insufficient permissions", "PERMISSION_DENIED"),
 

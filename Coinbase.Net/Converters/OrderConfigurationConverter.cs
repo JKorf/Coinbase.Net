@@ -37,7 +37,7 @@ namespace Coinbase.Net.Converters
                 if (limitGtcElement.TryGetProperty("base_size", out var baseSize))
                     result.Quantity = decimal.Parse(baseSize.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
                 if (limitGtcElement.TryGetProperty("limit_price", out var limitPrice))
-                    result.Price = decimal.Parse(limitPrice.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture);
+                    result.Price = decimal.TryParse(limitPrice.GetString()!, NumberStyles.Float, CultureInfo.InvariantCulture, out var res) ? res : null;
                 if (limitGtcElement.TryGetProperty("post_only", out var postOnly))
                     result.PostOnly = postOnly.GetBoolean();
             }

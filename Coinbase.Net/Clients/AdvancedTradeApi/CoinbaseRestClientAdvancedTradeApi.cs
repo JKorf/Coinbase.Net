@@ -26,7 +26,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region fields 
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Advanced Trade Api");
 
-        protected override ErrorCollection ErrorMapping => CoinbaseErrors.Errors;
+        protected override ErrorMapping ErrorMapping => CoinbaseErrors.Errors;
         #endregion
 
         #region Api clients

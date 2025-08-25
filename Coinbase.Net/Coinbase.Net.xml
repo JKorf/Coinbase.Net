@@ -394,6 +394,9 @@
         <member name="M:Coinbase.Net.Clients.CoinbaseUserClientProvider.InitializeUserClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Coinbase.Net.CoinbaseEnvironment)">
             <inheritdoc />
         </member>
+        <member name="M:Coinbase.Net.Clients.CoinbaseUserClientProvider.ClearUserClients(System.String)">
+            <inheritdoc />
+        </member>
         <member name="M:Coinbase.Net.Clients.CoinbaseUserClientProvider.GetRestClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Coinbase.Net.CoinbaseEnvironment)">
             <inheritdoc />
         </member>
@@ -4006,6 +4009,11 @@
             <param name="userIdentifier">The identifier for the user</param>
             <param name="credentials">The credentials for the user</param>
             <param name="environment">The environment to use</param>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.ICoinbaseUserClientProvider.ClearUserClients(System.String)">
+            <summary>
+            Reset the cached clients for a user. This can be useful when a user changes API credentials.
+            </summary>
         </member>
         <member name="M:Coinbase.Net.Interfaces.Clients.ICoinbaseUserClientProvider.GetRestClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Coinbase.Net.CoinbaseEnvironment)">
             <summary>
@@ -7956,7 +7964,7 @@
         <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.GetUnsubQuery">
+        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.GetUnsubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Internal.CoinbaseSocketMessage{`0}})">

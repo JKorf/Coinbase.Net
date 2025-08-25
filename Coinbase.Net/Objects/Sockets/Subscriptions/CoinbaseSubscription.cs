@@ -42,7 +42,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         }
 
         /// <inheritdoc />
-        public override Query? GetSubQuery(SocketConnection connection) => new CoinbaseSubscriptionQuery(new CoinbaseSocketRequest
+        protected override Query? GetSubQuery(SocketConnection connection) => new CoinbaseSubscriptionQuery(new CoinbaseSocketRequest
         {
             Channel = _channel,
             Type = "subscribe",
@@ -51,7 +51,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         }, Authenticated);
 
         /// <inheritdoc />
-        public override Query? GetUnsubQuery() => new CoinbaseQuery<CoinbaseSocketMessage>(new CoinbaseSocketRequest
+        protected override Query? GetUnsubQuery(SocketConnection connection) => new CoinbaseQuery<CoinbaseSocketMessage>(new CoinbaseSocketRequest
         {
             Channel = _channel,
             Type = "unsubscribe",

@@ -20,7 +20,7 @@ namespace Coinbase.Net.Objects.Sockets
             MessageMatcher = MessageMatcher.Create<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>("subscriptions", HandleMessage);
         }
 
-        public override bool PreCheckMessage(DataEvent<object> message)
+        public override bool PreCheckMessage(SocketConnection connection, DataEvent<object> message)
         {
             var messageData = (CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>)message.Data;
             var evnt = messageData.Events.First();

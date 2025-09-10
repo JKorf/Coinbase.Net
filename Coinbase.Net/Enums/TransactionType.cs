@@ -1,6 +1,6 @@
 using System.Text.Json.Serialization;
-using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Attributes;
+using CryptoExchange.Net.Converters.SystemTextJson;
 
 namespace Coinbase.Net.Enums
 {
@@ -135,5 +135,20 @@ namespace Coinbase.Net.Enums
         /// </summary>
         [Map("wrap_asset")]
         WrapAsset,
+        /// <summary>
+        /// Withdrawal from Coinbase Pro
+        /// </summary>
+        [Map("pro_withdrawal")]
+        ProWithdrawal,
+        /// <summary>
+        /// Deposit to Coinbase Pro
+        /// </summary>
+        [Map("pro_deposit")]
+        ProDeposit,
+        /// <summary>
+        /// Interest payout
+        /// </summary>
+        [Map("interest")]
+        Interest
     }
 }

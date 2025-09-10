@@ -904,6 +904,11 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseAdvancedTradeFill">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseApiKey">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -940,6 +945,11 @@
             </summary>
         </member>
         <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseBookTickerWrapperArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseBuyOrSell">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -1990,6 +2000,11 @@
             </summary>
         </member>
         <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTransactionNetworkArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseTransactionTrade">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -3066,6 +3081,21 @@
         <member name="F:Coinbase.Net.Enums.TransactionType.WrapAsset">
             <summary>
             Wrap wrappable assets, e.g. staked ETH, to wrapped assets, e.g. cbETH
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.TransactionType.ProWithdrawal">
+            <summary>
+            Withdrawal from Coinbase Pro
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.TransactionType.ProDeposit">
+            <summary>
+            Deposit to Coinbase Pro
+            </summary>
+        </member>
+        <member name="F:Coinbase.Net.Enums.TransactionType.Interest">
+            <summary>
+            Interest payout
             </summary>
         </member>
         <member name="T:Coinbase.Net.Enums.TriggerStatus">
@@ -4811,6 +4841,11 @@
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseDeposit.PayoutAt">
             <summary>
             Payout at
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseDeposit.UserReference">
+            <summary>
+            User reference
             </summary>
         </member>
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseDepositAddressWrapper.Data">
@@ -7643,6 +7678,26 @@
             Details
             </summary>
         </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTransaction.Trade">
+            <summary>
+            Trade info
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTransaction.Buy">
+            <summary>
+            Buy info
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTransaction.Sell">
+            <summary>
+            Sell info
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTransaction.AdvancedTradeFill">
+            <summary>
+            Advanced trade fill info
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseTransactionNetwork">
             <summary>
             Network info
@@ -7686,6 +7741,81 @@
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseTransactionDetails.Subtitle">
             <summary>
             Subtitle
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseTransactionTrade">
+            <summary>
+            Trade details
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTransactionTrade.Id">
+            <summary>
+            Id of the trade
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseTransactionTrade.PaymentMethodName">
+            <summary>
+            The name of the payment method used for the trade
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseAdvancedTradeFill">
+            <summary>
+            Advanced trade fill details
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseAdvancedTradeFill.Commission">
+            <summary>
+            Commission
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseAdvancedTradeFill.FillPrice">
+            <summary>
+            Fill price
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseAdvancedTradeFill.OrderId">
+            <summary>
+            Order id
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseAdvancedTradeFill.OrderSide">
+            <summary>
+            Order side (buy/sell)
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseAdvancedTradeFill.ProductId">
+            <summary>
+            Product id
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseBuyOrSell">
+            <summary>
+            Buy/Sell details
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBuyOrSell.Fee">
+            <summary>
+            Fee details
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBuyOrSell.Id">
+            <summary>
+            Id of the buy/sell
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBuyOrSell.PaymentMethodName">
+            <summary>
+            Payment method name
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBuyOrSell.Subtotal">
+            <summary>
+            Subtotal info
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseBuyOrSell.Total">
+            <summary>
+            Total info
             </summary>
         </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseUserTrades">
@@ -7881,6 +8011,11 @@
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseWithdrawal.PayoutAt">
             <summary>
             Payout at
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseWithdrawal.UserReference">
+            <summary>
+            User reference
             </summary>
         </member>
         <member name="T:Coinbase.Net.Objects.Models.IntradayMarginSetting">

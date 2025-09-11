@@ -88,6 +88,26 @@ namespace Coinbase.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("details")]
         public CoinbaseTransactionDetails Details { get; set; } = null!;
+        /// <summary>
+        /// Trade info
+        /// </summary>
+        [JsonPropertyName("trade")]
+        public CoinbaseTransactionTrade? Trade { get; set; }
+        /// <summary>
+        /// Buy info
+        /// </summary>
+        [JsonPropertyName("buy")]
+        public CoinbaseBuyOrSell? Buy { get; set; }
+        /// <summary>
+        /// Sell info
+        /// </summary>
+        [JsonPropertyName("sell")]
+        public CoinbaseBuyOrSell? Sell { get; set; }
+        /// <summary>
+        /// Advanced trade fill info
+        /// </summary>
+        [JsonPropertyName("advanced_trade_fill")]
+        public CoinbaseAdvancedTradeFill? AdvancedTradeFill { get; set; }
     }
 
     /// <summary>
@@ -143,5 +163,87 @@ namespace Coinbase.Net.Objects.Models
         public string Subtitle { get; set; } = string.Empty;
     }
 
+    /// <summary>
+    /// Trade details
+    /// </summary>
+    [SerializationModel]
+    public record CoinbaseTransactionTrade
+    {
+        /// <summary>
+        /// Id of the trade
+        /// </summary>
+        [JsonPropertyName("id")]
+        public string Id { get; set; } = string.Empty;
+        /// <summary>
+        /// The name of the payment method used for the trade
+        /// </summary>
+        [JsonPropertyName("payment_method_name")]
+        public string PaymentMethodName { get; set; } = string.Empty;
+    }
 
+    /// <summary>
+    /// Advanced trade fill details
+    /// </summary>
+    [SerializationModel]
+    public record CoinbaseAdvancedTradeFill
+    {
+        /// <summary>
+        /// Commission
+        /// </summary>
+        [JsonPropertyName("commission")]
+        public decimal Commission { get; set; }
+        /// <summary>
+        /// Fill price
+        /// </summary>
+        [JsonPropertyName("fill_price")]
+        public decimal FillPrice { get; set; }
+        /// <summary>
+        /// Order id
+        /// </summary>
+        [JsonPropertyName("order_id")]
+        public string OrderId { get; set; } = string.Empty;
+        /// <summary>
+        /// Order side (buy/sell)
+        /// </summary>
+        [JsonPropertyName("order_side")]
+        public OrderSide OrderSide { get; set; }
+        /// <summary>
+        /// Product id
+        /// </summary>
+        [JsonPropertyName("product_id")]
+        public string ProductId { get; set; } = string.Empty;
+    }
+
+    /// <summary>
+    /// Buy/Sell details
+    /// </summary>
+    [SerializationModel]
+    public record CoinbaseBuyOrSell
+    {
+        /// <summary>
+        /// Fee details
+        /// </summary>
+        [JsonPropertyName("fee")]
+        public CoinbaseQuantityReference? Fee { get; set; } = null!;
+        /// <summary>
+        /// Id of the buy/sell
+        /// </summary>
+        [JsonPropertyName("id")]
+        public string Id { get; set; } = string.Empty;
+        /// <summary>
+        /// Payment method name
+        /// </summary>
+        [JsonPropertyName("payment_method_name")]
+        public string PaymentMethodName { get; set; } = string.Empty;
+        /// <summary>
+        /// Subtotal info
+        /// </summary>
+        [JsonPropertyName("subtotal")]
+        public CoinbaseQuantityReference Subtotal { get; set; } = null!;
+        /// <summary>
+        /// Total info
+        /// </summary>
+        [JsonPropertyName("total")]
+        public CoinbaseQuantityReference Total { get; set; } = null!;
+    }
 }

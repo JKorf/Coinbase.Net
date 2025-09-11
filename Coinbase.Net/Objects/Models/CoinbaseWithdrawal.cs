@@ -1,7 +1,7 @@
-using CryptoExchange.Net.Converters.SystemTextJson;
-using Coinbase.Net.Enums;
 using System;
 using System.Text.Json.Serialization;
+using Coinbase.Net.Enums;
+using CryptoExchange.Net.Converters.SystemTextJson;
 
 namespace Coinbase.Net.Objects.Models
 {
@@ -83,5 +83,10 @@ namespace Coinbase.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("payout_at")]
         public DateTime? PayoutAt { get; set; }
+        /// <summary>
+        /// User reference
+        /// </summary>
+        [JsonPropertyName("user_reference")]
+        public string? UserReference { get; set; }
     }
 }

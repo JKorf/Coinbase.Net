@@ -102,6 +102,7 @@ namespace Microsoft.Extensions.DependencyInjection
             services.AddSingleton<ICryptoSocketClient, CryptoSocketClient>();
             services.AddTransient<ICoinbaseOrderBookFactory, CoinbaseOrderBookFactory>();
             services.AddTransient<ICoinbaseTrackerFactory, CoinbaseTrackerFactory>();
+            services.AddTransient<ITrackerFactory, CoinbaseTrackerFactory>();
             services.AddSingleton<ICoinbaseUserClientProvider, CoinbaseUserClientProvider>(x =>
             new CoinbaseUserClientProvider(
                 x.GetRequiredService<HttpClient>(),

@@ -95,15 +95,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #endregion
 
         #region Balance Client
-        EndpointOptions<GetBalancesRequest> IBalanceRestClient.GetBalancesOptions { get; } = new EndpointOptions<GetBalancesRequest>(true);
+        GetBalancesOptions IBalanceRestClient.GetBalancesOptions { get; } = new GetBalancesOptions(AccountTypeFilter.Spot, AccountTypeFilter.Futures);
 
         async Task<ExchangeWebResult<SharedBalance[]>> IBalanceRestClient.GetBalancesAsync(GetBalancesRequest request, CancellationToken ct)
         {
-            var validationError = ((IBalanceRestClient)this).GetBalancesOptions.ValidateRequest(Exchange, request, request.TradingMode, SupportedTradingModes);
+            var validationError = ((IBalanceRestClient)this).GetBalancesOptions.ValidateRequest(Exchange, request, SupportedTradingModes);
             if (validationError != null)
                 return new ExchangeWebResult<SharedBalance[]>(Exchange, validationError);
 
-            if (request.TradingMode == TradingMode.Spot || request.TradingMode == null)
+            if (request.AccountType == SharedAccountType.Spot || request.AccountType == null)
             {
                 var result = await Account.GetAccountsAsync(ct: ct).ConfigureAwait(false);
                 if (!result)
@@ -113,7 +113,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     result.Data.Accounts.Where(x => x.Type == AccountType.Crypto || x.Type == AccountType.Fiat).Select(x => 
                     new SharedBalance(x.Asset, x.AvailableBalance.Value, x.AvailableBalance.Value + x.HoldBalance.Value)).ToArray());
             }
-            else if (request.TradingMode.Value.IsPerpetual())
+            else if (request.AccountType == SharedAccountType.PerpetualLinearFutures || request.AccountType == SharedAccountType.PerpetualInverseFutures)
             {
                 var portfolioId = ExchangeParameters.GetValue<string>(request.ExchangeParameters, Exchange, "PortfolioId");
                 if (portfolioId == default)
@@ -123,7 +123,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 if (!result)
                     return result.AsExchangeResult<SharedBalance[]>(Exchange, null, default);
 
-                return result.AsExchangeResult<SharedBalance[]>(Exchange, request.TradingMode.Value, result.Data.Balances.Select(x => new SharedBalance(x.Asset.AssetId, x.MaxWithdrawQuantity, x.Quantity)).ToArray());
+                return result.AsExchangeResult<SharedBalance[]>(Exchange, TradingMode.PerpetualLinear, result.Data.Balances.Select(x => new SharedBalance(x.Asset.AssetId, x.MaxWithdrawQuantity, x.Quantity)).ToArray());
             }
             else
             {
@@ -132,7 +132,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 if (!result)
                     return result.AsExchangeResult<SharedBalance[]>(Exchange, null, default);
 
-                return result.AsExchangeResult<SharedBalance[]>(Exchange, request.TradingMode.Value, new[] { new SharedBalance(result.Data.CfmUsdBalance.Asset, result.Data.CfmUsdBalance.Value, result.Data.TotalUsdBalance.Value) });
+                return result.AsExchangeResult<SharedBalance[]>(Exchange, TradingMode.DeliveryLinear, new[] { new SharedBalance(result.Data.CfmUsdBalance.Asset, result.Data.CfmUsdBalance.Value, result.Data.TotalUsdBalance.Value) });
             }
         }
 

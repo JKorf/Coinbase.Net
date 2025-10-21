@@ -652,7 +652,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 x.OrderId,
                 x.TradeId,
                 x.OrderSide == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                x.Quantity,
+                x.QuantityInQuoteAsset ? (x.Quantity / x.Price) : x.Quantity,
                 x.Price,
                 x.Timestamp)
             {
@@ -695,7 +695,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 x.OrderId,
                 x.TradeId,
                 x.OrderSide == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell,
-                x.Quantity,
+                x.QuantityInQuoteAsset ? (x.Quantity / x.Price) : x.Quantity,
                 x.Price,
                 x.Timestamp)
             {

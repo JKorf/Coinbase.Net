@@ -45,7 +45,7 @@ namespace Coinbase.Net.UnitTests
             var result = await CreateClient().AdvancedTradeApi.ExchangeData.GetSymbolAsync("TSTTST", default);
 
             Assert.That(result.Success, Is.False);
-            Assert.That(result.Error.ErrorCode, Is.EqualTo("INVALID_ARGUMENT"));
+            Assert.That(result.Error.ErrorCode, Is.EqualTo("NOT_FOUND"));
             Assert.That(result.Error.ErrorType, Is.EqualTo(ErrorType.InvalidParameter));
         }
 

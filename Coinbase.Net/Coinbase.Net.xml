@@ -3104,6 +3104,11 @@
             Interest payout
             </summary>
         </member>
+        <member name="F:Coinbase.Net.Enums.TransactionType.AssetMigration">
+            <summary>
+            Asset migration
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Enums.TriggerStatus">
             <summary>
             Trigger status

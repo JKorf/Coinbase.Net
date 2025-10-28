@@ -149,6 +149,11 @@ namespace Coinbase.Net.Enums
         /// Interest payout
         /// </summary>
         [Map("interest")]
-        Interest
+        Interest,
+        /// <summary>
+        /// Asset migration
+        /// </summary>
+        [Map("asset_migration")]
+        AssetMigration
     }
 }

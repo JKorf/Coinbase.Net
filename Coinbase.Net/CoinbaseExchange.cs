@@ -53,6 +53,16 @@ namespace Coinbase.Net
         internal static JsonSerializerContext _serializerContext = JsonSerializerContextCache.GetOrCreate<CoinbaseSourceGenerationContext>();
 
         /// <summary>
+        /// Aliases for Coinbase assets
+        /// </summary>
+        public static AssetAliasConfiguration AssetAliases { get; } = new AssetAliasConfiguration
+        {
+            Aliases = [
+                new AssetAlias("USDC", SharedSymbol.UsdOrStable.ToUpperInvariant(), AliasType.OnlyToExchange)
+            ]
+        };
+
+        /// <summary>
         /// Format a base and quote asset to a Coinbase recognized symbol 
         /// </summary>
         /// <param name="baseAsset">Base asset</param>
@@ -62,16 +72,19 @@ namespace Coinbase.Net
         /// <returns></returns>
         public static string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)
         {
+            baseAsset = AssetAliases.CommonToExchangeName(baseAsset.ToUpperInvariant());
+            quoteAsset = AssetAliases.CommonToExchangeName(quoteAsset.ToUpperInvariant());
+
             if (tradingMode == TradingMode.Spot)
-                return $"{baseAsset.ToUpperInvariant()}-{quoteAsset.ToUpperInvariant()}";
+                return $"{baseAsset}-{quoteAsset}";
 
             if (tradingMode.IsPerpetual())
-                return $"{baseAsset.ToUpperInvariant()}-PERP-INTX";
+                return $"{baseAsset}-PERP-INTX";
 
             if (deliverTime == null)
                 throw new ArgumentException("DeliverDate required for delivery futures symbol");
 
-            return $"{baseAsset.ToUpperInvariant()}-{deliverTime.Value:dd}{deliverTime.Value.ToString("MMM").ToUpper()}{deliverTime.Value:yy}-CDE";
+            return $"{baseAsset}-{deliverTime.Value:dd}{deliverTime.Value.ToString("MMM").ToUpper()}{deliverTime.Value:yy}-CDE";
         }
 
         /// <summary>

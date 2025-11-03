@@ -489,6 +489,11 @@
             Type of exchange
             </summary>
         </member>
+        <member name="P:Coinbase.Net.CoinbaseExchange.AssetAliases">
+            <summary>
+            Aliases for Coinbase assets
+            </summary>
+        </member>
         <member name="M:Coinbase.Net.CoinbaseExchange.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <summary>
             Format a base and quote asset to a Coinbase recognized symbol 

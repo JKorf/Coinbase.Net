@@ -17,6 +17,9 @@ namespace Coinbase.Net.SymbolOrderBooks
     {
         private readonly IServiceProvider _serviceProvider;
 
+        /// <inheritdoc />
+        public string ExchangeName => CoinbaseExchange.ExchangeName;
+
         /// <summary>
         /// ctor
         /// </summary>

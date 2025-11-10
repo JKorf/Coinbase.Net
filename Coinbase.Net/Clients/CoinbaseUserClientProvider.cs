@@ -22,6 +22,9 @@ namespace Coinbase.Net.Clients
         private readonly HttpClient _httpClient;
         private readonly ILoggerFactory? _loggerFactory;
 
+        /// <inheritdoc />
+        public string ExchangeName => CoinbaseExchange.ExchangeName;
+
         /// <summary>
         /// ctor
         /// </summary>

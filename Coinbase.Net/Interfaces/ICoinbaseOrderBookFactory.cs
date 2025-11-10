@@ -8,7 +8,7 @@ namespace Coinbase.Net.Interfaces
     /// <summary>
     /// Coinbase local order book factory
     /// </summary>
-    public interface ICoinbaseOrderBookFactory
+    public interface ICoinbaseOrderBookFactory : IExchangeService
     {
         /// <summary>
         /// Order book factory methods

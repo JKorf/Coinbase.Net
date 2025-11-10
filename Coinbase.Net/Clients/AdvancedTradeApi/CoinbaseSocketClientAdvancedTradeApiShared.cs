@@ -48,7 +48,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     return;
 
                 foreach (var item in update.Data)
-                    handler(update.AsExchangeEvent(Exchange, new SharedKline(item.OpenTime, item.ClosePrice, item.HighPrice, item.LowPrice, item.OpenPrice, item.Volume)));
+                    handler(update.AsExchangeEvent(Exchange, new SharedKline(ExchangeSymbolCache.ParseSymbol(_topicSpotId, item.Symbol), item.Symbol, item.OpenTime, item.ClosePrice, item.HighPrice, item.LowPrice, item.OpenPrice, item.Volume)));
             }, ct).ConfigureAwait(false);
 
             return new ExchangeResult<UpdateSubscription>(Exchange, result);
@@ -56,7 +56,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #endregion
 
         #region Ticker client
-        EndpointOptions<SubscribeTickerRequest> ITickerSocketClient.SubscribeTickerOptions { get; } = new EndpointOptions<SubscribeTickerRequest>(false)
+        SubscribeTickerOptions ITickerSocketClient.SubscribeTickerOptions { get; } = new SubscribeTickerOptions()
         {
             SupportsMultipleSymbols = true
         };
@@ -93,7 +93,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
                 foreach (var item in update.Data)
                 {
-                    handler(update.AsExchangeEvent<SharedTrade[]>(Exchange, new[] { new SharedTrade(item.Quantity, item.Price, item.Timestamp){
+                    handler(update.AsExchangeEvent<SharedTrade[]>(Exchange, new[] { 
+                        new SharedTrade(ExchangeSymbolCache.ParseSymbol(_topicSpotId, item.Symbol), item.Symbol, item.Quantity, item.Price, item.Timestamp){
                         Side = item.OrderSide == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
                     } }));
                 }

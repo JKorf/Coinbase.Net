@@ -380,6 +380,9 @@
         <member name="T:Coinbase.Net.Clients.CoinbaseUserClientProvider">
             <inheritdoc />
         </member>
+        <member name="P:Coinbase.Net.Clients.CoinbaseUserClientProvider.ExchangeName">
+            <inheritdoc />
+        </member>
         <member name="M:Coinbase.Net.Clients.CoinbaseUserClientProvider.#ctor(System.Action{Coinbase.Net.Objects.Options.CoinbaseOptions})">
             <summary>
             ctor
@@ -8106,6 +8109,9 @@
             <summary>
             Coinbase order book factory
             </summary>
+        </member>
+        <member name="P:Coinbase.Net.SymbolOrderBooks.CoinbaseOrderBookFactory.ExchangeName">
+            <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.SymbolOrderBooks.CoinbaseOrderBookFactory.#ctor(System.IServiceProvider)">
             <summary>

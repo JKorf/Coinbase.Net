@@ -8,7 +8,12 @@ namespace Coinbase.Net.Converters
 {
     [JsonSerializable(typeof(Dictionary<string, object>))]
 
-    // End manual defined attributes
+    [JsonSerializable(typeof(CoinbaseExHeartbeat))]
+    [JsonSerializable(typeof(CoinbaseExchangeInfo))]
+    [JsonSerializable(typeof(CoinbaseExTicker))]
+    [JsonSerializable(typeof(CoinbaseExBookSnapshot))]
+    [JsonSerializable(typeof(CoinbaseExBookUpdate))]
+    [JsonSerializable(typeof(CoinbaseExSocketRequest))]
 
     [JsonSerializable(typeof(CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>))]
     [JsonSerializable(typeof(CoinbaseSocketMessage<CoinbaseHeartbeat>))]

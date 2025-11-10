@@ -1,0 +1,68 @@
+using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Sockets;
+using CryptoExchange.Net.Sockets;
+using Microsoft.Extensions.Logging;
+using System;
+using System.Collections.Generic;
+using Coinbase.Net.Objects.Internal;
+using CryptoExchange.Net.Clients;
+using System.Linq;
+
+namespace Coinbase.Net.Objects.Sockets.Subscriptions
+{
+    /// <inheritdoc />
+    internal class CoinbaseExSubscription<T> : Subscription<CoinbaseSocketMessage, CoinbaseSocketMessage> 
+    {
+        private readonly Action<DataEvent<T>> _handler;
+        private readonly string _channel;
+        private readonly string[]? _symbols;
+        private readonly SocketApiClient _client;
+
+        private HashSet<string> _usdcNotReplacing = new HashSet<string>
+        {
+            "USDT-USDC",
+            "EURC-USDC"
+        };
+
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public CoinbaseExSubscription(SocketApiClient client, ILogger logger, string channel, string channelIdentifier, string[]? symbols, Action<DataEvent<T>> handler, bool auth) : base(logger, auth)
+        {
+            _handler = handler;
+            _channel = channel;
+            _client = client;
+            _symbols = symbols?.Select(x => !_usdcNotReplacing.Contains(x) ? x.Replace("-USDC", "-USD") : x).ToArray();
+
+            if (_symbols?.Length > 0)
+                MessageMatcher = MessageMatcher.Create(_symbols.Select(x => new MessageHandlerLink<T>(channelIdentifier + x, DoHandleMessage)).ToArray());
+            else
+                MessageMatcher = MessageMatcher.Create<T>(channelIdentifier, DoHandleMessage);
+        }
+
+        /// <inheritdoc />
+        protected override Query? GetSubQuery(SocketConnection connection) => new CoinbaseExQuery<CoinbaseSocketMessage>(new CoinbaseExSocketRequest
+        {
+            Channels = [_channel],
+            Type = "subscribe",
+            Symbols = _symbols,
+        }, Authenticated);
+
+        /// <inheritdoc />
+        protected override Query? GetUnsubQuery(SocketConnection connection) => new CoinbaseExQuery<CoinbaseSocketMessage>(new CoinbaseExSocketRequest
+        {
+            Channels = [_channel],
+            Type = "unsubscribe",
+            Symbols = _symbols,
+        }, Authenticated);
+
+        /// <inheritdoc />
+        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<T> message)
+        {
+            _handler.Invoke(message);
+            return CallResult.SuccessResult;
+        }
+
+    }
+}

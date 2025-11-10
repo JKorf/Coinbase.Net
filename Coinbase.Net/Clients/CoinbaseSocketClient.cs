@@ -1,13 +1,15 @@
+using Coinbase.Net.Clients.AdvancedTradeApi;
+using Coinbase.Net.Clients.ExchangeApi;
+using Coinbase.Net.Interfaces.Clients;
+using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
+using Coinbase.Net.Interfaces.Clients.ExchangeApi;
+using Coinbase.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
-using Microsoft.Extensions.Logging;
-using System;
-using Coinbase.Net.Interfaces.Clients;
-using Coinbase.Net.Objects.Options;
-using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
-using Coinbase.Net.Clients.AdvancedTradeApi;
-using Microsoft.Extensions.Options;
 using CryptoExchange.Net.Objects.Options;
+using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
+using System;
 
 namespace Coinbase.Net.Clients
 {
@@ -21,6 +23,9 @@ namespace Coinbase.Net.Clients
 
          /// <inheritdoc />
         public ICoinbaseSocketClientAdvancedTradeApi AdvancedTradeApi { get; }
+
+        /// <inheritdoc />
+        public ICoinbaseSocketClientExchangeApi ExchangeApi { get; }
 
         #endregion
 
@@ -45,6 +50,7 @@ namespace Coinbase.Net.Clients
             Initialize(options.Value);
 
             AdvancedTradeApi = AddApiClient(new CoinbaseSocketClientAdvancedTradeApi(_logger, options.Value));
+            ExchangeApi = AddApiClient(new CoinbaseSocketClientExchangeApi(_logger, options.Value));
         }
         #endregion
 
@@ -52,6 +58,7 @@ namespace Coinbase.Net.Clients
         public void SetOptions(UpdateOptions options)
         {
             AdvancedTradeApi.SetOptions(options);
+            ExchangeApi.SetOptions(options);
         }
 
         /// <summary>
@@ -67,6 +74,7 @@ namespace Coinbase.Net.Clients
         public void SetApiCredentials(ApiCredentials credentials)
         {
             AdvancedTradeApi.SetApiCredentials(credentials);
+            ExchangeApi.SetApiCredentials(credentials);
         }
     }
 }

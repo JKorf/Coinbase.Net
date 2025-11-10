@@ -10,11 +10,15 @@ namespace Coinbase.Net.Objects
         /// </summary>
         public string RestClientAddress { get; set; } = "";
         /// <summary>
-        /// The address used by the CoinbaseSocketClient for public data from the websocket API
+        /// The address used by the CoinbaseSocketClient for public data from the websocket Advanced Trade API
         /// </summary>
         public string SocketClientPublicAddress { get; set; } = "";
         /// <summary>
-        /// The address used by the CoinbaseSocketClient for user data from the websocket API
+        /// The address used by the CoinbaseSocketClient for public data from the websocket Exchange API
+        /// </summary>
+        public string SocketExchangeApiPublicAddress { get; set; } = "";
+        /// <summary>
+        /// The address used by the CoinbaseSocketClient for user data from the websocket Advanced Trade API
         /// </summary>
         public string SocketClientPrivateAddress { get; set; } = "";
 
@@ -25,6 +29,7 @@ namespace Coinbase.Net.Objects
         {
             RestClientAddress = "https://api.coinbase.com",
             SocketClientPublicAddress = "wss://advanced-trade-ws.coinbase.com",
+            SocketExchangeApiPublicAddress = "wss://ws-feed.exchange.coinbase.com",
             SocketClientPrivateAddress = "wss://advanced-trade-ws-user.coinbase.com"
         };
     }

@@ -1,4 +1,5 @@
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
+using Coinbase.Net.Interfaces.Clients.ExchangeApi;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects.Options;
@@ -11,10 +12,14 @@ namespace Coinbase.Net.Interfaces.Clients
     public interface ICoinbaseSocketClient : ISocketClient
     {
         /// <summary>
-        /// Advanced trade API streams
+        /// Advanced trade API streams (Consumer API)
         /// </summary>
         /// <see cref="ICoinbaseSocketClientAdvancedTradeApi"/>
         public ICoinbaseSocketClientAdvancedTradeApi AdvancedTradeApi { get; }
+        /// <summary>
+        /// Exchange API streams (Institutional API)
+        /// </summary>
+        public ICoinbaseSocketClientExchangeApi ExchangeApi { get; }
 
         /// <summary>
         /// Update specific options

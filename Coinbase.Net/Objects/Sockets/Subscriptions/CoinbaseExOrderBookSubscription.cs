@@ -43,7 +43,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         }
 
         /// <inheritdoc />
-        protected override Query? GetSubQuery(SocketConnection connection) => new CoinbaseExQuery<CoinbaseSocketMessage>(new CoinbaseExSocketRequest
+        protected override Query? GetSubQuery(SocketConnection connection) => new CoinbaseExSubscriptionQuery(new CoinbaseExSocketRequest
         {
             Channels = ["level2_batch"],
             Type = "subscribe",
@@ -51,7 +51,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         }, Authenticated);
 
         /// <inheritdoc />
-        protected override Query? GetUnsubQuery(SocketConnection connection) => new CoinbaseExQuery<CoinbaseSocketMessage>(new CoinbaseExSocketRequest
+        protected override Query? GetUnsubQuery(SocketConnection connection) => new CoinbaseExSubscriptionQuery(new CoinbaseExSocketRequest
         {
             Channels = ["level2_batch"],
             Type = "unsubscribe",

@@ -796,7 +796,27 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseExError">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseExSocketRequest">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseExSubscriptionItem">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseExSubscriptionItemArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseExSubscriptionsUpdate">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>

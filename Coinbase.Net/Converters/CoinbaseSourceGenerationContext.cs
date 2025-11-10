@@ -14,6 +14,8 @@ namespace Coinbase.Net.Converters
     [JsonSerializable(typeof(CoinbaseExBookSnapshot))]
     [JsonSerializable(typeof(CoinbaseExBookUpdate))]
     [JsonSerializable(typeof(CoinbaseExSocketRequest))]
+    [JsonSerializable(typeof(CoinbaseExSubscriptionsUpdate))]
+    [JsonSerializable(typeof(CoinbaseExError))]
 
     [JsonSerializable(typeof(CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>))]
     [JsonSerializable(typeof(CoinbaseSocketMessage<CoinbaseHeartbeat>))]

@@ -8,7 +8,7 @@ using CryptoExchange.Net.Objects.Errors;
 
 namespace Coinbase.Net.Objects.Sockets
 {
-    internal class CoinbaseExSubscriptionQuery : Query<CoinbaseSubscriptionsUpdate>
+    internal class CoinbaseExSubscriptionQuery : Query<CoinbaseExSubscriptionsUpdate>
     {
         private readonly string _channel;
         private readonly string[]? _symbols;

@@ -12,7 +12,7 @@ using System.Linq;
 namespace Coinbase.Net.Objects.Sockets.Subscriptions
 {
     /// <inheritdoc />
-    internal class CoinbaseExSubscription<T> : Subscription<CoinbaseSocketMessage, CoinbaseSocketMessage> 
+    internal class CoinbaseExSubscription<T> : Subscription<CoinbaseExSubscriptionsUpdate, CoinbaseExSubscriptionsUpdate> 
     {
         private readonly Action<DataEvent<T>> _handler;
         private readonly string _channel;

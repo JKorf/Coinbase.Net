@@ -159,6 +159,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 2.11.1 - 12 Nov 2025
+    * Fixed socketClient.ExchangeApi subscriptions
+
 * Version 2.11.0 - 11 Nov 2025
     * Updated CryptoExchange.Net version to 9.13.0, see https://github.com/JKorf/CryptoExchange.Net/releases/
     * Added public streams for socketClient.ExchangeApi for the institutional websocket API

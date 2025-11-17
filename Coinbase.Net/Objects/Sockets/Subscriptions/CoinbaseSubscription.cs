@@ -22,7 +22,8 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         private HashSet<string> _usdcNotReplacing = new HashSet<string>
         {
             "USDT-USDC",
-            "EURC-USDC"
+            "EURC-USDC",
+            "XSGD-USDC",
         };
 
         /// <summary>

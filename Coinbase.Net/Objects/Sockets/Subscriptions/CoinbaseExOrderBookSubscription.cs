@@ -53,16 +53,24 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         }, Authenticated);
 
         /// <inheritdoc />
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<CoinbaseExBookSnapshot> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExBookSnapshot message)
         {
-            _snapshotHandler.Invoke(message.WithSymbol(message.Data.Symbol).WithUpdateType(SocketUpdateType.Snapshot));
+            _snapshotHandler.Invoke(
+                new DataEvent<CoinbaseExBookSnapshot>(message, receiveTime, originalData)
+                    .WithUpdateType(SocketUpdateType.Snapshot)
+                    .WithSymbol(message.Symbol)
+                );
             return CallResult.SuccessResult;
         }
 
         /// <inheritdoc />
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<CoinbaseExBookUpdate> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExBookUpdate message)
         {
-            _updateHandler.Invoke(message.WithSymbol(message.Data.Symbol).WithUpdateType(SocketUpdateType.Update));
+            _updateHandler.Invoke(
+                new DataEvent<CoinbaseExBookUpdate>(message, receiveTime, originalData)
+                    .WithUpdateType(SocketUpdateType.Update)
+                    .WithSymbol(message.Symbol)
+                );
             return CallResult.SuccessResult;
         }
     }

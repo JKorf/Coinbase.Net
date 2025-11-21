@@ -1,10 +1,11 @@
+using Coinbase.Net.Objects.Internal;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using System;
 using System.Collections.Generic;
-using Coinbase.Net.Objects.Internal;
 using System.Linq;
-using CryptoExchange.Net.Objects.Errors;
 
 namespace Coinbase.Net.Objects.Sockets
 {
@@ -23,12 +24,11 @@ namespace Coinbase.Net.Objects.Sockets
                 new MessageHandlerLink<CoinbaseExError>("error", HandleError));
         }
 
-        public override bool PreCheckMessage(SocketConnection connection, DataEvent<object> message)
+        public override bool PreCheckMessage(SocketConnection connection, object message)
         {
-            if (message.Data is not CoinbaseExSubscriptionsUpdate)
+            if (message is not CoinbaseExSubscriptionsUpdate messageData)
                 return true;
 
-            var messageData = (CoinbaseExSubscriptionsUpdate)message.Data;
             var channel = messageData.Subscriptions.SingleOrDefault(x => x.Name == _channel);
             if (channel == null)
                 return false;
@@ -39,14 +39,14 @@ namespace Coinbase.Net.Objects.Sockets
             return true;
         }
 
-        public CallResult<CoinbaseExError> HandleError(SocketConnection connection, DataEvent<CoinbaseExError> message)
+        public CallResult<CoinbaseExError> HandleError(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExError message)
         {
-            return new CallResult<CoinbaseExError>(message.Data, message.OriginalData, new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, message.Data.Reason)));
+            return new CallResult<CoinbaseExError>(message, originalData, new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, message.Reason)));
         }
 
-        public CallResult<CoinbaseExSubscriptionsUpdate> HandleMessage(SocketConnection connection, DataEvent<CoinbaseExSubscriptionsUpdate> message)
+        public CallResult<CoinbaseExSubscriptionsUpdate> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExSubscriptionsUpdate message)
         {
-            return message.ToCallResult();
+            return new CallResult<CoinbaseExSubscriptionsUpdate>(message, originalData, null);
         }
     }
 }

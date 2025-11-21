@@ -1,8 +1,9 @@
+using Coinbase.Net.Objects.Internal;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using System;
 using System.Collections.Generic;
-using Coinbase.Net.Objects.Internal;
 using System.Linq;
 
 namespace Coinbase.Net.Objects.Sockets
@@ -20,9 +21,9 @@ namespace Coinbase.Net.Objects.Sockets
             MessageMatcher = MessageMatcher.Create<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>("subscriptions", HandleMessage);
         }
 
-        public override bool PreCheckMessage(SocketConnection connection, DataEvent<object> message)
+        public override bool PreCheckMessage(SocketConnection connection, object message)
         {
-            var messageData = (CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>)message.Data;
+            var messageData = (CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>)message;
             var evnt = messageData.Events.First();
             if (!evnt.Subscriptions.TryGetValue(_channel, out var subbed))
                 return false;
@@ -33,9 +34,9 @@ namespace Coinbase.Net.Objects.Sockets
             return true;
         }
 
-        public CallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> HandleMessage(SocketConnection connection, DataEvent<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> message)
+        public CallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate> message)
         {
-            return message.ToCallResult();
+            return new CallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>(message, originalData, null);
         }
     }
 }

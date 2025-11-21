@@ -14,7 +14,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
     /// <inheritdoc />
     internal class CoinbaseExSubscription<T> : Subscription<CoinbaseExSubscriptionsUpdate, CoinbaseExSubscriptionsUpdate> 
     {
-        private readonly Action<DataEvent<T>> _handler;
+        private readonly Action<DateTime, string?, T> _handler;
         private readonly string _channel;
         private readonly string[]? _symbols;
         private readonly SocketApiClient _client;
@@ -22,7 +22,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         /// <summary>
         /// ctor
         /// </summary>
-        public CoinbaseExSubscription(SocketApiClient client, ILogger logger, string channel, string channelIdentifier, string[]? symbols, Action<DataEvent<T>> handler, bool auth) : base(logger, auth)
+        public CoinbaseExSubscription(SocketApiClient client, ILogger logger, string channel, string channelIdentifier, string[]? symbols, Action<DateTime, string?, T> handler, bool auth) : base(logger, auth)
         {
             _handler = handler;
             _channel = channel;
@@ -52,9 +52,9 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         }, Authenticated);
 
         /// <inheritdoc />
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<T> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, T message)
         {
-            _handler.Invoke(message);
+            _handler.Invoke(receiveTime, originalData, message);
             return CallResult.SuccessResult;
         }
 

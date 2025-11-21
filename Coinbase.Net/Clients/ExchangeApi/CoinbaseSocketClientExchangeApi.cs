@@ -21,6 +21,7 @@ using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using CryptoExchange.Net;
 using System.Net.WebSockets;
 using Coinbase.Net.Interfaces.Clients.ExchangeApi;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 
 namespace Coinbase.Net.Clients.ExchangeApi
 {
@@ -50,6 +51,8 @@ namespace Coinbase.Net.Clients.ExchangeApi
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
 
+        public override IMessageConverter CreateMessageConverter(WebSocketMessageType messageType) => new CoinbaseSocketClientExchangeApiMessageConverter();
+
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new CoinbaseAuthenticationProvider(credentials);
@@ -61,14 +64,34 @@ namespace Coinbase.Net.Clients.ExchangeApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToHeartbeatUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseExHeartbeat>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new CoinbaseExSubscription<CoinbaseExHeartbeat>(this, _logger, "heartbeat", "heartbeat", symbols.ToArray(), x => onMessage(x.WithSymbol(x.Data.Symbol).WithDataTimestamp(x.Data.Timestamp)), false);
+            var internalHandler = new Action<DateTime, string?, CoinbaseExHeartbeat>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<CoinbaseExHeartbeat>(data, receiveTime, originalData)
+                        .WithUpdateType(SocketUpdateType.Update)
+                        .WithStreamId("heartbeat")
+                        .WithSymbol(data.Symbol)
+                        .WithDataTimestamp(data.Timestamp)
+                    );
+            });
+
+            var subscription = new CoinbaseExSubscription<CoinbaseExHeartbeat>(this, _logger, "heartbeat", "heartbeat", symbols.ToArray(), internalHandler, false);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToExchangeInfoUpdatesAsync(Action<DataEvent<CoinbaseExchangeInfo>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new CoinbaseExSubscription<CoinbaseExchangeInfo>(this, _logger, "status", "status", null, onMessage, AuthenticationProvider != null);
+            var internalHandler = new Action<DateTime, string?, CoinbaseExchangeInfo>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<CoinbaseExchangeInfo>(data, receiveTime, originalData)
+                        .WithUpdateType(SocketUpdateType.Update)
+                        .WithStreamId("status")
+                    );
+            });
+
+            var subscription = new CoinbaseExSubscription<CoinbaseExchangeInfo>(this, _logger, "status", "status", null, internalHandler, AuthenticationProvider != null);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
 
@@ -79,7 +102,18 @@ namespace Coinbase.Net.Clients.ExchangeApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseExTicker>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new CoinbaseExSubscription<CoinbaseExTicker>(this, _logger, "ticker", "ticker", symbols.ToArray(), x => onMessage(x.WithSymbol(x.Data.Symbol).WithDataTimestamp(x.Data.Timestamp)), false);
+            var internalHandler = new Action<DateTime, string?, CoinbaseExTicker>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<CoinbaseExTicker>(data, receiveTime, originalData)
+                        .WithUpdateType(SocketUpdateType.Update)
+                        .WithStreamId("ticker")
+                        .WithSymbol(data.Symbol)
+                        .WithDataTimestamp(data.Timestamp)
+                    );
+            });
+
+            var subscription = new CoinbaseExSubscription<CoinbaseExTicker>(this, _logger, "ticker", "ticker", symbols.ToArray(), internalHandler, false);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
 
@@ -90,7 +124,18 @@ namespace Coinbase.Net.Clients.ExchangeApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToBatchedTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseExTicker>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new CoinbaseExSubscription<CoinbaseExTicker>(this, _logger, "ticker_batch", "ticker", symbols.ToArray(), x => onMessage(x.WithSymbol(x.Data.Symbol).WithDataTimestamp(x.Data.Timestamp)), false);
+            var internalHandler = new Action<DateTime, string?, CoinbaseExTicker>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<CoinbaseExTicker>(data, receiveTime, originalData)
+                        .WithUpdateType(SocketUpdateType.Update)
+                        .WithStreamId("ticker")
+                        .WithSymbol(data.Symbol)
+                        .WithDataTimestamp(data.Timestamp)
+                    );
+            });
+
+            var subscription = new CoinbaseExSubscription<CoinbaseExTicker>(this, _logger, "ticker_batch", "ticker", symbols.ToArray(), internalHandler, false);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
 

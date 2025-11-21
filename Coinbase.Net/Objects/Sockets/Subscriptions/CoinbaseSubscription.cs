@@ -14,7 +14,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
     /// <inheritdoc />
     internal class CoinbaseSubscription<T> : Subscription<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>, CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> where T: CoinbaseSocketEvent
     {
-        private readonly Action<DataEvent<T[]>> _handler;
+        private readonly Action<DateTime, string?, CoinbaseSocketMessage<T>> _handler;
         private readonly string _channel;
         private readonly string[]? _symbols;
         private readonly SocketApiClient _client;
@@ -29,7 +29,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         /// <summary>
         /// ctor
         /// </summary>
-        public CoinbaseSubscription(SocketApiClient client, ILogger logger, string channel, string channelIdentifier, string[]? symbols, Action<DataEvent<T[]>> handler, bool auth) : base(logger, auth)
+        public CoinbaseSubscription(SocketApiClient client, ILogger logger, string channel, string channelIdentifier, string[]? symbols, Action<DateTime, string?, CoinbaseSocketMessage<T>> handler, bool auth) : base(logger, auth)
         {
             _handler = handler;
             _channel = channel;
@@ -61,10 +61,11 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         }, Authenticated);
 
         /// <inheritdoc />
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<CoinbaseSocketMessage<T>> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseSocketMessage<T> message)
         {
-            _handler.Invoke(message.As(message.Data.Events, message.Data.Channel, null, message.Data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
-                .WithDataTimestamp(message.Data.Timestamp));
+            _handler.Invoke(receiveTime, originalData, message);
+            //_handler.Invoke(message.As(message.Data.Events, message.Data.Channel, null, message.Data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+            //    .WithDataTimestamp(message.Data.Timestamp));
             return CallResult.SuccessResult;
         }
 

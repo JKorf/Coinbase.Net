@@ -13,13 +13,13 @@ namespace Coinbase.Net.UnitTests
     [NonParallelizable]
     internal class CoinbaseSocketIntegrationTests : SocketIntegrationTest<CoinbaseSocketClient>
     {
-        public override bool Run { get; set; } = false;
+        public override bool Run { get; set; } = true;
 
         public CoinbaseSocketIntegrationTests()
         {
         }
 
-        public override CoinbaseSocketClient GetClient(ILoggerFactory loggerFactory)
+        public override CoinbaseSocketClient GetClient(ILoggerFactory loggerFactory, bool useUpdatedDeserialization)
         {
             var key = Environment.GetEnvironmentVariable("APIKEY");
             var sec = Environment.GetEnvironmentVariable("APISECRET");
@@ -28,15 +28,17 @@ namespace Coinbase.Net.UnitTests
             return new CoinbaseSocketClient(Options.Create(new CoinbaseSocketOptions
             {
                 OutputOriginalData = true,
+                UseUpdatedDeserialization = useUpdatedDeserialization,
                 ApiCredentials = Authenticated ? new CryptoExchange.Net.Authentication.ApiCredentials(key, sec) : null
             }), loggerFactory);
         }
 
-        [Test]
-        public async Task TestSubscriptions()
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task TestSubscriptions(bool useUpdatedDeserialization)
         {
-            await RunAndCheckUpdate<CoinbaseTicker>((client, updateHandler) => client.AdvancedTradeApi.SubscribeToFuturesBalanceUpdatesAsync(default , default), false, true);
-            await RunAndCheckUpdate<CoinbaseTicker>((client, updateHandler) => client.AdvancedTradeApi.SubscribeToTickerUpdatesAsync("ETH-USD", updateHandler, default), true, false);
+            await RunAndCheckUpdate<CoinbaseTicker>(useUpdatedDeserialization , (client, updateHandler) => client.AdvancedTradeApi.SubscribeToFuturesBalanceUpdatesAsync(default , default), false, true);
+            await RunAndCheckUpdate<CoinbaseTicker>(useUpdatedDeserialization , (client, updateHandler) => client.AdvancedTradeApi.SubscribeToTickerUpdatesAsync("ETH-USD", updateHandler, default), true, false);
         } 
     }
 }

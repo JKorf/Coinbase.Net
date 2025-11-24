@@ -1,27 +1,28 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
+using Coinbase.Net.Clients.MessageHandlers;
+using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
+using Coinbase.Net.Interfaces.Clients.ExchangeApi;
+using Coinbase.Net.Objects.Internal;
+using Coinbase.Net.Objects.Models;
+using Coinbase.Net.Objects.Options;
+using Coinbase.Net.Objects.Sockets.Subscriptions;
+using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
+using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
-using Coinbase.Net.Objects.Models;
-using Coinbase.Net.Objects.Options;
-using Coinbase.Net.Objects.Sockets.Subscriptions;
-using CryptoExchange.Net.Converters.SystemTextJson;
-using System.Linq;
-using Coinbase.Net.Objects.Internal;
+using System;
 using System.Collections.Generic;
-using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
-using CryptoExchange.Net;
+using System.Linq;
 using System.Net.WebSockets;
-using Coinbase.Net.Interfaces.Clients.ExchangeApi;
-using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Coinbase.Net.Clients.ExchangeApi
 {
@@ -51,7 +52,7 @@ namespace Coinbase.Net.Clients.ExchangeApi
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
 
-        public override IMessageConverter CreateMessageConverter(WebSocketMessageType messageType) => new CoinbaseSocketClientExchangeApiMessageConverter();
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new CoinbaseSocketExchangeMessageHandler();
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)

@@ -1,22 +1,25 @@
+using Coinbase.Net.Clients.MessageHandlers;
+using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
+using Coinbase.Net.Objects.Options;
 using CryptoExchange.Net;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Errors;
+using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Coinbase.Net.Objects.Options;
-using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Converters.SystemTextJson;
-using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.SharedApis;
-using CryptoExchange.Net.Converters.MessageParsing;
-using System.Reflection;
-using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
-using System.Linq;
-using CryptoExchange.Net.Objects.Errors;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
@@ -26,6 +29,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region fields 
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Advanced Trade Api");
 
+        protected override IRestMessageHandler MessageHandler { get; } = new CoinbaseRestMessageHandler(CoinbaseErrors.Errors);
         protected override ErrorMapping ErrorMapping => CoinbaseErrors.Errors;
         #endregion
 
@@ -82,7 +86,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             return await base.SendAsync<T>(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
         }
 
-        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor)
+        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, HttpResponseHeaders responseHeaders, IMessageAccessor accessor)
         {
             var reset = responseHeaders.SingleOrDefault(x => x.Key.Equals("x-ratelimit-reset", StringComparison.InvariantCultureIgnoreCase));
             if (reset.Key == null)
@@ -96,7 +100,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             return error;
         }
 
-        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
+        protected override Error ParseErrorResponse(int httpStatusCode, HttpResponseHeaders responseHeaders, IMessageAccessor accessor, Exception? exception)
         {
             if (!accessor.IsValid)
             {

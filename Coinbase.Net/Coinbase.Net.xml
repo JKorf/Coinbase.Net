@@ -314,61 +314,6 @@
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
-        <member name="T:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi">
-            <summary>
-            Client providing access to the Coinbase Exchange websocket Api
-            </summary>
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.#ctor(Microsoft.Extensions.Logging.ILogger,Coinbase.Net.Objects.Options.CoinbaseSocketOptions)">
-            <summary>
-            ctor
-            </summary>
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.CreateAccessor(System.Net.WebSockets.WebSocketMessageType)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.CreateSerializer">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToHeartbeatUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExHeartbeat}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToHeartbeatUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExHeartbeat}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToExchangeInfoUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExchangeInfo}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExTicker}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExTicker}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToBatchedTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExTicker}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToBatchedTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExTicker}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExBookSnapshot}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExBookUpdate}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExBookSnapshot}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExBookUpdate}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.SocketConnection)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
-            <inheritdoc />
-        </member>
         <member name="T:Coinbase.Net.Clients.CoinbaseRestClient">
             <inheritdoc cref="T:Coinbase.Net.Interfaces.Clients.ICoinbaseRestClient" />
         </member>
@@ -462,6 +407,61 @@
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.CoinbaseUserClientProvider.GetSocketClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Coinbase.Net.CoinbaseEnvironment)">
+            <inheritdoc />
+        </member>
+        <member name="T:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi">
+            <summary>
+            Client providing access to the Coinbase Exchange websocket Api
+            </summary>
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.#ctor(Microsoft.Extensions.Logging.ILogger,Coinbase.Net.Objects.Options.CoinbaseSocketOptions)">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.CreateAccessor(System.Net.WebSockets.WebSocketMessageType)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.CreateSerializer">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToHeartbeatUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExHeartbeat}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToHeartbeatUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExHeartbeat}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToExchangeInfoUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExchangeInfo}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExTicker}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExTicker}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToBatchedTickerUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExTicker}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToBatchedTickerUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExTicker}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToOrderBookUpdatesAsync(System.String,System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExBookSnapshot}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExBookUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExBookSnapshot}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExBookUpdate}},System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.SocketConnection)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="T:Coinbase.Net.CoinbaseEnvironment">

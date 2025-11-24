@@ -1,4 +1,5 @@
 using Coinbase.Net.Clients.ExchangeApi;
+using Coinbase.Net.Clients.MessageHandlers;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using Coinbase.Net.Objects.Internal;
 using Coinbase.Net.Objects.Models;
@@ -55,7 +56,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
 
-        public override IMessageConverter CreateMessageConverter(WebSocketMessageType messageType) => new CoinbaseSocketClientAdvancedTradeApiMessageConverter();
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new CoinbaseSocketAdvancedTradeMessageConverter();
 
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)

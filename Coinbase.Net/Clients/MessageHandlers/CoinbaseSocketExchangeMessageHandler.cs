@@ -7,9 +7,9 @@ using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 
-namespace Coinbase.Net.Clients.ExchangeApi
+namespace Coinbase.Net.Clients.MessageHandlers
 {
-    internal class CoinbaseSocketClientExchangeApiMessageConverter : DynamicJsonConverter
+    internal class CoinbaseSocketExchangeMessageHandler : JsonSocketMessageHandler
     {
         public override JsonSerializerOptions Options { get; } = SerializerOptions.WithConverters(CoinbaseExchange._serializerContext);
 

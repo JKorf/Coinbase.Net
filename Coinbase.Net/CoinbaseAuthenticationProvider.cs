@@ -31,6 +31,7 @@ namespace Coinbase.Net
             var timestamp = GetTimestamp(apiClient);
 
             var host = request.BaseAddress.Substring(request.BaseAddress.IndexOf("//") + 2);
+            request.Headers ??= new Dictionary<string, string>();
             request.Headers.Add("Authorization", $"Bearer {GenerateToken(timestamp, $"{request.Method} {host}{request.Path}")}");
         }
 

@@ -19,6 +19,7 @@ namespace Coinbase.Net.Objects.Sockets
             _symbols = request.Symbols;
 
             MessageMatcher = MessageMatcher.Create<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>("subscriptions", HandleMessage);
+            MessageRouter = MessageRouter.Create<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>("subscriptions", HandleMessage);
         }
 
         public override bool PreCheckMessage(SocketConnection connection, object message)

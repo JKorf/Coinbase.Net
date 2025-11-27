@@ -11,6 +11,7 @@ namespace Coinbase.Net.Objects.Sockets
         public CoinbaseExQuery(CoinbaseExSocketRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
             MessageMatcher = MessageMatcher.Create<T>("subscriptions");
+            MessageRouter = MessageRouter.Create<T>("subscriptions");
         }
     }
 }

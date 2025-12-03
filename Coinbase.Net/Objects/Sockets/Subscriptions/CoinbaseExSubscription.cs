@@ -32,13 +32,15 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
             if (_symbols?.Length > 0)
             {
                 MessageMatcher = MessageMatcher.Create(_symbols.Select(x => new MessageHandlerLink<T>(channelIdentifier + x, DoHandleMessage)).ToArray());
-                MessageRouter = MessageRouter.Create(_symbols.Select(x => new MessageRoute<T>(channelIdentifier + x, (string?)null, DoHandleMessage)).ToArray());
+                //MessageRouter = MessageRouter.Create(_symbols.Select(x => new MessageRoute<T>(channelIdentifier + x, (string?)null, DoHandleMessage)).ToArray());
             }
             else
             {
                 MessageMatcher = MessageMatcher.Create<T>(channelIdentifier, DoHandleMessage);
-                MessageRouter = MessageRouter.Create<T>(channelIdentifier, DoHandleMessage);
+                //MessageRouter = MessageRouter.Create<T>(channelIdentifier, DoHandleMessage);
             }
+
+            MessageRouter = MessageRouter.CreateWithOptionalTopicFilters<T>(channelIdentifier, symbols, DoHandleMessage);
         }
 
         /// <inheritdoc />

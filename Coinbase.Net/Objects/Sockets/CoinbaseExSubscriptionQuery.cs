@@ -24,8 +24,8 @@ namespace Coinbase.Net.Objects.Sockets
                 new MessageHandlerLink<CoinbaseExError>("error", HandleError));
 
             MessageRouter = MessageRouter.Create(
-                new MessageRoute<CoinbaseExSubscriptionsUpdate>("subscriptions", (string?)null, HandleMessage),
-                new MessageRoute<CoinbaseExError>("error", (string?)null, HandleError));
+                MessageRoute<CoinbaseExSubscriptionsUpdate>.CreateWithoutTopicFilter("subscriptions", HandleMessage),
+                MessageRoute<CoinbaseExError>.CreateWithoutTopicFilter("error", HandleError));
         }
 
         public override bool PreCheckMessage(SocketConnection connection, object message)

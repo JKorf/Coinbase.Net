@@ -1,4 +1,5 @@
-﻿using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
+﻿using Coinbase.Net.Objects.Models;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using System;
 using System.Collections.Generic;
@@ -13,15 +14,21 @@ namespace Coinbase.Net.Clients.MessageHandlers
     {
         public override JsonSerializerOptions Options { get; } = SerializerOptions.WithConverters(CoinbaseExchange._serializerContext);
 
+        public CoinbaseSocketExchangeMessageHandler()
+        {
+            AddTopicMapping<CoinbaseExTicker>(x => x.Symbol);
+            AddTopicMapping<CoinbaseExHeartbeat>(x => x.Symbol);
+            AddTopicMapping<CoinbaseExBookSnapshot>(x => x.Symbol);
+        }
+
         protected override MessageEvaluator[] TypeEvaluators { get; } = [
 
             new MessageEvaluator {
                 Priority = 1,
                 Fields = [
-                    new PropertyFieldReference("type"),
-                    new PropertyFieldReference("product_id"),
+                    new PropertyFieldReference("type")
                 ],
-                IdentifyMessageCallback = x => $"{x.FieldValue("type")}{x.FieldValue("product_id")}",
+                IdentifyMessageCallback = x => x.FieldValue("type")!
             },
 
         ];

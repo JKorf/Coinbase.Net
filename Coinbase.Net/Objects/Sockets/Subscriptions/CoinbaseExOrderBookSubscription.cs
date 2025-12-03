@@ -35,10 +35,18 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
                  new MessageHandlerLink<CoinbaseExBookUpdate>("l2update" + x, DoHandleMessage)
              }).ToArray());
 
-            MessageRouter = MessageRouter.Create(_symbols.SelectMany(x =>
-                 new MessageRoute[] { new MessageRoute<CoinbaseExBookSnapshot>("snapshot" + x, (string?)null, DoHandleMessage),
-                 new MessageRoute<CoinbaseExBookUpdate>("l2update" + x, (string?)null, DoHandleMessage)
-             }).ToArray());
+            //MessageRouter = MessageRouter.Create(_symbols.SelectMany(x =>
+            //     new MessageRoute[] { new MessageRoute<CoinbaseExBookSnapshot>("snapshot" + x, (string?)null, DoHandleMessage),
+            //     new MessageRoute<CoinbaseExBookUpdate>("l2update" + x, (string?)null, DoHandleMessage)
+            // }).ToArray());
+
+            var routes = new List<MessageRoute>();
+            foreach(var symbol in symbols)
+            {
+                routes.Add(MessageRoute<CoinbaseExBookSnapshot>.CreateWithTopicFilter("snapshot", symbol, DoHandleMessage));
+                routes.Add(MessageRoute<CoinbaseExBookUpdate>.CreateWithTopicFilter("l2update", symbol, DoHandleMessage));
+            }
+            MessageRouter = MessageRouter.Create(routes.ToArray());
         }
 
         /// <inheritdoc />

@@ -39,13 +39,15 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
             if (_symbols?.Length > 0)
             {
                 MessageMatcher = MessageMatcher.Create(_symbols.Select(x => new MessageHandlerLink<CoinbaseSocketMessage<T>>(channelIdentifier + "-" + x, DoHandleMessage)).ToArray());
-                MessageRouter = MessageRouter.Create(_symbols.Select(x => new MessageRoute<CoinbaseSocketMessage<T>>(channelIdentifier + "-" + x, (string?)null, DoHandleMessage)).ToArray());
+                //MessageRouter = MessageRouter.Create(_symbols.Select(x => new MessageRoute<CoinbaseSocketMessage<T>>(channelIdentifier + "-" + x, (string?)null, DoHandleMessage)).ToArray());
             }
             else
             {
                 MessageMatcher = MessageMatcher.Create<CoinbaseSocketMessage<T>>(channelIdentifier, DoHandleMessage);
-                MessageRouter = MessageRouter.Create<CoinbaseSocketMessage<T>>(channelIdentifier, DoHandleMessage);
+                //MessageRouter = MessageRouter.Create<CoinbaseSocketMessage<T>>(channelIdentifier, DoHandleMessage);
             }
+
+            MessageRouter = MessageRouter.CreateWithOptionalTopicFilters<CoinbaseSocketMessage<T>>(channelIdentifier, symbols, DoHandleMessage);
         }
 
         /// <inheritdoc />

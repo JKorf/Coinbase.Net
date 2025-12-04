@@ -27,11 +27,10 @@ namespace Coinbase.Net.Clients.MessageHandlers
 
         public override async ValueTask<Error> ParseErrorResponse(
             int httpStatusCode,
-            object? state,
             HttpResponseHeaders responseHeaders,
             Stream responseStream)
         {
-            var (parseError, document) = await GetJsonDocument(responseStream, state).ConfigureAwait(false);
+            var (parseError, document) = await GetJsonDocument(responseStream).ConfigureAwait(false);
             if (parseError != null)
                 return parseError;
 
@@ -59,20 +58,19 @@ namespace Coinbase.Net.Clients.MessageHandlers
 
         public override async ValueTask<ServerRateLimitError> ParseErrorRateLimitResponse(
             int httpStatusCode,
-            object? state,
             HttpResponseHeaders responseHeaders, 
             Stream responseStream)
         {
-            var (parseError, document) = await GetJsonDocument(responseStream, state).ConfigureAwait(false);
+            var (parseError, document) = await GetJsonDocument(responseStream).ConfigureAwait(false);
             if (parseError != null)
                 return _emptyRateLimitError;
 
             var reset = responseHeaders.SingleOrDefault(x => x.Key.Equals("x-ratelimit-reset", StringComparison.InvariantCultureIgnoreCase));
             if (reset.Key == null)
-                return await base.ParseErrorRateLimitResponse(httpStatusCode, state, responseHeaders, responseStream).ConfigureAwait(false);
+                return await base.ParseErrorRateLimitResponse(httpStatusCode, responseHeaders, responseStream).ConfigureAwait(false);
 
             if (!int.TryParse(reset.Value.Single(), out var seconds))
-                return await base.ParseErrorRateLimitResponse(httpStatusCode, state, responseHeaders, responseStream).ConfigureAwait(false);
+                return await base.ParseErrorRateLimitResponse(httpStatusCode, responseHeaders, responseStream).ConfigureAwait(false);
 
             var error = new ServerRateLimitError();
             error.RetryAfter = DateTime.UtcNow.AddSeconds(seconds);

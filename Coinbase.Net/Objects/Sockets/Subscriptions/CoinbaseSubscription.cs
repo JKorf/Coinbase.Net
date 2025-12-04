@@ -12,7 +12,7 @@ using System.Linq;
 namespace Coinbase.Net.Objects.Sockets.Subscriptions
 {
     /// <inheritdoc />
-    internal class CoinbaseSubscription<T> : Subscription<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>, CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> where T: CoinbaseSocketEvent
+    internal class CoinbaseSubscription<T> : Subscription where T: CoinbaseSocketEvent
     {
         private readonly Action<DateTime, string?, CoinbaseSocketMessage<T>> _handler;
         private readonly string _channel;

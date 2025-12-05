@@ -15,6 +15,26 @@ namespace Coinbase.Net.UnitTests
     [TestFixture]
     public class SocketSubscriptionTests
     {
+        [TestCase(false)]
+        [TestCase(true)]
+        public async Task ValidateConcurrentSubscriptions(bool newDeserialization)
+        {
+            var logger = new LoggerFactory();
+            logger.AddProvider(new TraceLoggerProvider());
+
+            var client = new CoinbaseSocketClient(Options.Create(new CoinbaseSocketOptions
+            {
+                OutputOriginalData = true,
+                UseUpdatedDeserialization = newDeserialization
+            }), logger);
+
+            var tester = new SocketSubscriptionValidator<CoinbaseSocketClient>(client, "Subscriptions/AdvancedTrade", "wss://advanced-trade-ws.coinbase.com", "events.0");
+            await tester.ValidateConcurrentAsync<CoinbaseStreamKline[]>(
+                (client, handler) => client.AdvancedTradeApi.SubscribeToKlineUpdatesAsync("ETH-USDT", handler),
+                (client, handler) => client.AdvancedTradeApi.SubscribeToKlineUpdatesAsync("BTC-USDT", handler),
+                "Concurrent");
+        }
+
 #warning add ExchangeApi
         [TestCase(false)]
         [TestCase(true)]

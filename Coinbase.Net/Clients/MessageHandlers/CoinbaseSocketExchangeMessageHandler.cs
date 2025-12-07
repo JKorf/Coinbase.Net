@@ -21,14 +21,13 @@ namespace Coinbase.Net.Clients.MessageHandlers
             AddTopicMapping<CoinbaseExBookSnapshot>(x => x.Symbol);
         }
 
-        protected override MessageEvaluator[] TypeEvaluators { get; } = [
+        protected override MessageTypeDefinition[] TypeEvaluators { get; } = [
 
-            new MessageEvaluator {
-                Priority = 1,
+            new MessageTypeDefinition {
                 Fields = [
                     new PropertyFieldReference("type")
                 ],
-                IdentifyMessageCallback = x => x.FieldValue("type")!
+                TypeIdentifierCallback = x => x.FieldValue("type")!
             },
 
         ];

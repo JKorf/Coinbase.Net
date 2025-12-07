@@ -23,59 +23,14 @@ namespace Coinbase.Net.Clients.MessageHandlers
             AddTopicMapping<CoinbaseSocketMessage<CoinbaseOrderBookEvent>>(x => x.Events.First().Symbol);
         }
 
-        protected override MessageEvaluator[] TypeEvaluators { get; } = [
+        protected override MessageTypeDefinition[] TypeEvaluators { get; } = [
 
-            new MessageEvaluator {
-                Priority = 1,
+            new MessageTypeDefinition {
                 Fields = [
                     new PropertyFieldReference("channel")
                 ],
-                IdentifyMessageCallback = x => x.FieldValue("channel")!,
-            },
-
-            //new MessageEvaluator {
-            //    Priority = 2,
-            //    Fields = [
-            //        new PropertyFieldReference("channel") { Constraint = x => x!.Equals("candles", StringComparison.Ordinal) },
-            //        new PropertyFieldReference("product_id") { Depth = 5 }
-            //    ],
-            //    IdentifyMessageCallback = x => $"{x.FieldValue("channel")}-{x.FieldValue("product_id")}",
-            //},
-
-            //new MessageEvaluator {
-            //    Priority = 3,
-            //    Fields = [
-            //        new PropertyFieldReference("channel") { Constraint = x => x!.Equals("ticker", StringComparison.Ordinal) || x.Equals("ticker_batch", StringComparison.Ordinal) },
-            //        new PropertyFieldReference("product_id") { Depth = 5 }
-            //    ],
-            //    IdentifyMessageCallback = x => $"{x.FieldValue("channel")}-{x.FieldValue("product_id")}",
-            //},
-
-            //new MessageEvaluator {
-            //    Priority = 4,
-            //    Fields = [
-            //        new PropertyFieldReference("channel") { Constraint = x => x!.Equals("status", StringComparison.Ordinal) },
-            //        new PropertyFieldReference("id") { Depth = 5 }
-            //    ],
-            //    IdentifyMessageCallback = x => $"{x.FieldValue("channel")}-{x.FieldValue("id")}",
-            //},
-
-            //new MessageEvaluator {
-            //    Priority = 5,
-            //    Fields = [
-            //        new PropertyFieldReference("channel") { Constraint = x => x!.Equals("l2_data", StringComparison.Ordinal) },
-            //        new PropertyFieldReference("product_id") { Depth = 3 }
-            //    ],
-            //    IdentifyMessageCallback = x => $"{x.FieldValue("channel")}-{x.FieldValue("product_id")}",
-            //},
-
-            //new MessageEvaluator {
-            //    Priority = 6,
-            //    Fields = [
-            //        new PropertyFieldReference("channel"),
-            //    ],
-            //    IdentifyMessageCallback = x => $"{x.FieldValue("channel")}",
-            //},
+                TypeIdentifierCallback = x => x.FieldValue("channel")!,
+            }
         ];
     }
 }

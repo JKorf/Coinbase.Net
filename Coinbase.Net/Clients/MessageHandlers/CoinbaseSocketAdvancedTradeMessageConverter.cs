@@ -1,12 +1,9 @@
 ﻿using Coinbase.Net.Objects.Internal;
 using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Converters.SystemTextJson;
-using System;
-using System.Collections.Generic;
+using CryptoExchange.Net.Converters.SystemTextJson.MessageHandlers;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace Coinbase.Net.Clients.MessageHandlers
 {

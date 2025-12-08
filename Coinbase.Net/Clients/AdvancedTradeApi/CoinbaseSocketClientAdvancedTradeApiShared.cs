@@ -1,6 +1,5 @@
 using CryptoExchange.Net.SharedApis;
 using System;
-using System.Collections.Generic;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using System.Threading.Tasks;
 using System.Threading;

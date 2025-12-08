@@ -8,7 +8,6 @@ using System.Linq;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net;
 using Coinbase.Net.Enums;
-using System.Drawing;
 using CryptoExchange.Net.Objects.Errors;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
@@ -1242,7 +1241,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     nextToken = new DateTimeToken(minOpenTime.AddSeconds(-(int)(interval - 1)));
             }
 
-            return result.AsExchangeResult<SharedKline[]>(Exchange, request.Symbol!.TradingMode, result.Data.Reverse().Select(x => 
+            return result.AsExchangeResult<SharedKline[]>(Exchange, request.Symbol!.TradingMode, result.Data.AsEnumerable().Reverse().Select(x => 
                 new SharedKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume)).ToArray(), nextToken);
         }
 

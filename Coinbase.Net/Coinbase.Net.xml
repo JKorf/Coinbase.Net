@@ -305,7 +305,7 @@
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
         <member name="P:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.SharedClient">
@@ -458,7 +458,7 @@
         <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
@@ -8745,16 +8745,16 @@
             ctor
             </summary>
         </member>
-        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseExOrderBookSubscription.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseExOrderBookSubscription.GetSubQuery(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseExOrderBookSubscription.GetUnsubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseExOrderBookSubscription.GetUnsubQuery(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseExOrderBookSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,System.DateTime,System.String,Coinbase.Net.Objects.Models.CoinbaseExBookSnapshot)">
+        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseExOrderBookSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,Coinbase.Net.Objects.Models.CoinbaseExBookSnapshot)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseExOrderBookSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,System.DateTime,System.String,Coinbase.Net.Objects.Models.CoinbaseExBookUpdate)">
+        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseExOrderBookSubscription.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,Coinbase.Net.Objects.Models.CoinbaseExBookUpdate)">
             <inheritdoc />
         </member>
         <member name="T:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseExSubscription`1">
@@ -8765,13 +8765,13 @@
             ctor
             </summary>
         </member>
-        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseExSubscription`1.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseExSubscription`1.GetSubQuery(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseExSubscription`1.GetUnsubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseExSubscription`1.GetUnsubQuery(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseExSubscription`1.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,System.DateTime,System.String,`0)">
+        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseExSubscription`1.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,`0)">
             <inheritdoc />
         </member>
         <member name="T:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1">
@@ -8782,13 +8782,13 @@
             ctor
             </summary>
         </member>
-        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.GetSubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.GetSubQuery(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.GetUnsubQuery(CryptoExchange.Net.Sockets.SocketConnection)">
+        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.GetUnsubQuery(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.DoHandleMessage(CryptoExchange.Net.Sockets.SocketConnection,System.DateTime,System.String,Coinbase.Net.Objects.Internal.CoinbaseSocketMessage{`0})">
+        <member name="M:Coinbase.Net.Objects.Sockets.Subscriptions.CoinbaseSubscription`1.DoHandleMessage(CryptoExchange.Net.Sockets.Default.SocketConnection,System.DateTime,System.String,Coinbase.Net.Objects.Internal.CoinbaseSocketMessage{`0})">
             <inheritdoc />
         </member>
         <member name="T:Coinbase.Net.SymbolOrderBooks.CoinbaseOrderBookFactory">
@@ -8850,14 +8850,14 @@
             Extensions for the ICryptoRestClient and ICryptoSocketClient interfaces
             </summary>
         </member>
-        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Coinbase(CryptoExchange.Net.Interfaces.ICryptoRestClient)">
+        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Coinbase(CryptoExchange.Net.Interfaces.Clients.ICryptoRestClient)">
             <summary>
             Get the Coinbase REST Api client
             </summary>
             <param name="baseClient"></param>
             <returns></returns>
         </member>
-        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Coinbase(CryptoExchange.Net.Interfaces.ICryptoSocketClient)">
+        <member name="M:CryptoExchange.Net.Interfaces.CryptoClientExtensions.Coinbase(CryptoExchange.Net.Interfaces.Clients.ICryptoSocketClient)">
             <summary>
             Get the Coinbase Websocket Api client
             </summary>

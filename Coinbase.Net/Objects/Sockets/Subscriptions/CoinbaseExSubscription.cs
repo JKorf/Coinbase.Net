@@ -1,13 +1,11 @@
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using System;
-using System.Collections.Generic;
 using Coinbase.Net.Objects.Internal;
 using CryptoExchange.Net.Clients;
 using System.Linq;
+using CryptoExchange.Net.Sockets.Default;
 
 namespace Coinbase.Net.Objects.Sockets.Subscriptions
 {

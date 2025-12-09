@@ -37,7 +37,7 @@ namespace Coinbase.Net.UnitTests
         [TestCase(true)]
         public async Task TestSubscriptions(bool useUpdatedDeserialization)
         {
-            await RunAndCheckUpdate<CoinbaseTicker>(useUpdatedDeserialization , (client, updateHandler) => client.AdvancedTradeApi.SubscribeToFuturesBalanceUpdatesAsync(default , default), false, true);
+            await RunAndCheckUpdate<CoinbaseFuturesBalance>(useUpdatedDeserialization , (client, updateHandler) => client.AdvancedTradeApi.SubscribeToFuturesBalanceUpdatesAsync(updateHandler, default), false, true);
             await RunAndCheckUpdate<CoinbaseTicker>(useUpdatedDeserialization , (client, updateHandler) => client.AdvancedTradeApi.SubscribeToTickerUpdatesAsync("ETH-USD", updateHandler, default), true, false);
         } 
     }

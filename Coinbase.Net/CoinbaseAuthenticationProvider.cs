@@ -18,6 +18,7 @@ namespace Coinbase.Net
         private static IStringMessageSerializer _serializer = new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
         private static readonly JwtSettings _mapperSettings = new() { JsonMapper = new JwtJsonMapper() };
 
+        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Hmac];
         public CoinbaseAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {
         }

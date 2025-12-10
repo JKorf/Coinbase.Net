@@ -84,45 +84,6 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             return await base.SendAsync<T>(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
         }
 
-        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, HttpResponseHeaders responseHeaders, IMessageAccessor accessor)
-        {
-            var reset = responseHeaders.SingleOrDefault(x => x.Key.Equals("x-ratelimit-reset", StringComparison.InvariantCultureIgnoreCase));
-            if (reset.Key == null)
-                return base.ParseRateLimitResponse(httpStatusCode, responseHeaders, accessor);
-
-            if (!int.TryParse(reset.Value.Single(), out var seconds))
-                return base.ParseRateLimitResponse(httpStatusCode, responseHeaders, accessor);
-
-            var error = new ServerRateLimitError(accessor.GetOriginalString());
-            error.RetryAfter = DateTime.UtcNow.AddSeconds(seconds);
-            return error;
-        }
-
-        protected override Error ParseErrorResponse(int httpStatusCode, HttpResponseHeaders responseHeaders, IMessageAccessor accessor, Exception? exception)
-        {
-            if (!accessor.IsValid)
-            {
-                if (httpStatusCode == 401)
-                    return new ServerError(new ErrorInfo(ErrorType.Unauthorized, "Unauthorized"));
-
-                return new ServerError(ErrorInfo.Unknown, exception: exception);
-            }
-
-            var error = accessor.GetValue<string>(MessagePath.Get().Property("error"));
-            if (error == null)
-            {
-                var errorId = accessor.GetValue<string?>(MessagePath.Get().Property("errors").Index(0).Property("id"));
-                var errorMsg = accessor.GetValue<string?>(MessagePath.Get().Property("errors").Index(0).Property("message"));
-                if (errorId != null)
-                    return new ServerError(errorId, GetErrorInfo(errorId, errorMsg), exception);
-
-                return new ServerError(ErrorInfo.Unknown, exception: exception);
-            }
-
-            var msg = accessor.GetValue<string>(MessagePath.Get().Property("message"));
-            return new ServerError(error, GetErrorInfo(error, msg), exception);
-        }
-
         /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
             => ExchangeData.GetServerTimeAsync();

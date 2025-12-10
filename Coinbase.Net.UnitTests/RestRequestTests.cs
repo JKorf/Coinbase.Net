@@ -13,13 +13,11 @@ namespace Coinbase.Net.UnitTests
     [TestFixture]
     public class RestRequestTests
     {
-        [TestCase(false)]
-        [TestCase(true)]
-        public async Task ValidateAdvancedTradeAccountCalls(bool newDeserialization)
+        [Test]
+        public async Task ValidateAdvancedTradeAccountCalls()
         {
             var client = new CoinbaseRestClient(opts =>
             {
-                opts.UseUpdatedDeserialization = newDeserialization;
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new ApiCredentials("123", "-----BEGIN EC PRIVATE KEY-----\r\nMHcCAQEEIGaopmcUKDBihelMJbKUyRmaR6F3Eo90EZaqZJ3/mBr0oAoGCCqGSM49\r\nAwEHoUQDQgAEnYaxPG+o57xM5o/M5QNn0ocwlw12ZNVWFEo9tKDQ7Jz5Gz/0eMcP\r\nmEhm5msFFpWgrY0/T92MfwByuaLws/rM3w==\r\n-----END EC PRIVATE KEY-----");
             });
@@ -58,13 +56,11 @@ namespace Coinbase.Net.UnitTests
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetFuturesCurrentMarginWindowAsync(MarginProfileType.Regular), "GetFuturesCurrentMarginWindow");
         }
 
-        [TestCase(false)]
-        [TestCase(true)]
-        public async Task ValidateAdvancedTradeExchangeDataCalls(bool newDeserialization)
+        [Test]
+        public async Task ValidateAdvancedTradeExchangeDataCalls()
         {
             var client = new CoinbaseRestClient(opts =>
             {
-                opts.UseUpdatedDeserialization = newDeserialization;
                 opts.AutoTimestamp = false;
             });
             var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/AdvancedTrade/ExchangeData", "https://api.coinbase.com", IsAuthenticated);
@@ -76,13 +72,11 @@ namespace Coinbase.Net.UnitTests
             await tester.ValidateAsync(client => client.AdvancedTradeApi.ExchangeData.GetExchangeRatesAsync(), "GetExchangeRates", nestedJsonProperty: "data");
         }
 
-        [TestCase(false)]
-        [TestCase(true)]
-        public async Task ValidateAdvancedTradeTradingCalls(bool newDeserialization)
+        [Test]
+        public async Task ValidateAdvancedTradeTradingCalls()
         {
             var client = new CoinbaseRestClient(opts =>
             {
-                opts.UseUpdatedDeserialization = newDeserialization;
                 opts.AutoTimestamp = false;
                 opts.ApiCredentials = new ApiCredentials("123", "-----BEGIN EC PRIVATE KEY-----\r\nMHcCAQEEIGaopmcUKDBihelMJbKUyRmaR6F3Eo90EZaqZJ3/mBr0oAoGCCqGSM49\r\nAwEHoUQDQgAEnYaxPG+o57xM5o/M5QNn0ocwlw12ZNVWFEo9tKDQ7Jz5Gz/0eMcP\r\nmEhm5msFFpWgrY0/T92MfwByuaLws/rM3w==\r\n-----END EC PRIVATE KEY-----");
             });

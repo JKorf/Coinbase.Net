@@ -46,7 +46,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
                 //MessageRouter = MessageRouter.Create<CoinbaseSocketMessage<T>>(channelIdentifier, DoHandleMessage);
             }
 
-            MessageRouter = MessageRouter.CreateWithOptionalTopicFilters<CoinbaseSocketMessage<T>>(channelIdentifier, symbols, DoHandleMessage);
+            MessageRouter = MessageRouter.CreateWithOptionalTopicFilters<CoinbaseSocketMessage<T>>(channelIdentifier, _symbols, DoHandleMessage);
         }
 
         /// <inheritdoc />

@@ -87,6 +87,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         {
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseTradeEvent>>((receiveTime, originalData, data) =>
             {
+                // Won't know the symbol this message was for..
+                if (data.Events.First().Trades.Length == 0)
+                    return;
+
                 onMessage(
                     new DataEvent<CoinbaseTrade[]>(data.Events.First().Trades, receiveTime, originalData)
                         .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)

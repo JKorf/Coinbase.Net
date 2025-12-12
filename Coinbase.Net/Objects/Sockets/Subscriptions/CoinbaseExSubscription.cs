@@ -27,6 +27,8 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
             _client = client;
             _symbols = symbols?.ToArray();
 
+            IndividualSubscriptionCount = symbols?.Length ?? 1;
+
             if (_symbols?.Length > 0)
             {
                 MessageMatcher = MessageMatcher.Create(_symbols.Select(x => new MessageHandlerLink<T>(channelIdentifier + x, DoHandleMessage)).ToArray());

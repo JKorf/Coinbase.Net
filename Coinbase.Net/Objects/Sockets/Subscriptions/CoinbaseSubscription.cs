@@ -35,6 +35,8 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
             _client = client;
             _symbols = symbols?.Select(x => !_usdcNotReplacing.Contains(x) ? x.Replace("-USDC", "-USD") : x).ToArray();
 
+            IndividualSubscriptionCount = symbols?.Length ?? 1;
+
             if (_symbols?.Length > 0)
             {
                 MessageMatcher = MessageMatcher.Create(_symbols.Select(x => new MessageHandlerLink<CoinbaseSocketMessage<T>>(channelIdentifier + "-" + x, DoHandleMessage)).ToArray());

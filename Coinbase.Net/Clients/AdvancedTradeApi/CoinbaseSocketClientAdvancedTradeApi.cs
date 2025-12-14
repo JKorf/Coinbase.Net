@@ -67,7 +67,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseHeartbeat>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<CoinbaseHeartbeat>(data.Events.First(), receiveTime, originalData)
+                    new DataEvent<CoinbaseHeartbeat>(Exchange, data.Events.First(), receiveTime, originalData)
                         .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Channel)
                         .WithDataTimestamp(data.Timestamp)
@@ -92,7 +92,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     return;
 
                 onMessage(
-                    new DataEvent<CoinbaseTrade[]>(data.Events.First().Trades, receiveTime, originalData)
+                    new DataEvent<CoinbaseTrade[]>(Exchange, data.Events.First().Trades, receiveTime, originalData)
                         .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Channel)
                         .WithSymbol(data.Events.First().Trades.First().Symbol)
@@ -114,7 +114,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseKlineEvent>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<CoinbaseStreamKline[]>(data.Events.First().Klines, receiveTime, originalData)
+                    new DataEvent<CoinbaseStreamKline[]>(Exchange, data.Events.First().Klines, receiveTime, originalData)
                         .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Channel)
                         .WithSymbol(data.Events.First().Klines.First().Symbol)
@@ -136,7 +136,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseTickerEvent>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<CoinbaseTicker>(data.Events.First().Tickers.First(), receiveTime, originalData)
+                    new DataEvent<CoinbaseTicker>(Exchange, data.Events.First().Tickers.First(), receiveTime, originalData)
                         .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Channel)
                         .WithSymbol(data.Events.First().Tickers.First().Symbol)
@@ -158,7 +158,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseBatchTickerEvent>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<CoinbaseBatchTicker>(data.Events.First().Tickers.First(), receiveTime, originalData)
+                    new DataEvent<CoinbaseBatchTicker>(Exchange, data.Events.First().Tickers.First(), receiveTime, originalData)
                         .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Channel)
                         .WithSymbol(data.Events.First().Tickers.First().Symbol)
@@ -180,7 +180,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseSymbolEvent>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<CoinbaseStreamSymbol>(data.Events.First().Symbols.First(), receiveTime, originalData)
+                    new DataEvent<CoinbaseStreamSymbol>(Exchange, data.Events.First().Symbols.First(), receiveTime, originalData)
                         .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Channel)
                         .WithSymbol(data.Events.First().Symbols.First().Symbol)
@@ -207,7 +207,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     Bids = data.Events.First().Book.Where(a => a.Side == Enums.OrderSide.Buy).ToArray()
                 };
                 onMessage(
-                    new DataEvent<CoinbaseOrderBookUpdate>(book, receiveTime, originalData)
+                    new DataEvent<CoinbaseOrderBookUpdate>(Exchange, book, receiveTime, originalData)
                         .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Channel)
                         .WithSymbol(data.Events.First().Symbol)
@@ -225,7 +225,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseUserUpdate>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<CoinbaseUserUpdate>(data.Events.First(), receiveTime, originalData)
+                    new DataEvent<CoinbaseUserUpdate>(Exchange, data.Events.First(), receiveTime, originalData)
                         .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Channel)
                         .WithDataTimestamp(data.Timestamp)
@@ -242,7 +242,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseFuturesBalanceUpdate>>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<CoinbaseFuturesBalance>(data.Events.First().BalanceSummary, receiveTime, originalData)
+                    new DataEvent<CoinbaseFuturesBalance>(Exchange, data.Events.First().BalanceSummary, receiveTime, originalData)
                         .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
                         .WithStreamId(data.Channel)
                         .WithDataTimestamp(data.Timestamp)

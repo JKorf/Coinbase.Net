@@ -66,7 +66,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExBookSnapshot message)
         {
             _snapshotHandler.Invoke(
-                new DataEvent<CoinbaseExBookSnapshot>(message, receiveTime, originalData)
+                new DataEvent<CoinbaseExBookSnapshot>(CoinbaseExchange.ExchangeName, message, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Snapshot)
                     .WithSymbol(message.Symbol)
                 );
@@ -77,7 +77,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExBookUpdate message)
         {
             _updateHandler.Invoke(
-                new DataEvent<CoinbaseExBookUpdate>(message, receiveTime, originalData)
+                new DataEvent<CoinbaseExBookUpdate>(CoinbaseExchange.ExchangeName, message, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithSymbol(message.Symbol)
                 );

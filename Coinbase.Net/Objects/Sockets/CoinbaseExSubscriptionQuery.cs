@@ -19,16 +19,18 @@ namespace Coinbase.Net.Objects.Sockets
             _symbols = request.Symbols;
 
             MessageMatcher = MessageMatcher.Create(
-                new MessageHandlerLink<CoinbaseExSubscriptionsUpdate>("subscriptions", HandleMessage),
+                new MessageHandlerLink<CoinbaseExSubscriptionsUpdate>("subscriptions", HandleMessage!),
                 new MessageHandlerLink<CoinbaseExError>("error", HandleError));
 
             MessageRouter = MessageRouter.Create(
-                MessageRoute<CoinbaseExSubscriptionsUpdate>.CreateWithoutTopicFilter("subscriptions", HandleMessage),
+                MessageRoute<CoinbaseExSubscriptionsUpdate>.CreateWithoutTopicFilter("subscriptions", HandleMessage, true),
                 MessageRoute<CoinbaseExError>.CreateWithoutTopicFilter("error", HandleError));
         }
 
         public override bool PreCheckMessage(SocketConnection connection, object message)
         {
+            // TO REMOVE
+
             if (message is not CoinbaseExSubscriptionsUpdate messageData)
                 return true;
 
@@ -47,8 +49,15 @@ namespace Coinbase.Net.Objects.Sockets
             return new CallResult<CoinbaseExError>(message, originalData, new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, message.Reason)));
         }
 
-        public CallResult<CoinbaseExSubscriptionsUpdate> HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExSubscriptionsUpdate message)
+        public CallResult<CoinbaseExSubscriptionsUpdate>? HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExSubscriptionsUpdate message)
         {
+            var channel = message.Subscriptions.SingleOrDefault(x => x.Name == _channel);
+            if (channel == null)
+                return null;
+
+            if (_symbols != null && _symbols.Any(x => !channel.Symbols.Contains(x)))
+                return null;
+
             return new CallResult<CoinbaseExSubscriptionsUpdate>(message, originalData, null);
         }
     }

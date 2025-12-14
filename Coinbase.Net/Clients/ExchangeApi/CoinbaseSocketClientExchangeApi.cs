@@ -66,7 +66,7 @@ namespace Coinbase.Net.Clients.ExchangeApi
             var internalHandler = new Action<DateTime, string?, CoinbaseExHeartbeat>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<CoinbaseExHeartbeat>(data, receiveTime, originalData)
+                    new DataEvent<CoinbaseExHeartbeat>(CoinbaseExchange.ExchangeName, data, receiveTime, originalData)
                         .WithUpdateType(SocketUpdateType.Update)
                         .WithStreamId("heartbeat")
                         .WithSymbol(data.Symbol)
@@ -84,7 +84,7 @@ namespace Coinbase.Net.Clients.ExchangeApi
             var internalHandler = new Action<DateTime, string?, CoinbaseExchangeInfo>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<CoinbaseExchangeInfo>(data, receiveTime, originalData)
+                    new DataEvent<CoinbaseExchangeInfo>(CoinbaseExchange.ExchangeName, data, receiveTime, originalData)
                         .WithUpdateType(SocketUpdateType.Update)
                         .WithStreamId("status")
                     );
@@ -104,7 +104,7 @@ namespace Coinbase.Net.Clients.ExchangeApi
             var internalHandler = new Action<DateTime, string?, CoinbaseExTicker>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<CoinbaseExTicker>(data, receiveTime, originalData)
+                    new DataEvent<CoinbaseExTicker>(CoinbaseExchange.ExchangeName, data, receiveTime, originalData)
                         .WithUpdateType(SocketUpdateType.Update)
                         .WithStreamId("ticker")
                         .WithSymbol(data.Symbol)
@@ -126,7 +126,7 @@ namespace Coinbase.Net.Clients.ExchangeApi
             var internalHandler = new Action<DateTime, string?, CoinbaseExTicker>((receiveTime, originalData, data) =>
             {
                 onMessage(
-                    new DataEvent<CoinbaseExTicker>(data, receiveTime, originalData)
+                    new DataEvent<CoinbaseExTicker>(CoinbaseExchange.ExchangeName, data, receiveTime, originalData)
                         .WithUpdateType(SocketUpdateType.Update)
                         .WithStreamId("ticker")
                         .WithSymbol(data.Symbol)

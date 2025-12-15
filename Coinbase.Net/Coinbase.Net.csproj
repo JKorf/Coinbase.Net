@@ -11,6 +11,10 @@
     <AssemblyVersion>2.11.2</AssemblyVersion>
     <FileVersion>2.11.2</FileVersion>
     <Description>Coinbase.Net is a high performance client library for accessing the Coinbase REST and Websocket API. All data is mapped to readable models and enum values. Additional features include an implementation for maintaining a client side order book, easy integration with other exchange client libraries and more.</Description>
+    <PackageVersion>2.11.3</PackageVersion>
+    <AssemblyVersion>2.11.3</AssemblyVersion>
+    <FileVersion>2.11.3</FileVersion>
+    <Description>Coinbase.Net is a client library for accessing the Coinbase REST and Websocket API. All data is mapped to readable models and enum values. Additional features include an implementation for maintaining a client side order book, easy integration with other exchange client libraries and more.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Coinbase;Coinbase.Net;Coinbase.com;Coinbase Client;Coinbase API;CryptoCurrency;CryptoCurrency Exchange;CryptoExchange.Net</PackageTags>
     <RepositoryType>git</RepositoryType>

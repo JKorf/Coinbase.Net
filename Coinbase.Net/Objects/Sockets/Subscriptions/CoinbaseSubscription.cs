@@ -39,15 +39,9 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
             IndividualSubscriptionCount = symbols?.Length ?? 1;
 
             if (_symbols?.Length > 0)
-            {
                 MessageMatcher = MessageMatcher.Create(_symbols.Select(x => new MessageHandlerLink<CoinbaseSocketMessage<T>>(channelIdentifier + "-" + x, DoHandleMessage)).ToArray());
-                //MessageRouter = MessageRouter.Create(_symbols.Select(x => new MessageRoute<CoinbaseSocketMessage<T>>(channelIdentifier + "-" + x, (string?)null, DoHandleMessage)).ToArray());
-            }
             else
-            {
                 MessageMatcher = MessageMatcher.Create<CoinbaseSocketMessage<T>>(channelIdentifier, DoHandleMessage);
-                //MessageRouter = MessageRouter.Create<CoinbaseSocketMessage<T>>(channelIdentifier, DoHandleMessage);
-            }
 
             MessageRouter = MessageRouter.CreateWithOptionalTopicFilters<CoinbaseSocketMessage<T>>(channelIdentifier, _symbols, DoHandleMessage);
         }
@@ -74,8 +68,6 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseSocketMessage<T> message)
         {
             _handler.Invoke(receiveTime, originalData, message);
-            //_handler.Invoke(message.As(message.Data.Events, message.Data.Channel, null, message.Data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
-            //    .WithDataTimestamp(message.Data.Timestamp));
             return CallResult.SuccessResult;
         }
 

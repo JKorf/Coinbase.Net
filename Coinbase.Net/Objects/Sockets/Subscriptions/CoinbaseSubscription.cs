@@ -1,6 +1,4 @@
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
 using Microsoft.Extensions.Logging;
 using System;
@@ -8,13 +6,14 @@ using System.Collections.Generic;
 using Coinbase.Net.Objects.Internal;
 using CryptoExchange.Net.Clients;
 using System.Linq;
+using CryptoExchange.Net.Sockets.Default;
 
 namespace Coinbase.Net.Objects.Sockets.Subscriptions
 {
     /// <inheritdoc />
-    internal class CoinbaseSubscription<T> : Subscription<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>, CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>> where T: CoinbaseSocketEvent
+    internal class CoinbaseSubscription<T> : Subscription where T: CoinbaseSocketEvent
     {
-        private readonly Action<DataEvent<T[]>> _handler;
+        private readonly Action<DateTime, string?, CoinbaseSocketMessage<T>> _handler;
         private readonly string _channel;
         private readonly string[]? _symbols;
         private readonly SocketApiClient _client;
@@ -30,17 +29,21 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         /// <summary>
         /// ctor
         /// </summary>
-        public CoinbaseSubscription(SocketApiClient client, ILogger logger, string channel, string channelIdentifier, string[]? symbols, Action<DataEvent<T[]>> handler, bool auth) : base(logger, auth)
+        public CoinbaseSubscription(SocketApiClient client, ILogger logger, string channel, string channelIdentifier, string[]? symbols, Action<DateTime, string?, CoinbaseSocketMessage<T>> handler, bool auth) : base(logger, auth)
         {
             _handler = handler;
             _channel = channel;
             _client = client;
             _symbols = symbols?.Select(x => !_usdcNotReplacing.Contains(x) ? x.Replace("-USDC", "-USD") : x).ToArray();
 
+            IndividualSubscriptionCount = symbols?.Length ?? 1;
+
             if (_symbols?.Length > 0)
                 MessageMatcher = MessageMatcher.Create(_symbols.Select(x => new MessageHandlerLink<CoinbaseSocketMessage<T>>(channelIdentifier + "-" + x, DoHandleMessage)).ToArray());
             else
                 MessageMatcher = MessageMatcher.Create<CoinbaseSocketMessage<T>>(channelIdentifier, DoHandleMessage);
+
+            MessageRouter = MessageRouter.CreateWithOptionalTopicFilters<CoinbaseSocketMessage<T>>(channelIdentifier, _symbols, DoHandleMessage);
         }
 
         /// <inheritdoc />
@@ -62,10 +65,9 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         }, Authenticated);
 
         /// <inheritdoc />
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<CoinbaseSocketMessage<T>> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseSocketMessage<T> message)
         {
-            _handler.Invoke(message.As(message.Data.Events, message.Data.Channel, null, message.Data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
-                .WithDataTimestamp(message.Data.Timestamp));
+            _handler.Invoke(receiveTime, originalData, message);
             return CallResult.SuccessResult;
         }
 

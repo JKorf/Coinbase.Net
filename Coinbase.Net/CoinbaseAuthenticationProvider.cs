@@ -1,24 +1,24 @@
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Converters.SystemTextJson;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
-using Jose;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+#if !NETSTANDARD2_0
 using System.Linq;
-using System.Net.Http;
 using System.Security.Cryptography;
-using System.Text.Json;
-using System.Text.Json.Serialization.Metadata;
+using Microsoft.IdentityModel.JsonWebTokens;
+#endif
 
 namespace Coinbase.Net
 {
     internal class CoinbaseAuthenticationProvider : AuthenticationProvider
     {
-        private static IStringMessageSerializer _serializer = new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
-        private static readonly JwtSettings _mapperSettings = new() { JsonMapper = new JwtJsonMapper() };
+#if !NETSTANDARD2_0
+        private SigningCredentials? _signingCreds;
+#endif
 
+        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Hmac];
         public CoinbaseAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {
         }
@@ -31,53 +31,50 @@ namespace Coinbase.Net
             var timestamp = GetTimestamp(apiClient);
 
             var host = request.BaseAddress.Substring(request.BaseAddress.IndexOf("//") + 2);
+            request.Headers ??= new Dictionary<string, string>();
             request.Headers.Add("Authorization", $"Bearer {GenerateToken(timestamp, $"{request.Method} {host}{request.Path}")}");
         }
 
         public string GenerateToken(DateTime timestamp, string? uriLine)
         {
-#if NETSTANDARD2_1_OR_GREATER || NET8_0_OR_GREATER
-
-            var lines = _credentials.Secret.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
-            var strippedKey = string.Join("", lines.Skip(1).Take(lines.Length - 2));
-
-            using var key = ECDsa.Create();
-            key.ImportECPrivateKey(Convert.FromBase64String(strippedKey), out _);
-
-            var payload = new Dictionary<string, object>
-             {
-                 { "iss", "coinbase-cloud" },
-                 { "nbf", (long)DateTimeConverter.ConvertToSeconds(timestamp) },
-                 { "exp", (long)DateTimeConverter.ConvertToSeconds(timestamp.AddMinutes(1)) },
-                 { "sub", ApiKey },
-             };
-            if (uriLine != null)
-                payload.Add("uri", uriLine);
-
+#if !NETSTANDARD2_0
             var nonce = new byte[16];
             RandomNumberGenerator.Fill(nonce);
-            var extraHeaders = new Dictionary<string, object>
-             {
-                 { "kid", ApiKey },
-                 { "nonce", BytesToHexString(nonce) },
-             };
 
-            var payloadStr = _serializer.Serialize(payload);
-            return JWT.Encode(payloadStr, key, JwsAlgorithm.ES256, extraHeaders, _mapperSettings);
+            if (_signingCreds == null)
+            {
+                var lines = _credentials.Secret.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                var strippedKey = string.Join("", lines.Skip(1).Take(lines.Length - 2));
+
+                var key = ECDsa.Create();
+                key.ImportECPrivateKey(Convert.FromBase64String(strippedKey), out _);
+                _signingCreds = new SigningCredentials(new ECDsaSecurityKey(key) { KeyId = ApiKey }, "ES256");
+            }
+
+            var descriptor = new SecurityTokenDescriptor
+            {
+                Issuer = "coinbase-cloud",
+                NotBefore = timestamp,
+                Expires = timestamp.AddMinutes(1),
+                Claims = new Dictionary<string, object> {
+                    { "sub", ApiKey }
+                },
+                AdditionalHeaderClaims = new Dictionary<string, object>
+                {
+                    { "nonce", BytesToHexString(nonce) },
+                    { "typ", "JWT" }
+                },
+                SigningCredentials = _signingCreds
+            };
+
+            if (uriLine != null)
+                descriptor.Claims.Add("uri", uriLine);
+
+            var result = new JsonWebTokenHandler().CreateToken(descriptor);
+            return result;
 #else
             throw new PlatformNotSupportedException("Authentication is not available for .NetStandard2.0 due to platform limitations");
 #endif
-        }
-
-        // Override the default to make sure the correct json serializer options are used
-        class JwtJsonMapper : IJsonMapper
-        {
-            public T Parse<T>(string json)
-            {
-                return JsonSerializer.Deserialize(json, (JsonTypeInfo<T>)CoinbaseExchange._serializerContext.GetTypeInfo(typeof(T))!)!;
-            }
-
-            public string Serialize(object obj) => _serializer.Serialize(obj);
         }
     }
 

@@ -1,25 +1,27 @@
-using System;
-using System.Threading;
-using System.Threading.Tasks;
+using Coinbase.Net.Clients.MessageHandlers;
+using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
+using Coinbase.Net.Objects.Internal;
+using Coinbase.Net.Objects.Models;
+using Coinbase.Net.Objects.Options;
+using Coinbase.Net.Objects.Sockets.Subscriptions;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
 using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
+using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 using Microsoft.Extensions.Logging;
-using Coinbase.Net.Objects.Models;
-using Coinbase.Net.Objects.Options;
-using Coinbase.Net.Objects.Sockets.Subscriptions;
-using CryptoExchange.Net.Converters.SystemTextJson;
-using System.Linq;
-using Coinbase.Net.Objects.Internal;
+using System;
 using System.Collections.Generic;
-using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
-using CryptoExchange.Net;
+using System.Linq;
 using System.Net.WebSockets;
+using System.Threading;
+using System.Threading.Tasks;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
@@ -53,6 +55,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
 
+        public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new CoinbaseSocketAdvancedTradeMessageConverter();
+
         /// <inheritdoc />
         protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
             => new CoinbaseAuthenticationProvider(credentials);
@@ -60,7 +64,17 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToHeartbeatUpdatesAsync(Action<DataEvent<CoinbaseHeartbeat>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new CoinbaseSubscription<CoinbaseHeartbeat>(this, _logger, "heartbeats", "heartbeats", null, x => onMessage(x.As(x.Data.First())), AuthenticationProvider != null);
+            var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseHeartbeat>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<CoinbaseHeartbeat>(Exchange, data.Events.First(), receiveTime, originalData)
+                        .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithStreamId(data.Channel)
+                        .WithDataTimestamp(data.Timestamp)
+                    );
+            });
+
+            var subscription = new CoinbaseSubscription<CoinbaseHeartbeat>(this, _logger, "heartbeats", "heartbeats", null, internalHandler, AuthenticationProvider != null);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
 
@@ -71,9 +85,22 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseTrade[]>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new CoinbaseSubscription<CoinbaseTradeEvent>(this, _logger, "market_trades", "market_trades", symbols.ToArray(), x => onMessage(
-                x.As(x.Data.First().Trades)
-                .WithSymbol(x.Data.First().Trades.First().Symbol)), AuthenticationProvider != null);
+            var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseTradeEvent>>((receiveTime, originalData, data) =>
+            {
+                // Won't know the symbol this message was for..
+                if (data.Events.First().Trades.Length == 0)
+                    return;
+
+                onMessage(
+                    new DataEvent<CoinbaseTrade[]>(Exchange, data.Events.First().Trades, receiveTime, originalData)
+                        .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithStreamId(data.Channel)
+                        .WithSymbol(data.Events.First().Trades.First().Symbol)
+                        .WithDataTimestamp(data.Timestamp)
+                    );
+            });
+
+            var subscription = new CoinbaseSubscription<CoinbaseTradeEvent>(this, _logger, "market_trades", "market_trades", symbols.ToArray(), internalHandler, AuthenticationProvider != null);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
 
@@ -84,9 +111,18 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseStreamKline[]>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new CoinbaseSubscription<CoinbaseKlineEvent>(this, _logger, "candles", "candles", symbols.ToArray(), x => onMessage(
-                x.As(x.Data.First().Klines)
-                .WithSymbol(x.Data.First().Klines.First().Symbol)), AuthenticationProvider != null);
+            var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseKlineEvent>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<CoinbaseStreamKline[]>(Exchange, data.Events.First().Klines, receiveTime, originalData)
+                        .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithStreamId(data.Channel)
+                        .WithSymbol(data.Events.First().Klines.First().Symbol)
+                        .WithDataTimestamp(data.Timestamp)
+                    );
+            });
+
+            var subscription = new CoinbaseSubscription<CoinbaseKlineEvent>(this, _logger, "candles", "candles", symbols.ToArray(), internalHandler, AuthenticationProvider != null);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
 
@@ -97,9 +133,18 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseTicker>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new CoinbaseSubscription<CoinbaseTickerEvent>(this, _logger, "ticker", "ticker", symbols.ToArray(), x => onMessage(
-                x.As(x.Data.First().Tickers.First())
-                .WithSymbol(x.Data.First().Tickers.First().Symbol)), AuthenticationProvider != null);
+            var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseTickerEvent>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<CoinbaseTicker>(Exchange, data.Events.First().Tickers.First(), receiveTime, originalData)
+                        .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithStreamId(data.Channel)
+                        .WithSymbol(data.Events.First().Tickers.First().Symbol)
+                        .WithDataTimestamp(data.Timestamp)
+                    );
+            });
+
+            var subscription = new CoinbaseSubscription<CoinbaseTickerEvent>(this, _logger, "ticker", "ticker", symbols.ToArray(), internalHandler, AuthenticationProvider != null);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
 
@@ -110,9 +155,18 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToBatchedTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseBatchTicker>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new CoinbaseSubscription<CoinbaseBatchTickerEvent>(this, _logger, "ticker_batch", "ticker_batch", symbols.ToArray(), x => onMessage(
-                x.As(x.Data.First().Tickers.First())
-                .WithSymbol(x.Data.First().Tickers.First().Symbol)), AuthenticationProvider != null);
+            var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseBatchTickerEvent>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<CoinbaseBatchTicker>(Exchange, data.Events.First().Tickers.First(), receiveTime, originalData)
+                        .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithStreamId(data.Channel)
+                        .WithSymbol(data.Events.First().Tickers.First().Symbol)
+                        .WithDataTimestamp(data.Timestamp)
+                    );
+            });
+
+            var subscription = new CoinbaseSubscription<CoinbaseBatchTickerEvent>(this, _logger, "ticker_batch", "ticker_batch", symbols.ToArray(), internalHandler, AuthenticationProvider != null);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
 
@@ -123,9 +177,18 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseStreamSymbol>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new CoinbaseSubscription<CoinbaseSymbolEvent>(this, _logger, "status", "status", symbols.ToArray(), x => onMessage(
-                x.As(x.Data.First().Symbols.First())
-                .WithSymbol(x.Data.First().Symbols.First().Symbol)), AuthenticationProvider != null);
+            var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseSymbolEvent>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<CoinbaseStreamSymbol>(Exchange, data.Events.First().Symbols.First(), receiveTime, originalData)
+                        .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithStreamId(data.Channel)
+                        .WithSymbol(data.Events.First().Symbols.First().Symbol)
+                        .WithDataTimestamp(data.Timestamp)
+                    );
+            });
+
+            var subscription = new CoinbaseSubscription<CoinbaseSymbolEvent>(this, _logger, "status", "status", symbols.ToArray(), internalHandler, AuthenticationProvider != null);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
 
@@ -136,27 +199,57 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseOrderBookUpdate>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new CoinbaseSubscription<CoinbaseOrderBookEvent>(this, _logger, "level2", "l2_data", symbols.ToArray(), x => onMessage(
-                x.As(new CoinbaseOrderBookUpdate
+            var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseOrderBookEvent>>((receiveTime, originalData, data) =>
+            {
+                var book = new CoinbaseOrderBookUpdate
                 {
-                    Asks = x.Data.First().Book.Where(a => a.Side == Enums.OrderSide.Sell).ToArray(),
-                    Bids = x.Data.First().Book.Where(a => a.Side == Enums.OrderSide.Buy).ToArray()
-                })
-                .WithSymbol(x.Data.First().Symbol)), AuthenticationProvider != null);
+                    Asks = data.Events.First().Book.Where(a => a.Side == Enums.OrderSide.Sell).ToArray(),
+                    Bids = data.Events.First().Book.Where(a => a.Side == Enums.OrderSide.Buy).ToArray()
+                };
+                onMessage(
+                    new DataEvent<CoinbaseOrderBookUpdate>(Exchange, book, receiveTime, originalData)
+                        .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithStreamId(data.Channel)
+                        .WithSymbol(data.Events.First().Symbol)
+                        .WithDataTimestamp(data.Timestamp)
+                    );
+            });
+
+            var subscription = new CoinbaseSubscription<CoinbaseOrderBookEvent>(this, _logger, "level2", "l2_data", symbols.ToArray(), internalHandler, AuthenticationProvider != null);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToUserUpdatesAsync(Action<DataEvent<CoinbaseUserUpdate>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new CoinbaseSubscription<CoinbaseUserUpdate>(this, _logger, "user", "user", null, x => onMessage(x.As(x.Data.First())), true);
+            var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseUserUpdate>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<CoinbaseUserUpdate>(Exchange, data.Events.First(), receiveTime, originalData)
+                        .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithStreamId(data.Channel)
+                        .WithDataTimestamp(data.Timestamp)
+                    );
+            });
+
+            var subscription = new CoinbaseSubscription<CoinbaseUserUpdate>(this, _logger, "user", "user", null, internalHandler, true);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
 
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToFuturesBalanceUpdatesAsync(Action<DataEvent<CoinbaseFuturesBalance>> onMessage, CancellationToken ct = default)
         {
-            var subscription = new CoinbaseSubscription<CoinbaseFuturesBalanceUpdate>(this, _logger, "futures_balance_summary", "futures_balance_summary", null, x => onMessage(x.As(x.Data.First().BalanceSummary)), true);
+            var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseFuturesBalanceUpdate>>((receiveTime, originalData, data) =>
+            {
+                onMessage(
+                    new DataEvent<CoinbaseFuturesBalance>(Exchange, data.Events.First().BalanceSummary, receiveTime, originalData)
+                        .WithUpdateType(data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update)
+                        .WithStreamId(data.Channel)
+                        .WithDataTimestamp(data.Timestamp)
+                    );
+            });
+
+            var subscription = new CoinbaseSubscription<CoinbaseFuturesBalanceUpdate>(this, _logger, "futures_balance_summary", "futures_balance_summary", null, internalHandler, true);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
 

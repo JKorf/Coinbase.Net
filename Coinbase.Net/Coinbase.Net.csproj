@@ -1,12 +1,16 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net8.0;net9.0;netstandard2.0;netstandard2.1</TargetFrameworks>
-    <LangVersion>12.0</LangVersion>
+    <TargetFrameworks>net8.0;net9.0;net10.0;netstandard2.0;netstandard2.1</TargetFrameworks>
+    <LangVersion>latest</LangVersion>
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <PropertyGroup>
     <PackageId>JKorf.Coinbase.Net</PackageId>
     <Authors>JKorf</Authors>
+    <PackageVersion>2.11.2</PackageVersion>
+    <AssemblyVersion>2.11.2</AssemblyVersion>
+    <FileVersion>2.11.2</FileVersion>
+    <Description>Coinbase.Net is a high performance client library for accessing the Coinbase REST and Websocket API. All data is mapped to readable models and enum values. Additional features include an implementation for maintaining a client side order book, easy integration with other exchange client libraries and more.</Description>
     <PackageVersion>2.11.3</PackageVersion>
     <AssemblyVersion>2.11.3</AssemblyVersion>
     <FileVersion>2.11.3</FileVersion>
@@ -48,15 +52,15 @@
     <None Include="..\README.md" Pack="true" PackagePath="\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="CryptoExchange.Net" Version="10.0.0" />
     <PackageReference Include="ConfigureAwaitChecker.Analyzer" Version="5.0.0.1">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="CryptoExchange.Net" Version="9.13.0" />
-    <PackageReference Include="jose-jwt" Version="5.1.0" />
-    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="9.0.0">
+    <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.101">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="Microsoft.IdentityModel.JsonWebTokens" Version="8.15.0" />
   </ItemGroup>
 </Project>

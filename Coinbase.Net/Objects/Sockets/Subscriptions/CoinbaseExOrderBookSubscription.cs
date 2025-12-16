@@ -1,10 +1,10 @@
 using Coinbase.Net.Objects.Internal;
 using Coinbase.Net.Objects.Models;
 using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -13,7 +13,7 @@ using System.Linq;
 namespace Coinbase.Net.Objects.Sockets.Subscriptions
 {
     /// <inheritdoc />
-    internal class CoinbaseExOrderBookSubscription : Subscription<CoinbaseExSubscriptionsUpdate, CoinbaseExSubscriptionsUpdate> 
+    internal class CoinbaseExOrderBookSubscription : Subscription
     {
         private readonly Action<DataEvent<CoinbaseExBookSnapshot>> _snapshotHandler;
         private readonly Action<DataEvent<CoinbaseExBookUpdate>> _updateHandler;
@@ -30,10 +30,20 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
             _client = client;
             _symbols = symbols.ToArray();
 
+            IndividualSubscriptionCount = symbols.Length;
+
             MessageMatcher = MessageMatcher.Create(_symbols.SelectMany(x => 
                  new MessageHandlerLink[] { new MessageHandlerLink<CoinbaseExBookSnapshot>("snapshot" + x, DoHandleMessage),
                  new MessageHandlerLink<CoinbaseExBookUpdate>("l2update" + x, DoHandleMessage)
              }).ToArray());
+
+            var routes = new List<MessageRoute>();
+            foreach(var symbol in symbols)
+            {
+                routes.Add(MessageRoute<CoinbaseExBookSnapshot>.CreateWithTopicFilter("snapshot", symbol, DoHandleMessage));
+                routes.Add(MessageRoute<CoinbaseExBookUpdate>.CreateWithTopicFilter("l2update", symbol, DoHandleMessage));
+            }
+            MessageRouter = MessageRouter.Create(routes.ToArray());
         }
 
         /// <inheritdoc />
@@ -53,16 +63,24 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         }, Authenticated);
 
         /// <inheritdoc />
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<CoinbaseExBookSnapshot> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExBookSnapshot message)
         {
-            _snapshotHandler.Invoke(message.WithSymbol(message.Data.Symbol).WithUpdateType(SocketUpdateType.Snapshot));
+            _snapshotHandler.Invoke(
+                new DataEvent<CoinbaseExBookSnapshot>(CoinbaseExchange.ExchangeName, message, receiveTime, originalData)
+                    .WithUpdateType(SocketUpdateType.Snapshot)
+                    .WithSymbol(message.Symbol)
+                );
             return CallResult.SuccessResult;
         }
 
         /// <inheritdoc />
-        public CallResult DoHandleMessage(SocketConnection connection, DataEvent<CoinbaseExBookUpdate> message)
+        public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExBookUpdate message)
         {
-            _updateHandler.Invoke(message.WithSymbol(message.Data.Symbol).WithUpdateType(SocketUpdateType.Update));
+            _updateHandler.Invoke(
+                new DataEvent<CoinbaseExBookUpdate>(CoinbaseExchange.ExchangeName, message, receiveTime, originalData)
+                    .WithUpdateType(SocketUpdateType.Update)
+                    .WithSymbol(message.Symbol)
+                );
             return CallResult.SuccessResult;
         }
     }

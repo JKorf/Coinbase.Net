@@ -1,22 +1,23 @@
-using CryptoExchange.Net;
+using Coinbase.Net.Clients.MessageHandlers;
+using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
+using Coinbase.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Converters.MessageParsing;
+using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
+using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Errors;
+using CryptoExchange.Net.SharedApis;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Headers;
 using System.Threading;
 using System.Threading.Tasks;
-using Coinbase.Net.Objects.Options;
-using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Converters.SystemTextJson;
-using CryptoExchange.Net.Interfaces;
-using CryptoExchange.Net.SharedApis;
-using CryptoExchange.Net.Converters.MessageParsing;
-using System.Reflection;
-using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
-using System.Linq;
-using CryptoExchange.Net.Objects.Errors;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
@@ -26,6 +27,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region fields 
         internal static TimeSyncState _timeSyncState = new TimeSyncState("Advanced Trade Api");
 
+        protected override IRestMessageHandler MessageHandler { get; } = new CoinbaseRestMessageHandler(CoinbaseErrors.Errors);
         protected override ErrorMapping ErrorMapping => CoinbaseErrors.Errors;
         #endregion
 
@@ -80,45 +82,6 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         internal async Task<WebCallResult<T>> SendToAddressAsync<T>(string baseAddress, RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null) where T : class
         {
             return await base.SendAsync<T>(baseAddress, definition, parameters, cancellationToken, null, weight).ConfigureAwait(false);
-        }
-
-        protected override ServerRateLimitError ParseRateLimitResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor)
-        {
-            var reset = responseHeaders.SingleOrDefault(x => x.Key.Equals("x-ratelimit-reset", StringComparison.InvariantCultureIgnoreCase));
-            if (reset.Key == null)
-                return base.ParseRateLimitResponse(httpStatusCode, responseHeaders, accessor);
-
-            if (!int.TryParse(reset.Value.Single(), out var seconds))
-                return base.ParseRateLimitResponse(httpStatusCode, responseHeaders, accessor);
-
-            var error = new ServerRateLimitError(accessor.GetOriginalString());
-            error.RetryAfter = DateTime.UtcNow.AddSeconds(seconds);
-            return error;
-        }
-
-        protected override Error ParseErrorResponse(int httpStatusCode, KeyValuePair<string, string[]>[] responseHeaders, IMessageAccessor accessor, Exception? exception)
-        {
-            if (!accessor.IsValid)
-            {
-                if (httpStatusCode == 401)
-                    return new ServerError(new ErrorInfo(ErrorType.Unauthorized, "Unauthorized"));
-
-                return new ServerError(ErrorInfo.Unknown, exception: exception);
-            }
-
-            var error = accessor.GetValue<string>(MessagePath.Get().Property("error"));
-            if (error == null)
-            {
-                var errorId = accessor.GetValue<string?>(MessagePath.Get().Property("errors").Index(0).Property("id"));
-                var errorMsg = accessor.GetValue<string?>(MessagePath.Get().Property("errors").Index(0).Property("message"));
-                if (errorId != null)
-                    return new ServerError(errorId, GetErrorInfo(errorId, errorMsg), exception);
-
-                return new ServerError(ErrorInfo.Unknown, exception: exception);
-            }
-
-            var msg = accessor.GetValue<string>(MessagePath.Get().Property("message"));
-            return new ServerError(error, GetErrorInfo(error, msg), exception);
         }
 
         /// <inheritdoc />

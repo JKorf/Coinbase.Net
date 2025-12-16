@@ -1,10 +1,10 @@
-using CryptoExchange.Net.Objects;
-using CryptoExchange.Net.Objects.Sockets;
-using CryptoExchange.Net.Sockets;
-using System.Collections.Generic;
 using Coinbase.Net.Objects.Internal;
-using System.Linq;
+using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Objects.Errors;
+using CryptoExchange.Net.Sockets;
+using CryptoExchange.Net.Sockets.Default;
+using System;
+using System.Linq;
 
 namespace Coinbase.Net.Objects.Sockets
 {
@@ -19,16 +19,21 @@ namespace Coinbase.Net.Objects.Sockets
             _symbols = request.Symbols;
 
             MessageMatcher = MessageMatcher.Create(
-                new MessageHandlerLink<CoinbaseExSubscriptionsUpdate>("subscriptions", HandleMessage),
+                new MessageHandlerLink<CoinbaseExSubscriptionsUpdate>("subscriptions", HandleMessage!),
                 new MessageHandlerLink<CoinbaseExError>("error", HandleError));
+
+            MessageRouter = MessageRouter.Create(
+                MessageRoute<CoinbaseExSubscriptionsUpdate>.CreateWithoutTopicFilter("subscriptions", HandleMessage, true),
+                MessageRoute<CoinbaseExError>.CreateWithoutTopicFilter("error", HandleError));
         }
 
-        public override bool PreCheckMessage(SocketConnection connection, DataEvent<object> message)
+        public override bool PreCheckMessage(SocketConnection connection, object message)
         {
-            if (message.Data is not CoinbaseExSubscriptionsUpdate)
+            // TO REMOVE
+
+            if (message is not CoinbaseExSubscriptionsUpdate messageData)
                 return true;
 
-            var messageData = (CoinbaseExSubscriptionsUpdate)message.Data;
             var channel = messageData.Subscriptions.SingleOrDefault(x => x.Name == _channel);
             if (channel == null)
                 return false;
@@ -39,14 +44,21 @@ namespace Coinbase.Net.Objects.Sockets
             return true;
         }
 
-        public CallResult<CoinbaseExError> HandleError(SocketConnection connection, DataEvent<CoinbaseExError> message)
+        public CallResult<CoinbaseExError> HandleError(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExError message)
         {
-            return new CallResult<CoinbaseExError>(message.Data, message.OriginalData, new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, message.Data.Reason)));
+            return new CallResult<CoinbaseExError>(message, originalData, new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, message.Reason)));
         }
 
-        public CallResult<CoinbaseExSubscriptionsUpdate> HandleMessage(SocketConnection connection, DataEvent<CoinbaseExSubscriptionsUpdate> message)
+        public CallResult<CoinbaseExSubscriptionsUpdate>? HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExSubscriptionsUpdate message)
         {
-            return message.ToCallResult();
+            var channel = message.Subscriptions.SingleOrDefault(x => x.Name == _channel);
+            if (channel == null)
+                return null;
+
+            if (_symbols != null && _symbols.Any(x => !channel.Symbols.Contains(x)))
+                return null;
+
+            return new CallResult<CoinbaseExSubscriptionsUpdate>(message, originalData, null);
         }
     }
 }

@@ -14,7 +14,9 @@ namespace Coinbase.Net
 {
     internal class CoinbaseAuthenticationProvider : AuthenticationProvider
     {
+#if !NETSTANDARD2_0
         private SigningCredentials? _signingCreds;
+#endif
 
         public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Hmac];
         public CoinbaseAuthenticationProvider(ApiCredentials credentials) : base(credentials)

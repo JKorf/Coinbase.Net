@@ -20,7 +20,6 @@ namespace Coinbase.Net.Objects.Sockets
 
             MessageMatcher = MessageMatcher.Create<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>("subscriptions", HandleMessage!);
             MessageRouter = MessageRouter.CreateWithoutTopicFilter<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>("subscriptions", HandleMessage, true);
-            //MessageRouter = MessageRouter.CreateWithoutTopicFilter<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>("error", HandleMessage);
 
             RequestTimeout = TimeSpan.FromSeconds(5);
         }

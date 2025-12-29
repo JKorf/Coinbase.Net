@@ -7,6 +7,8 @@ using Coinbase.Net.Objects.Options;
 using CryptoExchange.Net.Clients;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using Coinbase.Net.Clients.AdvancedTradeApi;
+using Coinbase.Net.Clients.ExchangeApi;
+using Coinbase.Net.Interfaces.Clients.ExchangeApi;
 using Microsoft.Extensions.Options;
 using CryptoExchange.Net.Objects.Options;
 
@@ -19,7 +21,8 @@ namespace Coinbase.Net.Clients
 
          /// <inheritdoc />
         public ICoinbaseRestClientAdvancedTradeApi AdvancedTradeApi { get; }
-
+         /// <inheritdoc />
+        public ICoinbaseRestClientExchangeApi ExchangeApi { get; }
 
         #endregion
 
@@ -45,6 +48,7 @@ namespace Coinbase.Net.Clients
             Initialize(options.Value);
 
             AdvancedTradeApi = AddApiClient(new CoinbaseRestClientAdvancedTradeApi(this, _logger, httpClient, options.Value));
+            ExchangeApi = AddApiClient(new CoinbaseRestClientExchangeApi(this, _logger, httpClient, options.Value));
         }
 
         #endregion

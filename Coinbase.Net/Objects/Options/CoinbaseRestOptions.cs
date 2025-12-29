@@ -29,10 +29,16 @@ namespace Coinbase.Net.Objects.Options
         /// </summary>
         public RestApiOptions AdvancedTradeOptions { get; private set; } = new RestApiOptions();
 
+        /// <summary>
+        /// Exchange API options
+        /// </summary>
+        public RestApiOptions ExchangeOptions { get; private set; } = new RestApiOptions();
+
         internal CoinbaseRestOptions Set(CoinbaseRestOptions targetOptions)
         {
             targetOptions = base.Set<CoinbaseRestOptions>(targetOptions);
             targetOptions.AdvancedTradeOptions = AdvancedTradeOptions.Set(targetOptions.AdvancedTradeOptions);
+            targetOptions.ExchangeOptions = ExchangeOptions.Set(targetOptions.ExchangeOptions);
             return targetOptions;
         }
     }

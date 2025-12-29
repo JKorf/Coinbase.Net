@@ -10,6 +10,10 @@ namespace Coinbase.Net.Objects
         /// </summary>
         public string RestClientAddress { get; set; } = "";
         /// <summary>
+        /// The address used by the CoinbaseRestClient for the Exchange API
+        /// </summary>
+        public string ExchangeRestClientAddress { get; set; } = "";
+        /// <summary>
         /// The address used by the CoinbaseSocketClient for public data from the websocket Advanced Trade API
         /// </summary>
         public string SocketClientPublicAddress { get; set; } = "";
@@ -28,6 +32,7 @@ namespace Coinbase.Net.Objects
         public static CoinbaseApiAddresses Default = new CoinbaseApiAddresses
         {
             RestClientAddress = "https://api.coinbase.com",
+            ExchangeRestClientAddress = "https://api.exchange.coinbase.com",
             SocketClientPublicAddress = "wss://advanced-trade-ws.coinbase.com",
             SocketExchangeApiPublicAddress = "wss://ws-feed.exchange.coinbase.com",
             SocketClientPrivateAddress = "wss://advanced-trade-ws-user.coinbase.com"

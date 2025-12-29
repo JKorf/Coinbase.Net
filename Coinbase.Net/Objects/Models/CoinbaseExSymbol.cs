@@ -76,7 +76,31 @@ namespace Coinbase.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("fx_stablecoin")]
         public bool FxStablecoin { get; set; }
-
+        /// <summary>
+        /// Is margin enabled
+        /// </summary>
+        [JsonPropertyName("margin_enabled")]
+        public bool MarginEnabled { get; set; }
+        /// <summary>
+        /// Is trading disabled
+        /// </summary>
+        [JsonPropertyName("trading_disabled")]
+        public bool TradingDisabled { get; set; }
+        /// <summary>
+        /// Max slippage percentage
+        /// </summary>
+        [JsonPropertyName("max_slippage_percentage")]
+        public decimal? MaxSlippagePercentage { get; set; }
+        /// <summary>
+        /// Is action mode enabled
+        /// </summary>
+        [JsonPropertyName("auction_mode")]
+        public bool AuctionMode { get; set; }
+        /// <summary>
+        /// Percentage to calculate highest price for limit buy order (Stable coin trading pair only)
+        /// </summary>
+        [JsonPropertyName("high_bid_limit_percentage")]
+        public decimal? HighBidLimitPercentage { get; set; }
     }
 
 }

@@ -10,6 +10,7 @@ true
     "updated_at": "2015-03-31T17:25:29-07:00",
     "network": "bitcoin",
     "resource": "address",
-    "resource_path": "/v2/accounts/2bbf394c-193b-5b2a-9155-3b4732659ede/addresses/dd3183eb-af1d-5f5d-a90d-cbff946435ff"
+    "resource_path": "/v2/accounts/2bbf394c-193b-5b2a-9155-3b4732659ede/addresses/dd3183eb-af1d-5f5d-a90d-cbff946435ff",
+    "destination_tag":"123"
   }
 }

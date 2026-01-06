@@ -5269,6 +5269,11 @@
             Resource path
             </summary>
         </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseDepositAddress.DestinationTag">
+            <summary>
+            Destination tag (for XRP etc)
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseEditOrderResult">
             <summary>
             Order info
@@ -5746,7 +5751,7 @@
         </member>
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseExSymbol.HighBidLimitPercentage">
             <summary>
-            The maximum allowable bid as a percentage of the reference value.
+            Percentage to calculate highest price for limit buy order (Stable coin trading pair only)
             </summary>
         </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseExTicker">

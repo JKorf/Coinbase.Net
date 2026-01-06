@@ -116,12 +116,12 @@ namespace Coinbase.Net.Objects.Models
         /// Network confirmations required
         /// </summary>
         [JsonPropertyName("network_confirmations")]
-        public int NetworkConfirmations { get; set; }
+        public int? NetworkConfirmations { get; set; }
         /// <summary>
         /// Processing time in seconds
         /// </summary>
         [JsonPropertyName("processing_time_seconds")]
-        public int ProcessingTime { get; set; }
+        public int? ProcessingTime { get; set; }
         /// <summary>
         /// Destination tag regex
         /// </summary>

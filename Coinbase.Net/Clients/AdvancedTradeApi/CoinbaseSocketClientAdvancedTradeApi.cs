@@ -11,6 +11,7 @@ using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
@@ -223,6 +224,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         /// <inheritdoc />
         public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseOrderBookUpdate>> onMessage, CancellationToken ct = default)
         {
+            var symbolArray = symbols.ToArray();
+            if (symbolArray.Length > 55)
+                return new CallResult<UpdateSubscription>(new ServerError(new ErrorInfo(ErrorType.InvalidParameter, "API doesn't allow more than 55 orderbook subscription on a single socket, split the call in multiple batches")));
+
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseOrderBookEvent>>((receiveTime, originalData, data) =>
             {
                 var eventType = data.Events.First().EventType.Equals("snapshot") ? SocketUpdateType.Snapshot : SocketUpdateType.Update;
@@ -244,7 +249,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     );
             });
 
-            var subscription = new CoinbaseSubscription<CoinbaseOrderBookEvent>(this, _logger, "level2", "l2_data", symbols.ToArray(), internalHandler, AuthenticationProvider != null);
+            var subscription = new CoinbaseSubscription<CoinbaseOrderBookEvent>(this, _logger, "level2", "l2_data", symbolArray, internalHandler, AuthenticationProvider != null);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
 

@@ -1,4 +1,5 @@
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
+using Coinbase.Net.Interfaces.Clients.ExchangeApi;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces.Clients;
 using CryptoExchange.Net.Objects.Options;
@@ -15,6 +16,12 @@ namespace Coinbase.Net.Interfaces.Clients
         /// </summary>
         /// <see cref="ICoinbaseRestClientAdvancedTradeApi"/>
         public ICoinbaseRestClientAdvancedTradeApi AdvancedTradeApi { get; }
+
+        /// <summary>
+        /// Exchange API endpoints, includes some more detailed currency and market data endpoints
+        /// </summary>
+        /// <see cref="ICoinbaseRestClientExchangeApi"/>
+        public ICoinbaseRestClientExchangeApi ExchangeApi { get; }
 
         /// <summary>
         /// Update specific options

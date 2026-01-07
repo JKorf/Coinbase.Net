@@ -14,6 +14,11 @@ namespace Coinbase.Net
         public string RestClientAddress { get; }
 
         /// <summary>
+        /// Rest Exchange API address
+        /// </summary>
+        public string ExchangeRestClientAddress { get; }
+
+        /// <summary>
         /// Socket API address for the Advanced Trade API
         /// </summary>
         public string SocketClientPublicAddress { get; }
@@ -31,12 +36,14 @@ namespace Coinbase.Net
         internal CoinbaseEnvironment(
             string name,
             string restAddress,
+            string exchangeRestAddress,
             string streamAddressPublic,
             string streamAddressPrivate,
             string socketClientPublicExchangeApiAddress) :
             base(name)
         {
             RestClientAddress = restAddress;
+            ExchangeRestClientAddress = exchangeRestAddress;
             SocketClientPublicAddress = streamAddressPublic;
             SocketClientPrivateAddress = streamAddressPrivate;
             SocketClientPublicExchangeApiAddress = socketClientPublicExchangeApiAddress;
@@ -74,6 +81,7 @@ namespace Coinbase.Net
         public static CoinbaseEnvironment Live { get; }
             = new CoinbaseEnvironment(TradeEnvironmentNames.Live,
                                      CoinbaseApiAddresses.Default.RestClientAddress,
+                                     CoinbaseApiAddresses.Default.ExchangeRestClientAddress,
                                      CoinbaseApiAddresses.Default.SocketClientPublicAddress,
                                      CoinbaseApiAddresses.Default.SocketClientPrivateAddress,
                                      CoinbaseApiAddresses.Default.SocketExchangeApiPublicAddress);
@@ -84,9 +92,10 @@ namespace Coinbase.Net
         public static CoinbaseEnvironment CreateCustom(
                         string name,
                         string restAddress,
+                        string exchangeRestAddress,
                         string socketStreamPublicAddress,
                         string socketStreamPrivateAddress,
                         string socketClientPublicExchangeApiAddress)
-            => new CoinbaseEnvironment(name, restAddress, socketStreamPublicAddress, socketStreamPrivateAddress, socketClientPublicExchangeApiAddress);
+            => new CoinbaseEnvironment(name, restAddress, exchangeRestAddress, socketStreamPublicAddress, socketStreamPrivateAddress, socketClientPublicExchangeApiAddress);
     }
 }

@@ -320,6 +320,9 @@
         <member name="P:Coinbase.Net.Clients.CoinbaseRestClient.AdvancedTradeApi">
             <inheritdoc />
         </member>
+        <member name="P:Coinbase.Net.Clients.CoinbaseRestClient.ExchangeApi">
+            <inheritdoc />
+        </member>
         <member name="M:Coinbase.Net.Clients.CoinbaseRestClient.#ctor(System.Action{Coinbase.Net.Objects.Options.CoinbaseRestOptions})">
             <summary>
             Create a new instance of the CoinbaseRestClient using provided options
@@ -409,6 +412,47 @@
         <member name="M:Coinbase.Net.Clients.CoinbaseUserClientProvider.GetSocketClient(System.String,CryptoExchange.Net.Authentication.ApiCredentials,Coinbase.Net.CoinbaseEnvironment)">
             <inheritdoc />
         </member>
+        <member name="T:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi">
+            <summary>
+            Client providing access to the Coinbase Exchange rest Api
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi.ExchangeData">
+            <inheritdoc />
+        </member>
+        <member name="P:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi.ExchangeName">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi.CreateAccessor">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi.CreateSerializer">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi.CreateAuthenticationProvider(CryptoExchange.Net.Authentication.ApiCredentials)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi.GetServerTimestampAsync">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi.GetTimeSyncInfo">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi.GetTimeOffset">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApiExchangeData.GetCoinbaseExAssetAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApiExchangeData.GetCoinbaseExSymbolAsync(System.Threading.CancellationToken)">
+            <inheritdoc />
+        </member>
         <member name="T:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi">
             <summary>
             Client providing access to the Coinbase Exchange websocket Api
@@ -474,6 +518,11 @@
             Rest API address
             </summary>
         </member>
+        <member name="P:Coinbase.Net.CoinbaseEnvironment.ExchangeRestClientAddress">
+            <summary>
+            Rest Exchange API address
+            </summary>
+        </member>
         <member name="P:Coinbase.Net.CoinbaseEnvironment.SocketClientPublicAddress">
             <summary>
             Socket API address for the Advanced Trade API
@@ -491,7 +540,7 @@
         </member>
         <member name="M:Coinbase.Net.CoinbaseEnvironment.#ctor">
             <summary>
-            ctor for DI, use <see cref="M:Coinbase.Net.CoinbaseEnvironment.CreateCustom(System.String,System.String,System.String,System.String,System.String)"/> for creating a custom environment
+            ctor for DI, use <see cref="M:Coinbase.Net.CoinbaseEnvironment.CreateCustom(System.String,System.String,System.String,System.String,System.String,System.String)"/> for creating a custom environment
             </summary>
         </member>
         <member name="M:Coinbase.Net.CoinbaseEnvironment.GetEnvironmentByName(System.String)">
@@ -510,7 +559,7 @@
             Live environment
             </summary>
         </member>
-        <member name="M:Coinbase.Net.CoinbaseEnvironment.CreateCustom(System.String,System.String,System.String,System.String,System.String)">
+        <member name="M:Coinbase.Net.CoinbaseEnvironment.CreateCustom(System.String,System.String,System.String,System.String,System.String,System.String)">
             <summary>
             Create a custom environment
             </summary>
@@ -1217,6 +1266,11 @@
             </summary>
         </member>
         <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseExAssetArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseExAssetDetails">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -2287,6 +2341,11 @@
             </summary>
         </member>
         <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.IDictionaryStringObject">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.ListString">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
@@ -4158,6 +4217,43 @@
             Shared interface for the Advanced Trade socket API
             </summary>
         </member>
+        <member name="T:Coinbase.Net.Interfaces.Clients.ExchangeApi.ICoinbaseRestClientExchangeApi">
+            <summary>
+            Coinbase exchange rest api endpoints.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Interfaces.Clients.ExchangeApi.ICoinbaseRestClientExchangeApi.ExchangeData">
+            <summary>
+            Endpoints related to retrieving market and system data
+            </summary>
+            <see cref="T:Coinbase.Net.Interfaces.Clients.ExchangeApi.ICoinbaseRestClientExchangeApiExchangeData"/>
+        </member>
+        <member name="T:Coinbase.Net.Interfaces.Clients.ExchangeApi.ICoinbaseRestClientExchangeApiExchangeData">
+            <summary>
+            Coinbase exchange api exchange data endpoints. Exchange data includes market data and currency data.
+            </summary>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.ExchangeApi.ICoinbaseRestClientExchangeApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get the current server time
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.ExchangeApi.ICoinbaseRestClientExchangeApiExchangeData.GetCoinbaseExAssetAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get the list of supported currencies
+            </summary>
+            <param name="ct">Cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.Clients.ExchangeApi.ICoinbaseRestClientExchangeApiExchangeData.GetCoinbaseExSymbolAsync(System.Threading.CancellationToken)">
+            <summary>
+            Get the list of supported trading pairs
+            </summary>
+            <param name="ct"></param>
+            <returns></returns>
+        </member>
         <member name="T:Coinbase.Net.Interfaces.Clients.ExchangeApi.ICoinbaseSocketClientExchangeApi">
             <summary>
             Coinbase Exchange API streams
@@ -4264,6 +4360,12 @@
             Advanced Trade API endpoints, also contains some App API endpoints
             </summary>
             <see cref="T:Coinbase.Net.Interfaces.Clients.AdvancedTradeApi.ICoinbaseRestClientAdvancedTradeApi"/>
+        </member>
+        <member name="P:Coinbase.Net.Interfaces.Clients.ICoinbaseRestClient.ExchangeApi">
+            <summary>
+            Exchange API endpoints, includes some more detailed currency and market data endpoints
+            </summary>
+            <see cref="T:Coinbase.Net.Interfaces.Clients.ExchangeApi.ICoinbaseRestClientExchangeApi"/>
         </member>
         <member name="M:Coinbase.Net.Interfaces.Clients.ICoinbaseRestClient.SetOptions(CryptoExchange.Net.Objects.Options.UpdateOptions)">
             <summary>
@@ -4375,6 +4477,11 @@
         <member name="P:Coinbase.Net.Objects.CoinbaseApiAddresses.RestClientAddress">
             <summary>
             The address used by the CoinbaseRestClient for the API
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.CoinbaseApiAddresses.ExchangeRestClientAddress">
+            <summary>
+            The address used by the CoinbaseRestClient for the Exchange API
             </summary>
         </member>
         <member name="P:Coinbase.Net.Objects.CoinbaseApiAddresses.SocketClientPublicAddress">
@@ -5162,6 +5269,11 @@
             Resource path
             </summary>
         </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseDepositAddress.DestinationTag">
+            <summary>
+            Destination tag (for XRP etc)
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseEditOrderResult">
             <summary>
             Order info
@@ -5237,6 +5349,11 @@
             Supported networks
             </summary>
         </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExAsset.Details">
+            <summary>
+            Detailed info
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseExAssetNetwork">
             <summary>
             Asset network
@@ -5295,6 +5412,71 @@
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseExAssetNetwork.DestinationTagRegex">
             <summary>
             Destination tag regex
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseExAssetDetails">
+            <summary>
+            Detailed asset info
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExAssetDetails.Type">
+            <summary>
+            Asset type
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExAssetDetails.Symbol">
+            <summary>
+            Symbol
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExAssetDetails.NetworkConfirmations">
+            <summary>
+            The number of network confirmations associated with the transaction.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExAssetDetails.SortOrder">
+            <summary>
+            The position of the item in a sorted sequence.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExAssetDetails.CryptoAddressLink">
+            <summary>
+            The link template for viewing crypto addresses.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExAssetDetails.CryptoTransactionLink">
+            <summary>
+            The URL or reference link to the associated cryptocurrency transaction.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExAssetDetails.PushPaymentMethods">
+            <summary>
+            The list of supported push payment methods for the transaction.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExAssetDetails.GroupTypes">
+            <summary>
+            The collection of group type identifiers associated with the entity.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExAssetDetails.DisplayName">
+            <summary>
+            The display name
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExAssetDetails.ProcessingTimeSeconds">
+            <summary>
+            The estimated processing time in seconds for transactions involving this asset.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExAssetDetails.MinWithdrawalAmount">
+            <summary>
+            The minimum amount that can be withdrawn for this asset.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExAssetDetails.MaxWithdrawalAmount">
+            <summary>
+            The maximum amount that can be withdrawn for this asset.
             </summary>
         </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseExBookSnapshot">
@@ -5405,6 +5587,16 @@
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseExchangeRates.ExchangeRates">
             <summary>
             Exchange rates
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseExchangeTime">
+            <summary>
+            Timestamp response
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExchangeTime.Time">
+            <summary>
+            Current time
             </summary>
         </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseExHeartbeat">
@@ -5535,6 +5727,31 @@
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseExSymbol.FxStablecoin">
             <summary>
             Is symbol stablecoin
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExSymbol.MarginEnabled">
+            <summary>
+            Is margin enabled
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExSymbol.TradingDisabled">
+            <summary>
+            Is trading disabled
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExSymbol.MaxSlippagePercentage">
+            <summary>
+            Max slippage percentage
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExSymbol.AuctionMode">
+            <summary>
+            Is action mode enabled
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseExSymbol.HighBidLimitPercentage">
+            <summary>
+            Percentage to calculate highest price for limit buy order (Stable coin trading pair only)
             </summary>
         </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseExTicker">
@@ -8715,6 +8932,11 @@
         <member name="P:Coinbase.Net.Objects.Options.CoinbaseRestOptions.AdvancedTradeOptions">
             <summary>
             Advanced Trade API options
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Options.CoinbaseRestOptions.ExchangeOptions">
+            <summary>
+            Exchange API options
             </summary>
         </member>
         <member name="T:Coinbase.Net.Objects.Options.CoinbaseSocketOptions">

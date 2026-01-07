@@ -60,6 +60,12 @@ namespace Coinbase.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("resource_path")]
         public string ResourcePath { get; set; } = string.Empty;
+
+        /// <summary>
+        /// Destination tag (for XRP etc)
+        /// </summary>
+        [JsonPropertyName("destination_tag")]
+        public string? DestinationTag { get; set; }
     }
 
 

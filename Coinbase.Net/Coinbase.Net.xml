@@ -31,12 +31,6 @@
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApi.GetServerTimestampAsync">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApi.GetTimeSyncInfo">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApi.GetTimeOffset">
-            <inheritdoc />
-        </member>
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
@@ -305,9 +299,6 @@
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.Default.SocketConnection)">
-            <inheritdoc />
-        </member>
         <member name="P:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.SharedClient">
             <inheritdoc />
         </member>
@@ -435,22 +426,16 @@
         <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi.GetServerTimestampAsync">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi.GetTimeSyncInfo">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi.GetTimeOffset">
-            <inheritdoc />
-        </member>
         <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApiExchangeData.GetServerTimeAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApiExchangeData.GetCoinbaseExAssetAsync(System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApiExchangeData.GetAssetsAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApiExchangeData.GetCoinbaseExSymbolAsync(System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApiExchangeData.GetSymbolsAsync(System.Threading.CancellationToken)">
             <inheritdoc />
         </member>
         <member name="T:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi">
@@ -500,9 +485,6 @@
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.GetAuthenticationRequestAsync(CryptoExchange.Net.Sockets.Default.SocketConnection)">
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
@@ -4224,7 +4206,7 @@
         </member>
         <member name="P:Coinbase.Net.Interfaces.Clients.ExchangeApi.ICoinbaseRestClientExchangeApi.ExchangeData">
             <summary>
-            Endpoints related to retrieving market and system data
+            Endpoints related to retrieving market and system data, specifically for the Exchange API
             </summary>
             <see cref="T:Coinbase.Net.Interfaces.Clients.ExchangeApi.ICoinbaseRestClientExchangeApiExchangeData"/>
         </member>
@@ -4240,18 +4222,20 @@
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.ExchangeApi.ICoinbaseRestClientExchangeApiExchangeData.GetCoinbaseExAssetAsync(System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.ExchangeApi.ICoinbaseRestClientExchangeApiExchangeData.GetAssetsAsync(System.Threading.CancellationToken)">
             <summary>
             Get the list of supported currencies
+            <para><a href="https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/currencies/get-a-currency" /></para>
             </summary>
             <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.Clients.ExchangeApi.ICoinbaseRestClientExchangeApiExchangeData.GetCoinbaseExSymbolAsync(System.Threading.CancellationToken)">
+        <member name="M:Coinbase.Net.Interfaces.Clients.ExchangeApi.ICoinbaseRestClientExchangeApiExchangeData.GetSymbolsAsync(System.Threading.CancellationToken)">
             <summary>
             Get the list of supported trading pairs
+            <para><a href="https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-all-known-trading-pairs" /></para>
             </summary>
-            <param name="ct"></param>
+            <param name="ct">Cancellation token</param>
             <returns></returns>
         </member>
         <member name="T:Coinbase.Net.Interfaces.Clients.ExchangeApi.ICoinbaseSocketClientExchangeApi">

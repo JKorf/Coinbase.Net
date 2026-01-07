@@ -21,16 +21,18 @@ public interface ICoinbaseRestClientExchangeApiExchangeData
 
     /// <summary>
     /// Get the list of supported currencies
+    /// <para><a href="https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/currencies/get-a-currency" /></para>
     /// </summary>
     /// <param name="ct">Cancellation token</param>
     /// <returns></returns>
-    Task<WebCallResult<CoinbaseExAsset[]>> GetCoinbaseExAssetAsync(CancellationToken ct = default);
+    Task<WebCallResult<CoinbaseExAsset[]>> GetAssetsAsync(CancellationToken ct = default);
 
 
     /// <summary>
     /// Get the list of supported trading pairs
+    /// <para><a href="https://docs.cdp.coinbase.com/api-reference/exchange-api/rest-api/products/get-all-known-trading-pairs" /></para>
     /// </summary>
-    /// <param name="ct"></param>
+    /// <param name="ct">Cancellation token</param>
     /// <returns></returns>
-    Task<WebCallResult<CoinbaseExSymbol[]>> GetCoinbaseExSymbolAsync(CancellationToken ct = default);
+    Task<WebCallResult<CoinbaseExSymbol[]>> GetSymbolsAsync(CancellationToken ct = default);
 }

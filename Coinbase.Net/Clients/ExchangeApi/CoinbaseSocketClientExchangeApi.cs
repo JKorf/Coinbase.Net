@@ -65,12 +65,14 @@ namespace Coinbase.Net.Clients.ExchangeApi
         {
             var internalHandler = new Action<DateTime, string?, CoinbaseExHeartbeat>((receiveTime, originalData, data) =>
             {
+                UpdateTimeOffset(data.Timestamp);
+
                 onMessage(
                     new DataEvent<CoinbaseExHeartbeat>(CoinbaseExchange.ExchangeName, data, receiveTime, originalData)
                         .WithUpdateType(SocketUpdateType.Update)
                         .WithStreamId("heartbeat")
                         .WithSymbol(data.Symbol)
-                        .WithDataTimestamp(data.Timestamp)
+                        .WithDataTimestamp(data.Timestamp, GetTimeOffset())
                     );
             });
 
@@ -103,12 +105,14 @@ namespace Coinbase.Net.Clients.ExchangeApi
         {
             var internalHandler = new Action<DateTime, string?, CoinbaseExTicker>((receiveTime, originalData, data) =>
             {
+                UpdateTimeOffset(data.Timestamp);
+
                 onMessage(
                     new DataEvent<CoinbaseExTicker>(CoinbaseExchange.ExchangeName, data, receiveTime, originalData)
                         .WithUpdateType(SocketUpdateType.Update)
                         .WithStreamId("ticker")
                         .WithSymbol(data.Symbol)
-                        .WithDataTimestamp(data.Timestamp)
+                        .WithDataTimestamp(data.Timestamp, GetTimeOffset())
                     );
             });
 
@@ -125,12 +129,14 @@ namespace Coinbase.Net.Clients.ExchangeApi
         {
             var internalHandler = new Action<DateTime, string?, CoinbaseExTicker>((receiveTime, originalData, data) =>
             {
+                UpdateTimeOffset(data.Timestamp);
+
                 onMessage(
                     new DataEvent<CoinbaseExTicker>(CoinbaseExchange.ExchangeName, data, receiveTime, originalData)
                         .WithUpdateType(SocketUpdateType.Update)
                         .WithStreamId("ticker")
                         .WithSymbol(data.Symbol)
-                        .WithDataTimestamp(data.Timestamp)
+                        .WithDataTimestamp(data.Timestamp, GetTimeOffset())
                     );
             });
 
@@ -157,9 +163,6 @@ namespace Coinbase.Net.Clients.ExchangeApi
 
             return type + product;
         }
-
-        /// <inheritdoc />
-        protected override Task<Query?> GetAuthenticationRequestAsync(SocketConnection connection) => Task.FromResult<Query?>(null);
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)

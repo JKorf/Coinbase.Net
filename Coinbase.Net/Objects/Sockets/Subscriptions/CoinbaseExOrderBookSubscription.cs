@@ -76,10 +76,13 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         /// <inheritdoc />
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExBookUpdate message)
         {
+            _client.UpdateTimeOffset(message.Timestamp);
+
             _updateHandler.Invoke(
                 new DataEvent<CoinbaseExBookUpdate>(CoinbaseExchange.ExchangeName, message, receiveTime, originalData)
                     .WithUpdateType(SocketUpdateType.Update)
                     .WithSymbol(message.Symbol)
+                    .WithDataTimestamp(message.Timestamp, _client.GetTimeOffset())
                 );
             return CallResult.SuccessResult;
         }

@@ -30,10 +30,10 @@ internal class CoinbaseRestClientExchangeApiExchangeData : ICoinbaseRestClientEx
 
     #endregion
 
-    #region Get Crypto ExAssets
+    #region Get Assets
 
     /// <inheritdoc />
-    public async Task<WebCallResult<CoinbaseExAsset[]>> GetCoinbaseExAssetAsync(CancellationToken ct = default)
+    public async Task<WebCallResult<CoinbaseExAsset[]>> GetAssetsAsync(CancellationToken ct = default)
     {
         var parameters = new ParameterCollection();
         var request = _definitions.GetOrCreate(HttpMethod.Get, "currencies", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
@@ -43,9 +43,9 @@ internal class CoinbaseRestClientExchangeApiExchangeData : ICoinbaseRestClientEx
 
     #endregion
 
-    #region Get Crypto ExSymbols
+    #region Get Symbols
     /// <inheritdoc />
-    public async Task<WebCallResult<CoinbaseExSymbol[]>> GetCoinbaseExSymbolAsync(CancellationToken ct = default)
+    public async Task<WebCallResult<CoinbaseExSymbol[]>> GetSymbolsAsync(CancellationToken ct = default)
     {
         var parameters = new ParameterCollection();
         var request = _definitions.GetOrCreate(HttpMethod.Get, "products", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);

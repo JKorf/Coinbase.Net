@@ -25,8 +25,6 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
     internal partial class CoinbaseRestClientAdvancedTradeApi : RestApiClient, ICoinbaseRestClientAdvancedTradeApi
     {
         #region fields 
-        internal static TimeSyncState _timeSyncState = new TimeSyncState("Advanced Trade Api");
-
         protected override IRestMessageHandler MessageHandler { get; } = new CoinbaseRestMessageHandler(CoinbaseErrors.Errors);
         protected override ErrorMapping ErrorMapping => CoinbaseErrors.Errors;
         #endregion
@@ -87,14 +85,6 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         /// <inheritdoc />
         protected override Task<WebCallResult<DateTime>> GetServerTimestampAsync()
             => ExchangeData.GetServerTimeAsync();
-
-        /// <inheritdoc />
-        public override TimeSyncInfo? GetTimeSyncInfo()
-            => new TimeSyncInfo(_logger, ApiOptions.AutoTimestamp ?? ClientOptions.AutoTimestamp, ApiOptions.TimestampRecalculationInterval ?? ClientOptions.TimestampRecalculationInterval, _timeSyncState);
-
-        /// <inheritdoc />
-        public override TimeSpan? GetTimeOffset()
-            => _timeSyncState.TimeOffset;
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)

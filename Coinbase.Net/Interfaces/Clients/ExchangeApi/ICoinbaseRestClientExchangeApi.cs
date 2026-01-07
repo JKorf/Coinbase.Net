@@ -6,7 +6,7 @@
 public interface ICoinbaseRestClientExchangeApi
 {
     /// <summary>
-    /// Endpoints related to retrieving market and system data
+    /// Endpoints related to retrieving market and system data, specifically for the Exchange API
     /// </summary>
     /// <see cref="ICoinbaseRestClientExchangeApiExchangeData"/>
     ICoinbaseRestClientExchangeApiExchangeData ExchangeData { get; }

@@ -67,6 +67,9 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         /// <inheritdoc />
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseSocketMessage<T> message)
         {
+            if (message.SequenceNumber != 0)
+                connection.UpdateSequenceNumber(message.SequenceNumber);
+
             _handler.Invoke(receiveTime, originalData, message);
             return CallResult.SuccessResult;
         }

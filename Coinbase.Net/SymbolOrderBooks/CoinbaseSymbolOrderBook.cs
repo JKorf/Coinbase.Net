@@ -53,6 +53,7 @@ namespace Coinbase.Net.SymbolOrderBooks
 
             _strictLevels = false;
 
+            _sequencesAreConsecutive = false; // Sequence numbers are on connection level, not order book
             _initialDataTimeout = options?.InitialDataTimeout ?? TimeSpan.FromSeconds(30);
             _clientOwner = socketClient == null;
             _socketClient = socketClient ?? new CoinbaseSocketClient();
@@ -81,13 +82,9 @@ namespace Coinbase.Net.SymbolOrderBooks
         {
             var entries = data.Data;
             if (data.UpdateType == SocketUpdateType.Snapshot)
-            {
-                SetInitialOrderBook(DateTime.UtcNow.Ticks, data.Data.Bids, data.Data.Asks, data.DataTime, data.DataTimeLocal);
-            }
+                SetSnapshot(data.SequenceNumber!.Value, data.Data.Bids, data.Data.Asks, data.DataTime, data.DataTimeLocal);
             else
-            {
-                UpdateOrderBook(DateTime.UtcNow.Ticks, data.Data.Bids, data.Data.Asks, data.DataTime, data.DataTimeLocal);
-            }
+                UpdateOrderBook(data.SequenceNumber!.Value, data.Data.Bids, data.Data.Asks, data.DataTime, data.DataTimeLocal);
         }
 
         /// <inheritdoc />

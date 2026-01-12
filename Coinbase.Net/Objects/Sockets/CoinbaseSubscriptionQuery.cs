@@ -41,6 +41,9 @@ namespace Coinbase.Net.Objects.Sockets
 
         public CallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>? HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate> message)
         {
+            if (message.SequenceNumber != 0)
+                connection.UpdateSequenceNumber(message.SequenceNumber);
+
             var evnt = message.Events.First();
             if (!evnt.Subscriptions.TryGetValue(_channel, out var subbed))
                 return null;

@@ -48,6 +48,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         internal CoinbaseSocketClientAdvancedTradeApi(ILogger logger, CoinbaseSocketOptions options) :
             base(logger, options.Environment.SocketClientPublicAddress!, options, options.AdvancedTradeOptions)
         {
+            EnforceSequenceNumbers = true;
         }
         #endregion
 
@@ -76,6 +77,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         .WithUpdateType(eventType)
                         .WithStreamId(data.Channel)
                         .WithDataTimestamp(data.Timestamp, GetTimeOffset())
+                        .WithSequenceNumber(data.SequenceNumber)
                     );
             });
 
@@ -106,6 +108,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         .WithStreamId(data.Channel)
                         .WithSymbol(data.Events.First().Trades.First().Symbol)
                         .WithDataTimestamp(data.Timestamp, GetTimeOffset())
+                        .WithSequenceNumber(data.SequenceNumber)
                     );
             });
 
@@ -132,6 +135,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         .WithStreamId(data.Channel)
                         .WithSymbol(data.Events.First().Klines.First().Symbol)
                         .WithDataTimestamp(data.Timestamp, GetTimeOffset())
+                        .WithSequenceNumber(data.SequenceNumber)
                     );
             });
 
@@ -158,6 +162,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         .WithStreamId(data.Channel)
                         .WithSymbol(data.Events.First().Tickers.First().Symbol)
                         .WithDataTimestamp(data.Timestamp, GetTimeOffset())
+                        .WithSequenceNumber(data.SequenceNumber)
                     );
             });
 
@@ -184,6 +189,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         .WithStreamId(data.Channel)
                         .WithSymbol(data.Events.First().Tickers.First().Symbol)
                         .WithDataTimestamp(data.Timestamp, GetTimeOffset())
+                        .WithSequenceNumber(data.SequenceNumber)
                     );
             });
 
@@ -210,6 +216,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         .WithStreamId(data.Channel)
                         .WithSymbol(data.Events.First().Symbols.First().Symbol)
                         .WithDataTimestamp(data.Timestamp, GetTimeOffset())
+                        .WithSequenceNumber(data.SequenceNumber)
                     );
             });
 
@@ -246,6 +253,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         .WithStreamId(data.Channel)
                         .WithSymbol(data.Events.First().Symbol)
                         .WithDataTimestamp(data.Timestamp, GetTimeOffset())
+                        .WithSequenceNumber(data.SequenceNumber)
                     );
             });
 
@@ -267,6 +275,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         .WithUpdateType(eventType)
                         .WithStreamId(data.Channel)
                         .WithDataTimestamp(data.Timestamp, GetTimeOffset())
+                        .WithSequenceNumber(data.SequenceNumber)
                     );
             });
 
@@ -288,6 +297,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         .WithUpdateType(eventType)
                         .WithStreamId(data.Channel)
                         .WithDataTimestamp(data.Timestamp, GetTimeOffset())
+                        .WithSequenceNumber(data.SequenceNumber)
                     );
             });
 

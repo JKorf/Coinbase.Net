@@ -160,6 +160,12 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.2.0 - 13 Jan 2026
+    * Updated CryptoExchange.Net to version 10.2.1, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
+    * Added SequenceNumber to websocket updates
+    * Added validation of sequence numbers for websocket connections
+    * Fixed restClient.AdvancedTradeApi.Account.GetFeeInfoAsync deserialization, updated response model
+
 * Version 3.1.0 - 07 Jan 2026
     * Updated CryptoExchange.Net version to 10.1.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
     * Added DataTimeLocal and DataAge properties to DataEvent object

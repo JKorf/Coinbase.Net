@@ -2277,6 +2277,26 @@
             Defines the source generated JSON serialization contract metadata for a given type.
             </summary>
         </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseVolumeBreakdown">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseVolumeBreakdownArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseVolumeRange">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseVolumeRangeArray">
+            <summary>
+            Defines the source generated JSON serialization contract metadata for a given type.
+            </summary>
+        </member>
         <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.CoinbaseWithdrawal">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -5883,6 +5903,16 @@
             Promo fee active
             </summary>
         </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFeeInfo.HasCostPlusCommission">
+            <summary>
+            Has cost plus commission
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFeeInfo.VolumeBreakdown">
+            <summary>
+            Volume breakdown
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseFeeTier">
             <summary>
             Tier info
@@ -5923,6 +5953,31 @@
             Upper bound (exclusive) of pricing tier in usd of total assets on platform.
             </summary>
         </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFeeTier.PerpsFrom">
+            <summary>
+            Perp volume from
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFeeTier.PerpsTo">
+            <summary>
+            Perp volume to
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFeeTier.FuturesFrom">
+            <summary>
+            Futures volume from
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFeeTier.FuturesTo">
+            <summary>
+            Futures volume to
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseFeeTier.VolumeRanges">
+            <summary>
+            Volume types and ranges
+            </summary>
+        </member>
         <member name="T:Coinbase.Net.Objects.Models.CoinbaseTax">
             <summary>
             Tax rate
@@ -5936,6 +5991,41 @@
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseTax.Type">
             <summary>
             Type
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseVolumeBreakdown">
+            <summary>
+            Volume breakdown
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseVolumeBreakdown.VolumeType">
+            <summary>
+            Volume type
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseVolumeBreakdown.Volume">
+            <summary>
+            Volume
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.Objects.Models.CoinbaseVolumeRange">
+            <summary>
+            Volume type range
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseVolumeRange.VolumeTypes">
+            <summary>
+            Volume types
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseVolumeRange.VolumeFrom">
+            <summary>
+            Volume from
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.Objects.Models.CoinbaseVolumeRange.VolumeTo">
+            <summary>
+            Volume to
             </summary>
         </member>
         <member name="P:Coinbase.Net.Objects.Models.CoinbaseFiatAssetWrapper.Data">

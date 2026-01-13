@@ -64,6 +64,16 @@ namespace Coinbase.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("has_promo_fee")]
         public bool HasPromoFee { get; set; }
+        /// <summary>
+        /// Has cost plus commission
+        /// </summary>
+        [JsonPropertyName("has_cost_plus_commission")]
+        public bool HasCostPlusCommission { get; set; }
+        /// <summary>
+        /// Volume breakdown
+        /// </summary>
+        [JsonPropertyName("volume_breakdown")]
+        public CoinbaseVolumeBreakdown[] VolumeBreakdown { get; set; } = [];
     }
 
     /// <summary>
@@ -81,12 +91,12 @@ namespace Coinbase.Net.Objects.Models
         /// Usd from
         /// </summary>
         [JsonPropertyName("usd_from")]
-        public decimal UsdFrom { get; set; }
+        public decimal? UsdFrom { get; set; }
         /// <summary>
         /// Usd to
         /// </summary>
         [JsonPropertyName("usd_to")]
-        public decimal UsdTo { get; set; }
+        public decimal? UsdTo { get; set; }
         /// <summary>
         /// Taker fee rate
         /// </summary>
@@ -107,6 +117,31 @@ namespace Coinbase.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("aop_to")]
         public decimal? AopTo { get; set; }
+        /// <summary>
+        /// Perp volume from
+        /// </summary>
+        [JsonPropertyName("perps_vol_from")]
+        public decimal? PerpsFrom { get; set; }
+        /// <summary>
+        /// Perp volume to
+        /// </summary>
+        [JsonPropertyName("perps_vol_to")]
+        public decimal? PerpsTo { get; set; }
+        /// <summary>
+        /// Futures volume from
+        /// </summary>
+        [JsonPropertyName("futures_vol_from")]
+        public decimal? FuturesFrom { get; set; }
+        /// <summary>
+        /// Futures volume to
+        /// </summary>
+        [JsonPropertyName("futures_vol_to")]
+        public decimal? FuturesTo { get; set; }
+        /// <summary>
+        /// Volume types and ranges
+        /// </summary>
+        [JsonPropertyName("volume_types_and_range")]
+        public CoinbaseVolumeRange[] VolumeRanges { get; set; } = [];
     }
 
     /// <summary>
@@ -127,5 +162,42 @@ namespace Coinbase.Net.Objects.Models
         public string? Type { get; set; }
     }
 
+    /// <summary>
+    /// Volume breakdown
+    /// </summary>
+    public record CoinbaseVolumeBreakdown
+    {
+        /// <summary>
+        /// Volume type
+        /// </summary>
+        [JsonPropertyName("volume_type")]
+        public string VolumeType { get; set; } = string.Empty;
+        /// <summary>
+        /// Volume
+        /// </summary>
+        [JsonPropertyName("volume")]
+        public decimal Volume { get; set; }
+    }
 
+    /// <summary>
+    /// Volume type range
+    /// </summary>
+    public record CoinbaseVolumeRange
+    {
+        /// <summary>
+        /// Volume types
+        /// </summary>
+        [JsonPropertyName("volume_types")]
+        public string[] VolumeTypes { get; set; } = [];
+        /// <summary>
+        /// Volume from
+        /// </summary>
+        [JsonPropertyName("vol_from")]
+        public decimal? VolumeFrom { get; set; }
+        /// <summary>
+        /// Volume to
+        /// </summary>
+        [JsonPropertyName("vol_to")]
+        public decimal? VolumeTo { get; set; }
+    }
 }

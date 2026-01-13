@@ -24,6 +24,7 @@ namespace Coinbase.Net.UnitTests
             var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/AdvancedTrade/Account", "https://api.coinbase.com", IsAuthenticated);
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetAccountsAsync(), "GetAccounts");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetFeeInfoAsync(), "GetFeeInfo");
+            await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetFeeInfoAsync(), "GetFeeInfo2");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetApiKeyInfoAsync(), "GetApiKeyInfo");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetPaymentMethodsAsync(), "GetPaymentMethods", nestedJsonProperty: "payment_methods");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.WithdrawCryptoAsync("123", "123", 0.1m, "123"), "WithdrawCrypto", "data");

@@ -18,25 +18,9 @@ namespace Coinbase.Net.Objects.Sockets
             _channel = request.Channel;
             _symbols = request.Symbols;
 
-            MessageMatcher = MessageMatcher.Create<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>("subscriptions", HandleMessage!);
             MessageRouter = MessageRouter.CreateWithoutTopicFilter<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>("subscriptions", HandleMessage, true);
 
             RequestTimeout = TimeSpan.FromSeconds(5);
-        }
-
-        public override bool PreCheckMessage(SocketConnection connection, object message)
-        {
-            // TO REMOVE
-
-            var messageData = (CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>)message;
-            var evnt = messageData.Events.First();
-            if (!evnt.Subscriptions.TryGetValue(_channel, out var subbed))
-                return false;
-
-            if (_symbols != null && _symbols.Any(x => !subbed.Contains(x)))
-                return false;
-
-            return true;
         }
 
         public CallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>? HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate> message)

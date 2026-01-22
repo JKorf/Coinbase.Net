@@ -18,6 +18,20 @@ namespace Coinbase.Net
     public static class CoinbaseExchange
     {
         /// <summary>
+        /// Platform metadata
+        /// </summary>
+        public static PlatformInfo Metadata { get; } = new PlatformInfo(
+                "Coinbase",
+                "Coinbase",
+                "https://raw.githubusercontent.com/JKorf/Coinbase.Net/master/Coinbase.Net/Icon/icon.png",
+                "https://www.coinbase.com",
+                ["https://docs.cdp.coinbase.com/advanced-trade/reference",
+                 "https://docs.cdp.coinbase.com/coinbase-app/docs/welcome"],
+                PlatformType.CryptoCurrencyExchange,
+                CentralizationType.Centralized
+                );
+
+        /// <summary>
         /// Exchange name
         /// </summary>
         public static string ExchangeName => "Coinbase";

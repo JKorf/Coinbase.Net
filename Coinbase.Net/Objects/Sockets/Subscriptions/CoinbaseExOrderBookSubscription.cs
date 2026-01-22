@@ -32,11 +32,6 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
 
             IndividualSubscriptionCount = symbols.Length;
 
-            MessageMatcher = MessageMatcher.Create(_symbols.SelectMany(x => 
-                 new MessageHandlerLink[] { new MessageHandlerLink<CoinbaseExBookSnapshot>("snapshot" + x, DoHandleMessage),
-                 new MessageHandlerLink<CoinbaseExBookUpdate>("l2update" + x, DoHandleMessage)
-             }).ToArray());
-
             var routes = new List<MessageRoute>();
             foreach(var symbol in symbols)
             {

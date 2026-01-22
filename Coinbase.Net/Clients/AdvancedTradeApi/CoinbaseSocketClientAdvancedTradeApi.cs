@@ -31,15 +31,6 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
     /// </summary>
     internal partial class CoinbaseSocketClientAdvancedTradeApi : SocketApiClient, ICoinbaseSocketClientAdvancedTradeApi
     {
-        #region fields
-        private static readonly MessagePath _channelPath = MessagePath.Get().Property("channel");
-        private static readonly MessagePath _tradesSymbolPath = MessagePath.Get().Property("events").Index(0).Property("trades").Index(0).Property("product_id");
-        private static readonly MessagePath _klinesSymbolPath = MessagePath.Get().Property("events").Index(0).Property("candles").Index(0).Property("product_id");
-        private static readonly MessagePath _tickersSymbolPath = MessagePath.Get().Property("events").Index(0).Property("tickers").Index(0).Property("product_id");
-        private static readonly MessagePath _symbolsSymbolPath = MessagePath.Get().Property("events").Index(0).Property("products").Index(0).Property("id");
-        private static readonly MessagePath _bookSymbolPath = MessagePath.Get().Property("events").Index(0).Property("product_id");
-        #endregion
-
         #region constructor/destructor
 
         /// <summary>
@@ -52,8 +43,6 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
         #endregion
 
-        /// <inheritdoc />
-        protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
 
@@ -303,30 +292,6 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             var subscription = new CoinbaseSubscription<CoinbaseFuturesBalanceUpdate>(this, _logger, "futures_balance_summary", "futures_balance_summary", null, internalHandler, true);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public override string? GetListenerIdentifier(IMessageAccessor message)
-        {
-            var channel = message.GetValue<string>(_channelPath);
-            if (channel == null)
-                return null;
-
-            if (channel.Equals("market_trades", StringComparison.Ordinal))
-                channel += "-" + message.GetValue<string>(_tradesSymbolPath);
-            if (channel.Equals("candles", StringComparison.Ordinal))
-                channel += "-" + message.GetValue<string>(_klinesSymbolPath);
-            if (channel.Equals("ticker", StringComparison.Ordinal)
-                || channel.Equals("ticker_batch", StringComparison.Ordinal))
-            {
-                channel += "-" + message.GetValue<string>(_tickersSymbolPath);
-            }
-            if (channel.Equals("status", StringComparison.Ordinal))
-                channel += "-" + message.GetValue<string>(_symbolsSymbolPath);
-            if (channel.Equals("l2_data", StringComparison.Ordinal))
-                channel += "-" + message.GetValue<string>(_bookSymbolPath);
-
-            return channel;
         }
 
         /// <inheritdoc />

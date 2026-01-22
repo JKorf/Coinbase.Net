@@ -19,9 +19,6 @@
         <member name="P:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApi.ExchangeName">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApi.CreateAccessor">
-            <inheritdoc />
-        </member>
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseRestClientAdvancedTradeApi.CreateSerializer">
             <inheritdoc />
         </member>
@@ -242,9 +239,6 @@
             ctor
             </summary>
         </member>
-        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.CreateAccessor(System.Net.WebSockets.WebSocketMessageType)">
-            <inheritdoc />
-        </member>
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.CreateSerializer">
             <inheritdoc />
         </member>
@@ -294,9 +288,6 @@
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.SubscribeToFuturesBalanceUpdatesAsync(System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseFuturesBalance}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
         <member name="P:Coinbase.Net.Clients.AdvancedTradeApi.CoinbaseSocketClientAdvancedTradeApi.SharedClient">
@@ -414,9 +405,6 @@
         <member name="P:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi.ExchangeName">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi.CreateAccessor">
-            <inheritdoc />
-        </member>
         <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseRestClientExchangeApi.CreateSerializer">
             <inheritdoc />
         </member>
@@ -447,9 +435,6 @@
             <summary>
             ctor
             </summary>
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.CreateAccessor(System.Net.WebSockets.WebSocketMessageType)">
-            <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.CreateSerializer">
             <inheritdoc />
@@ -482,9 +467,6 @@
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.SubscribeToOrderBookUpdatesAsync(System.Collections.Generic.IEnumerable{System.String},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExBookSnapshot}},System.Action{CryptoExchange.Net.Objects.Sockets.DataEvent{Coinbase.Net.Objects.Models.CoinbaseExBookUpdate}},System.Threading.CancellationToken)">
-            <inheritdoc />
-        </member>
-        <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.GetListenerIdentifier(CryptoExchange.Net.Interfaces.IMessageAccessor)">
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.Clients.ExchangeApi.CoinbaseSocketClientExchangeApi.FormatSymbol(System.String,System.String,CryptoExchange.Net.SharedApis.TradingMode,System.Nullable{System.DateTime})">
@@ -549,6 +531,11 @@
         <member name="T:Coinbase.Net.CoinbaseExchange">
             <summary>
             Coinbase exchange information and configuration
+            </summary>
+        </member>
+        <member name="P:Coinbase.Net.CoinbaseExchange.Metadata">
+            <summary>
+            Platform metadata
             </summary>
         </member>
         <member name="P:Coinbase.Net.CoinbaseExchange.ExchangeName">

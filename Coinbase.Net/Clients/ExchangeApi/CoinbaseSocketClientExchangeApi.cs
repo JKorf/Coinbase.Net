@@ -29,11 +29,6 @@ namespace Coinbase.Net.Clients.ExchangeApi
     /// </summary>
     internal partial class CoinbaseSocketClientExchangeApi : SocketApiClient, ICoinbaseSocketClientExchangeApi
     {
-        #region fields
-        private static readonly MessagePath _typePath = MessagePath.Get().Property("type");
-        private static readonly MessagePath _symbolPath = MessagePath.Get().Property("product_id");
-        #endregion
-
         #region constructor/destructor
 
         /// <summary>
@@ -45,8 +40,6 @@ namespace Coinbase.Net.Clients.ExchangeApi
         }
         #endregion
 
-        /// <inheritdoc />
-        protected override IByteMessageAccessor CreateAccessor(WebSocketMessageType type) => new SystemTextJsonByteMessageAccessor(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
 
@@ -153,15 +146,6 @@ namespace Coinbase.Net.Clients.ExchangeApi
         {
             var subscription = new CoinbaseExOrderBookSubscription(this, _logger, symbols.ToArray(), onSnapshot, onUpdate);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
-        }
-
-        /// <inheritdoc />
-        public override string? GetListenerIdentifier(IMessageAccessor message)
-        {
-            var type = message.GetValue<string>(_typePath);
-            var product = message.GetValue<string>(_symbolPath);
-
-            return type + product;
         }
 
         /// <inheritdoc />

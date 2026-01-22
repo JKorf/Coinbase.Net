@@ -15,17 +15,15 @@ namespace Coinbase.Net.UnitTests
     [TestFixture]
     public class SocketSubscriptionTests
     {
-        [TestCase(false)]
-        [TestCase(true)]
-        public async Task ValidateConcurrentSubscriptions(bool newDeserialization)
+        [Test]
+        public async Task ValidateConcurrentSubscriptions()
         {
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider());
 
             var client = new CoinbaseSocketClient(Options.Create(new CoinbaseSocketOptions
             {
-                OutputOriginalData = true,
-                UseUpdatedDeserialization = newDeserialization
+                OutputOriginalData = true
             }), logger);
 
             var tester = new SocketSubscriptionValidator<CoinbaseSocketClient>(client, "Subscriptions/AdvancedTrade", "wss://advanced-trade-ws.coinbase.com", "events.0");
@@ -36,9 +34,8 @@ namespace Coinbase.Net.UnitTests
         }
 
 #warning add ExchangeApi
-        [TestCase(false)]
-        [TestCase(true)]
-        public async Task ValidateAdvancedTradeExchangeDataSubscriptions(bool newDeserialization)
+        [Test]
+        public async Task ValidateAdvancedTradeExchangeDataSubscriptions()
         {
             var logger = new LoggerFactory();
             logger.AddProvider(new TraceLoggerProvider());
@@ -46,8 +43,7 @@ namespace Coinbase.Net.UnitTests
             var client = new CoinbaseSocketClient(Options.Create(new CoinbaseSocketOptions
             {
                 ApiCredentials = new ApiCredentials("123", "-----BEGIN EC PRIVATE KEY-----\r\nMHcCAQEEIGaopmcUKDBihelMJbKUyRmaR6F3Eo90EZaqZJ3/mBr0oAoGCCqGSM49\r\nAwEHoUQDQgAEnYaxPG+o57xM5o/M5QNn0ocwlw12ZNVWFEo9tKDQ7Jz5Gz/0eMcP\r\nmEhm5msFFpWgrY0/T92MfwByuaLws/rM3w==\r\n-----END EC PRIVATE KEY-----"),
-                OutputOriginalData = true,
-                UseUpdatedDeserialization = newDeserialization
+                OutputOriginalData = true
             }), logger);
             var tester = new SocketSubscriptionValidator<CoinbaseSocketClient>(client, "Subscriptions/AdvancedTrade", "wss://advanced-trade-ws.coinbase.com", "events.0");
             await tester.ValidateAsync<CoinbaseHeartbeat>((client, handler) => client.AdvancedTradeApi.SubscribeToHeartbeatUpdatesAsync(handler), "Heartbeat");

@@ -18,30 +18,9 @@ namespace Coinbase.Net.Objects.Sockets
             _channel = request.Channels.Single();
             _symbols = request.Symbols;
 
-            MessageMatcher = MessageMatcher.Create(
-                new MessageHandlerLink<CoinbaseExSubscriptionsUpdate>("subscriptions", HandleMessage!),
-                new MessageHandlerLink<CoinbaseExError>("error", HandleError));
-
             MessageRouter = MessageRouter.Create(
                 MessageRoute<CoinbaseExSubscriptionsUpdate>.CreateWithoutTopicFilter("subscriptions", HandleMessage, true),
                 MessageRoute<CoinbaseExError>.CreateWithoutTopicFilter("error", HandleError));
-        }
-
-        public override bool PreCheckMessage(SocketConnection connection, object message)
-        {
-            // TO REMOVE
-
-            if (message is not CoinbaseExSubscriptionsUpdate messageData)
-                return true;
-
-            var channel = messageData.Subscriptions.SingleOrDefault(x => x.Name == _channel);
-            if (channel == null)
-                return false;
-
-            if (_symbols != null && _symbols.Any(x => !channel.Symbols.Contains(x)))
-                return false;
-
-            return true;
         }
 
         public CallResult<CoinbaseExError> HandleError(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExError message)

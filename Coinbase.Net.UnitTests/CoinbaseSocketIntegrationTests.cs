@@ -19,7 +19,7 @@ namespace Coinbase.Net.UnitTests
         {
         }
 
-        public override CoinbaseSocketClient GetClient(ILoggerFactory loggerFactory, bool useUpdatedDeserialization)
+        public override CoinbaseSocketClient GetClient(ILoggerFactory loggerFactory)
         {
             var key = Environment.GetEnvironmentVariable("APIKEY");
             var sec = Environment.GetEnvironmentVariable("APISECRET");
@@ -28,17 +28,15 @@ namespace Coinbase.Net.UnitTests
             return new CoinbaseSocketClient(Options.Create(new CoinbaseSocketOptions
             {
                 OutputOriginalData = true,
-                UseUpdatedDeserialization = useUpdatedDeserialization,
                 ApiCredentials = Authenticated ? new CryptoExchange.Net.Authentication.ApiCredentials(key, sec) : null
             }), loggerFactory);
         }
 
-        [TestCase(false)]
-        [TestCase(true)]
-        public async Task TestSubscriptions(bool useUpdatedDeserialization)
+        [Test]
+        public async Task TestSubscriptions()
         {
-            await RunAndCheckUpdate<CoinbaseFuturesBalance>(useUpdatedDeserialization , (client, updateHandler) => client.AdvancedTradeApi.SubscribeToFuturesBalanceUpdatesAsync(updateHandler, default), false, true);
-            await RunAndCheckUpdate<CoinbaseTicker>(useUpdatedDeserialization , (client, updateHandler) => client.AdvancedTradeApi.SubscribeToTickerUpdatesAsync("ETH-USD", updateHandler, default), true, false);
+            await RunAndCheckUpdate<CoinbaseFuturesBalance>((client, updateHandler) => client.AdvancedTradeApi.SubscribeToFuturesBalanceUpdatesAsync(updateHandler, default), false, true);
+            await RunAndCheckUpdate<CoinbaseTicker>((client, updateHandler) => client.AdvancedTradeApi.SubscribeToTickerUpdatesAsync("ETH-USD", updateHandler, default), true, false);
         } 
     }
 }

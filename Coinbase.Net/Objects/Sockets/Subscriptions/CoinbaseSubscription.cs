@@ -51,7 +51,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         }, Authenticated);
 
         /// <inheritdoc />
-        protected override Query? GetUnsubQuery(SocketConnection connection) => new CoinbaseQuery<CoinbaseSocketMessage>(new CoinbaseSocketRequest
+        protected override Query? GetUnsubQuery(SocketConnection connection) => new CoinbaseUnsubscriptionQuery(new CoinbaseSocketRequest
         {
             Channel = _channel,
             Type = "unsubscribe",

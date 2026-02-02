@@ -8,12 +8,12 @@ using System.Linq;
 
 namespace Coinbase.Net.Objects.Sockets
 {
-    internal class CoinbaseSubscriptionQuery : Query<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>
+    internal class CoinbaseUnsubscriptionQuery : Query<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>
     {
         private readonly string _channel;
         private readonly string[]? _symbols;
 
-        public CoinbaseSubscriptionQuery(CoinbaseSocketRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
+        public CoinbaseUnsubscriptionQuery(CoinbaseSocketRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
             _channel = request.Channel;
             _symbols = request.Symbols;
@@ -30,9 +30,11 @@ namespace Coinbase.Net.Objects.Sockets
 
             var evnt = message.Events.First();
             if (!evnt.Subscriptions.TryGetValue(_channel, out var subbed))
-                return null;
+                // No more subscriptions of this type means we did unsub
+                return new CallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>(message, originalData, null);
 
-            if (_symbols != null && _symbols.Any(x => !subbed.Contains(x)))
+            if (_symbols != null && _symbols.Any(x => subbed.Contains(x)))
+                // Still subbed symbols
                 return null;
 
             return new CallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>(message, originalData, null);

@@ -30,6 +30,9 @@ namespace Coinbase.Net.Objects.Sockets
 
         public CallResult<CoinbaseExSubscriptionsUpdate>? HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExSubscriptionsUpdate message)
         {
+            if (message.SequenceNumber != 0)
+                connection.UpdateSequenceNumber(message.SequenceNumber);
+
             var channel = message.Subscriptions.SingleOrDefault(x => x.Name == _channel);
             if (channel == null)
                 return null;

@@ -6,6 +6,8 @@ namespace Coinbase.Net.Objects.Internal
     [SerializationModel]
     internal record CoinbaseExSubscriptionsUpdate
     {
+        [JsonPropertyName("sequence_num")]
+        public long SequenceNumber { get; set; }
         [JsonPropertyName("channels")]
         public CoinbaseExSubscriptionItem[] Subscriptions { get; set; } = [];
 

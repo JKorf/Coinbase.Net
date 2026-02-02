@@ -13,7 +13,8 @@ namespace Coinbase.Net.Objects.Options
         internal static CoinbaseSocketOptions Default { get; set; } = new CoinbaseSocketOptions()
         {
             Environment = CoinbaseEnvironment.Live,
-            SocketSubscriptionsCombineTarget = 10
+            SocketSubscriptionsCombineTarget = 10,
+            ReceiveBufferSize = 524288 // Increased buffer so snapshot data fits better
         };
 
         /// <summary>

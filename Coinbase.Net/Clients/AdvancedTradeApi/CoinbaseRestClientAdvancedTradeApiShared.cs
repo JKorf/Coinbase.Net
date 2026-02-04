@@ -203,7 +203,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (deposits.Data.Pagination.NextUri != null)
                 nextToken = new FromIdToken(deposits.Data.Data.OrderBy(x => x.CreateTime).First().Id);
 
-            return deposits.AsExchangeResult<SharedDeposit[]>(Exchange, TradingMode.Spot, deposits.Data.Data.Select(x => new SharedDeposit(x.Quantity.Asset, x.Quantity.Value, x.Status == Enums.WithdrawalStatus.Completed, x.CreateTime)
+            return deposits.AsExchangeResult<SharedDeposit[]>(Exchange, TradingMode.Spot, deposits.Data.Data.Select(x => 
+            new SharedDeposit(
+                x.Quantity.Asset,
+                x.Quantity.Value,
+                x.Status == Enums.WithdrawalStatus.Completed,
+                x.CreateTime,
+                x.Status == WithdrawalStatus.Completed ? SharedTransferStatus.Completed
+                : x.Status == WithdrawalStatus.Canceled ? SharedTransferStatus.Failed
+                : SharedTransferStatus.InProgress)
             {
                 Id = x.Id
             }).ToArray(), nextToken);

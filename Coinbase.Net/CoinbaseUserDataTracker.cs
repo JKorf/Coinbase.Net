@@ -17,7 +17,7 @@ namespace Coinbase.Net
             ICoinbaseRestClient restClient,
             ICoinbaseSocketClient socketClient,
             string? userIdentifier,
-            SpotUserDataTrackerConfig config) : base(
+            SpotUserDataTrackerConfig? config) : base(
                 logger,
                 restClient.AdvancedTradeApi.SharedClient,
                 null,
@@ -27,7 +27,7 @@ namespace Coinbase.Net
                 socketClient.AdvancedTradeApi.SharedClient,
                 null,
                 userIdentifier,
-                config)
+                config ?? new SpotUserDataTrackerConfig())
         {
         }
     }
@@ -46,7 +46,7 @@ namespace Coinbase.Net
             ICoinbaseRestClient restClient,
             ICoinbaseSocketClient socketClient,
             string? userIdentifier,
-            FuturesUserDataTrackerConfig config) : base(logger,
+            FuturesUserDataTrackerConfig? config) : base(logger,
                 restClient.AdvancedTradeApi.SharedClient,
                 null,
                 restClient.AdvancedTradeApi.SharedClient,
@@ -56,7 +56,7 @@ namespace Coinbase.Net
                 null,
                 socketClient.AdvancedTradeApi.SharedClient,
                 userIdentifier,
-                config)
+                config ?? new FuturesUserDataTrackerConfig())
         {
         }
     }

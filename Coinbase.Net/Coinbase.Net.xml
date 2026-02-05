@@ -632,13 +632,13 @@
         <member name="M:Coinbase.Net.CoinbaseTrackerFactory.CreateUserSpotDataTracker(CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.CoinbaseTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Coinbase.Net.CoinbaseEnvironment)">
+        <member name="M:Coinbase.Net.CoinbaseTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig,Coinbase.Net.CoinbaseEnvironment)">
             <inheritdoc />
         </member>
         <member name="M:Coinbase.Net.CoinbaseTrackerFactory.CreateUserFuturesDataTracker(CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig)">
             <inheritdoc />
         </member>
-        <member name="M:Coinbase.Net.CoinbaseTrackerFactory.CreateUserFuturesDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Coinbase.Net.CoinbaseEnvironment)">
+        <member name="M:Coinbase.Net.CoinbaseTrackerFactory.CreateUserFuturesDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,Coinbase.Net.CoinbaseEnvironment)">
             <inheritdoc />
         </member>
         <member name="T:Coinbase.Net.CoinbaseUserSpotDataTracker">
@@ -4491,7 +4491,7 @@
             Tracker factory
             </summary>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.ICoinbaseTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Coinbase.Net.CoinbaseEnvironment)">
+        <member name="M:Coinbase.Net.Interfaces.ICoinbaseTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig,Coinbase.Net.CoinbaseEnvironment)">
             <summary>
             Create a new Spot user data tracker
             </summary>
@@ -4506,7 +4506,7 @@
             </summary>
             <param name="config">Configuration</param>
         </member>
-        <member name="M:Coinbase.Net.Interfaces.ICoinbaseTrackerFactory.CreateUserFuturesDataTracker(System.String,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,CryptoExchange.Net.Authentication.ApiCredentials,Coinbase.Net.CoinbaseEnvironment)">
+        <member name="M:Coinbase.Net.Interfaces.ICoinbaseTrackerFactory.CreateUserFuturesDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,Coinbase.Net.CoinbaseEnvironment)">
             <summary>
             Create a new futures user data tracker
             </summary>

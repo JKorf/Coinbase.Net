@@ -82,12 +82,8 @@ namespace Coinbase.Net
         }
 
         /// <inheritdoc />
-        public IUserSpotDataTracker CreateUserSpotDataTracker(SpotUserDataTrackerConfig config)
+        public IUserSpotDataTracker CreateUserSpotDataTracker(SpotUserDataTrackerConfig? config = null)
         {
-#warning best way to have a default interval since we don't have a subscription available?
-            if (config.BalancesConfig.PollIntervalConnected == TimeSpan.Zero)
-                config.BalancesConfig.PollIntervalConnected = TimeSpan.FromSeconds(10);
-
             var restClient = _serviceProvider?.GetRequiredService<ICoinbaseRestClient>() ?? new CoinbaseRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<ICoinbaseSocketClient>() ?? new CoinbaseSocketClient();
             return new CoinbaseUserSpotDataTracker(
@@ -100,7 +96,7 @@ namespace Coinbase.Net
         }
 
         /// <inheritdoc />
-        public IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, SpotUserDataTrackerConfig config, ApiCredentials credentials, CoinbaseEnvironment? environment = null)
+        public IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, ApiCredentials credentials, SpotUserDataTrackerConfig? config = null, CoinbaseEnvironment? environment = null)
         {
             var clientProvider = _serviceProvider?.GetRequiredService<ICoinbaseUserClientProvider>() ?? new CoinbaseUserClientProvider();
             var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);
@@ -115,7 +111,7 @@ namespace Coinbase.Net
         }
 
         /// <inheritdoc />
-        public IUserFuturesDataTracker CreateUserFuturesDataTracker(FuturesUserDataTrackerConfig config)
+        public IUserFuturesDataTracker CreateUserFuturesDataTracker(FuturesUserDataTrackerConfig? config = null)
         {
             var restClient = _serviceProvider?.GetRequiredService<ICoinbaseRestClient>() ?? new CoinbaseRestClient();
             var socketClient = _serviceProvider?.GetRequiredService<ICoinbaseSocketClient>() ?? new CoinbaseSocketClient();
@@ -129,7 +125,7 @@ namespace Coinbase.Net
         }
 
         /// <inheritdoc />
-        public IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, FuturesUserDataTrackerConfig config, ApiCredentials credentials, CoinbaseEnvironment? environment = null)
+        public IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, ApiCredentials credentials, FuturesUserDataTrackerConfig? config = null, CoinbaseEnvironment? environment = null)
         {
             var clientProvider = _serviceProvider?.GetRequiredService<ICoinbaseUserClientProvider>() ?? new CoinbaseUserClientProvider();
             var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);

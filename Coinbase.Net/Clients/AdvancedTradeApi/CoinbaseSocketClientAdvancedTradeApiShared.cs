@@ -246,6 +246,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                             AverageOpenPrice = x.EntryVolumeWeightedAveragePrice,
                             Leverage = x.Leverage,
                             LiquidationPrice = x.LiquidationPrice,
+                            PositionMode = SharedPositionMode.HedgeMode,
                             PositionSide = x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,
                             UnrealizedPnl = x.UnrealizedPnl
                         }).ToList();
@@ -254,6 +255,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), x.Symbol, x.NumberOfContracts, null)
                         {
                             AverageOpenPrice = x.EntryPrice,
+                            PositionMode = SharedPositionMode.HedgeMode,
                             PositionSide = x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,
                             UnrealizedPnl = x.UnrealizedPnl
                         }));

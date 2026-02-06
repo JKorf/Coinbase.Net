@@ -629,6 +629,37 @@
         <member name="M:Coinbase.Net.CoinbaseTrackerFactory.CreateTradeTracker(CryptoExchange.Net.SharedApis.SharedSymbol,System.Nullable{System.Int32},System.Nullable{System.TimeSpan})">
             <inheritdoc />
         </member>
+        <member name="M:Coinbase.Net.CoinbaseTrackerFactory.CreateUserSpotDataTracker(CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.CoinbaseTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig,Coinbase.Net.CoinbaseEnvironment)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.CoinbaseTrackerFactory.CreateUserFuturesDataTracker(CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig)">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.CoinbaseTrackerFactory.CreateUserFuturesDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,Coinbase.Net.CoinbaseEnvironment)">
+            <inheritdoc />
+        </member>
+        <member name="T:Coinbase.Net.CoinbaseUserSpotDataTracker">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.CoinbaseUserSpotDataTracker.#ctor(Microsoft.Extensions.Logging.ILogger{Coinbase.Net.CoinbaseUserSpotDataTracker},Coinbase.Net.Interfaces.Clients.ICoinbaseRestClient,Coinbase.Net.Interfaces.Clients.ICoinbaseSocketClient,System.String,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig)">
+            <summary>
+            ctor
+            </summary>
+        </member>
+        <member name="T:Coinbase.Net.CoinbaseUserFuturesDataTracker">
+            <inheritdoc />
+        </member>
+        <member name="P:Coinbase.Net.CoinbaseUserFuturesDataTracker.WebsocketPositionUpdatesAreFullSnapshots">
+            <inheritdoc />
+        </member>
+        <member name="M:Coinbase.Net.CoinbaseUserFuturesDataTracker.#ctor(Microsoft.Extensions.Logging.ILogger{Coinbase.Net.CoinbaseUserFuturesDataTracker},Coinbase.Net.Interfaces.Clients.ICoinbaseRestClient,Coinbase.Net.Interfaces.Clients.ICoinbaseSocketClient,System.String,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig)">
+            <summary>
+            ctor
+            </summary>
+        </member>
         <member name="P:Coinbase.Net.Converters.CoinbaseSourceGenerationContext.Boolean">
             <summary>
             Defines the source generated JSON serialization contract metadata for a given type.
@@ -4459,6 +4490,36 @@
             <summary>
             Tracker factory
             </summary>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.ICoinbaseTrackerFactory.CreateUserSpotDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig,Coinbase.Net.CoinbaseEnvironment)">
+            <summary>
+            Create a new Spot user data tracker
+            </summary>
+            <param name="userIdentifier">User identifier</param>
+            <param name="config">Configuration</param>
+            <param name="credentials">Credentials</param>
+            <param name="environment">Environment</param>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.ICoinbaseTrackerFactory.CreateUserSpotDataTracker(CryptoExchange.Net.Trackers.UserData.Objects.SpotUserDataTrackerConfig)">
+            <summary>
+            Create a new spot user data tracker
+            </summary>
+            <param name="config">Configuration</param>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.ICoinbaseTrackerFactory.CreateUserFuturesDataTracker(System.String,CryptoExchange.Net.Authentication.ApiCredentials,CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig,Coinbase.Net.CoinbaseEnvironment)">
+            <summary>
+            Create a new futures user data tracker
+            </summary>
+            <param name="userIdentifier">User identifier</param>
+            <param name="config">Configuration</param>
+            <param name="credentials">Credentials</param>
+            <param name="environment">Environment</param>
+        </member>
+        <member name="M:Coinbase.Net.Interfaces.ICoinbaseTrackerFactory.CreateUserFuturesDataTracker(CryptoExchange.Net.Trackers.UserData.Objects.FuturesUserDataTrackerConfig)">
+            <summary>
+            Create a new futures user data tracker
+            </summary>
+            <param name="config">Configuration</param>
         </member>
         <member name="T:Coinbase.Net.Objects.CoinbaseApiAddresses">
             <summary>

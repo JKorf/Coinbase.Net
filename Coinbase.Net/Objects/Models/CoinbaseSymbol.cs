@@ -220,12 +220,12 @@ namespace Coinbase.Net.Objects.Models
         /// Open time
         /// </summary>
         [JsonPropertyName("open_time")]
-        public DateTime OpenTime { get; set; }
+        public DateTime? OpenTime { get; set; }
         /// <summary>
         /// Close time
         /// </summary>
         [JsonPropertyName("close_time")]
-        public DateTime CloseTime { get; set; }
+        public DateTime? CloseTime { get; set; }
         /// <summary>
         /// Session state
         /// </summary>

@@ -161,6 +161,17 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.4.0 - 06 Feb 2026
+    * Updated CryptoExchange.Net to version 10.4.0, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
+    * Added CoinbaseUserSpotDataTracker and CoinbaseUserFuturesDataTracker
+    * Added additional methods for requesting supported symbols to Shared ISpotSymbolRestClient/IFuturesSymbolRestClient interfaces
+    * Added PositionMode mapping on SharedPosition models
+    * Added Status mapping for SharedDeposit models
+    * Updated socket receive buffer size
+    * Fixed unsubscription query not register sequence number
+    * Fixed disposed clients getting returned from UserClientProvider
+    * Fixed deserialization warning in futures symbols
+
 * Version 3.3.1 - 27 Jan 2026
     * Updated CryptoExchange.Net to version 10.3.1, see https://github.com/JKorf/CryptoExchange.Net/releases/ for full release notes
 

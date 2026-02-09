@@ -12,8 +12,8 @@ namespace Coinbase.Net.Clients
     /// <inheritdoc />
     public class CoinbaseUserClientProvider : ICoinbaseUserClientProvider
     {
-        private static ConcurrentDictionary<string, ICoinbaseRestClient> _restClients = new ConcurrentDictionary<string, ICoinbaseRestClient>();
-        private static ConcurrentDictionary<string, ICoinbaseSocketClient> _socketClients = new ConcurrentDictionary<string, ICoinbaseSocketClient>();
+        private ConcurrentDictionary<string, ICoinbaseRestClient> _restClients = new ConcurrentDictionary<string, ICoinbaseRestClient>();
+        private ConcurrentDictionary<string, ICoinbaseSocketClient> _socketClients = new ConcurrentDictionary<string, ICoinbaseSocketClient>();
 
         private readonly IOptions<CoinbaseRestOptions> _restOptions;
         private readonly IOptions<CoinbaseSocketOptions> _socketOptions;

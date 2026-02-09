@@ -17,7 +17,8 @@ namespace Coinbase.Net.Clients.MessageHandlers
             AddTopicMapping<CoinbaseSocketMessage<CoinbaseKlineEvent>>(x => x.Events.First().Klines.First().Symbol);
             AddTopicMapping<CoinbaseSocketMessage<CoinbaseTickerEvent>>(x => x.Events.First().Tickers.First().Symbol);
             AddTopicMapping<CoinbaseSocketMessage<CoinbaseBatchTickerEvent>>(x => x.Events.First().Tickers.First().Symbol);
-            AddTopicMapping<CoinbaseSocketMessage<CoinbaseOrderBookEvent>>(x => x.Events.First().Symbol);
+            AddTopicMapping<CoinbaseSocketMessage<CoinbaseOrderBookEvent>>(x => x.Events.First().Symbol);  
+            AddTopicMapping<CoinbaseSocketMessage<CoinbaseSymbolEvent>>(x => x.Events.First().Symbols.First().Symbol);  
         }
 
         protected override MessageTypeDefinition[] TypeEvaluators { get; } = [

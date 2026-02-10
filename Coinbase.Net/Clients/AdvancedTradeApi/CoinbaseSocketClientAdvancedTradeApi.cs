@@ -21,6 +21,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.WebSockets;
+using System.Text.Json;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -292,6 +293,31 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             var subscription = new CoinbaseSubscription<CoinbaseFuturesBalanceUpdate>(this, _logger, "futures_balance_summary", "futures_balance_summary", null, internalHandler, true);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
+        }
+
+        protected override bool HandleUnhandledMessage(SocketConnection connection, string typeIdentifier, ReadOnlySpan<byte> data)
+        {
+            // If a snapshot message is send for a symbol subscription without any data we don't know which symbol it was for so we can't process,
+            // but we still need to update the sequence number
+            var doc = JsonDocument.Parse(data.ToArray());
+            if (doc.RootElement.ValueKind != JsonValueKind.Object)
+                return false;
+
+            // Sequence number is in second to last field
+            if (!doc.RootElement.TryGetProperty("sequence_num", out var seqProp))
+                return false;
+
+            try
+            {
+                var sequenceValue = seqProp.GetInt64();
+                _logger.LogDebug($"Setting connection sequence number to {sequenceValue} for unhandled message");
+                connection.UpdateSequenceNumber(sequenceValue);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         /// <inheritdoc />

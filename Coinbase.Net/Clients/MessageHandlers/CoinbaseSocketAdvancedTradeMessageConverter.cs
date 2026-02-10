@@ -2,6 +2,7 @@
 using CryptoExchange.Net.Converters.MessageParsing.DynamicConverters;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using CryptoExchange.Net.Converters.SystemTextJson.MessageHandlers;
+using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
 
@@ -13,12 +14,12 @@ namespace Coinbase.Net.Clients.MessageHandlers
 
         public CoinbaseSocketAdvancedTradeMessageConverter()
         {
-            AddTopicMapping<CoinbaseSocketMessage<CoinbaseTradeEvent>>(x => x.Events.First().Trades.First().Symbol);
-            AddTopicMapping<CoinbaseSocketMessage<CoinbaseKlineEvent>>(x => x.Events.First().Klines.First().Symbol);
-            AddTopicMapping<CoinbaseSocketMessage<CoinbaseTickerEvent>>(x => x.Events.First().Tickers.First().Symbol);
-            AddTopicMapping<CoinbaseSocketMessage<CoinbaseBatchTickerEvent>>(x => x.Events.First().Tickers.First().Symbol);
+            AddTopicMapping<CoinbaseSocketMessage<CoinbaseTradeEvent>>(x => x.Events.First().Trades.FirstOrDefault()?.Symbol);
+            AddTopicMapping<CoinbaseSocketMessage<CoinbaseKlineEvent>>(x => x.Events.First().Klines.FirstOrDefault()?.Symbol);
+            AddTopicMapping<CoinbaseSocketMessage<CoinbaseTickerEvent>>(x => x.Events.First().Tickers.FirstOrDefault()?.Symbol);
+            AddTopicMapping<CoinbaseSocketMessage<CoinbaseBatchTickerEvent>>(x => x.Events.First().Tickers.FirstOrDefault()?.Symbol);
             AddTopicMapping<CoinbaseSocketMessage<CoinbaseOrderBookEvent>>(x => x.Events.First().Symbol);  
-            AddTopicMapping<CoinbaseSocketMessage<CoinbaseSymbolEvent>>(x => x.Events.First().Symbols.First().Symbol);  
+            AddTopicMapping<CoinbaseSocketMessage<CoinbaseSymbolEvent>>(x => x.Events.First().Symbols.FirstOrDefault()?.Symbol);  
         }
 
         protected override MessageTypeDefinition[] TypeEvaluators { get; } = [

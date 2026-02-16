@@ -75,6 +75,9 @@ namespace Coinbase.Net.SymbolOrderBooks
             Status = OrderBookStatus.Syncing;
 
             var setResult = await WaitForSetOrderBookAsync(_initialDataTimeout, ct).ConfigureAwait(false);
+            if (!setResult)
+                await result.Data.CloseAsync().ConfigureAwait(false);
+
             return setResult ? result : new CallResult<UpdateSubscription>(setResult.Error!);
         }
 

@@ -13,7 +13,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
     {
         /// <summary>
         /// Get accounts
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getaccounts" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getaccounts" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/accounts
+        /// </para>
         /// </summary>
         /// <param name="limit">Max number of results</param>
         /// <param name="pageCursor">Cursor from last request to retrieve the next page</param>
@@ -22,7 +27,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get a specific account
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getaccount" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getaccount" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/accounts/{accountId}
+        /// </para>
         /// </summary>
         /// <param name="accountId">Account id</param>
         /// <param name="ct">Cancellation token</param>
@@ -31,7 +41,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get a list of portfolios
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getportfolios" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getportfolios" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/portfolios
+        /// </para>
         /// </summary>
         /// <param name="type">Filter by portfolio type</param>
         /// <param name="ct">Cancellation token</param>
@@ -40,7 +55,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get a breakdown of a portfolio
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getportfoliobreakdown" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getportfoliobreakdown" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/portfolios/{portfolioId}
+        /// </para>
         /// </summary>
         /// <param name="portfolioId">Id of the portfolio</param>
         /// <param name="asset">Filter by asset</param>
@@ -49,7 +69,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Create a new portfolio
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_createportfolio" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_createportfolio" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/brokerage/portfolios
+        /// </para>
         /// </summary>
         /// <param name="portfolioName">Name of the new portfolio</param>
         /// <param name="ct">Cancellation token</param>
@@ -58,7 +83,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Move funds between portfolios
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_moveportfoliofunds" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_moveportfoliofunds" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/brokerage/portfolios/move_funds
+        /// </para>
         /// </summary>
         /// <param name="fromPortfolioId">From portfolio</param>
         /// <param name="toPortfolioId">To portfolio</param>
@@ -70,8 +100,13 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Edit portfolio
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_editportfolio" /><br />
+        /// Endpoint:<br />
+        /// PUT /api/v3/brokerage/portfolios/{portfolioId}
+        /// </para>
         /// </summary>
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_editportfolio" /></para>
         /// <param name="portfolioId">Id of portfolio</param>
         /// <param name="newName">New name</param>
         /// <param name="ct">Cancellation token</param>
@@ -80,7 +115,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Delete a portfolio
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_deleteportfolio" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_deleteportfolio" /><br />
+        /// Endpoint:<br />
+        /// DELETE /api/v3/brokerage/portfolios/{portfolioId}
+        /// </para>
         /// </summary>
         /// <param name="portfolioId">Id of the portfolio</param>
         /// <param name="ct">Cancellation token</param>
@@ -89,7 +129,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Allocate portfolio funds to a sub-portfolio on Intx Portfolio
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_allocateportfolio" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_allocateportfolio" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/brokerage/intx/allocate
+        /// </para>
         /// </summary>
         /// <param name="portfolioId">Portfolio id</param>
         /// <param name="symbol">Symbol</param>
@@ -101,7 +146,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get a summary of your Perpetuals portfolio
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxportfoliosummary" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxportfoliosummary" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/intx/portfolio/{portfolioId}
+        /// </para>
         /// </summary>
         /// <param name="portfolioId">Portfolio uuid</param>
         /// <param name="ct">Cancellation token</param>
@@ -110,7 +160,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get balances of a Perpetual futures portfolio
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxbalances" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxbalances" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/intx/balances/{portfolioId}
+        /// </para>
         /// </summary>
         /// <param name="portfolioId">Portfolio uuid</param>
         /// <param name="ct">Cancellation token</param>
@@ -119,7 +174,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Set multi asset collateral mode
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_intxmultiassetcollateral" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_intxmultiassetcollateral" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/brokerage/intx/multi_asset_collateral
+        /// </para>
         /// </summary>
         /// <param name="portfolioId">Portfolio uuid</param>
         /// <param name="enabled">Enabled</param>
@@ -129,14 +189,24 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get delivery futures balance summary
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmbalancesummary" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmbalancesummary" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/cfm/balance_summary
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<CoinbaseFuturesBalanceSummary>> GetFuturesBalanceSummaryAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Set intraday margin setting
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_setintradaymarginsetting" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_setintradaymarginsetting" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/brokerage/cfm/intraday/margin_setting
+        /// </para>
         /// </summary>
         /// <param name="setting">Setting value</param>
         /// <param name="ct">Cancellation token</param>
@@ -144,14 +214,24 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get intraday margin setting
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintradaymarginsetting" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintradaymarginsetting" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/cfm/intraday/margin_setting
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<IntradayMarginSetting>> GetFuturesIntradayMarginSettingAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get futures current margin window
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getcurrentmarginwindow" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getcurrentmarginwindow" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/cfm/intraday/current_margin_window
+        /// </para>
         /// </summary>
         /// <param name="marginProfileType">Margin profile type</param>
         /// <param name="ct">Cancellation token</param>
@@ -159,7 +239,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get fee tier info
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_gettransactionsummary" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_gettransactionsummary" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/transaction_summary
+        /// </para>
         /// </summary>
         /// <param name="symbolType">Type of product</param>
         /// <param name="expiryType">Expiry type</param>
@@ -169,21 +254,36 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get API key info/permissions for the current API key
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getapikeypermissions" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getapikeypermissions" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/key_permissions
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<CoinbaseApiKey>> GetApiKeyInfoAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get payment methods
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpaymentmethods" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpaymentmethods" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/payment_methods
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<CoinbasePaymentMethod[]>> GetPaymentMethodsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get payment method by id
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpaymentmethods" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpaymentmethods" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/payment_methods/{paymentMethodId}
+        /// </para>
         /// </summary>
         /// <param name="paymentMethodId">Payment method id</param>
         /// <param name="ct">Cancellation token</param>
@@ -191,7 +291,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get a convert quote
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_createconvertquote" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_createconvertquote" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/brokerage/convert/quote
+        /// </para>
         /// </summary>
         /// <param name="fromAsset">The asset to convert from</param>
         /// <param name="toAsset">The asset to convert to</param>
@@ -203,7 +308,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get convert trade info
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getconverttrade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getconverttrade" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/convert/trade/{tradeId}
+        /// </para>
         /// </summary>
         /// <param name="tradeId">Id of the trade</param>
         /// <param name="fromAsset">From asset</param>
@@ -214,7 +324,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Commit a convert trade
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_commitconverttrade" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_commitconverttrade" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/brokerage/convert/trade/{tradeId}
+        /// </para>
         /// </summary>
         /// <param name="tradeId">Id of the quote</param>
         /// <param name="fromAsset">From asset</param>
@@ -225,7 +340,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get fiat withdrawls
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-withdrawals" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-withdrawals" /><br />
+        /// Endpoint:<br />
+        /// GET /v2/accounts/{accountId}/withdrawals
+        /// </para>
         /// </summary>
         /// <param name="accountId">Account id</param>
         /// <param name="order">Result order</param>
@@ -237,7 +357,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get info on a specific fiat withdrawal
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-withdrawals" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-withdrawals" /><br />
+        /// Endpoint:<br />
+        /// GET /v2/accounts/{accountId}/withdrawals/{withdrawalId}
+        /// </para>
         /// </summary>
         /// <param name="accountId">Account id</param>
         /// <param name="withdrawalId">Withdrawal id</param>
@@ -246,7 +371,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Withdraw fiat funds
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-withdrawals" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-withdrawals" /><br />
+        /// Endpoint:<br />
+        /// POST /v2/accounts/{accountId}/withdrawals
+        /// </para>
         /// </summary>
         /// <param name="accountId">Account id</param>
         /// <param name="asset">The asset, for example `ETH`</param>
@@ -257,7 +387,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Deposit fiat funds
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-deposits" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-deposits" /><br />
+        /// Endpoint:<br />
+        /// POST /v2/accounts/{accountId}/deposits
+        /// </para>
         /// </summary>
         /// <param name="accountId">Account id</param>
         /// <param name="paymentId">Payment id</param>
@@ -268,7 +403,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get fiat deposits
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-deposits" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-deposits" /><br />
+        /// Endpoint:<br />
+        /// GET /v2/accounts/{accountId}/deposits
+        /// </para>
         /// </summary>
         /// <param name="accountId">Account id</param>
         /// <param name="order">Result order</param>
@@ -280,7 +420,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get info on a specific fiat deposit
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-deposits" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-deposits" /><br />
+        /// Endpoint:<br />
+        /// GET /v2/accounts/{accountId}/deposits/{depositId}
+        /// </para>
         /// </summary>
         /// <param name="accountId">Account id</param>
         /// <param name="depositId">Deposit id</param>
@@ -289,7 +434,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get list of transaction for the account
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-transactions" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-transactions" /><br />
+        /// Endpoint:<br />
+        /// GET /v2/accounts/{accountId}/transactions
+        /// </para>
         /// </summary>
         /// <param name="accountId">Account id</param>
         /// <param name="order">Result order</param>
@@ -301,7 +451,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get info on a specific transaction
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-transactions" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-transactions" /><br />
+        /// Endpoint:<br />
+        /// GET /v2/accounts/{accountId}/transactions/{transactionId}
+        /// </para>
         /// </summary>
         /// <param name="accountId">Account id</param>
         /// <param name="transactionId">Transaction id</param>
@@ -311,7 +466,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get transactions for a specific address
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /><br />
+        /// Endpoint:<br />
+        /// GET /v2/accounts/{accountId}/addresses/{addressId}/transactions
+        /// </para>
         /// </summary>
         /// <param name="accountId">Account id</param>
         /// <param name="addressId">Address id</param>
@@ -324,7 +484,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Withdraw a crypto asset to an external blockchain address or user by email
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-transactions#transfer-money-between-accounts" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-transactions#transfer-money-between-accounts" /><br />
+        /// Endpoint:<br />
+        /// POST /v2/accounts/{accountId}/transactions
+        /// </para>
         /// </summary>
         /// <param name="accountId">Account id</param>
         /// <param name="to">Blockchain addres or email address of recipient</param>
@@ -339,7 +504,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Create a new deposit address for an account
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /><br />
+        /// Endpoint:<br />
+        /// POST /v2/accounts/{accountId}/addresses
+        /// </para>
         /// </summary>
         /// <param name="accountId">Account id</param>
         /// <param name="name">Address label</param>
@@ -348,7 +518,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// List deposit addresses for an account
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /><br />
+        /// Endpoint:<br />
+        /// GET /v2/accounts/{accountId}/addresses
+        /// </para>
         /// </summary>
         /// <param name="accountId">Account id</param>
         /// <param name="order">Result order</param>
@@ -360,7 +535,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get info on a specific deposit address
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-addresses" /><br />
+        /// Endpoint:<br />
+        /// GET /v2/accounts/{accountId}/addresses/{addressId}
+        /// </para>
         /// </summary>
         /// <param name="accountId">Account id</param>
         /// <param name="addressId">Id of the address</param>

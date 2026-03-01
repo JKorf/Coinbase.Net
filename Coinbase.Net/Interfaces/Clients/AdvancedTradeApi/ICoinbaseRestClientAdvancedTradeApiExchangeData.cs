@@ -22,7 +22,13 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get list of supported symbols
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicproducts" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicproducts" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/market/products<br />
+        /// GET /api/v3/brokerage/products
+        /// </para>
         /// </summary>
         /// <param name="type">Type of symbol</param>
         /// <param name="expiryType">Type of expiry</param>
@@ -37,7 +43,13 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get info on a specific symbol
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicproduct" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicproduct" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/market/products/{symbol}<br />
+        /// GET /api/v3/brokerage/products/{symbol}
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol name</param>
         /// <param name="ct">Cancellation token</param>
@@ -45,7 +57,13 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get the order book
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicproductbook" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicproductbook" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/market/product_book<br />
+        /// GET /api/v3/brokerage/product_book
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETH-USDT`</param>
         /// <param name="limit">Book depth</param>
@@ -55,7 +73,13 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get kline/candlestick data
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpubliccandles" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpubliccandles" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/market/products/{symbol}/candles<br />
+        /// GET /api/v3/brokerage/products/{symbol}/candles
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETH-USDT`</param>
         /// <param name="klineInterval">Kline interval</param>
@@ -67,7 +91,13 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get historical public trades for a symbol
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicmarkettrades" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicmarkettrades" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/market/products/{symbol}/ticker<br />
+        /// GET /api/v3/brokerage/products/{symbol}/ticker
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="startTime">Filter by start time</param>
@@ -78,7 +108,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get the best ask/bid price and quantity for a symbol
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getbestbidask" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getbestbidask" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/best_bid_ask
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol</param>
         /// <param name="ct">Cancellation token</param>
@@ -87,7 +122,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get the best ask/bid price and quantity for all or selected symbols
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getbestbidask" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getbestbidask" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/best_bid_ask
+        /// </para>
         /// </summary>
         /// <param name="symbols">Filter by symbol</param>
         /// <param name="ct">Cancellation token</param>
@@ -96,21 +136,36 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get fiat assets
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-currencies" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-currencies" /><br />
+        /// Endpoint:<br />
+        /// GET /v2/currencies
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<CoinbaseFiatAsset[]>> GetFiatAssetsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get crypto assets
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-currencies" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-currencies" /><br />
+        /// Endpoint:<br />
+        /// GET /v2/currencies/crypto
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<CoinbaseCryptoAsset[]>> GetCryptoAssetsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get exchange rates
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-exchange-rates" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-exchange-rates" /><br />
+        /// Endpoint:<br />
+        /// GET /v2/exchange-rates
+        /// </para>
         /// </summary>
         /// <param name="asset">The asset to get exchange rates for, defaults to USD</param>
         /// <param name="ct">Cancellation token</param>
@@ -118,7 +173,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get the current buy prices for all assets denoted in the asset parameter. Includes a 1% Coinbase fee.
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-prices" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-prices" /><br />
+        /// Endpoint:<br />
+        /// GET /v2/prices/{asset}/buy
+        /// </para>
         /// </summary>
         /// <param name="asset">Asset name</param>
         /// <param name="ct">Cancellation token</param>
@@ -126,7 +186,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get the current sell prices for all assets denoted in the asset parameter. Includes a 1% Coinbase fee.
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-prices" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-prices" /><br />
+        /// Endpoint:<br />
+        /// GET /v2/prices/{asset}/sell
+        /// </para>
         /// </summary>
         /// <param name="asset">Asset name</param>
         /// <param name="ct">Cancellation token</param>
@@ -134,7 +199,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get the spot market prices for all assets denoted in the asset parameter
-        /// <para><a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-prices" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-prices" /><br />
+        /// Endpoint:<br />
+        /// GET /v2/prices/{asset}/sell
+        /// </para>
         /// </summary>
         /// <param name="asset">Asset name</param>
         /// <param name="date">Specify for retrieving a historical price</param>

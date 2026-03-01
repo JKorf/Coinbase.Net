@@ -15,7 +15,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
     {
         /// <summary>
         /// Place a new order
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_postorder" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_postorder" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/brokerage/orders
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETH-USDT`</param>
         /// <param name="side">Order side</param>
@@ -55,7 +60,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Cancel an order
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_cancelorders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_cancelorders" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/brokerage/orders/batch_cancel
+        /// </para>
         /// </summary>
         /// <param name="orderId">Id of order to cancel</param>
         /// <param name="ct">Cancellation token</param>
@@ -64,7 +74,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Cancel orders
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_cancelorders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_cancelorders" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/brokerage/orders/batch_cancel
+        /// </para>
         /// </summary>
         /// <param name="orderIds">Ids of orders to cancel</param>
         /// <param name="ct">Cancellation token</param>
@@ -72,7 +87,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Edit an order
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_editorder" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_editorder" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/brokerage/orders/edit
+        /// </para>
         /// </summary>
         /// <param name="orderId">Id of order to edit</param>
         /// <param name="price">New order price</param>
@@ -82,7 +102,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get order details 
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_gethistoricalorder" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_gethistoricalorder" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/orders/historical/{orderId}
+        /// </para>
         /// </summary>
         /// <param name="orderId">Order id</param>
         /// <param name="ct">Cancellation token</param>
@@ -90,7 +115,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get orders. Note that open orders do not adhere to the time filter
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_gethistoricalorders" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_gethistoricalorders" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/orders/historical/batch
+        /// </para>
         /// </summary>
         /// <param name="orderIds">Filter by order id</param>
         /// <param name="symbols">Filter by symbol</param>
@@ -128,7 +158,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get user trade history
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfills" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfills" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/orders/historical/fills
+        /// </para>
         /// </summary>
         /// <param name="orderIds">Filter by order id</param>
         /// <param name="tradeIds">Filter by trade id</param>
@@ -152,7 +187,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Close a position
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_closeposition" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_closeposition" /><br />
+        /// Endpoint:<br />
+        /// POST /api/v3/brokerage/orders/close_position
+        /// </para>
         /// </summary>
         /// <param name="symbol">The symbol, for example `ETHUSDT`</param>
         /// <param name="clientOrderId">Client order id for the close order</param>
@@ -162,14 +202,24 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get expiring futures positions
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmpositions" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmpositions" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/cfm/positions
+        /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
         Task<WebCallResult<CoinbaseFuturesPosition[]>> GetFuturesPositionsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get expiring futures position for a symbol
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmposition" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmposition" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/cfm/positions/{symbol}
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol</param>
         /// <param name="ct">Cancellation token</param>
@@ -177,7 +227,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get a list of open positions in your Perpetuals portfolio
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxportfoliosummary" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxportfoliosummary" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/intx/positions/{portfolioId}
+        /// </para>
         /// </summary>
         /// <param name="portfolioId">Portfolio uuid</param>
         /// <param name="ct">Cancellation token</param>
@@ -186,7 +241,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Get a specific Perpetual position
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxposition" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxposition" /><br />
+        /// Endpoint:<br />
+        /// GET /api/v3/brokerage/intx/positions/{portfolioId}/{symbol}
+        /// </para>
         /// </summary>
         /// <param name="portfolioId">Portfolio uuid</param>
         /// <param name="symbol">Symbol</param>

@@ -21,7 +21,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Subscribe to the heartbeats channel. The heartbeats channel can be used to keep the connection alive when data from other subscriptions isn't continuous. When using this subscription it is recommended to also set the client option <code>options.SocketNoData = TimeSpan.FromSeconds(5)</code> to quickly detect when the connection is interupted.
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#heartbeats-channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#heartbeats-channel" /><br />
+        /// Endpoint:<br />
+        /// WS heartbeats
+        /// </para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -30,7 +35,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Subscribe to public trades updates
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#market-trades-channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#market-trades-channel" /><br />
+        /// Endpoint:<br />
+        /// WS market_trades
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -40,7 +50,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Subscribe to public trades updates
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#market-trades-channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#market-trades-channel" /><br />
+        /// Endpoint:<br />
+        /// WS market_trades
+        /// </para>
         /// </summary>
         /// <param name="symbols">Symbols to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -50,7 +65,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Subscribe to kline updates. Klines are always at a 5 minute interval.
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#candles-channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#candles-channel" /><br />
+        /// Endpoint:<br />
+        /// WS candles
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -60,7 +80,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Subscribe to kline updates. Klines are always at a 5 minute interval.
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#candles-channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#candles-channel" /><br />
+        /// Endpoint:<br />
+        /// WS candles
+        /// </para>
         /// </summary>
         /// <param name="symbols">Symbols to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -70,7 +95,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Subscribe to ticker updates, updates are pushed immediately on any chance
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-channel" /><br />
+        /// Endpoint:<br />
+        /// WS ticker
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -79,7 +109,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<CoinbaseTicker>> onMessage, CancellationToken ct = default);
         /// <summary>
         /// Subscribe to ticker updates, updates are pushed immediately on any chance
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-channel" /><br />
+        /// Endpoint:<br />
+        /// WS ticker
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -89,7 +124,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Subscribe to batched ticker updates, updates are pushed every 5 seconds
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-batch-channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-batch-channel" /><br />
+        /// Endpoint:<br />
+        /// WS ticker_batch
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -98,7 +138,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         Task<CallResult<UpdateSubscription>> SubscribeToBatchedTickerUpdatesAsync(string symbol, Action<DataEvent<CoinbaseBatchTicker>> onMessage, CancellationToken ct = default);
         /// <summary>
         /// Subscribe to batched ticker updates, updates are pushed every 5 seconds
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-batch-channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-batch-channel" /><br />
+        /// Endpoint:<br />
+        /// WS ticker_batch
+        /// </para>
         /// </summary>
         /// <param name="symbols">Symbols to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -108,7 +153,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Subscribe to symbol rules updates
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#status-channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#status-channel" /><br />
+        /// Endpoint:<br />
+        /// WS status
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -117,7 +167,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(string symbol, Action<DataEvent<CoinbaseStreamSymbol>> onMessage, CancellationToken ct = default);
         /// <summary>
         /// Subscribe to symbol rules updates
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#status-channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#status-channel" /><br />
+        /// Endpoint:<br />
+        /// WS status
+        /// </para>
         /// </summary>
         /// <param name="symbols">Symbols to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -127,7 +182,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Subscribe to order book updates. First update is a snapshot of the full book, subsequent updates are change messages
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#level2-channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#level2-channel" /><br />
+        /// Endpoint:<br />
+        /// WS level2
+        /// </para>
         /// </summary>
         /// <param name="symbol">Symbol to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -136,7 +196,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, Action<DataEvent<CoinbaseOrderBookUpdate>> onMessage, CancellationToken ct = default);
         /// <summary>
         /// Subscribe to order book updates. First update is a snapshot of the full book, subsequent updates are change messages
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#level2-channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#level2-channel" /><br />
+        /// Endpoint:<br />
+        /// WS level2
+        /// </para>
         /// </summary>
         /// <param name="symbols">Symbols to subscribe</param>
         /// <param name="onMessage">The event handler for the received data</param>
@@ -146,7 +211,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Subscribe to user order and position updates. After subscribing snapshots will be pushed containing all open orders for the user
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#user-channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#user-channel" /><br />
+        /// Endpoint:<br />
+        /// WS user
+        /// </para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
@@ -155,7 +225,12 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 
         /// <summary>
         /// Subscribe to futures balance updates
-        /// <para><a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#futures-balance-summary-channel" /></para>
+        /// <para>
+        /// Docs:<br />
+        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#futures-balance-summary-channel" /><br />
+        /// Endpoint:<br />
+        /// WS futures_balance_summary
+        /// </para>
         /// </summary>
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>

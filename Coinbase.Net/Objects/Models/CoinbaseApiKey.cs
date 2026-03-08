@@ -11,27 +11,27 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseApiKey
     {
         /// <summary>
-        /// Can view
+        /// ["<c>can_view</c>"] Can view
         /// </summary>
         [JsonPropertyName("can_view")]
         public bool CanView { get; set; }
         /// <summary>
-        /// Can trade
+        /// ["<c>can_trade</c>"] Can trade
         /// </summary>
         [JsonPropertyName("can_trade")]
         public bool CanTrade { get; set; }
         /// <summary>
-        /// Can transfer
+        /// ["<c>can_transfer</c>"] Can transfer
         /// </summary>
         [JsonPropertyName("can_transfer")]
         public bool CanTransfer { get; set; }
         /// <summary>
-        /// Portfolio uuid
+        /// ["<c>portfolio_uuid</c>"] Portfolio uuid
         /// </summary>
         [JsonPropertyName("portfolio_uuid")]
         public string PortfolioUuid { get; set; } = string.Empty;
         /// <summary>
-        /// Portfolio type
+        /// ["<c>portfolio_type</c>"] Portfolio type
         /// </summary>
         [JsonPropertyName("portfolio_type")]
         public PortfolioType PortfolioType { get; set; }

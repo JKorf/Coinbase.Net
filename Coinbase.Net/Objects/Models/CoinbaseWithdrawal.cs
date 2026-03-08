@@ -19,72 +19,72 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseWithdrawal
     {
         /// <summary>
-        /// Withdrawal id
+        /// ["<c>id</c>"] Withdrawal id
         /// </summary>
         [JsonPropertyName("id")]
         public string Id { get; set; } = string.Empty;
         /// <summary>
-        /// Status of withdrawal
+        /// ["<c>status</c>"] Status of withdrawal
         /// </summary>
         [JsonPropertyName("status")]
         public WithdrawalStatus Status { get; set; }
         /// <summary>
-        /// Payment method
+        /// ["<c>payment_method</c>"] Payment method
         /// </summary>
         [JsonPropertyName("payment_method")]
         public CoinbaseResourceReference PaymentMethod { get; set; } = null!;
         /// <summary>
-        /// Transaction
+        /// ["<c>transaction</c>"] Transaction
         /// </summary>
         [JsonPropertyName("transaction")]
         public CoinbaseResourceReference Transaction { get; set; } = null!;
         /// <summary>
-        /// Quantity
+        /// ["<c>amount</c>"] Quantity
         /// </summary>
         [JsonPropertyName("amount")]
         public CoinbaseQuantityReference Quantity { get; set; } = null!;
         /// <summary>
-        /// Subtotal
+        /// ["<c>subtotal</c>"] Subtotal
         /// </summary>
         [JsonPropertyName("subtotal")]
         public CoinbaseQuantityReference Subtotal { get; set; } = null!;
         /// <summary>
-        /// Created at
+        /// ["<c>created_at</c>"] Created at
         /// </summary>
         [JsonPropertyName("created_at")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Updated at
+        /// ["<c>updated_at</c>"] Updated at
         /// </summary>
         [JsonPropertyName("updated_at")]
         public DateTime? UpdateTime { get; set; }
         /// <summary>
-        /// Resource
+        /// ["<c>resource</c>"] Resource
         /// </summary>
         [JsonPropertyName("resource")]
         public string Resource { get; set; } = string.Empty;
         /// <summary>
-        /// Resource path
+        /// ["<c>resource_path</c>"] Resource path
         /// </summary>
         [JsonPropertyName("resource_path")]
         public string ResourcePath { get; set; } = string.Empty;
         /// <summary>
-        /// Committed
+        /// ["<c>committed</c>"] Committed
         /// </summary>
         [JsonPropertyName("committed")]
         public bool Committed { get; set; }
         /// <summary>
-        /// Fee
+        /// ["<c>fee</c>"] Fee
         /// </summary>
         [JsonPropertyName("fee")]
         public CoinbaseQuantityReference Fee { get; set; } = null!;
         /// <summary>
-        /// Payout at
+        /// ["<c>payout_at</c>"] Payout at
         /// </summary>
         [JsonPropertyName("payout_at")]
         public DateTime? PayoutAt { get; set; }
         /// <summary>
-        /// User reference
+        /// ["<c>user_reference</c>"] User reference
         /// </summary>
         [JsonPropertyName("user_reference")]
         public string? UserReference { get; set; }

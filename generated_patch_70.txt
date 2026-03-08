@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTransaction.cs
+        [JsonPropertyName("description")]
+        public string? Description { get; set; }
+        /// <summary>
+-        /// Created at
++        /// ["<c>created_at</c>"] Created at
+        /// </summary>
+        [JsonPropertyName("created_at")]
+        public DateTime CreateTime { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTransaction.cs
+        [JsonPropertyName("created_at")]
+        public DateTime CreateTime { get; set; }
+        /// <summary>
+-        /// Updated at
++        /// ["<c>updated_at</c>"] Updated at
+        /// </summary>
+        [JsonPropertyName("updated_at")]
+        public DateTime? UpdateTime { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTransaction.cs
+        [JsonPropertyName("updated_at")]
+        public DateTime? UpdateTime { get; set; }
+        /// <summary>
+-        /// Resource
++        /// ["<c>resource</c>"] Resource
+        /// </summary>
+        [JsonPropertyName("resource")]
+        public string Resource { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTransaction.cs
+        [JsonPropertyName("resource")]
+        public string Resource { get; set; } = string.Empty;
+        /// <summary>
+-        /// Resource path
++        /// ["<c>resource_path</c>"] Resource path
+        /// </summary>
+        [JsonPropertyName("resource_path")]
+        public string ResourcePath { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTransaction.cs
+        [JsonPropertyName("resource_path")]
+        public string ResourcePath { get; set; } = string.Empty;
+        /// <summary>
+-        /// Network info
++        /// ["<c>network</c>"] Network info
+        /// </summary>
+        [JsonPropertyName("network")]
+        public CoinbaseTransactionNetwork? Network { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTransaction.cs
+        [JsonPropertyName("network")]
+        public CoinbaseTransactionNetwork? Network { get; set; }
+        /// <summary>
+-        /// Transfer target
++        /// ["<c>to</c>"] Transfer target
+        /// </summary>
+        [JsonPropertyName("to")]
+        public CoinbaseToReference? To { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTransaction.cs
+        [JsonPropertyName("to")]
+        public CoinbaseToReference? To { get; set; }
+        /// <summary>
+-        /// Transfer source
++        /// ["<c>from</c>"] Transfer source
+        /// </summary>
+        [JsonPropertyName("from")]
+        public CoinbaseToReference? From { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTransaction.cs
+        [JsonPropertyName("from")]
+        public CoinbaseToReference? From { get; set; }
+        /// <summary>
+-        /// Details
++        /// ["<c>details</c>"] Details
+        /// </summary>
+        [JsonPropertyName("details")]
+        public CoinbaseTransactionDetails Details { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTransaction.cs
+        [JsonPropertyName("details")]
+        public CoinbaseTransactionDetails Details { get; set; } = null!;
+        /// <summary>
+-        /// Trade info
++        /// ["<c>trade</c>"] Trade info
+        /// </summary>
+        [JsonPropertyName("trade")]
+        public CoinbaseTransactionTrade? Trade { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTransaction.cs
+        [JsonPropertyName("trade")]
+        public CoinbaseTransactionTrade? Trade { get; set; }
+        /// <summary>
+-        /// Buy info
++        /// ["<c>buy</c>"] Buy info
+        /// </summary>
+        [JsonPropertyName("buy")]
+        public CoinbaseBuyOrSell? Buy { get; set; }
+*** End Patch

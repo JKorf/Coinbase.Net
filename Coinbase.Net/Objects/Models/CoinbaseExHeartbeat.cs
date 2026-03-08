@@ -12,22 +12,22 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseExHeartbeat : CoinbaseSocketEvent
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>product_id</c>"] Symbol
         /// </summary>
         [JsonPropertyName("product_id")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Counter
+        /// ["<c>sequence</c>"] Counter
         /// </summary>
         [JsonPropertyName("sequence")]
         public long Counter { get; set; }
         /// <summary>
-        /// Last trade id
+        /// ["<c>last_trade_id</c>"] Last trade id
         /// </summary>
         [JsonPropertyName("last_trade_id")]
         public long LastTradeId { get; set; }
         /// <summary>
-        /// Timestamp
+        /// ["<c>time</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("time")]
         public DateTime Timestamp { get; set; }

@@ -8,7 +8,7 @@ namespace Coinbase.Net.Objects.Models
     internal record CoinbasePaymentMethodsWrapper
     {
         /// <summary>
-        /// Payment methods
+        /// ["<c>payment_methods</c>"] Payment methods
         /// </summary>
         [JsonPropertyName("payment_methods")]
         public CoinbasePaymentMethod[] PaymentMethods { get; set; } = null!;
@@ -18,7 +18,7 @@ namespace Coinbase.Net.Objects.Models
     internal record CoinbasePaymentMethodWrapper
     {
         /// <summary>
-        /// Payment methods
+        /// ["<c>payment_method</c>"] Payment methods
         /// </summary>
         [JsonPropertyName("payment_method")]
         public CoinbasePaymentMethod PaymentMethod { get; set; } = null!;
@@ -31,57 +31,57 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbasePaymentMethod
     {
         /// <summary>
-        /// Id
+        /// ["<c>id</c>"] Id
         /// </summary>
         [JsonPropertyName("id")]
         public string Id { get; set; } = string.Empty;
         /// <summary>
-        /// Type
+        /// ["<c>type</c>"] Type
         /// </summary>
         [JsonPropertyName("type")]
         public string Type { get; set; } = string.Empty;
         /// <summary>
-        /// Name
+        /// ["<c>name</c>"] Name
         /// </summary>
         [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
         /// <summary>
-        /// Asset
+        /// ["<c>currency</c>"] Asset
         /// </summary>
         [JsonPropertyName("currency")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Verified
+        /// ["<c>verified</c>"] Verified
         /// </summary>
         [JsonPropertyName("verified")]
         public bool Verified { get; set; }
         /// <summary>
-        /// Allow buy
+        /// ["<c>allow_buy</c>"] Allow buy
         /// </summary>
         [JsonPropertyName("allow_buy")]
         public bool AllowBuy { get; set; }
         /// <summary>
-        /// Allow sell
+        /// ["<c>allow_sell</c>"] Allow sell
         /// </summary>
         [JsonPropertyName("allow_sell")]
         public bool AllowSell { get; set; }
         /// <summary>
-        /// Allow deposit
+        /// ["<c>allow_deposit</c>"] Allow deposit
         /// </summary>
         [JsonPropertyName("allow_deposit")]
         public bool AllowDeposit { get; set; }
         /// <summary>
-        /// Allow withdraw
+        /// ["<c>allow_withdraw</c>"] Allow withdraw
         /// </summary>
         [JsonPropertyName("allow_withdraw")]
         public bool AllowWithdraw { get; set; }
         /// <summary>
-        /// Created at
+        /// ["<c>created_at</c>"] Created at
         /// </summary>
         [JsonPropertyName("created_at")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Updated at
+        /// ["<c>updated_at</c>"] Updated at
         /// </summary>
         [JsonPropertyName("updated_at")]
         public DateTime? UpdateTime { get; set; }

@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("amount")]
+        public CoinbaseQuantityReference Quantity { get; set; } = null!;
+        /// <summary>
+-        /// Subtotal
++        /// ["<c>subtotal</c>"] Subtotal
+        /// </summary>
+        [JsonPropertyName("subtotal")]
+        public CoinbaseQuantityReference Subtotal { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("subtotal")]
+        public CoinbaseQuantityReference Subtotal { get; set; } = null!;
+        /// <summary>
+-        /// Total
++        /// ["<c>total</c>"] Total
+        /// </summary>
+        [JsonPropertyName("total")]
+        public CoinbaseQuantityReference Total { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("total")]
+        public CoinbaseQuantityReference Total { get; set; } = null!;
+        /// <summary>
+-        /// Fees
++        /// ["<c>fees</c>"] Fees
+        /// </summary>
+        [JsonPropertyName("fees")]
+        public CoinbaseConvertFees[] Fees { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("fees")]
+        public CoinbaseConvertFees[] Fees { get; set; } = null!;
+        /// <summary>
+-        /// Total fee
++        /// ["<c>total_fee</c>"] Total fee
+        /// </summary>
+        [JsonPropertyName("total_fee")]
+        public CoinbaseConvertFees TotalFee { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("total_fee")]
+        public CoinbaseConvertFees TotalFee { get; set; } = null!;
+        /// <summary>
+-        /// Unit price
++        /// ["<c>unit_price</c>"] Unit price
+        /// </summary>
+        [JsonPropertyName("unit_price")]
+        public CoinbaseUnitPrice UnitPrice { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("unit_price")]
+        public CoinbaseUnitPrice UnitPrice { get; set; } = null!;
+        /// <summary>
+-        /// Unit warnings
++        /// ["<c>user_warnings</c>"] Unit warnings
+        /// </summary>
+        [JsonPropertyName("user_warnings")]
+        public CoinbaseUserWarning[] UserWarnings { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        public CoinbaseUserWarning[] UserWarnings { get; set; } = null!;
+
+        /// <summary>
+-        /// User reference
++        /// ["<c>user_reference</c>"] User reference
+        /// </summary>
+        [JsonPropertyName("user_reference")]
+        public string? UserReference { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("user_reference")]
+        public string? UserReference { get; set; }
+        /// <summary>
+-        /// Source asset
++        /// ["<c>source_currency</c>"] Source asset
+        /// </summary>
+        [JsonPropertyName("source_currency")]
+        public string SourceAsset { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("source_currency")]
+        public string SourceAsset { get; set; } = string.Empty;
+        /// <summary>
+-        /// Target asset
++        /// ["<c>target_currency</c>"] Target asset
+        /// </summary>
+        [JsonPropertyName("target_currency")]
+        public string TargetAsset { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("target_currency")]
+        public string TargetAsset { get; set; } = string.Empty;
+        /// <summary>
+-        /// Source id
++        /// ["<c>source_id</c>"] Source id
+        /// </summary>
+        [JsonPropertyName("source_id")]
+        public string SourceId { get; set; } = string.Empty;
+*** End Patch

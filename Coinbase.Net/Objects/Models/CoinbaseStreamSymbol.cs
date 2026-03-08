@@ -11,52 +11,52 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseStreamSymbol
     {
         /// <summary>
-        /// Symbol type
+        /// ["<c>product_type</c>"] Symbol type
         /// </summary>
         [JsonPropertyName("product_type")]
         public SymbolType SymbolType { get; set; }
         /// <summary>
-        /// Symbol
+        /// ["<c>id</c>"] Symbol
         /// </summary>
         [JsonPropertyName("id")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Base asset
+        /// ["<c>base_currency</c>"] Base asset
         /// </summary>
         [JsonPropertyName("base_currency")]
         public string BaseAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Quote asset
+        /// ["<c>quote_currency</c>"] Quote asset
         /// </summary>
         [JsonPropertyName("quote_currency")]
         public string QuoteAsset { get; set; } = string.Empty;
         /// <summary>
-        /// Base increment
+        /// ["<c>base_increment</c>"] Base increment
         /// </summary>
         [JsonPropertyName("base_increment")]
         public decimal QuantityStep { get; set; }
         /// <summary>
-        /// Quote quantity increment
+        /// ["<c>quote_increment</c>"] Quote quantity increment
         /// </summary>
         [JsonPropertyName("quote_increment")]
         public decimal QuoteQuantityStep { get; set; }
         /// <summary>
-        /// Display name
+        /// ["<c>display_name</c>"] Display name
         /// </summary>
         [JsonPropertyName("display_name")]
         public string DisplayName { get; set; } = string.Empty;
         /// <summary>
-        /// Status
+        /// ["<c>status</c>"] Status
         /// </summary>
         [JsonPropertyName("status")]
         public SymbolStatus SymbolStatus { get; set; }
         /// <summary>
-        /// Status message
+        /// ["<c>status_message</c>"] Status message
         /// </summary>
         [JsonPropertyName("status_message")]
         public string? StatusMessage { get; set; }
         /// <summary>
-        /// Min notional value
+        /// ["<c>min_market_funds</c>"] Min notional value
         /// </summary>
         [JsonPropertyName("min_market_funds")]
         public decimal MinNotionalValue { get; set; }

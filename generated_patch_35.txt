@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("product_type")]
+        public SymbolType SymbolType { get; set; }
+        /// <summary>
+-        /// Reject message
++        /// ["<c>reject_message</c>"] Reject message
+        /// </summary>
+        [JsonPropertyName("reject_message")]
+        public string? RejectMessage { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("reject_message")]
+        public string? RejectMessage { get; set; }
+        /// <summary>
+-        /// Cancel message
++        /// ["<c>cancel_message</c>"] Cancel message
+        /// </summary>
+        [JsonPropertyName("cancel_message")]
+        public string? CancelMessage { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("cancel_message")]
+        public string? CancelMessage { get; set; }
+        /// <summary>
+-        /// Order placement source
++        /// ["<c>order_placement_source</c>"] Order placement source
+        /// </summary>
+        [JsonPropertyName("order_placement_source")]
+        public string OrderPlacementSource { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("order_placement_source")]
+        public string OrderPlacementSource { get; set; } = string.Empty;
+        /// <summary>
+-        /// Outstanding hold quantity
++        /// ["<c>outstanding_hold_amount</c>"] Outstanding hold quantity
+        /// </summary>
+        [JsonPropertyName("outstanding_hold_amount")]
+        public decimal OutstandingHoldQuantity { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("outstanding_hold_amount")]
+        public decimal OutstandingHoldQuantity { get; set; }
+        /// <summary>
+-        /// Is liquidation
++        /// ["<c>is_liquidation</c>"] Is liquidation
+        /// </summary>
+        [JsonPropertyName("is_liquidation")]
+        public bool? IsLiquidation { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("is_liquidation")]
+        public bool? IsLiquidation { get; set; }
+        /// <summary>
+-        /// Last fill time
++        /// ["<c>last_fill_time</c>"] Last fill time
+        /// </summary>
+        [JsonPropertyName("last_fill_time")]
+        public DateTime? LastFillTime { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("last_fill_time")]
+        public DateTime? LastFillTime { get; set; }
+        /// <summary>
+-        /// Edit history
++        /// ["<c>edit_history</c>"] Edit history
+        /// </summary>
+        [JsonPropertyName("edit_history")]
+        public CoinbaseOrderEditHistory[]? EditHistory { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("edit_history")]
+        public CoinbaseOrderEditHistory[]? EditHistory { get; set; }
+        /// <summary>
+-        /// Leverage
++        /// ["<c>leverage</c>"] Leverage
+        /// </summary>
+        [JsonPropertyName("leverage")]
+        public decimal? Leverage { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("leverage")]
+        public decimal? Leverage { get; set; }
+        /// <summary>
+-        /// Margin type
++        /// ["<c>margin_type</c>"] Margin type
+        /// </summary>
+        [JsonPropertyName("margin_type")]
+        public MarginType? MarginType { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("margin_type")]
+        public MarginType? MarginType { get; set; }
+        /// <summary>
+-        /// Retail portfolio id
++        /// ["<c>retail_portfolio_id</c>"] Retail portfolio id
+        /// </summary>
+        [JsonPropertyName("retail_portfolio_id")]
+        public string? RetailPortfolioId { get; set; }
+*** End Patch

@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+    public record CoinbaseAccountPage : CoinbasePage
+    {
+        /// <summary>
+-        /// Accounts
++        /// ["<c>accounts</c>"] Accounts
+        /// </summary>
+        [JsonPropertyName("accounts")]
+        public CoinbaseAccount[] Accounts { get; set; } = Array.Empty<CoinbaseAccount>();
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+    public record CoinbaseAccount
+    {
+        /// <summary>
+-        /// Account id
++        /// ["<c>uuid</c>"] Account id
+        /// </summary>
+        [JsonPropertyName("uuid")]
+        public string AccountId { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+        [JsonPropertyName("uuid")]
+        public string AccountId { get; set; } = string.Empty;
+        /// <summary>
+-        /// Account name
++        /// ["<c>name</c>"] Account name
+        /// </summary>
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = string.Empty;
+        /// <summary>
+-        /// Asset name
++        /// ["<c>currency</c>"] Asset name
+        /// </summary>
+        [JsonPropertyName("currency")]
+        public string Asset { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+        [JsonPropertyName("currency")]
+        public string Asset { get; set; } = string.Empty;
+        /// <summary>
+-        /// Available balance
++        /// ["<c>available_balance</c>"] Available balance
+        /// </summary>
+        [JsonPropertyName("available_balance")]
+        public CoinbaseQuantityReference AvailableBalance { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+        [JsonPropertyName("available_balance")]
+        public CoinbaseQuantityReference AvailableBalance { get; set; } = null!;
+        /// <summary>
+-        /// Holding/frozen balance
++        /// ["<c>hold</c>"] Holding/frozen balance
+        /// </summary>
+        [JsonPropertyName("hold")]
+        public CoinbaseQuantityReference HoldBalance { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+        [JsonPropertyName("hold")]
+        public CoinbaseQuantityReference HoldBalance { get; set; } = null!;
+        /// <summary>
+-        /// Type of account
++        /// ["<c>type</c>"] Type of account
+        /// </summary>
+        [JsonPropertyName("type")]
+        public AccountType Type { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+        [JsonPropertyName("type")]
+        public AccountType Type { get; set; }
+        /// <summary>
+-        /// Default
++        /// ["<c>default</c>"] Default
+        /// </summary>
+        [JsonPropertyName("default")]
+        public bool Default { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+        [JsonPropertyName("default")]
+        public bool Default { get; set; }
+        /// <summary>
+-        /// Active
++        /// ["<c>active</c>"] Active
+        /// </summary>
+        [JsonPropertyName("active")]
+        public bool Active { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+        [JsonPropertyName("active")]
+        public bool Active { get; set; }
+        /// <summary>
+-        /// Ready
++        /// ["<c>ready</c>"] Ready
+        /// </summary>
+        [JsonPropertyName("ready")]
+        public bool Ready { get; set; }
+*** End Patch

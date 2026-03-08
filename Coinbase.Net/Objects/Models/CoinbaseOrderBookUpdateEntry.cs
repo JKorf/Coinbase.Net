@@ -29,22 +29,22 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseOrderBookUpdateEntry : ISymbolOrderBookEntry
     {
         /// <summary>
-        /// Side
+        /// ["<c>side</c>"] Side
         /// </summary>
         [JsonPropertyName("side")]
         public OrderSide Side { get; set; }
         /// <summary>
-        /// Timestamp
+        /// ["<c>event_time</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("event_time")]
         public DateTime EventTime { get; set; }
         /// <summary>
-        /// Price
+        /// ["<c>price_level</c>"] Price
         /// </summary>
         [JsonPropertyName("price_level")]
         public decimal Price { get; set; }
         /// <summary>
-        /// Quantity
+        /// ["<c>new_quantity</c>"] Quantity
         /// </summary>
         [JsonPropertyName("new_quantity")]
         public decimal Quantity { get; set; }

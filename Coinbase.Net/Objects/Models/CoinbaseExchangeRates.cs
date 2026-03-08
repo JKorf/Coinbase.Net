@@ -8,7 +8,7 @@ namespace Coinbase.Net.Objects.Models
     internal record CoinbaseExchangeRatesWrapper
     {
         /// <summary>
-        /// Data
+        /// ["<c>data</c>"] Data
         /// </summary>
         [JsonPropertyName("data")]
         public CoinbaseExchangeRates Data { get; set; } = null!;
@@ -21,12 +21,12 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseExchangeRates
     {
         /// <summary>
-        /// Asset
+        /// ["<c>currency</c>"] Asset
         /// </summary>
         [JsonPropertyName("currency")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Exchange rates
+        /// ["<c>rates</c>"] Exchange rates
         /// </summary>
         [JsonPropertyName("rates")]
         public Dictionary<string, decimal> ExchangeRates { get; set; } = null!;

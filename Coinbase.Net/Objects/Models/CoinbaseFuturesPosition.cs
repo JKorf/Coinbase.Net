@@ -9,7 +9,7 @@ namespace Coinbase.Net.Objects.Models
     internal record CoinbaseFuturesPositionsWrapper
     {
         /// <summary>
-        /// Positions
+        /// ["<c>positions</c>"] Positions
         /// </summary>
         [JsonPropertyName("positions")]
         public CoinbaseFuturesPosition[] Positions { get; set; } = null!;
@@ -19,7 +19,7 @@ namespace Coinbase.Net.Objects.Models
     internal record CoinbaseFuturesPositionWrapper
     {
         /// <summary>
-        /// Position
+        /// ["<c>position</c>"] Position
         /// </summary>
         [JsonPropertyName("position")]
         public CoinbaseFuturesPosition Position { get; set; } = null!;
@@ -32,42 +32,42 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseFuturesPosition
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>product_id</c>"] Symbol
         /// </summary>
         [JsonPropertyName("product_id")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Expiration time
+        /// ["<c>expiration_time</c>"] Expiration time
         /// </summary>
         [JsonPropertyName("expiration_time")]
         public DateTime ExpirationTime { get; set; }
         /// <summary>
-        /// Side
+        /// ["<c>side</c>"] Side
         /// </summary>
         [JsonPropertyName("side")]
         public PositionSide? PositionSide { get; set; }
         /// <summary>
-        /// Number of contracts
+        /// ["<c>number_of_contracts</c>"] Number of contracts
         /// </summary>
         [JsonPropertyName("number_of_contracts")]
         public int NumberOfContracts { get; set; }
         /// <summary>
-        /// Current price
+        /// ["<c>current_price</c>"] Current price
         /// </summary>
         [JsonPropertyName("current_price")]
         public decimal CurrentPrice { get; set; }
         /// <summary>
-        /// Average entry price
+        /// ["<c>avg_entry_price</c>"] Average entry price
         /// </summary>
         [JsonPropertyName("avg_entry_price")]
         public decimal AverageEntryPrice { get; set; }
         /// <summary>
-        /// Unrealized profit and loss
+        /// ["<c>unrealized_pnl</c>"] Unrealized profit and loss
         /// </summary>
         [JsonPropertyName("unrealized_pnl")]
         public decimal UnrealizedPnl { get; set; }
         /// <summary>
-        /// Daily realized profit and loss
+        /// ["<c>daily_realized_pnl</c>"] Daily realized profit and loss
         /// </summary>
         [JsonPropertyName("daily_realized_pnl")]
         public decimal DailyRealizedPnl { get; set; }

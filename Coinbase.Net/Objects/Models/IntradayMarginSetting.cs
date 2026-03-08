@@ -11,7 +11,7 @@ namespace Coinbase.Net.Objects.Models
     public record IntradayMarginSetting
     {
         /// <summary>
-        /// Intraday trading setting value
+        /// ["<c>setting</c>"] Intraday trading setting value
         /// </summary>
         [JsonPropertyName("setting")]
         public IntradayMargin Setting { get; set; }

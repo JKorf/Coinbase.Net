@@ -10,18 +10,18 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseEditOrderResult
     {
         /// <summary>
-        /// Whether the call was succesfull
+        /// ["<c>success</c>"] Whether the call was succesfull
         /// </summary>
         [JsonPropertyName("success")]
         public bool Success { get; set; }
 
         /// <summary>
-        /// Success response
+        /// ["<c>success_response</c>"] Success response
         /// </summary>
         [JsonPropertyName("success_response")]
         public CoinbaseOrderSuccess SuccessResponse { get; set; } = null!;
         /// <summary>
-        /// Error response
+        /// ["<c>error_response</c>"] Error response
         /// </summary>
         [JsonPropertyName("error_response")]
         public CoinbaseOrderError ErrorResponse { get; set; } = null!;

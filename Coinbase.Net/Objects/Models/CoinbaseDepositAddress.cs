@@ -8,7 +8,7 @@ namespace Coinbase.Net.Objects.Models
     internal record CoinbaseDepositAddressWrapper
     {
         /// <summary>
-        /// Data
+        /// ["<c>data</c>"] Data
         /// </summary>
         [JsonPropertyName("data")]
         public CoinbaseDepositAddress Data { get; set; } = null!;
@@ -21,48 +21,48 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseDepositAddress
     {
         /// <summary>
-        /// Id
+        /// ["<c>id</c>"] Id
         /// </summary>
         [JsonPropertyName("id")]
         public string Id { get; set; } = string.Empty;
         /// <summary>
-        /// Address
+        /// ["<c>address</c>"] Address
         /// </summary>
         [JsonPropertyName("address")]
         public string Address { get; set; } = string.Empty;
         /// <summary>
-        /// Name
+        /// ["<c>name</c>"] Name
         /// </summary>
         [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
         /// <summary>
-        /// Created at
+        /// ["<c>created_at</c>"] Created at
         /// </summary>
         [JsonPropertyName("created_at")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Updated at
+        /// ["<c>updated_at</c>"] Updated at
         /// </summary>
         [JsonPropertyName("updated_at")]
         public DateTime UpdateTime { get; set; }
         /// <summary>
-        /// Network
+        /// ["<c>network</c>"] Network
         /// </summary>
         [JsonPropertyName("network")]
         public string Network { get; set; } = string.Empty;
         /// <summary>
-        /// Resource
+        /// ["<c>resource</c>"] Resource
         /// </summary>
         [JsonPropertyName("resource")]
         public string Resource { get; set; } = string.Empty;
         /// <summary>
-        /// Resource path
+        /// ["<c>resource_path</c>"] Resource path
         /// </summary>
         [JsonPropertyName("resource_path")]
         public string ResourcePath { get; set; } = string.Empty;
 
         /// <summary>
-        /// Destination tag (for XRP etc)
+        /// ["<c>destination_tag</c>"] Destination tag (for XRP etc)
         /// </summary>
         [JsonPropertyName("destination_tag")]
         public string? DestinationTag { get; set; }

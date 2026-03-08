@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseDeposit.cs
+        [JsonPropertyName("committed")]
+        public bool Committed { get; set; }
+        /// <summary>
+-        /// Fee
++        /// ["<c>fee</c>"] Fee
+        /// </summary>
+        [JsonPropertyName("fee")]
+        public CoinbaseQuantityReference Fee { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseDeposit.cs
+        [JsonPropertyName("fee")]
+        public CoinbaseQuantityReference Fee { get; set; } = null!;
+        /// <summary>
+-        /// Payout at
++        /// ["<c>payout_at</c>"] Payout at
+        /// </summary>
+        [JsonPropertyName("payout_at")]
+        public DateTime? PayoutAt { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseDeposit.cs
+        [JsonPropertyName("payout_at")]
+        public DateTime? PayoutAt { get; set; }
+        /// <summary>
+-        /// User reference
++        /// ["<c>user_reference</c>"] User reference
+        /// </summary>
+        [JsonPropertyName("user_reference")]
+        public string? UserReference { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseDepositAddress.cs
+    internal record CoinbaseDepositAddressWrapper
+    {
+        /// <summary>
+-        /// Data
++        /// ["<c>data</c>"] Data
+        /// </summary>
+        [JsonPropertyName("data")]
+        public CoinbaseDepositAddress Data { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseDepositAddress.cs
+    public record CoinbaseDepositAddress
+    {
+        /// <summary>
+-        /// Id
++        /// ["<c>id</c>"] Id
+        /// </summary>
+        [JsonPropertyName("id")]
+        public string Id { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseDepositAddress.cs
+        [JsonPropertyName("id")]
+        public string Id { get; set; } = string.Empty;
+        /// <summary>
+-        /// Address
++        /// ["<c>address</c>"] Address
+        /// </summary>
+        [JsonPropertyName("address")]
+        public string Address { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseDepositAddress.cs
+        [JsonPropertyName("address")]
+        public string Address { get; set; } = string.Empty;
+        /// <summary>
+-        /// Name
++        /// ["<c>name</c>"] Name
+        /// </summary>
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseDepositAddress.cs
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = string.Empty;
+        /// <summary>
+-        /// Created at
++        /// ["<c>created_at</c>"] Created at
+        /// </summary>
+        [JsonPropertyName("created_at")]
+        public DateTime CreateTime { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseDepositAddress.cs
+        [JsonPropertyName("created_at")]
+        public DateTime CreateTime { get; set; }
+        /// <summary>
+-        /// Updated at
++        /// ["<c>updated_at</c>"] Updated at
+        /// </summary>
+        [JsonPropertyName("updated_at")]
+        public DateTime UpdateTime { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseDepositAddress.cs
+        [JsonPropertyName("updated_at")]
+        public DateTime UpdateTime { get; set; }
+        /// <summary>
+-        /// Network
++        /// ["<c>network</c>"] Network
+        /// </summary>
+        [JsonPropertyName("network")]
+        public string Network { get; set; } = string.Empty;
+*** End Patch

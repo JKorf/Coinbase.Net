@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        [JsonPropertyName("min_size")]
+        public decimal MinSize { get; set; }
+        /// <summary>
+-        /// Status
++        /// ["<c>status</c>"] Status
+        /// </summary>
+        [JsonPropertyName("status")]
+        public SymbolStatus Status { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        [JsonPropertyName("status")]
+        public SymbolStatus Status { get; set; }
+        /// <summary>
+-        /// Status info
++        /// ["<c>status_message</c>"] Status info
+        /// </summary>
+        [JsonPropertyName("status_message")]
+        public string? StatusMessage { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        [JsonPropertyName("status_message")]
+        public string? StatusMessage { get; set; }
+        /// <summary>
+-        /// Max precision
++        /// ["<c>max_precision</c>"] Max precision
+        /// </summary>
+        [JsonPropertyName("max_precision")]
+        public decimal MaxPrecision { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        [JsonPropertyName("max_precision")]
+        public decimal MaxPrecision { get; set; }
+        /// <summary>
+-        /// Convertible to
++        /// ["<c>convertible_to</c>"] Convertible to
+        /// </summary>
+        [JsonPropertyName("convertible_to")]
+        public string[] ConvertibleTo { get; set; } = [];
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        [JsonPropertyName("convertible_to")]
+        public string[] ConvertibleTo { get; set; } = [];
+        /// <summary>
+-        /// Default network
++        /// ["<c>default_network</c>"] Default network
+        /// </summary>
+        [JsonPropertyName("default_network")]
+        public string DefaultNetwork { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        [JsonPropertyName("default_network")]
+        public string DefaultNetwork { get; set; } = string.Empty;
+        /// <summary>
+-        /// Supported networks
++        /// ["<c>supported_networks</c>"] Supported networks
+        /// </summary>
+        [JsonPropertyName("supported_networks")]
+        public CoinbaseExAssetNetwork[] SupportedNetworks { get; set; } = [];
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        public CoinbaseExAssetNetwork[] SupportedNetworks { get; set; } = [];
+
+        /// <summary>
+-        /// Detailed info
++        /// ["<c>details</c>"] Detailed info
+        /// </summary>
+        [JsonPropertyName("details")]
+        public CoinbaseExAssetDetails? Details { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+    public record CoinbaseExAssetNetwork
+    {
+        /// <summary>
+-        /// Id
++        /// ["<c>id</c>"] Id
+        /// </summary>
+        [JsonPropertyName("id")]
+        public string Id { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        [JsonPropertyName("id")]
+        public string Id { get; set; } = string.Empty;
+        /// <summary>
+-        /// Full name
++        /// ["<c>name</c>"] Full name
+        /// </summary>
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = string.Empty;
+        /// <summary>
+-        /// Status
++        /// ["<c>status</c>"] Status
+        /// </summary>
+        [JsonPropertyName("status")]
+        public SymbolStatus Status { get; set; }
+*** End Patch

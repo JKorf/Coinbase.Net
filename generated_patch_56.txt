@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("unrealized_pnl")]
+        public CoinbaseCurrencyQuantityReference UnrealizedPnl { get; set; } = null!;
+        /// <summary>
+-        /// Mark price
++        /// ["<c>mark_price</c>"] Mark price
+        /// </summary>
+        [JsonPropertyName("mark_price")]
+        public CoinbaseCurrencyQuantityReference MarkPrice { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("mark_price")]
+        public CoinbaseCurrencyQuantityReference MarkPrice { get; set; } = null!;
+        /// <summary>
+-        /// Liquidation price
++        /// ["<c>liquidation_price</c>"] Liquidation price
+        /// </summary>
+        [JsonPropertyName("liquidation_price")]
+        public CoinbaseCurrencyQuantityReference LiquidationPrice { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("liquidation_price")]
+        public CoinbaseCurrencyQuantityReference LiquidationPrice { get; set; } = null!;
+        /// <summary>
+-        /// Leverage
++        /// ["<c>leverage</c>"] Leverage
+        /// </summary>
+        [JsonPropertyName("leverage")]
+        public decimal Leverage { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("leverage")]
+        public decimal Leverage { get; set; }
+        /// <summary>
+-        /// Initial margin notional
++        /// ["<c>im_notional</c>"] Initial margin notional
+        /// </summary>
+        [JsonPropertyName("im_notional")]
+        public CoinbaseCurrencyQuantityReference InitialMarginNotional { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("im_notional")]
+        public CoinbaseCurrencyQuantityReference InitialMarginNotional { get; set; } = null!;
+        /// <summary>
+-        /// Maintenance margin notional
++        /// ["<c>mm_notional</c>"] Maintenance margin notional
+        /// </summary>
+        [JsonPropertyName("mm_notional")]
+        public CoinbaseCurrencyQuantityReference MaintenanceMarginNotional { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("mm_notional")]
+        public CoinbaseCurrencyQuantityReference MaintenanceMarginNotional { get; set; } = null!;
+        /// <summary>
+-        /// Position notional
++        /// ["<c>position_notional</c>"] Position notional
+        /// </summary>
+        [JsonPropertyName("position_notional")]
+        public CoinbaseCurrencyQuantityReference PositionNotional { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("position_notional")]
+        public CoinbaseCurrencyQuantityReference PositionNotional { get; set; } = null!;
+        /// <summary>
+-        /// Margin type
++        /// ["<c>margin_type</c>"] Margin type
+        /// </summary>
+        [JsonPropertyName("margin_type")]
+        public MarginType? MarginType { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("margin_type")]
+        public MarginType? MarginType { get; set; }
+        /// <summary>
+-        /// Liquidation buffer
++        /// ["<c>liquidation_buffer</c>"] Liquidation buffer
+        /// </summary>
+        [JsonPropertyName("liquidation_buffer")]
+        public decimal LiquidationBuffer { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("liquidation_buffer")]
+        public decimal LiquidationBuffer { get; set; }
+        /// <summary>
+-        /// Liquidation percentage
++        /// ["<c>liquidation_percentage</c>"] Liquidation percentage
+        /// </summary>
+        [JsonPropertyName("liquidation_percentage")]
+        public decimal LiquidationPercentage { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+    public record CoinbasePorfolioBreakdownFuturesPosition
+    {
+        /// <summary>
+-        /// Product id
++        /// ["<c>product_id</c>"] Product id
+        /// </summary>
+        [JsonPropertyName("product_id")]
+        public string ProductId { get; set; } = string.Empty;
+*** End Patch

@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+        [JsonPropertyName("pricing_tier")]
+        public string PricingTier { get; set; } = string.Empty;
+        /// <summary>
+-        /// Usd from
++        /// ["<c>usd_from</c>"] Usd from
+        /// </summary>
+        [JsonPropertyName("usd_from")]
+        public decimal? UsdFrom { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+        [JsonPropertyName("usd_from")]
+        public decimal? UsdFrom { get; set; }
+        /// <summary>
+-        /// Usd to
++        /// ["<c>usd_to</c>"] Usd to
+        /// </summary>
+        [JsonPropertyName("usd_to")]
+        public decimal? UsdTo { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+        [JsonPropertyName("usd_to")]
+        public decimal? UsdTo { get; set; }
+        /// <summary>
+-        /// Taker fee rate
++        /// ["<c>taker_fee_rate</c>"] Taker fee rate
+        /// </summary>
+        [JsonPropertyName("taker_fee_rate")]
+        public decimal TakerFeeRate { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+        [JsonPropertyName("taker_fee_rate")]
+        public decimal TakerFeeRate { get; set; }
+        /// <summary>
+-        /// Maker fee rate
++        /// ["<c>maker_fee_rate</c>"] Maker fee rate
+        /// </summary>
+        [JsonPropertyName("maker_fee_rate")]
+        public decimal MakerFeeRate { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+        [JsonPropertyName("maker_fee_rate")]
+        public decimal MakerFeeRate { get; set; }
+        /// <summary>
+-        /// Lower bound (inclusive) of pricing tier in usd of total assets on platform.
++        /// ["<c>aop_from</c>"] Lower bound (inclusive) of pricing tier in usd of total assets on platform.
+        /// </summary>
+        [JsonPropertyName("aop_from")]
+        public decimal? AopFrom { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+        [JsonPropertyName("aop_from")]
+        public decimal? AopFrom { get; set; }
+        /// <summary>
+-        /// Upper bound (exclusive) of pricing tier in usd of total assets on platform.
++        /// ["<c>aop_to</c>"] Upper bound (exclusive) of pricing tier in usd of total assets on platform.
+        /// </summary>
+        [JsonPropertyName("aop_to")]
+        public decimal? AopTo { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+        [JsonPropertyName("aop_to")]
+        public decimal? AopTo { get; set; }
+        /// <summary>
+-        /// Perp volume from
++        /// ["<c>perps_vol_from</c>"] Perp volume from
+        /// </summary>
+        [JsonPropertyName("perps_vol_from")]
+        public decimal? PerpsFrom { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+        [JsonPropertyName("perps_vol_from")]
+        public decimal? PerpsFrom { get; set; }
+        /// <summary>
+-        /// Perp volume to
++        /// ["<c>perps_vol_to</c>"] Perp volume to
+        /// </summary>
+        [JsonPropertyName("perps_vol_to")]
+        public decimal? PerpsTo { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+        [JsonPropertyName("perps_vol_to")]
+        public decimal? PerpsTo { get; set; }
+        /// <summary>
+-        /// Futures volume from
++        /// ["<c>futures_vol_from</c>"] Futures volume from
+        /// </summary>
+        [JsonPropertyName("futures_vol_from")]
+        public decimal? FuturesFrom { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+        [JsonPropertyName("futures_vol_from")]
+        public decimal? FuturesFrom { get; set; }
+        /// <summary>
+-        /// Futures volume to
++        /// ["<c>futures_vol_to</c>"] Futures volume to
+        /// </summary>
+        [JsonPropertyName("futures_vol_to")]
+        public decimal? FuturesTo { get; set; }
+*** End Patch

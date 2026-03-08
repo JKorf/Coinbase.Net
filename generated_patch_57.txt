@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("product_id")]
+        public string ProductId { get; set; } = string.Empty;
+        /// <summary>
+-        /// Contract quantity
++        /// ["<c>contract_size</c>"] Contract quantity
+        /// </summary>
+        [JsonPropertyName("contract_size")]
+        public decimal ContractQuantity { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("contract_size")]
+        public decimal ContractQuantity { get; set; }
+        /// <summary>
+-        /// Side
++        /// ["<c>side</c>"] Side
+        /// </summary>
+        [JsonPropertyName("side")]
+        public PositionSide? Side { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("side")]
+        public PositionSide? Side { get; set; }
+        /// <summary>
+-        /// Quantity
++        /// ["<c>amount</c>"] Quantity
+        /// </summary>
+        [JsonPropertyName("amount")]
+        public decimal Quantity { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("amount")]
+        public decimal Quantity { get; set; }
+        /// <summary>
+-        /// Average entry price
++        /// ["<c>avg_entry_price</c>"] Average entry price
+        /// </summary>
+        [JsonPropertyName("avg_entry_price")]
+        public decimal? AverageEntryPrice { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("avg_entry_price")]
+        public decimal? AverageEntryPrice { get; set; }
+        /// <summary>
+-        /// Current price
++        /// ["<c>current_price</c>"] Current price
+        /// </summary>
+        [JsonPropertyName("current_price")]
+        public decimal CurrentPrice { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("current_price")]
+        public decimal CurrentPrice { get; set; }
+        /// <summary>
+-        /// Unrealized pnl
++        /// ["<c>unrealized_pnl</c>"] Unrealized pnl
+        /// </summary>
+        [JsonPropertyName("unrealized_pnl")]
+        public decimal UnrealizedPnl { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("unrealized_pnl")]
+        public decimal UnrealizedPnl { get; set; }
+        /// <summary>
+-        /// Expiry
++        /// ["<c>expiry</c>"] Expiry
+        /// </summary>
+        [JsonPropertyName("expiry")]
+        public DateTime Expiry { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("expiry")]
+        public DateTime Expiry { get; set; }
+        /// <summary>
+-        /// Underlying asset
++        /// ["<c>underlying_asset</c>"] Underlying asset
+        /// </summary>
+        [JsonPropertyName("underlying_asset")]
+        public string UnderlyingAsset { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("underlying_asset")]
+        public string UnderlyingAsset { get; set; } = string.Empty;
+        /// <summary>
+-        /// Asset img url
++        /// ["<c>asset_img_url</c>"] Asset img url
+        /// </summary>
+        [JsonPropertyName("asset_img_url")]
+        public string AssetImgUrl { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("asset_img_url")]
+        public string AssetImgUrl { get; set; } = string.Empty;
+        /// <summary>
+-        /// Product name
++        /// ["<c>product_name</c>"] Product name
+        /// </summary>
+        [JsonPropertyName("product_name")]
+        public string ProductName { get; set; } = string.Empty;
+*** End Patch

@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+        [JsonPropertyName("futures_vol_to")]
+        public decimal? FuturesTo { get; set; }
+        /// <summary>
+-        /// Volume types and ranges
++        /// ["<c>volume_types_and_range</c>"] Volume types and ranges
+        /// </summary>
+        [JsonPropertyName("volume_types_and_range")]
+        public CoinbaseVolumeRange[] VolumeRanges { get; set; } = [];
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+    public record CoinbaseTax
+    {
+        /// <summary>
+-        /// Rate
++        /// ["<c>rate</c>"] Rate
+        /// </summary>
+        [JsonPropertyName("rate")]
+        public decimal Rate { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+        [JsonPropertyName("rate")]
+        public decimal Rate { get; set; }
+        /// <summary>
+-        /// Type
++        /// ["<c>type</c>"] Type
+        /// </summary>
+        [JsonPropertyName("type")]
+        public string? Type { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+    public record CoinbaseVolumeBreakdown
+    {
+        /// <summary>
+-        /// Volume type
++        /// ["<c>volume_type</c>"] Volume type
+        /// </summary>
+        [JsonPropertyName("volume_type")]
+        public string VolumeType { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+        [JsonPropertyName("volume_type")]
+        public string VolumeType { get; set; } = string.Empty;
+        /// <summary>
+-        /// Volume
++        /// ["<c>volume</c>"] Volume
+        /// </summary>
+        [JsonPropertyName("volume")]
+        public decimal Volume { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+    public record CoinbaseVolumeRange
+    {
+        /// <summary>
+-        /// Volume types
++        /// ["<c>volume_types</c>"] Volume types
+        /// </summary>
+        [JsonPropertyName("volume_types")]
+        public string[] VolumeTypes { get; set; } = [];
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+        [JsonPropertyName("volume_types")]
+        public string[] VolumeTypes { get; set; } = [];
+        /// <summary>
+-        /// Volume from
++        /// ["<c>vol_from</c>"] Volume from
+        /// </summary>
+        [JsonPropertyName("vol_from")]
+        public decimal? VolumeFrom { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFeeInfo.cs
+        [JsonPropertyName("vol_from")]
+        public decimal? VolumeFrom { get; set; }
+        /// <summary>
+-        /// Volume to
++        /// ["<c>vol_to</c>"] Volume to
+        /// </summary>
+        [JsonPropertyName("vol_to")]
+        public decimal? VolumeTo { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFiatAsset.cs
+    internal record CoinbaseFiatAssetWrapper
+    {
+        /// <summary>
+-        /// Data
++        /// ["<c>data</c>"] Data
+        /// </summary>
+        [JsonPropertyName("data")]
+        public CoinbaseFiatAsset[] Data { get; set; } = Array.Empty<CoinbaseFiatAsset>();
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFiatAsset.cs
+    public record CoinbaseFiatAsset
+    {
+        /// <summary>
+-        /// Asset
++        /// ["<c>id</c>"] Asset
+        /// </summary>
+        [JsonPropertyName("id")]
+        public string Asset { get; set; } = string.Empty;
+*** End Patch

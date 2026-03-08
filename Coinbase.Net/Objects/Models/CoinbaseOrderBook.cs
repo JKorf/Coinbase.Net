@@ -19,23 +19,23 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseOrderBook
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>product_id</c>"] Symbol
         /// </summary>
         [JsonPropertyName("product_id")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Asks list
+        /// ["<c>asks</c>"] Asks list
         /// </summary>
         [JsonPropertyName("asks")]
         public CoinbaseOrderBookEntry[] Asks { get; set; } = Array.Empty<CoinbaseOrderBookEntry>();
         /// <summary>
-        /// Bids list
+        /// ["<c>bids</c>"] Bids list
         /// </summary>
         [JsonPropertyName("bids")]
         public CoinbaseOrderBookEntry[] Bids { get; set; } = Array.Empty<CoinbaseOrderBookEntry>();
 
         /// <summary>
-        /// Time
+        /// ["<c>time</c>"] Time
         /// </summary>
         [JsonPropertyName("time")]
         public DateTime Time { get; set; }
@@ -48,12 +48,12 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseOrderBookEntry : ISymbolOrderBookEntry
     {
         /// <summary>
-        /// Price
+        /// ["<c>price</c>"] Price
         /// </summary>
         [JsonPropertyName("price")]
         public decimal Price { get; set; }
         /// <summary>
-        /// Quantity
+        /// ["<c>size</c>"] Quantity
         /// </summary>
         [JsonPropertyName("size")]
         public decimal Quantity { get; set; }

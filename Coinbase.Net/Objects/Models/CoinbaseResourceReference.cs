@@ -11,17 +11,17 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseResourceReference
     {
         /// <summary>
-        /// Id
+        /// ["<c>id</c>"] Id
         /// </summary>
         [JsonPropertyName("id")]
         public string? Id { get; set; } = string.Empty;
         /// <summary>
-        /// Resource
+        /// ["<c>resource</c>"] Resource
         /// </summary>
         [JsonPropertyName("resource")]
         public string Resource { get; set; } = string.Empty;
         /// <summary>
-        /// Resource path
+        /// ["<c>resource_path</c>"] Resource path
         /// </summary>
         [JsonPropertyName("resource_path")]
         public string? ResourcePath { get; set; }
@@ -34,13 +34,13 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseToReference : CoinbaseResourceReference
     {
         /// <summary>
-        /// Address
+        /// ["<c>address</c>"] Address
         /// </summary>
         [JsonPropertyName("address")]
         public string? Address { get; set; }
 
         /// <summary>
-        /// Email
+        /// ["<c>email</c>"] Email
         /// </summary>
         [JsonPropertyName("email")]
         public string? Email { get; set; }

@@ -10,17 +10,17 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbasePage
     {
         /// <summary>
-        /// Has another page
+        /// ["<c>has_next</c>"] Has another page
         /// </summary>
         [JsonPropertyName("has_next")]
         public bool HasNextPage { get; set; }
         /// <summary>
-        /// Next page cursor
+        /// ["<c>cursor</c>"] Next page cursor
         /// </summary>
         [JsonPropertyName("cursor")]
         public string? Cursor { get; set; }
         /// <summary>
-        /// Total items
+        /// ["<c>size</c>"] Total items
         /// </summary>
         [JsonPropertyName("size")]
         public int TotalItems { get; set; }

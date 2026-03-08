@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExpiringPosition.cs
+        [JsonPropertyName("realized_pnl")]
+        public decimal RealizedPnl { get; set; }
+        /// <summary>
+-        /// Unrealized profit and loss
++        /// ["<c>unrealized_pnl</c>"] Unrealized profit and loss
+        /// </summary>
+        [JsonPropertyName("unrealized_pnl")]
+        public decimal UnrealizedPnl { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExpiringPosition.cs
+        [JsonPropertyName("unrealized_pnl")]
+        public decimal UnrealizedPnl { get; set; }
+        /// <summary>
+-        /// Entry price
++        /// ["<c>entry_price</c>"] Entry price
+        /// </summary>
+        [JsonPropertyName("entry_price")]
+        public decimal EntryPrice { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExSymbol.cs
+    public record CoinbaseExSymbol
+    {
+        /// <summary>
+-        /// Symbol name
++        /// ["<c>id</c>"] Symbol name
+        /// </summary>
+        [JsonPropertyName("id")]
+        public string Symbol { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExSymbol.cs
+        [JsonPropertyName("id")]
+        public string Symbol { get; set; } = string.Empty;
+        /// <summary>
+-        /// Display name
++        /// ["<c>display_name</c>"] Display name
+        /// </summary>
+        [JsonPropertyName("display_name")]
+        public string DisplayName { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExSymbol.cs
+        [JsonPropertyName("display_name")]
+        public string DisplayName { get; set; } = string.Empty;
+        /// <summary>
+-        /// Base increment
++        /// ["<c>base_increment</c>"] Base increment
+        /// </summary>
+        [JsonPropertyName("base_increment")]
+        public decimal QuantityStep { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExSymbol.cs
+        [JsonPropertyName("base_increment")]
+        public decimal QuantityStep { get; set; }
+        /// <summary>
+-        /// Quote quantity increment
++        /// ["<c>quote_increment</c>"] Quote quantity increment
+        /// </summary>
+        [JsonPropertyName("quote_increment")]
+        public decimal QuoteQuantityStep { get; set; }        
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExSymbol.cs
+        [JsonPropertyName("quote_increment")]
+        public decimal QuoteQuantityStep { get; set; }        
+        /// <summary>
+-        /// Min order value
++        /// ["<c>min_market_funds</c>"] Min order value
+        /// </summary>
+        [JsonPropertyName("min_market_funds")]
+        public decimal MinOrderValue { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExSymbol.cs
+        [JsonPropertyName("min_market_funds")]
+        public decimal MinOrderValue { get; set; }
+        /// <summary>
+-        /// Base asset name
++        /// ["<c>base_currency</c>"] Base asset name
+        /// </summary>
+        [JsonPropertyName("base_currency")]
+        public string BaseAssetName { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExSymbol.cs
+        [JsonPropertyName("base_currency")]
+        public string BaseAssetName { get; set; } = string.Empty;
+        /// <summary>
+-        /// Quote asset name
++        /// ["<c>quote_currency</c>"] Quote asset name
+        /// </summary>
+        [JsonPropertyName("quote_currency")]
+        public string QuoteAssetName { get; set; } = string.Empty;       
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExSymbol.cs
+        public string QuoteAssetName { get; set; } = string.Empty;       
+        
+        /// <summary>
+-        /// Status of the symbol
++        /// ["<c>status</c>"] Status of the symbol
+        /// </summary>
+        [JsonPropertyName("status")]
+        public SymbolStatus? SymbolStatus { get; set; }
+*** End Patch

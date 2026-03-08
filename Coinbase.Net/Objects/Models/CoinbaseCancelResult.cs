@@ -18,17 +18,17 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseCancelResult
     {
         /// <summary>
-        /// Success
+        /// ["<c>success</c>"] Success
         /// </summary>
         [JsonPropertyName("success")]
         public bool Success { get; set; }
         /// <summary>
-        /// Error message
+        /// ["<c>failure_reason</c>"] Error message
         /// </summary>
         [JsonPropertyName("failure_reason")]
         public string? ErrorMessage { get; set; }
         /// <summary>
-        /// Order id
+        /// ["<c>order_id</c>"] Order id
         /// </summary>
         [JsonPropertyName("order_id")]
         public string? OrderId { get; set; }

@@ -19,92 +19,92 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseTransaction
     {
         /// <summary>
-        /// Id
+        /// ["<c>id</c>"] Id
         /// </summary>
         [JsonPropertyName("id")]
         public string Id { get; set; } = string.Empty;
         /// <summary>
-        /// Type of the transaction
+        /// ["<c>type</c>"] Type of the transaction
         /// </summary>
         [JsonPropertyName("type")]
         public TransactionType TransactionType { get; set; }
         /// <summary>
-        /// Status of the transaction
+        /// ["<c>status</c>"] Status of the transaction
         /// </summary>
         [JsonPropertyName("status")]
         public TransactionStatus TransactionStatus { get; set; }
         /// <summary>
-        /// Quantity
+        /// ["<c>amount</c>"] Quantity
         /// </summary>
         [JsonPropertyName("amount")]
         public CoinbaseQuantityReference Quantity { get; set; } = null!;
         /// <summary>
-        /// Native quantity
+        /// ["<c>native_amount</c>"] Native quantity
         /// </summary>
         [JsonPropertyName("native_amount")]
         public CoinbaseQuantityReference NativeQuantity { get; set; } = null!;
         /// <summary>
-        /// Description
+        /// ["<c>description</c>"] Description
         /// </summary>
         [JsonPropertyName("description")]
         public string? Description { get; set; }
         /// <summary>
-        /// Created at
+        /// ["<c>created_at</c>"] Created at
         /// </summary>
         [JsonPropertyName("created_at")]
         public DateTime CreateTime { get; set; }
         /// <summary>
-        /// Updated at
+        /// ["<c>updated_at</c>"] Updated at
         /// </summary>
         [JsonPropertyName("updated_at")]
         public DateTime? UpdateTime { get; set; }
         /// <summary>
-        /// Resource
+        /// ["<c>resource</c>"] Resource
         /// </summary>
         [JsonPropertyName("resource")]
         public string Resource { get; set; } = string.Empty;
         /// <summary>
-        /// Resource path
+        /// ["<c>resource_path</c>"] Resource path
         /// </summary>
         [JsonPropertyName("resource_path")]
         public string ResourcePath { get; set; } = string.Empty;
         /// <summary>
-        /// Network info
+        /// ["<c>network</c>"] Network info
         /// </summary>
         [JsonPropertyName("network")]
         public CoinbaseTransactionNetwork? Network { get; set; }
         /// <summary>
-        /// Transfer target
+        /// ["<c>to</c>"] Transfer target
         /// </summary>
         [JsonPropertyName("to")]
         public CoinbaseToReference? To { get; set; }
         /// <summary>
-        /// Transfer source
+        /// ["<c>from</c>"] Transfer source
         /// </summary>
         [JsonPropertyName("from")]
         public CoinbaseToReference? From { get; set; }
         /// <summary>
-        /// Details
+        /// ["<c>details</c>"] Details
         /// </summary>
         [JsonPropertyName("details")]
         public CoinbaseTransactionDetails Details { get; set; } = null!;
         /// <summary>
-        /// Trade info
+        /// ["<c>trade</c>"] Trade info
         /// </summary>
         [JsonPropertyName("trade")]
         public CoinbaseTransactionTrade? Trade { get; set; }
         /// <summary>
-        /// Buy info
+        /// ["<c>buy</c>"] Buy info
         /// </summary>
         [JsonPropertyName("buy")]
         public CoinbaseBuyOrSell? Buy { get; set; }
         /// <summary>
-        /// Sell info
+        /// ["<c>sell</c>"] Sell info
         /// </summary>
         [JsonPropertyName("sell")]
         public CoinbaseBuyOrSell? Sell { get; set; }
         /// <summary>
-        /// Advanced trade fill info
+        /// ["<c>advanced_trade_fill</c>"] Advanced trade fill info
         /// </summary>
         [JsonPropertyName("advanced_trade_fill")]
         public CoinbaseAdvancedTradeFill? AdvancedTradeFill { get; set; }
@@ -117,29 +117,29 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseTransactionNetwork
     {
         /// <summary>
-        /// Status
+        /// ["<c>status</c>"] Status
         /// </summary>
         [JsonPropertyName("status")]
         public string Status { get; set; } = string.Empty;
         /// <summary>
-        /// Transaction hash, only provided when this is a SEND transaction
+        /// ["<c>hash</c>"] Transaction hash, only provided when this is a SEND transaction
         /// </summary>
         [JsonPropertyName("hash")]
         public string? Hash { get; set; }
         /// <summary>
-        /// Name of the network, only provided when this is a SEND transaction
+        /// ["<c>name</c>"] Name of the network, only provided when this is a SEND transaction
         /// </summary>
         [JsonPropertyName("name")]
         public string? NetworkName { get; set; }
 
         /// <summary>
-        /// Transaction fee, only provided when this is a SEND transaction
+        /// ["<c>transaction_fee</c>"] Transaction fee, only provided when this is a SEND transaction
         /// </summary>
         [JsonPropertyName("transaction_fee")]
         public CoinbaseQuantityReference? TransactionFee { get; set; }
 
         /// <summary>
-        /// Transaction quantity, only provided when this is a SEND transaction
+        /// ["<c>transaction_amount</c>"] Transaction quantity, only provided when this is a SEND transaction
         /// </summary>
         [JsonPropertyName("transaction_amount")]
         public CoinbaseQuantityReference? TransactionQuantity { get; set; }
@@ -152,12 +152,12 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseTransactionDetails
     {
         /// <summary>
-        /// Title
+        /// ["<c>title</c>"] Title
         /// </summary>
         [JsonPropertyName("title")]
         public string Title { get; set; } = string.Empty;
         /// <summary>
-        /// Subtitle
+        /// ["<c>subtitle</c>"] Subtitle
         /// </summary>
         [JsonPropertyName("subtitle")]
         public string Subtitle { get; set; } = string.Empty;
@@ -170,12 +170,12 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseTransactionTrade
     {
         /// <summary>
-        /// Id of the trade
+        /// ["<c>id</c>"] Id of the trade
         /// </summary>
         [JsonPropertyName("id")]
         public string Id { get; set; } = string.Empty;
         /// <summary>
-        /// The name of the payment method used for the trade
+        /// ["<c>payment_method_name</c>"] The name of the payment method used for the trade
         /// </summary>
         [JsonPropertyName("payment_method_name")]
         public string PaymentMethodName { get; set; } = string.Empty;
@@ -188,27 +188,27 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseAdvancedTradeFill
     {
         /// <summary>
-        /// Commission
+        /// ["<c>commission</c>"] Commission
         /// </summary>
         [JsonPropertyName("commission")]
         public decimal Commission { get; set; }
         /// <summary>
-        /// Fill price
+        /// ["<c>fill_price</c>"] Fill price
         /// </summary>
         [JsonPropertyName("fill_price")]
         public decimal FillPrice { get; set; }
         /// <summary>
-        /// Order id
+        /// ["<c>order_id</c>"] Order id
         /// </summary>
         [JsonPropertyName("order_id")]
         public string OrderId { get; set; } = string.Empty;
         /// <summary>
-        /// Order side (buy/sell)
+        /// ["<c>order_side</c>"] Order side (buy/sell)
         /// </summary>
         [JsonPropertyName("order_side")]
         public OrderSide OrderSide { get; set; }
         /// <summary>
-        /// Product id
+        /// ["<c>product_id</c>"] Product id
         /// </summary>
         [JsonPropertyName("product_id")]
         public string ProductId { get; set; } = string.Empty;
@@ -221,27 +221,27 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseBuyOrSell
     {
         /// <summary>
-        /// Fee details
+        /// ["<c>fee</c>"] Fee details
         /// </summary>
         [JsonPropertyName("fee")]
         public CoinbaseQuantityReference? Fee { get; set; } = null!;
         /// <summary>
-        /// Id of the buy/sell
+        /// ["<c>id</c>"] Id of the buy/sell
         /// </summary>
         [JsonPropertyName("id")]
         public string Id { get; set; } = string.Empty;
         /// <summary>
-        /// Payment method name
+        /// ["<c>payment_method_name</c>"] Payment method name
         /// </summary>
         [JsonPropertyName("payment_method_name")]
         public string PaymentMethodName { get; set; } = string.Empty;
         /// <summary>
-        /// Subtotal info
+        /// ["<c>subtotal</c>"] Subtotal info
         /// </summary>
         [JsonPropertyName("subtotal")]
         public CoinbaseQuantityReference Subtotal { get; set; } = null!;
         /// <summary>
-        /// Total info
+        /// ["<c>total</c>"] Total info
         /// </summary>
         [JsonPropertyName("total")]
         public CoinbaseQuantityReference Total { get; set; } = null!;

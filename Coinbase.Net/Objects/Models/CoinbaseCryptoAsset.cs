@@ -19,42 +19,42 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseCryptoAsset
     {
         /// <summary>
-        /// Asset
+        /// ["<c>code</c>"] Asset
         /// </summary>
         [JsonPropertyName("code")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Name
+        /// ["<c>name</c>"] Name
         /// </summary>
         [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
         /// <summary>
-        /// Color
+        /// ["<c>color</c>"] Color
         /// </summary>
         [JsonPropertyName("color")]
         public string Color { get; set; } = string.Empty;
         /// <summary>
-        /// Sort index
+        /// ["<c>sort_index</c>"] Sort index
         /// </summary>
         [JsonPropertyName("sort_index")]
         public int SortIndex { get; set; }
         /// <summary>
-        /// Exponent
+        /// ["<c>exponent</c>"] Exponent
         /// </summary>
         [JsonPropertyName("exponent")]
         public int Exponent { get; set; }
         /// <summary>
-        /// Type of asset
+        /// ["<c>type</c>"] Type of asset
         /// </summary>
         [JsonPropertyName("type")]
         public AssetType AssetType { get; set; }
         /// <summary>
-        /// Address regex
+        /// ["<c>address_regex</c>"] Address regex
         /// </summary>
         [JsonPropertyName("address_regex")]
         public string AddressRegex { get; set; } = string.Empty;
         /// <summary>
-        /// Asset id
+        /// ["<c>asset_id</c>"] Asset id
         /// </summary>
         [JsonPropertyName("asset_id")]
         public string AssetId { get; set; } = string.Empty;

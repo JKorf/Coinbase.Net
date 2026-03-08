@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("product_name")]
+        public string ProductName { get; set; } = string.Empty;
+        /// <summary>
+-        /// Venue
++        /// ["<c>venue</c>"] Venue
+        /// </summary>
+        [JsonPropertyName("venue")]
+        public string Venue { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("venue")]
+        public string Venue { get; set; } = string.Empty;
+        /// <summary>
+-        /// Notional value
++        /// ["<c>notional_value</c>"] Notional value
+        /// </summary>
+        [JsonPropertyName("notional_value")]
+        public decimal NotionalValue { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+    public record CoinbaseCurrencyQuantityReference
+    {
+        /// <summary>
+-        /// User native asset
++        /// ["<c>userNativeCurrency</c>"] User native asset
+        /// </summary>
+        [JsonPropertyName("userNativeCurrency")]
+        public CoinbaseQuantityReference UserNativeAsset { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePorfolioBreakdown.cs
+        [JsonPropertyName("userNativeCurrency")]
+        public CoinbaseQuantityReference UserNativeAsset { get; set; } = null!;
+        /// <summary>
+-        /// Raw asset
++        /// ["<c>rawCurrency</c>"] Raw asset
+        /// </summary>
+        [JsonPropertyName("rawCurrency")]
+        public CoinbaseQuantityReference RawAsset { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePortfolio.cs
+    public record CoinbasePortfolio
+    {
+        /// <summary>
+-        /// Portfolio name
++        /// ["<c>name</c>"] Portfolio name
+        /// </summary>
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePortfolio.cs
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = string.Empty;
+        /// <summary>
+-        /// Portfolio id
++        /// ["<c>uuid</c>"] Portfolio id
+        /// </summary>
+        [JsonPropertyName("uuid")]
+        public string Id { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePortfolio.cs
+        [JsonPropertyName("uuid")]
+        public string Id { get; set; } = string.Empty;
+        /// <summary>
+-        /// Type
++        /// ["<c>type</c>"] Type
+        /// </summary>
+        [JsonPropertyName("type")]
+        public PortfolioType PortfolioType { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePortfolio.cs
+        [JsonPropertyName("type")]
+        public PortfolioType PortfolioType { get; set; }
+        /// <summary>
+-        /// Deleted
++        /// ["<c>deleted</c>"] Deleted
+        /// </summary>
+        [JsonPropertyName("deleted")]
+        public bool Deleted { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePortfolioMove.cs
+    public record CoinbasePortfolioMove
+    {
+        /// <summary>
+-        /// Source portfolio id
++        /// ["<c>source_portfolio_uuid</c>"] Source portfolio id
+        /// </summary>
+        [JsonPropertyName("source_portfolio_uuid")]
+        public string SourcePortfolioId { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePortfolioMove.cs
+        [JsonPropertyName("source_portfolio_uuid")]
+        public string SourcePortfolioId { get; set; } = string.Empty;
+        /// <summary>
+-        /// Target portfolio id
++        /// ["<c>target_portfolio_uuid</c>"] Target portfolio id
+        /// </summary>
+        [JsonPropertyName("target_portfolio_uuid")]
+        public string TargetPortfolioId { get; set; } = string.Empty;
+*** End Patch

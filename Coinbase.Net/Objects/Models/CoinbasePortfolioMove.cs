@@ -10,12 +10,12 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbasePortfolioMove
     {
         /// <summary>
-        /// Source portfolio id
+        /// ["<c>source_portfolio_uuid</c>"] Source portfolio id
         /// </summary>
         [JsonPropertyName("source_portfolio_uuid")]
         public string SourcePortfolioId { get; set; } = string.Empty;
         /// <summary>
-        /// Target portfolio id
+        /// ["<c>target_portfolio_uuid</c>"] Target portfolio id
         /// </summary>
         [JsonPropertyName("target_portfolio_uuid")]
         public string TargetPortfolioId { get; set; } = string.Empty;

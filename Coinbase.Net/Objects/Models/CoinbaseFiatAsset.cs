@@ -8,7 +8,7 @@ namespace Coinbase.Net.Objects.Models
     internal record CoinbaseFiatAssetWrapper
     {
         /// <summary>
-        /// Data
+        /// ["<c>data</c>"] Data
         /// </summary>
         [JsonPropertyName("data")]
         public CoinbaseFiatAsset[] Data { get; set; } = Array.Empty<CoinbaseFiatAsset>();
@@ -21,17 +21,17 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseFiatAsset
     {
         /// <summary>
-        /// Asset
+        /// ["<c>id</c>"] Asset
         /// </summary>
         [JsonPropertyName("id")]
         public string Asset { get; set; } = string.Empty;
         /// <summary>
-        /// Name
+        /// ["<c>name</c>"] Name
         /// </summary>
         [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
         /// <summary>
-        /// Min quantity
+        /// ["<c>min_size</c>"] Min quantity
         /// </summary>
         [JsonPropertyName("min_size")]
         public decimal MinQuantity { get; set; }

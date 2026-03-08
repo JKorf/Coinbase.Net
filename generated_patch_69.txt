@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTrade.cs
+        [JsonPropertyName("trade_id")]
+        public string TradeId { get; set; } = string.Empty;
+        /// <summary>
+-        /// Symbol
++        /// ["<c>product_id</c>"] Symbol
+        /// </summary>
+        [JsonPropertyName("product_id")]
+        public string Symbol { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTrade.cs
+        [JsonPropertyName("product_id")]
+        public string Symbol { get; set; } = string.Empty;
+        /// <summary>
+-        /// Trade price
++        /// ["<c>price</c>"] Trade price
+        /// </summary>
+        [JsonPropertyName("price")]
+        public decimal Price { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTrade.cs
+        [JsonPropertyName("price")]
+        public decimal Price { get; set; }
+        /// <summary>
+-        /// Quantity traded
++        /// ["<c>size</c>"] Quantity traded
+        /// </summary>
+        [JsonPropertyName("size")]
+        public decimal Quantity { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTrade.cs
+        [JsonPropertyName("size")]
+        public decimal Quantity { get; set; }
+        /// <summary>
+-        /// Side of the trade
++        /// ["<c>side</c>"] Side of the trade
+        /// </summary>
+        [JsonPropertyName("side")]
+        public OrderSide OrderSide { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTransaction.cs
+    public record CoinbaseTransaction
+    {
+        /// <summary>
+-        /// Id
++        /// ["<c>id</c>"] Id
+        /// </summary>
+        [JsonPropertyName("id")]
+        public string Id { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTransaction.cs
+        [JsonPropertyName("id")]
+        public string Id { get; set; } = string.Empty;
+        /// <summary>
+-        /// Type of the transaction
++        /// ["<c>type</c>"] Type of the transaction
+        /// </summary>
+        [JsonPropertyName("type")]
+        public TransactionType TransactionType { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTransaction.cs
+        [JsonPropertyName("type")]
+        public TransactionType TransactionType { get; set; }
+        /// <summary>
+-        /// Status of the transaction
++        /// ["<c>status</c>"] Status of the transaction
+        /// </summary>
+        [JsonPropertyName("status")]
+        public TransactionStatus TransactionStatus { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTransaction.cs
+        [JsonPropertyName("status")]
+        public TransactionStatus TransactionStatus { get; set; }
+        /// <summary>
+-        /// Quantity
++        /// ["<c>amount</c>"] Quantity
+        /// </summary>
+        [JsonPropertyName("amount")]
+        public CoinbaseQuantityReference Quantity { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTransaction.cs
+        [JsonPropertyName("amount")]
+        public CoinbaseQuantityReference Quantity { get; set; } = null!;
+        /// <summary>
+-        /// Native quantity
++        /// ["<c>native_amount</c>"] Native quantity
+        /// </summary>
+        [JsonPropertyName("native_amount")]
+        public CoinbaseQuantityReference NativeQuantity { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseTransaction.cs
+        [JsonPropertyName("native_amount")]
+        public CoinbaseQuantityReference NativeQuantity { get; set; } = null!;
+        /// <summary>
+-        /// Description
++        /// ["<c>description</c>"] Description
+        /// </summary>
+        [JsonPropertyName("description")]
+        public string? Description { get; set; }
+*** End Patch

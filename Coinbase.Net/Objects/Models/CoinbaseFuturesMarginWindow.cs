@@ -12,17 +12,17 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseFuturesMarginWindow
     {
         /// <summary>
-        /// Margin window
+        /// ["<c>margin_window</c>"] Margin window
         /// </summary>
         [JsonPropertyName("margin_window")]
         public CoinbaseFuturesMarginWindowInfo MarginWindow { get; set; } = null!;
         /// <summary>
-        /// Is intraday margin killswitch enabled
+        /// ["<c>is_intraday_margin_killswitch_enabled</c>"] Is intraday margin killswitch enabled
         /// </summary>
         [JsonPropertyName("is_intraday_margin_killswitch_enabled")]
         public bool IsIntradayMarginKillswitchEnabled { get; set; }
         /// <summary>
-        /// Is intraday margin enrollment killswitch enabled
+        /// ["<c>is_intraday_margin_enrollment_killswitch_enabled</c>"] Is intraday margin enrollment killswitch enabled
         /// </summary>
         [JsonPropertyName("is_intraday_margin_enrollment_killswitch_enabled")]
         public bool IsIntradayMarginEnrollmentKillswitchEnabled { get; set; }
@@ -35,12 +35,12 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseFuturesMarginWindowInfo
     {
         /// <summary>
-        /// Margin window type
+        /// ["<c>margin_window_type</c>"] Margin window type
         /// </summary>
         [JsonPropertyName("margin_window_type")]
         public MarginWindowType MarginWindowType { get; set; }
         /// <summary>
-        /// End time
+        /// ["<c>end_time</c>"] End time
         /// </summary>
         [JsonPropertyName("end_time")]
         public DateTime EndTime { get; set; }

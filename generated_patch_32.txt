@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseKline.cs
+        [JsonPropertyName("open")]
+        public decimal OpenPrice { get; set; }
+        /// <summary>
+-        /// Close price
++        /// ["<c>close</c>"] Close price
+        /// </summary>
+        [JsonPropertyName("close")]
+        public decimal ClosePrice { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseKline.cs
+        [JsonPropertyName("close")]
+        public decimal ClosePrice { get; set; }
+        /// <summary>
+-        /// Volume
++        /// ["<c>volume</c>"] Volume
+        /// </summary>
+        [JsonPropertyName("volume")]
+        public decimal Volume { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseKline.cs
+    public record CoinbaseStreamKline: CoinbaseKline
+    {
+        /// <summary>
+-        /// Symbol
++        /// ["<c>product_id</c>"] Symbol
+        /// </summary>
+        [JsonPropertyName("product_id")]
+        public string Symbol { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseMultiAssetMode.cs
+    public record CoinbaseMultiAssetMode
+    {
+        /// <summary>
+-        /// Is multi asset collateral enabled
++        /// ["<c>multi_asset_collateral_enabled</c>"] Is multi asset collateral enabled
+        /// </summary>
+        [JsonPropertyName("multi_asset_collateral_enabled")]
+        public bool MultiAssetCollateralEnabled { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+    internal record CoinbaseOrderWrapper
+    {
+        /// <summary>
+-        /// Order
++        /// ["<c>order</c>"] Order
+        /// </summary>
+        [JsonPropertyName("order")]
+        public CoinbaseOrder Order { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+    internal record CoinbaseOrdersWrapper
+    {
+        /// <summary>
+-        /// Orders
++        /// ["<c>orders</c>"] Orders
+        /// </summary>
+        [JsonPropertyName("orders")]
+        public CoinbaseOrder[] Orders { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+    public record CoinbaseOrder
+    {
+        /// <summary>
+-        /// Order id
++        /// ["<c>order_id</c>"] Order id
+        /// </summary>
+        [JsonPropertyName("order_id")]
+        public string OrderId { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("order_id")]
+        public string OrderId { get; set; } = string.Empty;
+        /// <summary>
+-        /// Symbol
++        /// ["<c>product_id</c>"] Symbol
+        /// </summary>
+        [JsonPropertyName("product_id")]
+        public string Symbol { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("product_id")]
+        public string Symbol { get; set; } = string.Empty;
+        /// <summary>
+-        /// User id
++        /// ["<c>user_id</c>"] User id
+        /// </summary>
+        [JsonPropertyName("user_id")]
+        public string UserId { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("user_id")]
+        public string UserId { get; set; } = string.Empty;
+        /// <summary>
+-        /// Order configuration
++        /// ["<c>order_configuration</c>"] Order configuration
+        /// </summary>
+        [JsonPropertyName("order_configuration")]
+        public CoinbaseOrderConfiguration OrderConfiguration { get; set; } = null!;
+*** End Patch

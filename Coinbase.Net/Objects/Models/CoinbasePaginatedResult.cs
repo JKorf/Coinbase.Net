@@ -11,12 +11,12 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbasePaginatedResult<T>
     {
         /// <summary>
-        /// Pagination
+        /// ["<c>pagination</c>"] Pagination
         /// </summary>
         [JsonPropertyName("pagination")]
         public CoinbasePageInfo Pagination { get; set; } = null!;
         /// <summary>
-        /// Data
+        /// ["<c>data</c>"] Data
         /// </summary>
         [JsonPropertyName("data")]
         public T[] Data { get; set; } = Array.Empty<T>();
@@ -29,32 +29,32 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbasePageInfo
     {
         /// <summary>
-        /// To id
+        /// ["<c>ending_before</c>"] To id
         /// </summary>
         [JsonPropertyName("ending_before")]
         public string? ToId { get; set; }
         /// <summary>
-        /// From id
+        /// ["<c>starting_after</c>"] From id
         /// </summary>
         [JsonPropertyName("starting_after")]
         public string? FromId { get; set; }
         /// <summary>
-        /// Limit
+        /// ["<c>limit</c>"] Limit
         /// </summary>
         [JsonPropertyName("limit")]
         public decimal Limit { get; set; }
         /// <summary>
-        /// Order
+        /// ["<c>order</c>"] Order
         /// </summary>
         [JsonPropertyName("order")]
         public string Order { get; set; } = string.Empty;
         /// <summary>
-        /// Previous uri
+        /// ["<c>previous_uri</c>"] Previous uri
         /// </summary>
         [JsonPropertyName("previous_uri")]
         public string? PreviousUri { get; set; }
         /// <summary>
-        /// Next uri
+        /// ["<c>next_uri</c>"] Next uri
         /// </summary>
         [JsonPropertyName("next_uri")]
         public string? NextUri { get; set; }

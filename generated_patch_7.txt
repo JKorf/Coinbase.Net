@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("target_to_source")]
+        public CoinbaseQuantityScale TargetToSource { get; set; } = null!;
+        /// <summary>
+-        /// Source to fiat
++        /// ["<c>source_to_fiat</c>"] Source to fiat
+        /// </summary>
+        [JsonPropertyName("source_to_fiat")]
+        public CoinbaseQuantityScale SourceToFiat { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+    public record CoinbaseQuantityScale
+    {
+        /// <summary>
+-        /// Quantity
++        /// ["<c>amount</c>"] Quantity
+        /// </summary>
+        [JsonPropertyName("amount")]
+        public CoinbaseQuantityReference Quantity { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("amount")]
+        public CoinbaseQuantityReference Quantity { get; set; } = null!;
+        /// <summary>
+-        /// Scale
++        /// ["<c>scale</c>"] Scale
+        /// </summary>
+        [JsonPropertyName("scale")]
+        public int Scale { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+    public record CoinbaseUserWarning
+    {
+        /// <summary>
+-        /// Id
++        /// ["<c>id</c>"] Id
+        /// </summary>
+        [JsonPropertyName("id")]
+        public string Id { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("id")]
+        public string Id { get; set; } = string.Empty;
+        /// <summary>
+-        /// Code
++        /// ["<c>code</c>"] Code
+        /// </summary>
+        [JsonPropertyName("code")]
+        public string Code { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("code")]
+        public string Code { get; set; } = string.Empty;
+        /// <summary>
+-        /// Message
++        /// ["<c>message</c>"] Message
+        /// </summary>
+        [JsonPropertyName("message")]
+        public string Message { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("message")]
+        public string Message { get; set; } = string.Empty;
+        /// <summary>
+-        /// Link
++        /// ["<c>link</c>"] Link
+        /// </summary>
+        [JsonPropertyName("link")]
+        public CoinbaseLink? Link { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("link")]
+        public CoinbaseLink? Link { get; set; }
+        /// <summary>
+-        /// Context
++        /// ["<c>context</c>"] Context
+        /// </summary>
+        [JsonPropertyName("context")]
+        public CoinbaseContext? Context { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+    public record CoinbaseContext
+    {
+        /// <summary>
+-        /// Details
++        /// ["<c>details</c>"] Details
+        /// </summary>
+        [JsonPropertyName("details")]
+        public string[] Details { get; set; } = Array.Empty<string>();
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        public string[] Details { get; set; } = Array.Empty<string>();
+
+        /// <summary>
+-        /// Title
++        /// ["<c>title</c>"] Title
+        /// </summary>
+        [JsonPropertyName("title")]
+        public string Title { get; set; } = string.Empty;
+*** End Patch

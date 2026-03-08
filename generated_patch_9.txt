@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("remaining_free_trading_volume")]
+        public CoinbaseQuantityReference RemainingFreeTradingVolume { get; set; } = null!;
+        /// <summary>
+-        /// Max free trading volume
++        /// ["<c>max_free_trading_volume</c>"] Max free trading volume
+        /// </summary>
+        [JsonPropertyName("max_free_trading_volume")]
+        public CoinbaseQuantityReference MaxFreeTradingVolume { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("max_free_trading_volume")]
+        public CoinbaseQuantityReference MaxFreeTradingVolume { get; set; } = null!;
+        /// <summary>
+-        /// Has benefit cap
++        /// ["<c>has_benefit_cap</c>"] Has benefit cap
+        /// </summary>
+        [JsonPropertyName("has_benefit_cap")]
+        public bool? HasBenifitCap { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("has_benefit_cap")]
+        public bool? HasBenifitCap { get; set; }
+        /// <summary>
+-        /// Applied subscription benefit
++        /// ["<c>applied_subscription_benefit</c>"] Applied subscription benefit
+        /// </summary>
+        [JsonPropertyName("applied_subscription_benefit")]
+        public bool? AppliedSubscriptionBenefit { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("applied_subscription_benefit")]
+        public bool? AppliedSubscriptionBenefit { get; set; }
+        /// <summary>
+-        /// Fee without subscription benefit
++        /// ["<c>fee_without_subscription_benefit</c>"] Fee without subscription benefit
+        /// </summary>
+        [JsonPropertyName("fee_without_subscription_benefit")]
+        public CoinbaseQuantityReference FeeWithoutSubscriptionBenefit { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("fee_without_subscription_benefit")]
+        public CoinbaseQuantityReference FeeWithoutSubscriptionBenefit { get; set; } = null!;
+        /// <summary>
+-        /// Payment method fee without subscription benefit
++        /// ["<c>payment_method_fee_without_subscription_benefit</c>"] Payment method fee without subscription benefit
+        /// </summary>
+        [JsonPropertyName("payment_method_fee_without_subscription_benefit")]
+        public CoinbaseQuantityReference PaymentMethodFeeWithoutSubscriptionBenefit { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+    public record CoinbaseTradeIncentiveInfo
+    {
+        /// <summary>
+-        /// Applied incentive
++        /// ["<c>applied_incentive</c>"] Applied incentive
+        /// </summary>
+        [JsonPropertyName("applied_incentive")]
+        public bool AppliedIncentive { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("applied_incentive")]
+        public bool AppliedIncentive { get; set; }
+        /// <summary>
+-        /// User incentive id
++        /// ["<c>user_incentive_id</c>"] User incentive id
+        /// </summary>
+        [JsonPropertyName("user_incentive_id")]
+        public string UserIncentiveId { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("user_incentive_id")]
+        public string UserIncentiveId { get; set; } = string.Empty;
+        /// <summary>
+-        /// Promo code value
++        /// ["<c>code_val</c>"] Promo code value
+        /// </summary>
+        [JsonPropertyName("code_val")]
+        public string PromoCode { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("code_val")]
+        public string PromoCode { get; set; } = string.Empty;
+        /// <summary>
+-        /// End time
++        /// ["<c>ends_at</c>"] End time
+        /// </summary>
+        [JsonPropertyName("ends_at")]
+        public DateTime? EndsAt { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseConvertQuote.cs
+        [JsonPropertyName("ends_at")]
+        public DateTime? EndsAt { get; set; }
+        /// <summary>
+-        /// Fee without incentive
++        /// ["<c>fee_without_incentive</c>"] Fee without incentive
+        /// </summary>
+        [JsonPropertyName("fee_without_incentive")]
+        public CoinbaseQuantityReference Quantity { get; set; } = null!;
+*** End Patch

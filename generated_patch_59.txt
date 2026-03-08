@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePrice.cs
+    public record CoinbasePrice
+    {
+        /// <summary>
+-        /// The price
++        /// ["<c>amount</c>"] The price
+        /// </summary>
+        [JsonPropertyName("amount")]
+        public decimal Price { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePrice.cs
+        [JsonPropertyName("amount")]
+        public decimal Price { get; set; }
+        /// <summary>
+-        /// The currency in which the price is
++        /// ["<c>base</c>"] The currency in which the price is
+        /// </summary>
+        [JsonPropertyName("base")]
+        public string Asset { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePrice.cs
+        [JsonPropertyName("base")]
+        public string Asset { get; set; } = string.Empty;
+        /// <summary>
+-        /// The currency in which the price is
++        /// ["<c>currency</c>"] The currency in which the price is
+        /// </summary>
+        [JsonPropertyName("currency")]
+        public string Currency { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseResourceReference.cs
+    public record CoinbaseResourceReference
+    {
+        /// <summary>
+-        /// Id
++        /// ["<c>id</c>"] Id
+        /// </summary>
+        [JsonPropertyName("id")]
+        public string? Id { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseResourceReference.cs
+        [JsonPropertyName("id")]
+        public string? Id { get; set; } = string.Empty;
+        /// <summary>
+-        /// Resource
++        /// ["<c>resource</c>"] Resource
+        /// </summary>
+        [JsonPropertyName("resource")]
+        public string Resource { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseResourceReference.cs
+        [JsonPropertyName("resource")]
+        public string Resource { get; set; } = string.Empty;
+        /// <summary>
+-        /// Resource path
++        /// ["<c>resource_path</c>"] Resource path
+        /// </summary>
+        [JsonPropertyName("resource_path")]
+        public string? ResourcePath { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseResourceReference.cs
+    public record CoinbaseToReference : CoinbaseResourceReference
+    {
+        /// <summary>
+-        /// Address
++        /// ["<c>address</c>"] Address
+        /// </summary>
+        [JsonPropertyName("address")]
+        public string? Address { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseResourceReference.cs
+        public string? Address { get; set; }
+
+        /// <summary>
+-        /// Email
++        /// ["<c>email</c>"] Email
+        /// </summary>
+        [JsonPropertyName("email")]
+        public string? Email { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseStreamSymbol.cs
+    public record CoinbaseStreamSymbol
+    {
+        /// <summary>
+-        /// Symbol type
++        /// ["<c>product_type</c>"] Symbol type
+        /// </summary>
+        [JsonPropertyName("product_type")]
+        public SymbolType SymbolType { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseStreamSymbol.cs
+        [JsonPropertyName("product_type")]
+        public SymbolType SymbolType { get; set; }
+        /// <summary>
+-        /// Symbol
++        /// ["<c>id</c>"] Symbol
+        /// </summary>
+        [JsonPropertyName("id")]
+        public string Symbol { get; set; } = string.Empty;
+*** End Patch

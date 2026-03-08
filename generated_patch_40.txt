@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("outstanding_hold_amount")]
+        public decimal OutstandingHoldQuantity { get; set; }
+        /// <summary>
+-        /// Post only
++        /// ["<c>post_only</c>"] Post only
+        /// </summary>
+        [JsonPropertyName("post_only")]
+        public bool? PostOnly { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("post_only")]
+        public bool? PostOnly { get; set; }
+        /// <summary>
+-        /// Symbol
++        /// ["<c>product_id</c>"] Symbol
+        /// </summary>
+        [JsonPropertyName("product_id")]
+        public string Symbol { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("product_id")]
+        public string Symbol { get; set; } = string.Empty;
+        /// <summary>
+-        /// Product type
++        /// ["<c>product_type</c>"] Product type
+        /// </summary>
+        [JsonPropertyName("product_type")]
+        public SymbolType SymbolType { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("product_type")]
+        public SymbolType SymbolType { get; set; }
+        /// <summary>
+-        /// Reject reason
++        /// ["<c>reject_reason</c>"] Reject reason
+        /// </summary>
+        [JsonPropertyName("reject_reason")]
+        public string? RejectReason { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("reject_reason")]
+        public string? RejectReason { get; set; }
+        /// <summary>
+-        /// Retail portfolio id
++        /// ["<c>retail_portfolio_id</c>"] Retail portfolio id
+        /// </summary>
+        [JsonPropertyName("retail_portfolio_id")]
+        public string RetailPortfolioId { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("retail_portfolio_id")]
+        public string RetailPortfolioId { get; set; } = string.Empty;
+        /// <summary>
+-        /// Risk managed by
++        /// ["<c>risk_managed_by</c>"] Risk managed by
+        /// </summary>
+        [JsonPropertyName("risk_managed_by")]
+        public RiskManageType? RiskManagedBy { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("risk_managed_by")]
+        public RiskManageType? RiskManagedBy { get; set; }
+        /// <summary>
+-        /// Order status
++        /// ["<c>status</c>"] Order status
+        /// </summary>
+        [JsonPropertyName("status")]
+        public OrderStatus Status { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("status")]
+        public OrderStatus Status { get; set; }
+        /// <summary>
+-        /// Stop price
++        /// ["<c>stop_price</c>"] Stop price
+        /// </summary>
+        [JsonPropertyName("stop_price")]
+        public decimal? StopPrice { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("stop_price")]
+        public decimal? StopPrice { get; set; }
+        /// <summary>
+-        /// Time in force
++        /// ["<c>time_in_force</c>"] Time in force
+        /// </summary>
+        [JsonPropertyName("time_in_force")]
+        public TimeInForce TimeInForce { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("time_in_force")]
+        public TimeInForce TimeInForce { get; set; }
+        /// <summary>
+-        /// Fees paid for the order
++        /// ["<c>total_fees</c>"] Fees paid for the order
+        /// </summary>
+        [JsonPropertyName("total_fees")]
+        public decimal TotalFees { get; set; }
+*** End Patch

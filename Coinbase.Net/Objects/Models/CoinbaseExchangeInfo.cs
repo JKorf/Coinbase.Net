@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
@@ -8,12 +8,12 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseExchangeInfo
     {
         /// <summary>
-        /// Symbol info
+        /// ["<c>products</c>"] Symbol info
         /// </summary>
         [JsonPropertyName("products")]
         public CoinbaseExSymbol[] Symbols { get; set; } = [];
         /// <summary>
-        /// Asset info
+        /// ["<c>currencies</c>"] Asset info
         /// </summary>
         [JsonPropertyName("currencies")]
         public CoinbaseExAsset[] Assets { get; set; } = [];

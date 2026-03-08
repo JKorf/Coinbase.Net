@@ -12,12 +12,12 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbasePerpetualPorfolios
     {
         /// <summary>
-        /// Portfolios
+        /// ["<c>portfolios</c>"] Portfolios
         /// </summary>
         [JsonPropertyName("portfolios")]
         public CoinbasePerpetualPorfolio[] Portfolios { get; set; } = Array.Empty<CoinbasePerpetualPorfolio>();
         /// <summary>
-        /// Summary
+        /// ["<c>summary</c>"] Summary
         /// </summary>
         [JsonPropertyName("summary")]
         public CoinbasePerpetualPorfolioSummary Summary { get; set; } = null!;
@@ -30,97 +30,97 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbasePerpetualPorfolio
     {
         /// <summary>
-        /// Portfolio uuid
+        /// ["<c>portfolio_uuid</c>"] Portfolio uuid
         /// </summary>
         [JsonPropertyName("portfolio_uuid")]
         public string PortfolioId { get; set; } = string.Empty;
         /// <summary>
-        /// Collateral
+        /// ["<c>collateral</c>"] Collateral
         /// </summary>
         [JsonPropertyName("collateral")]
         public decimal Collateral { get; set; }
         /// <summary>
-        /// Position notional
+        /// ["<c>position_notional</c>"] Position notional
         /// </summary>
         [JsonPropertyName("position_notional")]
         public decimal PositionNotional { get; set; }
         /// <summary>
-        /// Open position notional
+        /// ["<c>open_position_notional</c>"] Open position notional
         /// </summary>
         [JsonPropertyName("open_position_notional")]
         public decimal OpenPositionNotional { get; set; }
         /// <summary>
-        /// Pending fees
+        /// ["<c>pending_fees</c>"] Pending fees
         /// </summary>
         [JsonPropertyName("pending_fees")]
         public decimal PendingFees { get; set; }
         /// <summary>
-        /// Borrow
+        /// ["<c>borrow</c>"] Borrow
         /// </summary>
         [JsonPropertyName("borrow")]
         public decimal Borrow { get; set; }
         /// <summary>
-        /// Accrued interest
+        /// ["<c>accrued_interest</c>"] Accrued interest
         /// </summary>
         [JsonPropertyName("accrued_interest")]
         public decimal AccruedInterest { get; set; }
         /// <summary>
-        /// Rolling debt
+        /// ["<c>rolling_debt</c>"] Rolling debt
         /// </summary>
         [JsonPropertyName("rolling_debt")]
         public decimal RollingDebt { get; set; }
         /// <summary>
-        /// Portfolio initial margin
+        /// ["<c>portfolio_initial_margin</c>"] Portfolio initial margin
         /// </summary>
         [JsonPropertyName("portfolio_initial_margin")]
         public CoinbaseQuantityReference PortfolioInitialMargin { get; set; } = null!;
         /// <summary>
-        /// Portfolio im notional
+        /// ["<c>portfolio_im_notional</c>"] Portfolio im notional
         /// </summary>
         [JsonPropertyName("portfolio_im_notional")]
         public decimal PortfolioImNotional { get; set; }
         /// <summary>
-        /// Portfolio maintenance margin
+        /// ["<c>portfolio_maintenance_margin</c>"] Portfolio maintenance margin
         /// </summary>
         [JsonPropertyName("portfolio_maintenance_margin")]
         public decimal PortfolioMaintenanceMargin { get; set; }
         /// <summary>
-        /// Portfolio mm notional
+        /// ["<c>portfolio_mm_notional</c>"] Portfolio mm notional
         /// </summary>
         [JsonPropertyName("portfolio_mm_notional")]
         public CoinbaseQuantityReference PortfolioMmNotional { get; set; } = null!;
         /// <summary>
-        /// Liquidation percentage
+        /// ["<c>liquidation_percentage</c>"] Liquidation percentage
         /// </summary>
         [JsonPropertyName("liquidation_percentage")]
         public decimal LiquidationPercentage { get; set; }
         /// <summary>
-        /// Liquidation buffer
+        /// ["<c>liquidation_buffer</c>"] Liquidation buffer
         /// </summary>
         [JsonPropertyName("liquidation_buffer")]
         public decimal LiquidationBuffer { get; set; }
         /// <summary>
-        /// Margin type
+        /// ["<c>margin_type</c>"] Margin type
         /// </summary>
         [JsonPropertyName("margin_type")]
         public MarginType MarginType { get; set; }
         /// <summary>
-        /// Margin flags
+        /// ["<c>margin_flags</c>"] Margin flags
         /// </summary>
         [JsonPropertyName("margin_flags")]
         public MarginFlags MarginFlags { get; set; }
         /// <summary>
-        /// Liquidation status
+        /// ["<c>liquidation_status</c>"] Liquidation status
         /// </summary>
         [JsonPropertyName("liquidation_status")]
         public LiquidationStatus LiquidationStatus { get; set; }
         /// <summary>
-        /// Unrealized profit and loss
+        /// ["<c>unrealized_pnl</c>"] Unrealized profit and loss
         /// </summary>
         [JsonPropertyName("unrealized_pnl")]
         public CoinbaseQuantityReference UnrealizedPnl { get; set; } = null!;
         /// <summary>
-        /// Total balance
+        /// ["<c>total_balance</c>"] Total balance
         /// </summary>
         [JsonPropertyName("total_balance")]
         public CoinbaseQuantityReference TotalBalance { get; set; } = null!;
@@ -133,22 +133,22 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbasePerpetualPorfolioSummary
     {
         /// <summary>
-        /// Unrealized profit and loss
+        /// ["<c>unrealized_pnl</c>"] Unrealized profit and loss
         /// </summary>
         [JsonPropertyName("unrealized_pnl")]
         public CoinbaseQuantityReference UnrealizedPnl { get; set; } = null!;
         /// <summary>
-        /// Buying power
+        /// ["<c>buying_power</c>"] Buying power
         /// </summary>
         [JsonPropertyName("buying_power")]
         public CoinbaseQuantityReference BuyingPower { get; set; } = null!;
         /// <summary>
-        /// Total balance
+        /// ["<c>total_balance</c>"] Total balance
         /// </summary>
         [JsonPropertyName("total_balance")]
         public CoinbaseQuantityReference TotalBalance { get; set; } = null!;
         /// <summary>
-        /// Max withdrawal quantity
+        /// ["<c>max_withdrawal_amount</c>"] Max withdrawal quantity
         /// </summary>
         [JsonPropertyName("max_withdrawal_amount")]
         public CoinbaseQuantityReference MaxWithdrawalQuantity { get; set; } = null!;

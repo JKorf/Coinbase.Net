@@ -25,22 +25,22 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbasePortfolio
     {
         /// <summary>
-        /// Portfolio name
+        /// ["<c>name</c>"] Portfolio name
         /// </summary>
         [JsonPropertyName("name")]
         public string Name { get; set; } = string.Empty;
         /// <summary>
-        /// Portfolio id
+        /// ["<c>uuid</c>"] Portfolio id
         /// </summary>
         [JsonPropertyName("uuid")]
         public string Id { get; set; } = string.Empty;
         /// <summary>
-        /// Type
+        /// ["<c>type</c>"] Type
         /// </summary>
         [JsonPropertyName("type")]
         public PortfolioType PortfolioType { get; set; }
         /// <summary>
-        /// Deleted
+        /// ["<c>deleted</c>"] Deleted
         /// </summary>
         [JsonPropertyName("deleted")]
         public bool Deleted { get; set; }

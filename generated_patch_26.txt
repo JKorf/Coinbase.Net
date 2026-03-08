@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFiatAsset.cs
+        [JsonPropertyName("id")]
+        public string Asset { get; set; } = string.Empty;
+        /// <summary>
+-        /// Name
++        /// ["<c>name</c>"] Name
+        /// </summary>
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFiatAsset.cs
+        [JsonPropertyName("name")]
+        public string Name { get; set; } = string.Empty;
+        /// <summary>
+-        /// Min quantity
++        /// ["<c>min_size</c>"] Min quantity
+        /// </summary>
+        [JsonPropertyName("min_size")]
+        public decimal MinQuantity { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+    public record CoinbaseFuturesBalance
+    {
+        /// <summary>
+-        /// The amount of your cash balance that is available to trade CFM futures
++        /// ["<c>futures_buying_power</c>"] The amount of your cash balance that is available to trade CFM futures
+        /// </summary>
+        [JsonPropertyName("futures_buying_power")]
+        public decimal CashAvailable { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+        [JsonPropertyName("futures_buying_power")]
+        public decimal CashAvailable { get; set; }
+        /// <summary>
+-        /// Aggregate USD maintained across your CFTC-regulated futures account and your Coinbase Inc. spot account
++        /// ["<c>total_usd_balance</c>"] Aggregate USD maintained across your CFTC-regulated futures account and your Coinbase Inc. spot account
+        /// </summary>
+        [JsonPropertyName("total_usd_balance")]
+        public decimal TotalUsdBalance { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+        [JsonPropertyName("total_usd_balance")]
+        public decimal TotalUsdBalance { get; set; }
+        /// <summary>
+-        /// USD maintained in your Coinbase Inc. spot account
++        /// ["<c>cbi_usd_balance</c>"] USD maintained in your Coinbase Inc. spot account
+        /// </summary>
+        [JsonPropertyName("cbi_usd_balance")]
+        public decimal CbiUsdBalance { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+        [JsonPropertyName("cbi_usd_balance")]
+        public decimal CbiUsdBalance { get; set; }
+        /// <summary>
+-        /// USD maintained in your CFTC-regulated futures account. Funds held in your futures account are not available to trade spot
++        /// ["<c>cfm_usd_balance</c>"] USD maintained in your CFTC-regulated futures account. Funds held in your futures account are not available to trade spot
+        /// </summary>
+        [JsonPropertyName("cfm_usd_balance")]
+        public decimal CfmUsdBalance { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+        [JsonPropertyName("cfm_usd_balance")]
+        public decimal CfmUsdBalance { get; set; }
+        /// <summary>
+-        /// Your total balance on hold for spot and futures open orders
++        /// ["<c>total_open_orders_hold_amount</c>"] Your total balance on hold for spot and futures open orders
+        /// </summary>
+        [JsonPropertyName("total_open_orders_hold_amount")]
+        public decimal TotalOpenOrdersHoldQuantity { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+        [JsonPropertyName("total_open_orders_hold_amount")]
+        public decimal TotalOpenOrdersHoldQuantity { get; set; }
+        /// <summary>
+-        /// Unrealized profit and loss
++        /// ["<c>unrealized_pnl</c>"] Unrealized profit and loss
+        /// </summary>
+        [JsonPropertyName("unrealized_pnl")]
+        public decimal UnrealizedPnl { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+        [JsonPropertyName("unrealized_pnl")]
+        public decimal UnrealizedPnl { get; set; }
+        /// <summary>
+-        /// Daily realized profit and loss
++        /// ["<c>daily_realized_pnl</c>"] Daily realized profit and loss
+        /// </summary>
+        [JsonPropertyName("daily_realized_pnl")]
+        public decimal DailyRealizedPnl { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+        [JsonPropertyName("daily_realized_pnl")]
+        public decimal DailyRealizedPnl { get; set; }
+        /// <summary>
+-        /// Initial margin
++        /// ["<c>initial_margin</c>"] Initial margin
+        /// </summary>
+        [JsonPropertyName("initial_margin")]
+        public decimal InitialMargin { get; set; }
+*** End Patch

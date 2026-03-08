@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("completion_percentage")]
+        public decimal CompletionPercentage { get; set; }
+        /// <summary>
+-        /// Contract expiry type
++        /// ["<c>contract_expiry_type</c>"] Contract expiry type
+        /// </summary>
+        [JsonPropertyName("contract_expiry_type")]
+        public ContractExpiryType? ContractExpiryType { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("contract_expiry_type")]
+        public ContractExpiryType? ContractExpiryType { get; set; }
+        /// <summary>
+-        /// Cumulative quantity filled
++        /// ["<c>cumulative_quantity</c>"] Cumulative quantity filled
+        /// </summary>
+        [JsonPropertyName("cumulative_quantity")]
+        public decimal QuantityFilled { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("cumulative_quantity")]
+        public decimal QuantityFilled { get; set; }
+        /// <summary>
+-        /// Filled value
++        /// ["<c>filled_value</c>"] Filled value
+        /// </summary>
+        [JsonPropertyName("filled_value")]
+        public decimal ValueFilled { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("filled_value")]
+        public decimal ValueFilled { get; set; }
+        /// <summary>
+-        /// Remaining quantity
++        /// ["<c>leaves_quantity</c>"] Remaining quantity
+        /// </summary>
+        [JsonPropertyName("leaves_quantity")]
+        public decimal QuantityRemaining { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("leaves_quantity")]
+        public decimal QuantityRemaining { get; set; }
+        /// <summary>
+-        /// Limit price
++        /// ["<c>limit_price</c>"] Limit price
+        /// </summary>
+        [JsonPropertyName("limit_price")]
+        public decimal? Price { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("limit_price")]
+        public decimal? Price { get; set; }
+        /// <summary>
+-        /// Number of trades for the order
++        /// ["<c>number_of_fills</c>"] Number of trades for the order
+        /// </summary>
+        [JsonPropertyName("number_of_fills")]
+        public int NumberOfTrades { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("number_of_fills")]
+        public int NumberOfTrades { get; set; }
+        /// <summary>
+-        /// Order id
++        /// ["<c>order_id</c>"] Order id
+        /// </summary>
+        [JsonPropertyName("order_id")]
+        public string OrderId { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("order_id")]
+        public string OrderId { get; set; } = string.Empty;
+        /// <summary>
+-        /// Order side
++        /// ["<c>order_side</c>"] Order side
+        /// </summary>
+        [JsonPropertyName("order_side")]
+        public OrderSide OrderSide { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("order_side")]
+        public OrderSide OrderSide { get; set; }
+        /// <summary>
+-        /// Order type
++        /// ["<c>order_type</c>"] Order type
+        /// </summary>
+        [JsonPropertyName("order_type")]
+        public OrderType OrderType { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrderUpdate.cs
+        [JsonPropertyName("order_type")]
+        public OrderType OrderType { get; set; }
+        /// <summary>
+-        /// Outstanding hold quantity
++        /// ["<c>outstanding_hold_amount</c>"] Outstanding hold quantity
+        /// </summary>
+        [JsonPropertyName("outstanding_hold_amount")]
+        public decimal OutstandingHoldQuantity { get; set; }
+*** End Patch

@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExBookSnapshot.cs
+    public record CoinbaseExBookSnapshot : CoinbaseSocketEvent
+    {
+        /// <summary>
+-        /// Symbol
++        /// ["<c>product_id</c>"] Symbol
+        /// </summary>
+        [JsonPropertyName("product_id")]
+        public string Symbol { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExBookSnapshot.cs
+        [JsonPropertyName("product_id")]
+        public string Symbol { get; set; } = string.Empty;
+        /// <summary>
+-        /// Bids
++        /// ["<c>bids</c>"] Bids
+        /// </summary>
+        [JsonPropertyName("bids")]
+        public CoinbaseExOrderBookEntry[] Bids { get; set; } = [];
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExBookSnapshot.cs
+        [JsonPropertyName("bids")]
+        public CoinbaseExOrderBookEntry[] Bids { get; set; } = [];
+        /// <summary>
+-        /// Asks
++        /// ["<c>asks</c>"] Asks
+        /// </summary>
+        [JsonPropertyName("asks")]
+        public CoinbaseExOrderBookEntry[] Asks { get; set; } = [];
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExBookUpdate.cs
+    public record CoinbaseExBookUpdate : CoinbaseSocketEvent
+    {
+        /// <summary>
+-        /// Symbol
++        /// ["<c>product_id</c>"] Symbol
+        /// </summary>
+        [JsonPropertyName("product_id")]
+        public string Symbol { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExBookUpdate.cs
+        [JsonPropertyName("product_id")]
+        public string Symbol { get; set; } = string.Empty;
+        /// <summary>
+-        /// Timestamp
++        /// ["<c>time</c>"] Timestamp
+        /// </summary>
+        [JsonPropertyName("time")]
+        public DateTime Timestamp { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExBookUpdate.cs
+        [JsonPropertyName("time")]
+        public DateTime Timestamp { get; set; }
+        /// <summary>
+-        /// Change
++        /// ["<c>changes</c>"] Change
+        /// </summary>
+        [JsonPropertyName("changes")]
+        public CoinbaseExOrderBookEntryChange[] Change { get; set; } = [];
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExchangeInfo.cs
+    public record CoinbaseExchangeInfo
+    {
+        /// <summary>
+-        /// Symbol info
++        /// ["<c>products</c>"] Symbol info
+        /// </summary>
+        [JsonPropertyName("products")]
+        public CoinbaseExSymbol[] Symbols { get; set; } = [];
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExchangeInfo.cs
+        [JsonPropertyName("products")]
+        public CoinbaseExSymbol[] Symbols { get; set; } = [];
+        /// <summary>
+-        /// Asset info
++        /// ["<c>currencies</c>"] Asset info
+        /// </summary>
+        [JsonPropertyName("currencies")]
+        public CoinbaseExAsset[] Assets { get; set; } = [];
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExchangeRates.cs
+    internal record CoinbaseExchangeRatesWrapper
+    {
+        /// <summary>
+-        /// Data
++        /// ["<c>data</c>"] Data
+        /// </summary>
+        [JsonPropertyName("data")]
+        public CoinbaseExchangeRates Data { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExchangeRates.cs
+    public record CoinbaseExchangeRates
+    {
+        /// <summary>
+-        /// Asset
++        /// ["<c>currency</c>"] Asset
+        /// </summary>
+        [JsonPropertyName("currency")]
+        public string Asset { get; set; } = string.Empty;
+*** End Patch

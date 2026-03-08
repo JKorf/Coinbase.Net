@@ -11,12 +11,12 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseHeartbeat : CoinbaseSocketEvent
     {
         /// <summary>
-        /// Counter
+        /// ["<c>heartbeat_counter</c>"] Counter
         /// </summary>
         [JsonPropertyName("heartbeat_counter")]
         public long Counter { get; set; }
         /// <summary>
-        /// Timestamp
+        /// ["<c>current_time</c>"] Timestamp
         /// </summary>
         [JsonPropertyName("current_time")]
         public string Timestamp { get; set; } = string.Empty;

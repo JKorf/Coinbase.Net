@@ -18,32 +18,32 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseKline
     {
         /// <summary>
-        /// Candle open time
+        /// ["<c>start</c>"] Candle open time
         /// </summary>
         [JsonPropertyName("start")]
         public DateTime OpenTime { get; set; }
         /// <summary>
-        /// Low price
+        /// ["<c>low</c>"] Low price
         /// </summary>
         [JsonPropertyName("low")]
         public decimal LowPrice { get; set; }
         /// <summary>
-        /// High price
+        /// ["<c>high</c>"] High price
         /// </summary>
         [JsonPropertyName("high")]
         public decimal HighPrice { get; set; }
         /// <summary>
-        /// Open price
+        /// ["<c>open</c>"] Open price
         /// </summary>
         [JsonPropertyName("open")]
         public decimal OpenPrice { get; set; }
         /// <summary>
-        /// Close price
+        /// ["<c>close</c>"] Close price
         /// </summary>
         [JsonPropertyName("close")]
         public decimal ClosePrice { get; set; }
         /// <summary>
-        /// Volume
+        /// ["<c>volume</c>"] Volume
         /// </summary>
         [JsonPropertyName("volume")]
         public decimal Volume { get; set; }
@@ -56,7 +56,7 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseStreamKline: CoinbaseKline
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>product_id</c>"] Symbol
         /// </summary>
         [JsonPropertyName("product_id")]
         public string Symbol { get; set; } = string.Empty;

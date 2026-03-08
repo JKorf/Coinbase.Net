@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+        [JsonPropertyName("initial_margin")]
+        public decimal InitialMargin { get; set; }
+        /// <summary>
+-        /// Available margin
++        /// ["<c>available_margin</c>"] Available margin
+        /// </summary>
+        [JsonPropertyName("available_margin")]
+        public decimal AvailableMargin { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+        [JsonPropertyName("available_margin")]
+        public decimal AvailableMargin { get; set; }
+        /// <summary>
+-        /// When your available funds for collateral drop to the liquidation threshold, some or all of your futures positions will be liquidated
++        /// ["<c>liquidation_threshold</c>"] When your available funds for collateral drop to the liquidation threshold, some or all of your futures positions will be liquidated
+        /// </summary>
+        [JsonPropertyName("liquidation_threshold")]
+        public decimal LiquidationThreshold { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+        [JsonPropertyName("liquidation_threshold")]
+        public decimal LiquidationThreshold { get; set; }
+        /// <summary>
+-        /// Funds available in excess of the liquidation threshold, calculated as available margin minus liquidation threshold. If your liquidation buffer amount reaches 0, your futures positions and/or open orders will be liquidated as necessary
++        /// ["<c>liquidation_buffer_amount</c>"] Funds available in excess of the liquidation threshold, calculated as available margin minus liquidation threshold. If your liquidation buffer amount reaches 0, your futures positions and/or open orders will be liquidated as necessary
+        /// </summary>
+        [JsonPropertyName("liquidation_buffer_amount")]
+        public decimal LiquidationBufferQuantity { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+        [JsonPropertyName("liquidation_buffer_amount")]
+        public decimal LiquidationBufferQuantity { get; set; }
+        /// <summary>
+-        /// Funds available in excess of the liquidation threshold expressed as a percentage. If your liquidation buffer percentage reaches 0%, your futures positions and/or open orders will be liquidated as necessary
++        /// ["<c>liquidation_buffer_percentage</c>"] Funds available in excess of the liquidation threshold expressed as a percentage. If your liquidation buffer percentage reaches 0%, your futures positions and/or open orders will be liquidated as necessary
+        /// </summary>
+        [JsonPropertyName("liquidation_buffer_percentage")]
+        public decimal LiquidationBufferPercentage { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+        [JsonPropertyName("liquidation_buffer_percentage")]
+        public decimal LiquidationBufferPercentage { get; set; }
+        /// <summary>
+-        /// Intraday margin window measure
++        /// ["<c>intraday_margin_window_measure</c>"] Intraday margin window measure
+        /// </summary>
+        [JsonPropertyName("intraday_margin_window_measure")]
+        public CoinbaseFuturesBalanceWindow? IntradayMarginWindowMeasure { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+        [JsonPropertyName("intraday_margin_window_measure")]
+        public CoinbaseFuturesBalanceWindow? IntradayMarginWindowMeasure { get; set; }
+        /// <summary>
+-        /// Overnight margin window measure
++        /// ["<c>overnight_margin_window_measure</c>"] Overnight margin window measure
+        /// </summary>
+        [JsonPropertyName("overnight_margin_window_measure")]
+        public CoinbaseFuturesBalanceWindow? OvernightMarginWindowMeasure { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+    public record CoinbaseFuturesBalanceWindow
+    {
+        /// <summary>
+-        /// Margin window type
++        /// ["<c>margin_window_type</c>"] Margin window type
+        /// </summary>
+        [JsonPropertyName("margin_window_type")]
+        public MarginWindowType MarginWindowType { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+        [JsonPropertyName("margin_window_type")]
+        public MarginWindowType MarginWindowType { get; set; }
+        /// <summary>
+-        /// Margin level
++        /// ["<c>margin_level</c>"] Margin level
+        /// </summary>
+        [JsonPropertyName("margin_level")]
+        public MarginLevel MarginLevel { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+        [JsonPropertyName("margin_level")]
+        public MarginLevel MarginLevel { get; set; }
+        /// <summary>
+-        /// Initial margin
++        /// ["<c>initial_margin</c>"] Initial margin
+        /// </summary>
+        [JsonPropertyName("initial_margin")]
+        public decimal InitialMargin { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesBalance.cs
+        [JsonPropertyName("initial_margin")]
+        public decimal InitialMargin { get; set; }
+        /// <summary>
+-        /// Maintenance margin
++        /// ["<c>maintenance_margin</c>"] Maintenance margin
+        /// </summary>
+        [JsonPropertyName("maintenance_margin")]
+        public decimal? MaintenanceMargin { get; set; }
+*** End Patch

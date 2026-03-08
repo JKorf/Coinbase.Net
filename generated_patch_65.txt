@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+    public record CoinbaseSymbolFuturesDetails
+    {
+        /// <summary>
+-        /// Venue
++        /// ["<c>venue</c>"] Venue
+        /// </summary>
+        [JsonPropertyName("venue")]
+        public string Venue { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("venue")]
+        public string Venue { get; set; } = string.Empty;
+        /// <summary>
+-        /// Contract code
++        /// ["<c>contract_code</c>"] Contract code
+        /// </summary>
+        [JsonPropertyName("contract_code")]
+        public string ContractCode { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("contract_code")]
+        public string ContractCode { get; set; } = string.Empty;
+        /// <summary>
+-        /// Contract expiry
++        /// ["<c>contract_expiry</c>"] Contract expiry
+        /// </summary>
+        [JsonPropertyName("contract_expiry")]
+        public DateTime? ContractExpiry { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("contract_expiry")]
+        public DateTime? ContractExpiry { get; set; }
+        /// <summary>
+-        /// Contract size
++        /// ["<c>contract_size</c>"] Contract size
+        /// </summary>
+        [JsonPropertyName("contract_size")]
+        public decimal ContractSize { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("contract_size")]
+        public decimal ContractSize { get; set; }
+        /// <summary>
+-        /// Contract settlement asset
++        /// ["<c>contract_root_unit</c>"] Contract settlement asset
+        /// </summary>
+        [JsonPropertyName("contract_root_unit")]
+        public string ContractSettlementAsset { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("contract_root_unit")]
+        public string ContractSettlementAsset { get; set; } = string.Empty;
+        /// <summary>
+-        /// Group description
++        /// ["<c>group_description</c>"] Group description
+        /// </summary>
+        [JsonPropertyName("group_description")]
+        public string GroupDescription { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("group_description")]
+        public string GroupDescription { get; set; } = string.Empty;
+        /// <summary>
+-        /// Contract expiry timezone
++        /// ["<c>contract_expiry_timezone</c>"] Contract expiry timezone
+        /// </summary>
+        [JsonPropertyName("contract_expiry_timezone")]
+        public string ContractExpiryTimezone { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("contract_expiry_timezone")]
+        public string ContractExpiryTimezone { get; set; } = string.Empty;
+        /// <summary>
+-        /// Group short description
++        /// ["<c>group_short_description</c>"] Group short description
+        /// </summary>
+        [JsonPropertyName("group_short_description")]
+        public string GroupShortDescription { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("group_short_description")]
+        public string GroupShortDescription { get; set; } = string.Empty;
+        /// <summary>
+-        /// Risk managed by
++        /// ["<c>risk_managed_by</c>"] Risk managed by
+        /// </summary>
+        [JsonPropertyName("risk_managed_by")]
+        public RiskManageType RiskManagedBy { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("risk_managed_by")]
+        public RiskManageType RiskManagedBy { get; set; }
+        /// <summary>
+-        /// Contract expiry type
++        /// ["<c>contract_expiry_type</c>"] Contract expiry type
+        /// </summary>
+        [JsonPropertyName("contract_expiry_type")]
+        public ContractExpiryType ContractExpiryType { get; set; }
+*** End Patch

@@ -1,4 +1,4 @@
-﻿using CryptoExchange.Net.Converters.SystemTextJson;
+using CryptoExchange.Net.Converters.SystemTextJson;
 using System;
 using System.Text.Json.Serialization;
 
@@ -11,7 +11,7 @@ namespace Coinbase.Net.Objects.Models;
 public class CoinbaseExchangeTime
 {
     /// <summary>
-    /// Current time
+    /// ["<c>epoch</c>"] Current time
     /// </summary>
     [JsonPropertyName("epoch")]
     public DateTime Time { get; set; }

@@ -10,7 +10,7 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseMultiAssetMode
     {
         /// <summary>
-        /// Is multi asset collateral enabled
+        /// ["<c>multi_asset_collateral_enabled</c>"] Is multi asset collateral enabled
         /// </summary>
         [JsonPropertyName("multi_asset_collateral_enabled")]
         public bool MultiAssetCollateralEnabled { get; set; }

@@ -1,0 +1,65 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseWithdrawal.cs
+        [JsonPropertyName("updated_at")]
+        public DateTime? UpdateTime { get; set; }
+        /// <summary>
+-        /// Resource
++        /// ["<c>resource</c>"] Resource
+        /// </summary>
+        [JsonPropertyName("resource")]
+        public string Resource { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseWithdrawal.cs
+        [JsonPropertyName("resource")]
+        public string Resource { get; set; } = string.Empty;
+        /// <summary>
+-        /// Resource path
++        /// ["<c>resource_path</c>"] Resource path
+        /// </summary>
+        [JsonPropertyName("resource_path")]
+        public string ResourcePath { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseWithdrawal.cs
+        [JsonPropertyName("resource_path")]
+        public string ResourcePath { get; set; } = string.Empty;
+        /// <summary>
+-        /// Committed
++        /// ["<c>committed</c>"] Committed
+        /// </summary>
+        [JsonPropertyName("committed")]
+        public bool Committed { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseWithdrawal.cs
+        [JsonPropertyName("committed")]
+        public bool Committed { get; set; }
+        /// <summary>
+-        /// Fee
++        /// ["<c>fee</c>"] Fee
+        /// </summary>
+        [JsonPropertyName("fee")]
+        public CoinbaseQuantityReference Fee { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseWithdrawal.cs
+        [JsonPropertyName("fee")]
+        public CoinbaseQuantityReference Fee { get; set; } = null!;
+        /// <summary>
+-        /// Payout at
++        /// ["<c>payout_at</c>"] Payout at
+        /// </summary>
+        [JsonPropertyName("payout_at")]
+        public DateTime? PayoutAt { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseWithdrawal.cs
+        [JsonPropertyName("payout_at")]
+        public DateTime? PayoutAt { get; set; }
+        /// <summary>
+-        /// User reference
++        /// ["<c>user_reference</c>"] User reference
+        /// </summary>
+        [JsonPropertyName("user_reference")]
+        public string? UserReference { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\IntradayMarginSetting.cs
+    public record IntradayMarginSetting
+    {
+        /// <summary>
+-        /// Intraday trading setting value
++        /// ["<c>setting</c>"] Intraday trading setting value
+        /// </summary>
+        [JsonPropertyName("setting")]
+        public IntradayMargin Setting { get; set; }
+*** End Patch

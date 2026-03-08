@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualBalances.cs
+        [JsonPropertyName("ecosystem_collateral_limit_breached")]
+        public bool EcosystemCollateralLimitBreached { get; set; }
+        /// <summary>
+-        /// Asset icon url
++        /// ["<c>asset_icon_url</c>"] Asset icon url
+        /// </summary>
+        [JsonPropertyName("asset_icon_url")]
+        public string AssetIconUrl { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualBalances.cs
+        [JsonPropertyName("asset_icon_url")]
+        public string AssetIconUrl { get; set; } = string.Empty;
+        /// <summary>
+-        /// Supported networks enabled
++        /// ["<c>supported_networks_enabled</c>"] Supported networks enabled
+        /// </summary>
+        [JsonPropertyName("supported_networks_enabled")]
+        public bool SupportedNetworksEnabled { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualPorfolio.cs
+    public record CoinbasePerpetualPorfolios
+    {
+        /// <summary>
+-        /// Portfolios
++        /// ["<c>portfolios</c>"] Portfolios
+        /// </summary>
+        [JsonPropertyName("portfolios")]
+        public CoinbasePerpetualPorfolio[] Portfolios { get; set; } = Array.Empty<CoinbasePerpetualPorfolio>();
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualPorfolio.cs
+        [JsonPropertyName("portfolios")]
+        public CoinbasePerpetualPorfolio[] Portfolios { get; set; } = Array.Empty<CoinbasePerpetualPorfolio>();
+        /// <summary>
+-        /// Summary
++        /// ["<c>summary</c>"] Summary
+        /// </summary>
+        [JsonPropertyName("summary")]
+        public CoinbasePerpetualPorfolioSummary Summary { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualPorfolio.cs
+    public record CoinbasePerpetualPorfolio
+    {
+        /// <summary>
+-        /// Portfolio uuid
++        /// ["<c>portfolio_uuid</c>"] Portfolio uuid
+        /// </summary>
+        [JsonPropertyName("portfolio_uuid")]
+        public string PortfolioId { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualPorfolio.cs
+        [JsonPropertyName("portfolio_uuid")]
+        public string PortfolioId { get; set; } = string.Empty;
+        /// <summary>
+-        /// Collateral
++        /// ["<c>collateral</c>"] Collateral
+        /// </summary>
+        [JsonPropertyName("collateral")]
+        public decimal Collateral { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualPorfolio.cs
+        [JsonPropertyName("collateral")]
+        public decimal Collateral { get; set; }
+        /// <summary>
+-        /// Position notional
++        /// ["<c>position_notional</c>"] Position notional
+        /// </summary>
+        [JsonPropertyName("position_notional")]
+        public decimal PositionNotional { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualPorfolio.cs
+        [JsonPropertyName("position_notional")]
+        public decimal PositionNotional { get; set; }
+        /// <summary>
+-        /// Open position notional
++        /// ["<c>open_position_notional</c>"] Open position notional
+        /// </summary>
+        [JsonPropertyName("open_position_notional")]
+        public decimal OpenPositionNotional { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualPorfolio.cs
+        [JsonPropertyName("open_position_notional")]
+        public decimal OpenPositionNotional { get; set; }
+        /// <summary>
+-        /// Pending fees
++        /// ["<c>pending_fees</c>"] Pending fees
+        /// </summary>
+        [JsonPropertyName("pending_fees")]
+        public decimal PendingFees { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualPorfolio.cs
+        [JsonPropertyName("pending_fees")]
+        public decimal PendingFees { get; set; }
+        /// <summary>
+-        /// Borrow
++        /// ["<c>borrow</c>"] Borrow
+        /// </summary>
+        [JsonPropertyName("borrow")]
+        public decimal Borrow { get; set; }
+*** End Patch

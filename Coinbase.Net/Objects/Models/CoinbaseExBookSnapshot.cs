@@ -1,4 +1,4 @@
-﻿using Coinbase.Net.Objects.Internal;
+using Coinbase.Net.Objects.Internal;
 using CryptoExchange.Net.Converters;
 using CryptoExchange.Net.Converters.SystemTextJson;
 using System.Text.Json.Serialization;
@@ -11,17 +11,17 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseExBookSnapshot : CoinbaseSocketEvent
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>product_id</c>"] Symbol
         /// </summary>
         [JsonPropertyName("product_id")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
-        /// Bids
+        /// ["<c>bids</c>"] Bids
         /// </summary>
         [JsonPropertyName("bids")]
         public CoinbaseExOrderBookEntry[] Bids { get; set; } = [];
         /// <summary>
-        /// Asks
+        /// ["<c>asks</c>"] Asks
         /// </summary>
         [JsonPropertyName("asks")]
         public CoinbaseExOrderBookEntry[] Asks { get; set; } = [];

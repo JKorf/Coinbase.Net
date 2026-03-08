@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("order_configuration")]
+        public CoinbaseOrderConfiguration OrderConfiguration { get; set; } = null!;
+        /// <summary>
+-        /// OrderSide
++        /// ["<c>side</c>"] OrderSide
+        /// </summary>
+        [JsonPropertyName("side")]
+        public OrderSide? OrderSide { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("side")]
+        public OrderSide? OrderSide { get; set; }
+        /// <summary>
+-        /// Client order id
++        /// ["<c>client_order_id</c>"] Client order id
+        /// </summary>
+        [JsonPropertyName("client_order_id")]
+        public string ClientOrderId { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("client_order_id")]
+        public string ClientOrderId { get; set; } = string.Empty;
+        /// <summary>
+-        /// Status of the order
++        /// ["<c>status</c>"] Status of the order
+        /// </summary>
+        [JsonPropertyName("status")]
+        public OrderStatus OrderStatus { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("status")]
+        public OrderStatus OrderStatus { get; set; }
+        /// <summary>
+-        /// Time in force
++        /// ["<c>time_in_force</c>"] Time in force
+        /// </summary>
+        [JsonPropertyName("time_in_force")]
+        public TimeInForce TimeInForce { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("time_in_force")]
+        public TimeInForce TimeInForce { get; set; }
+        /// <summary>
+-        /// Created time
++        /// ["<c>created_time</c>"] Created time
+        /// </summary>
+        [JsonPropertyName("created_time")]
+        public DateTime CreateTime { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("created_time")]
+        public DateTime CreateTime { get; set; }
+        /// <summary>
+-        /// Filled percentage of the order
++        /// ["<c>completion_percentage</c>"] Filled percentage of the order
+        /// </summary>
+        [JsonPropertyName("completion_percentage")]
+        public decimal FilledPercentage { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("completion_percentage")]
+        public decimal FilledPercentage { get; set; }
+        /// <summary>
+-        /// Quantity filled
++        /// ["<c>filled_size</c>"] Quantity filled
+        /// </summary>
+        [JsonPropertyName("filled_size")]
+        public decimal QuantityFilled { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("filled_size")]
+        public decimal QuantityFilled { get; set; }
+        /// <summary>
+-        /// Average fill price
++        /// ["<c>average_filled_price</c>"] Average fill price
+        /// </summary>
+        [JsonPropertyName("average_filled_price")]
+        public decimal AverageFillPrice { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("average_filled_price")]
+        public decimal AverageFillPrice { get; set; }
+        /// <summary>
+-        /// Number of trades
++        /// ["<c>number_of_fills</c>"] Number of trades
+        /// </summary>
+        [JsonPropertyName("number_of_fills")]
+        public decimal NumberOfTrades { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseOrder.cs
+        [JsonPropertyName("number_of_fills")]
+        public decimal NumberOfTrades { get; set; }
+        /// <summary>
+-        /// Filled quote quantity value
++        /// ["<c>filled_value</c>"] Filled quote quantity value
+        /// </summary>
+        [JsonPropertyName("filled_value")]
+        public decimal QuoteQuantityFilled { get; set; }
+*** End Patch

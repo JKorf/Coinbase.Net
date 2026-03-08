@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualBalances.cs
+    public record CoinbasePerpetualBalances
+    {
+        /// <summary>
+-        /// Portfolio uuid
++        /// ["<c>portfolio_uuid</c>"] Portfolio uuid
+        /// </summary>
+        [JsonPropertyName("portfolio_uuid")]
+        public string PortfolioId { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualBalances.cs
+        [JsonPropertyName("portfolio_uuid")]
+        public string PortfolioId { get; set; } = string.Empty;
+        /// <summary>
+-        /// Balances
++        /// ["<c>balances</c>"] Balances
+        /// </summary>
+        [JsonPropertyName("balances")]
+        public CoinbasePerpetualBalance[] Balances { get; set; } = Array.Empty<CoinbasePerpetualBalance>();
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualBalances.cs
+        [JsonPropertyName("balances")]
+        public CoinbasePerpetualBalance[] Balances { get; set; } = Array.Empty<CoinbasePerpetualBalance>();
+        /// <summary>
+-        /// Is margin limit reached
++        /// ["<c>is_margin_limit_reached</c>"] Is margin limit reached
+        /// </summary>
+        [JsonPropertyName("is_margin_limit_reached")]
+        public bool IsMarginLimitReached { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualBalances.cs
+    public record CoinbasePerpetualBalance
+    {
+        /// <summary>
+-        /// Asset
++        /// ["<c>asset</c>"] Asset
+        /// </summary>
+        [JsonPropertyName("asset")]
+        public CoinbasePerpetualBalancesAsset Asset { get; set; } = null!;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualBalances.cs
+        [JsonPropertyName("asset")]
+        public CoinbasePerpetualBalancesAsset Asset { get; set; } = null!;
+        /// <summary>
+-        /// Quantity
++        /// ["<c>quantity</c>"] Quantity
+        /// </summary>
+        [JsonPropertyName("quantity")]
+        public decimal Quantity { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualBalances.cs
+        [JsonPropertyName("quantity")]
+        public decimal Quantity { get; set; }
+        /// <summary>
+-        /// Hold
++        /// ["<c>hold</c>"] Hold
+        /// </summary>
+        [JsonPropertyName("hold")]
+        public decimal Hold { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualBalances.cs
+        [JsonPropertyName("hold")]
+        public decimal Hold { get; set; }
+        /// <summary>
+-        /// Transfer hold
++        /// ["<c>transfer_hold</c>"] Transfer hold
+        /// </summary>
+        [JsonPropertyName("transfer_hold")]
+        public decimal TransferHold { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualBalances.cs
+        [JsonPropertyName("transfer_hold")]
+        public decimal TransferHold { get; set; }
+        /// <summary>
+-        /// Collateral value
++        /// ["<c>collateral_value</c>"] Collateral value
+        /// </summary>
+        [JsonPropertyName("collateral_value")]
+        public decimal CollateralValue { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualBalances.cs
+        [JsonPropertyName("collateral_value")]
+        public decimal CollateralValue { get; set; }
+        /// <summary>
+-        /// Collateral weight
++        /// ["<c>collateral_weight</c>"] Collateral weight
+        /// </summary>
+        [JsonPropertyName("collateral_weight")]
+        public decimal CollateralWeight { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbasePerpetualBalances.cs
+        [JsonPropertyName("collateral_weight")]
+        public decimal CollateralWeight { get; set; }
+        /// <summary>
+-        /// Max withdraw quantity
++        /// ["<c>max_withdraw_amount</c>"] Max withdraw quantity
+        /// </summary>
+        [JsonPropertyName("max_withdraw_amount")]
+        public decimal MaxWithdrawQuantity { get; set; }
+*** End Patch

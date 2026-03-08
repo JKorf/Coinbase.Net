@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        [JsonPropertyName("status")]
+        public SymbolStatus Status { get; set; }
+        /// <summary>
+-        /// Contract address
++        /// ["<c>contract_address</c>"] Contract address
+        /// </summary>
+        [JsonPropertyName("contract_address")]
+        public string ContractAddress { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        [JsonPropertyName("contract_address")]
+        public string ContractAddress { get; set; } = string.Empty;
+        /// <summary>
+-        /// Crypto address link
++        /// ["<c>crypto_address_link</c>"] Crypto address link
+        /// </summary>
+        [JsonPropertyName("crypto_address_link")]
+        public string AddressLink { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        [JsonPropertyName("crypto_address_link")]
+        public string AddressLink { get; set; } = string.Empty;
+        /// <summary>
+-        /// Crypto transaction link
++        /// ["<c>crypto_transaction_link</c>"] Crypto transaction link
+        /// </summary>
+        [JsonPropertyName("crypto_transaction_link")]
+        public string TransactionLink { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        [JsonPropertyName("crypto_transaction_link")]
+        public string TransactionLink { get; set; } = string.Empty;
+        /// <summary>
+-        /// Min withdraw quantity
++        /// ["<c>min_withdrawal_amount</c>"] Min withdraw quantity
+        /// </summary>
+        [JsonPropertyName("min_withdrawal_amount")]
+        public decimal MinWithdrawQuantity { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        [JsonPropertyName("min_withdrawal_amount")]
+        public decimal MinWithdrawQuantity { get; set; }
+        /// <summary>
+-        /// Max withdraw quantity
++        /// ["<c>max_withdrawal_amount</c>"] Max withdraw quantity
+        /// </summary>
+        [JsonPropertyName("max_withdrawal_amount")]
+        public decimal MaxWithdrawQuantity { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        [JsonPropertyName("max_withdrawal_amount")]
+        public decimal MaxWithdrawQuantity { get; set; }
+        /// <summary>
+-        /// Network confirmations required
++        /// ["<c>network_confirmations</c>"] Network confirmations required
+        /// </summary>
+        [JsonPropertyName("network_confirmations")]
+        public int? NetworkConfirmations { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        [JsonPropertyName("network_confirmations")]
+        public int? NetworkConfirmations { get; set; }
+        /// <summary>
+-        /// Processing time in seconds
++        /// ["<c>processing_time_seconds</c>"] Processing time in seconds
+        /// </summary>
+        [JsonPropertyName("processing_time_seconds")]
+        public int? ProcessingTime { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        [JsonPropertyName("processing_time_seconds")]
+        public int? ProcessingTime { get; set; }
+        /// <summary>
+-        /// Destination tag regex
++        /// ["<c>destination_tag_regex</c>"] Destination tag regex
+        /// </summary>
+        [JsonPropertyName("destination_tag_regex")]
+        public string DestinationTagRegex { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+    public class CoinbaseExAssetDetails
+    {
+        /// <summary>
+-        /// Asset type
++        /// ["<c>type</c>"] Asset type
+        /// </summary>
+        [JsonPropertyName("type")]
+        public AssetType Type { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseExAsset.cs
+        public AssetType Type { get; set; }
+
+        /// <summary>
+-        /// Symbol
++        /// ["<c>symbol</c>"] Symbol
+        /// </summary>
+        [JsonPropertyName("symbol")]
+        public string Symbol { get; set; } = string.Empty;
+*** End Patch

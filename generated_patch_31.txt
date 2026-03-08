@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesPosition.cs
+        [JsonPropertyName("number_of_contracts")]
+        public int NumberOfContracts { get; set; }
+        /// <summary>
+-        /// Current price
++        /// ["<c>current_price</c>"] Current price
+        /// </summary>
+        [JsonPropertyName("current_price")]
+        public decimal CurrentPrice { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesPosition.cs
+        [JsonPropertyName("current_price")]
+        public decimal CurrentPrice { get; set; }
+        /// <summary>
+-        /// Average entry price
++        /// ["<c>avg_entry_price</c>"] Average entry price
+        /// </summary>
+        [JsonPropertyName("avg_entry_price")]
+        public decimal AverageEntryPrice { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesPosition.cs
+        [JsonPropertyName("avg_entry_price")]
+        public decimal AverageEntryPrice { get; set; }
+        /// <summary>
+-        /// Unrealized profit and loss
++        /// ["<c>unrealized_pnl</c>"] Unrealized profit and loss
+        /// </summary>
+        [JsonPropertyName("unrealized_pnl")]
+        public decimal UnrealizedPnl { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseFuturesPosition.cs
+        [JsonPropertyName("unrealized_pnl")]
+        public decimal UnrealizedPnl { get; set; }
+        /// <summary>
+-        /// Daily realized profit and loss
++        /// ["<c>daily_realized_pnl</c>"] Daily realized profit and loss
+        /// </summary>
+        [JsonPropertyName("daily_realized_pnl")]
+        public decimal DailyRealizedPnl { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseHeartbeat.cs
+    public record CoinbaseHeartbeat : CoinbaseSocketEvent
+    {
+        /// <summary>
+-        /// Counter
++        /// ["<c>heartbeat_counter</c>"] Counter
+        /// </summary>
+        [JsonPropertyName("heartbeat_counter")]
+        public long Counter { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseHeartbeat.cs
+        [JsonPropertyName("heartbeat_counter")]
+        public long Counter { get; set; }
+        /// <summary>
+-        /// Timestamp
++        /// ["<c>current_time</c>"] Timestamp
+        /// </summary>
+        [JsonPropertyName("current_time")]
+        public string Timestamp { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseKline.cs
+    public record CoinbaseKline
+    {
+        /// <summary>
+-        /// Candle open time
++        /// ["<c>start</c>"] Candle open time
+        /// </summary>
+        [JsonPropertyName("start")]
+        public DateTime OpenTime { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseKline.cs
+        [JsonPropertyName("start")]
+        public DateTime OpenTime { get; set; }
+        /// <summary>
+-        /// Low price
++        /// ["<c>low</c>"] Low price
+        /// </summary>
+        [JsonPropertyName("low")]
+        public decimal LowPrice { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseKline.cs
+        [JsonPropertyName("low")]
+        public decimal LowPrice { get; set; }
+        /// <summary>
+-        /// High price
++        /// ["<c>high</c>"] High price
+        /// </summary>
+        [JsonPropertyName("high")]
+        public decimal HighPrice { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseKline.cs
+        [JsonPropertyName("high")]
+        public decimal HighPrice { get; set; }
+        /// <summary>
+-        /// Open price
++        /// ["<c>open</c>"] Open price
+        /// </summary>
+        [JsonPropertyName("open")]
+        public decimal OpenPrice { get; set; }
+*** End Patch

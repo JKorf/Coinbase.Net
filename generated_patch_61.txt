@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("price")]
+        public decimal? LastPrice { get; set; }
+        /// <summary>
+-        /// Price percentage change in last 24 hours
++        /// ["<c>price_percentage_change_24h</c>"] Price percentage change in last 24 hours
+        /// </summary>
+        [JsonPropertyName("price_percentage_change_24h")]
+        public decimal? PricePercentageChange24h { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("price_percentage_change_24h")]
+        public decimal? PricePercentageChange24h { get; set; }
+        /// <summary>
+-        /// Volume in base asset in last 24 hours
++        /// ["<c>volume_24h</c>"] Volume in base asset in last 24 hours
+        /// </summary>
+        [JsonPropertyName("volume_24h")]
+        public decimal? Volume24h { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("volume_24h")]
+        public decimal? Volume24h { get; set; }
+        /// <summary>
+-        /// Volume percentage change in last 24 hours
++        /// ["<c>volume_percentage_change_24h</c>"] Volume percentage change in last 24 hours
+        /// </summary>
+        [JsonPropertyName("volume_percentage_change_24h")]
+        public decimal? VolumePercentageChange24h { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("volume_percentage_change_24h")]
+        public decimal? VolumePercentageChange24h { get; set; }
+        /// <summary>
+-        /// Base increment
++        /// ["<c>base_increment</c>"] Base increment
+        /// </summary>
+        [JsonPropertyName("base_increment")]
+        public decimal QuantityStep { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("base_increment")]
+        public decimal QuantityStep { get; set; }
+        /// <summary>
+-        /// Quote quantity increment
++        /// ["<c>quote_increment</c>"] Quote quantity increment
+        /// </summary>
+        [JsonPropertyName("quote_increment")]
+        public decimal QuoteQuantityStep { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("quote_increment")]
+        public decimal QuoteQuantityStep { get; set; }
+        /// <summary>
+-        /// Quote min quantity
++        /// ["<c>quote_min_size</c>"] Quote min quantity
+        /// </summary>
+        [JsonPropertyName("quote_min_size")]
+        public decimal QuoteMinQuantity { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("quote_min_size")]
+        public decimal QuoteMinQuantity { get; set; }
+        /// <summary>
+-        /// Quote max quantity
++        /// ["<c>quote_max_size</c>"] Quote max quantity
+        /// </summary>
+        [JsonPropertyName("quote_max_size")]
+        public decimal QuoteMaxQuantity { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("quote_max_size")]
+        public decimal QuoteMaxQuantity { get; set; }
+        /// <summary>
+-        /// Min order quantity
++        /// ["<c>base_min_size</c>"] Min order quantity
+        /// </summary>
+        [JsonPropertyName("base_min_size")]
+        public decimal MinOrderQuantity { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("base_min_size")]
+        public decimal MinOrderQuantity { get; set; }
+        /// <summary>
+-        /// Max order quantity
++        /// ["<c>base_max_size</c>"] Max order quantity
+        /// </summary>
+        [JsonPropertyName("base_max_size")]
+        public decimal MaxOrderQuantity { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseSymbol.cs
+        [JsonPropertyName("base_max_size")]
+        public decimal MaxOrderQuantity { get; set; }
+        /// <summary>
+-        /// Base asset name
++        /// ["<c>base_name</c>"] Base asset name
+        /// </summary>
+        [JsonPropertyName("base_name")]
+        public string BaseAssetName { get; set; } = string.Empty;
+*** End Patch

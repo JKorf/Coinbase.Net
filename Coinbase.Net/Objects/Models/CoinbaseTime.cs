@@ -11,7 +11,7 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseTime
     {
         /// <summary>
-        /// Current time
+        /// ["<c>epochMillis</c>"] Current time
         /// </summary>
         [JsonPropertyName("epochMillis")]
         public DateTime Time { get; set; }

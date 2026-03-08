@@ -17,7 +17,7 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseBookTicker
     {
         /// <summary>
-        /// Symbol
+        /// ["<c>product_id</c>"] Symbol
         /// </summary>
         [JsonPropertyName("product_id")]
         public string Symbol { get; set; } = string.Empty;

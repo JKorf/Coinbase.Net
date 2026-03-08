@@ -1,0 +1,92 @@
+*** Begin Patch
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+        [JsonPropertyName("ready")]
+        public bool Ready { get; set; }
+        /// <summary>
+-        /// Create time
++        /// ["<c>created_at</c>"] Create time
+        /// </summary>
+        [JsonPropertyName("created_at")]
+        public DateTime CreateTime { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+        [JsonPropertyName("created_at")]
+        public DateTime CreateTime { get; set; }
+        /// <summary>
+-        /// Update time
++        /// ["<c>updated_at</c>"] Update time
+        /// </summary>
+        [JsonPropertyName("updated_at")]
+        public DateTime? UpdateTime { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+        [JsonPropertyName("updated_at")]
+        public DateTime? UpdateTime { get; set; }
+        /// <summary>
+-        /// Delete time
++        /// ["<c>deleted_at</c>"] Delete time
+        /// </summary>
+        [JsonPropertyName("deleted_at")]
+        public DateTime? DeleteTime { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+        [JsonPropertyName("deleted_at")]
+        public DateTime? DeleteTime { get; set; }
+        /// <summary>
+-        /// Portfolio id
++        /// ["<c>retail_portfolio_id</c>"] Portfolio id
+        /// </summary>
+        [JsonPropertyName("retail_portfolio_id")]
+        public string PortfolioId { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+        [JsonPropertyName("retail_portfolio_id")]
+        public string PortfolioId { get; set; } = string.Empty;
+        /// <summary>
+-        /// Account platform
++        /// ["<c>platform</c>"] Account platform
+        /// </summary>
+        [JsonPropertyName("platform")]
+        public AccountPlatform Platform { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+    public record CoinbaseQuantityReference
+    {
+        /// <summary>
+-        /// Value
++        /// ["<c>value</c>"] Value
+        /// </summary>
+        [JsonPropertyName("value")]
+        public decimal Value { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseAccount.cs
+        [JsonInclude]
+        internal decimal Amount { set => Value = value; }
+        /// <summary>
+-        /// Asset name
++        /// ["<c>currency</c>"] Asset name
+        /// </summary>
+        [JsonPropertyName("currency")]
+        public string Asset { get; set; } = string.Empty;
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseApiKey.cs
+    public record CoinbaseApiKey
+    {
+        /// <summary>
+-        /// Can view
++        /// ["<c>can_view</c>"] Can view
+        /// </summary>
+        [JsonPropertyName("can_view")]
+        public bool CanView { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseApiKey.cs
+        [JsonPropertyName("can_view")]
+        public bool CanView { get; set; }
+        /// <summary>
+-        /// Can trade
++        /// ["<c>can_trade</c>"] Can trade
+        /// </summary>
+        [JsonPropertyName("can_trade")]
+        public bool CanTrade { get; set; }
+*** Update File: C:\Projects\Coinbase.Net\Coinbase.Net\Objects\Models\CoinbaseApiKey.cs
+        [JsonPropertyName("can_trade")]
+        public bool CanTrade { get; set; }
+        /// <summary>
+-        /// Can transfer
++        /// ["<c>can_transfer</c>"] Can transfer
+        /// </summary>
+        [JsonPropertyName("can_transfer")]
+        public bool CanTransfer { get; set; }
+*** End Patch

@@ -12,12 +12,12 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseUserUpdate : CoinbaseSocketEvent
     {
         /// <summary>
-        /// Order data
+        /// ["<c>orders</c>"] Order data
         /// </summary>
         [JsonPropertyName("orders")]
         public CoinbaseOrderUpdate[] Orders { get; set; } = Array.Empty<CoinbaseOrderUpdate>();
         /// <summary>
-        /// Position data
+        /// ["<c>positions</c>"] Position data
         /// </summary>
         [JsonPropertyName("positions")]
         public CoinbasePositionsUpdates PositionInfo { get; set; } = null!;
@@ -30,12 +30,12 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbasePositionsUpdates
     {
         /// <summary>
-        /// Perpetual futures positions
+        /// ["<c>perpetual_futures_positions</c>"] Perpetual futures positions
         /// </summary>
         [JsonPropertyName("perpetual_futures_positions")]
         public CoinbasePerpetualPositionUpdate[] PerpetualPositions { get; set; } = Array.Empty<CoinbasePerpetualPositionUpdate>();
         /// <summary>
-        /// Expiring futures positions
+        /// ["<c>expiring_futures_positions</c>"] Expiring futures positions
         /// </summary>
         [JsonPropertyName("expiring_futures_positions")]
         public CoinbaseExpiringPosition[] ExpiringPositions { get; set; } = Array.Empty<CoinbaseExpiringPosition>();

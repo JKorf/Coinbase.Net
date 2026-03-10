@@ -11,27 +11,27 @@ namespace Coinbase.Net.Enums
     public enum AccountType
     {
         /// <summary>
-        /// Unspecified
+        /// ["<c>ACCOUNT_TYPE_UNSPECIFIED</c>"] Unspecified
         /// </summary>
         [Map("ACCOUNT_TYPE_UNSPECIFIED")]
         Unspecified,
         /// <summary>
-        /// Crypto account
+        /// ["<c>ACCOUNT_TYPE_CRYPTO</c>"] Crypto account
         /// </summary>
         [Map("ACCOUNT_TYPE_CRYPTO")]
         Crypto,
         /// <summary>
-        /// Fiat account
+        /// ["<c>ACCOUNT_TYPE_FIAT</c>"] Fiat account
         /// </summary>
         [Map("ACCOUNT_TYPE_FIAT")]
         Fiat,
         /// <summary>
-        /// Vault account
+        /// ["<c>ACCOUNT_TYPE_VAULT</c>"] Vault account
         /// </summary>
         [Map("ACCOUNT_TYPE_VAULT")]
         Vault,
         /// <summary>
-        /// Perpetual futures account
+        /// ["<c>ACCOUNT_TYPE_PERP_FUTURES</c>"] Perpetual futures account
         /// </summary>
         [Map("ACCOUNT_TYPE_PERP_FUTURES")]
         PerpetualFutures

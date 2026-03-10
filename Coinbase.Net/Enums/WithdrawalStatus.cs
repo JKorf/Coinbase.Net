@@ -11,17 +11,17 @@ namespace Coinbase.Net.Enums
     public enum WithdrawalStatus
     {
         /// <summary>
-        /// Created
+        /// ["<c>created</c>"] Created
         /// </summary>
         [Map("created")]
         Created,
         /// <summary>
-        /// Completed
+        /// ["<c>completed</c>"] Completed
         /// </summary>
         [Map("completed")]
         Completed,
         /// <summary>
-        /// Canceled
+        /// ["<c>canceled</c>"] Canceled
         /// </summary>
         [Map("canceled")]
         Canceled

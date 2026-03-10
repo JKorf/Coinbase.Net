@@ -11,22 +11,22 @@ namespace Coinbase.Net.Enums
     public enum ExpiryStatus
     {
         /// <summary>
-        /// Unknown status
+        /// ["<c>UNKNOWN_EXPIRING_CONTRACT_STATUS</c>"] Unknown status
         /// </summary>
         [Map("UNKNOWN_EXPIRING_CONTRACT_STATUS")]
         Unknown,
         /// <summary>
-        /// Unexpired status
+        /// ["<c>STATUS_UNEXPIRED</c>"] Unexpired status
         /// </summary>
         [Map("STATUS_UNEXPIRED")]
         Unexpired,
         /// <summary>
-        /// Expired contract
+        /// ["<c>STATUS_EXPIRED</c>"] Expired contract
         /// </summary>
         [Map("STATUS_EXPIRED")]
         Expired,
         /// <summary>
-        /// All statuses
+        /// ["<c>STATUS_ALL</c>"] All statuses
         /// </summary>
         [Map("STATUS_ALL")]
         All

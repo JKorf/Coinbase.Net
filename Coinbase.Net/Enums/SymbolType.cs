@@ -11,17 +11,17 @@ namespace Coinbase.Net.Enums
     public enum SymbolType
     {
         /// <summary>
-        /// Unknown
+        /// ["<c>UNKNOWN_PRODUCT_TYPE</c>"] Unknown
         /// </summary>
         [Map("UNKNOWN_PRODUCT_TYPE")]
         Unknown,
         /// <summary>
-        /// Spot symbol
+        /// ["<c>SPOT</c>"] Spot symbol
         /// </summary>
         [Map("SPOT")]
         Spot,
         /// <summary>
-        /// Futures symbol
+        /// ["<c>FUTURE</c>"] Futures symbol
         /// </summary>
         [Map("FUTURE")]
         Futures

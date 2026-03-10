@@ -11,12 +11,12 @@ namespace Coinbase.Net.Enums
     public enum StopDirection
     {
         /// <summary>
-        /// Triggers when price is higher as the stop trigger price
+        /// ["<c>STOP_DIRECTION_STOP_UP</c>"] Triggers when price is higher as the stop trigger price
         /// </summary>
         [Map("STOP_DIRECTION_STOP_UP")]
         Up,
         /// <summary>
-        /// Triggers when price is lower as the stop trigger price
+        /// ["<c>STOP_DIRECTION_STOP_DOWN</c>"] Triggers when price is lower as the stop trigger price
         /// </summary>
         [Map("STOP_DIRECTION_STOP_DOWN")]
         Down

@@ -11,32 +11,32 @@ namespace Coinbase.Net.Enums
     public enum OrderType
     {
         /// <summary>
-        /// Unknown
+        /// ["<c>UNKNOWN_ORDER_TYPE</c>"] Unknown
         /// </summary>
         [Map("UNKNOWN_ORDER_TYPE")]
         Unknown,
         /// <summary>
-        /// Market order
+        /// ["<c>MARKET</c>"] Market order
         /// </summary>
         [Map("MARKET")]
         Market,
         /// <summary>
-        /// Limit order
+        /// ["<c>LIMIT</c>"] Limit order
         /// </summary>
         [Map("LIMIT")]
         Limit,
         /// <summary>
-        /// Stop order
+        /// ["<c>STOP</c>"] Stop order
         /// </summary>
         [Map("STOP")]
         Stop,
         /// <summary>
-        /// Stop limit order
+        /// ["<c>STOP_LIMIT</c>"] Stop limit order
         /// </summary>
         [Map("STOP_LIMIT", "Stop Limit")]
         StopLimit,
         /// <summary>
-        /// Bracket order
+        /// ["<c>BRACKET</c>"] Bracket order
         /// </summary>
         [Map("BRACKET")]
         Bracket,

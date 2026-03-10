@@ -11,17 +11,17 @@ namespace Coinbase.Net.Enums
     public enum ContractExpiryType
     {
         /// <summary>
-        /// Unknown
+        /// ["<c>UNKNOWN_CONTRACT_EXPIRY_TYPE</c>"] Unknown
         /// </summary>
         [Map("UNKNOWN_CONTRACT_EXPIRY_TYPE")]
         Unknown,
         /// <summary>
-        /// Expiring contract
+        /// ["<c>EXPIRING</c>"] Expiring contract
         /// </summary>
         [Map("EXPIRING")]
         Expiring,
         /// <summary>
-        /// Perpetual contract
+        /// ["<c>PERPETUAL</c>"] Perpetual contract
         /// </summary>
         [Map("PERPETUAL")]
         Perpetual

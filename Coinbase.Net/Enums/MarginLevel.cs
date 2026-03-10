@@ -11,27 +11,27 @@ namespace Coinbase.Net.Enums
     public enum MarginLevel
     {
         /// <summary>
-        /// Unspecified
+        /// ["<c>MARGIN_LEVEL_TYPE_UNSPECIFIED</c>"] Unspecified
         /// </summary>
         [Map("MARGIN_LEVEL_TYPE_UNSPECIFIED")]
         Unspecified,
         /// <summary>
-        /// Base level
+        /// ["<c>MARGIN_LEVEL_TYPE_BASE</c>"] Base level
         /// </summary>
         [Map("MARGIN_LEVEL_TYPE_BASE")]
         Base,
         /// <summary>
-        /// Warning
+        /// ["<c>MARGIN_LEVEL_TYPE_WARNING</c>"] Warning
         /// </summary>
         [Map("MARGIN_LEVEL_TYPE_WARNING")]
         Warning,
         /// <summary>
-        /// Danger
+        /// ["<c>MARGIN_LEVEL_TYPE_DANGER</c>"] Danger
         /// </summary>
         [Map("MARGIN_LEVEL_TYPE_DANGER")]
         Danger,
         /// <summary>
-        /// Liquidation
+        /// ["<c>MARGIN_LEVEL_TYPE_LIQUIDATION</c>"] Liquidation
         /// </summary>
         [Map("MARGIN_LEVEL_TYPE_LIQUIDATION")]
         Liquidation,

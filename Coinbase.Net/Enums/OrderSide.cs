@@ -11,17 +11,17 @@ namespace Coinbase.Net.Enums
     public enum OrderSide
     {
         /// <summary>
-        /// Buy
+        /// ["<c>BUY</c>"] Buy
         /// </summary>
         [Map("BUY", "buy", "bid")]
         Buy,
         /// <summary>
-        /// Sell
+        /// ["<c>SELL</c>"] Sell
         /// </summary>
         [Map("SELL", "sell", "ask", "offer")]
         Sell,
         /// <summary>
-        /// Unkown, only for data mapping
+        /// ["<c>UNKNOWN_ORDER_SIDE</c>"] Unkown, only for data mapping
         /// </summary>
         [Map("UNKNOWN_ORDER_SIDE")]
         Unknown

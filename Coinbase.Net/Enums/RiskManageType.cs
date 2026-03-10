@@ -11,17 +11,17 @@ namespace Coinbase.Net.Enums
     public enum RiskManageType
     {
         /// <summary>
-        /// Unknown
+        /// ["<c>UNKNOWN_RISK_MANAGEMENT_TYPE</c>"] Unknown
         /// </summary>
         [Map("UNKNOWN_RISK_MANAGEMENT_TYPE")]
         Unknown,
         /// <summary>
-        /// Managed by FCM
+        /// ["<c>MANAGED_BY_FCM</c>"] Managed by FCM
         /// </summary>
         [Map("MANAGED_BY_FCM")]
         ManagedByFcm,
         /// <summary>
-        /// Management by venue
+        /// ["<c>MANAGED_BY_VENUE</c>"] Management by venue
         /// </summary>
         [Map("MANAGED_BY_VENUE")]
         ManagedByVenue

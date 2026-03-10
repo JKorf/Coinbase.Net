@@ -11,22 +11,22 @@ namespace Coinbase.Net.Enums
     public enum PortfolioType
     {
         /// <summary>
-        /// Undefined
+        /// ["<c>UNDEFINED</c>"] Undefined
         /// </summary>
         [Map("UNDEFINED")]
         Undefined,
         /// <summary>
-        /// Default
+        /// ["<c>DEFAULT</c>"] Default
         /// </summary>
         [Map("DEFAULT")]
         Default,
         /// <summary>
-        /// Consumer
+        /// ["<c>CONSUMER</c>"] Consumer
         /// </summary>
         [Map("CONSUMER")]
         Consumer,
         /// <summary>
-        /// International
+        /// ["<c>INTX</c>"] International
         /// </summary>
         [Map("INTX")]
         International

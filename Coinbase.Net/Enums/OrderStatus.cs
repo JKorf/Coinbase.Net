@@ -11,47 +11,47 @@ namespace Coinbase.Net.Enums
     public enum OrderStatus
     {
         /// <summary>
-        /// Pending placement
+        /// ["<c>PENDING</c>"] Pending placement
         /// </summary>
         [Map("PENDING")]
         Pending,
         /// <summary>
-        /// Open
+        /// ["<c>OPEN</c>"] Open
         /// </summary>
         [Map("OPEN")]
         Open,
         /// <summary>
-        /// Filled
+        /// ["<c>FILLED</c>"] Filled
         /// </summary>
         [Map("FILLED")]
         Filled,
         /// <summary>
-        /// Canceled
+        /// ["<c>CANCELLED</c>"] Canceled
         /// </summary>
         [Map("CANCELLED")]
         Canceled,
         /// <summary>
-        /// Expired
+        /// ["<c>EXPIRED</c>"] Expired
         /// </summary>
         [Map("EXPIRED")]
         Expired,
         /// <summary>
-        /// Failed
+        /// ["<c>FAILED</c>"] Failed
         /// </summary>
         [Map("FAILED")]
         Failed,
         /// <summary>
-        /// Unknown
+        /// ["<c>UNKNOWN_ORDER_STATUS</c>"] Unknown
         /// </summary>
         [Map("UNKNOWN_ORDER_STATUS")]
         Unknown,
         /// <summary>
-        /// Order is queued
+        /// ["<c>QUEUED</c>"] Order is queued
         /// </summary>
         [Map("QUEUED")]
         Queued,
         /// <summary>
-        /// Cancel has been queued
+        /// ["<c>CANCEL_QUEUED</c>"] Cancel has been queued
         /// </summary>
         [Map("CANCEL_QUEUED")]
         CancelQueued

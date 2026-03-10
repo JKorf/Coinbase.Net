@@ -11,27 +11,27 @@ namespace Coinbase.Net.Enums
     public enum MarginWindowType
     {
         /// <summary>
-        /// Unspecified
+        /// ["<c>FCM_MARGIN_WINDOW_TYPE_UNSPECIFIED</c>"] Unspecified
         /// </summary>
         [Map("FCM_MARGIN_WINDOW_TYPE_UNSPECIFIED", "MARGIN_WINDOW_TYPE_UNSPECIFIED")]
         Unspecified,
         /// <summary>
-        /// Overnight
+        /// ["<c>FCM_MARGIN_WINDOW_TYPE_OVERNIGHT</c>"] Overnight
         /// </summary>
         [Map("FCM_MARGIN_WINDOW_TYPE_OVERNIGHT", "MARGIN_WINDOW_TYPE_OVERNIGHT")]
         Overnight,
         /// <summary>
-        /// Weekend
+        /// ["<c>FCM_MARGIN_WINDOW_TYPE_WEEKEND</c>"] Weekend
         /// </summary>
         [Map("FCM_MARGIN_WINDOW_TYPE_WEEKEND", "MARGIN_WINDOW_TYPE_WEEKEND")]
         Weekend,
         /// <summary>
-        /// Intraday
+        /// ["<c>FCM_MARGIN_WINDOW_TYPE_INTRADAY</c>"] Intraday
         /// </summary>
         [Map("FCM_MARGIN_WINDOW_TYPE_INTRADAY", "MARGIN_WINDOW_TYPE_INTRADAY")]
         Intraday,
         /// <summary>
-        /// Transition
+        /// ["<c>FCM_MARGIN_WINDOW_TYPE_TRANSITION</c>"] Transition
         /// </summary>
         [Map("FCM_MARGIN_WINDOW_TYPE_TRANSITION", "MARGIN_WINDOW_TYPE_TRANSITION")]
         Transition

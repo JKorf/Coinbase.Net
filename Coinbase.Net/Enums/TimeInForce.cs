@@ -11,27 +11,27 @@ namespace Coinbase.Net.Enums
     public enum TimeInForce
     {
         /// <summary>
-        /// Unknown
+        /// ["<c>UNKNOWN_TIME_IN_FORCE</c>"] Unknown
         /// </summary>
         [Map("UNKNOWN_TIME_IN_FORCE")]
         Unknown,
         /// <summary>
-        /// Good until date
+        /// ["<c>GOOD_UNTIL_DATE_TIME</c>"] Good until date
         /// </summary>
         [Map("GOOD_UNTIL_DATE_TIME")]
         GoodTillDate,
         /// <summary>
-        /// Good until canceled
+        /// ["<c>GOOD_UNTIL_CANCELLED</c>"] Good until canceled
         /// </summary>
         [Map("GOOD_UNTIL_CANCELLED")]
         GoodTillCanceled,
         /// <summary>
-        /// Immediate or cancel
+        /// ["<c>IMMEDIATE_OR_CANCEL</c>"] Immediate or cancel
         /// </summary>
         [Map("IMMEDIATE_OR_CANCEL")]
         ImmediateOrCancel,
         /// <summary>
-        /// Fill or kill
+        /// ["<c>FILL_OR_KILL</c>"] Fill or kill
         /// </summary>
         [Map("FILL_OR_KILL")]
         FillOrKill

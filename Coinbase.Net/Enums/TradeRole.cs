@@ -11,17 +11,17 @@ namespace Coinbase.Net.Enums
     public enum TradeRole
     {
         /// <summary>
-        /// Unknown role
+        /// ["<c>UNKNOWN_LIQUIDITY_INDICATOR</c>"] Unknown role
         /// </summary>
         [Map("UNKNOWN_LIQUIDITY_INDICATOR")]
         Unknown,
         /// <summary>
-        /// Taker
+        /// ["<c>TAKER</c>"] Taker
         /// </summary>
         [Map("TAKER")]
         Taker,
         /// <summary>
-        /// Maker
+        /// ["<c>MAKER</c>"] Maker
         /// </summary>
         [Map("MAKER")]
         Maker

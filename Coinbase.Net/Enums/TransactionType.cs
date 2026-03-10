@@ -11,147 +11,147 @@ namespace Coinbase.Net.Enums
     public enum TransactionType
     {
         /// <summary>
-        /// Fills for an advanced trade order
+        /// ["<c>advanced_trade_fill</c>"] Fills for an advanced trade order
         /// </summary>
         [Map("advanced_trade_fill")]
         AdvancedTradeFill,
         /// <summary>
-        /// Buy a digital asset
+        /// ["<c>buy</c>"] Buy a digital asset
         /// </summary>
         [Map("buy")]
         Buy,
         /// <summary>
-        /// Recover money already disbursed
+        /// ["<c>clawback</c>"] Recover money already disbursed
         /// </summary>
         [Map("clawback")]
         Clawback,
         /// <summary>
-        /// Daily settlement between spot and futures accounts for US futures product
+        /// ["<c>derivatives_settlement</c>"] Daily settlement between spot and futures accounts for US futures product
         /// </summary>
         [Map("derivatives_settlement")]
         DerivativesSettlement,
         /// <summary>
-        /// Payout for user earn on Coinbase
+        /// ["<c>earn_payout</c>"] Payout for user earn on Coinbase
         /// </summary>
         [Map("earn_payout")]
         EarnPayout,
         /// <summary>
-        /// Deposit funds into a fiat account from a financial institution
+        /// ["<c>fiat_deposit</c>"] Deposit funds into a fiat account from a financial institution
         /// </summary>
         [Map("fiat_deposit")]
         FiatDeposit,
         /// <summary>
-        /// Withdraw funds from a fiat account
+        /// ["<c>fiat_withdrawal</c>"] Withdraw funds from a fiat account
         /// </summary>
         [Map("fiat_withdrawal")]
         FiatWithdrawal,
         /// <summary>
-        /// Clawback incentive payout from customer account
+        /// ["<c>incentives_shared_clawback</c>"] Clawback incentive payout from customer account
         /// </summary>
         [Map("incentives_shared_clawback")]
         IncentivesSharedClawback,
         /// <summary>
-        /// Deposit crypto to customer international account
+        /// ["<c>intx_deposit</c>"] Deposit crypto to customer international account
         /// </summary>
         [Map("intx_deposit")]
         IntxDeposit,
         /// <summary>
-        /// Withdraw crypto from customer international account
+        /// ["<c>intx_withdrawal</c>"] Withdraw crypto from customer international account
         /// </summary>
         [Map("intx_withdrawal")]
         IntxWithdrawal,
         /// <summary>
-        /// Receive a digital asset
+        /// ["<c>receive</c>"] Receive a digital asset
         /// </summary>
         [Map("receive")]
         Receive,
         /// <summary>
-        /// Request a digital asset from a user or email
+        /// ["<c>request</c>"] Request a digital asset from a user or email
         /// </summary>
         [Map("request")]
         Request,
         /// <summary>
-        /// Sell a digital asset
+        /// ["<c>sell</c>"] Sell a digital asset
         /// </summary>
         [Map("sell")]
         Sell,
         /// <summary>
-        /// Send a supported digital asset to a corresponding address or email.
+        /// ["<c>send</c>"] Send a supported digital asset to a corresponding address or email.
         /// </summary>
         [Map("send")]
         Send,
         /// <summary>
-        /// Funds from primary account moved to staked account
+        /// ["<c>staking_transfer</c>"] Funds from primary account moved to staked account
         /// </summary>
         [Map("staking_transfer")]
         StakingTransfer,
         /// <summary>
-        /// Transaction for Coinbase subscription rebate
+        /// ["<c>subscription_rebate</c>"] Transaction for Coinbase subscription rebate
         /// </summary>
         [Map("subscription_rebate")]
         SubscriptionRebate,
         /// <summary>
-        /// Transaction for Coinbase subscription
+        /// ["<c>subscription</c>"] Transaction for Coinbase subscription
         /// </summary>
         [Map("subscription")]
         Subscription,
         /// <summary>
-        /// Exchange one cryptocurrency for another cryptocurrency or fiat currency
+        /// ["<c>trade</c>"] Exchange one cryptocurrency for another cryptocurrency or fiat currency
         /// </summary>
         [Map("trade")]
         Trade,
         /// <summary>
-        /// Transfer funds between two of your own accounts
+        /// ["<c>transfer</c>"] Transfer funds between two of your own accounts
         /// </summary>
         [Map("transfer")]
         Transfer,
         /// <summary>
-        /// Default transaction type, uncategorized.
+        /// ["<c>tx</c>"] Default transaction type, uncategorized.
         /// </summary>
         [Map("tx")]
         Transaction,
         /// <summary>
-        /// Funds from staked funds moved to primary account
+        /// ["<c>unstaking_transfer</c>"] Funds from staked funds moved to primary account
         /// </summary>
         [Map("unstaking_transfer")]
         UnstakingTransfer,
         /// <summary>
-        /// Recover unsupported ERC-20s deposited to Coinbase on ethereum mainnet
+        /// ["<c>unsupported_asset_recovery</c>"] Recover unsupported ERC-20s deposited to Coinbase on ethereum mainnet
         /// </summary>
         [Map("unsupported_asset_recovery")]
         UnsupportedAssetRecovery,
         /// <summary>
-        /// Unwrap wrapped assets, e.g. cbETH, to wrappable assets, e.g. staked ETH
+        /// ["<c>unwrap_asset</c>"] Unwrap wrapped assets, e.g. cbETH, to wrappable assets, e.g. staked ETH
         /// </summary>
         [Map("unwrap_asset")]
         UnwrapAsset,
         /// <summary>
-        /// Withdraw funds from a vault account
+        /// ["<c>vault_withdrawal</c>"] Withdraw funds from a vault account
         /// </summary>
         [Map("vault_withdrawal")]
         VaultWithdrawal,
         /// <summary>
-        /// Wrap wrappable assets, e.g. staked ETH, to wrapped assets, e.g. cbETH
+        /// ["<c>wrap_asset</c>"] Wrap wrappable assets, e.g. staked ETH, to wrapped assets, e.g. cbETH
         /// </summary>
         [Map("wrap_asset")]
         WrapAsset,
         /// <summary>
-        /// Withdrawal from Coinbase Pro
+        /// ["<c>pro_withdrawal</c>"] Withdrawal from Coinbase Pro
         /// </summary>
         [Map("pro_withdrawal")]
         ProWithdrawal,
         /// <summary>
-        /// Deposit to Coinbase Pro
+        /// ["<c>pro_deposit</c>"] Deposit to Coinbase Pro
         /// </summary>
         [Map("pro_deposit")]
         ProDeposit,
         /// <summary>
-        /// Interest payout
+        /// ["<c>interest</c>"] Interest payout
         /// </summary>
         [Map("interest")]
         Interest,
         /// <summary>
-        /// Asset migration
+        /// ["<c>asset_migration</c>"] Asset migration
         /// </summary>
         [Map("asset_migration")]
         AssetMigration

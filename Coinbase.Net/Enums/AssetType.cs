@@ -11,12 +11,12 @@ namespace Coinbase.Net.Enums
     public enum AssetType
     {
         /// <summary>
-        /// Fiat asset
+        /// ["<c>fiat</c>"] Fiat asset
         /// </summary>
         [Map("fiat")]
         Fiat,
         /// <summary>
-        /// Crypto asset
+        /// ["<c>crypto</c>"] Crypto asset
         /// </summary>
         [Map("crypto")]
         Crypto

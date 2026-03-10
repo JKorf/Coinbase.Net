@@ -11,17 +11,17 @@ namespace Coinbase.Net.Enums
     public enum MarginType
     {
         /// <summary>
-        /// Unspecified
+        /// ["<c>MARGIN_TYPE_UNSPECIFIED</c>"] Unspecified
         /// </summary>
         [Map("MARGIN_TYPE_UNSPECIFIED", "UNKNOWN_MARGIN_TYPE")]
         Unspecified,
         /// <summary>
-        /// Cross margin
+        /// ["<c>MARGIN_TYPE_CROSS</c>"] Cross margin
         /// </summary>
         [Map("MARGIN_TYPE_CROSS")]
         Cross,
         /// <summary>
-        /// Isolated margin
+        /// ["<c>MARGIN_TYPE_ISOLATED</c>"] Isolated margin
         /// </summary>
         [Map("MARGIN_TYPE_ISOLATED")]
         Isolated

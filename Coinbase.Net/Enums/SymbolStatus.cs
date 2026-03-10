@@ -11,27 +11,27 @@ namespace Coinbase.Net.Enums
     public enum SymbolStatus
     {
         /// <summary>
-        /// Online
+        /// ["<c>online</c>"] Online
         /// </summary>
         [Map("online", "STANDARD")]
         Online,
         /// <summary>
-        /// Offline
+        /// ["<c>offline</c>"] Offline
         /// </summary>
         [Map("offline")]
         Offline,
         /// <summary>
-        /// Internal
+        /// ["<c>internal</c>"] Internal
         /// </summary>
         [Map("internal")]
         Internal,
         /// <summary>
-        /// Delisted
+        /// ["<c>delisted</c>"] Delisted
         /// </summary>
         [Map("delisted")]
         Delisted,
         /// <summary>
-        /// Pre-launch
+        /// ["<c>PRE_LAUNCH</c>"] Pre-launch
         /// </summary>
         [Map("PRE_LAUNCH")]
         PreLaunch

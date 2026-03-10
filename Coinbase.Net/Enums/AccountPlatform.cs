@@ -11,22 +11,22 @@ namespace Coinbase.Net.Enums
     public enum AccountPlatform
     {
         /// <summary>
-        /// Unspecified
+        /// ["<c>ACCOUNT_PLATFORM_UNSPECIFIED</c>"] Unspecified
         /// </summary>
         [Map("ACCOUNT_PLATFORM_UNSPECIFIED")]
         Unspecified,
         /// <summary>
-        /// Spot
+        /// ["<c>ACCOUNT_PLATFORM_CONSUMER</c>"] Spot
         /// </summary>
         [Map("ACCOUNT_PLATFORM_CONSUMER")]
         Spot,
         /// <summary>
-        /// US derivatives consumer
+        /// ["<c>ACCOUNT_PLATFORM_CFM_CONSUMER</c>"] US derivatives consumer
         /// </summary>
         [Map("ACCOUNT_PLATFORM_CFM_CONSUMER")]
         UsDerivatives,
         /// <summary>
-        /// International exchange
+        /// ["<c>ACCOUNT_PLATFORM_INTX</c>"] International exchange
         /// </summary>
         [Map("ACCOUNT_PLATFORM_INTX")]
         InternationalExchange

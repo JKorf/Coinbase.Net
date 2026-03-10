@@ -11,17 +11,17 @@ namespace Coinbase.Net.Enums
     public enum PositionSide
     {
         /// <summary>
-        /// Unspecified
+        /// ["<c>FUTURES_POSITION_SIDE_UNSPECIFIED</c>"] Unspecified
         /// </summary>
         [Map("FUTURES_POSITION_SIDE_UNSPECIFIED", "POSITION_SIDE_UNKNOWN", "UNKNOWN")]
         Unspecified,
         /// <summary>
-        /// Long position
+        /// ["<c>FUTURES_POSITION_SIDE_LONG</c>"] Long position
         /// </summary>
         [Map("FUTURES_POSITION_SIDE_LONG", "POSITION_SIDE_LONG", "LONG")]
         Long,
         /// <summary>
-        /// Short position
+        /// ["<c>FUTURES_POSITION_SIDE_SHORT</c>"] Short position
         /// </summary>
         [Map("FUTURES_POSITION_SIDE_SHORT", "POSITION_SIDE_SHORT", "SHORT")]
         Short

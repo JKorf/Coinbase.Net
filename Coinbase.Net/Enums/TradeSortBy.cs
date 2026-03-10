@@ -11,17 +11,17 @@ namespace Coinbase.Net.Enums
     public enum TradeSortBy
     {
         /// <summary>
-        /// Unknown
+        /// ["<c>UNKNOWN_SORT_BY</c>"] Unknown
         /// </summary>
         [Map("UNKNOWN_SORT_BY")]
         Unknown,
         /// <summary>
-        /// Trade price
+        /// ["<c>PRICE</c>"] Trade price
         /// </summary>
         [Map("PRICE")]
         Price,
         /// <summary>
-        /// Trade time
+        /// ["<c>TRADE_TIME</c>"] Trade time
         /// </summary>
         [Map("TRADE_TIME")]
         TradeTime

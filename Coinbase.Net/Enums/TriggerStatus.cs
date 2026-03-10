@@ -11,22 +11,22 @@ namespace Coinbase.Net.Enums
     public enum TriggerStatus
     {
         /// <summary>
-        /// Unknown
+        /// ["<c>UNKNOWN_TRIGGER_STATUS</c>"] Unknown
         /// </summary>
         [Map("UNKNOWN_TRIGGER_STATUS")]
         Unknown,
         /// <summary>
-        /// Invalid order type
+        /// ["<c>INVALID_ORDER_TYPE</c>"] Invalid order type
         /// </summary>
         [Map("INVALID_ORDER_TYPE")]
         InvalidOrderType,
         /// <summary>
-        /// Stop pending
+        /// ["<c>STOP_PENDING</c>"] Stop pending
         /// </summary>
         [Map("STOP_PENDING")]
         StopPending,
         /// <summary>
-        /// Stop triggered
+        /// ["<c>STOP_TRIGGERED</c>"] Stop triggered
         /// </summary>
         [Map("STOP_TRIGGERED")]
         StopTriggered

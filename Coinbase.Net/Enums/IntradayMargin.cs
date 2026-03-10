@@ -11,17 +11,17 @@ namespace Coinbase.Net.Enums
     public enum IntradayMargin
     {
         /// <summary>
-        /// Unspecified
+        /// ["<c>INTRADAY_MARGIN_SETTING_UNSPECIFIED</c>"] Unspecified
         /// </summary>
         [Map("INTRADAY_MARGIN_SETTING_UNSPECIFIED")]
         Unspecified,
         /// <summary>
-        /// Standard
+        /// ["<c>INTRADAY_MARGIN_SETTING_STANDARD</c>"] Standard
         /// </summary>
         [Map("INTRADAY_MARGIN_SETTING_STANDARD")]
         Standard,
         /// <summary>
-        /// Intraday
+        /// ["<c>INTRADAY_MARGIN_SETTING_INTRADAY</c>"] Intraday
         /// </summary>
         [Map("INTRADAY_MARGIN_SETTING_INTRADAY")]
         Intraday

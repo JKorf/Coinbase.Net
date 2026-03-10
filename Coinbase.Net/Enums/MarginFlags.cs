@@ -11,12 +11,12 @@ namespace Coinbase.Net.Enums
     public enum MarginFlags
     {
         /// <summary>
-        /// Unspecified
+        /// ["<c>PORTFOLIO_MARGIN_FLAGS_UNSPECIFIED</c>"] Unspecified
         /// </summary>
         [Map("PORTFOLIO_MARGIN_FLAGS_UNSPECIFIED")]
         Unspecified,
         /// <summary>
-        /// In liquidation
+        /// ["<c>PORTFOLIO_MARGIN_FLAGS_IN_LIQUIDATION</c>"] In liquidation
         /// </summary>
         [Map("PORTFOLIO_MARGIN_FLAGS_IN_LIQUIDATION")]
         InLiquidation

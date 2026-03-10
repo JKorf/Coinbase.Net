@@ -11,17 +11,17 @@ namespace Coinbase.Net.Enums
     public enum MarginProfileType
     {
         /// <summary>
-        /// Unspecified
+        /// ["<c>MARGIN_PROFILE_TYPE_UNSPECIFIED</c>"] Unspecified
         /// </summary>
         [Map("MARGIN_PROFILE_TYPE_UNSPECIFIED")]
         Unspecified,
         /// <summary>
-        /// Regular
+        /// ["<c>MARGIN_PROFILE_TYPE_RETAIL_REGULAR</c>"] Regular
         /// </summary>
         [Map("MARGIN_PROFILE_TYPE_RETAIL_REGULAR")]
         Regular,
         /// <summary>
-        /// Intraday margin 1
+        /// ["<c>MARGIN_PROFILE_TYPE_RETAIL_INTRADAY_MARGIN_1</c>"] Intraday margin 1
         /// </summary>
         [Map("MARGIN_PROFILE_TYPE_RETAIL_INTRADAY_MARGIN_1")]
         IntradayMargin1

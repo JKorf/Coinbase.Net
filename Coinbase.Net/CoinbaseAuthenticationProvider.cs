@@ -18,7 +18,7 @@ namespace Coinbase.Net
         private SigningCredentials? _signingCreds;
 #endif
 
-        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Hmac];
+        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Ecdsa];
         public CoinbaseAuthenticationProvider(ApiCredentials credentials) : base(credentials)
         {
         }
@@ -43,12 +43,12 @@ namespace Coinbase.Net
 
             if (_signingCreds == null)
             {
-                var lines = _credentials.Secret.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                var lines = ((ECDSACredential)Credential).PrivateKey.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
                 var strippedKey = string.Join("", lines.Skip(1).Take(lines.Length - 2));
 
                 var key = ECDsa.Create();
                 key.ImportECPrivateKey(Convert.FromBase64String(strippedKey), out _);
-                _signingCreds = new SigningCredentials(new ECDsaSecurityKey(key) { KeyId = ApiKey }, "ES256");
+                _signingCreds = new SigningCredentials(new ECDsaSecurityKey(key) { KeyId = Credential.PublicIdentifier }, "ES256");
             }
 
             var descriptor = new SecurityTokenDescriptor
@@ -57,7 +57,7 @@ namespace Coinbase.Net
                 NotBefore = timestamp,
                 Expires = timestamp.AddMinutes(1),
                 Claims = new Dictionary<string, object> {
-                    { "sub", ApiKey }
+                    { "sub", Credential.PublicIdentifier }
                 },
                 AdditionalHeaderClaims = new Dictionary<string, object>
                 {

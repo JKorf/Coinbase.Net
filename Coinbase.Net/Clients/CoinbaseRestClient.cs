@@ -11,11 +11,12 @@ using Coinbase.Net.Clients.ExchangeApi;
 using Coinbase.Net.Interfaces.Clients.ExchangeApi;
 using Microsoft.Extensions.Options;
 using CryptoExchange.Net.Objects.Options;
+using Coinbase.Net.Objects;
 
 namespace Coinbase.Net.Clients
 {
     /// <inheritdoc cref="ICoinbaseRestClient" />
-    public class CoinbaseRestClient : BaseRestClient, ICoinbaseRestClient
+    public class CoinbaseRestClient : BaseRestClient<CoinbaseEnvironment, CoinbaseCredentials>, ICoinbaseRestClient
     {
         #region Api clients
 

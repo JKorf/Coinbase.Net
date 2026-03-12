@@ -1,5 +1,6 @@
 ﻿using Coinbase.Net.Clients.MessageHandlers;
 using Coinbase.Net.Interfaces.Clients.ExchangeApi;
+using Coinbase.Net.Objects;
 using Coinbase.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;
@@ -21,7 +22,7 @@ namespace Coinbase.Net.Clients.ExchangeApi;
 /// <summary>
 /// Client providing access to the Coinbase Exchange rest Api
 /// </summary>
-internal class CoinbaseRestClientExchangeApi : RestApiClient, ICoinbaseRestClientExchangeApi
+internal class CoinbaseRestClientExchangeApi : RestApiClient<CoinbaseEnvironment, CoinbaseCredentials>, ICoinbaseRestClientExchangeApi
 {
     #region fields 
     protected override IRestMessageHandler MessageHandler { get; } = new CoinbaseRestMessageHandler(CoinbaseErrors.Errors);
@@ -54,7 +55,7 @@ internal class CoinbaseRestClientExchangeApi : RestApiClient, ICoinbaseRestClien
     protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
 
     /// <inheritdoc />
-    protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+    protected override AuthenticationProvider<CoinbaseCredentials> CreateAuthenticationProvider(CoinbaseCredentials credentials)
         => new CoinbaseAuthenticationProvider(credentials);
     internal Task<WebCallResult> SendAsync(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)
         => SendToAddressAsync(BaseAddress, definition, parameters, cancellationToken, weight);

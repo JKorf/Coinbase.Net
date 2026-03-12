@@ -6,13 +6,14 @@ using CryptoExchange.Net.Objects.Sockets;
 using Coinbase.Net.Objects.Models;
 using System.Collections.Generic;
 using CryptoExchange.Net.Interfaces.Clients;
+using Coinbase.Net.Objects;
 
 namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
 {
     /// <summary>
     /// Coinbase streams
     /// </summary>
-    public interface ICoinbaseSocketClientAdvancedTradeApi : ISocketApiClient, IDisposable
+    public interface ICoinbaseSocketClientAdvancedTradeApi : ISocketApiClient<CoinbaseCredentials>, IDisposable
     {
         /// <summary>
         /// Get the shared socket subscription client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.

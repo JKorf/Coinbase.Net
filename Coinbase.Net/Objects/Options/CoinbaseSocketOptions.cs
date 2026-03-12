@@ -5,7 +5,7 @@ namespace Coinbase.Net.Objects.Options
     /// <summary>
     /// Options for the CoinbaseSocketClient
     /// </summary>
-    public class CoinbaseSocketOptions : SocketExchangeOptions<CoinbaseEnvironment>
+    public class CoinbaseSocketOptions : SocketExchangeOptions<CoinbaseEnvironment, CoinbaseCredentials>
     {
         /// <summary>
         /// Default options for new clients
@@ -28,7 +28,7 @@ namespace Coinbase.Net.Objects.Options
         /// <summary>
         /// Advanced Trade API options
         /// </summary>
-        public SocketApiOptions AdvancedTradeOptions { get; private set; } = new SocketApiOptions();
+        public SocketApiOptions<CoinbaseCredentials> AdvancedTradeOptions { get; private set; } = new SocketApiOptions<CoinbaseCredentials>();
 
 
         internal CoinbaseSocketOptions Set(CoinbaseSocketOptions targetOptions)

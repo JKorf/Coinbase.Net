@@ -4,6 +4,8 @@ using CryptoExchange.Net.Objects;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using Coinbase.Net.Objects;
+
 #if !NETSTANDARD2_0
 using System.Linq;
 using System.Security.Cryptography;
@@ -12,14 +14,14 @@ using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace Coinbase.Net
 {
-    internal class CoinbaseAuthenticationProvider : AuthenticationProvider
+    internal class CoinbaseAuthenticationProvider : AuthenticationProvider<CoinbaseCredentials, ECDSACredential>
     {
 #if !NETSTANDARD2_0
         private SigningCredentials? _signingCreds;
 #endif
 
         public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Ecdsa];
-        public CoinbaseAuthenticationProvider(ApiCredentials credentials) : base(credentials)
+        public CoinbaseAuthenticationProvider(CoinbaseCredentials credentials) : base(credentials)
         {
         }
 
@@ -43,7 +45,7 @@ namespace Coinbase.Net
 
             if (_signingCreds == null)
             {
-                var lines = ((ECDSACredential)Credential).PrivateKey.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                var lines = Credential.PrivateKey.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
                 var strippedKey = string.Join("", lines.Skip(1).Take(lines.Length - 2));
 
                 var key = ECDsa.Create();

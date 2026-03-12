@@ -5,7 +5,7 @@ namespace Coinbase.Net.Objects.Options
     /// <summary>
     /// Options for the CoinbaseRestClient
     /// </summary>
-    public class CoinbaseRestOptions : RestExchangeOptions<CoinbaseEnvironment>
+    public class CoinbaseRestOptions : RestExchangeOptions<CoinbaseEnvironment, CoinbaseCredentials>
     {
         /// <summary>
         /// Default options for new clients
@@ -27,12 +27,12 @@ namespace Coinbase.Net.Objects.Options
         /// <summary>
         /// Advanced Trade API options
         /// </summary>
-        public RestApiOptions AdvancedTradeOptions { get; private set; } = new RestApiOptions();
+        public RestApiOptions<CoinbaseCredentials> AdvancedTradeOptions { get; private set; } = new RestApiOptions<CoinbaseCredentials>();
 
         /// <summary>
         /// Exchange API options
         /// </summary>
-        public RestApiOptions ExchangeOptions { get; private set; } = new RestApiOptions();
+        public RestApiOptions<CoinbaseCredentials> ExchangeOptions { get; private set; } = new RestApiOptions<CoinbaseCredentials>();
 
         internal CoinbaseRestOptions Set(CoinbaseRestOptions targetOptions)
         {

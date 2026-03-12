@@ -1,5 +1,6 @@
 using Coinbase.Net.Clients.MessageHandlers;
 using Coinbase.Net.Interfaces.Clients.ExchangeApi;
+using Coinbase.Net.Objects;
 using Coinbase.Net.Objects.Models;
 using Coinbase.Net.Objects.Options;
 using Coinbase.Net.Objects.Sockets.Subscriptions;
@@ -27,7 +28,7 @@ namespace Coinbase.Net.Clients.ExchangeApi
     /// <summary>
     /// Client providing access to the Coinbase Exchange websocket Api
     /// </summary>
-    internal partial class CoinbaseSocketClientExchangeApi : SocketApiClient, ICoinbaseSocketClientExchangeApi
+    internal partial class CoinbaseSocketClientExchangeApi : SocketApiClient<CoinbaseEnvironment, CoinbaseCredentials>, ICoinbaseSocketClientExchangeApi
     {
         #region constructor/destructor
 
@@ -46,7 +47,7 @@ namespace Coinbase.Net.Clients.ExchangeApi
         public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new CoinbaseSocketExchangeMessageHandler();
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        protected override AuthenticationProvider<CoinbaseCredentials> CreateAuthenticationProvider(CoinbaseCredentials credentials)
             => new CoinbaseAuthenticationProvider(credentials);
 
         /// <inheritdoc />

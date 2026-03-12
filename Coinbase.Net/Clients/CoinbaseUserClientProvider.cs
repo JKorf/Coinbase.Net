@@ -1,4 +1,5 @@
 ﻿using Coinbase.Net.Interfaces.Clients;
+using Coinbase.Net.Objects;
 using Coinbase.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
 using Microsoft.Extensions.Logging;
@@ -49,7 +50,7 @@ namespace Coinbase.Net.Clients
         }
 
         /// <inheritdoc />
-        public void InitializeUserClient(string userIdentifier, ApiCredentials credentials, CoinbaseEnvironment? environment = null)
+        public void InitializeUserClient(string userIdentifier, CoinbaseCredentials credentials, CoinbaseEnvironment? environment = null)
         {
             CreateRestClient(userIdentifier, credentials, environment);
             CreateSocketClient(userIdentifier, credentials, environment);
@@ -63,7 +64,7 @@ namespace Coinbase.Net.Clients
         }
 
         /// <inheritdoc />
-        public ICoinbaseRestClient GetRestClient(string userIdentifier, ApiCredentials? credentials = null, CoinbaseEnvironment? environment = null)
+        public ICoinbaseRestClient GetRestClient(string userIdentifier, CoinbaseCredentials? credentials = null, CoinbaseEnvironment? environment = null)
         {
             if (!_restClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
                 client = CreateRestClient(userIdentifier, credentials, environment);
@@ -72,7 +73,7 @@ namespace Coinbase.Net.Clients
         }
 
         /// <inheritdoc />
-        public ICoinbaseSocketClient GetSocketClient(string userIdentifier, ApiCredentials? credentials = null, CoinbaseEnvironment? environment = null)
+        public ICoinbaseSocketClient GetSocketClient(string userIdentifier, CoinbaseCredentials? credentials = null, CoinbaseEnvironment? environment = null)
         {
             if (!_socketClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
                 client = CreateSocketClient(userIdentifier, credentials, environment);
@@ -80,7 +81,7 @@ namespace Coinbase.Net.Clients
             return client;
         }
 
-        private ICoinbaseRestClient CreateRestClient(string userIdentifier, ApiCredentials? credentials, CoinbaseEnvironment? environment)
+        private ICoinbaseRestClient CreateRestClient(string userIdentifier, CoinbaseCredentials? credentials, CoinbaseEnvironment? environment)
         {
             var clientRestOptions = SetRestEnvironment(environment);
             var client = new CoinbaseRestClient(_httpClient, _loggerFactory, clientRestOptions);
@@ -92,7 +93,7 @@ namespace Coinbase.Net.Clients
             return client;
         }
 
-        private ICoinbaseSocketClient CreateSocketClient(string userIdentifier, ApiCredentials? credentials, CoinbaseEnvironment? environment)
+        private ICoinbaseSocketClient CreateSocketClient(string userIdentifier, CoinbaseCredentials? credentials, CoinbaseEnvironment? environment)
         {
             var clientSocketOptions = SetSocketEnvironment(environment);
             var client = new CoinbaseSocketClient(clientSocketOptions!, _loggerFactory);

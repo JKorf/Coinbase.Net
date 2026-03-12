@@ -16,7 +16,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         private readonly Action<DateTime, string?, CoinbaseSocketMessage<T>> _handler;
         private readonly string _channel;
         private readonly string[]? _symbols;
-        private readonly SocketApiClient _client;
+        private readonly SocketApiClient<CoinbaseEnvironment, CoinbaseCredentials> _client;
 
         private HashSet<string> _usdcNotReplacing = new HashSet<string>
         {
@@ -29,7 +29,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         /// <summary>
         /// ctor
         /// </summary>
-        public CoinbaseSubscription(SocketApiClient client, ILogger logger, string channel, string channelIdentifier, string[]? symbols, Action<DateTime, string?, CoinbaseSocketMessage<T>> handler, bool auth) : base(logger, auth)
+        public CoinbaseSubscription(SocketApiClient<CoinbaseEnvironment, CoinbaseCredentials> client, ILogger logger, string channel, string channelIdentifier, string[]? symbols, Action<DateTime, string?, CoinbaseSocketMessage<T>> handler, bool auth) : base(logger, auth)
         {
             _handler = handler;
             _channel = channel;

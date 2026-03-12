@@ -6,13 +6,14 @@ using CryptoExchange.Net.Objects.Sockets;
 using Coinbase.Net.Objects.Models;
 using System.Collections.Generic;
 using CryptoExchange.Net.Interfaces.Clients;
+using Coinbase.Net.Objects;
 
 namespace Coinbase.Net.Interfaces.Clients.ExchangeApi
 {
     /// <summary>
     /// Coinbase Exchange API streams
     /// </summary>
-    public interface ICoinbaseSocketClientExchangeApi : ISocketApiClient, IDisposable
+    public interface ICoinbaseSocketClientExchangeApi : ISocketApiClient<CoinbaseCredentials>, IDisposable
     {
         /// <summary>
         /// Subscribe to symbol heartbeat updates

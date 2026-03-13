@@ -6,6 +6,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using CryptoExchange.Net.Objects;
 using Coinbase.Net.Interfaces.Clients;
+using Coinbase.Net.Clients.AdvancedTradeApi;
 
 namespace Coinbase.Net.UnitTests
 {
@@ -111,8 +112,8 @@ namespace Coinbase.Net.UnitTests
 
             Assert.That(((BaseApiClient)restClient.AdvancedTradeApi).OutputOriginalData, Is.True);
             Assert.That(((BaseApiClient)socketClient.AdvancedTradeApi).OutputOriginalData, Is.False);
-            Assert.That(((BaseApiClient)restClient.AdvancedTradeApi).AuthenticationProvider.ApiKey, Is.EqualTo("123"));
-            Assert.That(((BaseApiClient)socketClient.AdvancedTradeApi).AuthenticationProvider.ApiKey, Is.EqualTo("456"));
+            Assert.That(((CoinbaseRestClientAdvancedTradeApi)restClient.AdvancedTradeApi).AuthenticationProvider.PublicKey, Is.EqualTo("123"));
+            Assert.That(((CoinbaseSocketClientAdvancedTradeApi)socketClient.AdvancedTradeApi).AuthenticationProvider.PublicKey, Is.EqualTo("456"));
             Assert.That(((BaseApiClient)restClient.AdvancedTradeApi).ClientOptions.Proxy.Host, Is.EqualTo("host"));
             Assert.That(((BaseApiClient)restClient.AdvancedTradeApi).ClientOptions.Proxy.Port, Is.EqualTo(80));
             Assert.That(((BaseApiClient)socketClient.AdvancedTradeApi).ClientOptions.Proxy.Host, Is.EqualTo("host2"));

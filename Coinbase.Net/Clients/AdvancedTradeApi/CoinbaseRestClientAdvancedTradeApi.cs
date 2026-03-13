@@ -23,7 +23,7 @@ using System.Threading.Tasks;
 namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     /// <inheritdoc cref="ICoinbaseRestClientAdvancedTradeApi" />
-    internal partial class CoinbaseRestClientAdvancedTradeApi : RestApiClient<CoinbaseEnvironment, CoinbaseCredentials>, ICoinbaseRestClientAdvancedTradeApi
+    internal partial class CoinbaseRestClientAdvancedTradeApi : RestApiClient<CoinbaseEnvironment, CoinbaseAuthenticationProvider, CoinbaseCredentials>, ICoinbaseRestClientAdvancedTradeApi
     {
         #region fields 
         protected override IRestMessageHandler MessageHandler { get; } = new CoinbaseRestMessageHandler(CoinbaseErrors.Errors);
@@ -62,7 +62,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
 
         /// <inheritdoc />
-        protected override AuthenticationProvider<CoinbaseCredentials> CreateAuthenticationProvider(CoinbaseCredentials credentials)
+        protected override CoinbaseAuthenticationProvider CreateAuthenticationProvider(CoinbaseCredentials credentials)
             => new CoinbaseAuthenticationProvider(credentials);
 
         internal Task<WebCallResult> SendAsync(RequestDefinition definition, ParameterCollection? parameters, CancellationToken cancellationToken, int? weight = null)

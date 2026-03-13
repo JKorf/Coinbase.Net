@@ -28,7 +28,7 @@ namespace Coinbase.Net.Clients.ExchangeApi
     /// <summary>
     /// Client providing access to the Coinbase Exchange websocket Api
     /// </summary>
-    internal partial class CoinbaseSocketClientExchangeApi : SocketApiClient<CoinbaseEnvironment, CoinbaseCredentials>, ICoinbaseSocketClientExchangeApi
+    internal partial class CoinbaseSocketClientExchangeApi : SocketApiClient<CoinbaseEnvironment, CoinbaseAuthenticationProvider, CoinbaseCredentials>, ICoinbaseSocketClientExchangeApi
     {
         #region constructor/destructor
 
@@ -47,7 +47,7 @@ namespace Coinbase.Net.Clients.ExchangeApi
         public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new CoinbaseSocketExchangeMessageHandler();
 
         /// <inheritdoc />
-        protected override AuthenticationProvider<CoinbaseCredentials> CreateAuthenticationProvider(CoinbaseCredentials credentials)
+        protected override CoinbaseAuthenticationProvider CreateAuthenticationProvider(CoinbaseCredentials credentials)
             => new CoinbaseAuthenticationProvider(credentials);
 
         /// <inheritdoc />

@@ -1,4 +1,5 @@
 using Coinbase.Net.Clients;
+using Coinbase.Net.Objects;
 using Coinbase.Net.Objects.Models;
 using Coinbase.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
@@ -42,7 +43,7 @@ namespace Coinbase.Net.UnitTests
 
             var client = new CoinbaseSocketClient(Options.Create(new CoinbaseSocketOptions
             {
-                ApiCredentials = new ApiCredentials("123", "-----BEGIN EC PRIVATE KEY-----\r\nMHcCAQEEIGaopmcUKDBihelMJbKUyRmaR6F3Eo90EZaqZJ3/mBr0oAoGCCqGSM49\r\nAwEHoUQDQgAEnYaxPG+o57xM5o/M5QNn0ocwlw12ZNVWFEo9tKDQ7Jz5Gz/0eMcP\r\nmEhm5msFFpWgrY0/T92MfwByuaLws/rM3w==\r\n-----END EC PRIVATE KEY-----"),
+                ApiCredentials = new CoinbaseCredentials("123", "-----BEGIN EC PRIVATE KEY-----\r\nMHcCAQEEIGaopmcUKDBihelMJbKUyRmaR6F3Eo90EZaqZJ3/mBr0oAoGCCqGSM49\r\nAwEHoUQDQgAEnYaxPG+o57xM5o/M5QNn0ocwlw12ZNVWFEo9tKDQ7Jz5Gz/0eMcP\r\nmEhm5msFFpWgrY0/T92MfwByuaLws/rM3w==\r\n-----END EC PRIVATE KEY-----"),
                 OutputOriginalData = true
             }), logger);
             var tester = new SocketSubscriptionValidator<CoinbaseSocketClient>(client, "Subscriptions/AdvancedTrade", "wss://advanced-trade-ws.coinbase.com", "events.0");

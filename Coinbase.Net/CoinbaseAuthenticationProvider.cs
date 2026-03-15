@@ -50,7 +50,7 @@ namespace Coinbase.Net
 
                 var key = ECDsa.Create();
                 key.ImportECPrivateKey(Convert.FromBase64String(strippedKey), out _);
-                _signingCreds = new SigningCredentials(new ECDsaSecurityKey(key) { KeyId = Credential.PublicKey }, "ES256");
+                _signingCreds = new SigningCredentials(new ECDsaSecurityKey(key) { KeyId = Credential.Key }, "ES256");
             }
 
             var descriptor = new SecurityTokenDescriptor
@@ -59,7 +59,7 @@ namespace Coinbase.Net
                 NotBefore = timestamp,
                 Expires = timestamp.AddMinutes(1),
                 Claims = new Dictionary<string, object> {
-                    { "sub", Credential.PublicKey }
+                    { "sub", Credential.Key }
                 },
                 AdditionalHeaderClaims = new Dictionary<string, object>
                 {

@@ -1,5 +1,4 @@
-﻿using Coinbase.Net.Objects;
-using CryptoExchange.Net.Authentication;
+﻿using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
 
 namespace Coinbase.Net.Interfaces.Clients

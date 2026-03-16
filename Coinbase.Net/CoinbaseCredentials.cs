@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Coinbase.Net.Objects
+namespace Coinbase.Net
 {
     /// <summary>
     /// Coinbase credentials

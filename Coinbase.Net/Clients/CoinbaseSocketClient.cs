@@ -3,7 +3,6 @@ using Coinbase.Net.Clients.ExchangeApi;
 using Coinbase.Net.Interfaces.Clients;
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using Coinbase.Net.Interfaces.Clients.ExchangeApi;
-using Coinbase.Net.Objects;
 using Coinbase.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Clients;

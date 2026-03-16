@@ -4,7 +4,6 @@ using CryptoExchange.Net.Objects;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
-using Coinbase.Net.Objects;
 
 #if !NETSTANDARD2_0
 using System.Linq;

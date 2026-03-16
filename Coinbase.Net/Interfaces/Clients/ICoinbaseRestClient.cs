@@ -1,6 +1,5 @@
 using Coinbase.Net.Interfaces.Clients.AdvancedTradeApi;
 using Coinbase.Net.Interfaces.Clients.ExchangeApi;
-using Coinbase.Net.Objects;
 using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces.Clients;
 using CryptoExchange.Net.Objects.Options;

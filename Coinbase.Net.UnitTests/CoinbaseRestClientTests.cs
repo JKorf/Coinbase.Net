@@ -89,12 +89,12 @@ namespace Coinbase.Net.UnitTests
             var configuration = new ConfigurationBuilder()
                 .AddInMemoryCollection(new Dictionary<string, string>
                 {
-                    { "ApiCredentials:Key", "123" },
-                    { "ApiCredentials:Secret", "456" },
-                    { "ApiCredentials:Memo", "000" },
-                    { "Socket:ApiCredentials:Key", "456" },
-                    { "Socket:ApiCredentials:Secret", "789" },
-                    { "Socket:ApiCredentials:Memo", "xxx" },
+                    { "ApiCredentials:Ecdsa:Key", "123" },
+                    { "ApiCredentials:Ecdsa:PrivateKey", "456" },
+                    { "ApiCredentials:Ecdsa:Pass", "000" },
+                    { "Socket:ApiCredentials:Ecdsa:Key", "456" },
+                    { "Socket:ApiCredentials:Ecdsa:PrivateKey", "789" },
+                    { "Socket:ApiCredentials:Ecdsa:Pass", "xxx" },
                     { "Rest:OutputOriginalData", "true" },
                     { "Socket:OutputOriginalData", "false" },
                     { "Rest:Proxy:Host", "host" },
@@ -112,8 +112,8 @@ namespace Coinbase.Net.UnitTests
 
             Assert.That(((BaseApiClient)restClient.AdvancedTradeApi).OutputOriginalData, Is.True);
             Assert.That(((BaseApiClient)socketClient.AdvancedTradeApi).OutputOriginalData, Is.False);
-            Assert.That(((CoinbaseRestClientAdvancedTradeApi)restClient.AdvancedTradeApi).AuthenticationProvider.PublicKey, Is.EqualTo("123"));
-            Assert.That(((CoinbaseSocketClientAdvancedTradeApi)socketClient.AdvancedTradeApi).AuthenticationProvider.PublicKey, Is.EqualTo("456"));
+            Assert.That(((CoinbaseRestClientAdvancedTradeApi)restClient.AdvancedTradeApi).AuthenticationProvider.Key, Is.EqualTo("123"));
+            Assert.That(((CoinbaseSocketClientAdvancedTradeApi)socketClient.AdvancedTradeApi).AuthenticationProvider.Key, Is.EqualTo("456"));
             Assert.That(((BaseApiClient)restClient.AdvancedTradeApi).ClientOptions.Proxy.Host, Is.EqualTo("host"));
             Assert.That(((BaseApiClient)restClient.AdvancedTradeApi).ClientOptions.Proxy.Port, Is.EqualTo(80));
             Assert.That(((BaseApiClient)socketClient.AdvancedTradeApi).ClientOptions.Proxy.Host, Is.EqualTo("host2"));

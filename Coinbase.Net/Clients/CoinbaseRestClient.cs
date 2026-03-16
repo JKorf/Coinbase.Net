@@ -11,7 +11,6 @@ using Coinbase.Net.Clients.ExchangeApi;
 using Coinbase.Net.Interfaces.Clients.ExchangeApi;
 using Microsoft.Extensions.Options;
 using CryptoExchange.Net.Objects.Options;
-using Coinbase.Net.Objects;
 
 namespace Coinbase.Net.Clients
 {

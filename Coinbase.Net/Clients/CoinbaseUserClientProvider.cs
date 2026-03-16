@@ -1,5 +1,4 @@
 ﻿using Coinbase.Net.Interfaces.Clients;
-using Coinbase.Net.Objects;
 using Coinbase.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
 using Microsoft.Extensions.Logging;

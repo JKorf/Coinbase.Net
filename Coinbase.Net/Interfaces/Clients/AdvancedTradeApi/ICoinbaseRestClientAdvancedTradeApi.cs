@@ -1,4 +1,3 @@
-using Coinbase.Net.Objects;
 using CryptoExchange.Net.Interfaces.Clients;
 using System;
 

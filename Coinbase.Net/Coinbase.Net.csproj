@@ -22,7 +22,8 @@
     <NeutralLanguage>en</NeutralLanguage>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <EnableConfigurationBindingGenerator>true</EnableConfigurationBindingGenerator>
-    <PackageReleaseNotes>https://github.com/JKorf/Coinbase.Net?tab=readme-ov-file#release-notes</PackageReleaseNotes>
+	<PackageReleaseNotes>https://github.com/JKorf/Coinbase.Net?tab=readme-ov-file#release-notes</PackageReleaseNotes>
+	<NoWarn>$(NoWarn);SYSLIB1100;SYSLIB1101</NoWarn>
   </PropertyGroup>
   <PropertyGroup Label="AOT" Condition="$([MSBuild]::IsTargetFrameworkCompatible('$(TargetFramework)', 'net7.0'))">
     <IsAotCompatible>true</IsAotCompatible>

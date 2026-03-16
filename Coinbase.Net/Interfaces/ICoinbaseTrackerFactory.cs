@@ -1,5 +1,4 @@
-﻿using Coinbase.Net.Objects;
-using CryptoExchange.Net.Authentication;
+﻿using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces;
 using CryptoExchange.Net.Trackers.UserData;
 using CryptoExchange.Net.Trackers.UserData.Interfaces;

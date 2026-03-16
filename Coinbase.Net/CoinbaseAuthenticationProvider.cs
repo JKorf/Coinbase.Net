@@ -13,13 +13,13 @@ using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace Coinbase.Net
 {
-    internal class CoinbaseAuthenticationProvider : AuthenticationProvider<CoinbaseCredentials, ECDSACredential>
+    internal class CoinbaseAuthenticationProvider : AuthenticationProvider<CoinbaseCredentials, ECDsaCredential>
     {
 #if !NETSTANDARD2_0
         private SigningCredentials? _signingCreds;
 #endif
 
-        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Ecdsa];
+        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.ECDsa];
         public CoinbaseAuthenticationProvider(CoinbaseCredentials credentials) : base(credentials)
         {
         }

@@ -18,19 +18,19 @@ namespace Coinbase.Net
         public CoinbaseCredentials() { }
 
         /// <summary>
-        /// Create credentials using an Ecdsa key and secret.
+        /// Create credentials using an ECDsa key and secret.
         /// </summary>
         /// <param name="apiKey">The API key</param>
         /// <param name="secret">The API secret</param>
-        public CoinbaseCredentials(string apiKey, string secret) : this(new ECDSACredential(apiKey, secret))
+        public CoinbaseCredentials(string apiKey, string secret) : this(new ECDsaCredential(apiKey, secret))
         {
         }
 
         /// <summary>
-        /// Create Coinbase credentials using Ecdsa credentials
+        /// Create Coinbase credentials using ECDsa credentials
         /// </summary>
-        /// <param name="credential">The Ecdsa credentials</param>
-        public CoinbaseCredentials(ECDSACredential credential) : base(credential)
+        /// <param name="credential">The ECDsa credentials</param>
+        public CoinbaseCredentials(ECDsaCredential credential) : base(credential)
         {
         }
 

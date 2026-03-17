@@ -218,13 +218,23 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                                 x.Quantity.Value,
                                 x.Status == Enums.WithdrawalStatus.Completed,
                                 x.CreateTime,
-                                x.Status == WithdrawalStatus.Completed ? SharedTransferStatus.Completed
-                                : x.Status == WithdrawalStatus.Canceled ? SharedTransferStatus.Failed
-                                : SharedTransferStatus.InProgress)
+                                ParseTransferStatus(x.Status))
                             {
                                 Id = x.Id
                             })
                        .ToArray(), nextPageRequest);
+        }
+
+        private SharedTransferStatus ParseTransferStatus(WithdrawalStatus status)
+        {
+            if (status == WithdrawalStatus.Completed)
+                return SharedTransferStatus.Completed;
+            if (status == WithdrawalStatus.Canceled)
+                return SharedTransferStatus.Failed;
+            if (status == WithdrawalStatus.Created)
+                return SharedTransferStatus.InProgress;
+
+            return SharedTransferStatus.Unknown;
         }
 
         #endregion
@@ -815,9 +825,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
-            if (status == OrderStatus.Pending || status == OrderStatus.Open || status == OrderStatus.Queued) return SharedOrderStatus.Open;
+            if (status == OrderStatus.Pending || status == OrderStatus.Open || status == OrderStatus.Queued || status == OrderStatus.CancelQueued) return SharedOrderStatus.Open;
             if (status == OrderStatus.Canceled || status == OrderStatus.Expired || status == OrderStatus.Failed) return SharedOrderStatus.Canceled;
-            return SharedOrderStatus.Filled;
+            if (status == OrderStatus.Filled) return SharedOrderStatus.Filled;
+
+            return SharedOrderStatus.Unknown;
         }
 
         private SharedTimeInForce? ParseTimeInForce(TimeInForce tif)
@@ -1482,7 +1494,14 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return SharedTriggerOrderStatus.CanceledOrRejected;
             }
 
-            return SharedTriggerOrderStatus.Active;
+            if (orderStatus == OrderStatus.Open
+                || orderStatus == OrderStatus.CancelQueued
+                || orderStatus == OrderStatus.Pending)
+            {
+                return SharedTriggerOrderStatus.Active;
+            }
+
+            return SharedTriggerOrderStatus.Unknown;
         }
 
         EndpointOptions<CancelOrderRequest> ISpotTriggerOrderRestClient.CancelSpotTriggerOrderOptions { get; } = new EndpointOptions<CancelOrderRequest>(true);

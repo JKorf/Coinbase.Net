@@ -174,9 +174,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         private SharedOrderStatus ParseOrderStatus(OrderStatus status)
         {
-            if (status == OrderStatus.Pending || status == OrderStatus.Open || status == OrderStatus.Queued) return SharedOrderStatus.Open;
+            if (status == OrderStatus.Pending || status == OrderStatus.Open || status == OrderStatus.Queued || status == OrderStatus.CancelQueued) return SharedOrderStatus.Open;
             if (status == OrderStatus.Canceled || status == OrderStatus.Expired || status == OrderStatus.Failed) return SharedOrderStatus.Canceled;
-            return SharedOrderStatus.Filled;
+            if (status == OrderStatus.Filled) return SharedOrderStatus.Filled;
+
+            return SharedOrderStatus.Unknown;
         }
         #endregion
 

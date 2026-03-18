@@ -89,12 +89,12 @@ namespace Coinbase.Net.UnitTests
             var configuration = new ConfigurationBuilder()
                 .AddInMemoryCollection(new Dictionary<string, string>
                 {
-                    { "ApiCredentials:ECDsa:Key", "123" },
-                    { "ApiCredentials:ECDsa:PrivateKey", "456" },
-                    { "ApiCredentials:ECdsa:Pass", "000" },
-                    { "Socket:ApiCredentials:ECDsa:Key", "456" },
-                    { "Socket:ApiCredentials:ECDsa:PrivateKey", "789" },
-                    { "Socket:ApiCredentials:ECDsa:Pass", "xxx" },
+                    { "ApiCredentials:Key", "123" },
+                    { "ApiCredentials:PrivateKey", "456" },
+                    { "ApiCredentials:Pass", "000" },
+                    { "Socket:ApiCredentials:Key", "456" },
+                    { "Socket:ApiCredentials:PrivateKey", "789" },
+                    { "Socket:ApiCredentials:Pass", "xxx" },
                     { "Rest:OutputOriginalData", "true" },
                     { "Socket:OutputOriginalData", "false" },
                     { "Rest:Proxy:Host", "host" },

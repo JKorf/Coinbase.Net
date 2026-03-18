@@ -1,3 +1,4 @@
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects.Options;
 
 namespace Coinbase.Net.Objects.Options
@@ -27,12 +28,12 @@ namespace Coinbase.Net.Objects.Options
         /// <summary>
         /// Advanced Trade API options
         /// </summary>
-        public RestApiOptions<CoinbaseCredentials> AdvancedTradeOptions { get; private set; } = new RestApiOptions<CoinbaseCredentials>();
+        public RestApiOptions AdvancedTradeOptions { get; private set; } = new RestApiOptions();
 
         /// <summary>
         /// Exchange API options
         /// </summary>
-        public RestApiOptions<CoinbaseCredentials> ExchangeOptions { get; private set; } = new RestApiOptions<CoinbaseCredentials>();
+        public RestApiOptions ExchangeOptions { get; private set; } = new RestApiOptions();
 
         internal CoinbaseRestOptions Set(CoinbaseRestOptions targetOptions)
         {

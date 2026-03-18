@@ -2,6 +2,7 @@
 using Coinbase.Net.Objects;
 using Coinbase.Net.Objects.Models;
 using Coinbase.Net.Objects.Options;
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;

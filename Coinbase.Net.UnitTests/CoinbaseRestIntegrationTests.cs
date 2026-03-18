@@ -1,6 +1,7 @@
 ﻿using Coinbase.Net.Clients;
 using Coinbase.Net.Objects;
 using Coinbase.Net.SymbolOrderBooks;
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects.Errors;
 using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;

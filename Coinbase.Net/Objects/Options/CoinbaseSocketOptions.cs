@@ -1,3 +1,4 @@
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects.Options;
 
 namespace Coinbase.Net.Objects.Options
@@ -28,7 +29,7 @@ namespace Coinbase.Net.Objects.Options
         /// <summary>
         /// Advanced Trade API options
         /// </summary>
-        public SocketApiOptions<CoinbaseCredentials> AdvancedTradeOptions { get; private set; } = new SocketApiOptions<CoinbaseCredentials>();
+        public SocketApiOptions AdvancedTradeOptions { get; private set; } = new SocketApiOptions();
 
 
         internal CoinbaseSocketOptions Set(CoinbaseSocketOptions targetOptions)

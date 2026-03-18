@@ -6,6 +6,7 @@ using CryptoExchange.Net.Objects.Sockets;
 using Coinbase.Net.Objects.Models;
 using System.Collections.Generic;
 using CryptoExchange.Net.Interfaces.Clients;
+using CryptoExchange.Net.Authentication;
 
 namespace Coinbase.Net.Interfaces.Clients.ExchangeApi
 {

@@ -14,7 +14,7 @@ using System;
 namespace Coinbase.Net.Clients
 {
     /// <inheritdoc cref="ICoinbaseSocketClient" />
-    public class CoinbaseSocketClient : BaseSocketClient, ICoinbaseSocketClient
+    public class CoinbaseSocketClient : BaseSocketClient<CoinbaseEnvironment, CoinbaseCredentials>, ICoinbaseSocketClient
     {
         #region fields
         #endregion
@@ -54,13 +54,6 @@ namespace Coinbase.Net.Clients
         }
         #endregion
 
-        /// <inheritdoc />
-        public void SetOptions(UpdateOptions options)
-        {
-            AdvancedTradeApi.SetOptions(options);
-            ExchangeApi.SetOptions(options);
-        }
-
         /// <summary>
         /// Set the default options to be used when creating new clients
         /// </summary>
@@ -68,13 +61,6 @@ namespace Coinbase.Net.Clients
         public static void SetDefaultOptions(Action<CoinbaseSocketOptions> optionsDelegate)
         {
             CoinbaseSocketOptions.Default = ApplyOptionsDelegate(optionsDelegate);
-        }
-
-        /// <inheritdoc />
-        public void SetApiCredentials(ApiCredentials credentials)
-        {
-            AdvancedTradeApi.SetApiCredentials(credentials);
-            ExchangeApi.SetApiCredentials(credentials);
         }
     }
 }

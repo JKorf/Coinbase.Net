@@ -1,3 +1,4 @@
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Interfaces.Clients;
 using System;
 
@@ -6,7 +7,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
     /// <summary>
     /// Coinbase API endpoints
     /// </summary>
-    public interface ICoinbaseRestClientAdvancedTradeApi : IRestApiClient, IDisposable
+    public interface ICoinbaseRestClientAdvancedTradeApi : IRestApiClient<CoinbaseCredentials>, IDisposable
     {
         /// <summary>
         /// Endpoints related to account settings, info or actions

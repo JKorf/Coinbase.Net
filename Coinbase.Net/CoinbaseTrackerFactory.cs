@@ -96,7 +96,7 @@ namespace Coinbase.Net
         }
 
         /// <inheritdoc />
-        public IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, ApiCredentials credentials, SpotUserDataTrackerConfig? config = null, CoinbaseEnvironment? environment = null)
+        public IUserSpotDataTracker CreateUserSpotDataTracker(string userIdentifier, CoinbaseCredentials credentials, SpotUserDataTrackerConfig? config = null, CoinbaseEnvironment? environment = null)
         {
             var clientProvider = _serviceProvider?.GetRequiredService<ICoinbaseUserClientProvider>() ?? new CoinbaseUserClientProvider();
             var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);
@@ -125,7 +125,7 @@ namespace Coinbase.Net
         }
 
         /// <inheritdoc />
-        public IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, ApiCredentials credentials, FuturesUserDataTrackerConfig? config = null, CoinbaseEnvironment? environment = null)
+        public IUserFuturesDataTracker CreateUserFuturesDataTracker(string userIdentifier, CoinbaseCredentials credentials, FuturesUserDataTrackerConfig? config = null, CoinbaseEnvironment? environment = null)
         {
             var clientProvider = _serviceProvider?.GetRequiredService<ICoinbaseUserClientProvider>() ?? new CoinbaseUserClientProvider();
             var restClient = clientProvider.GetRestClient(userIdentifier, credentials, environment);

@@ -7,6 +7,7 @@ using Coinbase.Net.Clients;
 using Coinbase.Net.Enums;
 using CryptoExchange.Net.Authentication;
 using System.Linq;
+using Coinbase.Net.Objects;
 
 namespace Coinbase.Net.UnitTests
 {
@@ -19,7 +20,7 @@ namespace Coinbase.Net.UnitTests
             var client = new CoinbaseRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
-                opts.ApiCredentials = new ApiCredentials("123", "-----BEGIN EC PRIVATE KEY-----\r\nMHcCAQEEIGaopmcUKDBihelMJbKUyRmaR6F3Eo90EZaqZJ3/mBr0oAoGCCqGSM49\r\nAwEHoUQDQgAEnYaxPG+o57xM5o/M5QNn0ocwlw12ZNVWFEo9tKDQ7Jz5Gz/0eMcP\r\nmEhm5msFFpWgrY0/T92MfwByuaLws/rM3w==\r\n-----END EC PRIVATE KEY-----");
+                opts.ApiCredentials = new CoinbaseCredentials("123", "-----BEGIN EC PRIVATE KEY-----\r\nMHcCAQEEIGaopmcUKDBihelMJbKUyRmaR6F3Eo90EZaqZJ3/mBr0oAoGCCqGSM49\r\nAwEHoUQDQgAEnYaxPG+o57xM5o/M5QNn0ocwlw12ZNVWFEo9tKDQ7Jz5Gz/0eMcP\r\nmEhm5msFFpWgrY0/T92MfwByuaLws/rM3w==\r\n-----END EC PRIVATE KEY-----");
             });
             var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/AdvancedTrade/Account", "https://api.coinbase.com", IsAuthenticated);
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Account.GetAccountsAsync(), "GetAccounts");
@@ -79,7 +80,7 @@ namespace Coinbase.Net.UnitTests
             var client = new CoinbaseRestClient(opts =>
             {
                 opts.AutoTimestamp = false;
-                opts.ApiCredentials = new ApiCredentials("123", "-----BEGIN EC PRIVATE KEY-----\r\nMHcCAQEEIGaopmcUKDBihelMJbKUyRmaR6F3Eo90EZaqZJ3/mBr0oAoGCCqGSM49\r\nAwEHoUQDQgAEnYaxPG+o57xM5o/M5QNn0ocwlw12ZNVWFEo9tKDQ7Jz5Gz/0eMcP\r\nmEhm5msFFpWgrY0/T92MfwByuaLws/rM3w==\r\n-----END EC PRIVATE KEY-----");
+                opts.ApiCredentials = new CoinbaseCredentials("123", "-----BEGIN EC PRIVATE KEY-----\r\nMHcCAQEEIGaopmcUKDBihelMJbKUyRmaR6F3Eo90EZaqZJ3/mBr0oAoGCCqGSM49\r\nAwEHoUQDQgAEnYaxPG+o57xM5o/M5QNn0ocwlw12ZNVWFEo9tKDQ7Jz5Gz/0eMcP\r\nmEhm5msFFpWgrY0/T92MfwByuaLws/rM3w==\r\n-----END EC PRIVATE KEY-----");
             });
             var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/AdvancedTrade/Trading", "https://api.coinbase.com", IsAuthenticated);
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Trading.PlaceOrderAsync("ETHUSDT", OrderSide.Sell, NewOrderType.Limit), "PlaceOrder", ignoreProperties: new List<string> { "order_configuration" });

@@ -15,7 +15,7 @@ using CryptoExchange.Net.Objects.Options;
 namespace Coinbase.Net.Clients
 {
     /// <inheritdoc cref="ICoinbaseRestClient" />
-    public class CoinbaseRestClient : BaseRestClient, ICoinbaseRestClient
+    public class CoinbaseRestClient : BaseRestClient<CoinbaseEnvironment, CoinbaseCredentials>, ICoinbaseRestClient
     {
         #region Api clients
 
@@ -53,12 +53,6 @@ namespace Coinbase.Net.Clients
 
         #endregion
 
-        /// <inheritdoc />
-        public void SetOptions(UpdateOptions options)
-        {
-            AdvancedTradeApi.SetOptions(options);
-        }
-
         /// <summary>
         /// Set the default options to be used when creating new clients
         /// </summary>
@@ -66,12 +60,6 @@ namespace Coinbase.Net.Clients
         public static void SetDefaultOptions(Action<CoinbaseRestOptions> optionsDelegate)
         {
             CoinbaseRestOptions.Default = ApplyOptionsDelegate(optionsDelegate);
-        }
-
-        /// <inheritdoc />
-        public void SetApiCredentials(ApiCredentials credentials)
-        {
-            AdvancedTradeApi.SetApiCredentials(credentials);
         }
     }
 }

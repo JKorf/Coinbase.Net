@@ -30,7 +30,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
     /// <summary>
     /// Client providing access to the Coinbase websocket Api
     /// </summary>
-    internal partial class CoinbaseSocketClientAdvancedTradeApi : SocketApiClient, ICoinbaseSocketClientAdvancedTradeApi
+    internal partial class CoinbaseSocketClientAdvancedTradeApi : SocketApiClient<CoinbaseEnvironment, CoinbaseAuthenticationProvider, CoinbaseCredentials>, ICoinbaseSocketClientAdvancedTradeApi
     {
         #region constructor/destructor
 
@@ -50,7 +50,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         public override ISocketMessageHandler CreateMessageConverter(WebSocketMessageType messageType) => new CoinbaseSocketAdvancedTradeMessageConverter();
 
         /// <inheritdoc />
-        protected override AuthenticationProvider CreateAuthenticationProvider(ApiCredentials credentials)
+        protected override CoinbaseAuthenticationProvider CreateAuthenticationProvider(CoinbaseCredentials credentials)
             => new CoinbaseAuthenticationProvider(credentials);
 
         /// <inheritdoc />

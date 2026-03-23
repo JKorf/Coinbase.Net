@@ -1,6 +1,8 @@
 ﻿using Coinbase.Net.Clients;
+using Coinbase.Net.Objects;
 using Coinbase.Net.Objects.Models;
 using Coinbase.Net.Objects.Options;
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
@@ -28,7 +30,7 @@ namespace Coinbase.Net.UnitTests
             return new CoinbaseSocketClient(Options.Create(new CoinbaseSocketOptions
             {
                 OutputOriginalData = true,
-                ApiCredentials = Authenticated ? new CryptoExchange.Net.Authentication.ApiCredentials(key, sec) : null
+                ApiCredentials = Authenticated ? new CoinbaseCredentials(key, sec) : null
             }), loggerFactory);
         }
 

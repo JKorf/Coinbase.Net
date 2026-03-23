@@ -4,6 +4,7 @@ using CryptoExchange.Net.Objects;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+
 #if !NETSTANDARD2_0
 using System.Linq;
 using System.Security.Cryptography;
@@ -12,14 +13,13 @@ using Microsoft.IdentityModel.JsonWebTokens;
 
 namespace Coinbase.Net
 {
-    internal class CoinbaseAuthenticationProvider : AuthenticationProvider
+    internal class CoinbaseAuthenticationProvider : AuthenticationProvider<CoinbaseCredentials, CoinbaseCredentials>
     {
 #if !NETSTANDARD2_0
         private SigningCredentials? _signingCreds;
 #endif
 
-        public override ApiCredentialsType[] SupportedCredentialTypes => [ApiCredentialsType.Hmac];
-        public CoinbaseAuthenticationProvider(ApiCredentials credentials) : base(credentials)
+        public CoinbaseAuthenticationProvider(CoinbaseCredentials credentials) : base(credentials, credentials)
         {
         }
 
@@ -43,12 +43,12 @@ namespace Coinbase.Net
 
             if (_signingCreds == null)
             {
-                var lines = _credentials.Secret.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                var lines = Credential.PrivateKey.Split(new[] { '\n' }, StringSplitOptions.RemoveEmptyEntries);
                 var strippedKey = string.Join("", lines.Skip(1).Take(lines.Length - 2));
 
                 var key = ECDsa.Create();
                 key.ImportECPrivateKey(Convert.FromBase64String(strippedKey), out _);
-                _signingCreds = new SigningCredentials(new ECDsaSecurityKey(key) { KeyId = ApiKey }, "ES256");
+                _signingCreds = new SigningCredentials(new ECDsaSecurityKey(key) { KeyId = Credential.Key }, "ES256");
             }
 
             var descriptor = new SecurityTokenDescriptor
@@ -57,7 +57,7 @@ namespace Coinbase.Net
                 NotBefore = timestamp,
                 Expires = timestamp.AddMinutes(1),
                 Claims = new Dictionary<string, object> {
-                    { "sub", ApiKey }
+                    { "sub", Credential.Key }
                 },
                 AdditionalHeaderClaims = new Dictionary<string, object>
                 {

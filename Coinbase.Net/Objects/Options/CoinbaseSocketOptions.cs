@@ -1,3 +1,4 @@
+using CryptoExchange.Net.Authentication;
 using CryptoExchange.Net.Objects.Options;
 
 namespace Coinbase.Net.Objects.Options
@@ -5,7 +6,7 @@ namespace Coinbase.Net.Objects.Options
     /// <summary>
     /// Options for the CoinbaseSocketClient
     /// </summary>
-    public class CoinbaseSocketOptions : SocketExchangeOptions<CoinbaseEnvironment>
+    public class CoinbaseSocketOptions : SocketExchangeOptions<CoinbaseEnvironment, CoinbaseCredentials>
     {
         /// <summary>
         /// Default options for new clients

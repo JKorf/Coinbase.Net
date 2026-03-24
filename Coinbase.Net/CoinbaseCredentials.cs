@@ -43,5 +43,8 @@ namespace Coinbase.Net
             PrivateKey = privateKey;
             return this;
         }
+
+        /// <inheritdoc />
+        public override ApiCredentials Copy() => new CoinbaseCredentials(this);
     }
 }

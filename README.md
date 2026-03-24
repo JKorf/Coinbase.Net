@@ -46,22 +46,38 @@ Coinbase.Net is available on [GitHub packages](https://github.com/JKorf/Coinbase
 The NuGet package files are added along side the source with the latest GitHub release which can found [here](https://github.com/JKorf/Coinbase.Net/releases).
 
 ## How to use
-* REST Endpoints
-	```csharp
-	// Get the ETH/USDT ticker via rest request
-	var restClient = new CoinbaseRestClient();
-	var tickerResult = await restClient.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USDT");
-	var lastPrice = tickerResult.Data.LastPrice;
-	```
-* Websocket streams
-	```csharp
-	// Subscribe to ETH/USDT ticker updates via the websocket API
-	var socketClient = new CoinbaseSocketClient();
-	var tickerSubscriptionResult = socketClient.AdvancedTradeApi.SubscribeToTickerUpdatesAsync("ETHUSDT", (update) => 
-	{
-	  var lastPrice = update.Data.LastPrice;
-	});
-	```
+*Basic request:*
+```csharp
+// Get the ETH/USDT ticker via rest request
+var restClient = new CoinbaseRestClient();
+var tickerResult = await restClient.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USDT");
+var lastPrice = tickerResult.Data.LastPrice;
+```
+
+*Place order:*
+```csharp
+var restClient = new CoinbaseRestClient(opts => {
+	opts.ApiCredentials = new CoinbaseCredentials("APIKEY", "APISECRET");
+});
+
+// Place Limit order to buy 0.1 ETH at 2000
+var orderResult = await restClient.AdvancedTradeApi.Trading.PlaceOrderAsync(
+    "ETH-USDT",
+    OrderSide.Buy,
+    NewOrderType.Limit,
+    0.1m,
+    price: 2000);
+```
+
+*WebSocket subscription:*
+```csharp
+// Subscribe to ETH/USDT ticker updates via the websocket API
+var socketClient = new CoinbaseSocketClient();
+var tickerSubscriptionResult = socketClient.AdvancedTradeApi.SubscribeToTickerUpdatesAsync("ETHUSDT", (update) => 
+{
+  var lastPrice = update.Data.LastPrice;
+});
+```
 
 For information on the clients, dependency injection, response processing and more see the [documentation](https://cryptoexchange.jkorf.dev?library=Coinbase.Net), or have a look at the examples [here](https://github.com/JKorf/Coinbase.Net/tree/main/Examples) or [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
 

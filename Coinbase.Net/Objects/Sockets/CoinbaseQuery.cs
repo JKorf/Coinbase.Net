@@ -2,6 +2,7 @@ using CryptoExchange.Net.Sockets;
 using Coinbase.Net.Objects.Internal;
 using CryptoExchange.Net.Objects;
 using CryptoExchange.Net.Sockets.Default;
+using CryptoExchange.Net.Sockets.Default.Routing;
 using System;
 
 namespace Coinbase.Net.Objects.Sockets

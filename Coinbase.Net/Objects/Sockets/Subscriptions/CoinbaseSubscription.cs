@@ -8,6 +8,7 @@ using CryptoExchange.Net.Clients;
 using System.Linq;
 using CryptoExchange.Net.Sockets.Default;
 using Coinbase.Net.Clients.AdvancedTradeApi;
+using CryptoExchange.Net.Sockets.Default.Routing;
 
 namespace Coinbase.Net.Objects.Sockets.Subscriptions
 {

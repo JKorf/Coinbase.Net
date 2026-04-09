@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CryptoExchange.Net.Sockets.Default.Routing;
 
 namespace Coinbase.Net.Objects.Sockets.Subscriptions
 {

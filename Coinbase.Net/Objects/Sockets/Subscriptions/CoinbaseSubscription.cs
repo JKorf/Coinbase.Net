@@ -26,6 +26,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
             "EURC-USDC",
             "XSGD-USDC",
             "AUDD-USDC",
+            "TGBP-USDC",
         };
 
         /// <summary>

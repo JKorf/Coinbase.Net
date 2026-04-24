@@ -20,15 +20,6 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         private readonly string[]? _symbols;
         private readonly CoinbaseSocketClientAdvancedTradeApi _client;
 
-        private HashSet<string> _usdcNotReplacing = new HashSet<string>
-        {
-            "USDT-USDC",
-            "EURC-USDC",
-            "XSGD-USDC",
-            "AUDD-USDC",
-            "TGBP-USDC",
-        };
-
         /// <summary>
         /// ctor
         /// </summary>
@@ -37,7 +28,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
             _handler = handler;
             _channel = channel;
             _client = client;
-            _symbols = symbols?.Select(x => !_usdcNotReplacing.Contains(x) ? x.Replace("-USDC", "-USD") : x).ToArray();
+            _symbols = symbols?.Select(x => !_client.ClientOptions.SymbolsUsdcReplaceFilter.Contains(x) ? x.Replace("-USDC", "-USD") : x).ToArray();
 
             IndividualSubscriptionCount = symbols?.Length ?? 1;
 

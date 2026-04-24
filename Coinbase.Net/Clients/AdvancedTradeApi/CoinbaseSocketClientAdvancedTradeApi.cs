@@ -32,6 +32,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
     /// </summary>
     internal partial class CoinbaseSocketClientAdvancedTradeApi : SocketApiClient<CoinbaseEnvironment, CoinbaseAuthenticationProvider, CoinbaseCredentials>, ICoinbaseSocketClientAdvancedTradeApi
     {
+        public new CoinbaseSocketOptions ClientOptions => (CoinbaseSocketOptions)base.ClientOptions;
+
         #region constructor/destructor
 
         /// <summary>

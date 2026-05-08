@@ -1,0 +1,912 @@
+# Coinbase.Net Full LLM Context
+
+> Detailed AI/LLM reference for generating correct C#/.NET code with Coinbase.Net. Use this file when `llms.txt` is too brief and the task needs concrete examples, endpoint routing guidance, Coinbase Advanced Trade credential handling, symbol guidance, WebSocket routing, or anti-hallucination rules.
+
+Coinbase.Net is a strongly typed .NET client library for Coinbase Advanced Trade REST/WebSocket APIs, selected Coinbase App REST endpoints, and Coinbase Exchange market-data APIs. It is part of the CryptoExchange.Net ecosystem and uses the same result, shared API, logging, rate limiting, dependency injection, and socket subscription patterns as the other JKorf exchange libraries.
+
+Current package version in this repository: 3.9.3.
+NuGet package id: JKorf.Coinbase.Net.
+CryptoExchange.Net dependency: 11.1.0.
+Target frameworks: netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
+Native AOT: supported on compatible .NET targets.
+
+Important private-endpoint note: due to framework restrictions for signing requests, private endpoints currently require netstandard2.1 or a modern .NET target. Public endpoints are available on all supported target frameworks.
+
+Primary documentation:
+- README.md: overview, installation, feature table, release notes, basic examples
+- docs site: https://cryptoexchange.jkorf.dev/Coinbase.Net/
+- Coinbase Advanced Trade docs: https://docs.cdp.coinbase.com/advanced-trade/docs/welcome
+- Coinbase Exchange docs: https://docs.cdp.coinbase.com/exchange/docs/welcome
+- API quick map: `docs/ai-api-map.md`
+- source interfaces: `Coinbase.Net/Interfaces/Clients/**`
+- AI examples: `Examples/ai-friendly/`
+
+## Golden Rules For AI Code Generation
+
+- Use `CoinbaseRestClient` for REST and `CoinbaseSocketClient` for WebSocket. Do not generate raw `HttpClient` calls to Coinbase endpoints.
+- Use `restClient.AdvancedTradeApi` for modern Coinbase Advanced Trade market data, accounts, portfolios, trading, futures, perpetuals, and selected Coinbase App endpoints.
+- Use `restClient.ExchangeApi` only for Coinbase Exchange API market-data endpoints exposed by this library.
+- Use `socketClient.AdvancedTradeApi` for Advanced Trade WebSocket streams.
+- Use `socketClient.ExchangeApi` for Coinbase Exchange WebSocket streams.
+- Do not generate Binance/Bybit-style roots such as `SpotApi`, `UsdFuturesApi`, `CoinFuturesApi`, `GeneralApi`, or `V5Api`.
+- Use `CoinbaseCredentials`, not generic `ApiCredentials`, for API key setup.
+- Include `using Coinbase.Net;` when using `CoinbaseCredentials` or `CoinbaseEnvironment`.
+- Coinbase Advanced Trade credentials are ECDSA key name/private key credentials. Do not generate HMAC secret/passphrase examples.
+- Preserve PEM newlines when loading the private key from environment variables or secret stores.
+- Always check `.Success` before reading `.Data`.
+- REST methods return `WebCallResult<T>` or `WebCallResult`.
+- WebSocket subscriptions and socket API requests return `CallResult<T>` or `CallResult`.
+- Order placement has two success layers: check the `WebCallResult` and then `CoinbaseOrderResult.Success`.
+- Reuse clients. Do not instantiate a REST or socket client per request in production code.
+- Prefer dependency injection for long-running services.
+- Store WebSocket subscriptions and unsubscribe during shutdown.
+- Do not call `.Result` or `.Wait()` on async methods.
+- Do not invent endpoint names. If unsure, inspect `Coinbase.Net/Interfaces/Clients/**`.
+- Use Coinbase dash-separated product ids such as `ETH-USD`, `BTC-USD`, and `ETH-USDT`.
+- Do not use compact symbols such as `ETHUSDT`, underscore symbols such as `ETH_USDT`, slash symbols such as `ETH/USD`, or Bitfinex symbols such as `tETHUSD`.
+- Let the library generate `clientOrderId` unless the user explicitly needs an idempotency/correlation id.
+- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from `AdvancedTradeApi.SharedClient`.
+
+## Installation
+
+```bash
+dotnet add package Coinbase.Net
+```
+
+The repository package id is `JKorf.Coinbase.Net`, but normal user install guidance in the README uses `dotnet add package Coinbase.Net`.
+
+## Required Usings
+
+Typical REST/trading code:
+
+```csharp
+using Coinbase.Net;
+using Coinbase.Net.Clients;
+using Coinbase.Net.Enums;
+```
+
+Shared API code:
+
+```csharp
+using Coinbase.Net.Clients;
+using CryptoExchange.Net.SharedApis;
+```
+
+Retry/error helper code may also need:
+
+```csharp
+using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Objects.Sockets;
+```
+
+Dependency injection setup:
+
+```csharp
+using Coinbase.Net;
+using Microsoft.Extensions.DependencyInjection;
+```
+
+Interface injection:
+
+```csharp
+using Coinbase.Net.Interfaces.Clients;
+```
+
+## Client Setup
+
+Public market data does not require credentials:
+
+```csharp
+var client = new CoinbaseRestClient();
+
+var product = await client.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USD");
+if (!product.Success)
+{
+    Console.WriteLine(product.Error);
+    return;
+}
+
+Console.WriteLine(product.Data.LastPrice);
+```
+
+Private account and trading endpoints require Coinbase ECDSA credentials:
+
+```csharp
+var client = new CoinbaseRestClient(options =>
+{
+    options.ApiCredentials = new CoinbaseCredentials(
+        "organizations/{org_id}/apiKeys/{key_id}",
+        "-----BEGIN EC PRIVATE KEY-----\n...\n-----END EC PRIVATE KEY-----");
+});
+```
+
+Socket client with credentials:
+
+```csharp
+var socketClient = new CoinbaseSocketClient(options =>
+{
+    options.ApiCredentials = new CoinbaseCredentials("API_KEY_NAME", "EC_PRIVATE_KEY");
+});
+```
+
+When reading the private key from an environment variable, normalize escaped newlines:
+
+```csharp
+var privateKey = Environment
+    .GetEnvironmentVariable("COINBASE_API_PRIVATE_KEY")
+    ?.Replace("\\n", "\n");
+```
+
+Do not add a passphrase parameter; `CoinbaseCredentials` accepts key name and ECDSA private key.
+
+## Environments And Options
+
+Default REST environment is `CoinbaseEnvironment.Live`. `CoinbaseEnvironment.Live` is the only built-in environment in this repository.
+
+```csharp
+var live = new CoinbaseRestClient(options => options.Environment = CoinbaseEnvironment.Live);
+```
+
+Create custom endpoints only when explicitly requested:
+
+```csharp
+var custom = CoinbaseEnvironment.CreateCustom(
+    "custom",
+    restAddress: "https://api.coinbase.com",
+    exchangeRestAddress: "https://api.exchange.coinbase.com",
+    socketStreamPublicAddress: "wss://advanced-trade-ws.coinbase.com",
+    socketStreamPrivateAddress: "wss://advanced-trade-ws-user.coinbase.com",
+    socketClientPublicExchangeApiAddress: "wss://ws-feed.exchange.coinbase.com");
+```
+
+Common REST options:
+
+```csharp
+var client = new CoinbaseRestClient(options =>
+{
+    options.Environment = CoinbaseEnvironment.Live;
+    options.ApiCredentials = new CoinbaseCredentials("API_KEY_NAME", "EC_PRIVATE_KEY");
+    options.AutoTimestamp = true;
+});
+```
+
+Common socket options:
+
+```csharp
+var socketClient = new CoinbaseSocketClient(options =>
+{
+    options.ApiCredentials = new CoinbaseCredentials("API_KEY_NAME", "EC_PRIVATE_KEY");
+    options.SocketSubscriptionsCombineTarget = 10;
+    options.ReceiveBufferSize = 524288;
+});
+```
+
+`CoinbaseSocketOptions.SymbolsUsdcReplaceFilter` controls symbols for which USDC should not be replaced with USD when subscribing to streams. Most generated code should leave it unchanged.
+
+## Dependency Injection
+
+Current DI shape:
+
+```csharp
+services.AddCoinbase(options =>
+{
+    options.ApiCredentials = new CoinbaseCredentials("API_KEY_NAME", "EC_PRIVATE_KEY");
+});
+```
+
+Inject:
+
+```csharp
+public class MyService
+{
+    private readonly ICoinbaseRestClient _restClient;
+    private readonly ICoinbaseSocketClient _socketClient;
+
+    public MyService(ICoinbaseRestClient restClient, ICoinbaseSocketClient socketClient)
+    {
+        _restClient = restClient;
+        _socketClient = socketClient;
+    }
+}
+```
+
+Configuration binding is supported through `services.AddCoinbase(configuration)`. The DI extension registers shared REST and socket interfaces from `AdvancedTradeApi.SharedClient`.
+
+## Result Handling Pattern
+
+Always branch on `.Success`.
+
+```csharp
+var result = await client.AdvancedTradeApi.ExchangeData.GetOrderBookAsync("ETH-USD", limit: 50);
+if (!result.Success)
+{
+    Console.WriteLine($"Code: {result.Error?.Code}");
+    Console.WriteLine($"Message: {result.Error?.Message}");
+    return;
+}
+
+var bestBid = result.Data.Bids.FirstOrDefault();
+Console.WriteLine(bestBid?.Price);
+```
+
+For order placement, also check Coinbase's order response success:
+
+```csharp
+var order = await client.AdvancedTradeApi.Trading.PlaceOrderAsync(
+    "ETH-USD",
+    OrderSide.Buy,
+    NewOrderType.Limit,
+    quantity: 0.01m,
+    price: 2000m);
+
+if (!order.Success)
+{
+    Console.WriteLine(order.Error);
+    return;
+}
+
+if (!order.Data.Success)
+{
+    Console.WriteLine(order.Data.ErrorResponse.Message);
+    return;
+}
+
+Console.WriteLine(order.Data.SuccessResponse.OrderId);
+```
+
+For retry logic, only retry transient errors:
+
+```csharp
+async Task<WebCallResult<T>> WithRetry<T>(Func<Task<WebCallResult<T>>> call, int maxAttempts = 3)
+{
+    WebCallResult<T> last = default!;
+
+    for (var attempt = 1; attempt <= maxAttempts; attempt++)
+    {
+        last = await call();
+        if (last.Success)
+            return last;
+
+        if (last.Error?.IsTransient != true)
+            return last;
+
+        await Task.Delay(TimeSpan.FromMilliseconds(250 * Math.Pow(2, attempt)));
+    }
+
+    return last;
+}
+```
+
+Coinbase.Net returns normal API, validation, signing, and rate-limit failures through `.Error`; it generally does not throw for exchange rejections. Exceptions are for misconfiguration, disposal, cancellation, or programming errors.
+
+## Main API Surface
+
+REST:
+
+```text
+CoinbaseRestClient
+  .AdvancedTradeApi
+    .Account
+    .ExchangeData
+    .Trading
+    .SharedClient
+  .ExchangeApi
+    .ExchangeData
+```
+
+WebSocket:
+
+```text
+CoinbaseSocketClient
+  .AdvancedTradeApi
+    .SharedClient
+  .ExchangeApi
+```
+
+Important: Coinbase.Net does not use Binance or Bybit roots. Do not generate:
+
+```text
+restClient.SpotApi
+restClient.UsdFuturesApi
+restClient.CoinFuturesApi
+restClient.GeneralApi
+restClient.V5Api
+socketClient.SpotApi
+socketClient.V5SpotApi
+```
+
+## Symbol Routing
+
+Coinbase uses dash-separated product ids:
+
+```text
+BTC-USD
+ETH-USD
+ETH-USDT
+SOL-USD
+```
+
+Use `AdvancedTradeApi.ExchangeData.GetSymbolsAsync(...)` to discover supported products and product types. Use `SymbolType.Spot` for spot products and `SymbolType.Futures` for futures products.
+
+Examples:
+
+```csharp
+await client.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USD");
+await client.AdvancedTradeApi.ExchangeData.GetSymbolsAsync(SymbolType.Spot);
+await client.AdvancedTradeApi.ExchangeData.GetKlinesAsync("ETH-USD", KlineInterval.OneMinute);
+await client.AdvancedTradeApi.ExchangeData.GetOrderBookAsync("ETH-USD", 50);
+```
+
+Do not "normalize" Coinbase symbols to compact format for native Coinbase.Net methods.
+
+## Intent To Method Map
+
+For a broader quick reference, see `docs/ai-api-map.md`.
+
+Common Advanced Trade market data tasks:
+
+```text
+Get server time -> client.AdvancedTradeApi.ExchangeData.GetServerTimeAsync()
+Get products -> client.AdvancedTradeApi.ExchangeData.GetSymbolsAsync(...)
+Get product -> client.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USD")
+Get order book -> client.AdvancedTradeApi.ExchangeData.GetOrderBookAsync("ETH-USD", limit)
+Get candles -> client.AdvancedTradeApi.ExchangeData.GetKlinesAsync("ETH-USD", KlineInterval.OneMinute, ...)
+Get public trades -> client.AdvancedTradeApi.ExchangeData.GetTradeHistoryAsync("ETH-USD", ...)
+Get book ticker -> client.AdvancedTradeApi.ExchangeData.GetBookTickerAsync("ETH-USD")
+Get multiple book tickers -> client.AdvancedTradeApi.ExchangeData.GetBookTickersAsync(...)
+Get fiat assets -> client.AdvancedTradeApi.ExchangeData.GetFiatAssetsAsync()
+Get crypto assets -> client.AdvancedTradeApi.ExchangeData.GetCryptoAssetsAsync()
+Get exchange rates -> client.AdvancedTradeApi.ExchangeData.GetExchangeRatesAsync(asset)
+Get buy prices -> client.AdvancedTradeApi.ExchangeData.GetBuyPriceAsync(asset)
+Get sell prices -> client.AdvancedTradeApi.ExchangeData.GetSellPriceAsync(asset)
+Get spot prices -> client.AdvancedTradeApi.ExchangeData.GetSpotPriceAsync(asset, date)
+```
+
+Common account and Coinbase App tasks:
+
+```text
+Get accounts -> client.AdvancedTradeApi.Account.GetAccountsAsync(...)
+Get account -> client.AdvancedTradeApi.Account.GetAccountAsync(accountId)
+Get portfolios -> client.AdvancedTradeApi.Account.GetPortfoliosAsync(...)
+Get portfolio breakdown -> client.AdvancedTradeApi.Account.GetPortfolioAsync(portfolioId, asset)
+Create portfolio -> client.AdvancedTradeApi.Account.CreatePortfolioAsync(name)
+Edit portfolio -> client.AdvancedTradeApi.Account.EditPortfolioAsync(portfolioId, newName)
+Delete portfolio -> client.AdvancedTradeApi.Account.DeletePortfolioAsync(portfolioId)
+Transfer portfolio funds -> client.AdvancedTradeApi.Account.TransferPortfolioFundsAsync(...)
+Get fee info -> client.AdvancedTradeApi.Account.GetFeeInfoAsync(...)
+Get API key info -> client.AdvancedTradeApi.Account.GetApiKeyInfoAsync()
+Get payment methods -> client.AdvancedTradeApi.Account.GetPaymentMethodsAsync()
+Get payment method -> client.AdvancedTradeApi.Account.GetPaymentMethodAsync(paymentMethodId)
+Create convert quote -> client.AdvancedTradeApi.Account.CreateConvertQuoteAsync(...)
+Get convert trade -> client.AdvancedTradeApi.Account.GetConvertTradeAsync(...)
+Commit convert trade -> client.AdvancedTradeApi.Account.CommitConvertTradeAsync(...)
+Get withdrawals -> client.AdvancedTradeApi.Account.GetWithdrawalsAsync(accountId, ...)
+Get withdrawal -> client.AdvancedTradeApi.Account.GetWithdrawalAsync(accountId, withdrawalId)
+Withdraw fiat -> client.AdvancedTradeApi.Account.WithdrawAsync(...)
+Deposit fiat -> client.AdvancedTradeApi.Account.DepositAsync(...)
+Get deposits -> client.AdvancedTradeApi.Account.GetDepositsAsync(accountId, ...)
+Get deposit -> client.AdvancedTradeApi.Account.GetDepositAsync(accountId, depositId)
+Get transactions -> client.AdvancedTradeApi.Account.GetTransactionsAsync(accountId, ...)
+Get transaction -> client.AdvancedTradeApi.Account.GetTransactionAsync(accountId, transactionId)
+Withdraw crypto -> client.AdvancedTradeApi.Account.WithdrawCryptoAsync(...)
+Create deposit address -> client.AdvancedTradeApi.Account.CreateDepositAddressAsync(accountId, name)
+Get deposit addresses -> client.AdvancedTradeApi.Account.GetDepositAddressesAsync(accountId, ...)
+Get deposit address -> client.AdvancedTradeApi.Account.GetDepositAddressAsync(accountId, addressId)
+```
+
+Common futures/perpetual account tasks:
+
+```text
+Get perpetual summary -> client.AdvancedTradeApi.Account.GetPerpetualPortfolioSummaryAsync(portfolioId)
+Get perpetual balances -> client.AdvancedTradeApi.Account.GetPerpetualBalancesAsync(portfolioId)
+Set perpetual multi-asset collateral -> client.AdvancedTradeApi.Account.SetPerpetualMultiAssetCollateralModeAsync(...)
+Get futures balance summary -> client.AdvancedTradeApi.Account.GetFuturesBalanceSummaryAsync()
+Get futures intraday margin setting -> client.AdvancedTradeApi.Account.GetFuturesIntradayMarginSettingAsync()
+Set futures intraday margin setting -> client.AdvancedTradeApi.Account.SetFuturesIntradayMarginSettingAsync(...)
+Get futures current margin window -> client.AdvancedTradeApi.Account.GetFuturesCurrentMarginWindowAsync(...)
+```
+
+Common trading tasks:
+
+```text
+Place order -> client.AdvancedTradeApi.Trading.PlaceOrderAsync(symbol, side, newOrderType, ...)
+Cancel order -> client.AdvancedTradeApi.Trading.CancelOrderAsync(orderId)
+Cancel orders -> client.AdvancedTradeApi.Trading.CancelOrdersAsync(orderIds)
+Edit order -> client.AdvancedTradeApi.Trading.EditOrderAsync(orderId, price, quantity)
+Get order -> client.AdvancedTradeApi.Trading.GetOrderAsync(orderId)
+Get orders -> client.AdvancedTradeApi.Trading.GetOrdersAsync(...)
+Get fills/user trades -> client.AdvancedTradeApi.Trading.GetUserTradesAsync(...)
+Close position -> client.AdvancedTradeApi.Trading.ClosePositionAsync(symbol, ...)
+Get futures positions -> client.AdvancedTradeApi.Trading.GetFuturesPositionsAsync()
+Get futures position -> client.AdvancedTradeApi.Trading.GetFuturesPositionAsync(symbol)
+Get perpetual positions -> client.AdvancedTradeApi.Trading.GetPerpetualPositionsAsync(portfolioId)
+Get perpetual position -> client.AdvancedTradeApi.Trading.GetPerpetualPositionAsync(portfolioId, symbol)
+```
+
+Coinbase Exchange API tasks:
+
+```text
+Get Exchange API server time -> client.ExchangeApi.ExchangeData.GetServerTimeAsync()
+Get Exchange currencies -> client.ExchangeApi.ExchangeData.GetAssetsAsync()
+Get Exchange products -> client.ExchangeApi.ExchangeData.GetSymbolsAsync()
+```
+
+Common WebSocket tasks:
+
+```text
+Advanced Trade heartbeat -> socketClient.AdvancedTradeApi.SubscribeToHeartbeatUpdatesAsync(handler)
+Advanced Trade trades -> socketClient.AdvancedTradeApi.SubscribeToTradeUpdatesAsync(symbol, handler)
+Advanced Trade candles -> socketClient.AdvancedTradeApi.SubscribeToKlineUpdatesAsync(symbol, handler)
+Advanced Trade ticker -> socketClient.AdvancedTradeApi.SubscribeToTickerUpdatesAsync(symbol, handler)
+Advanced Trade batched ticker -> socketClient.AdvancedTradeApi.SubscribeToBatchedTickerUpdatesAsync(symbol, handler)
+Advanced Trade symbols/status -> socketClient.AdvancedTradeApi.SubscribeToSymbolUpdatesAsync(symbol, handler)
+Advanced Trade level2 -> socketClient.AdvancedTradeApi.SubscribeToOrderBookUpdatesAsync(symbol, handler)
+Advanced Trade user -> socketClient.AdvancedTradeApi.SubscribeToUserUpdatesAsync(handler)
+Advanced Trade futures balance -> socketClient.AdvancedTradeApi.SubscribeToFuturesBalanceUpdatesAsync(handler)
+Exchange heartbeat -> socketClient.ExchangeApi.SubscribeToHeartbeatUpdatesAsync(symbol, handler)
+Exchange status -> socketClient.ExchangeApi.SubscribeToExchangeInfoUpdatesAsync(handler)
+Exchange ticker -> socketClient.ExchangeApi.SubscribeToTickerUpdatesAsync(symbol, handler)
+Exchange batched ticker -> socketClient.ExchangeApi.SubscribeToBatchedTickerUpdatesAsync(symbol, handler)
+Exchange level2 -> socketClient.ExchangeApi.SubscribeToOrderBookUpdatesAsync(symbol, onSnapshot, onUpdate)
+```
+
+## Market Data Example
+
+```csharp
+using Coinbase.Net.Clients;
+using Coinbase.Net.Enums;
+
+var client = new CoinbaseRestClient();
+
+var product = await client.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USD");
+if (!product.Success)
+{
+    Console.WriteLine(product.Error);
+    return;
+}
+
+Console.WriteLine($"{product.Data.Symbol}: {product.Data.LastPrice}");
+
+var candles = await client.AdvancedTradeApi.ExchangeData.GetKlinesAsync(
+    "ETH-USD",
+    KlineInterval.OneMinute,
+    limit: 10);
+
+if (!candles.Success)
+{
+    Console.WriteLine(candles.Error);
+    return;
+}
+
+foreach (var candle in candles.Data)
+    Console.WriteLine($"{candle.OpenTime:u} close={candle.ClosePrice}");
+```
+
+## Account Balance Example
+
+```csharp
+using Coinbase.Net;
+using Coinbase.Net.Clients;
+
+var client = new CoinbaseRestClient(options =>
+{
+    options.ApiCredentials = new CoinbaseCredentials("API_KEY_NAME", "EC_PRIVATE_KEY");
+});
+
+var accounts = await client.AdvancedTradeApi.Account.GetAccountsAsync(limit: 100);
+if (!accounts.Success)
+{
+    Console.WriteLine(accounts.Error);
+    return;
+}
+
+foreach (var account in accounts.Data.Accounts)
+    Console.WriteLine($"{account.Asset}: available={account.AvailableBalance.Value}, hold={account.HoldBalance.Value}");
+```
+
+## Spot Order Example
+
+```csharp
+using Coinbase.Net;
+using Coinbase.Net.Clients;
+using Coinbase.Net.Enums;
+
+var client = new CoinbaseRestClient(options =>
+{
+    options.ApiCredentials = new CoinbaseCredentials("API_KEY_NAME", "EC_PRIVATE_KEY");
+});
+
+var order = await client.AdvancedTradeApi.Trading.PlaceOrderAsync(
+    symbol: "ETH-USD",
+    side: OrderSide.Buy,
+    orderType: NewOrderType.Limit,
+    quantity: 0.01m,
+    price: 2000m);
+
+if (!order.Success)
+{
+    Console.WriteLine(order.Error);
+    return;
+}
+
+if (!order.Data.Success)
+{
+    Console.WriteLine(order.Data.ErrorResponse.Message);
+    return;
+}
+
+Console.WriteLine(order.Data.SuccessResponse.OrderId);
+```
+
+For market buy orders that specify quote currency amount, use `quoteQuantity`:
+
+```csharp
+var order = await client.AdvancedTradeApi.Trading.PlaceOrderAsync(
+    "ETH-USD",
+    OrderSide.Buy,
+    NewOrderType.Market,
+    quoteQuantity: 100m);
+```
+
+## Futures And Perpetual Example
+
+```csharp
+var futuresPositions = await client.AdvancedTradeApi.Trading.GetFuturesPositionsAsync();
+if (!futuresPositions.Success)
+{
+    Console.WriteLine(futuresPositions.Error);
+    return;
+}
+
+var perpetualPositions = await client.AdvancedTradeApi.Trading.GetPerpetualPositionsAsync("PORTFOLIO_ID");
+if (!perpetualPositions.Success)
+    Console.WriteLine(perpetualPositions.Error);
+```
+
+Use product ids returned by `GetSymbolsAsync(SymbolType.Futures)` for futures/perpetual products. Do not invent contract ids.
+
+## WebSocket Subscription Example
+
+```csharp
+using Coinbase.Net.Clients;
+
+var socketClient = new CoinbaseSocketClient();
+
+var tickerSub = await socketClient.AdvancedTradeApi.SubscribeToTickerUpdatesAsync(
+    "ETH-USD",
+    update => Console.WriteLine(update.Data.LastPrice));
+
+if (!tickerSub.Success)
+{
+    Console.WriteLine(tickerSub.Error);
+    return;
+}
+
+Console.ReadLine();
+
+await socketClient.UnsubscribeAsync(tickerSub.Data);
+```
+
+Multiple subscriptions should all be checked before `.Data` is used:
+
+```csharp
+var bookSub = await socketClient.AdvancedTradeApi.SubscribeToOrderBookUpdatesAsync(
+    "ETH-USD",
+    update => Console.WriteLine(update.Data.Bids.Length));
+
+if (!bookSub.Success)
+{
+    await socketClient.UnsubscribeAsync(tickerSub.Data);
+    Console.WriteLine(bookSub.Error);
+    return;
+}
+```
+
+## Private WebSocket Example
+
+```csharp
+using Coinbase.Net;
+using Coinbase.Net.Clients;
+
+var socketClient = new CoinbaseSocketClient(options =>
+{
+    options.ApiCredentials = new CoinbaseCredentials("API_KEY_NAME", "EC_PRIVATE_KEY");
+});
+
+var userSub = await socketClient.AdvancedTradeApi.SubscribeToUserUpdatesAsync(
+    update =>
+    {
+        foreach (var order in update.Data.Orders)
+            Console.WriteLine($"{order.Symbol}: {order.Status}");
+    });
+
+if (!userSub.Success)
+{
+    Console.WriteLine(userSub.Error);
+    return;
+}
+
+Console.ReadLine();
+
+await socketClient.UnsubscribeAsync(userSub.Data);
+```
+
+## Exchange API WebSocket Example
+
+```csharp
+var socketClient = new CoinbaseSocketClient();
+
+var level2Sub = await socketClient.ExchangeApi.SubscribeToOrderBookUpdatesAsync(
+    "ETH-USD",
+    snapshot => Console.WriteLine($"Snapshot bids: {snapshot.Data.Bids.Length}"),
+    update => Console.WriteLine($"Changes: {update.Data.Change.Length}"));
+
+if (!level2Sub.Success)
+{
+    Console.WriteLine(level2Sub.Error);
+    return;
+}
+
+await socketClient.UnsubscribeAsync(level2Sub.Data);
+```
+
+## SharedApis Multi-Exchange Pattern
+
+Use CryptoExchange.Net.SharedApis when the user asks for code that can work against Coinbase and other exchanges.
+
+```csharp
+using Coinbase.Net.Clients;
+
+var shared = new CoinbaseRestClient().AdvancedTradeApi.SharedClient;
+
+Console.WriteLine(shared.Exchange);
+Console.WriteLine(string.Join(", ", shared.SupportedTradingModes));
+```
+
+Native Coinbase endpoints remain better when the user needs Coinbase-specific fields or parameters:
+
+```text
+Advanced Trade order configuration
+CoinbaseOrderResult.Success/ErrorResponse
+Portfolios
+Payment methods
+Coinbase App deposits/withdrawals/transactions
+Futures/perpetual account details
+Exchange API WebSocket level2 callbacks
+```
+
+Shared WebSocket client:
+
+```csharp
+var socketClient = new CoinbaseSocketClient();
+var sharedSocket = socketClient.AdvancedTradeApi.SharedClient;
+```
+
+For shared socket interface variables, keep the concrete `CoinbaseSocketClient` so you can call:
+
+```csharp
+await socketClient.UnsubscribeAsync(subscription.Data);
+```
+
+## Symbol And Quantity Handling
+
+Use product metadata instead of hard-coded precision:
+
+```csharp
+var product = await client.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USD");
+if (!product.Success)
+{
+    Console.WriteLine(product.Error);
+    return;
+}
+
+var baseIncrement = product.Data.BaseIncrement;
+var quoteIncrement = product.Data.QuoteIncrement;
+```
+
+Do not manually round order quantities and prices using string operations. Prefer symbol metadata returned by Coinbase or CryptoExchange.Net helpers when available.
+
+Common order validation problems:
+
+```text
+Invalid product id format
+Quantity below minimum
+Quantity increment does not match base increment
+Price increment does not match quote increment
+Insufficient balance
+Order type requires quoteQuantity instead of quantity
+Private key formatting/newline issue
+Account permissions missing
+```
+
+## Error Handling Notes
+
+Common categories of Coinbase failures:
+
+```text
+Rate limiting or temporary network failure: transient; back off and retry if appropriate.
+Timestamp/JWT signing issue: verify AutoTimestamp and local clock.
+Credential issue: key name, ECDSA private key, permissions, or framework support; do not retry blindly.
+Invalid product id: use dash-separated Coinbase product ids.
+Order validation failure: fix quantity, price, increments, order type, permissions, or balance.
+Exchange-level order rejection: WebCallResult succeeds, but CoinbaseOrderResult.Success is false.
+Unknown order: may be expected for filled, canceled, or wrong id queries.
+```
+
+Coinbase.Net result objects contain `Error.Code` and `Error.Message` when available:
+
+```csharp
+if (!result.Success)
+{
+    Console.WriteLine(result.Error?.Code);
+    Console.WriteLine(result.Error?.Message);
+    return;
+}
+```
+
+## AI-Friendly Examples
+
+Use these examples when generating code:
+
+```text
+Examples/ai-friendly/01-advanced-trade-market-and-account.cs
+  Advanced Trade public product, candles, order book, Exchange API products, and credential-gated accounts.
+
+Examples/ai-friendly/02-advanced-trade-trading.cs
+  Dry-run safe order workflow, open orders, fills, order placement, and cancellation.
+
+Examples/ai-friendly/03-websocket.cs
+  Advanced Trade ticker/order book streams, optional authenticated user stream, and teardown.
+
+Examples/ai-friendly/04-shared-client.cs
+  CryptoExchange.Net shared REST/socket client access beside native Coinbase endpoints.
+
+Examples/ai-friendly/05-error-handling.cs
+  WebCallResult and CallResult helpers, CoinbaseOrderResult handling, and subscription teardown.
+```
+
+These files are intended to be copied into a console `Program.cs` after `dotnet add package Coinbase.Net`. Private and trading examples read credentials from environment variables and avoid live order placement unless explicitly enabled.
+
+## Anti-Hallucination Checklist
+
+Before finalizing generated code:
+
+- Does it compile with the current package?
+- Does it include `using Coinbase.Net;` when using credentials or environments?
+- Does every REST/socket result check `.Success` before `.Data`?
+- Does order placement check `order.Data.Success`?
+- Does it use `restClient.AdvancedTradeApi` or `restClient.ExchangeApi` correctly?
+- Does it use `socketClient.AdvancedTradeApi` or `socketClient.ExchangeApi` correctly?
+- Does it avoid raw Coinbase URLs and manual signing?
+- Does it avoid nonexistent Binance/Bybit-style roots?
+- Does it avoid HMAC/passphrase examples?
+- Does it avoid `.Result` and `.Wait()`?
+- Are WebSocket subscriptions unsubscribed on shutdown?
+- For shared socket interfaces, does it keep the concrete socket client for `UnsubscribeAsync(sub.Data)`?
+- Does it use Coinbase dash-separated product ids?
+- For order quantities/prices, does it use product metadata or a proper helper instead of ad hoc rounding?
+- Does private endpoint code target a framework that supports the signing requirements?
+
+## Source Of Truth For Method Names
+
+When unsure, inspect these files instead of guessing:
+
+```text
+Coinbase.Net/Interfaces/Clients/ICoinbaseRestClient.cs
+Coinbase.Net/Interfaces/Clients/ICoinbaseSocketClient.cs
+Coinbase.Net/Interfaces/Clients/AdvancedTradeApi/ICoinbaseRestClientAdvancedTradeApi.cs
+Coinbase.Net/Interfaces/Clients/AdvancedTradeApi/ICoinbaseRestClientAdvancedTradeApiExchangeData.cs
+Coinbase.Net/Interfaces/Clients/AdvancedTradeApi/ICoinbaseRestClientAdvancedTradeApiAccount.cs
+Coinbase.Net/Interfaces/Clients/AdvancedTradeApi/ICoinbaseRestClientAdvancedTradeApiTrading.cs
+Coinbase.Net/Interfaces/Clients/AdvancedTradeApi/ICoinbaseSocketClientAdvancedTradeApi.cs
+Coinbase.Net/Interfaces/Clients/ExchangeApi/ICoinbaseRestClientExchangeApi.cs
+Coinbase.Net/Interfaces/Clients/ExchangeApi/ICoinbaseRestClientExchangeApiExchangeData.cs
+Coinbase.Net/Interfaces/Clients/ExchangeApi/ICoinbaseSocketClientExchangeApi.cs
+Coinbase.Net/Enums/*.cs
+```
+
+Prefer the interface files over memory when generating endpoint names, parameters, callback names, and return types.
+
+## Common Wrong Patterns To Avoid
+
+Wrong:
+
+```csharp
+var client = new CoinbaseClient();
+```
+
+Use:
+
+```csharp
+var client = new CoinbaseRestClient();
+```
+
+Wrong:
+
+```csharp
+var ticker = await client.SpotApi.ExchangeData.GetTickerAsync("ETHUSDT");
+```
+
+Use:
+
+```csharp
+var ticker = await client.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USD");
+```
+
+Wrong:
+
+```csharp
+options.ApiCredentials = new CoinbaseCredentials("key", "secret", "passphrase");
+```
+
+Use:
+
+```csharp
+options.ApiCredentials = new CoinbaseCredentials("key-name", "ec-private-key");
+```
+
+Wrong:
+
+```csharp
+var result = await client.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USD");
+Console.WriteLine(result.Data.LastPrice);
+```
+
+Use:
+
+```csharp
+var result = await client.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USD");
+if (!result.Success)
+{
+    Console.WriteLine(result.Error);
+    return;
+}
+Console.WriteLine(result.Data.LastPrice);
+```
+
+Wrong:
+
+```csharp
+if (order.Success)
+    Console.WriteLine(order.Data.SuccessResponse.OrderId);
+```
+
+Use:
+
+```csharp
+if (!order.Success)
+{
+    Console.WriteLine(order.Error);
+    return;
+}
+if (!order.Data.Success)
+{
+    Console.WriteLine(order.Data.ErrorResponse.Message);
+    return;
+}
+Console.WriteLine(order.Data.SuccessResponse.OrderId);
+```
+
+Wrong:
+
+```csharp
+await sharedTickerSocket.UnsubscribeAsync(sub.Data);
+```
+
+Use:
+
+```csharp
+await socketClient.UnsubscribeAsync(sub.Data);
+```
+
+Wrong:
+
+```csharp
+await client.AdvancedTradeApi.ExchangeData.GetOrderBookAsync("ETHUSDT");
+```
+
+Use:
+
+```csharp
+await client.AdvancedTradeApi.ExchangeData.GetOrderBookAsync("ETH-USD");
+```

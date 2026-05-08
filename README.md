@@ -81,6 +81,17 @@ var tickerSubscriptionResult = socketClient.AdvancedTradeApi.SubscribeToTickerUp
 
 For information on the clients, dependency injection, response processing and more see the [documentation](https://cryptoexchange.jkorf.dev?library=Coinbase.Net), or have a look at the examples [here](https://github.com/JKorf/Coinbase.Net/tree/main/Examples) or [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
 
+## AI documentation
+This repository includes AI-focused guidance for generating correct Coinbase.Net code:
+
+* [CLAUDE.md](CLAUDE.md) - skill-style instructions for Coinbase.Net usage
+* [llms.txt](llms.txt) - compact AI context
+* [llms-full.txt](llms-full.txt) - detailed AI context and API map
+* [docs/ai-api-map.md](docs/ai-api-map.md) - Advanced Trade and Exchange API surface map
+* [Examples/ai-friendly](Examples/ai-friendly) - compilable examples for assistants and quick onboarding
+
+The AI guidance focuses on the actual Coinbase.Net API shape (`restClient.AdvancedTradeApi`, `restClient.ExchangeApi`, `socketClient.AdvancedTradeApi`, `socketClient.ExchangeApi`), ECDSA credential handling, Coinbase dash-separated product ids, result handling, and avoiding raw HTTP signing code.
+
 ## CryptoExchange.Net
 Coinbase.Net is based on the [CryptoExchange.Net](https://github.com/JKorf/CryptoExchange.Net) base library. Other exchange API implementations based on the CryptoExchange.Net base library are available and follow the same logic.
 

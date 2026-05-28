@@ -1,6 +1,7 @@
 # ![Coinbase.Net](https://raw.githubusercontent.com/JKorf/Coinbase.Net/master/Coinbase.Net/Icon/icon.png) Coinbase.Net  
 
 [![.NET](https://img.shields.io/github/actions/workflow/status/JKorf/Coinbase.Net/dotnet.yml?style=for-the-badge)](https://github.com/JKorf/Coinbase.Net/actions/workflows/dotnet.yml) ![License](https://img.shields.io/github/license/JKorf/Coinbase.Net?style=for-the-badge)
+![Since](https://img.shields.io/badge/since-2024-brightgreen?style=for-the-badge)
 
 Coinbase.Net is a client library for accessing the [Coinbase Advanced Trade REST and Websocket API](https://docs.cdp.coinbase.com/advanced-trade/docs/welcome) and [Coinbase App REST API](https://docs.cdp.coinbase.com/coinbase-app/docs/welcome). 
 

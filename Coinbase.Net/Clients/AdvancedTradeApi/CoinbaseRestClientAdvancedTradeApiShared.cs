@@ -1372,7 +1372,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             var result = await ExchangeData.GetKlinesAsync(
                 symbol,
                 interval,
-                pageParams.StartTime,
+                pageParams.StartTime ?? DateTime.UtcNow.Add(TimeSpan.FromSeconds(-((int)interval * 100))),
                 pageParams.EndTime,
                 pageParams.Limit,
                 ct: ct

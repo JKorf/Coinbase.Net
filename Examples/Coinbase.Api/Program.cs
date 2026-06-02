@@ -1,3 +1,4 @@
+using Coinbase.Net;
 using Coinbase.Net.Interfaces.Clients;
 using Microsoft.AspNetCore.Mvc;
 
@@ -12,9 +13,10 @@ builder.Services.AddCoinbase();
 // OR to provide API credentials for accessing private endpoints, or setting other options:
 /*
 builder.Services.AddCoinbase(options =>
-{    
-   options.ApiCredentials = new ApiCredentials("<APIKEY>", "<APISECRET>");
-   options.Rest.RequestTimeout = TimeSpan.FromSeconds(5);
+{
+    options.ApiCredentials = new CoinbaseCredentials()
+        .WithECDsa("API_KEY", "PRIVATE_KEY");
+    options.Rest.RequestTimeout = TimeSpan.FromSeconds(5);
 });
 */
 
@@ -27,7 +29,9 @@ app.UseHttpsRedirection();
 app.MapGet("/{Symbol}", async ([FromServices] ICoinbaseRestClient client, string symbol) =>
 {
     var result = await client.AdvancedTradeApi.ExchangeData.GetSymbolAsync(symbol);
-    return result.Data.LastPrice;
+    return result.Success
+        ? Results.Ok(result.Data.LastPrice)
+        : Results.Problem(result.Error?.Message, statusCode: 502);
 })
 .WithOpenApi();
 
@@ -35,7 +39,9 @@ app.MapGet("/{Symbol}", async ([FromServices] ICoinbaseRestClient client, string
 app.MapGet("/Balances", async ([FromServices] ICoinbaseRestClient client) =>
 {
     var result = await client.AdvancedTradeApi.Account.GetAccountsAsync();
-    return (object)(result.Success ? result.Data : result.Error!);
+    return result.Success
+        ? Results.Ok(result.Data)
+        : Results.Problem(result.Error?.Message, statusCode: 502);
 })
 .WithOpenApi();
 

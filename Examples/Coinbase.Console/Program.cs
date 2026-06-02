@@ -4,6 +4,12 @@ using Coinbase.Net.Clients;
 // REST
 var restClient = new CoinbaseRestClient();
 var ticker = await restClient.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USDT");
+if (!ticker.Success)
+{
+    Console.WriteLine($"Failed to get ticker: {ticker.Error}");
+    return;
+}
+
 Console.WriteLine($"Rest client ticker price for ETH-USDT: {ticker.Data.LastPrice}");
 
 Console.WriteLine();
@@ -16,5 +22,11 @@ var subscription = await socketClient.AdvancedTradeApi.SubscribeToTickerUpdatesA
 {
     Console.WriteLine($"Websocket client ticker price for ETH-USDT: {update.Data.LastPrice}");
 });
+
+if (!subscription.Success)
+{
+    Console.WriteLine($"Failed to subscribe to ticker updates: {subscription.Error}");
+    return;
+}
 
 Console.ReadLine();

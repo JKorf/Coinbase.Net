@@ -4,7 +4,7 @@
 
 Coinbase.Net is a strongly typed .NET client library for Coinbase Advanced Trade REST/WebSocket APIs, selected Coinbase App REST endpoints, and Coinbase Exchange market-data APIs. It is part of the CryptoExchange.Net ecosystem and uses the same result, shared API, logging, rate limiting, dependency injection, and socket subscription patterns as the other JKorf exchange libraries.
 
-Current package version in this repository: 3.9.3.
+Current package version in this repository: 3.10.1.
 NuGet package id: JKorf.Coinbase.Net.
 CryptoExchange.Net dependency: 11.1.0.
 Target frameworks: netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.

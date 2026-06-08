@@ -191,6 +191,9 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 3.11.0 - 08 Jun 2026
+    * Updated CryptoExchange.Net to version 11.2.2
+
 * Version 3.10.1 - 02 Jun 2026
     * Fixed Shared GetKlinesAsync implementations returning error if no startTime provided
     * Fixed user client provider not caching new client when previous client was disposed

@@ -30,7 +30,10 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
 
             IndividualSubscriptionCount = symbols?.Length ?? 1;
 
-            MessageRouter = MessageRouter.CreateWithOptionalTopicFilters<T>(channelIdentifier, symbols, DoHandleMessage);
+            if (symbols == null)
+                MessageRouter = MessageRouter.CreateForEvent<T>(channelIdentifier, DoHandleMessage);
+            else
+                MessageRouter = MessageRouter.CreateForEvent<T>(channelIdentifier, symbols, DoHandleMessage);
         }
 
         /// <inheritdoc />
@@ -53,7 +56,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
         public CallResult DoHandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, T message)
         {
             _handler.Invoke(receiveTime, originalData, message);
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
     }

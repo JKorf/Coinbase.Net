@@ -21,11 +21,14 @@ internal class CoinbaseRestClientExchangeApiExchangeData : ICoinbaseRestClientEx
     #region Get Server Time
 
     /// <inheritdoc />
-    public async Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
+    public async Task<HttpResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
     {
-        var request = _definitions.GetOrCreate(HttpMethod.Get, "time", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
+        var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "time", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
         var result = await _baseClient.SendAsync<CoinbaseTime>(request, null, ct).ConfigureAwait(false);
-        return result.As(result.Data?.Time ?? default);
+        if (!result.Success)
+            return HttpResult.Fail<DateTime>(result);
+
+        return HttpResult.Ok<DateTime>(result, result.Data.Time);
     }
 
     #endregion
@@ -33,10 +36,10 @@ internal class CoinbaseRestClientExchangeApiExchangeData : ICoinbaseRestClientEx
     #region Get Assets
 
     /// <inheritdoc />
-    public async Task<WebCallResult<CoinbaseExAsset[]>> GetAssetsAsync(CancellationToken ct = default)
+    public async Task<HttpResult<CoinbaseExAsset[]>> GetAssetsAsync(CancellationToken ct = default)
     {
-        var parameters = new ParameterCollection();
-        var request = _definitions.GetOrCreate(HttpMethod.Get, "currencies", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
+        var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+        var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "currencies", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
         var result = await _baseClient.SendAsync<CoinbaseExAsset[]> (request, parameters, ct).ConfigureAwait(false);
         return result;
     }
@@ -45,10 +48,10 @@ internal class CoinbaseRestClientExchangeApiExchangeData : ICoinbaseRestClientEx
 
     #region Get Symbols
     /// <inheritdoc />
-    public async Task<WebCallResult<CoinbaseExSymbol[]>> GetSymbolsAsync(CancellationToken ct = default)
+    public async Task<HttpResult<CoinbaseExSymbol[]>> GetSymbolsAsync(CancellationToken ct = default)
     {
-        var parameters = new ParameterCollection();
-        var request = _definitions.GetOrCreate(HttpMethod.Get, "products", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
+        var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+        var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "products", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
         var result = await _baseClient.SendAsync<CoinbaseExSymbol[]>(request, parameters, ct).ConfigureAwait(false);
         return result;
     }

@@ -25,12 +25,12 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Accounts
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseAccountPage>> GetAccountsAsync(int? limit = null, string? pageCursor = null, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseAccountPage>> GetAccountsAsync(int? limit = null, string? pageCursor = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptional("limit", limit);
-            parameters.AddOptional("cursor", pageCursor);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/brokerage/accounts", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            parameters.Add("limit", limit);
+            parameters.Add("cursor", pageCursor);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "api/v3/brokerage/accounts", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseAccountPage>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -40,12 +40,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Account
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseAccount>> GetAccountAsync(string accountId, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseAccount>> GetAccountAsync(string accountId, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"api/v3/brokerage/accounts/{accountId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, $"api/v3/brokerage/accounts/{accountId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseAccountWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbaseAccount>(result.Data?.Account);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbaseAccount>(result);
+
+            return HttpResult.Ok(result, result.Data.Account);
         }
 
         #endregion
@@ -53,13 +56,16 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Portfolios
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePortfolio[]>> GetPortfoliosAsync(PortfolioType? type = null, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbasePortfolio[]>> GetPortfoliosAsync(PortfolioType? type = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalEnum("portfolio_type", type);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/brokerage/portfolios", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            parameters.Add("portfolio_type", type);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "api/v3/brokerage/portfolios", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePortfoliosWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbasePortfolio[]>(result.Data?.Portfolios);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbasePortfolio[]>(result);
+
+            return HttpResult.Ok(result, result.Data.Portfolios);
         }
 
         #endregion
@@ -67,13 +73,16 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Portfolio
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePorfolioBreakdown>> GetPortfolioAsync(string portfolioId, string? asset = null, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbasePortfolioBreakdown>> GetPortfolioAsync(string portfolioId, string? asset = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptional("currency", asset);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"api/v3/brokerage/portfolios/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            parameters.Add("currency", asset);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, $"api/v3/brokerage/portfolios/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePorfolioBreakdownWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbasePorfolioBreakdown>(result.Data?.Breakdown);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbasePortfolioBreakdown>(result);
+
+            return HttpResult.Ok(result, result.Data.Breakdown);
         }
 
         #endregion
@@ -81,13 +90,16 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Create Portfolio
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePortfolio>> CreatePortfolioAsync(string portfolioName, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbasePortfolio>> CreatePortfolioAsync(string portfolioName, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
             parameters.Add("name", portfolioName);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, $"api/v3/brokerage/portfolios", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, $"api/v3/brokerage/portfolios", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePortfolioWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbasePortfolio>(result.Data?.Portfolio);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbasePortfolio>(result);
+
+            return HttpResult.Ok(result, result.Data.Portfolio);
         }
 
         #endregion
@@ -95,9 +107,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Transfer Portfolio funds
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePortfolioMove>> TransferPortfolioFundsAsync(string fromPortfolioId, string toPortfolioId, decimal quantity, string asset, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbasePortfolioMove>> TransferPortfolioFundsAsync(string fromPortfolioId, string toPortfolioId, decimal quantity, string asset, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
             parameters.Add("source_portfolio_uuid", fromPortfolioId);
             parameters.Add("target_portfolio_uuid", toPortfolioId);
             parameters.Add("funds", new Dictionary<string, object>
@@ -105,7 +117,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 { "value", quantity.ToString(CultureInfo.InvariantCulture) },
                 { "currency", asset }
             });
-            var request = _definitions.GetOrCreate(HttpMethod.Post, $"api/v3/brokerage/portfolios/move_funds", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, $"api/v3/brokerage/portfolios/move_funds", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePortfolioMove>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -115,13 +127,16 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Edit Portfolio
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePortfolio>> EditPortfolioAsync(string portfolioId, string newName, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbasePortfolio>> EditPortfolioAsync(string portfolioId, string newName, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
             parameters.Add("name", newName);
-            var request = _definitions.GetOrCreate(HttpMethod.Put, $"api/v3/brokerage/portfolios/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Put, _baseClient.BaseAddress, $"api/v3/brokerage/portfolios/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePortfolioWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbasePortfolio>(result.Data?.Portfolio);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbasePortfolio>(result);
+
+            return HttpResult.Ok(result, result.Data.Portfolio);
         }
 
         #endregion
@@ -129,11 +144,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Delete Portfolio
 
         /// <inheritdoc />
-        public async Task<WebCallResult> DeletePortfolioAsync(string portfolioId, CancellationToken ct = default)
+        public async Task<HttpResult> DeletePortfolioAsync(string portfolioId, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
             parameters.Add("portfolio_uuid", portfolioId);
-            var request = _definitions.GetOrCreate(HttpMethod.Delete, $"api/v3/brokerage/portfolios/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Delete, _baseClient.BaseAddress, $"api/v3/brokerage/portfolios/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -143,14 +158,14 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Delete Portfolio
 
         /// <inheritdoc />
-        public async Task<WebCallResult> AllocatePortfolioAsync(string portfolioId, string symbol, decimal quantity, string asset, CancellationToken ct = default)
+        public async Task<HttpResult> AllocatePortfolioAsync(string portfolioId, string symbol, decimal quantity, string asset, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
             parameters.Add("portfolio_uuid", portfolioId);
             parameters.Add("symbol", portfolioId);
-            parameters.AddString("amount", quantity);
+            parameters.Add("amount", quantity);
             parameters.Add("currency", portfolioId);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, $"api/v3/brokerage/intx/allocate", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, $"api/v3/brokerage/intx/allocate", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -160,10 +175,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Perpetual Portfolio Summary
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePerpetualPorfolios>> GetPerpetualPortfolioSummaryAsync(string portfolioId, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbasePerpetualPorfolios>> GetPerpetualPortfolioSummaryAsync(string portfolioId, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/intx/portfolio/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, $"/api/v3/brokerage/intx/portfolio/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePerpetualPorfolios>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -173,12 +188,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Perpetual Balances
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePerpetualBalances>> GetPerpetualBalancesAsync(string portfolioId, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbasePerpetualBalances>> GetPerpetualBalancesAsync(string portfolioId, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/api/v3/brokerage/intx/balances/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, $"/api/v3/brokerage/intx/balances/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePerpetualBalancesWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbasePerpetualBalances>(result.Data?.PortfolioBalances);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbasePerpetualBalances>(result);
+
+            return HttpResult.Ok(result, result.Data.PortfolioBalances);
         }
 
         #endregion
@@ -186,12 +204,12 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Set Perpetual Multi Asset Collateral Mode
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseMultiAssetMode>> SetPerpetualMultiAssetCollateralModeAsync(string portfolioId, bool enabled, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseMultiAssetMode>> SetPerpetualMultiAssetCollateralModeAsync(string portfolioId, bool enabled, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
             parameters.Add("portfolio_uuid", portfolioId);
             parameters.Add("multi_asset_collateral_enabled", enabled);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, $"/api/v3/brokerage/intx/multi_asset_collateral", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, $"/api/v3/brokerage/intx/multi_asset_collateral", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseMultiAssetMode>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -201,18 +219,18 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Futures Balance Summary
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseFuturesBalanceSummary>> GetFuturesBalanceSummaryAsync(CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseFuturesBalanceSummary>> GetFuturesBalanceSummaryAsync(CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/brokerage/cfm/balance_summary", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/brokerage/cfm/balance_summary", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseFuturesBalanceSummaryWrapper>(request, parameters, ct).ConfigureAwait(false);
-            if (!result)
-                return result.As<CoinbaseFuturesBalanceSummary>(default);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbaseFuturesBalanceSummary>(result);
 
             if (result.Data.BalanceSummary == null)
-                return result.AsError<CoinbaseFuturesBalanceSummary>(new ServerError(new ErrorInfo(ErrorType.Unknown, "Not found")));
+                return HttpResult.Fail<CoinbaseFuturesBalanceSummary>(result, new ServerError(new ErrorInfo(ErrorType.Unknown, "Not found")));
 
-            return result.As(result.Data.BalanceSummary);
+            return HttpResult.Ok(result, result.Data.BalanceSummary);
         }
 
         #endregion
@@ -220,13 +238,13 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Fee Info
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseFeeInfo>> GetFeeInfoAsync(SymbolType? symbolType = null, ContractExpiryType? expiryType = null, string? venue = null, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseFeeInfo>> GetFeeInfoAsync(SymbolType? symbolType = null, ContractExpiryType? expiryType = null, string? venue = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalEnum("product_type", symbolType);
-            parameters.AddOptionalEnum("contract_expiry_type", expiryType);
-            parameters.AddOptional("product_venue", venue);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/brokerage/transaction_summary", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            parameters.Add("product_type", symbolType);
+            parameters.Add("contract_expiry_type", expiryType);
+            parameters.Add("product_venue", venue);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "api/v3/brokerage/transaction_summary", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseFeeInfo>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -236,11 +254,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Set Futures Intraday Margin Setting
 
         /// <inheritdoc />
-        public async Task<WebCallResult> SetFuturesIntradayMarginSettingAsync(IntradayMargin setting, CancellationToken ct = default)
+        public async Task<HttpResult> SetFuturesIntradayMarginSettingAsync(IntradayMargin setting, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("setting", setting);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/brokerage/cfm/intraday/margin_setting", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            parameters.Add("setting", setting);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "api/v3/brokerage/cfm/intraday/margin_setting", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -250,10 +268,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Futures Intraday Margin Setting
 
         /// <inheritdoc />
-        public async Task<WebCallResult<IntradayMarginSetting>> GetFuturesIntradayMarginSettingAsync(CancellationToken ct = default)
+        public async Task<HttpResult<IntradayMarginSetting>> GetFuturesIntradayMarginSettingAsync(CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/brokerage/cfm/intraday/margin_setting", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "api/v3/brokerage/cfm/intraday/margin_setting", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<IntradayMarginSetting>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -263,11 +281,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Futures Current Margin Window
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseFuturesMarginWindow>> GetFuturesCurrentMarginWindowAsync(MarginProfileType marginProfileType, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseFuturesMarginWindow>> GetFuturesCurrentMarginWindowAsync(MarginProfileType marginProfileType, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddEnum("margin_profile_type", marginProfileType);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "/api/v3/brokerage/cfm/intraday/current_margin_window", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            parameters.Add("margin_profile_type", marginProfileType);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "/api/v3/brokerage/cfm/intraday/current_margin_window", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseFuturesMarginWindow>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -277,10 +295,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Api Key Info
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseApiKey>> GetApiKeyInfoAsync(CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseApiKey>> GetApiKeyInfoAsync(CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/brokerage/key_permissions", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "api/v3/brokerage/key_permissions", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseApiKey>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -290,12 +308,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Payment Methods
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePaymentMethod[]>> GetPaymentMethodsAsync(CancellationToken ct = default)
+        public async Task<HttpResult<CoinbasePaymentMethod[]>> GetPaymentMethodsAsync(CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, "api/v3/brokerage/payment_methods", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "api/v3/brokerage/payment_methods", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePaymentMethodsWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbasePaymentMethod[]>(result.Data?.PaymentMethods);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbasePaymentMethod[]>(result);
+
+            return HttpResult.Ok(result, result.Data.PaymentMethods);
         }
 
         #endregion
@@ -303,12 +324,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Payment Method
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePaymentMethod>> GetPaymentMethodAsync(string paymentMethodId, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbasePaymentMethod>> GetPaymentMethodAsync(string paymentMethodId, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"api/v3/brokerage/payment_methods/{paymentMethodId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, $"api/v3/brokerage/payment_methods/{paymentMethodId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePaymentMethodWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbasePaymentMethod>(result.Data?.PaymentMethod);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbasePaymentMethod>(result);
+
+            return HttpResult.Ok(result, result.Data.PaymentMethod);
         }
 
         #endregion
@@ -316,17 +340,20 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Create Convert Quote
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseConvertQuote>> CreateConvertQuoteAsync(string fromAsset, string toAsset, decimal quantity, string? userIncentiveId = null, string? promoCode = null, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseConvertQuote>> CreateConvertQuoteAsync(string fromAsset, string toAsset, decimal quantity, string? userIncentiveId = null, string? promoCode = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
             parameters.Add("from_account", fromAsset);
             parameters.Add("to_account", toAsset);
-            parameters.AddString("amount", quantity);
-            parameters.AddOptional("user_incentive_id", userIncentiveId);
-            parameters.AddOptional("code_val", promoCode);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, "api/v3/brokerage/convert/quote", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            parameters.Add("amount", quantity);
+            parameters.Add("user_incentive_id", userIncentiveId);
+            parameters.Add("code_val", promoCode);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, "api/v3/brokerage/convert/quote", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseConvertQuoteWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbaseConvertQuote>(result.Data?.Trade);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbaseConvertQuote>(result);
+
+            return HttpResult.Ok(result, result.Data.Trade);
         }
 
         #endregion
@@ -334,14 +361,17 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Convert Quote
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseConvertQuote>> GetConvertTradeAsync(string tradeId, string fromAsset, string toAsset, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseConvertQuote>> GetConvertTradeAsync(string tradeId, string fromAsset, string toAsset, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
             parameters.Add("from_account", fromAsset);
             parameters.Add("to_account", toAsset);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"api/v3/brokerage/convert/trade/{tradeId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, $"api/v3/brokerage/convert/trade/{tradeId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseConvertQuoteWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbaseConvertQuote>(result.Data?.Trade);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbaseConvertQuote>(result);
+
+            return HttpResult.Ok(result, result.Data.Trade);
         }
 
         #endregion
@@ -349,14 +379,17 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Commit Convert Quote
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseConvertQuote>> CommitConvertTradeAsync(string tradeId, string fromAsset, string toAsset, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseConvertQuote>> CommitConvertTradeAsync(string tradeId, string fromAsset, string toAsset, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
             parameters.Add("from_account", fromAsset);
             parameters.Add("to_account", toAsset);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, $"api/v3/brokerage/convert/trade/{tradeId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, $"api/v3/brokerage/convert/trade/{tradeId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseConvertQuoteWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbaseConvertQuote>(result.Data?.Trade);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbaseConvertQuote>(result);
+
+            return HttpResult.Ok(result, result.Data.Trade);
         }
 
         #endregion
@@ -364,14 +397,14 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Withdrawals
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePaginatedResult<CoinbaseWithdrawal>>> GetWithdrawalsAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbasePaginatedResult<CoinbaseWithdrawal>>> GetWithdrawalsAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalEnum("order", order);
-            parameters.AddOptional("starting_after", fromId);
-            parameters.AddOptional("ending_before", toId);
-            parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/accounts/{accountId}/withdrawals", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            parameters.Add("order", order);
+            parameters.Add("starting_after", fromId);
+            parameters.Add("ending_before", toId);
+            parameters.Add("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, $"/v2/accounts/{accountId}/withdrawals", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePaginatedResult<CoinbaseWithdrawal>>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -381,12 +414,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Withdrawal
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseWithdrawal>> GetWithdrawalAsync(string accountId, string withdrawalId, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseWithdrawal>> GetWithdrawalAsync(string accountId, string withdrawalId, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/accounts/{accountId}/withdrawals/{withdrawalId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, $"/v2/accounts/{accountId}/withdrawals/{withdrawalId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseWithdrawalWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbaseWithdrawal>(result.Data?.Data);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbaseWithdrawal>(result);
+
+            return HttpResult.Ok(result, result.Data.Data);
         }
 
         #endregion
@@ -394,15 +430,18 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Withdraw
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseWithdrawal>> WithdrawAsync(string accountId, string asset, decimal quantity, string paymentMethod, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseWithdrawal>> WithdrawAsync(string accountId, string asset, decimal quantity, string paymentMethod, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
             parameters.Add("currency", asset);
-            parameters.AddString("amount", quantity);
+            parameters.Add("amount", quantity);
             parameters.Add("payment_method", paymentMethod);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, $"/v2/accounts/{accountId}/withdrawals", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, $"/v2/accounts/{accountId}/withdrawals", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseWithdrawalWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbaseWithdrawal>(result.Data?.Data);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbaseWithdrawal>(result);
+
+            return HttpResult.Ok(result, result.Data.Data);
         }
 
         #endregion
@@ -410,15 +449,18 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Deposit
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseDeposit>> DepositAsync(string accountId, string paymentId, string asset, decimal quantity, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseDeposit>> DepositAsync(string accountId, string paymentId, string asset, decimal quantity, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
             parameters.Add("payment_method", paymentId);
             parameters.Add("currency", asset);
-            parameters.AddString("quantity", quantity);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, $"/v2/accounts/{accountId}/deposits", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            parameters.Add("quantity", quantity);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, $"/v2/accounts/{accountId}/deposits", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseDepositWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbaseDeposit>(result.Data?.Data);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbaseDeposit>(result);
+
+            return HttpResult.Ok(result, result.Data.Data);
         }
 
         #endregion
@@ -426,14 +468,14 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Deposits
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePaginatedResult<CoinbaseDeposit>>> GetDepositsAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbasePaginatedResult<CoinbaseDeposit>>> GetDepositsAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalEnum("order", order);
-            parameters.AddOptional("starting_after", fromId);
-            parameters.AddOptional("ending_before", toId);
-            parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/accounts/{accountId}/deposits", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            parameters.Add("order", order);
+            parameters.Add("starting_after", fromId);
+            parameters.Add("ending_before", toId);
+            parameters.Add("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, $"/v2/accounts/{accountId}/deposits", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePaginatedResult<CoinbaseDeposit>>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -443,12 +485,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Deposit
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseDeposit>> GetDepositAsync(string accountId, string depositId, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseDeposit>> GetDepositAsync(string accountId, string depositId, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/accounts/{accountId}/deposits/{depositId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, $"/v2/accounts/{accountId}/deposits/{depositId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseDepositWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbaseDeposit>(result.Data?.Data);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbaseDeposit>(result);
+
+            return HttpResult.Ok(result, result.Data.Data);
         }
 
         #endregion
@@ -456,14 +501,14 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Transactions
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePaginatedResult<CoinbaseTransaction>>> GetTransactionsAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbasePaginatedResult<CoinbaseTransaction>>> GetTransactionsAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalEnum("order", order);
-            parameters.AddOptional("starting_after", fromId);
-            parameters.AddOptional("ending_before", toId);
-            parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/accounts/{accountId}/transactions", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            parameters.Add("order", order);
+            parameters.Add("starting_after", fromId);
+            parameters.Add("ending_before", toId);
+            parameters.Add("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, $"/v2/accounts/{accountId}/transactions", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePaginatedResult<CoinbaseTransaction>>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -473,12 +518,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Transaction
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseTransaction>> GetTransactionAsync(string accountId, string transactionId, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseTransaction>> GetTransactionAsync(string accountId, string transactionId, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/accounts/{accountId}/transactions/{transactionId}", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, $"/v2/accounts/{accountId}/transactions/{transactionId}", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseTransactionWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbaseTransaction>(result.Data?.Data);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbaseTransaction>(result);
+
+            return HttpResult.Ok(result, result.Data.Data);
         }
 
         #endregion
@@ -486,14 +534,14 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Address Transactions
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePaginatedResult<CoinbaseTransaction>>> GetAddressTransactionsAsync(string accountId, string addressId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbasePaginatedResult<CoinbaseTransaction>>> GetAddressTransactionsAsync(string accountId, string addressId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalEnum("order", order);
-            parameters.AddOptional("starting_after", fromId);
-            parameters.AddOptional("ending_before", toId);
-            parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/accounts/{accountId}/addresses/{addressId}/transactions", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            parameters.Add("order", order);
+            parameters.Add("starting_after", fromId);
+            parameters.Add("ending_before", toId);
+            parameters.Add("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, $"/v2/accounts/{accountId}/addresses/{addressId}/transactions", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePaginatedResult<CoinbaseTransaction>>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -503,20 +551,23 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Withdraw Crypto
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseTransaction>> WithdrawCryptoAsync(string accountId, string to, decimal quantity, string asset, string? network = null, string? description = null, string? idempotencyToken = null, string? destinationTag = null, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseTransaction>> WithdrawCryptoAsync(string accountId, string to, decimal quantity, string asset, string? network = null, string? description = null, string? idempotencyToken = null, string? destinationTag = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
             parameters.Add("type", "send");
             parameters.Add("to", to);
-            parameters.AddString("amount", quantity);
+            parameters.Add("amount", quantity);
             parameters.Add("currency", asset);
-            parameters.AddOptional("description", description);
-            parameters.AddOptional("idem", idempotencyToken);
-            parameters.AddOptional("network", network);
-            parameters.AddOptional("destination_tag", destinationTag);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, $"/v2/accounts/{accountId}/transactions", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
+            parameters.Add("description", description);
+            parameters.Add("idem", idempotencyToken);
+            parameters.Add("network", network);
+            parameters.Add("destination_tag", destinationTag);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, $"/v2/accounts/{accountId}/transactions", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseTransactionWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbaseTransaction>(result.Data?.Data);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbaseTransaction>(result);
+
+            return HttpResult.Ok(result, result.Data.Data);
         }
 
         #endregion
@@ -524,13 +575,16 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Create Deposit Address
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseDepositAddress>> CreateDepositAddressAsync(string accountId, string name, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseDepositAddress>> CreateDepositAddressAsync(string accountId, string name, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
             parameters.Add("name", name);
-            var request = _definitions.GetOrCreate(HttpMethod.Post, $"/v2/accounts/{accountId}/addresses", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
+            var request = _definitions.GetOrCreate(HttpMethod.Post, _baseClient.BaseAddress, $"/v2/accounts/{accountId}/addresses", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseDepositAddressWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbaseDepositAddress>(result.Data?.Data);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbaseDepositAddress>(result);
+
+            return HttpResult.Ok(result, result.Data.Data);
         }
 
         #endregion
@@ -538,14 +592,14 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Deposit Addresses
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbasePaginatedResult<CoinbaseDepositAddress>>> GetDepositAddressesAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbasePaginatedResult<CoinbaseDepositAddress>>> GetDepositAddressesAsync(string accountId, SortOrder? order = null, string? fromId = null, string? toId = null, int? limit = null, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            parameters.AddOptionalEnum("order", order);
-            parameters.AddOptional("starting_after", fromId);
-            parameters.AddOptional("ending_before", toId);
-            parameters.AddOptional("limit", limit);
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/accounts/{accountId}/addresses", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            parameters.Add("order", order);
+            parameters.Add("starting_after", fromId);
+            parameters.Add("ending_before", toId);
+            parameters.Add("limit", limit);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, $"/v2/accounts/{accountId}/addresses", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePaginatedResult<CoinbaseDepositAddress>>(request, parameters, ct).ConfigureAwait(false);
             return result;
         }
@@ -555,12 +609,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Deposit Address
 
         /// <inheritdoc />
-        public async Task<WebCallResult<CoinbaseDepositAddress>> GetDepositAddressAsync(string accountId, string addressId, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbaseDepositAddress>> GetDepositAddressAsync(string accountId, string addressId, CancellationToken ct = default)
         {
-            var parameters = new ParameterCollection();
-            var request = _definitions.GetOrCreate(HttpMethod.Get, $"/v2/accounts/{accountId}/addresses/{addressId}", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
+            var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, $"/v2/accounts/{accountId}/addresses/{addressId}", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, true);
             var result = await _baseClient.SendAsync<CoinbaseDepositAddressWrapper>(request, parameters, ct).ConfigureAwait(false);
-            return result.As<CoinbaseDepositAddress>(result.Data?.Data);
+            if (!result.Success)
+                return HttpResult.Fail<CoinbaseDepositAddress>(result);
+
+            return HttpResult.Ok(result, result.Data.Data);
         }
 
         #endregion

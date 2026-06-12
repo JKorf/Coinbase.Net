@@ -39,7 +39,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="attachedOrderTriggerPrice">["<c>stopTriggerPrice</c>"] Attached order trigger price</param>
         /// <param name="attachedOrderLimitPrice">["<c>limitPrice</c>"] Attached order limit price</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbaseOrderResult>> PlaceOrderAsync(
+        Task<HttpResult<CoinbaseOrderResult>> PlaceOrderAsync(
             string symbol,
             OrderSide side,
             NewOrderType orderType, 
@@ -70,7 +70,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="orderId">Id of order to cancel</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<CoinbaseCancelResult>> CancelOrderAsync(string orderId, CancellationToken ct = default);
+        Task<HttpResult<CoinbaseCancelResult>> CancelOrderAsync(string orderId, CancellationToken ct = default);
 
         /// <summary>
         /// Cancel orders
@@ -83,7 +83,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// </summary>
         /// <param name="orderIds">["<c>order_ids</c>"] Ids of orders to cancel</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbaseCancelResult[]>> CancelOrdersAsync(IEnumerable<string> orderIds, CancellationToken ct = default);
+        Task<HttpResult<CoinbaseCancelResult[]>> CancelOrdersAsync(IEnumerable<string> orderIds, CancellationToken ct = default);
 
         /// <summary>
         /// Edit an order
@@ -98,7 +98,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="price">["<c>price</c>"] New order price</param>
         /// <param name="quantity">["<c>size</c>"] New order quantity</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbaseEditOrderResult>> EditOrderAsync(string orderId, decimal price, decimal quantity, CancellationToken ct = default);
+        Task<HttpResult<CoinbaseEditOrderResult>> EditOrderAsync(string orderId, decimal price, decimal quantity, CancellationToken ct = default);
 
         /// <summary>
         /// Get order details 
@@ -111,7 +111,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// </summary>
         /// <param name="orderId">["<c>orderId</c>"] Order id</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbaseOrder>> GetOrderAsync(string orderId, CancellationToken ct = default);
+        Task<HttpResult<CoinbaseOrder>> GetOrderAsync(string orderId, CancellationToken ct = default);
 
         /// <summary>
         /// Get orders. Note that open orders do not adhere to the time filter
@@ -138,7 +138,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="cursor">["<c>cursor</c>"] Page cursor</param>
         /// <param name="sortBy">["<c>sort_by</c>"] Sort order</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbaseOrder[]>> GetOrdersAsync(
+        Task<HttpResult<CoinbaseOrder[]>> GetOrdersAsync(
             IEnumerable<string>? orderIds = null,
             IEnumerable<string>? symbols = null,
             SymbolType? symbolType = null,
@@ -174,7 +174,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="cursor">["<c>cursor</c>"] Page cursor</param>
         /// <param name="sortBy">["<c>sort_by</c>"] Sort type</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbaseUserTrades>> GetUserTradesAsync(
+        Task<HttpResult<CoinbaseUserTrades>> GetUserTradesAsync(
             IEnumerable<string>? orderIds = null,
             IEnumerable<string>? tradeIds = null,
             IEnumerable<string>? symbols = null,
@@ -198,7 +198,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="clientOrderId">["<c>client_order_id</c>"] Client order id for the close order</param>
         /// <param name="quantity">["<c>size</c>"] Quantity to close</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbaseOrderResult>> ClosePositionAsync(string symbol, decimal? quantity = null, string? clientOrderId = null, CancellationToken ct = default);
+        Task<HttpResult<CoinbaseOrderResult>> ClosePositionAsync(string symbol, decimal? quantity = null, string? clientOrderId = null, CancellationToken ct = default);
 
         /// <summary>
         /// Get expiring futures positions
@@ -210,7 +210,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// </para>
         /// </summary>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbaseFuturesPosition[]>> GetFuturesPositionsAsync(CancellationToken ct = default);
+        Task<HttpResult<CoinbaseFuturesPosition[]>> GetFuturesPositionsAsync(CancellationToken ct = default);
 
         /// <summary>
         /// Get expiring futures position for a symbol
@@ -223,7 +223,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// </summary>
         /// <param name="symbol">["<c>symbol</c>"] Symbol</param>
         /// <param name="ct">Cancellation token</param>
-        Task<WebCallResult<CoinbaseFuturesPosition>> GetFuturesPositionAsync(string symbol, CancellationToken ct = default);
+        Task<HttpResult<CoinbaseFuturesPosition>> GetFuturesPositionAsync(string symbol, CancellationToken ct = default);
 
         /// <summary>
         /// Get a list of open positions in your Perpetuals portfolio
@@ -237,7 +237,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="portfolioId">["<c>portfolioId</c>"] Portfolio uuid</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<CoinbasePerpetualPositions>> GetPerpetualPositionsAsync(string portfolioId, CancellationToken ct = default);
+        Task<HttpResult<CoinbasePerpetualPositions>> GetPerpetualPositionsAsync(string portfolioId, CancellationToken ct = default);
 
         /// <summary>
         /// Get a specific Perpetual position
@@ -252,7 +252,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="symbol">["<c>symbol</c>"] Symbol</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<WebCallResult<CoinbasePerpetualPosition>> GetPerpetualPositionAsync(string portfolioId, string symbol, CancellationToken ct = default);
+        Task<HttpResult<CoinbasePerpetualPosition>> GetPerpetualPositionAsync(string portfolioId, string symbol, CancellationToken ct = default);
 
     }
 }

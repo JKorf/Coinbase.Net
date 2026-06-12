@@ -36,8 +36,8 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
             var routes = new List<MessageRoute>();
             foreach(var symbol in symbols)
             {
-                routes.Add(MessageRoute<CoinbaseExBookSnapshot>.CreateWithTopicFilter("snapshot", symbol, DoHandleMessage));
-                routes.Add(MessageRoute<CoinbaseExBookUpdate>.CreateWithTopicFilter("l2update", symbol, DoHandleMessage));
+                routes.Add(MessageRoute.CreateForEvent<CoinbaseExBookSnapshot>("snapshot", symbol, DoHandleMessage));
+                routes.Add(MessageRoute.CreateForEvent<CoinbaseExBookUpdate>("l2update", symbol, DoHandleMessage));
             }
             MessageRouter = MessageRouter.Create(routes.ToArray());
         }
@@ -66,7 +66,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
                     .WithUpdateType(SocketUpdateType.Snapshot)
                     .WithSymbol(message.Symbol)
                 );
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
         /// <inheritdoc />
@@ -80,7 +80,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
                     .WithSymbol(message.Symbol)
                     .WithDataTimestamp(message.Timestamp, _client.GetTimeOffset())
                 );
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
     }
 }

@@ -65,6 +65,12 @@ namespace Coinbase.Net
         public static ExchangeType Type { get; } = ExchangeType.CEX;
 
         internal static JsonSerializerContext _serializerContext = JsonSerializerContextCache.GetOrCreate<CoinbaseSourceGenerationContext>();
+        internal static ParameterSerializationSettings _parameterSerializationSettings = new ParameterSerializationSettings
+        {
+            Decimal = DecimalSerialization.String,
+            DateTimes = DateTimeSerialization.Rfc3339String,
+            Array = ArrayParametersSerialization.MultipleValues
+        };
 
         /// <summary>
         /// Aliases for Coinbase assets

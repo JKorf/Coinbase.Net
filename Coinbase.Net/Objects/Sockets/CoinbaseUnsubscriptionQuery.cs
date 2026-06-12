@@ -19,7 +19,7 @@ namespace Coinbase.Net.Objects.Sockets
             _channel = request.Channel;
             _symbols = request.Symbols;
 
-            MessageRouter = MessageRouter.CreateWithoutTopicFilter<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>("subscriptions", HandleMessage, true);
+            MessageRouter = MessageRouter.CreateForQuery<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>("subscriptions", HandleMessage, true);
 
             RequestTimeout = TimeSpan.FromSeconds(10);
         }
@@ -32,13 +32,13 @@ namespace Coinbase.Net.Objects.Sockets
             var evnt = message.Events.First();
             if (!evnt.Subscriptions.TryGetValue(_channel, out var subbed))
                 // No more subscriptions of this type means we did unsub
-                return new CallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>(message, originalData, null);
+                return CallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>.Ok(message, originalData);
 
             if (_symbols != null && _symbols.Any(x => subbed.Contains(x)))
                 // Still subbed symbols
                 return null;
 
-            return new CallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>(message, originalData, null);
+            return CallResult<CoinbaseSocketMessage<CoinbaseSubscriptionsUpdate>>.Ok(message, originalData);
         }
     }
 }

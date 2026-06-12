@@ -94,7 +94,7 @@ namespace Coinbase.Net.UnitTests
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Trading.GetPerpetualPositionAsync("123", "BTC-PERP-INTX"), "GetPerpetualPosition", "position");
         }
 
-        private bool IsAuthenticated(WebCallResult result)
+        private bool IsAuthenticated(IHttpResult result)
         {
             return result.RequestHeaders.Any(x => x.Key == "Authorization");
         }

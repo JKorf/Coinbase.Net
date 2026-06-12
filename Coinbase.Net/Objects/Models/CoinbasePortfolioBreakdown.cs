@@ -12,14 +12,14 @@ namespace Coinbase.Net.Objects.Models
         /// ["<c>breakdown</c>"] Breakdown
         /// </summary>
         [JsonPropertyName("breakdown")]
-        public CoinbasePorfolioBreakdown Breakdown { get; set; } = null!;
+        public CoinbasePortfolioBreakdown Breakdown { get; set; } = null!;
     }
 
     /// <summary>
     /// 
     /// </summary>
     [SerializationModel]
-    public record CoinbasePorfolioBreakdown
+    public record CoinbasePortfolioBreakdown
     {
         /// <summary>
         /// ["<c>portfolio</c>"] Portfolio

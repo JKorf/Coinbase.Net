@@ -1,11 +1,13 @@
 using Coinbase.Net.Objects.Internal;
 using Coinbase.Net.Objects.Models;
+using CryptoExchange.Net.Objects;
 using System;
 using System.Collections.Generic;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Converters
 {
+    [JsonSerializable(typeof(Parameters))]
     [JsonSerializable(typeof(Dictionary<string, object>))]
 
     [JsonSerializable(typeof(CoinbaseExHeartbeat))]
@@ -127,7 +129,7 @@ namespace Coinbase.Net.Converters
     [JsonSerializable(typeof(CoinbasePerpetualPositionSummary[]))]
     [JsonSerializable(typeof(CoinbasePerpetualPositionUpdate[]))]
     [JsonSerializable(typeof(CoinbasePorfolioBreakdownWrapper[]))]
-    [JsonSerializable(typeof(CoinbasePorfolioBreakdown[]))]
+    [JsonSerializable(typeof(CoinbasePortfolioBreakdown[]))]
     [JsonSerializable(typeof(CoinbasePorfolioBreakdownBalances[]))]
     [JsonSerializable(typeof(CoinbasePorfolioSpotBalance[]))]
     [JsonSerializable(typeof(CoinbasePorfolioBreakdownPosition[]))]

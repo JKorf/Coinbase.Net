@@ -36,8 +36,8 @@ internal class CoinbaseRestClientExchangeApi : RestApiClient<CoinbaseEnvironment
     #endregion
 
     #region constructor/destructor
-    internal CoinbaseRestClientExchangeApi(CoinbaseRestClient baseClient, ILogger logger, HttpClient? httpClient, CoinbaseRestOptions options)
-        : base(logger, CoinbaseExchange.Metadata.Id, httpClient, options.Environment.ExchangeRestClientAddress, options, options.ExchangeOptions)
+    internal CoinbaseRestClientExchangeApi(CoinbaseRestClient baseClient, ILoggerFactory? loggerFactory, HttpClient? httpClient, CoinbaseRestOptions options)
+        : base(loggerFactory, CoinbaseExchange.Metadata.Id, httpClient, options.Environment.ExchangeRestClientAddress, options, options.ExchangeOptions)
     {
         ExchangeData = new CoinbaseRestClientExchangeApiExchangeData(this);
 

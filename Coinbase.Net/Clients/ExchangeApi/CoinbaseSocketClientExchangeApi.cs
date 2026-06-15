@@ -34,8 +34,8 @@ namespace Coinbase.Net.Clients.ExchangeApi
         /// <summary>
         /// ctor
         /// </summary>
-        internal CoinbaseSocketClientExchangeApi(ILogger logger, CoinbaseSocketOptions options) :
-            base(logger, CoinbaseExchange.Metadata.Id, options.Environment.SocketClientPublicExchangeApiAddress!, options, options.AdvancedTradeOptions)
+        internal CoinbaseSocketClientExchangeApi(ILoggerFactory? loggerFactory, CoinbaseSocketOptions options) :
+            base(loggerFactory, CoinbaseExchange.Metadata.Id, options.Environment.SocketClientPublicExchangeApiAddress!, options, options.AdvancedTradeOptions)
         {
         }
         #endregion

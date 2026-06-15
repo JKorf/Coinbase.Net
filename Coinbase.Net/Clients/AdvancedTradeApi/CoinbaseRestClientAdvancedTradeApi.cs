@@ -41,12 +41,12 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #endregion
 
         #region constructor/destructor
-        internal CoinbaseRestClientAdvancedTradeApi(CoinbaseRestClient baseClient, ILogger logger, HttpClient? httpClient, CoinbaseRestOptions options)
-            : base(logger, CoinbaseExchange.Metadata.Id, httpClient, options.Environment.RestClientAddress, options, options.AdvancedTradeOptions)
+        internal CoinbaseRestClientAdvancedTradeApi(CoinbaseRestClient baseClient, ILoggerFactory? loggerFactory, HttpClient? httpClient, CoinbaseRestOptions options)
+            : base(loggerFactory, CoinbaseExchange.Metadata.Id, httpClient, options.Environment.RestClientAddress, options, options.AdvancedTradeOptions)
         {
             Account = new CoinbaseRestClientAdvancedTradeApiAccount(this);
-            ExchangeData = new CoinbaseRestClientAdvancedTradeApiExchangeData(logger, this);
-            Trading = new CoinbaseRestClientAdvancedTradeApiTrading(logger, this);
+            ExchangeData = new CoinbaseRestClientAdvancedTradeApiExchangeData(_logger, this);
+            Trading = new CoinbaseRestClientAdvancedTradeApiTrading(_logger, this);
 
             StandardRequestHeaders = new Dictionary<string, string>
             {

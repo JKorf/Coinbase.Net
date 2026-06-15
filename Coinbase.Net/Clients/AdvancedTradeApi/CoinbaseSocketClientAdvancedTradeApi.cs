@@ -39,8 +39,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         /// <summary>
         /// ctor
         /// </summary>
-        internal CoinbaseSocketClientAdvancedTradeApi(ILogger logger, CoinbaseSocketOptions options) :
-            base(logger, CoinbaseExchange.Metadata.Id, options.Environment.SocketClientPublicAddress!, options, options.AdvancedTradeOptions)
+        internal CoinbaseSocketClientAdvancedTradeApi(ILoggerFactory? loggerFactory, CoinbaseSocketOptions options) :
+            base(loggerFactory, CoinbaseExchange.Metadata.Id, options.Environment.SocketClientPublicAddress!, options, options.AdvancedTradeOptions)
         {
             EnforceSequenceNumbers = true;
         }

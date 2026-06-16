@@ -64,7 +64,7 @@ The key string is the Coinbase API key name/id, and the private key is the ECDSA
 
 ## Core Pattern: Result Handling
 
-REST methods return `WebCallResult<T>`. WebSocket subscriptions return `CallResult<UpdateSubscription>`. Always check `.Success` before reading `.Data`.
+REST methods return `HttpResult<T>`. WebSocket subscriptions return `WebSocketResult<UpdateSubscription>`. Always check `.Success` before reading `.Data`.
 
 ```csharp
 var result = await restClient.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USDT");

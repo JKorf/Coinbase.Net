@@ -37,7 +37,7 @@ true
       {
         "price": "19000.00",
         "size": "0.001",
-        "replace_accept_timestamp": "string"
+        "replace_accept_timestamp": ""
       }
     ],
     "leverage": "10",

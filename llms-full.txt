@@ -34,9 +34,9 @@ Primary documentation:
 - Coinbase Advanced Trade credentials are ECDSA key name/private key credentials. Do not generate HMAC secret/passphrase examples.
 - Preserve PEM newlines when loading the private key from environment variables or secret stores.
 - Always check `.Success` before reading `.Data`.
-- REST methods return `WebCallResult<T>` or `WebCallResult`.
-- WebSocket subscriptions and socket API requests return `CallResult<T>` or `CallResult`.
-- Order placement has two success layers: check the `WebCallResult` and then `CoinbaseOrderResult.Success`.
+- REST methods return `HttpResult<T>` or `HttpResult`.
+- WebSocket subscriptions and socket API requests return `WebSocketResult<T>` or `WebSocketResult`.
+- Order placement has two success layers: check the `HttpResult` and then `CoinbaseOrderResult.Success`.
 - Reuse clients. Do not instantiate a REST or socket client per request in production code.
 - Prefer dependency injection for long-running services.
 - Store WebSocket subscriptions and unsubscribe during shutdown.
@@ -257,9 +257,9 @@ Console.WriteLine(order.Data.SuccessResponse.OrderId);
 For retry logic, only retry transient errors:
 
 ```csharp
-async Task<WebCallResult<T>> WithRetry<T>(Func<Task<WebCallResult<T>>> call, int maxAttempts = 3)
+async Task<HttpResult<T>> WithRetry<T>(Func<Task<HttpResult<T>>> call, int maxAttempts = 3)
 {
-    WebCallResult<T> last = default!;
+    HttpResult<T> last = default!;
 
     for (var attempt = 1; attempt <= maxAttempts; attempt++)
     {
@@ -729,7 +729,7 @@ Timestamp/JWT signing issue: verify AutoTimestamp and local clock.
 Credential issue: key name, ECDSA private key, permissions, or framework support; do not retry blindly.
 Invalid product id: use dash-separated Coinbase product ids.
 Order validation failure: fix quantity, price, increments, order type, permissions, or balance.
-Exchange-level order rejection: WebCallResult succeeds, but CoinbaseOrderResult.Success is false.
+Exchange-level order rejection: HttpResult succeeds, but CoinbaseOrderResult.Success is false.
 Unknown order: may be expected for filled, canceled, or wrong id queries.
 ```
 
@@ -762,7 +762,7 @@ Examples/ai-friendly/04-shared-client.cs
   CryptoExchange.Net shared REST/socket client access beside native Coinbase endpoints.
 
 Examples/ai-friendly/05-error-handling.cs
-  WebCallResult and CallResult helpers, CoinbaseOrderResult handling, and subscription teardown.
+  HttpResult and WebSocketResult helpers, CoinbaseOrderResult handling, and subscription teardown.
 ```
 
 These files are intended to be copied into a console `Program.cs` after `dotnet add package Coinbase.Net`. Private and trading examples read credentials from environment variables and avoid live order placement unless explicitly enabled.

@@ -15,7 +15,7 @@ These examples are optimized for AI coding assistants and quick onboarding. Each
 | `02-advanced-trade-trading.cs` | Dry-run safe order workflow, open orders, fills, order placement, and cancellation |
 | `03-websocket.cs` | Advanced Trade ticker/order book streams, optional authenticated user stream, and teardown |
 | `04-shared-client.cs` | CryptoExchange.Net shared client access beside native Coinbase endpoints |
-| `05-error-handling.cs` | `WebCallResult` / `CallResult` helpers and `CoinbaseOrderResult` handling |
+| `05-error-handling.cs` | `HttpResult` / `CallResult` helpers and `CoinbaseOrderResult` handling |
 
 ## Running
 

@@ -36,6 +36,7 @@ Primary documentation:
 - Always check `.Success` before reading `.Data`.
 - REST methods return `HttpResult<T>` or `HttpResult`.
 - WebSocket subscriptions and socket API requests return `WebSocketResult<T>` or `WebSocketResult`.
+- Shared non-I/O symbol/cache helpers can return `ExchangeCallResult<T>`.
 - Order placement has two success layers: check the `HttpResult` and then `CoinbaseOrderResult.Success`.
 - Reuse clients. Do not instantiate a REST or socket client per request in production code.
 - Prefer dependency injection for long-running services.
@@ -45,7 +46,7 @@ Primary documentation:
 - Use Coinbase dash-separated product ids such as `ETH-USD`, `BTC-USD`, and `ETH-USDT`.
 - Do not use compact symbols such as `ETHUSDT`, underscore symbols such as `ETH_USDT`, slash symbols such as `ETH/USD`, or Bitfinex symbols such as `tETHUSD`.
 - Let the library generate `clientOrderId` unless the user explicitly needs an idempotency/correlation id.
-- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from `AdvancedTradeApi.SharedClient`.
+- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from `AdvancedTradeApi.SharedClient` and call `.Discover()` to inspect supported shared features.
 
 ## Installation
 
@@ -661,6 +662,10 @@ var shared = new CoinbaseRestClient().AdvancedTradeApi.SharedClient;
 
 Console.WriteLine(shared.Exchange);
 Console.WriteLine(string.Join(", ", shared.SupportedTradingModes));
+
+var info = shared.Discover();
+var supported = info.Features.Where(x => x.Supported).Select(x => x.EndpointName);
+Console.WriteLine($"{info.Exchange} {info.TypeName}: {string.Join(", ", supported)}");
 ```
 
 Native Coinbase endpoints remain better when the user needs Coinbase-specific fields or parameters:
@@ -759,7 +764,7 @@ Examples/ai-friendly/03-websocket.cs
   Advanced Trade ticker/order book streams, optional authenticated user stream, and teardown.
 
 Examples/ai-friendly/04-shared-client.cs
-  CryptoExchange.Net shared REST/socket client access beside native Coinbase endpoints.
+  CryptoExchange.Net shared REST/socket client access, capability discovery, and native Coinbase endpoints.
 
 Examples/ai-friendly/05-error-handling.cs
   HttpResult and WebSocketResult helpers, CoinbaseOrderResult handling, and subscription teardown.

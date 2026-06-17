@@ -72,7 +72,7 @@ if (!order.Data.Success) { return; }
 
 ## Result Handling
 
-All REST calls return `HttpResult<T>` and WebSocket calls return `WebSocketResult<T>`.
+REST methods return `HttpResult<T>` or `HttpResult`. WebSocket subscriptions and socket API requests return `WebSocketResult<T>` or `WebSocketResult`. Shared non-I/O symbol/cache helpers can return `ExchangeCallResult<T>`.
 
 ```csharp
 if (!product.Success)
@@ -96,5 +96,6 @@ Console.WriteLine(product.Data.LastPrice);
 - Use async/await.
 - Reuse clients or use dependency injection.
 - Store and unsubscribe WebSocket subscriptions.
+- For multi-exchange code, use `AdvancedTradeApi.SharedClient` and call `.Discover()` to inspect supported shared features before routing optional shared endpoints.
 
 See `CLAUDE.md`, `llms-full.txt`, `docs/ai-api-map.md`, and `Examples/ai-friendly/` for more complete guidance.

@@ -9,6 +9,7 @@ using CryptoExchange.Net.Objects;
 using CryptoExchange.Net;
 using Coinbase.Net.Enums;
 using CryptoExchange.Net.Objects.Errors;
+using Coinbase.Net.Objects.Models;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
@@ -371,12 +372,32 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             return HttpResult.Ok(result, ExchangeHelpers.ApplyFilter(result.Data.Data, x => x.CreateTime, request.StartTime, request.EndTime, direction)
                        .Select(x => 
-                            new SharedWithdrawal(x.Quantity.Asset, string.Empty, x.Quantity.Value, x.Status == Enums.WithdrawalStatus.Completed, x.CreateTime)
+                            new SharedWithdrawal(
+                                x.Quantity.Asset, 
+                                string.Empty,
+                                x.Quantity.Value, 
+                                x.Status == Enums.WithdrawalStatus.Completed, 
+                                x.CreateTime,
+                                GetWithdrawalStatus(x))
                             {
                                 Id = x.Id,
                                 Fee = x.Fee.Value
                             })
                        .ToArray(), nextPageRequest);
+        }
+
+        private SharedTransferStatus GetWithdrawalStatus(CoinbaseWithdrawal x)
+        {
+            if (x.Status == WithdrawalStatus.Canceled)
+                return SharedTransferStatus.Failed;
+
+            if (x.Status == WithdrawalStatus.Completed)
+                return SharedTransferStatus.Completed;
+
+            if (x.Status == WithdrawalStatus.Created)
+                return SharedTransferStatus.InProgress;
+
+            return SharedTransferStatus.Unknown;
         }
 
         #endregion

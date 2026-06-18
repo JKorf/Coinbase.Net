@@ -336,7 +336,7 @@ namespace Coinbase.Net.Objects.Models
         /// ["<c>funding_rate</c>"] Funding rate
         /// </summary>
         [JsonPropertyName("funding_rate")]
-        public decimal FundingRate { get; set; }
+        public decimal? FundingRate { get; set; }
         /// <summary>
         /// ["<c>funding_time</c>"] Funding time
         /// </summary>

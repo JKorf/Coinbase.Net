@@ -110,7 +110,7 @@ namespace Coinbase.Net
         /// <summary>
         /// Rate limiter configuration for the Coinbase API
         /// </summary>
-        public static CoinbaseRateLimiters RateLimiter { get; } = new CoinbaseRateLimiters();
+        public static CoinbaseRateLimiters RateLimiter { get; set; } = new CoinbaseRateLimiters();
     }
 
     /// <summary>
@@ -129,13 +129,19 @@ namespace Coinbase.Net
         public event Action<RateLimitUpdateEvent> RateLimitUpdated;
 
 #pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-        internal CoinbaseRateLimiters()
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public CoinbaseRateLimiters()
 #pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             Initialize();
         }
 
-        private void Initialize()
+        /// <summary>
+        /// Initialize the rate limits
+        /// </summary>
+        protected virtual void Initialize()
         {
             CoinbaseRestPublic = new RateLimitGate("Coinbase Public")
                 .AddGuard(new RateLimitGuard(RateLimitGuard.PerHost, Array.Empty<IGuardFilter>(), 10, TimeSpan.FromSeconds(1), RateLimitWindowType.Sliding));

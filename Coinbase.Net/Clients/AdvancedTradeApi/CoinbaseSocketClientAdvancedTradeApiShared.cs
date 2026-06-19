@@ -23,7 +23,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         public void SetDefaultExchangeParameter(string key, object value) => ExchangeParameters.SetStaticParameter(_exchangeName, key, value);
         public void ResetDefaultExchangeParameters() => ExchangeParameters.ResetStaticParameters();
-        public SharedClientInfo Discover() => SharedUtils.GetClientInfo(this);
+        public SharedClientInfo Discover() => SharedUtils.GetClientInfo(CoinbaseExchange.Metadata, this);
 
         #region Kline client
         SubscribeKlineOptions IKlineSocketClient.SubscribeKlineOptions { get; } = new SubscribeKlineOptions(_exchangeName, false, SharedKlineInterval.FiveMinutes)
@@ -44,7 +44,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     return;
 
                 foreach (var item in update.Data)
-                    handler(update.ToType(new SharedKline(ExchangeSymbolCache.ParseSymbol(_topicSpotId, item.Symbol), item.Symbol, item.OpenTime, item.ClosePrice, item.HighPrice, item.LowPrice, item.OpenPrice, item.Volume)));
+                    handler(update.ToType(new SharedKline(ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, item.Symbol), item.Symbol, item.OpenTime, item.ClosePrice, item.HighPrice, item.LowPrice, item.OpenPrice, item.Volume)));
             }, ct).ConfigureAwait(false);
 
             return result;
@@ -63,7 +63,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return WebSocketResult.Fail<UpdateSubscription>(_exchangeName, validationError);
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)) : [request.Symbol!.GetSymbol(FormatSymbol)];
-            var result = await SubscribeToTickerUpdatesAsync(symbols, update => handler(update.ToType(new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicSpotId, update.Data.Symbol), update.Data.Symbol, update.Data.LastPrice, update.Data.HighPrice24H, update.Data.LowPrice24H, update.Data.Volume24H ?? 0, update.Data.PricePercentChange24H))), ct).ConfigureAwait(false);
+            var result = await SubscribeToTickerUpdatesAsync(symbols, update => handler(update.ToType(new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, update.Data.Symbol), update.Data.Symbol, update.Data.LastPrice, update.Data.HighPrice24H, update.Data.LowPrice24H, update.Data.Volume24H ?? 0, update.Data.PricePercentChange24H))), ct).ConfigureAwait(false);
 
             return result;
         }
@@ -90,7 +90,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 foreach (var item in update.Data)
                 {
                     handler(update.ToType<SharedTrade[]>(new[] { 
-                        new SharedTrade(ExchangeSymbolCache.ParseSymbol(_topicSpotId, item.Symbol), item.Symbol, item.Quantity, item.Price, item.Timestamp){
+                        new SharedTrade(ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, item.Symbol), item.Symbol, item.Quantity, item.Price, item.Timestamp){
                         Side = item.OrderSide == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
                     } }));
                 }
@@ -116,7 +116,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 {
                     var orders = update.Data.Orders.Where(x => x.SymbolType == SymbolType.Spot).Select(x =>
                         new SharedSpotOrder(
-                            ExchangeSymbolCache.ParseSymbol(_topicSpotId, x.Symbol),
+                            ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, x.Symbol),
                             x.Symbol,
                             x.OrderId.ToString(),
                             ParseOrderType(x.OrderType),
@@ -193,7 +193,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 {
                     var orders = update.Data.Orders.Where(x => x.SymbolType == SymbolType.Futures).Select(x =>
                         new SharedFuturesOrder(
-                            ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol),
+                            ExchangeSymbolCache.ParseSymbol(_topicFuturesId, EnvironmentName, null, x.Symbol),
                             x.Symbol,
                             x.OrderId.ToString(),
                             x.OrderType == Enums.OrderType.Limit ? SharedOrderType.Limit : x.OrderType == Enums.OrderType.Market ? SharedOrderType.Market : SharedOrderType.Other,
@@ -237,7 +237,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 {
                     var positions = update.Data.PositionInfo.PerpetualPositions.Select(x =>
                         new SharedPosition(
-                            ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol),
+                            ExchangeSymbolCache.ParseSymbol(_topicFuturesId, EnvironmentName, null, x.Symbol),
                             x.Symbol,
                             x.NetQuantity,
                             null)
@@ -251,7 +251,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         }).ToList();
 
                     positions.AddRange(update.Data.PositionInfo.ExpiringPositions.Select(x =>
-                        new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicFuturesId, x.Symbol), x.Symbol, x.NumberOfContracts, null)
+                        new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicFuturesId, EnvironmentName, null, x.Symbol), x.Symbol, x.NumberOfContracts, null)
                         {
                             AverageOpenPrice = x.EntryPrice,
                             PositionMode = SharedPositionMode.HedgeMode,

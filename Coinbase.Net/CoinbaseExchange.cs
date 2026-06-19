@@ -28,7 +28,8 @@ namespace Coinbase.Net
                 ["https://docs.cdp.coinbase.com/advanced-trade/reference",
                  "https://docs.cdp.coinbase.com/coinbase-app/docs/welcome"],
                 PlatformType.CryptoCurrencyExchange,
-                CentralizationType.Centralized
+                CentralizationType.Centralized,
+                CoinbaseEnvironment.All
                 );
 
         /// <summary>

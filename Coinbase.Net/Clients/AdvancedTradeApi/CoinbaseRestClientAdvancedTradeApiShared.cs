@@ -110,7 +110,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     return HttpResult.Fail<SharedBalance[]>(result);
 
                 return HttpResult.Ok(result, result.Data.Accounts.Where(x => x.Type == AccountType.Crypto || x.Type == AccountType.Fiat).Select(x => 
-                    new SharedBalance(x.Asset, x.AvailableBalance.Value, x.AvailableBalance.Value + x.HoldBalance.Value)).ToArray());
+                    new SharedBalance(
+                        TradingMode.Spot,
+                        x.Asset,
+                        x.AvailableBalance.Value,
+                        x.AvailableBalance.Value + x.HoldBalance.Value)).ToArray());
             }
             else if (request.AccountType == SharedAccountType.PerpetualLinearFutures || request.AccountType == SharedAccountType.PerpetualInverseFutures)
             {
@@ -122,7 +126,12 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 if (!result.Success)
                     return HttpResult.Fail<SharedBalance[]>(result);
 
-                return HttpResult.Ok(result, result.Data.Balances.Select(x => new SharedBalance(x.Asset.AssetId, x.MaxWithdrawQuantity, x.Quantity)).ToArray());
+                return HttpResult.Ok(result, result.Data.Balances.Select(x => 
+                    new SharedBalance(
+                        TradingMode.PerpetualLinear, 
+                        x.Asset.AssetId, 
+                        x.MaxWithdrawQuantity,
+                        x.Quantity)).ToArray());
             }
             else
             {
@@ -131,7 +140,12 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 if (!result.Success)
                     return HttpResult.Fail<SharedBalance[]>(result);
 
-                return HttpResult.Ok(result, new[] { new SharedBalance(result.Data.CfmUsdBalance.Asset, result.Data.CfmUsdBalance.Value, result.Data.TotalUsdBalance.Value) });
+                return HttpResult.Ok(result, new[] { 
+                    new SharedBalance(
+                        TradingMode.DeliveryLinear,
+                        result.Data.CfmUsdBalance.Asset,
+                        result.Data.CfmUsdBalance.Value,
+                        result.Data.TotalUsdBalance.Value) });
             }
         }
 

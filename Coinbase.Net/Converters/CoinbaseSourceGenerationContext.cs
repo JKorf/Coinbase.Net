@@ -8,6 +8,7 @@ using System.Text.Json.Serialization;
 namespace Coinbase.Net.Converters
 {
     [JsonSerializable(typeof(Parameters))]
+    [JsonSerializable(typeof(Parameters[]))]
     [JsonSerializable(typeof(Dictionary<string, object>))]
 
     [JsonSerializable(typeof(CoinbaseExHeartbeat))]

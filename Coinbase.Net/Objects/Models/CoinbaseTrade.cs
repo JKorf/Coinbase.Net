@@ -20,12 +20,12 @@ namespace Coinbase.Net.Objects.Models
         /// ["<c>best_bid</c>"] Best bid price
         /// </summary>
         [JsonPropertyName("best_bid")]
-        public decimal BestBidPrice { get; set; }
+        public decimal? BestBidPrice { get; set; }
         /// <summary>
         /// ["<c>best_ask</c>"] Best ask price
         /// </summary>
         [JsonPropertyName("best_ask")]
-        public decimal BestAskPrice { get; set; }
+        public decimal? BestAskPrice { get; set; }
     }
 
     /// <summary>

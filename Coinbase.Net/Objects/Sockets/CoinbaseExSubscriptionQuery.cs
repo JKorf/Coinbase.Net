@@ -21,12 +21,12 @@ namespace Coinbase.Net.Objects.Sockets
 
             MessageRouter = MessageRouter.Create(
                 MessageRoute.CreateForQuery<CoinbaseExSubscriptionsUpdate>("subscriptions", HandleMessage, true),
-                MessageRoute.CreateForQuery<CoinbaseExError>("error", HandleError));
+                MessageRoute.CreateForQuery<CoinbaseExError, CoinbaseExSubscriptionsUpdate>("error", HandleError));
         }
 
-        public CallResult<CoinbaseExError> HandleError(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExError message)
+        public CallResult<CoinbaseExSubscriptionsUpdate> HandleError(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExError message)
         {
-            return CallResult<CoinbaseExError>.Fail(new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, message.Reason)), originalData);
+            return CallResult<CoinbaseExSubscriptionsUpdate>.Fail(new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, message.Reason)), originalData);
         }
 
         public CallResult<CoinbaseExSubscriptionsUpdate>? HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExSubscriptionsUpdate message)

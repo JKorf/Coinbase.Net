@@ -20,13 +20,13 @@ namespace Coinbase.Net.Objects.Sockets
             _symbols = request.Symbols;
 
             MessageRouter = MessageRouter.Create(
-                MessageRoute<CoinbaseExSubscriptionsUpdate>.CreateWithoutTopicFilter("subscriptions", HandleMessage, true),
-                MessageRoute<CoinbaseExError>.CreateWithoutTopicFilter("error", HandleError));
+                MessageRoute.CreateForQuery<CoinbaseExSubscriptionsUpdate>("subscriptions", HandleMessage, true),
+                MessageRoute.CreateForQuery<CoinbaseExError, CoinbaseExSubscriptionsUpdate>("error", HandleError));
         }
 
-        public CallResult<CoinbaseExError> HandleError(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExError message)
+        public CallResult<CoinbaseExSubscriptionsUpdate> HandleError(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExError message)
         {
-            return new CallResult<CoinbaseExError>(message, originalData, new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, message.Reason)));
+            return CallResult<CoinbaseExSubscriptionsUpdate>.Fail(new ServerError(new ErrorInfo(ErrorType.UnknownSymbol, message.Reason)), originalData);
         }
 
         public CallResult<CoinbaseExSubscriptionsUpdate>? HandleMessage(SocketConnection connection, DateTime receiveTime, string? originalData, CoinbaseExSubscriptionsUpdate message)
@@ -41,7 +41,7 @@ namespace Coinbase.Net.Objects.Sockets
             if (_symbols != null && _symbols.Any(x => !channel.Symbols.Contains(x)))
                 return null;
 
-            return new CallResult<CoinbaseExSubscriptionsUpdate>(message, originalData, null);
+            return CallResult<CoinbaseExSubscriptionsUpdate>.Ok(message, originalData);
         }
     }
 }

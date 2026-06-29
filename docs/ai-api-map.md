@@ -175,6 +175,7 @@ Use SharedApis for exchange-agnostic code across Coinbase, Binance, Bybit, OKX, 
 |---|---|
 | Shared Advanced Trade REST client | `new CoinbaseRestClient().AdvancedTradeApi.SharedClient` |
 | Shared Advanced Trade socket client | `new CoinbaseSocketClient().AdvancedTradeApi.SharedClient` |
+| Discover shared capabilities | `client.AdvancedTradeApi.SharedClient.Discover()` |
 | Shared spot ticker REST | `ISpotTickerRestClient.GetSpotTickerAsync(new GetTickerRequest(symbol))` |
 | Shared spot order REST | `ISpotOrderRestClient.PlaceSpotOrderAsync(...)` |
 | Shared futures order REST | `IFuturesOrderRestClient.PlaceFuturesOrderAsync(...)` |
@@ -185,6 +186,8 @@ Use SharedApis for exchange-agnostic code across Coinbase, Binance, Bybit, OKX, 
 | Shared order socket | `ISpotOrderSocketClient` / `IFuturesOrderSocketClient` |
 | Shared position socket | `IPositionSocketClient` |
 
+Shared REST calls return `HttpResult<T>` / `HttpResult`. Shared socket subscriptions return `WebSocketResult<UpdateSubscription>`. Shared non-I/O symbol/cache helpers can return `ExchangeCallResult<T>`.
+
 For shared socket subscriptions, keep the concrete socket client and unsubscribe with `await socketClient.UnsubscribeAsync(subscription.Data)`.
 
 ## Result Handling
@@ -192,8 +195,9 @@ For shared socket subscriptions, keep the concrete socket client and unsubscribe
 | Situation | Pattern |
 |---|---|
 | REST success check | `if (!result.Success) { Console.WriteLine(result.Error); return; }` |
-| Socket subscription success check | `if (!sub.Success) { Console.WriteLine(sub.Error); return; }` |
+| Socket subscription success check | `WebSocketResult<UpdateSubscription> sub = await ...; if (!sub.Success) { Console.WriteLine(sub.Error); return; }` |
 | Read REST data | Read `result.Data` only after `result.Success` |
+| Shared helper data | Read `ExchangeCallResult<T>.Data` only after `result.Success` |
 | Place-order transport success | `if (!order.Success) { Console.WriteLine(order.Error); return; }` |
 | Place-order exchange success | `if (!order.Data.Success) { Console.WriteLine(order.Data.ErrorResponse.Message); return; }` |
 | Read placed order id | `order.Data.SuccessResponse.OrderId` only after both success checks |

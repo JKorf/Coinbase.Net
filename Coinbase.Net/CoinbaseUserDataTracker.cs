@@ -20,7 +20,6 @@ namespace Coinbase.Net
             SpotUserDataTrackerConfig? config) : base(
                 logger,
                 restClient.AdvancedTradeApi.SharedClient,
-                null,
                 restClient.AdvancedTradeApi.SharedClient,
                 null,
                 restClient.AdvancedTradeApi.SharedClient,
@@ -48,7 +47,6 @@ namespace Coinbase.Net
             string? userIdentifier,
             FuturesUserDataTrackerConfig? config) : base(logger,
                 restClient.AdvancedTradeApi.SharedClient,
-                null,
                 restClient.AdvancedTradeApi.SharedClient,
                 null,
                 restClient.AdvancedTradeApi.SharedClient,

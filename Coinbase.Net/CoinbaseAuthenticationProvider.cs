@@ -25,14 +25,14 @@ namespace Coinbase.Net
 
         public override void ProcessRequest(RestApiClient apiClient, RestRequestConfiguration request)
         {
-            if (!request.Authenticated)
+            if (!request.RequestDefinition.Authenticated)
                 return;
 
             var timestamp = GetTimestamp(apiClient);
 
-            var host = request.BaseAddress.Substring(request.BaseAddress.IndexOf("//") + 2);
+            var host = request.RequestDefinition.BaseAddress.Substring(request.RequestDefinition.BaseAddress.IndexOf("//") + 2);
             request.Headers ??= new Dictionary<string, string>();
-            request.Headers.Add("Authorization", $"Bearer {GenerateToken(timestamp, $"{request.Method} {host}{request.Path}")}");
+            request.Headers.Add("Authorization", $"Bearer {GenerateToken(timestamp, $"{request.RequestDefinition.Method} {host}{request.RequestDefinition.Path}")}");
         }
 
         public string GenerateToken(DateTime timestamp, string? uriLine)

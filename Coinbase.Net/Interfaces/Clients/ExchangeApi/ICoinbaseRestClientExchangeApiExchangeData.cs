@@ -16,7 +16,7 @@ public interface ICoinbaseRestClientExchangeApiExchangeData
     /// </summary>
     /// <param name="ct">Cancellation token</param>
     /// <returns></returns>
-    Task<WebCallResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);
+    Task<HttpResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default);
 
 
     /// <summary>
@@ -25,7 +25,7 @@ public interface ICoinbaseRestClientExchangeApiExchangeData
     /// </summary>
     /// <param name="ct">Cancellation token</param>
     /// <returns></returns>
-    Task<WebCallResult<CoinbaseExAsset[]>> GetAssetsAsync(CancellationToken ct = default);
+    Task<HttpResult<CoinbaseExAsset[]>> GetAssetsAsync(CancellationToken ct = default);
 
 
     /// <summary>
@@ -34,5 +34,5 @@ public interface ICoinbaseRestClientExchangeApiExchangeData
     /// </summary>
     /// <param name="ct">Cancellation token</param>
     /// <returns></returns>
-    Task<WebCallResult<CoinbaseExSymbol[]>> GetSymbolsAsync(CancellationToken ct = default);
+    Task<HttpResult<CoinbaseExSymbol[]>> GetSymbolsAsync(CancellationToken ct = default);
 }

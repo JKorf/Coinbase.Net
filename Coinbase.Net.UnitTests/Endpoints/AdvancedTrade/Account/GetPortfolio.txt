@@ -148,7 +148,7 @@ true
         "avg_entry_price": "123",
         "current_price": "123",
         "unrealized_pnl": "123",
-        "expiry": "string",
+        "expiry": "",
         "underlying_asset": "string",
         "asset_img_url": "string",
         "product_name": "string",

@@ -30,8 +30,8 @@ false
     "base_currency_id": "BTC",
     "fcm_trading_session_details": {
       "is_session_open": true,
-      "open_time": "string",
-      "close_time": "string",
+      "open_time": "",
+      "close_time": "",
       "session_state": "FCM_TRADING_SESSION_STATE_UNDEFINED",
       "after_hours_order_entry_disabled": true
     },

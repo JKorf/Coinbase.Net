@@ -1,6 +1,8 @@
 ﻿using Coinbase.Net.Interfaces.Clients;
 using Coinbase.Net.Objects.Options;
 using CryptoExchange.Net.Authentication;
+using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Trackers.UserData.Objects;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
@@ -10,18 +12,17 @@ using System.Net.Http;
 namespace Coinbase.Net.Clients
 {
     /// <inheritdoc />
-    public class CoinbaseUserClientProvider : ICoinbaseUserClientProvider
+    public class CoinbaseUserClientProvider : UserClientProvider<
+        ICoinbaseRestClient,
+        ICoinbaseSocketClient,
+        CoinbaseRestOptions,
+        CoinbaseSocketOptions,
+        CoinbaseCredentials,
+        CoinbaseEnvironment
+        >, ICoinbaseUserClientProvider
     {
-        private ConcurrentDictionary<string, ICoinbaseRestClient> _restClients = new ConcurrentDictionary<string, ICoinbaseRestClient>();
-        private ConcurrentDictionary<string, ICoinbaseSocketClient> _socketClients = new ConcurrentDictionary<string, ICoinbaseSocketClient>();
-
-        private readonly IOptions<CoinbaseRestOptions> _restOptions;
-        private readonly IOptions<CoinbaseSocketOptions> _socketOptions;
-        private readonly HttpClient _httpClient;
-        private readonly ILoggerFactory? _loggerFactory;
-
-        /// <inheritdoc />
-        public string ExchangeName => CoinbaseExchange.ExchangeName;
+                /// <inheritdoc />
+        public override string ExchangeName => CoinbaseExchange.ExchangeName;
 
         /// <summary>
         /// ctor
@@ -40,97 +41,15 @@ namespace Coinbase.Net.Clients
             ILoggerFactory? loggerFactory,
             IOptions<CoinbaseRestOptions> restOptions,
             IOptions<CoinbaseSocketOptions> socketOptions)
+            : base(httpClient, loggerFactory, restOptions, socketOptions)
         {
-            _httpClient = httpClient ?? new HttpClient();
-            _httpClient.Timeout = restOptions.Value.RequestTimeout;
-            _loggerFactory = loggerFactory;
-            _restOptions = restOptions;
-            _socketOptions = socketOptions;
         }
 
         /// <inheritdoc />
-        public void InitializeUserClient(string userIdentifier, CoinbaseCredentials credentials, CoinbaseEnvironment? environment = null)
-        {
-            CreateRestClient(userIdentifier, credentials, environment);
-            CreateSocketClient(userIdentifier, credentials, environment);
-        }
-
+        protected override ICoinbaseRestClient ConstructRestClient(HttpClient client, ILoggerFactory? loggerFactory, IOptions<CoinbaseRestOptions> options) 
+            => new CoinbaseRestClient(client, loggerFactory, options);
         /// <inheritdoc />
-        public void ClearUserClients(string userIdentifier)
-        {
-            _restClients.TryRemove(userIdentifier, out _);
-            _socketClients.TryRemove(userIdentifier, out _);
-        }
-
-        /// <inheritdoc />
-        public ICoinbaseRestClient GetRestClient(string userIdentifier, CoinbaseCredentials? credentials = null, CoinbaseEnvironment? environment = null)
-        {
-            if (!_restClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
-                client = CreateRestClient(userIdentifier, credentials, environment);
-
-            return client;
-        }
-
-        /// <inheritdoc />
-        public ICoinbaseSocketClient GetSocketClient(string userIdentifier, CoinbaseCredentials? credentials = null, CoinbaseEnvironment? environment = null)
-        {
-            if (!_socketClients.TryGetValue(userIdentifier, out var client) || client.Disposed)
-                client = CreateSocketClient(userIdentifier, credentials, environment);
-
-            return client;
-        }
-
-        private ICoinbaseRestClient CreateRestClient(string userIdentifier, CoinbaseCredentials? credentials, CoinbaseEnvironment? environment)
-        {
-            var clientRestOptions = SetRestEnvironment(environment);
-            var client = new CoinbaseRestClient(_httpClient, _loggerFactory, clientRestOptions);
-            if (credentials != null)
-            {
-                client.SetApiCredentials(credentials);
-                _restClients[userIdentifier] = client;
-            }
-            return client;
-        }
-
-        private ICoinbaseSocketClient CreateSocketClient(string userIdentifier, CoinbaseCredentials? credentials, CoinbaseEnvironment? environment)
-        {
-            var clientSocketOptions = SetSocketEnvironment(environment);
-            var client = new CoinbaseSocketClient(clientSocketOptions!, _loggerFactory);
-            if (credentials != null)
-            {
-                client.SetApiCredentials(credentials);
-                _socketClients[userIdentifier] = client;
-            }
-            return client;
-        }
-
-        private IOptions<CoinbaseRestOptions> SetRestEnvironment(CoinbaseEnvironment? environment)
-        {
-            if (environment == null)
-                return _restOptions;
-
-            var newRestClientOptions = new CoinbaseRestOptions();
-            var restOptions = _restOptions.Value.Set(newRestClientOptions);
-            newRestClientOptions.Environment = environment;
-            return Options.Create(newRestClientOptions);
-        }
-
-        private IOptions<CoinbaseSocketOptions> SetSocketEnvironment(CoinbaseEnvironment? environment)
-        {
-            if (environment == null)
-                return _socketOptions;
-
-            var newSocketClientOptions = new CoinbaseSocketOptions();
-            var restOptions = _socketOptions.Value.Set(newSocketClientOptions);
-            newSocketClientOptions.Environment = environment;
-            return Options.Create(newSocketClientOptions);
-        }
-
-        private static T ApplyOptionsDelegate<T>(Action<T>? del) where T : new()
-        {
-            var opts = new T();
-            del?.Invoke(opts);
-            return opts;
-        }
+        protected override ICoinbaseSocketClient ConstructSocketClient(ILoggerFactory? loggerFactory, IOptions<CoinbaseSocketOptions> options) 
+            => new CoinbaseSocketClient(options, loggerFactory);
     }
 }

@@ -39,8 +39,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         /// <summary>
         /// ctor
         /// </summary>
-        internal CoinbaseSocketClientAdvancedTradeApi(ILogger logger, CoinbaseSocketOptions options) :
-            base(logger, options.Environment.SocketClientPublicAddress!, options, options.AdvancedTradeOptions)
+        internal CoinbaseSocketClientAdvancedTradeApi(ILoggerFactory? loggerFactory, CoinbaseSocketOptions options) :
+            base(loggerFactory, CoinbaseExchange.Metadata.Id, options.Environment.SocketClientPublicAddress!, options, options.AdvancedTradeOptions)
         {
             EnforceSequenceNumbers = true;
         }
@@ -56,7 +56,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             => new CoinbaseAuthenticationProvider(credentials);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToHeartbeatUpdatesAsync(Action<DataEvent<CoinbaseHeartbeat>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToHeartbeatUpdatesAsync(Action<DataEvent<CoinbaseHeartbeat>> onMessage, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseHeartbeat>>((receiveTime, originalData, data) =>
             {
@@ -78,11 +78,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<CoinbaseTrade[]>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(string symbol, Action<DataEvent<CoinbaseTrade[]>> onMessage, CancellationToken ct = default)
             => await SubscribeToTradeUpdatesAsync([symbol], onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseTrade[]>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTradeUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseTrade[]>> onMessage, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseTradeEvent>>((receiveTime, originalData, data) =>
             {
@@ -109,11 +109,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, Action<DataEvent<CoinbaseStreamKline[]>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(string symbol, Action<DataEvent<CoinbaseStreamKline[]>> onMessage, CancellationToken ct = default)
             => await SubscribeToKlineUpdatesAsync([symbol], onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseStreamKline[]>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseStreamKline[]>> onMessage, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseKlineEvent>>((receiveTime, originalData, data) =>
             {
@@ -136,11 +136,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<CoinbaseTicker>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<CoinbaseTicker>> onMessage, CancellationToken ct = default)
             => await SubscribeToTickerUpdatesAsync([symbol], onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseTicker>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseTicker>> onMessage, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseTickerEvent>>((receiveTime, originalData, data) =>
             {
@@ -163,11 +163,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToBatchedTickerUpdatesAsync(string symbol, Action<DataEvent<CoinbaseBatchTicker>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToBatchedTickerUpdatesAsync(string symbol, Action<DataEvent<CoinbaseBatchTicker>> onMessage, CancellationToken ct = default)
             => await SubscribeToBatchedTickerUpdatesAsync([symbol], onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToBatchedTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseBatchTicker>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToBatchedTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseBatchTicker>> onMessage, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseBatchTickerEvent>>((receiveTime, originalData, data) =>
             {
@@ -190,11 +190,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(string symbol, Action<DataEvent<CoinbaseStreamSymbol>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(string symbol, Action<DataEvent<CoinbaseStreamSymbol>> onMessage, CancellationToken ct = default)
             => await SubscribeToSymbolUpdatesAsync([symbol], onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseStreamSymbol>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToSymbolUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseStreamSymbol>> onMessage, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseSymbolEvent>>((receiveTime, originalData, data) =>
             {
@@ -217,15 +217,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, Action<DataEvent<CoinbaseOrderBookUpdate>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, Action<DataEvent<CoinbaseOrderBookUpdate>> onMessage, CancellationToken ct = default)
             => await SubscribeToOrderBookUpdatesAsync([symbol], onMessage, ct).ConfigureAwait(false);
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseOrderBookUpdate>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseOrderBookUpdate>> onMessage, CancellationToken ct = default)
         {
             var symbolArray = symbols.ToArray();
             if (symbolArray.Length > 55)
-                return new CallResult<UpdateSubscription>(new ServerError(new ErrorInfo(ErrorType.InvalidParameter, "API doesn't allow more than 55 orderbook subscription on a single socket, split the call in multiple batches")));
+                return WebSocketResult.Fail<UpdateSubscription>(Exchange, new ServerError(new ErrorInfo(ErrorType.InvalidParameter, "API doesn't allow more than 55 orderbook subscription on a single socket, split the call in multiple batches")));
 
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseOrderBookEvent>>((receiveTime, originalData, data) =>
             {
@@ -254,7 +254,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToUserUpdatesAsync(Action<DataEvent<CoinbaseUserUpdate>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToUserUpdatesAsync(Action<DataEvent<CoinbaseUserUpdate>> onMessage, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseUserUpdate>>((receiveTime, originalData, data) =>
             {
@@ -276,7 +276,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         /// <inheritdoc />
-        public async Task<CallResult<UpdateSubscription>> SubscribeToFuturesBalanceUpdatesAsync(Action<DataEvent<CoinbaseFuturesBalance>> onMessage, CancellationToken ct = default)
+        public async Task<WebSocketResult<UpdateSubscription>> SubscribeToFuturesBalanceUpdatesAsync(Action<DataEvent<CoinbaseFuturesBalance>> onMessage, CancellationToken ct = default)
         {
             var internalHandler = new Action<DateTime, string?, CoinbaseSocketMessage<CoinbaseFuturesBalanceUpdate>>((receiveTime, originalData, data) =>
             {

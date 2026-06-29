@@ -32,7 +32,10 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
 
             IndividualSubscriptionCount = symbols?.Length ?? 1;
 
-            MessageRouter = MessageRouter.CreateWithOptionalTopicFilters<CoinbaseSocketMessage<T>>(channelIdentifier, _symbols, DoHandleMessage);
+            if (_symbols != null)
+                MessageRouter = MessageRouter.CreateForEvent<CoinbaseSocketMessage<T>>(channelIdentifier, _symbols, DoHandleMessage);
+            else
+                MessageRouter = MessageRouter.CreateForEvent<CoinbaseSocketMessage<T>>(channelIdentifier, DoHandleMessage);
         }
 
         /// <inheritdoc />
@@ -60,7 +63,7 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
                 connection.UpdateSequenceNumber(message.SequenceNumber);
 
             _handler.Invoke(receiveTime, originalData, message);
-            return CallResult.SuccessResult;
+            return CallResult.Ok();
         }
 
     }

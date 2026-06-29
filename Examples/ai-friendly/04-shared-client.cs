@@ -13,6 +13,10 @@ var sharedRest = restClient.AdvancedTradeApi.SharedClient;
 Console.WriteLine($"Shared exchange: {sharedRest.Exchange}");
 Console.WriteLine($"Supported trading modes: {string.Join(", ", sharedRest.SupportedTradingModes)}");
 
+var info = sharedRest.Discover();
+var supportedFeatures = info.Features.Where(x => x.Supported).Select(x => x.EndpointName);
+Console.WriteLine($"{info.Exchange} {info.TypeName}: {string.Join(", ", supportedFeatures)}");
+
 var socketClient = new CoinbaseSocketClient();
 Console.WriteLine($"Shared socket exchange: {socketClient.AdvancedTradeApi.SharedClient.Exchange}");
 

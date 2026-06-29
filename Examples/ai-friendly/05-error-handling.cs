@@ -21,7 +21,7 @@ Console.WriteLine($"{product.Symbol}: {product.LastPrice}");
 
 // This intentionally demonstrates order response handling without placing an
 // order by default. Use the trading example for a guarded live workflow.
-static bool TryHandleOrderResult(WebCallResult<CoinbaseOrderResult> result, out string? orderId)
+static bool TryHandleOrderResult(HttpResult<CoinbaseOrderResult> result, out string? orderId)
 {
     orderId = null;
 
@@ -52,7 +52,7 @@ if (!TryGetSocketData(subscriptionResult, out UpdateSubscription? subscription))
 await Task.Delay(TimeSpan.FromSeconds(5));
 await socketClient.UnsubscribeAsync(subscription);
 
-static bool TryGetRestData<T>(WebCallResult<T> result, out T data)
+static bool TryGetRestData<T>(HttpResult<T> result, out T data)
 {
     if (result.Success)
     {
@@ -65,7 +65,7 @@ static bool TryGetRestData<T>(WebCallResult<T> result, out T data)
     return false;
 }
 
-static bool TryGetSocketData<T>(CallResult<T> result, out T data)
+static bool TryGetSocketData<T>(WebSocketResult<T> result, out T data)
 {
     if (result.Success)
     {

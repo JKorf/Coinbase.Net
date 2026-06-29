@@ -49,8 +49,8 @@ namespace Coinbase.Net.Clients
         {
             Initialize(options.Value);
 
-            AdvancedTradeApi = AddApiClient(new CoinbaseSocketClientAdvancedTradeApi(_logger, options.Value));
-            ExchangeApi = AddApiClient(new CoinbaseSocketClientExchangeApi(_logger, options.Value));
+            AdvancedTradeApi = AddApiClient(new CoinbaseSocketClientAdvancedTradeApi(loggerFactory, options.Value));
+            ExchangeApi = AddApiClient(new CoinbaseSocketClientExchangeApi(loggerFactory, options.Value));
         }
         #endregion
 

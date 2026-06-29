@@ -110,7 +110,7 @@ true
     "source_id": "string",
     "target_id": "string",
     "subscription_info": {
-      "free_trading_reset_date": "string",
+      "free_trading_reset_date": "",
       "used_zero_fee_trading": {
         "value": "123",
         "currency": "string"
@@ -151,7 +151,7 @@ true
       "applied_incentive": false,
       "user_incentive_id": "string",
       "code_val": "string",
-      "ends_at": "string",
+      "ends_at": "",
       "fee_without_incentive": {
         "value": "123",
         "currency": "string"

@@ -8,7 +8,7 @@ namespace Coinbase.Net.Objects.Sockets
     {
         public CoinbaseExQuery(CoinbaseExSocketRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
         {
-            MessageRouter = MessageRouter.CreateWithoutHandler<T>("subscriptions");
+            MessageRouter = MessageRouter.CreateVoid<T>("subscriptions");
         }
     }
 }

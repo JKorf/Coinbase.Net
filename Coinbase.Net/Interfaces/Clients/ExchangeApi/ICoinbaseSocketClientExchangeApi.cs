@@ -23,7 +23,7 @@ namespace Coinbase.Net.Interfaces.Clients.ExchangeApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToHeartbeatUpdatesAsync(string symbol, Action<DataEvent<CoinbaseExHeartbeat>> onMessage, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToHeartbeatUpdatesAsync(string symbol, Action<DataEvent<CoinbaseExHeartbeat>> onMessage, CancellationToken ct = default);
         /// <summary>
         /// Subscribe to symbol heartbeat updates
         /// <para><a href="https://docs.cdp.coinbase.com/exchange/websocket-feed/channels#heartbeat-channel" /></para>
@@ -32,7 +32,7 @@ namespace Coinbase.Net.Interfaces.Clients.ExchangeApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToHeartbeatUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseExHeartbeat>> onMessage, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToHeartbeatUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseExHeartbeat>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to symbol and asset status updates
@@ -41,7 +41,7 @@ namespace Coinbase.Net.Interfaces.Clients.ExchangeApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToExchangeInfoUpdatesAsync(Action<DataEvent<CoinbaseExchangeInfo>> onMessage, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToExchangeInfoUpdatesAsync(Action<DataEvent<CoinbaseExchangeInfo>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to symbol price ticker updates
@@ -51,7 +51,7 @@ namespace Coinbase.Net.Interfaces.Clients.ExchangeApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<CoinbaseExTicker>> onMessage, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(string symbol, Action<DataEvent<CoinbaseExTicker>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to symbol price ticker updates
@@ -61,7 +61,7 @@ namespace Coinbase.Net.Interfaces.Clients.ExchangeApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseExTicker>> onMessage, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseExTicker>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to symbol price ticker updates, batched to be pushed every 5 seconds if there is a change
@@ -71,7 +71,7 @@ namespace Coinbase.Net.Interfaces.Clients.ExchangeApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToBatchedTickerUpdatesAsync(string symbol, Action<DataEvent<CoinbaseExTicker>> onMessage, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToBatchedTickerUpdatesAsync(string symbol, Action<DataEvent<CoinbaseExTicker>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to symbol price ticker updates, batched to be pushed every 5 seconds if there is a change
@@ -81,7 +81,7 @@ namespace Coinbase.Net.Interfaces.Clients.ExchangeApi
         /// <param name="onMessage">The event handler for the received data</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToBatchedTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseExTicker>> onMessage, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToBatchedTickerUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseExTicker>> onMessage, CancellationToken ct = default);
 
         /// <summary>
         /// Subscribe to order book updates
@@ -92,7 +92,7 @@ namespace Coinbase.Net.Interfaces.Clients.ExchangeApi
         /// <param name="onUpdate">The event handler for a change is received</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, Action<DataEvent<CoinbaseExBookSnapshot>> onSnapshot, Action<DataEvent<CoinbaseExBookUpdate>> onUpdate, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(string symbol, Action<DataEvent<CoinbaseExBookSnapshot>> onSnapshot, Action<DataEvent<CoinbaseExBookUpdate>> onUpdate, CancellationToken ct = default);
 
 
         /// <summary>
@@ -104,7 +104,7 @@ namespace Coinbase.Net.Interfaces.Clients.ExchangeApi
         /// <param name="onUpdate">The event handler for a change is received</param>
         /// <param name="ct">Cancellation token for closing this subscription</param>
         /// <returns>A stream subscription. This stream subscription can be used to be notified when the socket is disconnected/reconnected</returns>
-        Task<CallResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseExBookSnapshot>> onSnapshot, Action<DataEvent<CoinbaseExBookUpdate>> onUpdate, CancellationToken ct = default);
+        Task<WebSocketResult<UpdateSubscription>> SubscribeToOrderBookUpdatesAsync(IEnumerable<string> symbols, Action<DataEvent<CoinbaseExBookSnapshot>> onSnapshot, Action<DataEvent<CoinbaseExBookUpdate>> onUpdate, CancellationToken ct = default);
 
     }
 }

@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using NUnit.Framework;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -54,35 +55,44 @@ namespace Coinbase.Net.UnitTests
         [Test]
         public async Task TestSpotAccount()
         {
-            await RunAndCheckResult(client => client.AdvancedTradeApi.Account.GetAccountsAsync(default, default, default), true);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.Account.GetPortfoliosAsync(default, default), true);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.Account.GetFeeInfoAsync(default, default, default, default), true);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.Account.GetApiKeyInfoAsync(default), true);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.Account.GetPaymentMethodsAsync(default), true);
+            var warnings = new List<Exception>();
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.Account.GetAccountsAsync(default, default, default), true);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.Account.GetPortfoliosAsync(default, default), true);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.Account.GetFeeInfoAsync(default, default, default, default), true);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.Account.GetApiKeyInfoAsync(default), true);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.Account.GetPaymentMethodsAsync(default), true);
+            foreach (var warning in warnings)
+                Assert.Warn(warning.Message);
         }
 
         [Test]
         public async Task TestSpotExchangeData()
         {
+            var warnings = new List<Exception>();
             await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetServerTimeAsync(default), false);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetSymbolsAsync(default, default, default, default, default, default, default, default, default), false);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USD", default), false);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetOrderBookAsync("ETH-USD", 1, default, default), false);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetKlinesAsync("ETH-USD", Enums.KlineInterval.OneDay, default, default, 5, default), false);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetTradeHistoryAsync("ETH-USD", default, default, default, default), false);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetFiatAssetsAsync(default), false);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetCryptoAssetsAsync(default), false);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetExchangeRatesAsync(default, default), false);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetBuyPriceAsync("USD", default), false);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetSellPriceAsync("USD", default), false);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetSpotPriceAsync("USD", default, default), false);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetSymbolsAsync(default, default, default, default, default, default, default, default, default), false);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USD", default), false);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetOrderBookAsync("ETH-USD", 1, default, default), false);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetKlinesAsync("ETH-USD", Enums.KlineInterval.OneDay, default, default, 5, default), false);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetTradeHistoryAsync("ETH-USD", default, default, default, default), false);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetFiatAssetsAsync(default), false);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetCryptoAssetsAsync(default), false);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetExchangeRatesAsync(default, default), false);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetBuyPriceAsync("USD", default), false);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetSellPriceAsync("USD", default), false);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetSpotPriceAsync("USD", default, default), false);
+            foreach (var warning in warnings)
+                Assert.Warn(warning.Message);
         }
 
         [Test]
         public async Task TestSpotTrading()
         {
-            await RunAndCheckResult(client => client.AdvancedTradeApi.Trading.GetOrdersAsync(default, default, default, default, default, default, default, default, default, default, default, default, default, default, default, default), true);
-            await RunAndCheckResult(client => client.AdvancedTradeApi.Trading.GetUserTradesAsync(default, default, default, default, default, default, default, default, default), true);
+            var warnings = new List<Exception>();
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.Trading.GetOrdersAsync(default, default, default, default, default, default, default, default, default, default, default, default, default, default, default, default), true);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.Trading.GetUserTradesAsync(default, default, default, default, default, default, default, default, default), true);
+            foreach (var warning in warnings)
+                Assert.Warn(warning.Message);
         }
 
         [Test]

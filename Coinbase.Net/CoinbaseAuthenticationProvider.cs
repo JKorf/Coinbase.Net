@@ -53,15 +53,15 @@ namespace Coinbase.Net
 
             var descriptor = new SecurityTokenDescriptor
             {
-                Issuer = "coinbase-cloud",
+                Issuer = "cdp",
                 NotBefore = timestamp,
-                Expires = timestamp.AddMinutes(1),
+                Expires = timestamp.AddMinutes(2),
                 Claims = new Dictionary<string, object> {
                     { "sub", Credential.Key }
                 },
                 AdditionalHeaderClaims = new Dictionary<string, object>
                 {
-                    { "nonce", BytesToHexString(nonce) },
+                    { "nonce", BytesToHexString(nonce).ToLowerInvariant() },
                     { "typ", "JWT" }
                 },
                 SigningCredentials = _signingCreds
@@ -70,7 +70,7 @@ namespace Coinbase.Net
             if (uriLine != null)
                 descriptor.Claims.Add("uri", uriLine);
 
-            var result = new JsonWebTokenHandler().CreateToken(descriptor);
+            var result = new JsonWebTokenHandler { SetDefaultTimesOnTokenCreation = false }.CreateToken(descriptor);
             return result;
 #else
             throw new PlatformNotSupportedException("Authentication is not available for .NetStandard2.0 due to platform limitations");

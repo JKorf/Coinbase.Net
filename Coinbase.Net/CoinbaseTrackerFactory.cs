@@ -48,7 +48,7 @@ namespace Coinbase.Net
         public bool CanCreateTradeTracker(SharedSymbol symbol) => true;
 
         /// <inheritdoc />
-        public IKlineTracker CreateKlineTracker(SharedSymbol symbol, SharedKlineInterval interval, int? limit = null, TimeSpan? period = null)
+        public IKlineTracker CreateKlineTracker(SharedSymbol symbol, SharedKlineInterval interval, int? limit = null, TimeSpan? period = null, ExchangeParameters? exchangeParameters = null)
         {
             var restClient = (_serviceProvider?.GetRequiredService<ICoinbaseRestClient>() ?? new CoinbaseRestClient()).AdvancedTradeApi.SharedClient;
             var socketClient = (_serviceProvider?.GetRequiredService<ICoinbaseSocketClient>()?? new CoinbaseSocketClient()).AdvancedTradeApi.SharedClient;
@@ -60,12 +60,13 @@ namespace Coinbase.Net
                 symbol,
                 interval,
                 limit,
-                period
+                period,
+                exchangeParameters
                 );
         }
 
         /// <inheritdoc />
-        public ITradeTracker CreateTradeTracker(SharedSymbol symbol, int? limit = null, TimeSpan? period = null)
+        public ITradeTracker CreateTradeTracker(SharedSymbol symbol, int? limit = null, TimeSpan? period = null, ExchangeParameters? exchangeParameters = null)
         {
             var restClient = (_serviceProvider?.GetRequiredService<ICoinbaseRestClient>() ?? new CoinbaseRestClient()).AdvancedTradeApi.SharedClient;
             var socketClient = (_serviceProvider?.GetRequiredService<ICoinbaseSocketClient>() ?? new CoinbaseSocketClient()).AdvancedTradeApi.SharedClient;
@@ -77,7 +78,8 @@ namespace Coinbase.Net
                 socketClient,
                 symbol,
                 limit,
-                period
+                period,
+                exchangeParameters
                 );
         }
 

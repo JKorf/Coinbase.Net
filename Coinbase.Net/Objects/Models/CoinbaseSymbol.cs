@@ -319,6 +319,11 @@ namespace Coinbase.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("contract_expiry_name")]
         public string ContractExpiryName { get; set; } = string.Empty;
+        /// <summary>
+        /// ["<c>index_price</c>"] Index price used for the perpetual funding process
+        /// </summary>
+        [JsonPropertyName("index_price")]
+        public decimal? IndexPrice { get; set; }
     }
 
     /// <summary>

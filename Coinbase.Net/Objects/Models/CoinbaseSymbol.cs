@@ -324,6 +324,11 @@ namespace Coinbase.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("index_price")]
         public decimal? IndexPrice { get; set; }
+        /// <summary>
+        /// ["<c>futures_asset_type</c>"] Asset type
+        /// </summary>
+        [JsonPropertyName("futures_asset_type")]
+        public FuturesAssetType FuturesAssetType { get; set; }
     }
 
     /// <summary>
@@ -361,6 +366,6 @@ namespace Coinbase.Net.Objects.Models
         /// ["<c>underlying_type</c>"] Underlying type
         /// </summary>
         [JsonPropertyName("underlying_type")]
-        public string? UnderlyingType { get; set; }
+        public UnderlyingType? UnderlyingType { get; set; }
     }
 }

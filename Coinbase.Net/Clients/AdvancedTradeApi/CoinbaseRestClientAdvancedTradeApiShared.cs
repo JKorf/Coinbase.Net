@@ -1013,20 +1013,16 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 if (result.TradingMode.IsPerpetual())
                 {
                     if (x.FutureProductDetails.PerpetualDetails?.UnderlyingType == UnderlyingType.Equity
-                        || x.FutureProductDetails.PerpetualDetails?.UnderlyingType == UnderlyingType.EquityEtf)
+                        || x.FutureProductDetails.PerpetualDetails?.UnderlyingType == UnderlyingType.EquityEtf
+                        || x.FutureProductDetails.PerpetualDetails?.UnderlyingType == UnderlyingType.Index)
                     {
                         result.BaseAssetType = SharedAssetType.TradFi;
-                        result.BaseAssetSubType = SharedAssetSubType.Stock;
+                        result.BaseAssetSubType = SharedAssetSubType.Equity;
                     }
                     else if (x.FutureProductDetails.PerpetualDetails?.UnderlyingType == UnderlyingType.Commodity)
                     {
                         result.BaseAssetType = SharedAssetType.TradFi;
                         result.BaseAssetSubType = SharedAssetSubType.Commodity;
-                    }
-                    else if (x.FutureProductDetails.PerpetualDetails?.UnderlyingType == UnderlyingType.Index)
-                    {
-                        result.BaseAssetType = SharedAssetType.TradFi;
-                        result.BaseAssetSubType = SharedAssetSubType.Index;
                     }
                     else
                     {
@@ -1040,7 +1036,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     if (x.FutureProductDetails.FuturesAssetType == FuturesAssetType.Stocks)
                     {
                         result.BaseAssetType = SharedAssetType.TradFi;
-                        result.BaseAssetSubType = SharedAssetSubType.Stock;
+                        result.BaseAssetSubType = SharedAssetSubType.Equity;
                     }
                     else if (x.FutureProductDetails.FuturesAssetType == FuturesAssetType.Energy
                         || x.FutureProductDetails.FuturesAssetType == FuturesAssetType.Metals)

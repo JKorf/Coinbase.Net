@@ -64,7 +64,7 @@ false
         "funding_time": "1727686200",
         "max_leverage": "1",
         "base_asset_uuid": "string",
-        "underlying_type": "string"
+        "underlying_type": "EQUITY"
       },
       "contract_display_name": "string",
       "time_to_expiry_ms": "1727686200",

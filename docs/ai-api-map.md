@@ -176,6 +176,10 @@ Use SharedApis for exchange-agnostic code across Coinbase, Binance, Bybit, OKX, 
 | Shared Advanced Trade REST client | `new CoinbaseRestClient().AdvancedTradeApi.SharedClient` |
 | Shared Advanced Trade socket client | `new CoinbaseSocketClient().AdvancedTradeApi.SharedClient` |
 | Discover shared capabilities | `client.AdvancedTradeApi.SharedClient.Discover()` |
+| Get filtered shared spot symbols | `ISpotSymbolRestClient.GetSpotSymbolsAsync(new GetSymbolsRequest(...))` |
+| Read cached shared spot symbol catalog | `ISpotSymbolRestClient.SpotSymbolCatalog` |
+| Get filtered shared futures symbols | `IFuturesSymbolRestClient.GetFuturesSymbolsAsync(new GetSymbolsRequest(...))` |
+| Read cached shared futures symbol catalog | `IFuturesSymbolRestClient.FuturesSymbolCatalog` |
 | Shared spot ticker REST | `ISpotTickerRestClient.GetSpotTickerAsync(new GetTickerRequest(symbol))` |
 | Shared spot order REST | `ISpotOrderRestClient.PlaceSpotOrderAsync(...)` |
 | Shared futures order REST | `IFuturesOrderRestClient.PlaceFuturesOrderAsync(...)` |
@@ -187,6 +191,8 @@ Use SharedApis for exchange-agnostic code across Coinbase, Binance, Bybit, OKX, 
 | Shared position socket | `IPositionSocketClient` |
 
 Shared REST calls return `HttpResult<T>` / `HttpResult`. Shared socket subscriptions return `WebSocketResult<UpdateSubscription>`. Shared non-I/O symbol/cache helpers can return `ExchangeCallResult<T>`.
+
+Shared spot/futures symbol results include `DisplayName` and base/quote `SharedAssetType` / `SharedAssetSubType` metadata. Coinbase classifies known fiat and stablecoins and maps supported non-crypto futures underlyings to TradFi equity or commodity metadata.
 
 For shared socket subscriptions, keep the concrete socket client and unsubscribe with `await socketClient.UnsubscribeAsync(subscription.Data)`.
 

@@ -92,6 +92,8 @@ var shared = new CoinbaseRestClient().AdvancedTradeApi.SharedClient;
 Console.WriteLine(shared.Exchange);
 ```
 
+Shared spot/futures symbols provide display names, typed asset/subtype metadata, request filtering, and cached symbol catalogs.
+
 ## Hard Rules
 
 - Never write raw `HttpClient` calls to Coinbase endpoints.

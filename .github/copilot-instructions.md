@@ -80,7 +80,7 @@ await socketClient.UnsubscribeAsync(sub.Data);
 
 ## Cross-exchange
 
-For exchange-agnostic code, use `CryptoExchange.Net.SharedApis` through `.SharedClient`, for example `new CoinbaseRestClient().AdvancedTradeApi.SharedClient`.
+For exchange-agnostic code, use `CryptoExchange.Net.SharedApis` through `.SharedClient`, for example `new CoinbaseRestClient().AdvancedTradeApi.SharedClient`. Shared spot/futures symbols provide display names, typed asset/subtype metadata, request filtering, and cached symbol catalogs. 
 
 ## Avoid
 

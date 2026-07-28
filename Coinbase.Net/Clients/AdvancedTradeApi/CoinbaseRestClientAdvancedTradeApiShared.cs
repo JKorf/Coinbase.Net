@@ -292,7 +292,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             // Return
             return HttpResult.Ok(result, result.Data.Trades.Select(x => 
-            new SharedTrade(request.Symbol, symbol, x.Quantity, x.Price, x.Timestamp)
+            new SharedTrade(request.Symbol, symbol, new SharedOrderQuantity(x.Quantity), x.Price, x.Timestamp)
             {
                 Side = x.OrderSide == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
             }).ToArray());
@@ -334,7 +334,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             return HttpResult.Ok(result, ExchangeHelpers.ApplyFilter(result.Data.Trades, x => x.Timestamp, request.StartTime, request.EndTime, direction)
                        .Select(x =>  
-                            new SharedTrade(request.Symbol, symbol, x.Quantity, x.Price, x.Timestamp)
+                            new SharedTrade(request.Symbol, symbol, new SharedOrderQuantity(x.Quantity), x.Price, x.Timestamp)
                             {
                                 Side = x.OrderSide == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
                             })
@@ -572,9 +572,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (!result.Success)
                 return HttpResult.Fail<SharedSpotTicker>(result);
 
-            return HttpResult.Ok(result, new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, result.Data.Symbol), result.Data.Symbol, result.Data.LastPrice, null, null, result.Data.Volume24h ?? 0, result.Data.PricePercentageChange24h)
+            return HttpResult.Ok(result, new SharedSpotTicker(
+                ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, result.Data.Symbol), 
+                result.Data.Symbol, 
+                result.Data.LastPrice,
+                null,
+                null,
+                new SharedOrderQuantity(result.Data.Volume24h, result.Data.ApproximateQuote24hVolume),
+                result.Data.PricePercentageChange24h)
             {
-                QuoteVolume = result.Data.ApproximateQuote24hVolume
             });
         }
 
@@ -590,10 +596,17 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return HttpResult.Fail<SharedSpotTicker[]>(result);
 
             var originalSymbols = result.Data.Where(x => x.QuoteAsset != "USD").ToArray();
-            return HttpResult.Ok(result, originalSymbols.Select(x => new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, x.Symbol), x.Symbol, x.LastPrice, null, null, x.Volume24h ?? 0, x.PricePercentageChange24h)
-            {
-                QuoteVolume = x.ApproximateQuote24hVolume
-            }).ToArray());
+            return HttpResult.Ok(result, originalSymbols.Select(x => 
+                new SharedSpotTicker(
+                    ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, x.Symbol),
+                    x.Symbol,
+                    x.LastPrice,
+                    null, 
+                    null,
+                    new SharedOrderQuantity(x.Volume24h, x.ApproximateQuote24hVolume),
+                    x.PricePercentageChange24h)
+                {
+                }).ToArray());
         }
 
         #endregion
@@ -919,7 +932,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (!resultTicker.Success)
                 return HttpResult.Fail<SharedFuturesTicker>(resultTicker);
 
-            return HttpResult.Ok(resultTicker, new SharedFuturesTicker(ExchangeSymbolCache.ParseSymbol(_topicFuturesId, EnvironmentName, null, resultTicker.Data.Symbol), resultTicker.Data.Symbol, resultTicker.Data.LastPrice, null, null, resultTicker.Data.Volume24h ?? 0, resultTicker.Data.PricePercentageChange24h)
+            return HttpResult.Ok(resultTicker, 
+                new SharedFuturesTicker(
+                    ExchangeSymbolCache.ParseSymbol(_topicFuturesId, EnvironmentName, null, resultTicker.Data.Symbol),
+                    resultTicker.Data.Symbol,
+                    resultTicker.Data.LastPrice,
+                    null, 
+                    null,
+                    new SharedOrderQuantity(resultTicker.Data.Volume24h, resultTicker.Data.ApproximateQuote24hVolume),
+                    resultTicker.Data.PricePercentageChange24h)
             {
                 FundingRate = resultTicker.Data.FutureProductDetails!.PerpetualDetails!.FundingRate,
                 NextFundingTime = resultTicker.Data.FutureProductDetails.PerpetualDetails.FundingTime
@@ -940,7 +961,14 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             var data = resultTicker.Data;
             return HttpResult.Ok(resultTicker, data.Select(x => 
-                    new SharedFuturesTicker(ExchangeSymbolCache.ParseSymbol(_topicFuturesId, EnvironmentName, null, x.Symbol), x.Symbol, x.LastPrice, null, null, x.Volume24h ?? 0, x.PricePercentageChange24h)
+                    new SharedFuturesTicker(
+                        ExchangeSymbolCache.ParseSymbol(_topicFuturesId, EnvironmentName, null, x.Symbol),
+                        x.Symbol,
+                        x.LastPrice,
+                        null, 
+                        null, 
+                        new SharedOrderQuantity(x.Volume24h, x.ApproximateQuote24hVolume),
+                        x.PricePercentageChange24h)
                     {
                         FundingRate = x.FutureProductDetails!.PerpetualDetails?.FundingRate,
                         NextFundingTime = x.FutureProductDetails.PerpetualDetails?.FundingTime
@@ -1487,7 +1515,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             return HttpResult.Ok(result, ExchangeHelpers.ApplyFilter(result.Data, x => x.OpenTime, request.StartTime, request.EndTime, direction)
                    .Select(x => 
-                        new SharedKline(request.Symbol, symbol, x.OpenTime, x.ClosePrice, x.HighPrice, x.LowPrice, x.OpenPrice, x.Volume))
+                        new SharedKline(
+                            request.Symbol,
+                            symbol,
+                            x.OpenTime,
+                            x.ClosePrice,
+                            x.HighPrice,
+                            x.LowPrice,
+                            x.OpenPrice,
+                            new SharedOrderQuantity(x.Volume)))
                    .ToArray(), nextPageRequest);
         }
 

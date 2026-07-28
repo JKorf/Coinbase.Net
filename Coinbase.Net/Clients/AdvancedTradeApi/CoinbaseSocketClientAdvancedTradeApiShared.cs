@@ -44,7 +44,18 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     return;
 
                 foreach (var item in update.Data)
-                    handler(update.ToType(new SharedKline(ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, item.Symbol), item.Symbol, item.OpenTime, item.ClosePrice, item.HighPrice, item.LowPrice, item.OpenPrice, item.Volume)));
+                {
+                    handler(update.ToType(
+                        new SharedKline(
+                            ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, item.Symbol),
+                            item.Symbol,
+                            item.OpenTime,
+                            item.ClosePrice,
+                            item.HighPrice,
+                            item.LowPrice,
+                            item.OpenPrice,
+                            new SharedOrderQuantity(item.Volume))));
+                }
             }, ct).ConfigureAwait(false);
 
             return result;
@@ -63,7 +74,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return WebSocketResult.Fail<UpdateSubscription>(_exchangeName, validationError);
 
             var symbols = request.Symbols?.Length > 0 ? request.Symbols.Select(x => x.GetSymbol(FormatSymbol)) : [request.Symbol!.GetSymbol(FormatSymbol)];
-            var result = await SubscribeToTickerUpdatesAsync(symbols, update => handler(update.ToType(new SharedSpotTicker(ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, update.Data.Symbol), update.Data.Symbol, update.Data.LastPrice, update.Data.HighPrice24H, update.Data.LowPrice24H, update.Data.Volume24H ?? 0, update.Data.PricePercentChange24H))), ct).ConfigureAwait(false);
+            var result = await SubscribeToTickerUpdatesAsync(symbols, update => handler(update.ToType(
+                new SharedSpotTicker(
+                    ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, update.Data.Symbol), 
+                    update.Data.Symbol,
+                    update.Data.LastPrice,
+                    update.Data.HighPrice24H,
+                    update.Data.LowPrice24H, 
+                    new SharedOrderQuantity(update.Data.Volume24H),
+                    update.Data.PricePercentChange24H))), ct).ConfigureAwait(false);
 
             return result;
         }
@@ -90,7 +109,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 foreach (var item in update.Data)
                 {
                     handler(update.ToType<SharedTrade[]>(new[] { 
-                        new SharedTrade(ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, item.Symbol), item.Symbol, item.Quantity, item.Price, item.Timestamp){
+                        new SharedTrade(ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, item.Symbol), item.Symbol, new SharedOrderQuantity(item.Quantity), item.Price, item.Timestamp){
                         Side = item.OrderSide == OrderSide.Buy ? SharedOrderSide.Buy : SharedOrderSide.Sell
                     } }));
                 }

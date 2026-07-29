@@ -64,6 +64,11 @@ namespace Coinbase.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("side")]
         public OrderSide OrderSide { get; set; }
+        /// <summary>
+        /// ["<c>exchange</c>"] Exchange
+        /// </summary>
+        [JsonPropertyName("exchange")]
+        public string? Exchange { get; set; }
     }
 
 

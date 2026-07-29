@@ -70,17 +70,30 @@ namespace Coinbase.Net.UnitTests
         {
             var warnings = new List<Exception>();
             await RunAndCheckResult(client => client.AdvancedTradeApi.ExchangeData.GetServerTimeAsync(default), false);
-            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetSymbolsAsync(default, default, default, default, default, default, default, default, default), false);
-            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USD", default), false);
-            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetOrderBookAsync("ETH-USD", 1, default, default), false);
-            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetKlinesAsync("ETH-USD", Enums.KlineInterval.OneDay, default, default, 5, default), false);
-            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetTradeHistoryAsync("ETH-USD", default, default, default, default), false);
-            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetFiatAssetsAsync(default), false);
-            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetCryptoAssetsAsync(default), false);
-            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetExchangeRatesAsync(default, default), false);
-            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetBuyPriceAsync("USD", default), false);
-            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetSellPriceAsync("USD", default), false);
-            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetSpotPriceAsync("USD", default, default), false);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetSymbolsAsync(default, default, default, default, default, default, default, default, default), false, "products", 
+                ignoreProperties: [
+                    "base_cbrn",
+                    "quote_cbrn",
+                    "product_cbrn",
+                    "icon_color",
+                    "icon_url",
+                    ]);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USD", default), false, ignoreProperties: [
+                    "base_cbrn",
+                    "quote_cbrn",
+                    "product_cbrn",
+                    "icon_color",
+                    "icon_url",
+                    ]);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetOrderBookAsync("ETH-USD", 1, default, default), false, "pricebook");
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetKlinesAsync("ETH-USD", Enums.KlineInterval.OneDay, default, default, 5, default), false, "candles");
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetTradeHistoryAsync("ETH-USD", default, default, default, default), false, ignoreProperties: ["bid", "ask"]);
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetFiatAssetsAsync(default), false, "data");
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetCryptoAssetsAsync(default), false, "data");
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetExchangeRatesAsync(default, default), false, "data");
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetBuyPriceAsync("USD", default), false, "data");
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetSellPriceAsync("USD", default), false, "data");
+            await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetSpotPriceAsync("USD", default, default), false, "data");
             foreach (var warning in warnings)
                 Assert.Warn(warning.Message);
         }

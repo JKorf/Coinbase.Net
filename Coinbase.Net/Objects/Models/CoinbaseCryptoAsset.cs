@@ -58,6 +58,16 @@ namespace Coinbase.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("asset_id")]
         public string AssetId { get; set; } = string.Empty;
+        /// <summary>
+        /// ["<c>destination_tag_regex</c>"] Destination tag regex
+        /// </summary>
+        [JsonPropertyName("destination_tag_regex")]
+        public string? DestinationTagRegex { get; set; }
+        /// <summary>
+        /// ["<c>destination_tag_name</c>"] Destination tag name
+        /// </summary>
+        [JsonPropertyName("destination_tag_name")]
+        public string? DestinationTagName { get; set; }
     }
 
 

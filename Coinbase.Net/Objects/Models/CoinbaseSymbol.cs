@@ -189,6 +189,16 @@ namespace Coinbase.Net.Objects.Models
         [JsonPropertyName("display_name")]
         public string DisplayName { get; set; } = string.Empty;
         /// <summary>
+        /// ["<c>display_name_overwrite</c>"] Dispaly name 
+        /// </summary>
+        [JsonPropertyName("display_name_overwrite")]
+        public string? DisplayNameOverwrite { get; set; }
+        /// <summary>
+        /// ["<c>about_description</c>"] About description
+        /// </summary>
+        [JsonPropertyName("about_description")]
+        public string? AboutDescription { get; set; }
+        /// <summary>
         /// ["<c>product_venue</c>"] Product venue
         /// </summary>
         [JsonPropertyName("product_venue")]
@@ -203,6 +213,41 @@ namespace Coinbase.Net.Objects.Models
         /// </summary>
         [JsonPropertyName("future_product_details")]
         public CoinbaseSymbolFuturesDetails? FutureProductDetails { get; set; } = null!;
+        /// <summary>
+        /// ["<c>new_at</c>"] New at
+        /// </summary>
+        [JsonPropertyName("new_at")]
+        public DateTime? NewAt { get; set; }
+        /// <summary>
+        /// ["<c>market_cap</c>"] Market cap
+        /// </summary>
+        [JsonPropertyName("market_cap")]
+        public decimal? MarketCap { get; set; }
+        /// <summary>
+        /// ["<c>is_alpha_testing</c>"] Is alpha testing
+        /// </summary>
+        [JsonPropertyName("is_alpha_testing")]
+        public bool IsAlphaTesting { get; set; }
+        /// <summary>
+        /// ["<c>best_bid_price</c>"] Best bid price
+        /// </summary>
+        [JsonPropertyName("best_bid_price")]
+        public decimal? BestBidPrice { get; set; }
+        /// <summary>
+        /// ["<c>best_ask_price</c>"] Best ask price
+        /// </summary>
+        [JsonPropertyName("best_ask_price")]
+        public decimal? BestAskPrice { get; set; }
+        /// <summary>
+        /// ["<c>high_24h</c>"] High price 24h
+        /// </summary>
+        [JsonPropertyName("high_24h")]
+        public decimal? HighPrice24h { get; set; }
+        /// <summary>
+        /// ["<c>low_24h</c>"] Low price 24h
+        /// </summary>
+        [JsonPropertyName("low_24h")]
+        public decimal? LowPrice24h { get; set; }
     }
 
     /// <summary>

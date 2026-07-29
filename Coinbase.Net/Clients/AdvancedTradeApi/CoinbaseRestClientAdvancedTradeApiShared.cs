@@ -576,8 +576,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, result.Data.Symbol), 
                 result.Data.Symbol, 
                 result.Data.LastPrice,
-                null,
-                null,
+                result.Data.HighPrice24h,
+                result.Data.LowPrice24h,
                 new SharedOrderQuantity(result.Data.Volume24h, result.Data.ApproximateQuote24hVolume),
                 result.Data.PricePercentageChange24h)
             {
@@ -601,8 +601,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     ExchangeSymbolCache.ParseSymbol(_topicSpotId, EnvironmentName, null, x.Symbol),
                     x.Symbol,
                     x.LastPrice,
-                    null, 
-                    null,
+                    x.HighPrice24h, 
+                    x.LowPrice24h,
                     new SharedOrderQuantity(x.Volume24h, x.ApproximateQuote24hVolume),
                     x.PricePercentageChange24h)
                 {
@@ -937,8 +937,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     ExchangeSymbolCache.ParseSymbol(_topicFuturesId, EnvironmentName, null, resultTicker.Data.Symbol),
                     resultTicker.Data.Symbol,
                     resultTicker.Data.LastPrice,
-                    null, 
-                    null,
+                    resultTicker.Data.HighPrice24h, 
+                    resultTicker.Data.LowPrice24h,
                     new SharedOrderQuantity(resultTicker.Data.Volume24h, resultTicker.Data.ApproximateQuote24hVolume),
                     resultTicker.Data.PricePercentageChange24h)
             {
@@ -965,8 +965,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         ExchangeSymbolCache.ParseSymbol(_topicFuturesId, EnvironmentName, null, x.Symbol),
                         x.Symbol,
                         x.LastPrice,
-                        null, 
-                        null, 
+                        x.HighPrice24h, 
+                        x.LowPrice24h, 
                         new SharedOrderQuantity(x.Volume24h, x.ApproximateQuote24hVolume),
                         x.PricePercentageChange24h)
                     {

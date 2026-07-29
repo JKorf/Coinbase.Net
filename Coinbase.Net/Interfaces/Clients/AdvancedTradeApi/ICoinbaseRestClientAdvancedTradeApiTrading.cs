@@ -17,7 +17,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Place a new order
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_postorder" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/orders/create-order" /><br />
         /// Endpoint:<br />
         /// POST /api/v3/brokerage/orders
         /// </para>
@@ -62,7 +62,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Cancel an order
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_cancelorders" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/orders/cancel-orders" /><br />
         /// Endpoint:<br />
         /// POST /api/v3/brokerage/orders/batch_cancel
         /// </para>
@@ -76,7 +76,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Cancel orders
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_cancelorders" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/orders/cancel-orders" /><br />
         /// Endpoint:<br />
         /// POST /api/v3/brokerage/orders/batch_cancel
         /// </para>
@@ -89,7 +89,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Edit an order
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_editorder" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/orders/edit-order" /><br />
         /// Endpoint:<br />
         /// POST /api/v3/brokerage/orders/edit
         /// </para>
@@ -104,7 +104,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get order details 
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_gethistoricalorder" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/orders/get-order" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/orders/historical/{orderId}
         /// </para>
@@ -117,7 +117,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get orders. Note that open orders do not adhere to the time filter
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_gethistoricalorders" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/orders/list-orders" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/orders/historical/batch
         /// </para>
@@ -160,7 +160,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get user trade history
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfills" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/orders/list-fills" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/orders/historical/fills
         /// </para>
@@ -189,7 +189,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Close a position
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_closeposition" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/orders/close-position" /><br />
         /// Endpoint:<br />
         /// POST /api/v3/brokerage/orders/close_position
         /// </para>
@@ -204,7 +204,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get expiring futures positions
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmpositions" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/futures/list-futures-positions" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/cfm/positions
         /// </para>
@@ -216,7 +216,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get expiring futures position for a symbol
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getfcmposition" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/futures/get-futures-position" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/cfm/positions/{symbol}
         /// </para>
@@ -229,7 +229,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get a list of open positions in your Perpetuals portfolio
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxportfoliosummary" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/perpetuals/get-perpetuals-portfolio-summary" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/intx/positions/{portfolioId}
         /// </para>
@@ -243,7 +243,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get a specific Perpetual position
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getintxposition" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/perpetuals/get-perpetuals-position" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/intx/positions/{portfolioId}/{symbol}
         /// </para>

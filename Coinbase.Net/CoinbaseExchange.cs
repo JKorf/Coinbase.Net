@@ -25,8 +25,8 @@ namespace Coinbase.Net
                 "Coinbase",
                 "https://raw.githubusercontent.com/JKorf/Coinbase.Net/master/Coinbase.Net/Icon/icon.png",
                 "https://www.coinbase.com",
-                ["https://docs.cdp.coinbase.com/advanced-trade/reference",
-                 "https://docs.cdp.coinbase.com/coinbase-app/docs/welcome"],
+                ["https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/introduction",
+                 "https://docs.cdp.coinbase.com/coinbase-app/introduction/welcome"],
                 PlatformType.CryptoCurrencyExchange,
                 CentralizationType.Centralized,
                 CoinbaseEnvironment.All
@@ -56,8 +56,8 @@ namespace Coinbase.Net
         /// Urls to the API documentation
         /// </summary>
         public static string[] ApiDocsUrl { get; } = new[] {
-            "https://docs.cdp.coinbase.com/advanced-trade/reference",
-            "https://docs.cdp.coinbase.com/coinbase-app/docs/welcome"
+            "https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/introduction",
+            "https://docs.cdp.coinbase.com/coinbase-app/introduction/welcome"
             };
 
         /// <summary>

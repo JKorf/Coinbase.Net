@@ -24,7 +24,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Subscribe to the heartbeats channel. The heartbeats channel can be used to keep the connection alive when data from other subscriptions isn't continuous. When using this subscription it is recommended to also set the client option <code>options.SocketNoData = TimeSpan.FromSeconds(5)</code> to quickly detect when the connection is interupted.
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#heartbeats-channel" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-channels#heartbeats-channel" /><br />
         /// Endpoint:<br />
         /// WS heartbeats
         /// </para>
@@ -38,7 +38,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Subscribe to public trades updates
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#market-trades-channel" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-channels#market-trades-channel" /><br />
         /// Endpoint:<br />
         /// WS market_trades
         /// </para>
@@ -53,7 +53,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Subscribe to public trades updates
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#market-trades-channel" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-channels#market-trades-channel" /><br />
         /// Endpoint:<br />
         /// WS market_trades
         /// </para>
@@ -68,7 +68,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Subscribe to kline updates. Klines are always at a 5 minute interval.
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#candles-channel" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-channels#candles-channel" /><br />
         /// Endpoint:<br />
         /// WS candles
         /// </para>
@@ -83,7 +83,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Subscribe to kline updates. Klines are always at a 5 minute interval.
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#candles-channel" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-channels#candles-channel" /><br />
         /// Endpoint:<br />
         /// WS candles
         /// </para>
@@ -98,7 +98,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Subscribe to ticker updates, updates are pushed immediately on any chance
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-channel" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-channels#ticker-channel" /><br />
         /// Endpoint:<br />
         /// WS ticker
         /// </para>
@@ -112,7 +112,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Subscribe to ticker updates, updates are pushed immediately on any chance
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-channel" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-channels#ticker-channel" /><br />
         /// Endpoint:<br />
         /// WS ticker
         /// </para>
@@ -127,7 +127,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Subscribe to batched ticker updates, updates are pushed every 5 seconds
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-batch-channel" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-channels#ticker-batch-channel" /><br />
         /// Endpoint:<br />
         /// WS ticker_batch
         /// </para>
@@ -141,7 +141,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Subscribe to batched ticker updates, updates are pushed every 5 seconds
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#ticker-batch-channel" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-channels#ticker-batch-channel" /><br />
         /// Endpoint:<br />
         /// WS ticker_batch
         /// </para>
@@ -156,7 +156,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Subscribe to symbol rules updates
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#status-channel" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-channels#status-channel" /><br />
         /// Endpoint:<br />
         /// WS status
         /// </para>
@@ -170,7 +170,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Subscribe to symbol rules updates
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#status-channel" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-channels#status-channel" /><br />
         /// Endpoint:<br />
         /// WS status
         /// </para>
@@ -185,7 +185,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Subscribe to order book updates. First update is a snapshot of the full book, subsequent updates are change messages
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#level2-channel" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-channels#level2-channel" /><br />
         /// Endpoint:<br />
         /// WS level2
         /// </para>
@@ -199,7 +199,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Subscribe to order book updates. First update is a snapshot of the full book, subsequent updates are change messages
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#level2-channel" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-channels#level2-channel" /><br />
         /// Endpoint:<br />
         /// WS level2
         /// </para>
@@ -214,7 +214,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Subscribe to user order and position updates. After subscribing snapshots will be pushed containing all open orders for the user
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#user-channel" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-channels#user-channel" /><br />
         /// Endpoint:<br />
         /// WS user
         /// </para>
@@ -228,7 +228,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Subscribe to futures balance updates
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/docs/ws-channels#futures-balance-summary-channel" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/advanced-trade-apis/websocket/websocket-channels#futures-balance-summary-channel" /><br />
         /// Endpoint:<br />
         /// WS futures_balance_summary
         /// </para>

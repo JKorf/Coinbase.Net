@@ -24,7 +24,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get list of supported symbols
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicproducts" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/public/list-public-products" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/market/products<br />
         /// GET /api/v3/brokerage/products
@@ -45,7 +45,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get info on a specific symbol
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicproduct" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/public/get-public-product" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/market/products/{symbol}<br />
         /// GET /api/v3/brokerage/products/{symbol}
@@ -59,7 +59,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get the order book
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicproductbook" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/public/get-public-product-book" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/market/product_book<br />
         /// GET /api/v3/brokerage/product_book
@@ -75,7 +75,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get kline/candlestick data
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpubliccandles" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/public/get-public-product-candles" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/market/products/{symbol}/candles<br />
         /// GET /api/v3/brokerage/products/{symbol}/candles
@@ -93,7 +93,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get historical public trades for a symbol
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getpublicmarkettrades" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/public/get-public-market-trades" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/market/products/{symbol}/ticker<br />
         /// GET /api/v3/brokerage/products/{symbol}/ticker
@@ -110,7 +110,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get the best ask/bid price and quantity for a symbol
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getbestbidask" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/products/get-best-bid-ask" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/best_bid_ask
         /// </para>
@@ -124,7 +124,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get the best ask/bid price and quantity for all or selected symbols
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/advanced-trade/reference/retailbrokerageapi_getbestbidask" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/products/get-best-bid-ask" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/best_bid_ask
         /// </para>
@@ -138,7 +138,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get fiat assets
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-currencies" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/track-apis/currencies" /><br />
         /// Endpoint:<br />
         /// GET /v2/currencies
         /// </para>
@@ -150,7 +150,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get crypto assets
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-currencies" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/track-apis/currencies" /><br />
         /// Endpoint:<br />
         /// GET /v2/currencies/crypto
         /// </para>
@@ -162,7 +162,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get exchange rates
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-exchange-rates" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/track-apis/exchange-rates" /><br />
         /// Endpoint:<br />
         /// GET /v2/exchange-rates
         /// </para>
@@ -175,7 +175,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get the current buy prices for all assets denoted in the asset parameter. Includes a 1% Coinbase fee.
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-prices" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/track-apis/prices" /><br />
         /// Endpoint:<br />
         /// GET /v2/prices/{asset}/buy
         /// </para>
@@ -188,7 +188,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get the current sell prices for all assets denoted in the asset parameter. Includes a 1% Coinbase fee.
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-prices" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/track-apis/prices" /><br />
         /// Endpoint:<br />
         /// GET /v2/prices/{asset}/sell
         /// </para>
@@ -201,7 +201,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get the spot market prices for all assets denoted in the asset parameter
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/docs/api-prices" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/coinbase-app/track-apis/prices" /><br />
         /// Endpoint:<br />
         /// GET /v2/prices/{asset}/sell
         /// </para>

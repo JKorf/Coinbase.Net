@@ -8,10 +8,10 @@ namespace Coinbase.Net.Objects.Models
     internal record CoinbasePerpetualBalancesWrapper
     {
         /// <summary>
-        /// ["<c>portfolio_balances</c>"] Portfolio balances
+        /// ["<c>portfolio_balances</c>"] Portfolio balances, one entry per portfolio
         /// </summary>
         [JsonPropertyName("portfolio_balances")]
-        public CoinbasePerpetualBalances PortfolioBalances { get; set; } = null!;
+        public CoinbasePerpetualBalances[] PortfolioBalances { get; set; } = Array.Empty<CoinbasePerpetualBalances>();
     }
 
     /// <summary>
@@ -127,10 +127,11 @@ namespace Coinbase.Net.Objects.Models
         [JsonPropertyName("collateral_weight")]
         public decimal CollateralWeight { get; set; }
         /// <summary>
-        /// ["<c>account_collateral_limit</c>"] Account collateral limit
+        /// ["<c>account_collateral_limit</c>"] Account collateral limit, null when the asset has none
+        /// (the API sends an empty string for it)
         /// </summary>
         [JsonPropertyName("account_collateral_limit")]
-        public decimal AccountCollateralLimit { get; set; }
+        public decimal? AccountCollateralLimit { get; set; }
         /// <summary>
         /// ["<c>ecosystem_collateral_limit_breached</c>"] Ecosystem collateral limit breached
         /// </summary>

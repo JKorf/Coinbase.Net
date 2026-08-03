@@ -170,7 +170,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// <param name="portfolioId">["<c>portfolioId</c>"] Portfolio uuid</param>
         /// <param name="ct">Cancellation token</param>
         /// <returns></returns>
-        Task<HttpResult<CoinbasePerpetualBalances>> GetPerpetualBalancesAsync(string portfolioId, CancellationToken ct = default);
+        Task<HttpResult<CoinbasePerpetualBalances[]>> GetPerpetualBalancesAsync(string portfolioId, CancellationToken ct = default);
 
         /// <summary>
         /// Set multi asset collateral mode

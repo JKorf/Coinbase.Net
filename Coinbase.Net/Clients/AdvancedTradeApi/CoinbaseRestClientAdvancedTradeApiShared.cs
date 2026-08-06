@@ -128,10 +128,17 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 if (!result.Success)
                     return HttpResult.Fail<SharedBalance[]>(result);
 
-                return HttpResult.Ok(result, result.Data.Balances.Select(x => 
+                // The endpoint answers with one entry per portfolio; take the requested one, falling
+                // back to the single entry a portfolio-scoped key returns without echoing its uuid.
+                var portfolio = result.Data.FirstOrDefault(x => x.PortfolioId == portfolioId)
+                    ?? result.Data.FirstOrDefault();
+                if (portfolio == null)
+                    return HttpResult.Ok(result, Array.Empty<SharedBalance>());
+
+                return HttpResult.Ok(result, portfolio.Balances.Select(x =>
                     new SharedBalance(
-                        TradingMode.PerpetualLinear, 
-                        x.Asset.AssetId, 
+                        TradingMode.PerpetualLinear,
+                        x.Asset.AssetId,
                         x.MaxWithdrawQuantity,
                         x.Quantity)).ToArray());
             }

@@ -2,7 +2,8 @@ GET
 /api/v3/brokerage/intx/balances/123
 true
 {
-  "portfolio_balances": {
+  "portfolio_balances": [
+   {
     "portfolio_uuid": "string",
     "balances": [
       {
@@ -12,7 +13,7 @@ true
           "asset_name": "string",
           "status": "string",
           "collateral_weight": "123",
-          "account_collateral_limit": "123",
+          "account_collateral_limit": "",
           "ecosystem_collateral_limit_breached": true,
           "asset_icon_url": "string",
           "supported_networks_enabled": true
@@ -29,5 +30,6 @@ true
       }
     ],
     "is_margin_limit_reached": true
-  }
+   }
+  ]
 }

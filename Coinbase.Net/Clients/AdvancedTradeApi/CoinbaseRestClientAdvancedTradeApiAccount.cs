@@ -188,13 +188,13 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #region Get Perpetual Balances
 
         /// <inheritdoc />
-        public async Task<HttpResult<CoinbasePerpetualBalances>> GetPerpetualBalancesAsync(string portfolioId, CancellationToken ct = default)
+        public async Task<HttpResult<CoinbasePerpetualBalances[]>> GetPerpetualBalancesAsync(string portfolioId, CancellationToken ct = default)
         {
             var parameters = new Parameters(CoinbaseExchange._parameterSerializationSettings);
             var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, $"/api/v3/brokerage/intx/balances/{portfolioId}", CoinbaseExchange.RateLimiter.CoinbaseRestPrivate, 1, true);
             var result = await _baseClient.SendAsync<CoinbasePerpetualBalancesWrapper>(request, parameters, ct).ConfigureAwait(false);
             if (!result.Success)
-                return HttpResult.Fail<CoinbasePerpetualBalances>(result);
+                return HttpResult.Fail<CoinbasePerpetualBalances[]>(result);
 
             return HttpResult.Ok(result, result.Data.PortfolioBalances);
         }

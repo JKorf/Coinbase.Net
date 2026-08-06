@@ -82,6 +82,52 @@ var tickerSubscriptionResult = socketClient.AdvancedTradeApi.SubscribeToTickerUp
 
 For information on the clients, dependency injection, response processing and more see the [documentation](https://cryptoexchange.jkorf.dev?library=Coinbase.Net), or have a look at the examples [here](https://github.com/JKorf/Coinbase.Net/tree/main/Examples) or [here](https://github.com/JKorf/CryptoExchange.Net/tree/master/Examples).
 
+## Shared / unified API
+
+The CryptoExchange.Net [Shared APIs](https://cryptoexchange.jkorf.dev/client-libs/shared) provide exchange-agnostic, unified interfaces for common operations such as retrieving tickers, order books and balances, placing orders, and subscribing to market updates.
+
+This allows the same application code to work with different exchange libraries. The supported Coinbase API surfaces expose their shared functionality through a `SharedClient` property. Because support differs between exchanges and API surfaces, call `Discover()` to inspect the available trading modes, environments, endpoints, and subscriptions at runtime.
+
+### Supported shared interfaces
+
+| API | Type | Supported interfaces |
+|--|--|--|
+| `AdvancedTradeApi` | REST | `IAssetsRestClient`, `IBalanceRestClient`, `IBookTickerRestClient`, `IDepositRestClient`, `IFeeRestClient`, `IFuturesOrderRestClient`, `IFuturesSymbolRestClient`, `IFuturesTickerRestClient`, `IFuturesTriggerOrderRestClient`, `IKlineRestClient`, `IOpenInterestRestClient`, `IOrderBookRestClient`, `IRecentTradeRestClient`, `ISpotOrderRestClient`, `ISpotSymbolRestClient`, `ISpotTickerRestClient`, `ISpotTriggerOrderRestClient`, `ITradeHistoryRestClient`, `IWithdrawalRestClient`, `IWithdrawRestClient` |
+| `AdvancedTradeApi` | WebSocket | `IFuturesOrderSocketClient`, `IKlineSocketClient`, `IPositionSocketClient`, `ISpotOrderSocketClient`, `ITickerSocketClient`, `ITradeSocketClient` |
+
+### Discover supported functionality
+
+```csharp
+var sharedClient = new CoinbaseRestClient().AdvancedTradeApi.SharedClient;
+var clientInfo = sharedClient.Discover();
+
+Console.WriteLine(clientInfo);
+```
+
+### Example
+
+```csharp
+using Coinbase.Net.Clients;
+using CryptoExchange.Net.SharedApis;
+
+var sharedClient = new CoinbaseRestClient().AdvancedTradeApi.SharedClient;
+ISpotTickerRestClient tickerClient = sharedClient;
+
+var symbol = new SharedSymbol(TradingMode.Spot, "ETH", "USDT");
+var result = await tickerClient.GetSpotTickerAsync(
+    new GetTickerRequest(symbol));
+
+if (!result.Success)
+{
+    Console.WriteLine(result.Error);
+    return;
+}
+
+Console.WriteLine(result.Data.LastPrice);
+```
+
+The request and response models belong to `CryptoExchange.Net.SharedApis`, so the same pattern can be used with another exchange's `SharedClient`.
+
 ## AI documentation
 This repository includes AI-focused guidance for generating correct Coinbase.Net code:
 
@@ -184,10 +230,8 @@ If you do not yet have an account please consider using this referal link to sig
 [Link](https://advanced.coinbase.com/join/T6H54H8)
 
 ### Donate
-Make a one time donation in a crypto currency of your choice. If you prefer to donate a currency not listed here please contact me.
-
-**Btc**:  bc1q277a5n54s2l2mzlu778ef7lpkwhjhyvghuv8qf  
-**Eth**:  0xcb1b63aCF9fef2755eBf4a0506250074496Ad5b7   
+Make a one time donation in a crypto currency of your choice. If you prefer to donate in a different currency or network send me a message.
+   
 **USDT (TRX)**  TKigKeJPXZYyMVDgMyXxMf17MWYia92Rjd 
 
 ### Sponsor

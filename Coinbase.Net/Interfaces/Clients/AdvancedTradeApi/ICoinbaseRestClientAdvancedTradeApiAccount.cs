@@ -162,7 +162,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get balances of a Perpetual futures portfolio
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/perpetuals/get-perpetuals-portfolio-balances" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/perpetuals/get-portfolio-balances" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/intx/balances/{portfolioId}
         /// </para>
@@ -241,7 +241,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get fee tier info
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/data-api/get-transaction-summary" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/fees/get-transaction-summary" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/transaction_summary
         /// </para>

@@ -229,7 +229,7 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         /// Get a list of open positions in your Perpetuals portfolio
         /// <para>
         /// Docs:<br />
-        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/perpetuals/get-perpetuals-portfolio-summary" /><br />
+        /// <a href="https://docs.cdp.coinbase.com/api-reference/advanced-trade-api/rest-api/perpetuals/list-perpetuals-positions" /><br />
         /// Endpoint:<br />
         /// GET /api/v3/brokerage/intx/positions/{portfolioId}
         /// </para>

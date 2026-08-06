@@ -138,7 +138,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return HttpResult.Ok(result, portfolio.Balances.Select(x =>
                     new SharedBalance(
                         TradingMode.PerpetualLinear,
-                        x.Asset.AssetId,
+                        x.Asset.AssetName,
                         x.MaxWithdrawQuantity,
                         x.Quantity)).ToArray());
             }

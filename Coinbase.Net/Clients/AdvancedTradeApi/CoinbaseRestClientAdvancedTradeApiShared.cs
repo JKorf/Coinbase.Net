@@ -949,8 +949,13 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                     new SharedOrderQuantity(resultTicker.Data.Volume24h, resultTicker.Data.ApproximateQuote24hVolume),
                     resultTicker.Data.PricePercentageChange24h)
             {
-                FundingRate = resultTicker.Data.FutureProductDetails!.PerpetualDetails!.FundingRate,
-                NextFundingTime = resultTicker.Data.FutureProductDetails.PerpetualDetails.FundingTime
+                // Null-conditional, not null-forgiving: both properties are declared nullable, and a
+                // DATED CDE contract (XPP-20DEC30-CDE) legitimately carries no PerpetualDetails —
+                // funding is a perpetual-swap mechanism, a dated future converges by expiry instead.
+                // The `!` pair threw a NullReferenceException out of the shared client for every dated
+                // futures symbol (observed 2026-08-04). No funding is the honest answer, not a crash.
+                FundingRate = resultTicker.Data.FutureProductDetails?.PerpetualDetails?.FundingRate,
+                NextFundingTime = resultTicker.Data.FutureProductDetails?.PerpetualDetails?.FundingTime
             });
         }
 
@@ -977,8 +982,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         new SharedOrderQuantity(x.Volume24h, x.ApproximateQuote24hVolume),
                         x.PricePercentageChange24h)
                     {
-                        FundingRate = x.FutureProductDetails!.PerpetualDetails?.FundingRate,
-                        NextFundingTime = x.FutureProductDetails.PerpetualDetails?.FundingTime
+                        // Same dated-CDE null-safety as GetFuturesTickerAsync above.
+                        FundingRate = x.FutureProductDetails?.PerpetualDetails?.FundingRate,
+                        NextFundingTime = x.FutureProductDetails?.PerpetualDetails?.FundingTime
                     }).ToArray());
         }
 
@@ -1182,7 +1188,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 price: request.Price,
                 leverage: request.Leverage,
                 marginType: request.MarginMode == null ? null : request.MarginMode == SharedMarginMode.Cross ? MarginType.Cross : MarginType.Isolated,
-                postOnly: request.OrderType == SharedOrderType.LimitMaker,
+                // null, not false, for anything that is not post-only: post_only is not a field of the
+                // market_market_ioc configuration, and Coinbase rejects the whole order with
+                // 'proto: unknown field "post_only"' when it is sent on a futures market order
+                // (observed 2026-08-03). Same shape the spot path already uses.
+                postOnly: request.OrderType == SharedOrderType.LimitMaker ? true : null,
                 clientOrderId: request.ClientOrderId,
                 ct: ct).ConfigureAwait(false);
 

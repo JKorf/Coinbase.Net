@@ -251,6 +251,10 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 4.4.1 - 14 Aug 2026
+    * Fixed Shared GetFuturesTicker(s)Async parsing issue dated CDE ticker NRE and futures market-order postOnly 
+    * Fixed Shared PlaceFuturesOrderAsync postOnly parameter
+
 * Version 4.4.0 - 06 Aug 2026
     * Fixed deserialization issue INTX perpetual balances response
     * Fixed incorrect Shared GetBalancesAsync asset name mapping for Perpetual futures

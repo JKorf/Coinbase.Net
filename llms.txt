@@ -97,6 +97,7 @@ Console.WriteLine(product.Data.LastPrice);
 - Reuse clients or use dependency injection.
 - Store and unsubscribe WebSocket subscriptions.
 - For multi-exchange code, use `AdvancedTradeApi.SharedClient` and call `.Discover()` to inspect supported shared features before routing optional shared endpoints.
-- Shared spot/futures symbols include display names and typed asset/subtype metadata
+- Shared spot/futures symbols include display names and typed asset/subtype metadata.
+- Shared results use `SharedOrderQuantity` for base, quote, or contract quantities; shared order-book levels use base-asset quantities.
 
 See `CLAUDE.md`, `llms-full.txt`, `docs/ai-api-map.md`, and `Examples/ai-friendly/` for more complete guidance.

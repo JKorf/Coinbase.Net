@@ -4,9 +4,9 @@
 
 Coinbase.Net is a strongly typed .NET client library for Coinbase Advanced Trade REST/WebSocket APIs, selected Coinbase App REST endpoints, and Coinbase Exchange market-data APIs. It is part of the CryptoExchange.Net ecosystem and uses the same result, shared API, logging, rate limiting, dependency injection, and socket subscription patterns as the other JKorf exchange libraries.
 
-Current package version in this repository: 4.4.1.
+Current package version in this repository: 4.5.0.
 NuGet package id: JKorf.Coinbase.Net.
-CryptoExchange.Net dependency: 12.2.0.
+CryptoExchange.Net dependency: 12.5.0.
 Target frameworks: netstandard2.0, netstandard2.1, net8.0, net9.0, net10.0.
 Native AOT: supported on compatible .NET targets.
 
@@ -669,6 +669,8 @@ Console.WriteLine($"{info.Exchange} {info.TypeName}: {string.Join(", ", supporte
 ```
 
 Shared spot and futures symbol responses include `DisplayName`, `BaseAssetType`, `BaseAssetSubType`, `QuoteAssetType`, and `QuoteAssetSubType`. Coinbase maps known fiat quotes as fiat, stablecoins as crypto/stablecoin, and supported non-crypto futures underlyings as TradFi equity or commodity. `GetSpotSymbolsAsync` and `GetFuturesSymbolsAsync` honor `GetSymbolsRequest` filters and populate `ISpotSymbolRestClient.SpotSymbolCatalog` or `IFuturesSymbolRestClient.FuturesSymbolCatalog` for cached symbol lookup.
+
+Shared market-data, trade, order, open-interest, and position results expose quantities as `SharedOrderQuantity`; use the base-asset, quote-asset, or contract value appropriate to the result. `SharedOrderBook.QuantityType` is `SharedQuantityType.BaseAsset` for Coinbase order books.
 
 Native Coinbase endpoints remain better when the user needs Coinbase-specific fields or parameters:
 

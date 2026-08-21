@@ -28,7 +28,7 @@ var publicClient = new CoinbaseRestClient();
 
 ## Result handling
 
-REST methods return `WebCallResult<T>` and WebSocket subscription methods return `CallResult<UpdateSubscription>`. Always check `.Success` before reading `.Data`.
+REST methods return `HttpResult<T>` and WebSocket subscription methods return `WebSocketResult<UpdateSubscription>`. Always check `.Success` before reading `.Data`.
 
 Order placement also has an exchange-level success flag:
 
@@ -80,7 +80,7 @@ await socketClient.UnsubscribeAsync(sub.Data);
 
 ## Cross-exchange
 
-For exchange-agnostic code, use `CryptoExchange.Net.SharedApis` through `.SharedClient`, for example `new CoinbaseRestClient().AdvancedTradeApi.SharedClient`. Shared spot/futures symbols provide display names, typed asset/subtype metadata, request filtering, and cached symbol catalogs. 
+For exchange-agnostic code, use `CryptoExchange.Net.SharedApis` through `.SharedClient`, for example `new CoinbaseRestClient().AdvancedTradeApi.SharedClient`. Shared spot/futures symbols provide display names, typed asset/subtype metadata, request filtering, and cached symbol catalogs. Shared results use `SharedOrderQuantity` for base, quote, or contract quantities; shared order-book levels use base-asset quantities.
 
 ## Avoid
 

@@ -294,6 +294,8 @@ Console.WriteLine(string.Join(", ", coinbaseShared.SupportedTradingModes));
 
 Shared spot/futures symbol results include display names plus `SharedAssetType` and `SharedAssetSubType` classification (including fiat, stablecoin, equity, and commodity metadata). Shared symbol requests populate the corresponding spot/futures symbol catalog and honor shared symbol filters.
 
+Shared API quantity-bearing results use `SharedOrderQuantity`; read the base, quote, or contract quantity as appropriate. Shared order-book level quantities are base-asset quantities.
+
 Use native Coinbase endpoints when the user needs Coinbase-specific products, portfolios, Coinbase App payment/deposit/withdrawal endpoints, Advanced Trade order configuration, or Exchange API streams.
 
 ## Dependency Injection

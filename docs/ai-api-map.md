@@ -194,6 +194,8 @@ Shared REST calls return `HttpResult<T>` / `HttpResult`. Shared socket subscript
 
 Shared spot/futures symbol results include `DisplayName` and base/quote `SharedAssetType` / `SharedAssetSubType` metadata. Coinbase classifies known fiat and stablecoins and maps supported non-crypto futures underlyings to TradFi equity or commodity metadata.
 
+Shared quantity-bearing results use `SharedOrderQuantity`; select its base-asset, quote-asset, or contract value as appropriate. Shared order books set `QuantityType` to `SharedQuantityType.BaseAsset`.
+
 For shared socket subscriptions, keep the concrete socket client and unsubscribe with `await socketClient.UnsubscribeAsync(subscription.Data)`.
 
 ## Result Handling

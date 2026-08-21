@@ -29,6 +29,21 @@ namespace Coinbase.Net.Enums
         /// ["<c>FUTURES_ASSET_TYPE_ENERGY</c>"] Energy
         /// </summary>
         [Map("FUTURES_ASSET_TYPE_ENERGY")]
-        Energy
+        Energy,
+        /// <summary>
+        /// ["<c>FUTURES_ASSET_TYPE_COMMODITIES</c>"] Commodities
+        /// </summary>
+        [Map("FUTURES_ASSET_TYPE_COMMODITIES")]
+        Commodities,
+        /// <summary>
+        /// ["<c>FUTURES_ASSET_TYPE_INDICES</c>"] Indices
+        /// </summary>
+        [Map("FUTURES_ASSET_TYPE_INDICES")]
+        Indices,
+        /// <summary>
+        /// ["<c>UNKNOWN_FUTURES_ASSET_TYPE</c>"] Unknown
+        /// </summary>
+        [Map("UNKNOWN_FUTURES_ASSET_TYPE")]
+        Unknown
     }
 }

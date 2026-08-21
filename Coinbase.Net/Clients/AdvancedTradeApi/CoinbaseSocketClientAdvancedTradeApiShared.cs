@@ -258,7 +258,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         new SharedPosition(
                             ExchangeSymbolCache.ParseSymbol(_topicFuturesId, EnvironmentName, null, x.Symbol),
                             x.Symbol,
-                            x.NetQuantity,
+                            new SharedOrderQuantity(x.NetQuantity),
                             null)
                         {
                             AverageOpenPrice = x.EntryVolumeWeightedAveragePrice,
@@ -270,13 +270,17 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                         }).ToList();
 
                     positions.AddRange(update.Data.PositionInfo.ExpiringPositions.Select(x =>
-                        new SharedPosition(ExchangeSymbolCache.ParseSymbol(_topicFuturesId, EnvironmentName, null, x.Symbol), x.Symbol, x.NumberOfContracts, null)
-                        {
-                            AverageOpenPrice = x.EntryPrice,
-                            PositionMode = SharedPositionMode.HedgeMode,
-                            PositionSide = x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,
-                            UnrealizedPnl = x.UnrealizedPnl
-                        }));
+                        new SharedPosition(
+                            ExchangeSymbolCache.ParseSymbol(_topicFuturesId, EnvironmentName, null, x.Symbol),
+                            x.Symbol, 
+                            new SharedOrderQuantity(x.NumberOfContracts),
+                            null)
+                            {
+                                AverageOpenPrice = x.EntryPrice,
+                                PositionMode = SharedPositionMode.HedgeMode,
+                                PositionSide = x.PositionSide == PositionSide.Short ? SharedPositionSide.Short : SharedPositionSide.Long,
+                                UnrealizedPnl = x.UnrealizedPnl
+                            }));
 
                     handler(update.ToType<SharedPosition[]>(positions.ToArray()));
                 },

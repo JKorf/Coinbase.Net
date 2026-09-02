@@ -14,4 +14,18 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
         IPositionSocketClient
     {
     }
+
+    /// <summary>
+    /// Shared API interface. Shared APIs provide a common,
+    /// exchange-independent contract for accessing functionality across different
+    /// exchange client libraries.
+    /// </summary>
+    public interface ICoinbaseSocketClientAdvancedTradeSharedApi :
+        ISubscribeKlinesSocket,
+        ISubscribeTickerSocket,
+        ISubscribeTradesSocket,
+        ISubscribeSpotOrdersSocket,
+        ISubscribeFuturesOrdersSocket,
+        ISubscribePositionsSocket
+    { }
 }

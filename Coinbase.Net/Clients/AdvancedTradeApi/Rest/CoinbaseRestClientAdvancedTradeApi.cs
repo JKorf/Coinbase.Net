@@ -25,6 +25,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
     internal partial class CoinbaseRestClientAdvancedTradeApi : RestApiClient<CoinbaseEnvironment, CoinbaseAuthenticationProvider, CoinbaseCredentials>, ICoinbaseRestClientAdvancedTradeApi
     {
         #region fields 
+        private readonly CoinbaseRestClientAdvancedTradeSharedApi _sharedApi;
+
         protected override IRestMessageHandler MessageHandler { get; } = new CoinbaseRestMessageHandler(CoinbaseErrors.Errors);
         protected override ErrorMapping ErrorMapping => CoinbaseErrors.Errors;
         #endregion
@@ -47,6 +49,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             Account = new CoinbaseRestClientAdvancedTradeApiAccount(this);
             ExchangeData = new CoinbaseRestClientAdvancedTradeApiExchangeData(_logger, this);
             Trading = new CoinbaseRestClientAdvancedTradeApiTrading(_logger, this);
+
+            _sharedApi = new CoinbaseRestClientAdvancedTradeSharedApi(this);
 
             StandardRequestHeaders = new Dictionary<string, string>
             {
@@ -81,7 +85,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 => CoinbaseExchange.FormatSymbol(baseAsset, quoteAsset, tradingMode, deliverTime);
 
         /// <inheritdoc />
-        public ICoinbaseRestClientAdvancedTradeApiShared SharedClient => this;
+        public ICoinbaseRestClientAdvancedTradeApiShared SharedClient => _sharedApi;
+        /// <inheritdoc />
+        public ICoinbaseRestClientAdvancedTradeSharedApi SharedApi => _sharedApi;
 
     }
 }

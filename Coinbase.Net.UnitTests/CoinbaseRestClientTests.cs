@@ -1,12 +1,13 @@
-using CryptoExchange.Net.Clients;
-using NUnit.Framework;
-using System.Collections.Generic;
 using Coinbase.Net.Clients;
+using Coinbase.Net.Clients.AdvancedTradeApi;
+using Coinbase.Net.Interfaces.Clients;
+using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.Testing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using CryptoExchange.Net.Objects;
-using Coinbase.Net.Interfaces.Clients;
-using Coinbase.Net.Clients.AdvancedTradeApi;
+using NUnit.Framework;
+using System.Collections.Generic;
 
 namespace Coinbase.Net.UnitTests
 {
@@ -118,6 +119,24 @@ namespace Coinbase.Net.UnitTests
             Assert.That(((BaseApiClient)restClient.AdvancedTradeApi).ClientOptions.Proxy.Port, Is.EqualTo(80));
             Assert.That(((BaseApiClient)socketClient.AdvancedTradeApi).ClientOptions.Proxy.Host, Is.EqualTo("host2"));
             Assert.That(((BaseApiClient)socketClient.AdvancedTradeApi).ClientOptions.Proxy.Port, Is.EqualTo(81));
+        }
+
+        [Test]
+        public void TestRestSharedApiDiscoveryMatchesAggregate()
+        {
+            var (missingOptions, missingInterfaces) = TestHelpers.ValidateSharedApi(new CoinbaseRestClient().AdvancedTradeApi.SharedApi);
+
+            Assert.That(missingOptions, Is.Empty);
+            Assert.That(missingInterfaces, Is.Empty);
+        }
+
+        [Test]
+        public void TestSocketSharedApiDiscoveryMatchesAggregate()
+        {
+            var (missingOptions, missingInterfaces) = TestHelpers.ValidateSharedApi(new CoinbaseSocketClient().AdvancedTradeApi.SharedApi);
+
+            Assert.That(missingOptions, Is.Empty);
+            Assert.That(missingInterfaces, Is.Empty);
         }
     }
 }

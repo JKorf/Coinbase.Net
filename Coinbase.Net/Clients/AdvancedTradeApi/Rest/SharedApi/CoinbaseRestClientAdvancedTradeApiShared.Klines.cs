@@ -15,7 +15,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     internal partial class CoinbaseRestClientAdvancedTradeSharedApi
     {
-        #region Klines Client
+
+        #region Get Klines
+
+        async Task<ICallResult<SharedKline[]>> IGetKlines.GetKlinesAsync(GetKlinesRequest request, PageRequest? pageRequest, CancellationToken ct)
+            => await GetKlinesAsync(request, pageRequest, ct).ConfigureAwait(false);
 
         public GetKlinesOptions GetKlinesOptions { get; } = new GetKlinesOptions(_exchangeName, false, true, true, 350, false,
             SharedKlineInterval.OneMinute,
@@ -75,5 +79,6 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         #endregion
+
     }
 }

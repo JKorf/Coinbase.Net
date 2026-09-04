@@ -14,11 +14,12 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     internal partial class CoinbaseSocketClientAdvancedTradeSharedApi
     {
-        #region Kline client
         public SubscribeKlineOptions SubscribeKlineOptions { get; } = new SubscribeKlineOptions(_exchangeName, false, SharedKlineInterval.FiveMinutes)
         {
             SupportsMultipleSymbols = true
         };
+        #region Subscribe To Kline Updates
+
         public async Task<WebSocketResult<UpdateSubscription>> SubscribeToKlineUpdatesAsync(SubscribeKlineRequest request, Action<DataEvent<SharedKline>> handler, CancellationToken ct)
         {
             var interval = (Enums.KlineInterval)request.Interval;
@@ -49,6 +50,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             return result;
         }
+
         #endregion
     }
 }

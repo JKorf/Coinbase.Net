@@ -15,7 +15,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     internal partial class CoinbaseRestClientAdvancedTradeSharedApi
     {
-        #region Futures Symbol client
+
+        #region Get Futures Symbols
+
+        async Task<ICallResult<SharedFuturesSymbol[]>> IGetFuturesSymbols.GetFuturesSymbolsAsync(GetSymbolsRequest request, CancellationToken ct)
+            => await GetFuturesSymbolsAsync(request, ct).ConfigureAwait(false);
 
         public SharedSymbolCatalog? FuturesSymbolCatalog => ExchangeSymbolCache.GetSymbolCatalog(_exchangeName, _topicFuturesId, _api.EnvironmentName, null);
         public GetFuturesSymbolsOptions GetFuturesSymbolsOptions { get; } = new GetFuturesSymbolsOptions(_exchangeName, false);
@@ -37,6 +41,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             ExchangeSymbolCache.UpdateSymbolInfo(_topicFuturesId, _api.EnvironmentName, expiringTime.ToString(), data);
             return HttpResult.Ok(result, SharedUtils.ApplySymbolFilter(data, request));
         }
+
+        #endregion
 
         private SharedFuturesSymbol ParseFuturesSymbol(CoinbaseSymbol x)
         {
@@ -162,6 +168,5 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             return ExchangeCallResult<bool>.Ok(Exchange, ExchangeSymbolCache.SupportsSymbol(_topicFuturesId, _api.EnvironmentName, null, symbolName));
         }
 
-        #endregion
     }
 }

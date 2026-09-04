@@ -118,6 +118,11 @@ namespace Microsoft.Extensions.DependencyInjection
                 x.GetRequiredService<IOptions<CoinbaseRestOptions>>(),
                 x.GetRequiredService<IOptions<CoinbaseSocketOptions>>()));
 
+            services.AddTransient<ICoinbaseSharedApiClient, CoinbaseSharedApiClient>();
+
+            services.RegisterSharedApi(x => x.GetRequiredService<ICoinbaseRestClient>().AdvancedTradeApi.SharedApi);
+            services.RegisterSharedApi(x => x.GetRequiredService<ICoinbaseSocketClient>().AdvancedTradeApi.SharedApi);
+
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<ICoinbaseRestClient>().AdvancedTradeApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<ICoinbaseSocketClient>().AdvancedTradeApi.SharedClient);
 

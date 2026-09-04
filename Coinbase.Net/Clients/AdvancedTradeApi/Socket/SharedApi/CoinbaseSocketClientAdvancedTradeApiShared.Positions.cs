@@ -14,9 +14,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     internal partial class CoinbaseSocketClientAdvancedTradeSharedApi
     {
-        #region Position client
 
         public SubscribePositionOptions SubscribePositionOptions { get; } = new SubscribePositionOptions(_exchangeName, true);
+        #region Subscribe To Position Updates
+
         public async Task<WebSocketResult<UpdateSubscription>> SubscribeToPositionUpdatesAsync(SubscribePositionRequest request, Action<DataEvent<SharedPosition[]>> handler, CancellationToken ct)
         {
             var validationError = SubscribePositionOptions.ValidateRequest(request, this);
@@ -62,5 +63,6 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         #endregion
+
     }
 }

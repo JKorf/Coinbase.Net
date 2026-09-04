@@ -15,8 +15,12 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     internal partial class CoinbaseRestClientAdvancedTradeSharedApi
     {
-        #region Fee Client
         public GetFeeOptions GetFeeOptions { get; } = new GetFeeOptions(_exchangeName, true);
+
+        #region Get Fees
+
+        async Task<ICallResult<SharedFee>> IGetFees.GetFeesAsync(GetFeeRequest request, CancellationToken ct)
+            => await GetFeesAsync(request, ct).ConfigureAwait(false);
 
         public async Task<HttpResult<SharedFee>> GetFeesAsync(GetFeeRequest request, CancellationToken ct)
         {
@@ -33,6 +37,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             // Return
             return HttpResult.Ok(result, new SharedFee(result.Data.FeeTier.MakerFeeRate * 100, result.Data.FeeTier.TakerFeeRate * 100));
         }
+
         #endregion
     }
 }

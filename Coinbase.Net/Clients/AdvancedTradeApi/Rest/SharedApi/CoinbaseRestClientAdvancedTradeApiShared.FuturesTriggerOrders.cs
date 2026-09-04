@@ -15,7 +15,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     internal partial class CoinbaseRestClientAdvancedTradeSharedApi
     {
-        #region Futures Trigger Order Client
+        #region Place Futures Trigger Order
+
+        async Task<ICallResult<SharedId>> IPlaceFuturesTriggerOrder.PlaceFuturesTriggerOrderAsync(PlaceFuturesTriggerOrderRequest request, CancellationToken ct)
+            => await PlaceFuturesTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public PlaceFuturesTriggerOrderOptions PlaceFuturesTriggerOrderOptions { get; } = new PlaceFuturesTriggerOrderOptions(_exchangeName, true)
         {
         };
@@ -45,6 +49,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             return HttpResult.Ok(result, new SharedId(result.Data.SuccessResponse.OrderId));
         }
 
+        #endregion
+
         private OrderSide GetTriggerOrderSide(PlaceFuturesTriggerOrderRequest request)
         {
             if (request.PositionSide == SharedPositionSide.Long)
@@ -58,6 +64,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return OrderSide.Sell;
             return OrderSide.Buy;
         }
+
+        #region Get Futures Trigger Order
+
+        async Task<ICallResult<SharedFuturesTriggerOrder>> IGetFuturesTriggerOrder.GetFuturesTriggerOrderAsync(GetOrderRequest request, CancellationToken ct)
+            => await GetFuturesTriggerOrderAsync(request, ct).ConfigureAwait(false);
 
         public GetFuturesTriggerOrderOptions GetFuturesTriggerOrderOptions { get; } = new GetFuturesTriggerOrderOptions(_exchangeName, true)
         {
@@ -95,6 +106,13 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             });
         }
 
+        #endregion
+
+        #region Cancel Futures Trigger Order
+
+        async Task<ICallResult<SharedId>> ICancelFuturesTriggerOrder.CancelFuturesTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
+            => await CancelFuturesTriggerOrderAsync(request, ct).ConfigureAwait(false);
+
         public CancelFuturesTriggerOrderOptions CancelFuturesTriggerOrderOptions { get; } = new CancelFuturesTriggerOrderOptions(_exchangeName, true);
         public async Task<HttpResult<SharedId>> CancelFuturesTriggerOrderAsync(CancelOrderRequest request, CancellationToken ct)
         {
@@ -112,5 +130,6 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         #endregion
+
     }
 }

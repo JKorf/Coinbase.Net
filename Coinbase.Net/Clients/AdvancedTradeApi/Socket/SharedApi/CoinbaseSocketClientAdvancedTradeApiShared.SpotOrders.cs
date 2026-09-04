@@ -14,7 +14,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
     internal partial class CoinbaseSocketClientAdvancedTradeSharedApi
     {
-        #region Spot Order client
+
+        #region Subscribe To Spot Order Updates
 
         async Task<WebSocketResult<UpdateSubscription>> ISpotOrderSocketClient.SubscribeToSpotOrderUpdatesAsync(SubscribeSpotOrderRequest request, Action<DataEvent<SharedSpotOrder[]>> handler, CancellationToken ct)
             => await SubscribeToSpotOrderUpdatesAsync(request, x => handler(x.ToType<SharedSpotOrder[]>(x.Data)), ct).ConfigureAwait(false);
@@ -62,6 +63,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             return result;
         }
 
+        #endregion
+
         private SharedOrderQuantity ParseOrderQuantity(CoinbaseOrderUpdate order)
         {
             if (order.OrderType != OrderType.Market || order.OrderSide != OrderSide.Buy)
@@ -94,6 +97,5 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             return SharedOrderStatus.Unknown;
         }
-        #endregion
     }
 }

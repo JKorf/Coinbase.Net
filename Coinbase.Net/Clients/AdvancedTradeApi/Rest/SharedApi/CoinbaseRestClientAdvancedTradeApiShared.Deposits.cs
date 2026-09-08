@@ -23,10 +23,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         public GetDepositAddressesOptions GetDepositAddressesOptions { get; } = new GetDepositAddressesOptions(_exchangeName, true)
         {
-            OptionalExchangeParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription("AccountId", typeof(string), "Id of the account to get info for", "123123")
-            }
+            ExchangeParameterRules = [
+                ExchangeParameterRule.Optional("AccountId", "Id of the account to get info for", "123123")
+            ]
         };
         public async Task<HttpResult<SharedDepositAddress[]>> GetDepositAddressesAsync(GetDepositAddressesRequest request, CancellationToken ct)
         {
@@ -62,10 +61,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         public GetDepositHistoryOptions GetDepositHistoryOptions { get; } = new GetDepositHistoryOptions(_exchangeName, true, true, false, 100)
         {
-            OptionalExchangeParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription("AccountId", typeof(string), "Id of the account to get info for", "123123")
-            }
+            ExchangeParameterRules = [
+                ExchangeParameterRule.Optional("AccountId", "Id of the account to get info for", "123123")
+            ]
         };
         public async Task<HttpResult<SharedDeposit[]>> GetDepositHistoryAsync(GetDepositsRequest request, PageRequest? pageRequest, CancellationToken ct)
         {

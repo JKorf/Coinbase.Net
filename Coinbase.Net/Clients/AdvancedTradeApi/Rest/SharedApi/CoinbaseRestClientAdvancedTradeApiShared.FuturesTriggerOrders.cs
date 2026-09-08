@@ -31,6 +31,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (validationError != null)
                 return HttpResult.Fail<SharedId>(Exchange, validationError);
 
+            // As per documentation TP/SL orders are always reduce only
+
             var result = await _api.Trading.PlaceOrderAsync(
                 request.Symbol!.GetSymbol(FormatSymbol),
                 side,

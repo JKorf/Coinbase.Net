@@ -27,10 +27,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         public GetWithdrawalHistoryOptions GetWithdrawalHistoryOptions { get; } = new GetWithdrawalHistoryOptions(_exchangeName, true, true, false, 100)
         {
-            OptionalExchangeParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription("AccountId", typeof(string), "Id of the account to get info for", "123123")
-            }
+            ExchangeParameterRules = [
+                ExchangeParameterRule.Optional("AccountId", "Id of the account to get info for", "123123")
+            ]
         };
         public async Task<HttpResult<SharedWithdrawal[]>> GetWithdrawalHistoryAsync(GetWithdrawalsRequest request, PageRequest? pageRequest, CancellationToken ct)
         {
@@ -108,10 +107,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         public WithdrawOptions WithdrawOptions { get; } = new WithdrawOptions(_exchangeName)
         {
-            OptionalExchangeParameters = new List<ParameterDescription>
-            {
-                new ParameterDescription("AccountId", typeof(string), "Id of the account to withdraw from", "123123")
-            }
+            ExchangeParameterRules = [
+                ExchangeParameterRule.Optional("AccountId", "Id of the account to withdraw from", "123123")
+            ]
         };
         public async Task<HttpResult<SharedId>> WithdrawAsync(WithdrawRequest request, CancellationToken ct)
         {

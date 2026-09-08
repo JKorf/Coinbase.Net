@@ -13,7 +13,7 @@ using Coinbase.Net.Objects.Models;
 
 namespace Coinbase.Net.Clients.AdvancedTradeApi
 {
-    internal partial class CoinbaseRestClientAdvancedTradeSharedApi : 
+    internal partial class CoinbaseRestClientAdvancedTradeSharedApi :
         SharedApiBase,
         ICoinbaseRestClientAdvancedTradeApiShared,
         ICoinbaseRestClientAdvancedTradeSharedApi
@@ -49,8 +49,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 GetWithdrawalHistoryOptions,
                 WithdrawOptions,
                 GetSpotSymbolsOptions,
-                GetSpotTickerOptions,
-                GetAllSpotTickersOptions,
+                GetTickerOptions,
+                GetAllTickersOptions,
                 GetBookTickerOptions,
                 PlaceSpotOrderOptions,
                 GetSpotOrderOptions,
@@ -59,8 +59,6 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 GetSpotOrderTradesOptions,
                 GetSpotUserTradeHistoryOptions,
                 CancelSpotOrderOptions,
-                GetFuturesTickerOptions,
-                GetAllFuturesTickersOptions,
                 GetFuturesSymbolsOptions,
                 GetOpenInterestOptions,
                 PlaceFuturesOrderOptions,
@@ -71,7 +69,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 GetFuturesUserTradeHistoryOptions,
                 CancelFuturesOrderOptions,
                 GetPositionsOptions,
-                ClosePositionOptions,
+                CloseFullPositionOptions,
                 GetKlinesOptions,
                 GetFeeOptions,
                 PlaceSpotTriggerOrderOptions,

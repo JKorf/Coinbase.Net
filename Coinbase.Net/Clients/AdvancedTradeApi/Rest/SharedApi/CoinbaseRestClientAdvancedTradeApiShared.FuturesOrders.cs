@@ -393,9 +393,31 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         #endregion
 
         #region Close Position
+        async Task<ICallResult<SharedId>> ICloseFullPosition.CloseFullPositionAsync(CloseFullPositionRequest request, CancellationToken ct)
+            => await CloseFullPositionAsync(request, ct).ConfigureAwait(false);
 
-        async Task<ICallResult<SharedId>> IClosePosition.ClosePositionAsync(ClosePositionRequest request, CancellationToken ct)
-            => await ClosePositionAsync(request, ct).ConfigureAwait(false);
+        public CloseFullPositionOptions CloseFullPositionOptions { get; } = new CloseFullPositionOptions(_exchangeName, true)
+        {
+            ParameterRuleOverwrites = [
+                RequestParameterRuleOverride<CloseFullPositionRequest>.NotSupported(x => x.PositionSide)
+            ]
+        };
+
+        public async Task<HttpResult<SharedId>> CloseFullPositionAsync(CloseFullPositionRequest request, CancellationToken ct)
+        {
+            var validationError = CloseFullPositionOptions.ValidateRequest(request, this);
+            if (validationError != null)
+                return HttpResult.Fail<SharedId>(Exchange, validationError);
+
+            var symbol = request.Symbol!.GetSymbol(FormatSymbol);
+            var result = await _api.Trading.ClosePositionAsync(
+                symbol,
+                ct: ct).ConfigureAwait(false);
+            if (!result.Success)
+                return HttpResult.Fail<SharedId>(result);
+
+            return HttpResult.Ok(result, new SharedId(result.Data.SuccessResponse.OrderId));
+        }
 
         public ClosePositionOptions ClosePositionOptions { get; } = new ClosePositionOptions(_exchangeName, true);
         public async Task<HttpResult<SharedId>> ClosePositionAsync(ClosePositionRequest request, CancellationToken ct)
@@ -414,6 +436,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
             return HttpResult.Ok(result, new SharedId(result.Data.SuccessResponse.OrderId));
         }
+
 
         #endregion
 

@@ -138,5 +138,37 @@ namespace Coinbase.Net.UnitTests
             Assert.That(missingOptions, Is.Empty);
             Assert.That(missingInterfaces, Is.Empty);
         }
+
+        [Test]
+        public void TestSpotRestSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = TestHelpers.ValidateUnsupportedCapabilities(new CoinbaseRestClient().AdvancedTradeApi.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
+
+        [Test]
+        public void TestSpotSocketSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = TestHelpers.ValidateUnsupportedCapabilities(new CoinbaseSocketClient().AdvancedTradeApi.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
+
+        [Test]
+        public void TestFuturesRestSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = TestHelpers.ValidateUnsupportedCapabilities(new CoinbaseRestClient().AdvancedTradeApi.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
+
+        [Test]
+        public void TestFuturesSocketSharedApiDoesntHaveUnsupportedCapabilities()
+        {
+            var unsupported = TestHelpers.ValidateUnsupportedCapabilities(new CoinbaseSocketClient().AdvancedTradeApi.SharedApi);
+
+            Assert.That(unsupported, Is.Empty);
+        }
     }
 }

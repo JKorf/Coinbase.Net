@@ -22,6 +22,10 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         public PlaceFuturesTriggerOrderOptions PlaceFuturesTriggerOrderOptions { get; } = new PlaceFuturesTriggerOrderOptions(_exchangeName, true)
         {
+            ParameterRuleOverwrites = [
+                    RequestParameterRuleOverride<PlaceFuturesTriggerOrderRequest>.NotSupported(x => x.Leverage),
+                    RequestParameterRuleOverride<PlaceFuturesTriggerOrderRequest>.NotSupported(x => x.ReduceOnly),
+                ]
         };
 
         public async Task<HttpResult<SharedId>> PlaceFuturesTriggerOrderAsync(PlaceFuturesTriggerOrderRequest request, CancellationToken ct)
@@ -43,6 +47,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 stopPrice: request.TriggerPrice,
                 stopDirection: request.PriceDirection == SharedTriggerPriceDirection.PriceAbove ? StopDirection.Up : StopDirection.Down,
                 clientOrderId: request.ClientOrderId,
+                marginType: request.MarginMode == null ? null: request.MarginMode == SharedMarginMode.Isolated ? MarginType.Isolated : MarginType.Cross,
                 ct: ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<SharedId>(result);

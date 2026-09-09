@@ -32,7 +32,14 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         async Task<ICallResult<SharedId>> IPlaceFuturesOrder.PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
             => await PlaceFuturesOrderAsync(request, ct).ConfigureAwait(false);
 
-        public PlaceFuturesOrderOptions PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderOptions(_exchangeName, false);
+        public PlaceFuturesOrderOptions PlaceFuturesOrderOptions { get; } = new PlaceFuturesOrderOptions(_exchangeName, false)
+        {
+            ParameterRuleOverwrites = [
+                RequestParameterRuleOverride<PlaceFuturesOrderRequest>.NotSupported(x => x.StopLossPrice),
+                RequestParameterRuleOverride<PlaceFuturesOrderRequest>.NotSupported(x => x.TakeProfitPrice),
+                RequestParameterRuleOverride<PlaceFuturesOrderRequest>.NotSupported(x => x.PositionSide),
+                ]
+        };
         public async Task<HttpResult<SharedId>> PlaceFuturesOrderAsync(PlaceFuturesOrderRequest request, CancellationToken ct)
         {
             var validationError = PlaceFuturesOrderOptions.ValidateRequest(request, this);
@@ -40,7 +47,27 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 return HttpResult.Fail<SharedId>(Exchange, validationError);
 
             if (request.ReduceOnly == true)
-                return HttpResult.Fail<SharedId>(Exchange, ArgumentError.Invalid(nameof(PlaceFuturesOrderRequest.ReduceOnly), $"ReduceOnly flag is not available on {Exchange}, use ClosePositionAsync with quantity to reduce a position"));
+            {
+                if (request.OrderType != SharedOrderType.Market)
+                {
+                    return HttpResult.Fail<SharedId>(
+                        Exchange,
+                        ArgumentError.Invalid(
+                            nameof(request.OrderType),
+                            "Coinbase does not allow for reduce-only futures orders with non-market order types. Either use a market order or do not set the reduce-only flag"));
+                }
+
+                var closeResult = await _api.Trading.ClosePositionAsync(
+                    request.Symbol!.GetSymbol(FormatSymbol),
+                    quantity: request.Quantity?.QuantityInContracts,
+                    clientOrderId: request.ClientOrderId,
+                    ct: ct).ConfigureAwait(false);
+
+                if (!closeResult.Success)
+                    return HttpResult.Fail<SharedId>(closeResult);
+
+                return HttpResult.Ok(closeResult, new SharedId(closeResult.Data.SuccessResponse.OrderId.ToString()));
+            }
 
             var result = await _api.Trading.PlaceOrderAsync(
                 request.Symbol!.GetSymbol(FormatSymbol),
@@ -50,10 +77,6 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 price: request.Price,
                 leverage: request.Leverage,
                 marginType: request.MarginMode == null ? null : request.MarginMode == SharedMarginMode.Cross ? MarginType.Cross : MarginType.Isolated,
-                // null, not false, for anything that is not post-only: post_only is not a field of the
-                // market_market_ioc configuration, and Coinbase rejects the whole order with
-                // 'proto: unknown field "post_only"' when it is sent on a futures market order
-                // (observed 2026-08-03). Same shape the spot path already uses.
                 postOnly: request.OrderType == SharedOrderType.LimitMaker ? true : null,
                 clientOrderId: request.ClientOrderId,
                 ct: ct).ConfigureAwait(false);

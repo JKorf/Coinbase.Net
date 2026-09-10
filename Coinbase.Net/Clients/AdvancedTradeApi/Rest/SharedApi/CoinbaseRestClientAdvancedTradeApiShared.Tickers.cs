@@ -142,7 +142,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         public GetAllTickersOptions GetAllTickersOptions { get; } = new GetAllTickersOptions(_exchangeName)
         {
-            ParameterRuleOverwrites = [
+            ParameterRuleOverrides = [
                 RequestParameterRuleOverride<GetTickersRequest>.Required(x => x.TradingMode)
                 ]
         };

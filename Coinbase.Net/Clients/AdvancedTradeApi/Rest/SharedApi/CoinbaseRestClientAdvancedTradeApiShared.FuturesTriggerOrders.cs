@@ -22,7 +22,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         public PlaceFuturesTriggerOrderOptions PlaceFuturesTriggerOrderOptions { get; } = new PlaceFuturesTriggerOrderOptions(_exchangeName, true)
         {
-            ParameterRuleOverwrites = [
+            ParameterRuleOverrides = [
                     RequestParameterRuleOverride<PlaceFuturesTriggerOrderRequest>.NotSupported(x => x.Leverage),
                     RequestParameterRuleOverride<PlaceFuturesTriggerOrderRequest>.NotSupported(x => x.ReduceOnly),
                 ]

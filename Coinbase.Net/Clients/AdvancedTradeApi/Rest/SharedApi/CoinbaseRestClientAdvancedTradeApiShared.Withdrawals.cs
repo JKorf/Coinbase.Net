@@ -27,7 +27,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         public GetWithdrawalHistoryOptions GetWithdrawalHistoryOptions { get; } = new GetWithdrawalHistoryOptions(_exchangeName, true, true, false, 100)
         {
-            ParameterRuleOverwrites = [
+            ParameterRuleOverrides = [
                 RequestParameterRuleOverride<GetWithdrawalsRequest>.NotSupported(x => x.StartTime),
                 RequestParameterRuleOverride<GetWithdrawalsRequest>.NotSupported(x => x.EndTime),
             ],
@@ -111,7 +111,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         public WithdrawOptions WithdrawOptions { get; } = new WithdrawOptions(_exchangeName)
         {
-            ParameterRuleOverwrites = [
+            ParameterRuleOverrides = [
                 RequestParameterRuleOverride<WithdrawRequest>.NotSupported(x => x.Network)
                 ],
             ExchangeParameterRules = [

@@ -61,7 +61,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
 
         public GetDepositHistoryOptions GetDepositHistoryOptions { get; } = new GetDepositHistoryOptions(_exchangeName, true, true, false, 100)
         {
-            ParameterRuleOverwrites = [
+            ParameterRuleOverrides = [
                 RequestParameterRuleOverride<GetDepositsRequest>.NotSupported(x => x.Asset),
                 RequestParameterRuleOverride<GetDepositsRequest>.NotSupported(x => x.StartTime),
                 RequestParameterRuleOverride<GetDepositsRequest>.NotSupported(x => x.EndTime)

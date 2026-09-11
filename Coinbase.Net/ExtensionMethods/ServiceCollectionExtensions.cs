@@ -57,9 +57,9 @@ namespace Microsoft.Extensions.DependencyInjection
             options.Socket.Environment = CoinbaseEnvironment.GetEnvironmentByName(socketEnvName) ?? options.Socket.Environment!;
             options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
 
-
-            services.AddSingleton(x => Options.Options.Create(options.Rest));
-            services.AddSingleton(x => Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options.Rest));
+            services.AddSingleton(Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options));
 
             return AddCoinbaseCore(services, options.SocketClientLifeTime);
         }
@@ -87,8 +87,9 @@ namespace Microsoft.Extensions.DependencyInjection
             options.Socket.Environment = options.Socket.Environment ?? options.Environment ?? CoinbaseEnvironment.Live;
             options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
 
-            services.AddSingleton(x => Options.Options.Create(options.Rest));
-            services.AddSingleton(x => Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options.Rest));
+            services.AddSingleton(Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options));
 
             return AddCoinbaseCore(services, options.SocketClientLifeTime);
         }
@@ -122,6 +123,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.RegisterSharedApi(x => x.GetRequiredService<ICoinbaseRestClient>().AdvancedTradeApi.SharedApi);
             services.RegisterSharedApi(x => x.GetRequiredService<ICoinbaseSocketClient>().AdvancedTradeApi.SharedApi);
+
+            services.RegisterSharedApiClientCapabilities<ICoinbaseSharedApiClient>();
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<ICoinbaseRestClient>().AdvancedTradeApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<ICoinbaseSocketClient>().AdvancedTradeApi.SharedClient);

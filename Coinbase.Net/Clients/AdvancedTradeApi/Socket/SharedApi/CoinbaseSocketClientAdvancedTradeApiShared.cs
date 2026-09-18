@@ -28,7 +28,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         public CoinbaseSocketClientAdvancedTradeSharedApi(CoinbaseSocketClientAdvancedTradeApi api)
            : base(
                  SharedTransport.Socket,
-                 api.Exchange,
+                 api,
                  [TradingMode.Spot, TradingMode.PerpetualLinear, TradingMode.DeliveryLinear],
                  () => api.Authenticated,
                  api.FormatSymbol)

@@ -30,7 +30,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         public CoinbaseRestClientAdvancedTradeSharedApi(CoinbaseRestClientAdvancedTradeApi api)
            : base(
                  SharedTransport.Rest,
-                 api.Exchange,
+                 api,
                  [TradingMode.Spot, TradingMode.PerpetualLinear, TradingMode.DeliveryLinear],
                  () => api.Authenticated,
                  api.FormatSymbol)

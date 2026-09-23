@@ -85,7 +85,7 @@ REST:
 restClient.AdvancedTradeApi.ExchangeData  // products, product book, candles, trades, book ticker, prices, assets
 restClient.AdvancedTradeApi.Account       // accounts, portfolios, fees, key info, payments, deposits, withdrawals
 restClient.AdvancedTradeApi.Trading       // place/cancel/edit/query orders, fills, futures/perpetual positions
-restClient.AdvancedTradeApi.SharedClient  // CryptoExchange.Net shared REST abstraction
+restClient.AdvancedTradeApi.SharedApi  // CryptoExchange.Net shared REST abstraction
 
 restClient.ExchangeApi.ExchangeData       // Exchange API currencies and product list
 ```
@@ -94,7 +94,7 @@ WebSocket:
 
 ```csharp
 socketClient.AdvancedTradeApi             // Advanced Trade ticker, trades, candles, level2, user, futures balance
-socketClient.AdvancedTradeApi.SharedClient
+socketClient.AdvancedTradeApi.SharedApi
 socketClient.ExchangeApi                  // Exchange API heartbeat, ticker, status, level2
 ```
 
@@ -286,7 +286,7 @@ await socketClient.ExchangeApi.SubscribeToOrderBookUpdatesAsync(
 For exchange-agnostic code, use shared clients:
 
 ```csharp
-var coinbaseShared = new CoinbaseRestClient().AdvancedTradeApi.SharedClient;
+var coinbaseShared = new CoinbaseRestClient().AdvancedTradeApi.SharedApi;
 
 Console.WriteLine(coinbaseShared.Exchange);
 Console.WriteLine(string.Join(", ", coinbaseShared.SupportedTradingModes));

@@ -46,7 +46,7 @@ Primary documentation:
 - Use Coinbase dash-separated product ids such as `ETH-USD`, `BTC-USD`, and `ETH-USDT`.
 - Do not use compact symbols such as `ETHUSDT`, underscore symbols such as `ETH_USDT`, slash symbols such as `ETH/USD`, or Bitfinex symbols such as `tETHUSD`.
 - Let the library generate `clientOrderId` unless the user explicitly needs an idempotency/correlation id.
-- For multi-exchange code, use `CryptoExchange.Net.SharedApis` interfaces from `AdvancedTradeApi.SharedClient` and call `.Discover()` to inspect supported shared features.
+- Use the exchange-level `ICoinbaseSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 
 ## Installation
 
@@ -211,7 +211,7 @@ public class MyService
 }
 ```
 
-Configuration binding is supported through `services.AddCoinbase(configuration)`. The DI extension registers shared REST and socket interfaces from `AdvancedTradeApi.SharedClient`.
+Configuration binding is supported through `services.AddCoinbase(configuration)`. The DI extension registers shared REST and socket interfaces from `AdvancedTradeApi.SharedApi`.
 
 ## Result Handling Pattern
 
@@ -290,7 +290,7 @@ CoinbaseRestClient
     .Account
     .ExchangeData
     .Trading
-    .SharedClient
+    .SharedApi
   .ExchangeApi
     .ExchangeData
 ```
@@ -300,7 +300,7 @@ WebSocket:
 ```text
 CoinbaseSocketClient
   .AdvancedTradeApi
-    .SharedClient
+    .SharedApi
   .ExchangeApi
 ```
 
@@ -658,17 +658,15 @@ Use CryptoExchange.Net.SharedApis when the user asks for code that can work agai
 ```csharp
 using Coinbase.Net.Clients;
 
-var shared = new CoinbaseRestClient().AdvancedTradeApi.SharedClient;
+var shared = new CoinbaseRestClient().AdvancedTradeApi.SharedApi;
 
 Console.WriteLine(shared.Exchange);
 Console.WriteLine(string.Join(", ", shared.SupportedTradingModes));
 
-var info = shared.Discover();
-var supported = info.Features.Where(x => x.Supported).Select(x => x.EndpointName);
-Console.WriteLine($"{info.Exchange} {info.TypeName}: {string.Join(", ", supported)}");
+// Use the exchange-level `ICoinbaseSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 ```
 
-Shared spot and futures symbol responses include `DisplayName`, `BaseAssetType`, `BaseAssetSubType`, `QuoteAssetType`, and `QuoteAssetSubType`. Coinbase maps known fiat quotes as fiat, stablecoins as crypto/stablecoin, and supported non-crypto futures underlyings as TradFi equity or commodity. `GetSpotSymbolsAsync` and `GetFuturesSymbolsAsync` honor `GetSymbolsRequest` filters and populate `ISpotSymbolRestClient.SpotSymbolCatalog` or `IFuturesSymbolRestClient.FuturesSymbolCatalog` for cached symbol lookup.
+Shared spot and futures symbol responses include `DisplayName`, `BaseAssetType`, `BaseAssetSubType`, `QuoteAssetType`, and `QuoteAssetSubType`. Coinbase maps known fiat quotes as fiat, stablecoins as crypto/stablecoin, and supported non-crypto futures underlyings as TradFi equity or commodity. `GetSpotSymbolsAsync` and `GetFuturesSymbolsAsync` honor `GetSymbolsRequest` filters and populate `IGetSpotSymbolsRest.SpotSymbolCatalog` or `IGetFuturesSymbolsRest.FuturesSymbolCatalog` for cached symbol lookup.
 
 Shared market-data, trade, order, open-interest, and position results expose quantities as `SharedOrderQuantity`; use the base-asset, quote-asset, or contract value appropriate to the result. `SharedOrderBook.QuantityType` is `SharedQuantityType.BaseAsset` for Coinbase order books.
 
@@ -688,7 +686,7 @@ Shared WebSocket client:
 
 ```csharp
 var socketClient = new CoinbaseSocketClient();
-var sharedSocket = socketClient.AdvancedTradeApi.SharedClient;
+var sharedSocket = socketClient.AdvancedTradeApi.SharedApi;
 ```
 
 For shared socket interface variables, keep the concrete `CoinbaseSocketClient` so you can call:

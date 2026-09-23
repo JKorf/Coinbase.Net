@@ -16,9 +16,15 @@ namespace Coinbase.Net.Interfaces.Clients.AdvancedTradeApi
     public interface ICoinbaseSocketClientAdvancedTradeApi : ISocketApiClient<CoinbaseCredentials>, IDisposable
     {
         /// <summary>
-        /// Get the shared socket subscription client. This interface is shared with other exchanges to allow for a common implementation for different exchanges.
+        /// [V1] Get the shared socket subscription client. For new implementations prefer <see cref="SharedApi"/>
         /// </summary>
         ICoinbaseSocketClientAdvancedTradeApiShared SharedClient { get; }
+        /// <summary>
+        /// [V2] Gets the aggregate Shared API interface. Shared APIs provide a common,
+        /// exchange-independent contract for accessing functionality across different
+        /// exchange client libraries.
+        /// </summary>
+        ICoinbaseSocketClientAdvancedTradeSharedApi SharedApi { get; }
 
         /// <summary>
         /// Subscribe to the heartbeats channel. The heartbeats channel can be used to keep the connection alive when data from other subscriptions isn't continuous. When using this subscription it is recommended to also set the client option <code>options.SocketNoData = TimeSpan.FromSeconds(5)</code> to quickly detect when the connection is interupted.

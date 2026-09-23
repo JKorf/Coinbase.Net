@@ -97,37 +97,21 @@ For more examples and explanations, continue with the [Coinbase.Net documentatio
 
 ## Shared / unified API
 
-The CryptoExchange.Net [Shared APIs](https://cryptoexchange.jkorf.dev/docs/shared-api) provide exchange-agnostic, unified interfaces for common operations such as retrieving tickers, order books and balances, placing orders, and subscribing to market updates.
+The CryptoExchange.Net [Shared API V2](https://cryptoexchange.jkorf.dev/docs/shared-api) provides exchange-agnostic interfaces and models for common operations such as retrieving tickers, order books and balances, placing orders, and subscribing to market updates.
 
-This allows the same application code to work with different exchange libraries. The supported Coinbase API surfaces expose their shared functionality through a `SharedClient` property. Because support differs between exchanges and API surfaces, call `Discover()` to inspect the available trading modes, environments, endpoints, and subscriptions at runtime.
+V2 uses a strict interface per capability. The `SharedApi` property on each API surface therefore exposes only the operations or subscriptions that surface actually supports. `ICoinbaseSharedApiClient` groups the exchange's Shared API surfaces for dependency injection and runtime capability lookup.
 
-### Supported shared interfaces
-
-| API | Type | Supported interfaces |
-|--|--|--|
-| `AdvancedTradeApi` | REST | `IAssetsRestClient`, `IBalanceRestClient`, `IBookTickerRestClient`, `IDepositRestClient`, `IFeeRestClient`, `IFuturesOrderRestClient`, `IFuturesSymbolRestClient`, `IFuturesTickerRestClient`, `IFuturesTriggerOrderRestClient`, `IKlineRestClient`, `IOpenInterestRestClient`, `IOrderBookRestClient`, `IRecentTradeRestClient`, `ISpotOrderRestClient`, `ISpotSymbolRestClient`, `ISpotTickerRestClient`, `ISpotTriggerOrderRestClient`, `ITradeHistoryRestClient`, `IWithdrawalRestClient`, `IWithdrawRestClient` |
-| `AdvancedTradeApi` | WebSocket | `IFuturesOrderSocketClient`, `IKlineSocketClient`, `IPositionSocketClient`, `ISpotOrderSocketClient`, `ITickerSocketClient`, `ITradeSocketClient` |
-
-### Discover supported functionality
-
-```csharp
-var sharedClient = new CoinbaseRestClient().AdvancedTradeApi.SharedClient;
-var clientInfo = sharedClient.Discover();
-
-Console.WriteLine(clientInfo);
-```
-
-### Example
+### Access a strict capability
 
 ```csharp
 using Coinbase.Net.Clients;
 using CryptoExchange.Net.SharedApis;
 
-var sharedClient = new CoinbaseRestClient().AdvancedTradeApi.SharedClient;
-ISpotTickerRestClient tickerClient = sharedClient;
+using var restClient = new CoinbaseRestClient();
+IGetTickerRest tickerClient = restClient.AdvancedTradeApi.SharedApi;
 
 var symbol = new SharedSymbol(TradingMode.Spot, "ETH", "USDT");
-var result = await tickerClient.GetSpotTickerAsync(
+var result = await tickerClient.GetTickerAsync(
     new GetTickerRequest(symbol));
 
 if (!result.Success)
@@ -139,7 +123,7 @@ if (!result.Success)
 Console.WriteLine(result.Data.LastPrice);
 ```
 
-The request and response models belong to `CryptoExchange.Net.SharedApis`, so the same pattern can be used with another exchange's `SharedClient`.
+The request and response models belong to `CryptoExchange.Net.SharedApis`, so the same operation can accept another exchange's `IGetTickerRest` implementation. When using dependency injection, inject `ICoinbaseSharedApiClient` to access all of the exchange's Shared API surfaces or inject a capability such as `IGetTickerRest` directly. Use `GetCapability` on the aggregate when the operation, transport, or trading mode is selected at runtime.
 
 ## AI documentation
 This repository includes AI-focused guidance for generating correct Coinbase.Net code:

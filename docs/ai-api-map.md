@@ -173,22 +173,22 @@ Use SharedApis for exchange-agnostic code across Coinbase, Binance, Bybit, OKX, 
 
 | User intent | Coinbase.Net member or interface |
 |---|---|
-| Shared Advanced Trade REST client | `new CoinbaseRestClient().AdvancedTradeApi.SharedClient` |
-| Shared Advanced Trade socket client | `new CoinbaseSocketClient().AdvancedTradeApi.SharedClient` |
-| Discover shared capabilities | `client.AdvancedTradeApi.SharedClient.Discover()` |
-| Get filtered shared spot symbols | `ISpotSymbolRestClient.GetSpotSymbolsAsync(new GetSymbolsRequest(...))` |
-| Read cached shared spot symbol catalog | `ISpotSymbolRestClient.SpotSymbolCatalog` |
-| Get filtered shared futures symbols | `IFuturesSymbolRestClient.GetFuturesSymbolsAsync(new GetSymbolsRequest(...))` |
-| Read cached shared futures symbol catalog | `IFuturesSymbolRestClient.FuturesSymbolCatalog` |
-| Shared spot ticker REST | `ISpotTickerRestClient.GetSpotTickerAsync(new GetTickerRequest(symbol))` |
-| Shared spot order REST | `ISpotOrderRestClient.PlaceSpotOrderAsync(...)` |
-| Shared futures order REST | `IFuturesOrderRestClient.PlaceFuturesOrderAsync(...)` |
-| Shared kline REST | `IKlineRestClient.GetKlinesAsync(...)` |
-| Shared ticker socket | `ITickerSocketClient.SubscribeToTickerUpdatesAsync(...)` |
-| Shared kline socket | `IKlineSocketClient.SubscribeToKlineUpdatesAsync(...)` |
-| Shared trade socket | `ITradeSocketClient.SubscribeToTradeUpdatesAsync(...)` |
-| Shared order socket | `ISpotOrderSocketClient` / `IFuturesOrderSocketClient` |
-| Shared position socket | `IPositionSocketClient` |
+| Shared Advanced Trade REST client | `new CoinbaseRestClient().AdvancedTradeApi.SharedApi` |
+| Shared Advanced Trade socket client | `new CoinbaseSocketClient().AdvancedTradeApi.SharedApi` |
+| Resolve a runtime-selected Shared API capability | `ICoinbaseSharedApiClient.GetCapability(...)` |
+| Get filtered shared spot symbols | `IGetSpotSymbolsRest.GetSpotSymbolsAsync(new GetSymbolsRequest(...))` |
+| Read cached shared spot symbol catalog | `IGetSpotSymbolsRest.SpotSymbolCatalog` |
+| Get filtered shared futures symbols | `IGetFuturesSymbolsRest.GetFuturesSymbolsAsync(new GetSymbolsRequest(...))` |
+| Read cached shared futures symbol catalog | `IGetFuturesSymbolsRest.FuturesSymbolCatalog` |
+| Shared spot ticker REST | `IGetTickerRest.GetTickerAsync(new GetTickerRequest(symbol))` |
+| Shared spot order REST | `IPlaceSpotOrderRest.PlaceSpotOrderAsync(...)` |
+| Shared futures order REST | `IPlaceFuturesOrderRest.PlaceFuturesOrderAsync(...)` |
+| Shared kline REST | `IGetKlinesRest.GetKlinesAsync(...)` |
+| Shared ticker socket | `ISubscribeTickerSocket.SubscribeToTickerUpdatesAsync(...)` |
+| Shared kline socket | `ISubscribeKlinesSocket.SubscribeToKlineUpdatesAsync(...)` |
+| Shared trade socket | `ISubscribeTradesSocket.SubscribeToTradeUpdatesAsync(...)` |
+| Shared order socket | `ISubscribeSpotOrdersSocket` / `ISubscribeFuturesOrdersSocket` |
+| Shared position socket | `ISubscribePositionsSocket` |
 
 Shared REST calls return `HttpResult<T>` / `HttpResult`. Shared socket subscriptions return `WebSocketResult<UpdateSubscription>`. Shared non-I/O symbol/cache helpers can return `ExchangeCallResult<T>`.
 
@@ -236,7 +236,7 @@ For shared socket subscriptions, keep the concrete socket client and unsubscribe
 | `BTCUSDT` | `BTC-USD` or a listed Coinbase product id |
 | `.Data` without `.Success` check | Check `.Success` first |
 | `CoinbaseOrderResult.SuccessResponse` without checking `CoinbaseOrderResult.Success` | Check both success layers |
-| `ITickerSocketClient.UnsubscribeAsync(...)` | Keep the concrete socket client and call `socketClient.UnsubscribeAsync(subscription.Data)` |
+| Unsubscribe from a shared subscription | Keep the concrete socket client and call `socketClient.UnsubscribeAsync(subscription.Data)` |
 | Custom `clientOrderId` by default | Let Coinbase.Net auto-generate it unless explicit idempotency is needed |
 
 ## Source Of Truth

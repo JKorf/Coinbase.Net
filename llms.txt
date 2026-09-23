@@ -35,13 +35,13 @@ Public market data can use `new CoinbaseRestClient()` or `new CoinbaseSocketClie
 - `restClient.AdvancedTradeApi.ExchangeData`
 - `restClient.AdvancedTradeApi.Account`
 - `restClient.AdvancedTradeApi.Trading`
-- `restClient.AdvancedTradeApi.SharedClient`
+- `restClient.AdvancedTradeApi.SharedApi`
 - `restClient.ExchangeApi.ExchangeData`
 
 ## WebSocket Roots
 
 - `socketClient.AdvancedTradeApi`
-- `socketClient.AdvancedTradeApi.SharedClient`
+- `socketClient.AdvancedTradeApi.SharedApi`
 - `socketClient.ExchangeApi`
 
 ## Common Calls
@@ -96,7 +96,7 @@ Console.WriteLine(product.Data.LastPrice);
 - Use async/await.
 - Reuse clients or use dependency injection.
 - Store and unsubscribe WebSocket subscriptions.
-- For multi-exchange code, use `AdvancedTradeApi.SharedClient` and call `.Discover()` to inspect supported shared features before routing optional shared endpoints.
+- Use the exchange-level `ICoinbaseSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
 - Shared spot/futures symbols include display names and typed asset/subtype metadata.
 - Shared results use `SharedOrderQuantity` for base, quote, or contract quantities; shared order-book levels use base-asset quantities.
 

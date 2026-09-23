@@ -43,7 +43,7 @@ if (!order.Data.Success) { return; }
 - `restClient.AdvancedTradeApi.ExchangeData` for products, candles, trades, order book, best bid/ask, prices, assets
 - `restClient.AdvancedTradeApi.Account` for accounts, portfolios, fees, key info, payment methods, deposits, withdrawals, transfers
 - `restClient.AdvancedTradeApi.Trading` for orders, fills, futures positions, perpetual positions
-- `restClient.AdvancedTradeApi.SharedClient` for CryptoExchange.Net shared REST abstractions
+- `restClient.AdvancedTradeApi.SharedApi` for CryptoExchange.Net shared REST abstractions
 - `restClient.ExchangeApi.ExchangeData` for Coinbase Exchange currencies and products
 - `socketClient.AdvancedTradeApi` for Advanced Trade ticker, trades, candles, level2, user, futures balance streams
 - `socketClient.ExchangeApi` for Exchange API heartbeat, ticker, status, level2 streams
@@ -80,7 +80,7 @@ await socketClient.UnsubscribeAsync(sub.Data);
 
 ## Cross-exchange
 
-For exchange-agnostic code, use `CryptoExchange.Net.SharedApis` through `.SharedClient`, for example `new CoinbaseRestClient().AdvancedTradeApi.SharedClient`. Shared spot/futures symbols provide display names, typed asset/subtype metadata, request filtering, and cached symbol catalogs. Shared results use `SharedOrderQuantity` for base, quote, or contract quantities; shared order-book levels use base-asset quantities.
+For exchange-agnostic code, use `CryptoExchange.Net.SharedApis` through `.SharedApi`, for example `new CoinbaseRestClient().AdvancedTradeApi.SharedApi`. Shared spot/futures symbols provide display names, typed asset/subtype metadata, request filtering, and cached symbol catalogs. Shared results use `SharedOrderQuantity` for base, quote, or contract quantities; shared order-book levels use base-asset quantities.
 
 ## Avoid
 

@@ -401,7 +401,7 @@ namespace Coinbase.Net.Objects.Models
         /// ["<c>max_leverage</c>"] Max leverage
         /// </summary>
         [JsonPropertyName("max_leverage")]
-        public decimal MaxLeverage { get; set; }
+        public decimal? MaxLeverage { get; set; }
         /// <summary>
         /// ["<c>base_asset_uuid</c>"] Base asset uuid
         /// </summary>

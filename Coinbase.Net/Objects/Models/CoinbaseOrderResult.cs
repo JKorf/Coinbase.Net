@@ -94,8 +94,11 @@ namespace Coinbase.Net.Objects.Models
         [JsonPropertyName("new_order_failure_reason")]
         public string? OrderFailureReason { get; set; }
 
+        /// <summary>
+        /// ["<c>edit_failure_reason</c>"] Edit endpoint alias for the order failure reason
+        /// </summary>
         [JsonInclude]
-        [JsonPropertyName("edit_order_failure_reason")]
+        [JsonPropertyName("edit_failure_reason")]
         internal string? EditFailureReason { set => OrderFailureReason = value; }
     }
 }

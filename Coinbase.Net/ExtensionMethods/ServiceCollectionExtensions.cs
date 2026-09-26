@@ -1,18 +1,19 @@
-using CryptoExchange.Net.Clients;
-using CryptoExchange.Net.Interfaces;
-using System;
-using System.Net.Http;
+using Coinbase.Net;
 using Coinbase.Net.Clients;
 using Coinbase.Net.Interfaces;
 using Coinbase.Net.Interfaces.Clients;
 using Coinbase.Net.Objects.Options;
 using Coinbase.Net.SymbolOrderBooks;
 using CryptoExchange.Net;
-using Coinbase.Net;
+using CryptoExchange.Net.Clients;
+using CryptoExchange.Net.Interfaces;
+using CryptoExchange.Net.Interfaces.Clients;
+using CryptoExchange.Net.SharedApis;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Configuration;
-using CryptoExchange.Net.Interfaces.Clients;
+using System;
+using System.Net.Http;
 using System.Threading;
 
 namespace Microsoft.Extensions.DependencyInjection
@@ -33,33 +34,11 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             IConfiguration configuration)
         {
-            var options = new CoinbaseOptions();
-            // Reset environment so we know if they're overridden
-            options.Rest.Environment = null!;
-            options.Socket.Environment = null!;
+            var options = CoinbaseOptions.CreateFromConfiguration(configuration);
 
-            try
-            {
-                configuration.Bind(options);
-            }
-            catch (InvalidOperationException ex)
-            {
-                throw new InvalidOperationException("Invalid configuration provided", ex);
-            }
-
-            if (options.Rest == null || options.Socket == null)
-                throw new ArgumentException("Options null");
-
-            var restEnvName = options.Rest.Environment?.Name ?? options.Environment?.Name ?? CoinbaseEnvironment.Live.Name;
-            var socketEnvName = options.Socket.Environment?.Name ?? options.Environment?.Name ?? CoinbaseEnvironment.Live.Name;
-            options.Rest.Environment = CoinbaseEnvironment.GetEnvironmentByName(restEnvName) ?? options.Rest.Environment!;
-            options.Rest.ApiCredentials = options.Rest.ApiCredentials ?? options.ApiCredentials;
-            options.Socket.Environment = CoinbaseEnvironment.GetEnvironmentByName(socketEnvName) ?? options.Socket.Environment!;
-            options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
-
-
-            services.AddSingleton(x => Options.Options.Create(options.Rest));
-            services.AddSingleton(x => Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options.Rest));
+            services.AddSingleton(Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options));
 
             return AddCoinbaseCore(services, options.SocketClientLifeTime);
         }
@@ -74,21 +53,11 @@ namespace Microsoft.Extensions.DependencyInjection
             this IServiceCollection services,
             Action<CoinbaseOptions>? optionsDelegate = null)
         {
-            var options = new CoinbaseOptions();
-            // Reset environment so we know if they're overridden
-            options.Rest.Environment = null!;
-            options.Socket.Environment = null!;
-            optionsDelegate?.Invoke(options);
-            if (options.Rest == null || options.Socket == null)
-                throw new ArgumentException("Options null");
+            var options = CoinbaseOptions.Create(optionsDelegate);
 
-            options.Rest.Environment = options.Rest.Environment ?? options.Environment ?? CoinbaseEnvironment.Live;
-            options.Rest.ApiCredentials = options.Rest.ApiCredentials ?? options.ApiCredentials;
-            options.Socket.Environment = options.Socket.Environment ?? options.Environment ?? CoinbaseEnvironment.Live;
-            options.Socket.ApiCredentials = options.Socket.ApiCredentials ?? options.ApiCredentials;
-
-            services.AddSingleton(x => Options.Options.Create(options.Rest));
-            services.AddSingleton(x => Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options.Rest));
+            services.AddSingleton(Options.Options.Create(options.Socket));
+            services.AddSingleton(Options.Options.Create(options));
 
             return AddCoinbaseCore(services, options.SocketClientLifeTime);
         }
@@ -120,6 +89,13 @@ namespace Microsoft.Extensions.DependencyInjection
 
             services.RegisterSharedRestInterfaces(x => x.GetRequiredService<ICoinbaseRestClient>().AdvancedTradeApi.SharedClient);
             services.RegisterSharedSocketInterfaces(x => x.GetRequiredService<ICoinbaseSocketClient>().AdvancedTradeApi.SharedClient);
+
+            services.RegisterSharedApiClient<
+                ICoinbaseSharedApiClient,
+                CoinbaseSharedApiClient>(sharedApis => sharedApis
+                    .Add(client => client.AdvancedTradeRest)
+                    .Add(client => client.AdvancedTradeSocket)
+                    );
 
             return services;
         }

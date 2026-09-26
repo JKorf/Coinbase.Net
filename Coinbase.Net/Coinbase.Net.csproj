@@ -7,9 +7,9 @@
   <PropertyGroup>
     <PackageId>JKorf.Coinbase.Net</PackageId>
     <Authors>JKorf</Authors>
-    <PackageVersion>4.5.0</PackageVersion>
-    <AssemblyVersion>4.5.0</AssemblyVersion>
-    <FileVersion>4.5.0</FileVersion>
+    <PackageVersion>4.6.0</PackageVersion>
+    <AssemblyVersion>4.6.0</AssemblyVersion>
+    <FileVersion>4.6.0</FileVersion>
     <Description>A high-performance .NET client library for the Coinbase REST and WebSocket APIs, providing strongly typed models, automatic WebSocket reconnection, client-side rate limiting, local order book support, and seamless integration with other CryptoExchange.Net based clients.</Description>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
     <PackageTags>Coinbase;Coinbase.Net;Coinbase.com;Coinbase Client;Coinbase API;CryptoCurrency;CryptoCurrency Exchange;CryptoExchange.Net;ccxt</PackageTags>
@@ -36,7 +36,7 @@
     <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
   </PropertyGroup>
   <ItemGroup Label="Deterministic Build" Condition="'$(Configuration)' == 'Release'">
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0">
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.401">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
@@ -53,7 +53,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="CryptoExchange.Net" Version="12.5.1" />
+    <PackageReference Include="CryptoExchange.Net" Version="13.0.0" />
     <PackageReference Include="Microsoft.CodeAnalysis.NetAnalyzers" Version="10.0.101">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>

@@ -29,7 +29,11 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         /// <inheritdoc />
         public async Task<HttpResult<DateTime>> GetServerTimeAsync(CancellationToken ct = default)
         {
-            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "api/v3/brokerage/time", CoinbaseExchange.RateLimiter.CoinbaseRestPublic, 1, false);
+            var request = _definitions.GetOrCreate(HttpMethod.Get, _baseClient.BaseAddress, "api/v3/brokerage/time", CoinbaseExchange.RateLimiter.CoinbaseRestPublic,
+                1, 
+                false,
+                preventRequestCoalescing: true,
+                preventCaching: true);
             var result = await _baseClient.SendAsync<CoinbaseTime>(request, null, ct).ConfigureAwait(false);
             if (!result.Success)
                 return HttpResult.Fail<DateTime>(result);

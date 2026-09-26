@@ -19,11 +19,16 @@ namespace Coinbase.Net
             string? userIdentifier,
             SpotUserDataTrackerConfig? config) : base(
                 logger,
-                restClient.AdvancedTradeApi.SharedClient,
-                restClient.AdvancedTradeApi.SharedClient,
+                restClient.AdvancedTradeApi.SharedApi,
+
+                restClient.AdvancedTradeApi.SharedApi,
                 null,
-                restClient.AdvancedTradeApi.SharedClient,
-                socketClient.AdvancedTradeApi.SharedClient,
+
+                restClient.AdvancedTradeApi.SharedApi,
+                restClient.AdvancedTradeApi.SharedApi,
+                socketClient.AdvancedTradeApi.SharedApi,
+
+                restClient.AdvancedTradeApi.SharedApi,
                 null,
                 userIdentifier,
                 config ?? new SpotUserDataTrackerConfig())
@@ -46,13 +51,20 @@ namespace Coinbase.Net
             ICoinbaseSocketClient socketClient,
             string? userIdentifier,
             FuturesUserDataTrackerConfig? config) : base(logger,
-                restClient.AdvancedTradeApi.SharedClient,
-                restClient.AdvancedTradeApi.SharedClient,
+                restClient.AdvancedTradeApi.SharedApi,
+
+                restClient.AdvancedTradeApi.SharedApi,
                 null,
-                restClient.AdvancedTradeApi.SharedClient,
-                socketClient.AdvancedTradeApi.SharedClient,
+
+                restClient.AdvancedTradeApi.SharedApi,
+                restClient.AdvancedTradeApi.SharedApi,
+                socketClient.AdvancedTradeApi.SharedApi,
+
+                restClient.AdvancedTradeApi.SharedApi,
                 null,
-                socketClient.AdvancedTradeApi.SharedClient,
+
+                restClient.AdvancedTradeApi.SharedApi,
+                socketClient.AdvancedTradeApi.SharedApi,
                 userIdentifier,
                 config ?? new FuturesUserDataTrackerConfig())
         {

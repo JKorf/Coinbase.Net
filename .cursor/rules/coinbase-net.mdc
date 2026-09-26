@@ -41,10 +41,10 @@ For order placement, also check `order.Data.Success` after the transport result 
 - `restClient.AdvancedTradeApi.ExchangeData`
 - `restClient.AdvancedTradeApi.Account`
 - `restClient.AdvancedTradeApi.Trading`
-- `restClient.AdvancedTradeApi.SharedClient`
+- `restClient.AdvancedTradeApi.SharedApi`
 - `restClient.ExchangeApi.ExchangeData`
 - `socketClient.AdvancedTradeApi`
-- `socketClient.AdvancedTradeApi.SharedClient`
+- `socketClient.AdvancedTradeApi.SharedApi`
 - `socketClient.ExchangeApi`
 
 ## Symbols
@@ -88,7 +88,7 @@ Use `AdvancedTradeApi.SubscribeToUserUpdatesAsync` for authenticated order and p
 Use CryptoExchange.Net shared clients:
 
 ```csharp
-var shared = new CoinbaseRestClient().AdvancedTradeApi.SharedClient;
+var shared = new CoinbaseRestClient().AdvancedTradeApi.SharedApi;
 Console.WriteLine(shared.Exchange);
 ```
 

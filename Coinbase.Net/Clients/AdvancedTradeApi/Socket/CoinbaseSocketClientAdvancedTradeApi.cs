@@ -32,6 +32,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
     /// </summary>
     internal partial class CoinbaseSocketClientAdvancedTradeApi : SocketApiClient<CoinbaseEnvironment, CoinbaseAuthenticationProvider, CoinbaseCredentials>, ICoinbaseSocketClientAdvancedTradeApi
     {
+        private readonly CoinbaseSocketClientAdvancedTradeSharedApi _sharedApi;
+
         public new CoinbaseSocketOptions ClientOptions => (CoinbaseSocketOptions)base.ClientOptions;
 
         #region constructor/destructor
@@ -43,6 +45,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             base(loggerFactory, CoinbaseExchange.Metadata.Id, options.Environment.SocketClientPublicAddress!, options, options.AdvancedTradeOptions)
         {
             EnforceSequenceNumbers = true;
+
+            _sharedApi = new CoinbaseSocketClientAdvancedTradeSharedApi(this);
         }
         #endregion
 
@@ -323,7 +327,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
         }
 
         /// <inheritdoc />
-        public ICoinbaseSocketClientAdvancedTradeApiShared SharedClient => this;
+        public ICoinbaseSocketClientAdvancedTradeApiShared SharedClient => _sharedApi;
+        /// <inheritdoc />
+        public ICoinbaseSocketClientAdvancedTradeSharedApi SharedApi => _sharedApi;
 
         /// <inheritdoc />
         public override string FormatSymbol(string baseAsset, string quoteAsset, TradingMode tradingMode, DateTime? deliverTime = null)

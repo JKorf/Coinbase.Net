@@ -156,8 +156,15 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             if (!result.Success)
                 return result;
 
-            if (!result.Data.Success && result.Data.ErrorResponse != null)
-                return HttpResult.Fail<CoinbaseEditOrderResult>(result, new ServerError(result.Data.ErrorResponse.ErrorCode, _baseClient.GetErrorInfo(result.Data.ErrorResponse.ErrorCode, result.Data.ErrorResponse.Message)));
+            if (!result.Data.Success)
+            {
+                // A rejected edit can report only a preview reason, or omit error details altogether.
+                var error = result.Data.Errors?.FirstOrDefault();
+                var code = error?.OrderFailureReason ?? error?.PreviewFailureReason;
+                return HttpResult.Fail<CoinbaseEditOrderResult>(result, code == null
+                    ? new ServerError(ErrorInfo.Unknown)
+                    : new ServerError(code, _baseClient.GetErrorInfo(code, error?.PreviewFailureReason ?? code)));
+            }
 
             return result;
         }

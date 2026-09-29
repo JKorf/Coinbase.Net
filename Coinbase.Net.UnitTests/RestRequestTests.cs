@@ -85,7 +85,7 @@ namespace Coinbase.Net.UnitTests
             var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/AdvancedTrade/Trading", "https://api.coinbase.com", IsAuthenticated);
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Trading.PlaceOrderAsync("ETHUSDT", OrderSide.Sell, NewOrderType.Limit), "PlaceOrder", ignoreProperties: new List<string> { "order_configuration" });
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Trading.CancelOrdersAsync(new[] { "123" }), "CancelOrders", nestedJsonProperty: "results");
-            await tester.ValidateAsync(client => client.AdvancedTradeApi.Trading.EditOrderAsync("123", 1, 1), "EditOrder", ignoreProperties: new List<string> { "errors" });
+            await tester.ValidateAsync(client => client.AdvancedTradeApi.Trading.EditOrderAsync("123", 1, 1), "EditOrder");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Trading.GetOrderAsync("123"), "GetOrder", nestedJsonProperty: "order");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Trading.GetOrdersAsync(), "GetOrders", nestedJsonProperty: "orders", ignoreProperties: new List<string> { "order_configuration" });
             await tester.ValidateAsync(client => client.AdvancedTradeApi.Trading.GetUserTradesAsync(), "GetUserTrades");

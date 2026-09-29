@@ -1,29 +1,25 @@
 using CryptoExchange.Net.Converters.SystemTextJson;
+using System;
 using System.Text.Json.Serialization;
 
 namespace Coinbase.Net.Objects.Models
 {
     /// <summary>
-    /// Order info
+    /// Order edit acknowledgement
     /// </summary>
     [SerializationModel]
     public record CoinbaseEditOrderResult
     {
         /// <summary>
-        /// ["<c>success</c>"] Whether the call was succesfull
+        /// ["<c>success</c>"] Whether the order edit request was placed
         /// </summary>
         [JsonPropertyName("success")]
         public bool Success { get; set; }
 
         /// <summary>
-        /// ["<c>success_response</c>"] Success response
+        /// ["<c>errors</c>"] Reasons the edit request was rejected
         /// </summary>
-        [JsonPropertyName("success_response")]
-        public CoinbaseOrderSuccess SuccessResponse { get; set; } = null!;
-        /// <summary>
-        /// ["<c>error_response</c>"] Error response
-        /// </summary>
-        [JsonPropertyName("error_response")]
-        public CoinbaseOrderError ErrorResponse { get; set; } = null!;
+        [JsonPropertyName("errors")]
+        public CoinbaseOrderError[] Errors { get; set; } = Array.Empty<CoinbaseOrderError>();
     }
 }

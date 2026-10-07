@@ -1,0 +1,14 @@
+GET
+/api/v3/brokerage/market/products/ETH-USDT/candles
+false
+UriParams: {"granularity": "FOUR_HOUR"}
+{
+  "candles": [{
+    "start": "1791345600",
+    "low": "84002.68",
+    "high": "84365.25",
+    "open": "84122.52",
+    "close": "84100.08",
+    "volume": "481.47063391"
+  }]
+}

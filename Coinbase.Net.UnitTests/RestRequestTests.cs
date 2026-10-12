@@ -1,4 +1,5 @@
 using CryptoExchange.Net.Objects;
+using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Testing;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -68,10 +69,22 @@ namespace Coinbase.Net.UnitTests
             var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/AdvancedTrade/ExchangeData", "https://api.coinbase.com", IsAuthenticated);
             await tester.ValidateAsync(client => client.AdvancedTradeApi.ExchangeData.GetSymbolsAsync(), "GetSymbols", "products");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.ExchangeData.GetKlinesAsync("ETH-USDT", KlineInterval.OneDay), "GetKlines", "candles");
+            await tester.ValidateAsync(client => client.AdvancedTradeApi.ExchangeData.GetKlinesAsync("ETH-USDT", KlineInterval.FourHours), "GetKlinesFourHour", "candles");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.ExchangeData.GetTradeHistoryAsync("ETH-USDT"), "GetTradeHistory", ignoreProperties: new List<string> { "bid", "ask" });
             await tester.ValidateAsync(client => client.AdvancedTradeApi.ExchangeData.GetFiatAssetsAsync(), "GetFiatAssets", nestedJsonProperty: "data");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.ExchangeData.GetCryptoAssetsAsync(), "GetCryptoAssets", "data");
             await tester.ValidateAsync(client => client.AdvancedTradeApi.ExchangeData.GetExchangeRatesAsync(), "GetExchangeRates", nestedJsonProperty: "data");
+        }
+
+        [Test]
+        public async Task ValidateAdvancedTradeSharedKlineCalls()
+        {
+            var client = new CoinbaseRestClient(opts =>
+            {
+                opts.AutoTimestamp = false;
+            });
+            var tester = new RestRequestValidator<CoinbaseRestClient>(client, "Endpoints/AdvancedTrade/ExchangeData", "https://api.coinbase.com", IsAuthenticated);
+            await tester.ValidateAsync(client => client.AdvancedTradeApi.SharedApi.GetKlinesAsync(new GetKlinesRequest(new SharedSymbol(TradingMode.Spot, "ETH", "USDT"), SharedKlineInterval.FourHours)), "GetKlinesFourHour", skipResponseValidation: true);
         }
 
         [Test]

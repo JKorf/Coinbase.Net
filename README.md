@@ -236,6 +236,11 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 4.7.0 - 30 Sep 2026
+    * Updated CryptoExchange.Net to V13.1.0
+    * Updated MaxLeverage on CoinbaseSymbol model to nullable to prevent deserialization issue
+    * Updated CoinbaseEditOrderResult model
+
 * Version 4.6.0 - 24 Sep 2026
     * Updated CryptoExchange.Net to v13.0.0
     * Shared APIs

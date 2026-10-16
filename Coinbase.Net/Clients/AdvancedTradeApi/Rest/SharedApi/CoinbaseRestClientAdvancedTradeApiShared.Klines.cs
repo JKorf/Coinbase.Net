@@ -28,6 +28,7 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             SharedKlineInterval.ThirtyMinutes,
             SharedKlineInterval.OneHour,
             SharedKlineInterval.TwoHours,
+            SharedKlineInterval.FourHours,
             SharedKlineInterval.SixHours,
             SharedKlineInterval.OneDay);
 

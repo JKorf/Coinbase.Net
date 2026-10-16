@@ -44,6 +44,9 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
                 SubscribePositionOptions
                 );
         }
-        
+
+        /// <inheritdoc />
+        public Task UnsubscribeAllAsync() => _api.UnsubscribeAllAsync();
+
     }
 }

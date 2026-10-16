@@ -77,6 +77,7 @@ namespace Coinbase.Net.UnitTests
                     "product_cbrn",
                     "icon_color",
                     "icon_url",
+                    "hidden_from_discovery"
                     ]);
             await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USD", default), false, ignoreProperties: [
                     "base_cbrn",
@@ -84,6 +85,7 @@ namespace Coinbase.Net.UnitTests
                     "product_cbrn",
                     "icon_color",
                     "icon_url",
+                    "hidden_from_discovery"
                     ]);
             await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetOrderBookAsync("ETH-USD", 1, default, default), false, "pricebook");
             await RunAndCheckResult(warnings, client => client.AdvancedTradeApi.ExchangeData.GetKlinesAsync("ETH-USD", Enums.KlineInterval.OneDay, default, default, 5, default), false, "candles");

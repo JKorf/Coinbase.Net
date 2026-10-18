@@ -289,11 +289,15 @@ namespace Coinbase.Net.Objects.Models
     [SerializationModel]
     public record CoinbaseSymbolFuturesDetails
     {
-        /// <summary>["<c>intraday_margin_rate</c>"] Intraday initial margin rates.</summary>
+        /// <summary>
+        /// ["<c>intraday_margin_rate</c>"] Intraday initial margin rates.
+        /// </summary>
         [JsonPropertyName("intraday_margin_rate")]
         public CoinbaseFuturesMarginRates? IntradayMarginRate { get; set; }
 
-        /// <summary>["<c>overnight_margin_rate</c>"] Overnight initial margin rates.</summary>
+        /// <summary>
+        /// ["<c>overnight_margin_rate</c>"] Overnight initial margin rates.
+        /// </summary>
         [JsonPropertyName("overnight_margin_rate")]
         public CoinbaseFuturesMarginRates? OvernightMarginRate { get; set; }
 
@@ -399,15 +403,21 @@ namespace Coinbase.Net.Objects.Models
         public FuturesAssetType FuturesAssetType { get; set; }
     }
 
-    /// <summary>Initial margin as a fraction of contract notional for each position side.</summary>
+    /// <summary>
+    /// Initial margin as a fraction of contract notional for each position side.
+    /// </summary>
     [SerializationModel]
     public record CoinbaseFuturesMarginRates
     {
-        /// <summary>["<c>long_margin_rate</c>"] Long initial margin rate, or null when unavailable.</summary>
+        /// <summary>
+        /// ["<c>long_margin_rate</c>"] Long initial margin rate, or null when unavailable.
+        /// </summary>
         [JsonPropertyName("long_margin_rate")]
         public decimal? LongMarginRate { get; set; }
 
-        /// <summary>["<c>short_margin_rate</c>"] Short initial margin rate, or null when unavailable.</summary>
+        /// <summary>
+        /// ["<c>short_margin_rate</c>"] Short initial margin rate, or null when unavailable.
+        /// </summary>
         [JsonPropertyName("short_margin_rate")]
         public decimal? ShortMarginRate { get; set; }
     }

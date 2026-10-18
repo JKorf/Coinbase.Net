@@ -83,7 +83,7 @@ namespace Coinbase.Net.Objects.Models
     }
 
     /// <summary>
-    /// Window info. Inactive windows can return empty numeric strings.
+    /// Window info
     /// </summary>
     [SerializationModel]
     public record CoinbaseFuturesBalanceWindow

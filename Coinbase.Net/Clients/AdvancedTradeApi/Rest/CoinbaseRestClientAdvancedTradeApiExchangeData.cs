@@ -54,6 +54,8 @@ namespace Coinbase.Net.Clients.AdvancedTradeApi
             parameters.Add("contract_expiry_type", expiryType);
             parameters.Add("expiring_contract_status", expireStatus);
             parameters.Add("get_all_products", allProducts);
+            parameters.Add("limit", limit);
+            parameters.Add("offset", offset);
             RequestDefinition request;
             if (!_baseClient.Authenticated)
             {

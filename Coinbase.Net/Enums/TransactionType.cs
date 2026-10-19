@@ -154,6 +154,11 @@ namespace Coinbase.Net.Enums
         /// ["<c>asset_migration</c>"] Asset migration
         /// </summary>
         [Map("asset_migration")]
-        AssetMigration
+        AssetMigration,
+        /// <summary>
+        /// ["<c>fcm_futures_usdc_sell</c>"] Convert USDC to USD to fund futures margin requirements
+        /// </summary>
+        [Map("fcm_futures_usdc_sell")]
+        FcmFuturesUsdcSell
     }
 }

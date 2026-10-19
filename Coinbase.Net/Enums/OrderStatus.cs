@@ -54,6 +54,11 @@ namespace Coinbase.Net.Enums
         /// ["<c>CANCEL_QUEUED</c>"] Cancel has been queued
         /// </summary>
         [Map("CANCEL_QUEUED")]
-        CancelQueued
+        CancelQueued,
+        /// <summary>
+        /// ["<c>EDIT_QUEUED</c>"] Order amendment has been queued
+        /// </summary>
+        [Map("EDIT_QUEUED")]
+        EditQueued
     }
 }

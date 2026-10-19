@@ -99,10 +99,10 @@ namespace Coinbase.Net.Objects.Models
         [JsonPropertyName("margin_level")]
         public MarginLevel MarginLevel { get; set; }
         /// <summary>
-        /// ["<c>initial_margin</c>"] Initial margin
+        /// ["<c>initial_margin</c>"] Initial margin, or null for an inactive or unavailable window
         /// </summary>
         [JsonPropertyName("initial_margin")]
-        public decimal InitialMargin { get; set; }
+        public decimal? InitialMargin { get; set; }
         /// <summary>
         /// ["<c>maintenance_margin</c>"] Maintenance margin
         /// </summary>

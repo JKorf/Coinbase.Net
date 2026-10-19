@@ -75,6 +75,11 @@ namespace Coinbase.Net.Objects.Models
         [JsonPropertyName("product_id")]
         public string Symbol { get; set; } = string.Empty;
         /// <summary>
+        /// ["<c>product_type</c>"] Symbol type, or null when not supplied
+        /// </summary>
+        [JsonPropertyName("product_type")]
+        public SymbolType? SymbolType { get; set; }
+        /// <summary>
         /// ["<c>sequence_timestamp</c>"] Time at which this fill was posted.
         /// </summary>
         [JsonPropertyName("sequence_timestamp")]

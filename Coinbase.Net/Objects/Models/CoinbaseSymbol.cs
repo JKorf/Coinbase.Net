@@ -290,6 +290,18 @@ namespace Coinbase.Net.Objects.Models
     public record CoinbaseSymbolFuturesDetails
     {
         /// <summary>
+        /// ["<c>intraday_margin_rate</c>"] Intraday initial margin rates.
+        /// </summary>
+        [JsonPropertyName("intraday_margin_rate")]
+        public CoinbaseFuturesMarginRates? IntradayMarginRate { get; set; }
+
+        /// <summary>
+        /// ["<c>overnight_margin_rate</c>"] Overnight initial margin rates.
+        /// </summary>
+        [JsonPropertyName("overnight_margin_rate")]
+        public CoinbaseFuturesMarginRates? OvernightMarginRate { get; set; }
+
+        /// <summary>
         /// ["<c>venue</c>"] Venue
         /// </summary>
         [JsonPropertyName("venue")]
@@ -370,10 +382,44 @@ namespace Coinbase.Net.Objects.Models
         [JsonPropertyName("index_price")]
         public decimal? IndexPrice { get; set; }
         /// <summary>
+        /// ["<c>funding_interval</c>"] CDE funding interval, expressed as a duration such as "3600s", or null for contracts without funding
+        /// </summary>
+        [JsonPropertyName("funding_interval")]
+        public string? FundingInterval { get; set; }
+        /// <summary>
+        /// ["<c>funding_rate</c>"] CDE funding rate, or null when unavailable
+        /// </summary>
+        [JsonPropertyName("funding_rate")]
+        public decimal? FundingRate { get; set; }
+        /// <summary>
+        /// ["<c>funding_time</c>"] CDE funding time, or null when unavailable
+        /// </summary>
+        [JsonPropertyName("funding_time")]
+        public DateTime? FundingTime { get; set; }
+        /// <summary>
         /// ["<c>futures_asset_type</c>"] Asset type
         /// </summary>
         [JsonPropertyName("futures_asset_type")]
         public FuturesAssetType FuturesAssetType { get; set; }
+    }
+
+    /// <summary>
+    /// Initial margin as a fraction of contract notional for each position side.
+    /// </summary>
+    [SerializationModel]
+    public record CoinbaseFuturesMarginRates
+    {
+        /// <summary>
+        /// ["<c>long_margin_rate</c>"] Long initial margin rate, or null when unavailable.
+        /// </summary>
+        [JsonPropertyName("long_margin_rate")]
+        public decimal? LongMarginRate { get; set; }
+
+        /// <summary>
+        /// ["<c>short_margin_rate</c>"] Short initial margin rate, or null when unavailable.
+        /// </summary>
+        [JsonPropertyName("short_margin_rate")]
+        public decimal? ShortMarginRate { get; set; }
     }
 
     /// <summary>
@@ -396,7 +442,7 @@ namespace Coinbase.Net.Objects.Models
         /// ["<c>funding_time</c>"] Funding time
         /// </summary>
         [JsonPropertyName("funding_time")]
-        public DateTime FundingTime { get; set; }
+        public DateTime? FundingTime { get; set; }
         /// <summary>
         /// ["<c>max_leverage</c>"] Max leverage
         /// </summary>

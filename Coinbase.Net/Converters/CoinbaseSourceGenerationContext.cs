@@ -100,6 +100,7 @@ namespace Coinbase.Net.Converters
     [JsonSerializable(typeof(CoinbaseMultiAssetMode[]))]
     [JsonSerializable(typeof(CoinbaseOrderWrapper[]))]
     [JsonSerializable(typeof(CoinbaseOrdersWrapper[]))]
+    [JsonSerializable(typeof(CoinbaseFuturesMarginRates[]))]
     [JsonSerializable(typeof(CoinbaseOrder[]))]
     [JsonSerializable(typeof(CoinbaseOrderEditHistory[]))]
     [JsonSerializable(typeof(CoinbaseOrderBookWrapper[]))]

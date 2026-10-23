@@ -234,6 +234,16 @@ Make a one time donation in a crypto currency of your choice. If you prefer to d
 Alternatively, sponsor me on Github using [Github Sponsors](https://github.com/sponsors/JKorf). 
 
 ## Release notes
+* Version 4.8.0 - 23 Oct 2026
+    * Updated CryptoExchange.Net to v13.2.2
+    * Added FourHours KlineInterval value
+    * Added EditQueued value to OrderStatus Enum
+    * Added FcmFuturesUsdcSell value to TransactionType Enum
+    * Added SymbolType to CoibnaseUserTrade model
+    * Updated CoinbaseSymbol model
+    * Fixed limit, offset parameters for GetSymbolsAsync endpoint
+    * Fixed deserialization issue CoinbaseFuturesBalance model
+
 * Version 4.7.0 - 30 Sep 2026
     * Updated CryptoExchange.Net to V13.1.0
     * Updated MaxLeverage on CoinbaseSymbol model to nullable to prevent deserialization issue

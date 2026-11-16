@@ -1,103 +1,18 @@
-# Coinbase.Net AI Context
+# Coinbase.Net
 
-Coinbase.Net is a C#/.NET client for Coinbase Advanced Trade, selected Coinbase App REST endpoints, and Coinbase Exchange market data/WebSocket APIs. Use it instead of raw HTTP for Coinbase integration.
+> A .NET client library for Coinbase Advanced Trade, selected Coinbase App endpoints, and Coinbase Exchange market data.
 
-## Install
+## Library usage
 
-```bash
-dotnet add package Coinbase.Net
-```
+- [Coinbase.Net skill](.claude/skills/coinbase-net/SKILL.md): Consumer conventions and task-specific guidance.
+- [API surfaces](.claude/skills/coinbase-net/references/api-surfaces.md): Client roots, intent-to-method routing, and Shared APIs.
+- [Usage examples](.claude/skills/coinbase-net/references/usage.md): Authentication, REST, WebSockets, and dependency injection.
+- [Operational considerations](.claude/skills/coinbase-net/references/safety.md): Credentials, order handling, and retry decisions.
 
-NuGet package id: `JKorf.Coinbase.Net`.
+## Repository and reference
 
-## Core Clients
-
-```csharp
-using Coinbase.Net;
-using Coinbase.Net.Clients;
-using Coinbase.Net.Enums;
-
-var restClient = new CoinbaseRestClient(options =>
-{
-    options.ApiCredentials = new CoinbaseCredentials("API_KEY_NAME", "EC_PRIVATE_KEY");
-});
-
-var socketClient = new CoinbaseSocketClient(options =>
-{
-    options.ApiCredentials = new CoinbaseCredentials("API_KEY_NAME", "EC_PRIVATE_KEY");
-});
-```
-
-Public market data can use `new CoinbaseRestClient()` or `new CoinbaseSocketClient()` without credentials.
-
-## REST Roots
-
-- `restClient.AdvancedTradeApi.ExchangeData`
-- `restClient.AdvancedTradeApi.Account`
-- `restClient.AdvancedTradeApi.Trading`
-- `restClient.AdvancedTradeApi.SharedApi`
-- `restClient.ExchangeApi.ExchangeData`
-
-## WebSocket Roots
-
-- `socketClient.AdvancedTradeApi`
-- `socketClient.AdvancedTradeApi.SharedApi`
-- `socketClient.ExchangeApi`
-
-## Common Calls
-
-```csharp
-var product = await restClient.AdvancedTradeApi.ExchangeData.GetSymbolAsync("ETH-USD");
-var products = await restClient.AdvancedTradeApi.ExchangeData.GetSymbolsAsync(SymbolType.Spot);
-var klines = await restClient.AdvancedTradeApi.ExchangeData.GetKlinesAsync("ETH-USD", KlineInterval.OneMinute);
-var orderBook = await restClient.AdvancedTradeApi.ExchangeData.GetOrderBookAsync("ETH-USD", limit: 50);
-var trades = await restClient.AdvancedTradeApi.ExchangeData.GetTradeHistoryAsync("ETH-USD", limit: 100);
-var accounts = await restClient.AdvancedTradeApi.Account.GetAccountsAsync(limit: 100);
-var orders = await restClient.AdvancedTradeApi.Trading.GetOrdersAsync(symbols: new[] { "ETH-USD" });
-```
-
-## Order Placement
-
-```csharp
-var order = await restClient.AdvancedTradeApi.Trading.PlaceOrderAsync(
-    "ETH-USD",
-    OrderSide.Buy,
-    NewOrderType.Limit,
-    quantity: 0.01m,
-    price: 2000m);
-
-if (!order.Success) { return; }
-if (!order.Data.Success) { return; }
-```
-
-## Result Handling
-
-REST methods return `HttpResult<T>` or `HttpResult`. WebSocket subscriptions and socket API requests return `WebSocketResult<T>` or `WebSocketResult`. Shared non-I/O symbol/cache helpers can return `ExchangeCallResult<T>`.
-
-```csharp
-if (!product.Success)
-{
-    Console.WriteLine(product.Error);
-    return;
-}
-
-Console.WriteLine(product.Data.LastPrice);
-```
-
-## Rules
-
-- Use `AdvancedTradeApi` for modern Coinbase trading and market data.
-- Use `ExchangeApi` for Coinbase Exchange market data and Exchange WebSocket streams.
-- Use Coinbase product ids such as `ETH-USD`, not `ETHUSDT`.
-- Use ECDSA credentials: `CoinbaseCredentials(keyName, ecPrivateKey)`.
-- Do not use passphrase examples.
-- Check `.Success` before `.Data`.
-- Check `CoinbaseOrderResult.Success` after placing orders.
-- Use async/await.
-- Reuse clients or use dependency injection.
-- Store and unsubscribe WebSocket subscriptions.
-- Use the exchange-level `ICoinbaseSharedApiClient` aggregate's `GetCapability(...)` or `GetCapabilities(...)` methods for runtime capability lookup; use an API surface's `.SharedApi` property when the transport and API are known.
-- Shared spot/futures symbols include display names and typed asset/subtype metadata.
-- Shared results use `SharedOrderQuantity` for base, quote, or contract quantities; shared order-book levels use base-asset quantities.
-
-See `CLAUDE.md`, `llms-full.txt`, `docs/ai-api-map.md`, and `Examples/ai-friendly/` for more complete guidance.
+- [README](README.md): Overview, installation, release notes, and documentation site link.
+- [Repository instructions](AGENTS.md): Development workflow and documentation ownership.
+- [Client interfaces](Coinbase.Net/Interfaces/Clients/): Exact endpoint signatures and XML documentation.
+- [Library project](Coinbase.Net/Coinbase.Net.csproj): Package version, dependencies, and target frameworks.
+- [AI-friendly examples](Examples/ai-friendly/): Complete programs compiled by the documentation test.

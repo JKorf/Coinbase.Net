@@ -3,7 +3,7 @@
 // Demonstrates: Coinbase Advanced Trade order queries, fills, dry-run safety,
 // order placement, and cancellation.
 //
-// Setup: dotnet add package Coinbase.Net
+// Setup: dotnet add package JKorf.Coinbase.Net
 
 using Coinbase.Net;
 using Coinbase.Net.Clients;

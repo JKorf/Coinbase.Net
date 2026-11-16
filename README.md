@@ -49,7 +49,7 @@ The library is targeting both `.NET Standard 2.0` and `.NET Standard 2.1` for op
 ### NuGet 
 [![NuGet version](https://img.shields.io/nuget/v/Jkorf.Coinbase.net.svg?style=for-the-badge)](https://www.nuget.org/packages/Jkorf.Coinbase.Net)  [![Nuget downloads](https://img.shields.io/nuget/dt/Jkorf.Coinbase.Net.svg?style=for-the-badge)](https://www.nuget.org/packages/Jkorf.Coinbase.Net)
 
-	dotnet add package Coinbase.Net
+	dotnet add package JKorf.Coinbase.Net
 	
 ### GitHub packages
 Coinbase.Net is available on [GitHub packages](https://github.com/JKorf/Coinbase.Net/pkgs/nuget/Jkorf.Coinbase.Net). You'll need to add `https://nuget.pkg.github.com/JKorf/index.json` as a NuGet package source.
@@ -126,15 +126,11 @@ Console.WriteLine(result.Data.LastPrice);
 The request and response models belong to `CryptoExchange.Net.SharedApis`, so the same operation can accept another exchange's `IGetTickerRest` implementation. When using dependency injection, inject `ICoinbaseSharedApiClient` to access all of the exchange's Shared API surfaces or inject a capability such as `IGetTickerRest` directly. Use `GetCapability` on the aggregate when the operation, transport, or trading mode is selected at runtime.
 
 ## AI documentation
-This repository includes AI-focused guidance for generating correct Coinbase.Net code:
 
-* [AGENTS.md](AGENTS.md) - skill-style instructions for Coinbase.Net usage
-* [llms.txt](llms.txt) - compact AI context
-* [llms-full.txt](llms-full.txt) - detailed AI context and API map
-* [docs/ai-api-map.md](docs/ai-api-map.md) - Advanced Trade and Exchange API surface map
-* [Examples/ai-friendly](Examples/ai-friendly) - compilable examples for assistants and quick onboarding
-
-See [cryptoexchange-skills-hub](https://github.com/JKorf/cryptoexchange-skills-hub) for installable skills.
+- [Library skill](.claude/skills/coinbase-net/SKILL.md): Consumer guidance and API references.
+- [Repository instructions](AGENTS.md): Development workflow and documentation ownership.
+- [llms.txt](llms.txt): Local documentation index.
+- [Complete examples](Examples/ai-friendly/): Programs compiled by the documentation test.
 
 ## CryptoExchange.Net
 Coinbase.Net is based on the [CryptoExchange.Net](https://github.com/JKorf/CryptoExchange.Net) base library. Other exchange API implementations based on the CryptoExchange.Net base library are available and follow the same logic.

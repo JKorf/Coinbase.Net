@@ -1,34 +1,19 @@
-# Coinbase.Net AI API Quick Map
+# API surfaces
 
-Use this file to route common user intents to the correct Coinbase.Net client member. If a method name or parameter is not listed here, inspect `Coinbase.Net/Interfaces/Clients/**` before generating code.
+## Client roots and symbols
 
-## Client Roots
+`client` below is a `CoinbaseRestClient`; `socketClient` is a `CoinbaseSocketClient`.
 
-| Intent | Use |
-|---|---|
-| REST calls | `new CoinbaseRestClient()` |
-| WebSocket streams | `new CoinbaseSocketClient()` |
-| Advanced Trade REST | `client.AdvancedTradeApi` |
-| Coinbase Exchange REST market data | `client.ExchangeApi` |
-| Advanced Trade WebSocket | `socketClient.AdvancedTradeApi` |
-| Coinbase Exchange WebSocket | `socketClient.ExchangeApi` |
-| API key authentication | `options.ApiCredentials = new CoinbaseCredentials("key-name", "ec-private-key")` |
-| Live environment | `CoinbaseEnvironment.Live` |
-| Custom environment | `CoinbaseEnvironment.CreateCustom(...)` |
-| Dependency injection | `services.AddCoinbase(options => { ... })` |
+| Surface | Purpose |
+| --- | --- |
+| `client.AdvancedTradeApi.ExchangeData` | Products, books, candles, trades, prices, assets, exchange rates |
+| `client.AdvancedTradeApi.Account` | Accounts, portfolios, derivatives balances/settings, fees, key permissions, and Coinbase App payment/deposit/withdrawal operations |
+| `client.AdvancedTradeApi.Trading` | Orders, fills, position closing, futures and perpetual positions |
+| `client.ExchangeApi.ExchangeData` | Coinbase Exchange time, currencies, and products |
+| `socketClient.AdvancedTradeApi` | Advanced Trade public and authenticated streams |
+| `socketClient.ExchangeApi` | Coinbase Exchange public streams |
 
-Coinbase credentials are ECDSA key-name/private-key credentials. Do not generate HMAC secret/passphrase examples.
-
-## Symbols
-
-| User intent | Coinbase.Net pattern |
-|---|---|
-| Spot BTC/USD product id | `BTC-USD` |
-| Spot ETH/USD product id | `ETH-USD` |
-| Spot ETH/USDT product id | `ETH-USDT` |
-| Discover supported product ids | `client.AdvancedTradeApi.ExchangeData.GetSymbolsAsync(...)` |
-| Avoid Binance/Bybit compact symbols | Do not use `ETHUSDT` or `BTCUSDT` |
-| Avoid non-Coinbase separators | Do not use `ETH_USDT`, `ETH/USD`, or `tETHUSD` |
+Native product IDs use dashes, for example `ETH-USD`, `BTC-USD`, and `ETH-USDT`. Select actual derivative product IDs from product metadata. REST candles use `KlineInterval`; product selection uses `SymbolType`. Coinbase App endpoints remain under `AdvancedTradeApi.Account`, with account UUIDs distinct from portfolio IDs.
 
 ## Advanced Trade Market Data REST
 
@@ -167,88 +152,39 @@ Advanced Trade kline WebSocket updates are always 5-minute candles; use REST `Ge
 | Subscribe Exchange batched ticker | `socketClient.ExchangeApi.SubscribeToBatchedTickerUpdatesAsync("ETH-USD", handler)` |
 | Subscribe Exchange level2 order book | `socketClient.ExchangeApi.SubscribeToOrderBookUpdatesAsync("ETH-USD", onSnapshot, onUpdate)` |
 
-## SharedApis
+## Shared API V2
 
-Use SharedApis for exchange-agnostic code across Coinbase, Binance, Bybit, OKX, Kraken, and other CryptoExchange.Net libraries.
+Use `client.AdvancedTradeApi.SharedApi` and `socketClient.AdvancedTradeApi.SharedApi`. The DI aggregate `ICoinbaseSharedApiClient` exposes `AdvancedTradeRest` and `AdvancedTradeSocket`. There is no Exchange API Shared API surface.
 
-| User intent | Coinbase.Net member or interface |
-|---|---|
-| Shared Advanced Trade REST client | `new CoinbaseRestClient().AdvancedTradeApi.SharedApi` |
-| Shared Advanced Trade socket client | `new CoinbaseSocketClient().AdvancedTradeApi.SharedApi` |
-| Resolve a runtime-selected Shared API capability | `ICoinbaseSharedApiClient.GetCapability(...)` |
-| Get filtered shared spot symbols | `IGetSpotSymbolsRest.GetSpotSymbolsAsync(new GetSymbolsRequest(...))` |
-| Read cached shared spot symbol catalog | `IGetSpotSymbolsRest.SpotSymbolCatalog` |
-| Get filtered shared futures symbols | `IGetFuturesSymbolsRest.GetFuturesSymbolsAsync(new GetSymbolsRequest(...))` |
-| Read cached shared futures symbol catalog | `IGetFuturesSymbolsRest.FuturesSymbolCatalog` |
-| Shared spot ticker REST | `IGetTickerRest.GetTickerAsync(new GetTickerRequest(symbol))` |
-| Shared spot order REST | `IPlaceSpotOrderRest.PlaceSpotOrderAsync(...)` |
-| Shared futures order REST | `IPlaceFuturesOrderRest.PlaceFuturesOrderAsync(...)` |
-| Shared kline REST | `IGetKlinesRest.GetKlinesAsync(...)` |
-| Shared ticker socket | `ISubscribeTickerSocket.SubscribeToTickerUpdatesAsync(...)` |
-| Shared kline socket | `ISubscribeKlinesSocket.SubscribeToKlineUpdatesAsync(...)` |
-| Shared trade socket | `ISubscribeTradesSocket.SubscribeToTradeUpdatesAsync(...)` |
-| Shared order socket | `ISubscribeSpotOrdersSocket` / `ISubscribeFuturesOrdersSocket` |
-| Shared position socket | `ISubscribePositionsSocket` |
+| Intent | Representative capabilities |
+| --- | --- |
+| Symbols, ticker, and book ticker | `IGetSpotSymbolsRest`, `IGetFuturesSymbolsRest`, `IGetTickerRest`, `IGetAllTickersRest`, `IGetBookTickerRest` |
+| Books, trades, and candles | `IGetOrderBookRest`, `IGetRecentTradesRest`, `IGetTradeHistoryRest`, `IGetKlinesRest` |
+| Assets, balances, and fees | `IGetAllAssetsRest`, `IGetAssetRest`, `IGetBalancesRest`, `IGetFeesRest` |
+| Deposits and withdrawals | `IGetDepositAddressesRest`, `IGetDepositHistoryRest`, `IGetWithdrawalHistoryRest`, `IWithdrawRest` |
+| Spot orders | `IPlaceSpotOrderRest`, `IGetSpotOrderRest`, `IGetOpenSpotOrdersRest`, `ICancelSpotOrderRest`, history/trade and trigger-order capabilities |
+| Futures orders and positions | `IPlaceFuturesOrderRest`, `IGetFuturesOrderRest`, `IGetOpenFuturesOrdersRest`, `ICancelFuturesOrderRest`, `IGetPositionsRest`, `ICloseFullPositionRest`, history/trade and trigger-order capabilities |
+| Public socket streams | `ISubscribeKlinesSocket`, `ISubscribeTickerSocket`, `ISubscribeTradesSocket` |
+| Private socket streams | `ISubscribeSpotOrdersSocket`, `ISubscribeFuturesOrdersSocket`, `ISubscribePositionsSocket` |
 
-Shared REST calls return `HttpResult<T>` / `HttpResult`. Shared socket subscriptions return `WebSocketResult<UpdateSubscription>`. Shared non-I/O symbol/cache helpers can return `ExchangeCallResult<T>`.
+Shared sockets do not expose an order-book subscription capability or socket order placement. Use the native order-book stream or a maintained local book where required. Native account and derivatives features are broader than the shared interfaces.
 
-Shared spot/futures symbol results include `DisplayName` and base/quote `SharedAssetType` / `SharedAssetSubType` metadata. Coinbase classifies known fiat and stablecoins and maps supported non-crypto futures underlyings to TradFi equity or commodity metadata.
+For dynamic selection, call the aggregate's `GetCapability` with a typed descriptor such as `SharedCapabilities.Tickers.GetTicker.Rest` and the required trading mode. Check for a missing match before accessing `Capability` and `Options`. Use `GetCapabilities` for matching implementations and `Discover()` for operation metadata. With multiple exchanges registered, resolve `IEnumerable<TCapability>` and select by exchange and supported mode.
 
-Shared quantity-bearing results use `SharedOrderQuantity`; select its base-asset, quote-asset, or contract value as appropriate. Shared order books set `QuantityType` to `SharedQuantityType.BaseAsset`.
+### Catalogs, quantities, and prerequisites
 
-For shared socket subscriptions, keep the concrete socket client and unsubscribe with `await socketClient.UnsubscribeAsync(subscription.Data)`.
+Use `IGetSpotSymbolsRest.GetSpotSymbolsAsync(new GetSymbolsRequest())` and `IGetFuturesSymbolsRest.GetFuturesSymbolsAsync(new GetSymbolsRequest())`. After a successful request, read `SpotSymbolCatalog` or `FuturesSymbolCatalog`. Requests support base/quote asset type and subtype filters; results provide `DisplayName`, trading constraints, and classifications (`Crypto`, `Fiat`, `TradFi`; applicable `StableCoin`, `Equity`, `Commodity` subtypes). Shared trading modes include spot, perpetual linear, and delivery linear as supported by the chosen operation. Futures symbol retrieval defaults to perpetual products; explicitly select `TradingMode.DeliveryLinear` when requesting expiring futures. A successful catalog population does not imply every product family was fetched. Follow the account endpoint's pagination cursor when collecting all accounts.
 
-## Result Handling
+Quantity-bearing shared models use `SharedOrderQuantity`. Spot limit orders and market sells use base quantity; spot market buys support base or quote quantities. Futures placement capabilities use contract quantities through `QuantityInContracts`. Shared order books report `SharedQuantityType.BaseAsset`. Inspect each capability's quantity options rather than assuming order-book and order quantities have the same units.
 
-| Situation | Pattern |
-|---|---|
-| REST success check | `if (!result.Success) { Console.WriteLine(result.Error); return; }` |
-| Socket subscription success check | `WebSocketResult<UpdateSubscription> sub = await ...; if (!sub.Success) { Console.WriteLine(sub.Error); return; }` |
-| Read REST data | Read `result.Data` only after `result.Success` |
-| Shared helper data | Read `ExchangeCallResult<T>.Data` only after `result.Success` |
-| Place-order transport success | `if (!order.Success) { Console.WriteLine(order.Error); return; }` |
-| Place-order exchange success | `if (!order.Data.Success) { Console.WriteLine(order.Data.ErrorResponse.Message); return; }` |
-| Read placed order id | `order.Data.SuccessResponse.OrderId` only after both success checks |
-| Retry decision | Retry only when `result.Error?.IsTransient == true` |
-| Cancellation | Pass `ct: cancellationToken` |
+Perpetual balance and position requests require `PortfolioId` in `ExchangeParameters`. Deposit/address/withdrawal workflows can accept `AccountId`; when the library cannot resolve the asset account, provide it explicitly. Read the selected capability's exchange parameter rules rather than substituting a portfolio ID for an account ID.
 
-## Credential And Framework Pitfalls
+Shared futures placement does not support `PositionSide`, inline `StopLossPrice`, or inline `TakeProfitPrice`. Reduce-only futures placement is supported through the market close-position path; non-market reduce-only requests are rejected. Use the native endpoints for Coinbase-specific order configurations and portfolio operations.
 
-| Do not use | Use instead |
-|---|---|
-| HMAC key/secret examples | `new CoinbaseCredentials(keyName, ecPrivateKey)` |
-| API passphrase examples | No passphrase is used by `CoinbaseCredentials` |
-| Flattened private key without newlines | Preserve PEM newlines or replace escaped `\\n` with `\n` |
-| Private endpoints on netstandard2.0 | Use netstandard2.1 or modern .NET targets for signing support |
-| Manual JWT/signing code | Let Coinbase.Net sign requests |
+Shared REST returns `HttpResult<T>` / `HttpResult`, subscriptions return `WebSocketResult<UpdateSubscription>`, and non-I/O symbol/cache helpers can return `ExchangeCallResult<T>`.
 
-## Common Routing Pitfalls
+## Environments and source navigation
 
-| Do not use | Use instead |
-|---|---|
-| `CoinbaseClient` | `CoinbaseRestClient` |
-| `SpotApi` | `AdvancedTradeApi` |
-| `UsdFuturesApi` | `AdvancedTradeApi.Trading` / `AdvancedTradeApi.Account` futures methods |
-| `CoinFuturesApi` | `AdvancedTradeApi.Trading` / `AdvancedTradeApi.Account` futures methods |
-| `GeneralApi` | `AdvancedTradeApi.Account` for Coinbase App and portfolio endpoints |
-| `V5Api` | `AdvancedTradeApi` / `ExchangeApi` |
-| `ETHUSDT` | `ETH-USDT` or `ETH-USD` |
-| `BTCUSDT` | `BTC-USD` or a listed Coinbase product id |
-| `.Data` without `.Success` check | Check `.Success` first |
-| `CoinbaseOrderResult.SuccessResponse` without checking `CoinbaseOrderResult.Success` | Check both success layers |
-| Unsubscribe from a shared subscription | Keep the concrete socket client and call `socketClient.UnsubscribeAsync(subscription.Data)` |
-| Custom `clientOrderId` by default | Let Coinbase.Net auto-generate it unless explicit idempotency is needed |
+`CoinbaseEnvironment.Live` is the built-in environment. `CreateCustom` requires Advanced Trade REST, Exchange REST, Advanced Trade public/private socket, and Exchange public socket addresses. A custom configuration does not itself supply a testnet.
 
-## Source Of Truth
-
-| Need | Inspect |
-|---|---|
-| REST root shape | `Coinbase.Net/Interfaces/Clients/ICoinbaseRestClient.cs` |
-| Socket root shape | `Coinbase.Net/Interfaces/Clients/ICoinbaseSocketClient.cs` |
-| Advanced Trade market data methods | `Coinbase.Net/Interfaces/Clients/AdvancedTradeApi/ICoinbaseRestClientAdvancedTradeApiExchangeData.cs` |
-| Advanced Trade account methods | `Coinbase.Net/Interfaces/Clients/AdvancedTradeApi/ICoinbaseRestClientAdvancedTradeApiAccount.cs` |
-| Advanced Trade trading methods | `Coinbase.Net/Interfaces/Clients/AdvancedTradeApi/ICoinbaseRestClientAdvancedTradeApiTrading.cs` |
-| Advanced Trade socket methods | `Coinbase.Net/Interfaces/Clients/AdvancedTradeApi/ICoinbaseSocketClientAdvancedTradeApi.cs` |
-| Exchange API REST methods | `Coinbase.Net/Interfaces/Clients/ExchangeApi/ICoinbaseRestClientExchangeApiExchangeData.cs` |
-| Exchange API socket methods | `Coinbase.Net/Interfaces/Clients/ExchangeApi/ICoinbaseSocketClientExchangeApi.cs` |
-| Enums and valid enum names | `Coinbase.Net/Enums/*.cs` |
+Checkout-only: [public interfaces](../../../../Coinbase.Net/Interfaces/Clients/), [authentication provider](../../../../Coinbase.Net/CoinbaseAuthenticationProvider.cs), [local order books](../../../../Coinbase.Net/SymbolOrderBooks/), and [tracker factory](../../../../Coinbase.Net/CoinbaseTrackerFactory.cs).

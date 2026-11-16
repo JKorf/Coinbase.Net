@@ -3,7 +3,7 @@
 // Demonstrates: Coinbase Advanced Trade public streams, optional private user
 // stream, and subscription teardown.
 //
-// Setup: dotnet add package Coinbase.Net
+// Setup: dotnet add package JKorf.Coinbase.Net
 
 using Coinbase.Net;
 using Coinbase.Net.Clients;

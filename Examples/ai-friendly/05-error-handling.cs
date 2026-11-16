@@ -3,7 +3,7 @@
 // Demonstrates: consistent Coinbase.Net result handling for REST, order
 // placement responses, and WebSocket subscriptions.
 //
-// Setup: dotnet add package Coinbase.Net
+// Setup: dotnet add package JKorf.Coinbase.Net
 
 using Coinbase.Net.Clients;
 using Coinbase.Net.Enums;

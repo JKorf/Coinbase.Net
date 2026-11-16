@@ -1,0 +1,4 @@
+interface:
+  display_name: "Coinbase.Net"
+  short_description: "Build C# Coinbase Advanced Trade integrations with Coinbase.Net."
+  default_prompt: "Use $coinbase-net to implement a Coinbase.Net Advanced Trade REST or websocket workflow."

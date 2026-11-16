@@ -1,37 +1,13 @@
-# AI-Friendly Examples
+# Coinbase.Net examples
 
-These examples are optimized for AI coding assistants and quick onboarding. Each file is:
+Install `JKorf.Coinbase.Net`. See [usage](../../.claude/skills/coinbase-net/references/usage.md), [API routing](../../.claude/skills/coinbase-net/references/api-surfaces.md), and [operational considerations](../../.claude/skills/coinbase-net/references/safety.md) for maintained consumer guidance.
 
-- **Compilable**: drop into a console project with `dotnet add package Coinbase.Net` and it builds.
-- **Self-contained**: single file, no shared helpers.
-- **Heavily commented**: explains why each line matters for Coinbase.Net.
-- **Coinbase-shaped**: uses `AdvancedTradeApi`, `ExchangeApi`, ECDSA credentials, and dash-separated product ids.
+- [Advanced Trade market and account](01-advanced-trade-market-and-account.cs)
+- [Advanced Trade trading](02-advanced-trade-trading.cs)
+- [WebSockets](03-websocket.cs)
+- [Shared API V2](04-shared-client.cs)
+- [Error handling](05-error-handling.cs)
 
-## Files
+The documentation test compiles these files as independent console programs without executing exchange operations. Running them contacts Coinbase. The trading example gates live placement with `COINBASE_EXAMPLE_PLACE_ORDER=true`; review its parameters before enabling it.
 
-| File | What it shows |
-|---|---|
-| `01-advanced-trade-market-and-account.cs` | Advanced Trade public product, candles, order book, Exchange API products, and credential-gated accounts |
-| `02-advanced-trade-trading.cs` | Dry-run safe order workflow, open orders, fills, order placement, and cancellation |
-| `03-websocket.cs` | Advanced Trade ticker/order book streams, optional authenticated user stream, and teardown |
-| `04-shared-client.cs` | CryptoExchange.Net SharedApis access, capability discovery, and native Coinbase endpoints |
-| `05-error-handling.cs` | `HttpResult` / `WebSocketResult` helpers and `CoinbaseOrderResult` handling |
-
-## Running
-
-```bash
-dotnet new console -n MyCoinbaseApp
-cd MyCoinbaseApp
-dotnet add package Coinbase.Net
-# Copy one example file into Program.cs
-dotnet run
-```
-
-Private examples read credentials from:
-
-- `COINBASE_API_KEY_NAME`
-- `COINBASE_API_PRIVATE_KEY`
-
-The private key can contain real newlines or escaped `\n` sequences. The examples normalize escaped newlines.
-
-The trading example defaults to dry-run mode. Set `COINBASE_EXAMPLE_PLACE_ORDER=true` only after reviewing product id, quantity, price, account permissions, and private key configuration.
+See [repository instructions](../../AGENTS.md) for build and test commands.

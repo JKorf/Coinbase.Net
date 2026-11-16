@@ -3,7 +3,7 @@
 // Demonstrates: Coinbase Advanced Trade public market data, Coinbase Exchange
 // market data, and credential-gated account balances.
 //
-// Setup: dotnet add package Coinbase.Net
+// Setup: dotnet add package JKorf.Coinbase.Net
 
 using Coinbase.Net;
 using Coinbase.Net.Clients;

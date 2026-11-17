@@ -50,8 +50,8 @@ namespace Coinbase.Net
         /// <inheritdoc />
         public IKlineTracker CreateKlineTracker(SharedSymbol symbol, SharedKlineInterval interval, int? limit = null, TimeSpan? period = null, ExchangeParameters? exchangeParameters = null)
         {
-            var restClient = (_serviceProvider?.GetRequiredService<ICoinbaseRestClient>() ?? new CoinbaseRestClient()).AdvancedTradeApi.SharedClient;
-            var socketClient = (_serviceProvider?.GetRequiredService<ICoinbaseSocketClient>()?? new CoinbaseSocketClient()).AdvancedTradeApi.SharedClient;
+            var restClient = (_serviceProvider?.GetRequiredService<ICoinbaseRestClient>() ?? new CoinbaseRestClient()).AdvancedTradeApi.SharedApi;
+            var socketClient = (_serviceProvider?.GetRequiredService<ICoinbaseSocketClient>()?? new CoinbaseSocketClient()).AdvancedTradeApi.SharedApi;
 
             return new KlineTracker(
                 _serviceProvider?.GetRequiredService<ILoggerFactory>().CreateLogger(restClient.Exchange),
@@ -68,8 +68,8 @@ namespace Coinbase.Net
         /// <inheritdoc />
         public ITradeTracker CreateTradeTracker(SharedSymbol symbol, int? limit = null, TimeSpan? period = null, ExchangeParameters? exchangeParameters = null)
         {
-            var restClient = (_serviceProvider?.GetRequiredService<ICoinbaseRestClient>() ?? new CoinbaseRestClient()).AdvancedTradeApi.SharedClient;
-            var socketClient = (_serviceProvider?.GetRequiredService<ICoinbaseSocketClient>() ?? new CoinbaseSocketClient()).AdvancedTradeApi.SharedClient;
+            var restClient = (_serviceProvider?.GetRequiredService<ICoinbaseRestClient>() ?? new CoinbaseRestClient()).AdvancedTradeApi.SharedApi;
+            var socketClient = (_serviceProvider?.GetRequiredService<ICoinbaseSocketClient>() ?? new CoinbaseSocketClient()).AdvancedTradeApi.SharedApi;
 
             return new TradeTracker(
                 _serviceProvider?.GetRequiredService<ILoggerFactory>().CreateLogger(restClient.Exchange),

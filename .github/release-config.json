@@ -1,0 +1,18 @@
+{
+  "baseBranch": "main",
+  "sdk": "11.0.100",
+  "packages": [
+    {
+      "key": "coinbase",
+      "project": "Coinbase.Net/Coinbase.Net.csproj",
+      "testProjects": [
+        "Coinbase.Net.UnitTests/Coinbase.Net.UnitTests.csproj"
+      ],
+      "packageId": "JKorf.Coinbase.Net",
+      "readme": "README.md",
+      "tagPrefix": "Coinbase.Net.",
+      "releaseIntegrationTests": false,
+      "publishToGitHubPackages": true
+    }
+  ]
+}

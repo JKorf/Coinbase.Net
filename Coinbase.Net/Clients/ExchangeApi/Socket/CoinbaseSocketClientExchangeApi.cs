@@ -14,6 +14,7 @@ using CryptoExchange.Net.Objects.Sockets;
 using CryptoExchange.Net.SharedApis;
 using CryptoExchange.Net.Sockets;
 using CryptoExchange.Net.Sockets.Default;
+using CryptoExchange.Net.Sockets.Interfaces;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -39,6 +40,24 @@ namespace Coinbase.Net.Clients.ExchangeApi
         {
         }
         #endregion
+
+        protected override bool ConnectionCanBeUsedFor(SocketConnection connection, string address, bool authenticated, IMessageProcessor? processor, string? topic = null)
+        {
+            if (!base.ConnectionCanBeUsedFor(connection, address, authenticated, processor, topic))
+                return false;
+
+            if (topic != "ticker" && topic != "batch_ticker")
+                return true;
+
+            if ((connection.Topics.Contains("batch_ticker") && topic == "ticker")
+                || (connection.Topics.Contains("ticker") && topic == "batch_ticker"))
+            {
+                // Keep batch_ticker and normal tickers on separate connections
+                return false;
+            }
+
+            return true;
+        }
 
         /// <inheritdoc />
         protected override IMessageSerializer CreateSerializer() => new SystemTextJsonMessageSerializer(SerializerOptions.WithConverters(CoinbaseExchange._serializerContext));
@@ -133,7 +152,7 @@ namespace Coinbase.Net.Clients.ExchangeApi
                     );
             });
 
-            var subscription = new CoinbaseExSubscription<CoinbaseExTicker>(this, _logger, "ticker_batch", "ticker", symbols.ToArray(), internalHandler, false);
+            var subscription = new CoinbaseExBatchTickerSubscription<CoinbaseExTicker>(this, _logger, symbols.ToArray(), internalHandler);
             return await SubscribeAsync(subscription, ct).ConfigureAwait(false);
         }
 

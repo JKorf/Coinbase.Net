@@ -28,6 +28,8 @@ namespace Coinbase.Net.Objects.Sockets.Subscriptions
             _client = client;
             _symbols = symbols?.ToArray();
 
+            Topic = channel;
+
             IndividualSubscriptionCount = symbols?.Length ?? 1;
 
             if (symbols == null)

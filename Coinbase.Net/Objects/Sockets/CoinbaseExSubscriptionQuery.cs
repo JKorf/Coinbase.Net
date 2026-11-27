@@ -14,9 +14,9 @@ namespace Coinbase.Net.Objects.Sockets
         private readonly string _channel;
         private readonly string[]? _symbols;
 
-        public CoinbaseExSubscriptionQuery(CoinbaseExSocketRequest request, bool authenticated, int weight = 1) : base(request, authenticated, weight)
+        public CoinbaseExSubscriptionQuery(CoinbaseExSocketRequest request, bool authenticated, int weight = 1, string? channelIdentifier = null) : base(request, authenticated, weight)
         {
-            _channel = request.Channels.Single();
+            _channel = channelIdentifier ?? request.Channels.Single();
             _symbols = request.Symbols;
 
             MessageRouter = MessageRouter.Create(
@@ -34,12 +34,16 @@ namespace Coinbase.Net.Objects.Sockets
             if (message.SequenceNumber != 0)
                 connection.UpdateSequenceNumber(message.SequenceNumber);
 
+            // For unsubscribe requests the symbol/channel is no longer returned
+            if (((CoinbaseExSocketRequest)Request).Type == "unsubscribe")
+                return CallResult<CoinbaseExSubscriptionsUpdate>.Ok(message, originalData);
+
             var channel = message.Subscriptions.SingleOrDefault(x => x.Name == _channel);
             if (channel == null)
                 return null;
 
             if (_symbols != null && _symbols.Any(x => !channel.Symbols.Contains(x)))
-                return null;
+                return null;            
 
             return CallResult<CoinbaseExSubscriptionsUpdate>.Ok(message, originalData);
         }
